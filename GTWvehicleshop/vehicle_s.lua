@@ -395,7 +395,13 @@ function sellVehicle(veh_id, model)
 				end
 			end
 		end
-		givePlayerMoney(client, math.floor(price*0.9))
+		
+		if isElement(vehicles[veh_id]) then
+			destroyElement(vehicles[veh_id])
+			vehicles[veh_id] = nil
+		end
+		
+		givePlayerMoney(client, math.floor(price*priceMultiplier*0.9))
 		exports.GTWtopbar:dm( "Your vehicle has been sold for 90% of it's price", client, 0, 255, 0 )
 	else
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
