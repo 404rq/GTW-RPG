@@ -59,45 +59,7 @@ addEventHandler( "acorp_onPlayerVehicleBuyRequest", root, vehicleBuyRequest )
 addEventHandler("onResourceStart", getResourceRootElement(),
 function()	
 	dbExec(veh_data, "CREATE TABLE IF NOT EXISTS vehicles (ID INTEGER PRIMARY KEY, owner TEXT, model NUMERIC, "..
-		"locked NUMERIC, engine NUMERIC, health NUMERIC, fuel NUMERIC, paint NUMERIC, pos TEXT, color TEXT, upgrades TEXT, inventory TEXT, headlight TEXT)")	
-	
-	-- Load all demo vehicles in the shops
-	--[[local XMLCarLocations = xmlLoadFile ( "vehicle_shop_map.xml" )
-	if ( not XMLCarLocations ) then
-		local XMLCarLocations = xmlCreateFile ( "vehicle_shop_map.xml", "veh_map" )
-		xmlSaveFile ( XMLBusLocations )
-	end
-	local car_locations = xmlNodeGetChildren(XMLCarLocations)
-    carLocations = {}
-    for i,node in ipairs(car_locations) do
-		carLocations[i] = {}
-		local routes = xmlNodeGetChildren(node)
-		for is,subNode in ipairs(routes) do
-			-- Vehicle type
-			carLocations[i][is] = {}
-			carLocations[i][is]["veh"] = xmlNodeGetAttribute ( subNode, "veh" )
-			-- Location data
-			carLocations[i][is]["x"] = xmlNodeGetAttribute ( subNode, "posX" )
-			carLocations[i][is]["y"] = xmlNodeGetAttribute ( subNode, "posY" )
-			carLocations[i][is]["z"] = xmlNodeGetAttribute ( subNode, "posZ" )
-			carLocations[i][is]["rx"] = xmlNodeGetAttribute ( subNode, "rotX" )
-			carLocations[i][is]["ry"] = xmlNodeGetAttribute ( subNode, "rotY" )
-			carLocations[i][is]["rz"] = xmlNodeGetAttribute ( subNode, "rotZ" )
-			
-			--Create it
-			local veh = createVehicle( carLocations[i][is]["veh"], carLocations[i][is]["x"], carLocations[i][is]["y"], 
-				carLocations[i][is]["z"]-0.3, carLocations[i][is]["rx"], carLocations[i][is]["ry"], carLocations[i][is]["rz"] )
-			setVehicleColor ( veh, 200,200,200, 200,200,200 )
-			setElementDimension(veh,111)
-			is_demo_ex[veh] = true
-				
-			-- Disable some features
-			setVehicleDamageProof( veh, true )
-			setTimer( fixVehicle, 3000000, 0, veh )
-			setTimer( respawnVehicle, 3000000, 0, veh )
-		end
-    end
-    xmlUnloadFile ( XMLCarLocations )]]--
+		"locked NUMERIC, engine NUMERIC, health NUMERIC, fuel NUMERIC, paint NUMERIC, pos TEXT, color TEXT, upgrades TEXT, inventory TEXT, headlight TEXT)")
 end)
 
 --[[ Loads all vehicles for a specific player, requires that the player is logged in ]]--
@@ -396,8 +358,15 @@ function sellVehicle(veh_id, model)
 			end
 		end
 		
+		-- Clean up if vehicle isn't hidden while selling
 		if isElement(vehicles[veh_id]) then
-			destroyElement(vehicles[veh_id])
+			local veh = vehicles[veh_id]
+			if inventory_markers[veh] and isElement(inventory_markers[veh]) then
+				destroyElement(inventory_markers[veh])
+			end	
+			vehicle_owners[veh] = nil
+			destroyElement(veh_blips[veh])
+			destroyElement(veh)
 			vehicles[veh_id] = nil
 		end
 		
