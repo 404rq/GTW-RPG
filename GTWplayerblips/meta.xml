@@ -1,0 +1,18 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.4
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>
+	<info author="GTWGames" type="script" name="Player blips management" description="Handle blips" version="2.0.4" />
+  	<script src="playerblips.lua" type="server" />
+</meta>
