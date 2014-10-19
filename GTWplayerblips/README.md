@@ -10,7 +10,7 @@ _(server) Called by timer, check so the color of a blip is the same as the team 
 `destroyBlipsAttachedTo(player thePlayer)`  
 _(server) Destroys any attached blip element to a player._
 
-`hasPlayerBlip(player thePlayer)`
+`hasPlayerBlip(player thePlayer)`   
 _(server) Returns true if the input player has a blip, otherwise false._
 
 
