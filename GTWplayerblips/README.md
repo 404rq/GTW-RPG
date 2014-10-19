@@ -23,4 +23,4 @@ None, _This resource doesn't have any exported functions._
 <br>
 **Requirements**
 
-None, _This resource doesn't require other resources to work._
+None, _this resource is standalone and will work without need of other resources._
