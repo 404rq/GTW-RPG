@@ -48,7 +48,7 @@ function addMarkers ( res )
     end
     
     -- Credits in server log
-    outputServerLog( "[ACRP] ac-train (v.1.4.9) by MrBrutus" )
+    outputServerLog( "[GTW] trains (v.2.0.4) by MrBrutus" )
 end
 addEventHandler( "onResourceStart", getResourceRootElement( ), addMarkers )
 
@@ -127,6 +127,23 @@ function findNearestTrainActive( player )
     return 0
 end
 
+function getNearbyTrain(thePlayer)
+	if isElement(thePlayer) then
+		local dist = 9999
+		local px,py,pz = getElementPosition(thePlayer)
+		for id, trainVeh in ipairs(getElementsByType("vehicle")) do
+			if getVehicleType(trainVeh) == "Train" then
+				local tx,ty,tz = getElementPosition(trainVeh)
+				if dist > getDistanceBetweenPoints3D(px,py,pz, tx,ty,tz) then
+					dist = getDistanceBetweenPoints3D(px,py,pz, tx,ty,tz)
+				end
+			end
+		end
+		return dist
+	end
+	return 9999
+end
+
 -- Initialize the train and attach the carriages
 function makeTrain( hitElement, matchingDimension, id )
 	-- Make sure the player is the hitelement
@@ -151,6 +168,8 @@ function makeTrain( hitElement, matchingDimension, id )
 	else
 		trainDirection[hitElement] = not globaldist
 	end
+	-- Break if other trains are nearby
+	if getNearbyTrain(hitElement) < 1500 then return end
 	if ( not isTimer( globcooldown ) and not isTimer( markercooldown[source] ) and 
 		getVehicleType( tmpveh ) and getVehicleType( tmpveh ) ~= "Train" and 
 		numberOfActiveTrains < maxNumberOfTrains and findNearestTrainActive(hitElement) > 1100 ) then
@@ -237,6 +256,10 @@ function makeTrain( hitElement, matchingDimension, id )
 				    -- Adds a blip to each carriage (DEBUG only)
 				    --createBlipAttachedTo( pilot[hitElement][j], 0, 1, 0, 0, 0, 50, 0, 99999 )
 				end
+				
+				-- Play the horn
+				exports.GTWtrainhorn:triggerTrainHorn(hitElement, train[hitElement])
+				
 				local time = math.random(1200, 1800)*1000
 				syncTimer[hitElement] = setTimer( sync, 200, 0, hitElement, maxSpeed, numberOfWagonsInTrain )
 				setTimer( cleanUp, time, 1, hitElement )

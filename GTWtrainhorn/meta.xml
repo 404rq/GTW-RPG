@@ -1,0 +1,22 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.6
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>
+	<info author="GTWGames" name="Air horn for trains" version="2.0.6" type="script" description="Adds various train horn sounds" />
+	<script src="horn_c.lua" type="client" />
+	<script src="horn_s.lua" type="server" />
+	
+	<file src="sound/x_d9_horn1.wav" download="true" />	
+	<export function="triggerTrainHorn" type="server" />
+</meta>
