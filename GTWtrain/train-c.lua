@@ -14,15 +14,14 @@
 
 -- Allow the train to move when no player can see it
 function stream ( veh )
-	setElementStreamable( veh, true )
+	--setElementStreamable( veh, true )
 end
 addEvent( "train.onstream", true )
-addEventHandler( "train.onstream", getRootElement(), stream )
+addEventHandler( "train.onstream", resourceRoot, stream )
 
 addEventHandler( "onClientElementStreamOut", getRootElement( ),
-    function ( )
-        if getElementType( source ) == "vehicle" and getVehicleType(source) == "Train" then
-            triggerServerEvent( "train_onClientStreamOut", localPlayer, getElementData( source, "syncer" ))           
-        end
+function ( )
+    if getElementType( source ) == "vehicle" and getVehicleType(source) == "Train" then
+        triggerServerEvent("GTWtrain.onClientTrainStreamOut", localPlayer, source)           
     end
-);
+end)

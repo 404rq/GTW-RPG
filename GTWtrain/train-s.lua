@@ -393,10 +393,11 @@ function quitPlayer( )
 end
 addEventHandler( "onPlayerQuit", getRootElement(), quitPlayer )
 
-function cleanUpFromClient( thePlayer )
+function cleanUpFromClient( theTrain )
+	local thePlayer = getElementSyncer(theTrain)
     if thePlayer and isElement(thePlayer) then
     	cleanUp(thePlayer)
     end
 end
-addEvent( "train_onClientStreamOut", true )
-addEventHandler( "train_onClientStreamOut", root, cleanUpFromClient )
+addEvent( "GTWtrain.onClientTrainStreamOut", true )
+addEventHandler( "GTWtrain.onClientTrainStreamOut", root, cleanUpFromClient )
