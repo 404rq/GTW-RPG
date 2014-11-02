@@ -78,7 +78,11 @@ img = guiCreateStaticImage((x/2)-150, (y/2)-300, 300, 600, "lumia920.png", false
 tabPanel = guiCreateTabPanel ( 10, 50, 280, 500, false, img )
 tabRadio = guiCreateTab( "Radio", tabPanel )
 tabPlayers = guiCreateTab( "SMS", tabPanel ) 
-tabPhone = guiCreateTab( "Phone", tabPanel ) 
+tabPhone = guiCreateTab( "Phone", tabPanel )
+exports.GTWgui:setDefaultFont(tabRadio, 10)
+exports.GTWgui:setDefaultFont(tabPlayers, 10)
+exports.GTWgui:setDefaultFont(tabPhone, 10)
+exports.GTWgui:setDefaultFont(tabPanel, 10)
 
 playerList = guiCreateGridList( 0, 0.60, 1, 0.29, true, tabPlayers )
 smsTextBox = guiCreateMemo( 0, 0.40, 1, 0.19, "", true, tabPlayers )
@@ -92,6 +96,8 @@ if ( column ) then --If the column has been created, fill it with players
 	end
 end
 guiMemoSetReadOnly( smsReceiveTextBox, true )
+exports.GTWgui:setDefaultFont(playerList, 10)
+exports.GTWgui:setDefaultFont(button3, 10)
 
 -- On SMS receive
 function onSMSReceive( message, from )
@@ -110,6 +116,12 @@ button2 = guiCreateButton( 0.33, 0.92, 0.34, 0.08, "X", true, img )
 button6 = guiCreateButton( 0, 0.92, 0.33, 0.08, "<", true, img )
 guiSetAlpha( button2, 0 )
 guiSetAlpha( button6, 0 )
+exports.GTWgui:setDefaultFont(button4, 10)
+exports.GTWgui:setDefaultFont(button5, 10)
+exports.GTWgui:setDefaultFont(button1, 10)
+exports.GTWgui:setDefaultFont(editBox, 10)
+exports.GTWgui:setDefaultFont(radioList, 10)
+
 if ( column ) then --If the column has been created, fill it with players
 	for id, station in ipairs(radio) do
 		local row = guiGridListAddRow ( radioList )
@@ -130,6 +142,8 @@ if ( column2 ) then
 		guiGridListSetItemText ( phoneList, row, column2, service[id], false, false )
 	end
 end
+exports.GTWgui:setDefaultFont(phoneList, 10)
+exports.GTWgui:setDefaultFont(button7, 10)
 
 -- Select radio station
 addEventHandler("onClientGUIDoubleClick",radioList,
@@ -302,4 +316,4 @@ function sendSMS( )
    	end
 end
 addEventHandler( "onClientGUIClick", button3, sendSMS )
-fileDelete("phone-c.lua")
+--fileDelete("phone-c.lua")

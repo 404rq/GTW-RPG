@@ -31,11 +31,11 @@ end
 
 function onPlayerSpawn(spawnpoint)
 	if(players[source]) then
-		setElementParent(plr, getPlayerTeam(source))
+		--setElementParent(plr, getPlayerTeam(source))
 		createBlipAttachedTo(source, 0, 2, players[source][1], players[source][2], players[source][3], 255, 999, 99999.0, getPlayerTeam(source))
 	elseif getPlayerTeam(source) then
 		local r,g,b = getTeamColor(getPlayerTeam(source))
-		setElementParent(plr, getPlayerTeam(source))
+		--setElementParent(plr, getPlayerTeam(source))
 		createBlipAttachedTo(source, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(source))
 		players[source] = { tonumber(r), tonumber(g), tonumber(b) }
 	end
@@ -62,17 +62,17 @@ function updateBlipColor(plr)
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
 		setElementParent(plr, getPlayerTeam(plr))
-		local a = 255
-		if getElementData(plr,"anon") then a = 0 end
-  		createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], a, 999, 99999.0, getPlayerTeam(plr))
+		local alpha = 255
+		if getElementData(plr,"anon") then alpha = 0 else alpha = 255 end
+  		createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, getPlayerTeam(plr))
 	end
 	if not hasPlayerBlip(plr) then
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
 		setElementParent(plr, getPlayerTeam(plr))
-		local a = 255
-		if getElementData(plr,"anon") then a = 0 end
-  		createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], a, 999, 99999.0, getPlayerTeam(plr))
+		local alpha = 255
+		if getElementData(plr,"anon") then alpha = 0 else alpha = 255 end
+  		createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, getPlayerTeam(plr))
 	end
 end
 
