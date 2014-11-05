@@ -258,7 +258,7 @@ function makeTrain( hitElement, matchingDimension, id )
 				end
 				
 				-- Play the horn
-				exports.GTWtrainhorn:triggerTrainHorn(hitElement, train[hitElement])
+				setTimer(useHorn, 3000, 1, pilot[hitElement][1], train[hitElement][1])
 				
 				local time = math.random(1200, 1800)*1000
 				syncTimer[hitElement] = setTimer( sync, 200, 0, hitElement, maxSpeed, numberOfWagonsInTrain )
@@ -284,6 +284,10 @@ function makeTrain( hitElement, matchingDimension, id )
 			markercooldown[source] = setTimer( function() end, 30000, 1 )
 		end
 	end
+end
+
+function useHorn(plr, theTrain)
+	exports.GTWtrainhorn:triggerTrainHorn(plr, theTrain)
 end
 
 -- Keep train and carriages speed synced
