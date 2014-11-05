@@ -28,8 +28,8 @@ function toggleTrainHorn(thePlayer, cmd)
 end
 
 -- Trigger the horn sound
-function triggerTrainHorn(thePlayer, theTrain)
-	if theTrain and thePlayer and isElement(theTrain) and isElement(thePlayer) then
-		triggerClientEvent( root, "GTWtrainhorn.toggle", thePlayer, theTrain)
+function triggerTrainHorn(theTrain)
+	if theTrain and isElement(theTrain) then
+		triggerClientEvent( root, "GTWtrainhorn.toggle", theTrain, theTrain)
 	end
 end

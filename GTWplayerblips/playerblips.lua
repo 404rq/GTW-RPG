@@ -62,7 +62,9 @@ end
 function toggleVisibility(plr)
 	if getPlayerTeam(plr) == getTeamFromName("Staff") then
 		for id, plr2 in ipairs(getElementsByType("player")) do
-			setElementVisibleTo(allBlips[plr2], plr, true)
+			if isElement(allBlips[plr2]) then
+				setElementVisibleTo(allBlips[plr2], plr, true)
+			end
 		end
 	else
 		for id, plr2 in ipairs(getElementsByType("player")) do
