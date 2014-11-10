@@ -52,7 +52,7 @@ function showGUI(hitPlayer, matchingDimension)
 				counter = k
 			end
 		end
-		if hitPlayer and isElement(hitPlayer) and getElementType(hitPlayer) == "player" and getPlayerWantedLevel(hitPlayer) > 0 then return end
+		-- if hitPlayer and isElement(hitPlayer) and getElementType(hitPlayer) == "player" and getPlayerWantedLevel(hitPlayer) > 0 then return end
 		if getElementInterior(source) > 0 then
 			local location = getElementData(source, "location")
 			if location and not getElementData(hitPlayer, "rob") then
@@ -81,13 +81,20 @@ function hideGUI(leavePlayer)
 end
 
 -- Take money and increase health
-function buyHamburger(money, health)
+function buyFood(money, health)
 	if not getElementData(client, "rob") then
-		takePlayerMoney(client, money)
-		setElementHealth(client, getElementHealth(client) + health)
+		if (getElementHealth(client) + health) < 100 then
+			takePlayerMoney(client, money)
+			setElementHealth(client, getElementHealth(client) + health)
+		elseif getElementHealth(client) < 100 then
+			takePlayerMoney(client, money)
+			setElementHealth(client, 100)
+		else
+			exports.GTWtopbar:dm("You already ate enough fatty!", client, 255, 0, 0)
+		end
 	else
 		exports.GTWtopbar:dm("You can't shop when robbing a store idiot!", client, 255, 0, 0)
 	end
 end
 addEvent("GTWfastfood.buy",true)
-addEventHandler("GTWfastfood.buy",getRootElement(),buyHamburger)
+addEventHandler("GTWfastfood.buy",getRootElement(),buyFood)

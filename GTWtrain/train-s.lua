@@ -26,6 +26,7 @@ markercooldown 	= { }
 turncooldown	= { }
 globcooldown 	= nil
 globaldist 		= false
+horncooldown	= { }
 
 -- Add all the markers
 function addMarkers ( res )
@@ -258,9 +259,11 @@ function makeTrain( hitElement, matchingDimension, id )
 				end
 				
 				-- Play the horn
-				setTimer(useHorn, 3000, 1, train[hitElement][1])
-				setTimer(useHorn, 7000, 1, train[hitElement][1])
+				if math.random(10) < 7 then
+					setTimer(useHorn, 500, 1, train[hitElement][1])
+				end
 				
+				-- Starting the syncer
 				local time = math.random(1200, 1800)*1000
 				syncTimer[hitElement] = setTimer( sync, 200, 0, hitElement, maxSpeed, numberOfWagonsInTrain )
 				setTimer( cleanUp, time, 1, hitElement )
@@ -308,6 +311,15 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 		if getElementModel( train[thePlayer][1] ) == 449 then
 			trainSpeed = (trainSpeed*(distToStation/accelerationConst)*7)
 		end
+		if distToStation > 30 and distToStation < 400 then
+			if math.random(10) < 3 and not isTimer(horncooldown[thePlayer]) then
+				useHorn(train[thePlayer][1])
+				if math.random(10) < 6 then
+					setTimer(useHorn, 2000, 1, train[thePlayer][1])
+				end
+				horncooldown[thePlayer] = setTimer(function() end, 10000, 1)
+			end
+		end
 		if trainSpeed > maxSpeed then
 			trainSpeed = maxSpeed
 		elseif trainSpeed < minSpeed then
@@ -316,6 +328,11 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 		if getElementModel( train[thePlayer][1] ) == 449 and trainSpeed > (maxSpeed/1.4) then
 			trainSpeed = (maxSpeed/1.4)
 		end
+		--[[if distToStation < accelerationConst and trainLocations[stationID][5] == "slow" then
+			if trainSpeed < (maxSpeed/2.5) then
+				trainSpeed = (maxSpeed/2.5)
+			end
+		end]]--
 		if not trainDirection[thePlayer] then
 			trainSpeed = -trainSpeed
 		end
@@ -399,9 +416,11 @@ end
 addEventHandler( "onPlayerQuit", getRootElement(), quitPlayer )
 
 function cleanUpFromClient( theTrain )
-	local thePlayer = getElementSyncer(theTrain)
-    if thePlayer and isElement(thePlayer) then
-    	cleanUp(thePlayer)
+	if theTrain and isElement(theTrain) then
+		local thePlayer = getElementSyncer(theTrain)
+    	if thePlayer and isElement(thePlayer) then
+    		cleanUp(thePlayer)
+    	end
     end
 end
 addEvent( "GTWtrain.onClientTrainStreamOut", true )
