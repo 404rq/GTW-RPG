@@ -1,0 +1,24 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.4
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>    
+	<info author="GTWGames" name="Logs system" description="Logs what's going on in game" type="script" version="2.0.4"></info>                    
+	<script src="logs_s.lua" type="server"></script>   
+	<script src="logs_c.lua" type="client"></script>  
+	
+	<export function="add" type="server" />
+	<export function="sub" type="server" />
+	<export function="add" type="client" />
+	<export function="sub" type="client" />
+</meta>

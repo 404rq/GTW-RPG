@@ -413,3 +413,8 @@ function vehicleHeadLightColors(player, cmd, r,g,b)
     end
 end
 addCommandHandler("headlight", vehicleHeadLightColors)
+
+function saveAllVehicles(quitType)
+	dbQuery(unloadMyVehicles, veh_data, "SELECT * FROM vehicles WHERE owner=?", getAccountName(getPlayerAccount( source )))
+end
+addEventHandler("onPlayerQuit", root, saveAllVehicles)
