@@ -59,7 +59,8 @@ function repair_veh(veh, repairTime)
 	setTimer(pay_repair, math.floor(repairTime), 1, client, owner)
 	setTimer(setPedAnimation, math.floor(repairTime), 1, client, nil, nil)
 				
-	-- Increase stats by 1
+	-- Increase stats by 1 (if not your own car, solution to abuse 2014-11-13)
+	if owner == client then return end
 	local playeraccount = getPlayerAccount(client)
 	local repaired_cars = getAccountData(playeraccount, "acorp_stats_repaired_cars") or 0
 	setAccountData(playeraccount, "acorp_stats_repaired_cars", repaired_cars + 1)
