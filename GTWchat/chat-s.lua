@@ -408,8 +408,10 @@ end
 
 --[[ Make first char in a string uppercase ]]--
 function firstToUpper(str)
-	if str and str:sub(1,5) ~= "http:" and str:sub(1,4) ~= "www." then
+	if str and str:sub(1,4) ~= "http" and str:sub(1,4) ~= "www." then
     	return str:sub(1,1):upper()..str:sub(2)
+    else
+    	return str
     end
 end
 
