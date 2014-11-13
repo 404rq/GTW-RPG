@@ -61,4 +61,6 @@ None, _This resource doesn't have any exported functions._
 <br>
 **Requirements**
 
-GTWtopbar
+GTWtopbar<br>
+(Optional) GTWgroupsys (private license)<br>
+(Optional) irc (available at wiki.mtasa.com)
