@@ -1,0 +1,19 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.4
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" name="Chat system" description="Local chat, chat bubbles and mute system for MTA SA" version="2.0.4" type="script"/>
+    <script src="chat-s.lua" type="server"/>
+    <script src="chat-c.lua" type="client"/>
+</meta>
