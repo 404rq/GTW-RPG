@@ -1,13 +1,13 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG [2.0.5]
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		2.0.5
 	Status:			Stable release
 ********************************************************************************
 ]]--
@@ -25,6 +25,9 @@ local showtime 			= 7500
 local hideown 			= true
 local defR,defG,defB	= 240,235,255
 
+-- Change only if you have the IRC module and renamed the irc resource
+local nameOfIRCResource	= "irc"
+
 -- Define law 
 local lawTeams = {
 	["Government"] = true,
@@ -33,6 +36,24 @@ local lawTeams = {
 local policeTeams = {
 	["Government"] = true, 
 }
+
+--[[ Compatibility with other servers, deal with export calls here ]]--
+function dm(plr, msg, r, g, b, col)
+	-- Replaces outputChatBox with identical syntax
+	exports.GTWtopbar:dm(plr, msg, r, g, b, col)
+	
+	-- If you don't have GTWtopbar, uncommend this instead
+	--outputChatBox(plr, msg, r, g, b, col)
+end
+function getGroupChatColor(group)
+	-- Call whatever group system you use and ask for a 
+	-- group as a string to receive it's chat color as RGB
+	local r,g,b = exports.GTWgroupsys:getGroupChatColor(group)
+	if not r or not g or not b then
+		r,g,b = defR,defG,defB
+	end
+	return r,g,b
+end
 
 --[[ Clear anti spam cache on quit ]]--
 function cleanUpChat(quitType)
@@ -84,34 +105,34 @@ end
 --[[ Handle spam and mutes, returns true if passed, false if failed ]]--
 function validateChatInput(plr, chatID, text)
 	if isPlayerMuted(plr) then 
-		exports.GTWtopbar:dm("You are muted, visit games.albonius.com if you wish to appeal your mute", plr, 255, 100, 0) 
+		dm("You are muted, visit games.albonius.com if you wish to appeal your mute", plr, 255, 100, 0) 
 		return false 
 	end
 	if isTimer(cooldownTimers[plr]) then 
-		exports.GTWtopbar:dm("Do not spam the chat!", plr, 255, 100, 0) 
+		dm("Do not spam the chat!", plr, 255, 100, 0) 
 		return false 
 	end
 	if last_msg[plr][chatID] and last_msg[plr][chatID] == text then
-		exports.GTWtopbar:dm("Do not repeat yourself!", plr, 255, 100, 0)
+		dm("Do not repeat yourself!", plr, 255, 100, 0)
 		return false
 	end
 	-- Special case for car chat
 	if chatID == "car" and not getPedOccupiedVehicle(plr) then 
-		exports.GTWtopbar:dm("Car chat can only be used inside vehicles!", plr, 255, 100, 0) 
+		dm("Car chat can only be used inside vehicles!", plr, 255, 100, 0) 
 		return false
 	end
 	-- Special case for law chat
 	if chatID == "law" and getPlayerTeam(plr) and not lawTeams[getPlayerTeam(plr)] then 
-		exports.GTWtopbar:dm("You are not a law enforcer!", plr, 255, 100, 0)
+		dm("You are not a law enforcer!", plr, 255, 100, 0)
 		return false
 	end
 	if chatID == "law" and not getPlayerTeam(plr) then 
-		exports.GTWtopbar:dm("You are not in a team!", plr, 255, 100, 0)
+		dm("You are not in a team!", plr, 255, 100, 0)
 		return false
 	end
 	-- Special case for group chat
 	if chatID == "group" and not getElementData(plr, "Group") then
-		exports.GTWtopbar:dm("You are not in a group! Hit F6 to create or join a group", plr, 255, 100, 0)
+		dm("You are not in a group! Hit F6 to create or join a group", plr, 255, 100, 0)
 		return false
 	end
 	return true
@@ -119,8 +140,11 @@ end
 
 --[[ Handle incoming IRC messages ]]--
 function IRCMessageReceive(channel, message)
+	-- Verify that the resource is running, added support for custom names 2014-11-14
+	local res = getResourceFromName(nameOfIRCResource)
+	if getResourceState(res) ~= "running" then return end
 	if string.match(message, '%d%d*') then return end
-	local nick = exports.irc:ircGetUserNick(source)
+	local nick = exports[nameOfIRCResource]:ircGetUserNick(source)
 	outputChatBox("#444444[IRC] #CCCCCC"..nick..":#FFFFFF "..message, root, 255, 255, 255, true)
 	outputServerLog("[IRC] "..nick..": "..message)
 end
@@ -236,7 +260,7 @@ addCommandHandler("e", useEmergencyChat)
 function useGroupChat(plr, n, ...)
 	local msg = table.concat({...}, " ")
 	if not validateChatInput(plr, "group", msg) then return end	
-	local r,g,b = exports.GTWgroupsys:getGroupChatColor(getElementData(plr, "Group")) or defR,defG,defB
+	local r,g,b = getGroupChatColor(getElementData(plr, "Group")) or defR,defG,defB
 	local nick = getPlayerName(plr)
 	for n,v in pairs(getElementsByType("player")) do
 		if getElementData(plr, "Group") == getElementData(v, "Group") then
@@ -318,7 +342,7 @@ function useGlobalChat(message, messageType)
 	    	occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
 	    end
 		local px,py,pz = getElementPosition(source)
-		local loc = getElementData(source,"City")
+		local loc = getZoneName(px,py,pz)
 		if not loc then
 			loc = "Guest"
 		end
