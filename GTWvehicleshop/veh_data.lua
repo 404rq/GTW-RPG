@@ -47,6 +47,7 @@ car_data[2] = {
 	{ 475, "muscle", 122300 },
 	
 	{ 412, "lowrider", 78800 },
+	{ 466, "lowrider", 55300 },
 	{ 534, "lowrider", 77600 },
 	{ 535, "lowrider", 73200 },
 	{ 536, "lowrider", 69700 },
