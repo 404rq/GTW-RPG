@@ -26,8 +26,8 @@ function startSmoking ( thePlayer )
     	bindKey( thePlayer, "D", "down", "stopsmoke" )
     	
     	-- Info message
-    	exports.GTWtopbar:dm( "Smoking: Right or Left click to smoke, walk forward to stop smoke.", thePlayer, 255, 200, 0 )
-    	setTimer( showDelayInfo, 2000, 1, "Smoking: Use /stopsmoke to throw your ciggarete away", thePlayer, 255, 200, 0)
+    	exports.GTWtopbar:dm( "Smoking: Right click to smoke, walk forward to stop smoke (W).", thePlayer, 255, 200, 0 )
+    	setTimer( showDelayInfo, 2000, 1, "Smoking: Use /stopsmoke or walk sideways (A or D) to throw your ciggarete away", thePlayer, 255, 200, 0)
     	
     	-- Anim in
     	setPedAnimation( thePlayer, "SMOKING", "M_smk_in", -1, false, false )
