@@ -17,6 +17,7 @@
 plants_age 		= { }
 player_plants 	= { }
 plants_pos		= {{{ }}}
+seed_moey 		= 300
 
 -- Finds the nearest plant
 function find_nearest(player)
@@ -38,7 +39,6 @@ end
 
 -- Plant the seed
 function plantSeed( player )
-	local seed_moey = math.random(400,500)
 	if getPlayerTeam(player) == getTeamFromName("Civilians") and getElementData(player, "Occupation") == "Farmer" and 
 		getPlayerMoney(player) > seed_moey and getPedOccupiedVehicle(player) and getElementModel( getPedOccupiedVehicle( player )) == 531 
 		and player_plants[player] < 200 then	

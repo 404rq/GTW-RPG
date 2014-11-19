@@ -166,13 +166,20 @@ function useLocalChat(plr, n, ...)
 		 	r,g,b = getTeamColor(getPlayerTeam(plr))
 		end
 	end
+	-- (2014-11-19) Count local players
+	local sumOfLocal = 0
+	for n,v in ipairs(getElementsByType("player")) do
+	   	if isPlayerInRangeOfPoint(v, px,py,pz, chat_range) then
+	   		sumOfLocal = sumOfLocal + 1
+	  	end
+	end
 	for n,v in ipairs(getElementsByType("player")) do
 	   	if isPlayerInRangeOfPoint(v, px,py,pz, chat_range) then
 	   		local occupation = ""
 	   		if getElementData(plr, "isPoliceChief") and getPlayerTeam(plr) and policeTeams[getTeamName(getPlayerTeam(plr))] then
 	   			occupation = RGBToHex(defR, defG, defB).."[PoliceChief]"..RGBToHex(r,g,b)
 	   		end
-	   		local outText = RGBToHex(r,g,b).."(LOCAL) "..occupation.."["..tostring(n).."] "..RGBToHex(r,g,b)..nick..": "..RGBToHex(defR,defG,defB)
+	   		local outText = RGBToHex(r,g,b).."(LOCAL) "..occupation.."["..tostring(sumOfLocal).."] "..RGBToHex(r,g,b)..nick..": "..RGBToHex(defR,defG,defB)
 			local length = string.len(outText..firstToUpper(msg))
 			if length < 128 then
 	   			outputChatBox(outText..firstToUpper(msg), v, r,g,b, true)
