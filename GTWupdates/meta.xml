@@ -1,0 +1,22 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.4
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" name="Update viewer" version="2.0.4" type="script" />
+    <script src="updates.lua" type="client"></script>
+    <file src="updates.txt" download="true" />
+    
+    <export function="viewUpdateListGUI" type="client"/>
+    <export function="getUpdatesList" type="client"/>
+</meta>
