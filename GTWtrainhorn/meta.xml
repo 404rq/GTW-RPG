@@ -17,6 +17,10 @@
 	<script src="horn_c.lua" type="client" />
 	<script src="horn_s.lua" type="server" />
 	
-	<file src="sound/x_d9_horn1.wav" download="true" />	
+	<file src="sound/x_d9_horn1.wav" download="true" />
+	<file src="sound/2k_hornl.wav" download="true" />
+	<file src="sound/2k_hornh.wav" download="true" />
+	<file src="sound/7k_hornl.wav" download="true" />
+	<file src="sound/7k_hornh.wav" download="true" />	
 	<export function="triggerTrainHorn" type="server" />
 </meta>

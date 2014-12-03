@@ -13,9 +13,10 @@
 ]]--
 
 -- Toggle the horn sound
-sound = {}
+local sound = {}
 function toggleTrainHorn(theTrain)
 	local theTrain2 = nil
+	local horn_signal = getElementData(theTrain, "horn")
 	for k=1, 20 do
 		if getVehicleTowedByVehicle( theTrain ) then
 			theTrain2 = getVehicleTowedByVehicle( theTrain )
@@ -23,9 +24,9 @@ function toggleTrainHorn(theTrain)
 		
 		if theTrain and (getElementModel(theTrain) == 537 or getElementModel(theTrain) == 538) then
 			x,y,z = getElementPosition(theTrain)
-			sound[k] = playSound3D( "sound/x_d9_horn1.wav", x, y, z, false )
+			sound[k] = playSound3D(horn_signal, x, y, z, false )
 			attachElements(sound[k], theTrain)
-			setSoundMaxDistance( sound[k], 500 )
+			setSoundMaxDistance( sound[k], 500 )	
 		end
 		
 		if not getVehicleTowedByVehicle( theTrain ) then
