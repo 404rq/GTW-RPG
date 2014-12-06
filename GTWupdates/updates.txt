@@ -1,3 +1,17 @@
+'''GTWcore v-1.4.2465'''
+* Added /gtw-version to see which version is running
+* Added new sounds to train horn, assigned randomly
+* Fixed hijack missions and a fair payment for those
+* Altered payments from turfs based on the total area owned by a group and a maximum amount of money for owning all turfs
+* Moved update news, help system and other global documents to github, these will be the same on all servers from now.
+* Updated help system
+* Increased amount of money gained from mystery bags
+* Increased money erned from robbery and reduced waiting time per rob as well as delay between each rob
+* Fixed previous minor bugs and reported bugs.
+* Added blips to all houses that are for sale currently.
+* Fixed bugs related to business system and set a max limit of their bank.
+
+
 '''GTWcore v-1.4.2152'''
 * Rewrote and optimized entire mechanic job
 * Made mechanic payments based on rank

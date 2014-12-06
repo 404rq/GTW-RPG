@@ -12,11 +12,20 @@
 ********************************************************************************
 ]]--
 
+-- Available sounds
+local h_list = {
+	"x_d9_horn1",
+	"2k_hornl",
+	"2k_hornh",
+	"7k_hornl",
+	"7k_hornh"
+}
+
 -- Toggle the horn sound
-local sound = {}
+sound = {}
 function toggleTrainHorn(theTrain)
 	local theTrain2 = nil
-	local horn_signal = getElementData(theTrain, "horn")
+	local horn_signal = getElementData(theTrain, "horn") or h_list[math.random(#h_list)]
 	for k=1, 20 do
 		if getVehicleTowedByVehicle( theTrain ) then
 			theTrain2 = getVehicleTowedByVehicle( theTrain )

@@ -1,0 +1,171 @@
+--[[ 
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.4
+	Status:			Stable release
+********************************************************************************
+]]--
+
+-- Money earnings ~$2500/rob 6 robberies/hour max $15´000/hour
+
+ped = { }
+peds = {
+	--x, y, z, dimension, interior, rotation, skinID, nameOfStore
+	[1]={ 161, -81, 1001.8046875, 3, 18, 180, 93, "Zip clothes shop" },
+	[2]={ 161, -81, 1001.8046875, 2, 18, 180, 226, "Zip clothes shop" },
+	[3]={ 161, -81, 1001.8046875, 1, 18, 180, 93, "Zip clothes shop" },
+	[4]={ 161, -81, 1001.8046875, 0, 18, 180, 192, "Zip clothes shop" },
+	
+	[5]={ 204.7978515625, -7.896484375, 1001.2109375, 2, 5, 270, 233, "Victim" },
+	[6]={ 204.7978515625, -7.896484375, 1001.2109375, 1, 5, 270, 93, "Victim" },
+	[7]={ 204.7978515625, -7.896484375, 1001.2109375, 0, 5, 270, 93, "Victim" },
+	
+	[8]={ 203.4, -41.7, 1001.8046875, 2, 1, 180, 192, "Sub Urban" },
+	[9]={ 203.4, -41.7, 1001.8046875, 1, 1, 180, 93, "Sub Urban (Hashbury)" },
+	[10]={ 203.4, -41.7, 1001.8046875, 0, 1, 180, 93, "Sub Urban" },
+	
+	[11]={ 204.2080078125, -157.8193359375, 1000.5234375, 0, 14, 180, 226, "DidierSachs (Rodeo)" },
+	
+	[12]={ 206.3759765625, -127.5380859375, 1003.5078125, 1, 3, 180, 233, "Pro Laps" },
+	[13]={ 206.3759765625, -127.5380859375, 1003.5078125, 0, 3, 180, 192, "Pro Laps (Rodeo)" },
+	
+	[14]={ 206.3349609375, -98.703125, 1005.2578125, 3, 15, 180, 192, "Binco clothes shop" },
+	[15]={ 206.3349609375, -98.703125, 1005.2578125, 2, 15, 180, 233, "Binco clothes shop" },
+	[16]={ 206.3349609375, -98.703125, 1005.2578125, 1, 15, 180, 192, "Binco clothes shop" },
+	[17]={ 206.3349609375, -98.703125, 1005.2578125, 0, 15, 180, 233, "Binco clothes shop (Ganton)" },
+}
+
+cancelTimers = {}
+function loadPeds()
+	for k=1, #peds do
+		-- Create the ped
+    	ped[k] = createPed( peds[k][7], peds[k][1], peds[k][2], peds[k][3] )
+		setElementDimension( ped[k], peds[k][4] )
+		setElementInterior( ped[k], peds[k][5] )
+		setPedRotation( ped[k], peds[k][6] )
+		setElementData( ped[k], "robLoc", peds[k][8] )
+	end
+end
+addEventHandler("onResourceStart", resourceRoot, loadPeds)
+
+-- Robbery time
+function CounterTime( crim )
+	if isElement( crim ) then
+		local time = getTickCount( )
+		setElementData( crim, "robTime2", time )
+	end
+end
+
+-- Define law 
+lawTeams = {
+	[getTeamFromName("Government")] = true, 
+	[getTeamFromName("Emergency service")] = true 
+}
+-- Antispam timer
+robTimer = { }
+
+-- Do the rob
+function robStore( target )
+	if getElementType( target ) == "ped" and not isTimer(robTimer[client]) then
+		-- Robbery in progress
+		setElementData( client, "rob", true )
+		local money = math.random( 2450, 2500 )
+		local robtime = math.random(30000, 90000)
+		
+		-- Allow count down timer
+		setElementData( client, "robTime", robtime+getTickCount( ))
+		setElementData( client, "robTime2", getTickCount( ))
+		setTimer( CounterTime, 1000, (math.floor(robtime)/1000), client )
+		
+		-- When the robbery is finished
+	    setTimer( payForRob, robtime, 1, client, money )
+	    setTimer( robStatus, robtime, 1, client, target )
+	    cancelTimers[client] = setTimer( cancelRob, (math.floor(robtime)/100), 100, client, target )
+	    
+	    -- Set the wanted level 4 stars and 15 minutes violent
+	    setElementData ( client, "Wanted", tonumber( 
+			getElementData( client, "Wanted" )) + 4 )
+		exports.GTWpolice:setPlayerWantedAC( client, 15 )
+		setPedAnimation( target, "shop", "shp_rob_givecash", -1, false, false, false )
+		exports.GTWtopbar:dm( "You committed the crime of robbery 4 stars)", client, 255, 0, 0 )
+		
+		-- Send alarm call to all the cops
+		local robLoc = getElementData( target, "robLoc" )
+		if not robLoc then
+			robLoc = "Unknown store"
+		end
+		if getElementData( client, "lastLoc" ) then
+			robLoc = robLoc.." ("..getElementData( client, "lastLoc" )..")"
+		end
+		exports.GTWtopbar:dm( "You have robbed "..robLoc..", stay inside!", client, 255, 200, 0 )
+		local cops = getElementsByType( "player" ) 
+		for theKey,cop in ipairs(cops) do 
+			if lawTeams[getPlayerTeam(cop)] then
+				outputChatBox( "#0000BB(911): #EEEEEERobbery in progress at: "..robLoc, cop, 255, 255, 255, true )
+				exports.GTWtopbar:dm( "Robbery in progress at: "..robLoc, cop, 255, 0, 0 )
+			end
+		end
+		
+		-- Set cooldown timer to 10 minutes
+		robTimer[client] = setTimer(function() end, 600000, 1 )
+	elseif isTimer(robTimer[client]) then
+		exports.GTWtopbar:dm( "Get the hell out of here, the cops know where you are!", client, 255, 0, 0 )
+	end
+end
+addEvent( "onRob", true )
+addEventHandler( "onRob", root, robStore )
+
+function payForRob( crim, amount )
+	if isElement( crim ) then
+		if getElementData( crim, "rob" ) then 
+			givePlayerMoney( crim, amount ) 
+			
+			-- Increase stats by 1
+			local playeraccount = getPlayerAccount( crim )
+			local robs = getAccountData( playeraccount, "acorp_stats_rob_count" ) or 0
+			setAccountData( playeraccount, "acorp_stats_rob_count", robs + 1 )
+			
+			-- Wanted points for criminals
+			local wantedPoints = getAccountData( playeraccount, "acorp_stats_wanted_points" ) or 0
+			setAccountData( playeraccount, "acorp_stats_wanted_points", wantedPoints + 40)
+		end 
+	end
+end
+
+function robStatus( crim, target, money ) 
+	if isElement( crim ) then
+		if getElementData( crim, "rob" ) then 
+			exports.GTWtopbar:dm( "Rob successfully, now escape before the cops arrive!", crim, 0, 255, 0 ) 			
+	    end
+	    if isElement( target ) and isElement( crim ) then
+			setPedAnimation( target, nil, nil )
+			setElementData( crim, "rob", false )
+		end
+	end	
+end
+
+-- Check if the rob should be interrupted
+function cancelRob( crim, target )
+	if isElement( crim ) then
+		if getElementInterior( crim ) == 0 or getElementData( crim, "arrested" ) or getElementData( crim, "Jailed" ) == "Yes" then
+			setElementData( crim, "rob", false )
+			exports.GTWtopbar:dm( "Robbery failed because you left the store!", crim, 255, 0, 0 )
+			setPedAnimation( target, nil, nil )
+			if isTimer( cancelTimers[crim] ) then
+				killTimer( cancelTimers[crim] )
+			end
+		end
+	end
+end
+
+-- Round float values
+function round(number, digits)
+  	local mult = 10^(digits or 0)
+  	return math.floor(number * mult + 0.5) / mult
+end

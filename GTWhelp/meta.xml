@@ -1,0 +1,19 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG [2.0.4]
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		2.0.4
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>
+	<info author="GTWGames" version="2.0.4" name="Help gui" description="Documentation GUI with help pages" type="script" />
+	<script src="data.lua" type="client" />
+	<script src="help.lua" type="client" />
+</meta>
