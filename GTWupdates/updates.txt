@@ -1,3 +1,11 @@
+'''GTWcore v-1.4.2546'''
+* Fixed GUI related bugs, errors and warnings in modshop and lowered the modding prices 10x, modding should be cheap.
+* Added /cteam <team> <message> for staff members to chat in any team chat
+* Added improved version management.
+* Added realistic nights for more darkness (makes police chases more interesting)
+* Added gym system to change walking styles
+
+
 '''GTWcore v-1.4.2465'''
 * Added /gtw-version to see which version is running
 * Added new sounds to train horn, assigned randomly
