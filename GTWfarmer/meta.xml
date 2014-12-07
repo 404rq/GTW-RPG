@@ -1,18 +1,18 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" name="Farmer job" version="2.0.3" description="A realistic farmer job" type="script" />
+    <info author="GTWGames" name="GTWfarmer" version="0" description="A realistic farmer job" type="script" />
     <script src="farmer.lua" type="server" />
 </meta>

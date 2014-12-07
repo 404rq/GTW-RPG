@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-	<info author="GTWGames" version="2.0.4" name="Walrus car dealer" type="script" />
+	<info author="GTWGames" version="0" name="GTWvehicleshop" description="Vehicle shops around the map for any type of vehicle" type="script" />
 	<script src="veh_data.lua" type="shared" />
 	<script src="vehicle_s.lua" type="server" />
 	<script src="vehicle_c.lua" type="client" />

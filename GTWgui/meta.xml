@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-	<info author="GTWGames" type="script" name="Core system" description="All server core features" version="2.0.4" />
+	<info author="GTWGames" type="script" name="GTWgui" description="Manage walrus GUI elements and custom fonts" version="0" />
 	<script src="c_window.lua" type="client" />
 	<script src="s_refresh.lua" type="server" />
 	

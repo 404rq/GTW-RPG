@@ -1,18 +1,18 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-	<info author="GTWGames" version="2.0.4" name="Turn indicators" description="Add simple turn indicators to any vehicle" type="script" />
+	<info author="GTWGames" version="0" name="GTWturnsignals" description="Add simple turn indicators to any vehicle" type="script" />
 	<script src="turnindicators.lua" type="server"/>
 </meta>

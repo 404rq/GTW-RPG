@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="Store robbery" descriptions="Allow criminals to rob stores to earn money" version="1.1.1"/>
+    <info author="GTWGames" type="script" name="GTWrob" descriptions="Allow criminals to rob stores to earn money" version="0"/>
     <script src="rob-c.lua" type="client"/>
 	<script src="rob-s.lua" type="server"/>
 </meta>

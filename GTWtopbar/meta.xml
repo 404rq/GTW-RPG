@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-	<info author="GTWGames" name="GTW topbar" description="Shows messages on the topbar" type="script" version="2.0.4" />
+	<info author="GTWGames" name="GTWtopbar" description="Shows messages on the topbar" type="script" version="0" />
 	<script src="client.lua" type="client" />
 	<script src="server.lua" type="server" />
 	<export function="dm" type="client"/>

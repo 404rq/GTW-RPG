@@ -321,6 +321,36 @@ end
 addCommandHandler("staff", useStaffChat)
 addCommandHandler("mod", useStaffChat)
 
+--[[ Staff chat, to reply to a certain team ]]--
+function useStaffTeamChat(plr, n, team, ...)
+	local msg = table.concat({...}, " ")
+	if not validateChatInput(plr, "mod-team", msg) then return end	
+	if not isServerStaff(plr) then return end
+	local r,g,b = defR,defG,defB
+	if team and getTeamFromName(team) then
+		r,g,b = getTeamColor(getTeamFromName(team))
+	end
+	local nick = getPlayerName(plr)
+	for n,v in pairs(getElementsByType("player")) do
+		if getPlayerTeam(v) and getPlayerTeam(v) == getTeamFromName(team) then
+	    	local outText = RGBToHex(255, 255, 255).."(STAFF-T) "..RGBToHex(r, g, b)..nick..": "
+			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
+			if length < 128 then
+	   			outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	  		else
+	   			outputChatBox(outText, v, r,g,b, true)
+	   			outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   		end
+    	end
+  	end
+  		
+  	-- Prevent spam and log the chat
+	last_msg[plr]["mod-team"] = msg
+	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
+	outputServerLog("[STAFF-T] "..getPlayerName(plr)..": "..msg)
+end
+addCommandHandler("cteam", useStaffTeamChat)
+
 --[[ Roleplay action chat, "/do <action>" ]]--
 function useActionChatDo(plr, n, ...)
 	local msg = table.concat({...}, " ")
@@ -446,6 +476,23 @@ function firstToUpper(str)
     end
 end
 
+--[[ Show help and available commands ]]--
+function displayHelp(plr)
+	outputChatBox("#000000**************************************************", plr, 255, 255, 255, true)
+	outputChatBox("#444444"..getResourceInfo(getThisResource(), "name").." #FFFFFF(#00AA00"..
+		getResourceInfo(getThisResource(), "version").."#FFFFFF), available commands:", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /local		#FFFFFF Local chat (U key)", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /cc		#FFFFFF Car chat, visible to all in your vehicle", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /gc		#FFFFFF Group chat, visible to group members", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /e			#FFFFFF Emergency chat, visible to law units", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /me /do	#FFFFFF Basic roleplay", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - T and Y	#FFFFFF Main and team chat", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /staff 	#FFFFFF Staff chat", plr, 255, 255, 255, true)
+	outputChatBox("#00AA00 - /cteam		#FFFFFF Staff chat to a specific team", plr, 255, 255, 255, true)
+	outputChatBox("#000000**************************************************", plr, 255, 255, 255, true)
+end
+addCommandHandler("chathelp", displayHelp)
+
 --[[ Get bubble settings from clients ]]--
 function receiveSettings()
 	local settings =
@@ -459,6 +506,3 @@ function receiveSettings()
 end
 addEvent("GTWchat.askForSettings",true)
 addEventHandler("GTWchat.askForSettings", root, receiveSettings)
-
--- Load successfull? output the status in server log
-outputServerLog("[Grand Theft Walrus] GTWchat (v.2.0.4) started successfully")

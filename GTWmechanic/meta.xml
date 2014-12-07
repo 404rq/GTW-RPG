@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" name="Mechanic" description="Repair and refuel vehicles and get payed" version="2.0.4" type="script" />
+    <info author="GTWGames" name="GTWmechanic" description="Repair and refuel vehicles and get payed" version="0" type="script" />
 	<script src="mechanic-s.lua" type="server" />
 	<script src="mechanic-c.lua" type="client" />
 </meta>

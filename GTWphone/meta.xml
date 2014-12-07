@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" name="Nokia Phone" type="script" description="Adds a nokia phone where the user can select radio stations, send SMS, or call services" version="2.0.4"></info>
+    <info author="GTWGames" name="GTWphone" type="script" description="Adds a phone where the user can select radio stations, send SMS, or call services" version="0"></info>
     <script src="phone-c.lua" type="client"></script>
     <script src="phone-s.lua" type="server"></script>
     <file src="lumia920.png" />

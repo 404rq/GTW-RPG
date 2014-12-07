@@ -1,19 +1,19 @@
-<!--
+<!-- 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 -->
 
 <meta>   
-	<info author="GTWGames" name="Train system" description="Add trains to the reailroads around SA, game mod for MTA SA" type="script" version="2.0.4"></info>
+	<info author="GTWGames" name="GTWtrain" description="Add trains to the reailroads around SA, game mod for MTA SA" type="script" version="0"></info>
 	<script src="data.lua" type="shared"></script>
 	<script src="train-s.lua" type="server"></script>
 	<script src="train-c.lua" type="client"></script>
