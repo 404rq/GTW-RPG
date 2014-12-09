@@ -11,6 +11,10 @@ Details
 =======
 Beside the standardized core features, this project also includes a lot of misc features that might not be the first you think of when it comes to RPG but still pretty interesting, GTWtrains is a typical example of that, a system that manage and control AI trains around the map, trains that can be used to travel between the three cities or why not block people during car chases. Smaller features that we consider as "details" such as GTWsmoke which handles some smoking animations etc. Please note that this isn't the full gamemode running at Grand Thest Walrus game servers, in fact, it's the opposite. We are working to extend this gamemode however and more resources will be published as soon they are rewritten to work on other servers than just our own. The reason are for example usage of exports to private resources or dependencies of many large resources, where some of them is badly written currently.
 
+Support our developers
+===
+<a href='https://pledgie.com/campaigns/27635'><img alt='Click here to lend your support to: GTW RPG and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/27635.png?skin_name=chrome' border='0' ></a>
+
 Websites:
 =======
 GTW games: http://games.albonius.com<br>
