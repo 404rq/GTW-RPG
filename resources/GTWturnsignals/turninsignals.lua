@@ -146,24 +146,54 @@ function lightHandler( player, cmd )
 				currHeadLightColor[veh][3] = nil
 				currHeadLightColor[veh] = nil
 			end
-			setVehicleLightState( veh, 0, 0 )
-			setVehicleLightState( veh, 1, 0 )
-			setVehicleLightState( veh, 2, 0 )
-			setVehicleLightState( veh, 3, 0 )
-			setVehicleOverrideLights( veh, 2 ) 
-			if getVehicleTowedByVehicle( veh ) then
-				local veh2 = getVehicleTowedByVehicle( veh )
-				if veh2 then
-					setVehicleLightState( veh2, 0, 0 )
-					setVehicleLightState( veh2, 1, 0 )
-					setVehicleLightState( veh2, 2, 0 )
-					setVehicleLightState( veh2, 3, 0 )
-					setVehicleOverrideLights( veh2, 2 )
-				end
-			end
+			startLights(veh)
 		end
 	end
 end
 addCommandHandler( "lleft", lightHandler )
 addCommandHandler( "lright", lightHandler )
 addCommandHandler( "warn", lightHandler )
+
+--[[ Turn on all lights ]]--
+function startLights(veh)
+	if not veh or not isElement(veh) then return end
+	setVehicleLightState( veh, 0, 0 )
+	setVehicleLightState( veh, 1, 0 )
+	setVehicleLightState( veh, 2, 0 )
+	setVehicleLightState( veh, 3, 0 )
+	setVehicleOverrideLights( veh, 2 ) 
+	if getVehicleTowedByVehicle( veh ) then
+		local veh2 = getVehicleTowedByVehicle( veh )
+		if veh2 then
+			setVehicleLightState( veh2, 0, 0 )
+			setVehicleLightState( veh2, 1, 0 )
+			setVehicleLightState( veh2, 2, 0 )
+			setVehicleLightState( veh2, 3, 0 )
+			setVehicleOverrideLights( veh2, 2 )
+		end
+	end
+end
+
+--[[ Attempt's to cleanup tables 2014-12-11 ]]--
+function cleanUp(plr, seat, jacked, door)
+	if door > 0 then return end
+	if isTimer(syncTimer[source]) then
+		killTimer(syncTimer[source])
+	end
+	syncTimer[source] = nil
+	toggler[source] = nil
+	dtype[source] = nil
+	
+	-- Reset color
+	if currHeadLightColor[source] and currHeadLightColor[source][1] and currHeadLightColor[source][2] and currHeadLightColor[source][3] then
+		setVehicleHeadLightColor( source, currHeadLightColor[source][1],currHeadLightColor[source][2],currHeadLightColor[source][3] )
+		currHeadLightColor[source][1] = nil
+		currHeadLightColor[source][2] = nil
+		currHeadLightColor[source][3] = nil
+		currHeadLightColor[source] = nil
+	end
+	
+	-- Reset light state
+	startLights(veh)
+end
+addEventHandler("onVehicleStartExit", root, cleanUp)

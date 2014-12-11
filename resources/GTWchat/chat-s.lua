@@ -31,7 +31,7 @@ local nameOfIRCResource	= "irc"
 -- Define law 
 local lawTeams = {
 	["Government"] = true,
-	["Emergency service"] = true
+	["Emergency service"] = true,
 }
 local policeTeams = {
 	["Government"] = true, 
@@ -122,7 +122,7 @@ function validateChatInput(plr, chatID, text)
 		return false
 	end
 	-- Special case for law chat
-	if chatID == "law" and getPlayerTeam(plr) and not lawTeams[getPlayerTeam(plr)] then 
+	if chatID == "law" and getPlayerTeam(plr) and not lawTeams[getTeamName(getPlayerTeam(plr))] then 
 		dm("You are not a law enforcer!", plr, 255, 100, 0)
 		return false
 	end
@@ -242,7 +242,7 @@ function useEmergencyChat(plr, n, ...)
    		occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
    	end
 	for m,v in pairs(getElementsByType("player")) do
-		if lawTeams[getPlayerTeam(v)] then
+		if lawTeams[getTeamName(getPlayerTeam(v))] then
     		local outText = RGBToHex(r,g,b).."(E)("..getTeamName(getPlayerTeam(plr))..")"..occupation.." "..nick..": "
 			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
 			if length < 128 then

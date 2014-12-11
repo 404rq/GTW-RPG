@@ -21,7 +21,7 @@ stealthTeams 	= {
 }
 
 function onResourceStart(resource)
-  	for id, plr in ipairs(getElementsByType("player")) do
+  	for id, plr in pairs(getElementsByType("player")) do
 		if players[plr] then
 			--setElementParent(plr, getPlayerTeam(plr))
 			--allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], 255, 999, 99999.0, getPlayerTeam(plr))
@@ -52,7 +52,7 @@ function onPlayerSpawn(spawnpoint)
 	if not isTimer(colorUpdater[source]) then
 		colorUpdater[source] = setTimer(updateBlipColor,200,0,source)
 	end
-	for id, plr2 in ipairs(getElementsByType("player")) do
+	for id, plr2 in pairs(getElementsByType("player")) do
 		toggleVisibility(plr2)
 	end
 end
@@ -70,14 +70,11 @@ end
 
 function toggleVisibility(plr)
 	if not getPlayerTeam(plr) then return end
-	for id, plr2 in ipairs(getElementsByType("player")) do
+	for id, plr2 in pairs(getElementsByType("player")) do
 		if getPlayerTeam(plr2) and plr ~= plr2 and getPlayerTeam(plr) ~= getPlayerTeam(plr2) and 
 			stealthTeams[getTeamName(getPlayerTeam(plr2))] and
 			stealthTeams[getTeamName(getPlayerTeam(plr))] then
 			if allBlips[plr2] then setElementVisibleTo(allBlips[plr2], plr, false) end
-		elseif getPlayerTeam(plr2) and plr ~= plr2 then
-			if allBlips[plr2] then setElementVisibleTo(allBlips[plr2], plr, true) end
-			if allBlips[plr] then setElementVisibleTo(allBlips[plr], plr2, true) end
 		end
 	end
 end
@@ -89,22 +86,20 @@ function updateBlipColor(plr)
 		destroyBlipsAttachedTo(plr)
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
-		setElementParent(plr, getPlayerTeam(plr))
 		local alpha = 255
 		if getElementData(plr,"anon") then alpha = 0 else alpha = 255 end
-  		allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, getPlayerTeam(plr))
-  		for id, plr2 in ipairs(getElementsByType("player")) do
+  		allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, root)
+  		for id, plr2 in pairs(getElementsByType("player")) do
 			toggleVisibility(plr2)
 		end
 	end
 	if not hasPlayerBlip(plr) then
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
-		setElementParent(plr, getPlayerTeam(plr))
 		local alpha = 255
 		if getElementData(plr,"anon") then alpha = 0 else alpha = 255 end
-  		allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, getPlayerTeam(plr))
-  		for id, plr2 in ipairs(getElementsByType("player")) do
+  		allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, root)
+  		for id, plr2 in pairs(getElementsByType("player")) do
 			toggleVisibility(plr2)
 		end
 	end
@@ -117,7 +112,7 @@ addEventHandler("onPlayerWasted", root, onPlayerWasted)
 function destroyBlipsAttachedTo(plr)
 	local attached = getAttachedElements(plr)
 	if(attached) then
-		for k,element in ipairs(attached) do
+		for k,element in pairs(attached) do
 			if element and getElementType(element) == "blip" then
 				destroyElement(element)
 			end
@@ -128,7 +123,7 @@ end
 function hasPlayerBlip(plr)
 	local attached = getAttachedElements(plr)
 	if(attached) then
-		for k,element in ipairs(attached) do
+		for k,element in pairs(attached) do
 			if element and getElementType(element) == "blip" then
 				return true
 			end
