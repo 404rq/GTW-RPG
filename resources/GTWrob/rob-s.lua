@@ -1,13 +1,13 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 ]]--
@@ -72,7 +72,7 @@ robTimer = { }
 
 -- Do the rob
 function robStore( target )
-	if getElementType( target ) == "ped" and not isTimer(robTimer[client]) then
+	if getElementType( target ) == "ped" and not isTimer(robTimer[target]) then
 		-- Robbery in progress
 		setElementData( client, "rob", true )
 		local money = math.random( 2450, 2500 )
@@ -112,10 +112,10 @@ function robStore( target )
 			end
 		end
 		
-		-- Set cooldown timer to 10 minutes
-		robTimer[client] = setTimer(function() end, 600000, 1 )
+		-- Set cooldown timer for store to 30 minutes
+		robTimer[target] = setTimer(function() end, 1800000, 1 )
 	elseif isTimer(robTimer[client]) then
-		exports.GTWtopbar:dm( "Get the hell out of here, the cops know where you are!", client, 255, 0, 0 )
+		exports.GTWtopbar:dm( "Get the hell out of here, this shop was recently robbed!", client, 255, 0, 0 )
 	end
 end
 addEvent( "onRob", true )

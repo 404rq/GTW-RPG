@@ -1,13 +1,13 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 ]]--
@@ -44,10 +44,12 @@ function toggleLights( veh )
 			setVehicleLightState( veh, 3, 1 )
 			if getVehicleTowedByVehicle( veh ) then
 				local veh2 = getVehicleTowedByVehicle( veh )
-				setVehicleLightState( veh2, 0, 1 )
-				setVehicleLightState( veh2, 1, 1 )
-				setVehicleLightState( veh2, 2, 1 )
-				setVehicleLightState( veh2, 3, 1 )
+				if veh2 then
+					setVehicleLightState( veh2, 0, 1 )
+					setVehicleLightState( veh2, 1, 1 )
+					setVehicleLightState( veh2, 2, 1 )
+					setVehicleLightState( veh2, 3, 1 )
+				end
 			end
 			toggler[veh] = 0
 		else
@@ -58,10 +60,12 @@ function toggleLights( veh )
 				setVehicleLightState( veh, 3, 0 )
 				if getVehicleTowedByVehicle( veh ) then
 					local veh2 = getVehicleTowedByVehicle( veh )
-					setVehicleLightState( veh2, 0, 0 )
-					setVehicleLightState( veh2, 1, 1 )
-					setVehicleLightState( veh2, 2, 1 )
-					setVehicleLightState( veh2, 3, 0 )
+					if veh2 then
+						setVehicleLightState( veh2, 0, 0 )
+						setVehicleLightState( veh2, 1, 1 )
+						setVehicleLightState( veh2, 2, 1 )
+						setVehicleLightState( veh2, 3, 0 )
+					end
 				end
 			elseif dtype[veh] == "lright" then
 				setVehicleLightState( veh, 0, 1 )
@@ -70,10 +74,12 @@ function toggleLights( veh )
 				setVehicleLightState( veh, 3, 1 )
 				if getVehicleTowedByVehicle( veh ) then
 					local veh2 = getVehicleTowedByVehicle( veh )
-					setVehicleLightState( veh2, 0, 1 )
-					setVehicleLightState( veh2, 1, 0 )
-					setVehicleLightState( veh2, 2, 0 )
-					setVehicleLightState( veh2, 3, 1 )
+					if veh2 then
+						setVehicleLightState( veh2, 0, 1 )
+						setVehicleLightState( veh2, 1, 0 )
+						setVehicleLightState( veh2, 2, 0 )
+						setVehicleLightState( veh2, 3, 1 )
+					end
 				end
 			elseif dtype[veh] == "warn" then
 				setVehicleLightState( veh, 0, 0 )
@@ -82,10 +88,12 @@ function toggleLights( veh )
 				setVehicleLightState( veh, 3, 0 )
 				if getVehicleTowedByVehicle( veh ) then
 					local veh2 = getVehicleTowedByVehicle( veh )
-					setVehicleLightState( veh2, 0, 0 )
-					setVehicleLightState( veh2, 1, 0 )
-					setVehicleLightState( veh2, 2, 0 )
-					setVehicleLightState( veh2, 3, 0 )
+					if veh2 then
+						setVehicleLightState( veh2, 0, 0 )
+						setVehicleLightState( veh2, 1, 0 )
+						setVehicleLightState( veh2, 2, 0 )
+						setVehicleLightState( veh2, 3, 0 )
+					end
 				end
 			end
 			toggler[veh] = 1
@@ -105,11 +113,14 @@ function lightHandler( player, cmd )
 			setVehicleLightState( veh, 3, 1 )
 			if getVehicleTowedByVehicle( veh ) then
 				local veh2 = getVehicleTowedByVehicle( veh )
-				setVehicleLightState( veh2, 0, 1 )
-				setVehicleLightState( veh2, 1, 1 )
-				setVehicleLightState( veh2, 2, 1 )
-				setVehicleLightState( veh2, 3, 1 )
+				if veh2 then
+					setVehicleLightState( veh2, 0, 1 )
+					setVehicleLightState( veh2, 1, 1 )
+					setVehicleLightState( veh2, 2, 1 )
+					setVehicleLightState( veh2, 3, 1 )
+				end
 			end
+			
 			if not currHeadLightColor[veh] then
 				currHeadLightColor[veh] = { }
 				currHeadLightColor[veh][1],currHeadLightColor[veh][2],currHeadLightColor[veh][3] = getVehicleHeadLightColor( veh )
@@ -130,7 +141,10 @@ function lightHandler( player, cmd )
 			if isTimer( syncTimer[veh] ) then
 				killTimer( syncTimer[veh] )
 				setVehicleHeadLightColor( veh, currHeadLightColor[veh][1],currHeadLightColor[veh][2],currHeadLightColor[veh][3] )
-				currHeadLightColor[player] = nil
+				currHeadLightColor[veh][1] = nil
+				currHeadLightColor[veh][2] = nil
+				currHeadLightColor[veh][3] = nil
+				currHeadLightColor[veh] = nil
 			end
 			setVehicleLightState( veh, 0, 0 )
 			setVehicleLightState( veh, 1, 0 )
@@ -139,11 +153,13 @@ function lightHandler( player, cmd )
 			setVehicleOverrideLights( veh, 2 ) 
 			if getVehicleTowedByVehicle( veh ) then
 				local veh2 = getVehicleTowedByVehicle( veh )
-				setVehicleLightState( veh2, 0, 0 )
-				setVehicleLightState( veh2, 1, 0 )
-				setVehicleLightState( veh2, 2, 0 )
-				setVehicleLightState( veh2, 3, 0 )
-				setVehicleOverrideLights( veh2, 2 )
+				if veh2 then
+					setVehicleLightState( veh2, 0, 0 )
+					setVehicleLightState( veh2, 1, 0 )
+					setVehicleLightState( veh2, 2, 0 )
+					setVehicleLightState( veh2, 3, 0 )
+					setVehicleOverrideLights( veh2, 2 )
+				end
 			end
 		end
 	end

@@ -14,5 +14,5 @@
 
 <meta>
 	<info author="GTWGames" version="0" name="GTWturnsignals" description="Add simple turn indicators to any vehicle" type="script" />
-	<script src="turnindicators.lua" type="server"/>
+	<script src="turninsignals.lua" type="server"/>
 </meta>

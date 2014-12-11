@@ -1,0 +1,24 @@
+<!--
+********************************************************************************
+	Project:		GTW RPG
+	Owner:			GTW Games 	
+	Location:		Sweden
+	Developers:		MrBrutus
+	Copyrights:		See: "license.txt"
+	
+	Website:		http://code.albonius.com
+	Version:		(git)
+	Status:			Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" name="GTWwanted" version="0" type="script" />
+    <script src="wanted_c.lua" type="client" />
+    <script src="wanted_s.lua" type="server" />
+    
+    <export function="setWl" type="server" />
+    <!--<export function="setWl" type="client" />-->
+    <export function="getWl" type="server" />
+    <!--<export function="getWl" type="client" />-->
+</meta>

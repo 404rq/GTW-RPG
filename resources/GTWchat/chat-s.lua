@@ -332,7 +332,7 @@ function useStaffTeamChat(plr, n, team, ...)
 	end
 	local nick = getPlayerName(plr)
 	for n,v in pairs(getElementsByType("player")) do
-		if getPlayerTeam(v) and getPlayerTeam(v) == getTeamFromName(team) then
+		if team and getTeamFromName(team) and ((getPlayerTeam(v) and getPlayerTeam(v) == getTeamFromName(team)) or (v == plr)) then
 	    	local outText = RGBToHex(255, 255, 255).."(STAFF-T) "..RGBToHex(r, g, b)..nick..": "
 			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
 			if length < 128 then

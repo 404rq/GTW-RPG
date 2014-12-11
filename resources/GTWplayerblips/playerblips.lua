@@ -1,13 +1,13 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 ]]--
@@ -15,15 +15,22 @@
 players 		= {}
 allBlips 		= {}
 colorUpdater 	= {}
+stealthTeams 	= {
+	["Government"]=true,
+	["Criminals"]=true
+}
+
 function onResourceStart(resource)
   	for id, plr in ipairs(getElementsByType("player")) do
 		if players[plr] then
-			setElementParent(plr, getPlayerTeam(plr))
-			allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], 255, 999, 99999.0, getPlayerTeam(plr))
+			--setElementParent(plr, getPlayerTeam(plr))
+			--allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], 255, 999, 99999.0, getPlayerTeam(plr))
+			allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], 255, 999, 99999.0, root)
 		elseif getPlayerTeam(plr) then
 			local r,g,b = getTeamColor(getPlayerTeam(plr))
-			setElementParent(plr, getPlayerTeam(plr))
-			allBlips[plr] = createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(plr))
+			--setElementParent(plr, getPlayerTeam(plr))
+			--allBlips[plr] = createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(plr))
+			allBlips[plr] = createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 999, 99999.0, root)
 			players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
 		end
 		colorUpdater[plr] = setTimer(updateBlipColor,200,0,plr)
@@ -33,11 +40,13 @@ end
 function onPlayerSpawn(spawnpoint)
 	if(players[source]) then
 		--setElementParent(plr, getPlayerTeam(source))
-		allBlips[source] = createBlipAttachedTo(source, 0, 2, players[source][1], players[source][2], players[source][3], 255, 999, 99999.0, getPlayerTeam(source))
+		--allBlips[source] = createBlipAttachedTo(source, 0, 2, players[source][1], players[source][2], players[source][3], 255, 999, 99999.0, getPlayerTeam(source))
+		allBlips[source] = createBlipAttachedTo(source, 0, 2, players[source][1], players[source][2], players[source][3], 255, 999, 99999.0, root)
 	elseif getPlayerTeam(source) then
 		local r,g,b = getTeamColor(getPlayerTeam(source))
 		--setElementParent(plr, getPlayerTeam(source))
-		allBlips[source] = createBlipAttachedTo(source, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(source))
+		--allBlips[source] = createBlipAttachedTo(source, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(source))
+		allBlips[source] = createBlipAttachedTo(source, 0, 2, r, g, b, 255, 999, 99999.0, root)
 		players[source] = { tonumber(r), tonumber(g), tonumber(b) }
 	end
 	if not isTimer(colorUpdater[source]) then
@@ -60,22 +69,21 @@ function onPlayerWasted(totalammo, killer, killerweapon)
 end
 
 function toggleVisibility(plr)
-	if getPlayerTeam(plr) == getTeamFromName("Staff") then
-		for id, plr2 in ipairs(getElementsByType("player")) do
-			if isElement(allBlips[plr2]) then
-				setElementVisibleTo(allBlips[plr2], plr, true)
-			end
-		end
-	else
-		for id, plr2 in ipairs(getElementsByType("player")) do
-			if getPlayerTeam(plr) ~= getPlayerTeam(plr2) then
-				if allBlips[plr2] then setElementVisibleTo(allBlips[plr2], plr, false) end
-			end
+	if not getPlayerTeam(plr) then return end
+	for id, plr2 in ipairs(getElementsByType("player")) do
+		if getPlayerTeam(plr2) and plr ~= plr2 and getPlayerTeam(plr) ~= getPlayerTeam(plr2) and 
+			stealthTeams[getTeamName(getPlayerTeam(plr2))] and
+			stealthTeams[getTeamName(getPlayerTeam(plr))] then
+			if allBlips[plr2] then setElementVisibleTo(allBlips[plr2], plr, false) end
+		elseif getPlayerTeam(plr2) and plr ~= plr2 then
+			if allBlips[plr2] then setElementVisibleTo(allBlips[plr2], plr, true) end
+			if allBlips[plr] then setElementVisibleTo(allBlips[plr], plr2, true) end
 		end
 	end
 end
 
 function updateBlipColor(plr)
+	if not getPlayerTeam(plr) then return end
 	local r,g,b = getTeamColor(getPlayerTeam(plr))
 	if players[plr] and ( r ~= players[plr][1] or g ~= players[plr][2] or b ~= players[plr][3] ) then
 		destroyBlipsAttachedTo(plr)

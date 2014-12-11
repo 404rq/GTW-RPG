@@ -1,5 +1,6 @@
 --[[ Make sure all calling resources are up to date ]]--
 restartList = {
+	"GTWaccounts",
 	"GTWclothes",
 	"GTWcivilians",
 	"GTWhelp",

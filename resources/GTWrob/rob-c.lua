@@ -1,13 +1,13 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.4
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 ]]--
@@ -24,7 +24,7 @@ function targetingActivated ( target )
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Gangsters" ) or 
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) then 
-		-- Cooldown during robbery 20 minutes between each rob
+		-- Cooldown during robbery 5 minutes between each rob
         triggerServerEvent( "onRob", localPlayer, target ) 
         cooldown[localPlayer] = setTimer(function() end, 300000, 1 )
     elseif getControlState("aim_weapon") and 

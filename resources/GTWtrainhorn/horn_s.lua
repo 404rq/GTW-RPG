@@ -1,13 +1,13 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
+	Project:		GTW RPG
 	Owner:			GTW Games 	
 	Location:		Sweden
 	Developers:		MrBrutus
 	Copyrights:		See: "license.txt"
 	
 	Website:		http://code.albonius.com
-	Version:		2.0.6
+	Version:		(git)
 	Status:			Stable release
 ********************************************************************************
 ]]--
@@ -25,7 +25,9 @@ local h_list = {
 function bindTrainHorn(thePlayer, seat, jacked)
     if getVehicleType(source) == "Train" and getElementType(thePlayer) == "player" then
     	bindKey(thePlayer, "H", "down", toggleTrainHorn)
-    	setElementData(source, "horn", "sound/"..h_list[math.random(#h_list)]..".wav")
+    	if not getElementData(source, "horn") then
+    		setElementData(source, "horn", "sound/"..h_list[math.random(#h_list)]..".wav")
+    	end
     end
 end
 addEventHandler("onVehicleEnter", root, bindTrainHorn) 

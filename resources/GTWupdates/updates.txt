@@ -1,3 +1,21 @@
+'''Tuesday 10, December 2014 (GTWcore v-1.4.2638)'''
+* Increased turfs alpha to make them easier to see.
+* Optimized and fixed bugs in turn indicators
+* Added SF transfender modshop
+* Added dogmod, click F4 to manage your dog
+* Improved store robbery by reducing waiting time and increase payments
+* Improved hijack missions by removing (missing keys bug) and increased payments a lot.
+* Fixed minor bugs in gym shops system.
+
+
+'''Tuesday 09, December 2014 (GTWcore v-1.4.2618)'''
+* Added /busdoor to toggle the passenger door as busdriver (you may bind it to a key)
+* Fixed mod shop doors being closed, now all of them should be open.
+* Fixed a sync issue in custom train horn sounds
+* Fixed minor bugs
+* Started the upgrade of GTW law and wanted level system current one will run until finished
+
+
 '''GTWcore v-1.4.2546'''
 * Fixed GUI related bugs, errors and warnings in modshop and lowered the modding prices 10x, modding should be cheap.
 * Added /cteam <team> <message> for staff members to chat in any team chat
@@ -9,7 +27,6 @@
 '''GTWcore v-1.4.2465'''
 * Added /gtw-version to see which version is running
 * Added new sounds to train horn, assigned randomly
-* Fixed hijack missions and a fair payment for those
 * Altered payments from turfs based on the total area owned by a group and a maximum amount of money for owning all turfs
 * Moved update news, help system and other global documents to github, these will be the same on all servers from now.
 * Updated help system
