@@ -1,3 +1,10 @@
+'''Saturday 14, December 2014 (GTWcore v-1.4.2725)'''
+* Added online stats http://s2.albonius.com/gtw-games/
+* Fixed a bug in turn indicators caused by bad headl ight configuration
+* Fixed a bug in business system where the money didn't increased
+* Temporary added the ability to steal NPC's cars after killing the driver (vehicle system will be rewritten including this feature)
+
+
 '''Tuesday 10, December 2014 (GTWcore v-1.4.2638)'''
 * Increased turfs alpha to make them easier to see.
 * Optimized and fixed bugs in turn indicators

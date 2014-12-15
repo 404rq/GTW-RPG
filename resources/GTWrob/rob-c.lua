@@ -13,12 +13,13 @@
 ]]--
 
 -- Player aims at another player or objcet
-cooldown = {}
+cooldown = nil
+info_cooldown = nil
 function targetingActivated ( target )
 	-- Check so the team is criminals, that the criminal 
 	-- is aiming and that the location is interior
 	local theTeam = getPlayerTeam ( localPlayer )
-	if not isTimer( cooldown[localPlayer] ) and getControlState("aim_weapon") and 
+	if not isTimer(cooldown) and not isTimer(info_cooldown) and getControlState("aim_weapon") and 
 		getElementInterior( localPlayer ) > 0 and isElement( target ) and 
 		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
@@ -26,8 +27,9 @@ function targetingActivated ( target )
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) then 
 		-- Cooldown during robbery 5 minutes between each rob
         triggerServerEvent( "onRob", localPlayer, target ) 
-        cooldown[localPlayer] = setTimer(function() end, 300000, 1 )
-    elseif getControlState("aim_weapon") and 
+        cooldown = setTimer(function() end, 300000, 1 )
+        info_cooldown = setTimer(function() end, 30000, 1 )
+    elseif not isTimer(info_cooldown) and getControlState("aim_weapon") and 
 		getElementInterior( localPlayer ) > 0 and isElement( target ) and 
 		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
@@ -39,9 +41,11 @@ end
 addEventHandler ( "onClientPlayerTarget", root, targetingActivated )
 
 function cancelPedDamage(attacker)
-	cancelEvent() -- cancel any damage done to peds
+	if getElementData(source, "robLoc") then
+		cancelEvent() -- Cancel any damage done to shop peds
+	end
 end
-addEventHandler("onClientPedDamage", resourceRoot, cancelPedDamage)
+addEventHandler("onClientPedDamage", root, cancelPedDamage)
 
 local color,direction = 0,true
 function showTimeLeft( )

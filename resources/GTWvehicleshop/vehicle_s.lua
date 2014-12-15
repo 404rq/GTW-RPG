@@ -154,7 +154,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			z = z + 3
 			isFirstSpawn = true
 		end
-		if tonumber( getElementData( getAccountPlayer( getAccount( owner )), "Wanted" )) < 3 then
+		if tonumber( getElementData( getAccountPlayer( getAccount( owner )), "Wanted" )) < 6 then
 			local veh = createVehicle( tonumber( model ), x,y,z )
 			if supported_cars[getElementModel(veh)] then
 				local dist = supported_cars[getElementModel(veh)]
@@ -215,7 +215,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 				end
 			end
 		else
-			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", client, 255, 0, 0 )
+			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", getAccountPlayer( getAccount( owner )), 255, 0, 0 )
 		end
 	end
 end

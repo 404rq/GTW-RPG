@@ -68,11 +68,11 @@ lawTeams = {
 	[getTeamFromName("Emergency service")] = true 
 }
 -- Antispam timer
-robTimer = { }
+robTimer = {{ }}
 
 -- Do the rob
 function robStore( target )
-	if getElementType( target ) == "ped" and not isTimer(robTimer[target]) then
+	if getElementType( target ) == "ped" and ((robTimer[target] and not isTimer(robTimer[target][client])) or not robTimer[target]) then
 		-- Robbery in progress
 		setElementData( client, "rob", true )
 		local money = math.random( 2450, 2500 )
@@ -113,8 +113,9 @@ function robStore( target )
 		end
 		
 		-- Set cooldown timer for store to 30 minutes
-		robTimer[target] = setTimer(function() end, 1800000, 1 )
-	elseif isTimer(robTimer[client]) then
+		if not robTimer[target] then robTimer[target] = { } end
+		robTimer[target][client] = setTimer(function() end, 1800000, 1 )
+	elseif robTimer[target] and robTimer[target][client] and isTimer(robTimer[target][client]) then
 		exports.GTWtopbar:dm( "Get the hell out of here, this shop was recently robbed!", client, 255, 0, 0 )
 	end
 end

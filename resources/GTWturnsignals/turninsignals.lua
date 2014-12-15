@@ -176,7 +176,7 @@ end
 
 --[[ Attempt's to cleanup tables 2014-12-11 ]]--
 function cleanUp(plr, seat, jacked, door)
-	if door > 0 then return end
+	if (door or 0) > 0 then return end
 	if isTimer(syncTimer[source]) then
 		killTimer(syncTimer[source])
 	end
