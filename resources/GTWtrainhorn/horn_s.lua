@@ -23,7 +23,7 @@ local h_list = {
 
 -- Bink keys to control the horn
 function bindTrainHorn(thePlayer, seat, jacked)
-    if getVehicleType(source) == "Train" and getElementType(thePlayer) == "player" then
+    if (getVehicleType(source) == "Train" or getElementData(thePlayer, "anon")) and getElementType(thePlayer) == "player" then
     	bindKey(thePlayer, "H", "down", toggleTrainHorn)
     	if not getElementData(source, "horn") then
     		setElementData(source, "horn", "sound/"..h_list[math.random(#h_list)]..".wav")
@@ -34,7 +34,7 @@ addEventHandler("onVehicleEnter", root, bindTrainHorn)
 
 -- Toggle the horn sound
 function toggleTrainHorn(thePlayer, cmd)
-	if getPedOccupiedVehicle(thePlayer) and getVehicleType(getPedOccupiedVehicle(thePlayer)) == "Train" then
+	if getPedOccupiedVehicle(thePlayer) and (getVehicleType(getPedOccupiedVehicle(thePlayer)) == "Train" or getElementData(thePlayer, "anon")) then
 		triggerClientEvent(root, "GTWtrainhorn.toggle", thePlayer, getPedOccupiedVehicle(thePlayer))
 	end
 end

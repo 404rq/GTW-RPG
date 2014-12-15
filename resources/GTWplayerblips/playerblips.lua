@@ -12,121 +12,134 @@
 ********************************************************************************
 ]]--
 
-players 		= {}
-allBlips 		= {}
-colorUpdater 	= {}
+--[[ Global data and settings ]]--
+colorUpdater 	= { }
+playersTeam 	= { }
 stealthTeams 	= {
 	["Government"]=true,
-	["Criminals"]=true
+	["Criminals"]=true,
+	["Gangsters"]=true
 }
 
-function onResourceStart(resource)
-  	for id, plr in pairs(getElementsByType("player")) do
-		if players[plr] then
-			--setElementParent(plr, getPlayerTeam(plr))
-			--allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], 255, 999, 99999.0, getPlayerTeam(plr))
-			allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], 255, 999, 99999.0, root)
-		elseif getPlayerTeam(plr) then
-			local r,g,b = getTeamColor(getPlayerTeam(plr))
-			--setElementParent(plr, getPlayerTeam(plr))
-			--allBlips[plr] = createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(plr))
-			allBlips[plr] = createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 999, 99999.0, root)
-			players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
+--[[ Rules for who can view the blips ]]--
+function validateVisiblity(plr, spectator)
+	-- Player is either cop or criminal and may be hidden?
+	if plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) and 
+		stealthTeams[getTeamName(getPlayerTeam(plr))] and stealthTeams[getTeamName(getPlayerTeam(spectator))] then
+		-- They are in different teams and should not see each others
+		if getPlayerTeam(plr) ~= getPlayerTeam(spectator) then return false end
+		-- They are in the same team and should see each others
+		if getPlayerTeam(plr) == getPlayerTeam(spectator) then return true end
+	elseif plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) then
+		return true
+	end
+end
+
+--[[ Refresh all blips on resource start ]]--
+function refreshAllBlips(resource)
+  	for x, plr in ipairs(getElementsByType("player")) do
+  		-- Remove current blips if any
+  		cleanPlayerBlips(plr)
+  		
+  		-- Get team color or black
+		local r,g,b = 0,0,0
+		if getPlayerTeam(plr) then
+			r,g,b = getTeamColor(getPlayerTeam(plr))
+			playersTeam[plr] = getTeamName(getPlayerTeam(plr))
 		end
-		colorUpdater[plr] = setTimer(updateBlipColor,200,0,plr)
+		
+		-- Make the blip visible to a specific amount of players
+		for y, spectator in pairs(getElementsByType("player")) do
+			if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
+				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
+			end
+		end
+		colorUpdater[plr] = setTimer(updateBlipColor, 500, 0, plr)
 	end
 end
 
+--[[ Update blip when a player spawn ]]--
 function onPlayerSpawn(spawnpoint)
-	if(players[source]) then
-		--setElementParent(plr, getPlayerTeam(source))
-		--allBlips[source] = createBlipAttachedTo(source, 0, 2, players[source][1], players[source][2], players[source][3], 255, 999, 99999.0, getPlayerTeam(source))
-		allBlips[source] = createBlipAttachedTo(source, 0, 2, players[source][1], players[source][2], players[source][3], 255, 999, 99999.0, root)
-	elseif getPlayerTeam(source) then
-		local r,g,b = getTeamColor(getPlayerTeam(source))
-		--setElementParent(plr, getPlayerTeam(source))
-		--allBlips[source] = createBlipAttachedTo(source, 0, 2, r, g, b, 255, 999, 99999.0, getPlayerTeam(source))
-		allBlips[source] = createBlipAttachedTo(source, 0, 2, r, g, b, 255, 999, 99999.0, root)
-		players[source] = { tonumber(r), tonumber(g), tonumber(b) }
+	updatePlayerBlip(source)
+end
+function updatePlayerBlip(plr)
+	-- Remove current blips if any
+  	cleanPlayerBlips(plr)
+  		
+  	-- Get team color or black
+	local r,g,b = 0,0,0
+	if getPlayerTeam(plr) then
+		r,g,b = getTeamColor(getPlayerTeam(plr))
+		playersTeam[plr] = getTeamName(getPlayerTeam(plr))
 	end
-	if not isTimer(colorUpdater[source]) then
-		colorUpdater[source] = setTimer(updateBlipColor,200,0,source)
+	
+	-- Make the blip visible to a specific amount of players
+	for y, spectator in pairs(getElementsByType("player")) do
+		if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
+			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
+		end
 	end
-	for id, plr2 in pairs(getElementsByType("player")) do
-		toggleVisibility(plr2)
+	if not isTimer(colorUpdater[plr]) then
+		colorUpdater[plr] = setTimer(updateBlipColor,500,0,plr)
 	end
 end
 
+--[[ Clean up when a player leaves ]]--
 function onPlayerQuit()
-	destroyBlipsAttachedTo(source)
+	-- Remove current blips if any
+  	cleanPlayerBlips(source)
+  	playersTeam[source] = nil
+  	
+  	-- Kill the update timer
 	if isTimer(colorUpdater[source]) then
 		killTimer(colorUpdater[source])
 	end	
 end
 
+--[[ Clean up when a player dies ]]--
 function onPlayerWasted(totalammo, killer, killerweapon)
-	destroyBlipsAttachedTo(source)
+	-- Remove current blips if any
+  	cleanPlayerBlips(source)
+  	playersTeam[source] = nil
 end
 
-function toggleVisibility(plr)
-	if not getPlayerTeam(plr) then return end
-	for id, plr2 in pairs(getElementsByType("player")) do
-		if getPlayerTeam(plr2) and plr ~= plr2 and getPlayerTeam(plr) ~= getPlayerTeam(plr2) and 
-			stealthTeams[getTeamName(getPlayerTeam(plr2))] and
-			stealthTeams[getTeamName(getPlayerTeam(plr))] then
-			if allBlips[plr2] then setElementVisibleTo(allBlips[plr2], plr, false) end
-		end
-	end
-end
-
+--[[ Check if team have changed and update blips ]]--
 function updateBlipColor(plr)
+	-- Check if team exist and has changed
 	if not getPlayerTeam(plr) then return end
-	local r,g,b = getTeamColor(getPlayerTeam(plr))
-	if players[plr] and ( r ~= players[plr][1] or g ~= players[plr][2] or b ~= players[plr][3] ) then
-		destroyBlipsAttachedTo(plr)
-		r,g,b = getTeamColor(getPlayerTeam(plr))
-		players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
-		local alpha = 255
-		if getElementData(plr,"anon") then alpha = 0 else alpha = 255 end
-  		allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, root)
-  		for id, plr2 in pairs(getElementsByType("player")) do
-			toggleVisibility(plr2)
-		end
-	end
-	if not hasPlayerBlip(plr) then
-		r,g,b = getTeamColor(getPlayerTeam(plr))
-		players[plr] = { tonumber(r), tonumber(g), tonumber(b) }
-		local alpha = 255
-		if getElementData(plr,"anon") then alpha = 0 else alpha = 255 end
-  		allBlips[plr] = createBlipAttachedTo(plr, 0, 2, players[plr][1], players[plr][2], players[plr][3], alpha, 999, 99999.0, root)
-  		for id, plr2 in pairs(getElementsByType("player")) do
-			toggleVisibility(plr2)
-		end
-	end
+	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) then return end
+	
+	-- Remove current blips if any
+  	playersTeam[plr] = nil
+  	
+  	-- Remake blips
+  	for x, plr2 in pairs(getElementsByType("player")) do
+  		updatePlayerBlip(plr2)
+  	end
 end
-addEventHandler("onResourceStart", resourceRoot, onResourceStart)
+addEventHandler("onResourceStart", resourceRoot, refreshAllBlips)
 addEventHandler("onPlayerSpawn", root, onPlayerSpawn)
 addEventHandler("onPlayerQuit", root, onPlayerQuit)
 addEventHandler("onPlayerWasted", root, onPlayerWasted)
 
-function destroyBlipsAttachedTo(plr)
+--[[ Clean up all blips attached to a player ]]--
+function cleanPlayerBlips(plr)
 	local attached = getAttachedElements(plr)
-	if(attached) then
-		for k,element in pairs(attached) do
-			if element and getElementType(element) == "blip" then
-				destroyElement(element)
-			end
+	if not attached then return end
+	for k,element in pairs(attached) do
+		if element and getElementType(element) == "blip" then
+			destroyElement(element)
 		end
 	end
 end
 
+--[[ Check if a player has blips attached ]]--
 function hasPlayerBlip(plr)
 	local attached = getAttachedElements(plr)
-	if(attached) then
-		for k,element in pairs(attached) do
-			if element and getElementType(element) == "blip" then
-				return true
-			end
+	if not attached then return end
+	for k,element in pairs(attached) do
+		if element and getElementType(element) == "blip" then
+			return true
 		end
 	end
 	return false
