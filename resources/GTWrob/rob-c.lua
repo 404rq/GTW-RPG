@@ -41,7 +41,7 @@ end
 addEventHandler ( "onClientPlayerTarget", root, targetingActivated )
 
 function cancelPedDamage(attacker)
-	if getElementData(source, "robLoc") then
+	if getElementInterior(localPlayer) > 0 then
 		cancelEvent() -- Cancel any damage done to shop peds
 	end
 end
