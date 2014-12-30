@@ -20,17 +20,18 @@ currHeadLightColor 	= {{ }}
 
 -- Bind keys
 function bindTurnIndicators()
-	bindKey(source, ",", "down", lightHandler, source, "lleft")
-	bindKey(source, ".", "down", lightHandler, source, "lright")
-	bindKey(source, "-", "down", lightHandler, source, "warn")
+	bindKey(source, ",", "down", "lleft")
+	bindKey(source, ".", "down", "lright")
+	bindKey(source, "-", "down", "warn")
 end
 addEventHandler("onPlayerJoin", root, bindTurnIndicators)
 
 -- Bind on resource start
 for k,v in pairs(getElementsByType("players")) do
-	bindKey(v, ",", "down", lightHandler, v, "lleft")
-	bindKey(v, ".", "down", lightHandler, v, "lright")
-	bindKey(v, "-", "down", lightHandler, v, "warn")
+	bindKey(v, ",", "down", "lleft")
+	bindKey(v, ".", "down", "lright")
+	bindKey(v, "-", "down", "warn")
+	outputServerLog("player: "..getPlayerName(v))
 end
 
 -- Toggling lights
