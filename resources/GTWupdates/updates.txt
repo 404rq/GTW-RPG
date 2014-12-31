@@ -1,3 +1,11 @@
+'''Wednesday 31, December 2014 (GTWcore v-1.4.2913)'''
+* Added peds in banks to allow bank robberies
+* Fixed the turn signals key bind bug, use , . or - for turn indicators
+* Disabled killing peds in interiors to prevent missing peds in robberies
+* Lowered the price of skin changing to $20 and improved the skin shops GUI
+* Fixed minor bugs
+
+
 '''Saturday 14, December 2014 (GTWcore v-1.4.2725)'''
 * Added online stats http://s2.albonius.com/gtw-games/
 * Fixed a bug in turn indicators caused by bad headl ight configuration
