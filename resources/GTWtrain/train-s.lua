@@ -259,9 +259,7 @@ function makeTrain( hitElement, matchingDimension, id )
 				end
 				
 				-- Play the horn
-				if math.random(10) < 7 then
-					setTimer(useHorn, 500, 1, train[hitElement][1])
-				end
+				setTimer(useHorn, math.random(500,5000), 1, train[hitElement][1])
 				
 				-- Starting the syncer
 				local time = math.random(1200, 1800)*1000

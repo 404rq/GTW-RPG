@@ -12,7 +12,7 @@
 ********************************************************************************
 ]]--
 
--- Allow the train to move when no player can see it
+-- Allow the train to move when no player can see it (disabled due to lag)
 function stream ( veh )
 	--setElementStreamable( veh, true )
 end
