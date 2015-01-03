@@ -180,7 +180,7 @@ addEvent( "acorp_onReceivePlayerVehicleData", true )
 addEventHandler( "acorp_onReceivePlayerVehicleData", root, receiveVehicleData )
 
 --[[ Toggle vehicle visibility on click ]]--
-addEventHandler("onClientGUIDoubleClick",vehicle_list,
+addEventHandler("onClientGUIClick",vehicle_list,
 function()
 	row,col = guiGridListGetSelectedItem( vehicle_list )
 	if row and col and veh_data_list[row+1] then	
