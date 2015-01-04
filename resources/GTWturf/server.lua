@@ -384,7 +384,7 @@ function player_Wasted(ammo, attacker, weapon, bodypart)
 	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
 	local wepSlot = getSlotFromWeapon(weapon)
 	local stats = 0
-	if(getPedStat(attacker, wepSlot+68) or 0) < 950 then
+	if wepSlot and (getPedStat(attacker, wepSlot+68) or 0) < 950 then
 		stats = math.random(weapon_stats_min, weapon_stats_max)
 		setPedStat(attacker, wepSlot+68, getPedStat(attacker, wepSlot+68)+stats)
 	end
@@ -396,7 +396,7 @@ function pedWasted(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
 	local wepSlot = getSlotFromWeapon(weapon)
 	local stats = 0
-	if(getPedStat(attacker, wepSlot+68) or 0) < 950 then
+	if wepSlot and (getPedStat(attacker, wepSlot+68) or 0) < 950 then
 		stats = math.random(weapon_stats_min, weapon_stats_max)
 		setPedStat(attacker, wepSlot+68, getPedStat(attacker, wepSlot+68)+stats)
 	end
