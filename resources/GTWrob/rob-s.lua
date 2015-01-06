@@ -104,7 +104,7 @@ function robStore( target )
 	    -- Set the wanted level 4 stars and 15 minutes violent
 	    setElementData ( client, "Wanted", tonumber( 
 			getElementData( client, "Wanted" )) + 4 )
-		exports.GTWpolice:setPlayerWantedAC( client, 15 )
+		exports.GTWpolice:syncWantedLevel( client, 15 )
 		setPedAnimation( target, "shop", "shp_rob_givecash", -1, false, false, false )
 		exports.GTWtopbar:dm( "You committed the crime of robbery 4 stars)", client, 255, 0, 0 )
 		

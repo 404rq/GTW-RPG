@@ -220,6 +220,17 @@ end
 
 -- Whenever a player leaves a turf
 function onTurfLeave(leaveElement)
+	if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
+		resetTurfData(leaveElement)
+	elseif leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "vehicle" then
+		for k,v in ipairs(getVehicleOccupants(leaveElement)) do
+			resetTurfData(v)
+		end
+	end
+end
+
+-- Same as above but takes a player element only as argument
+function resetTurfData(leaveElement)
 	if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" and getElementData(leaveElement, "Group") and
 		getElementData(leaveElement, "Group") ~= "None" and(getPlayerTeam(leaveElement) == getTeamFromName(team_criminals) or
 			getPlayerTeam(leaveElement) == getTeamFromName(team_gangsters)) then

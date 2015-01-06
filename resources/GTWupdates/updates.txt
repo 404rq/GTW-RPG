@@ -1,3 +1,16 @@
+'''Tuesday 06, January 2015 (GTWcore v-1.4.3316)'''
+* Fixed a bug causing the turf timer to continue when leaving the turf in a vehicle.
+
+
+'''Monday 05, January 2015 (GTWcore v-1.4.3305)'''
+* Added alcatraz jail north of San Fierro
+* Fixed a bug that caused the jail timer not to resume after reconnecting while in jail.
+* Added single click to select your vehicles (F2) to prevent confusion or "bugs"
+* Optimized traffic and trains
+* Made a lot of patches to GTWpolice, more stable function names, incresed security, fixed known bugs, improved stability to preven fatal errors and crashes.
+* Added driveby threat as a replacement for driveby as a crime to prevent bugs with nitro and left mouse button in general.
+
+
 '''Wednesday 31, December 2014 (GTWcore v-1.4.2913)'''
 * Added peds in banks to allow bank robberies
 * Fixed the turn signals key bind bug, use , . or - for turn indicators
