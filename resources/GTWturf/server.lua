@@ -222,7 +222,7 @@ end
 function onTurfLeave(leaveElement)
 	if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
 		resetTurfData(leaveElement)
-	elseif leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "vehicle" then
+	elseif leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "vehicle" and getVehicleOccupants(leaveElement) then
 		for k,v in ipairs(getVehicleOccupants(leaveElement)) do
 			resetTurfData(v)
 		end

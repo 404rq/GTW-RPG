@@ -209,7 +209,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 				addVehicleUpgrade( veh, i )
 			end
 			inventory_items[veh] = {}
-			if inventory then
+			if inventory and fromJSON( inventory ) then
 				for k, i in ipairs( fromJSON( inventory )) do
 					inventory_items[veh][k] = i
 				end
@@ -400,6 +400,62 @@ function respawnVehicleToStart(veh_id)
 end
 addEvent( "acorp_onVehicleRespawn", true )
 addEventHandler( "acorp_onVehicleRespawn", root, respawnVehicleToStart )
+
+--[[ Withdraw weapons to vehicle inventory ]]--
+function onVehicleWeaponWithdraw(veh_id, weap, ammo)
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
+		takeWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
+		-- Save to database
+		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", toJSON({weap,ammo}), veh_id)
+		exports.GTWtopbar:dm( "Your weapon has been withdrawed", client, 0, 255, 0 )
+	elseif not getPlayerAccount( client ) or isGuestAccount( getPlayerAccount( client )) then
+		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
+	end
+end
+addEvent( "acorp_onVehicleWeaponWithdraw", true )
+addEventHandler( "acorp_onVehicleWeaponWithdraw", root, onVehicleWeaponWithdraw )
+
+--[[ Deposit from vehicle inventory ]]--
+function onVehicleWeaponDeposit(veh_id, weap, ammo)
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
+		giveWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
+		-- Save to database
+		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", "", veh_id)
+		exports.GTWtopbar:dm( "Your weapon has been deposited", client, 0, 255, 0 )
+	elseif not getPlayerAccount( client ) or isGuestAccount( getPlayerAccount( client )) then
+		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
+	end
+end
+addEvent( "acorp_onVehicleWeaponDeposit", true )
+addEventHandler( "acorp_onVehicleWeaponDeposit", root, onVehicleWeaponDeposit )
+
+--[[ Get weapons from inventory ]]--
+function getInventoryWeapons(query)
+	local result = dbPoll( query, 0 )
+	if result then
+		local vehicle_data_to_client = nil
+		local player = nil
+    	for index, row in ipairs( result ) do
+    		-- Get all relevant data for the vehicle
+    		vehicle_data_to_client = row["inventory"]
+    		player = getAccountPlayer(getAccount(row["owner"]))
+    	end
+    	
+    	-- Send data to client
+    	if player then
+    		triggerClientEvent( player, "acorp_onReceiveInventoryItems", player, vehicle_data_to_client ) 
+		end    		
+	end
+end
+function openInventory(veh_id)
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id then
+		dbQuery(getInventoryWeapons, veh_data, "SELECT inventory, owner FROM vehicles WHERE owner=? AND ID=?", getAccountName(getPlayerAccount( client )), tonumber(veh_id))
+	else
+		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
+	end
+end
+addEvent( "acorp_onOpenInventory", true )
+addEventHandler( "acorp_onOpenInventory", root, openInventory )
 
 --[[ Toggle vehicle engine state from client ]]--
 function vehicleHeadLightColors(player, cmd, r,g,b)

@@ -30,9 +30,9 @@ we = {
 
 function chWeather( source )
 	local wid = math.random( #we )
-    setWeatherBlended( we[wid][1] )
-    outputServerLog("[Weather] Fading to: "..we[wid][1])
+    setWeather( we[wid][1] )
+    --outputServerLog("[Weather] Fading to: "..we[wid][1])
 end
 
-setTimer( chWeather, math.random(120, 300)*60000, 0 )
+setTimer( chWeather, math.random(30,60)*60*1000, 0 )
 setWeather( we[math.random( #we )][1] )

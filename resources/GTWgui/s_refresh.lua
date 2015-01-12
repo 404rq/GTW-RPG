@@ -9,7 +9,8 @@ restartList = {
 	"GTWstats",
 	"GTWteam",
 	"GTWupdates",
-	"GTWvehicles"
+	"GTWvehicles",
+	"GTWvehicleshop"
 }
 
 --[[ Check all resources that use this GUI ]]--

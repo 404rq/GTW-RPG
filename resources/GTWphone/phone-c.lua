@@ -22,15 +22,15 @@ local isRadioOn = false
 
 -- Radio list
 radio = {
-	{ "", " Swedish radio", 0 },
+	{ "", " Local radio", 0 },
 	{ "http://stream-ice.mtgradio.com:8080/stat_bandit.m3u", "Bandit rock", 1 },
-	{ "http://www.listenlive.eu/rockklassiker.m3u", "Classical Rock", 1 },
+	{ "http://194.16.21.227/rock_se_mp3.m3u", "Classical Rock", 1 },
 	{ "http://sverigesradio.se/topsy/direkt/2576-hi-aac.pls", "Malmö (Hiphop/RnB)", 1 },
-	{ "http://www.listenlive.eu/mixmegapol.m3u", "Mix megapol", 1 },
-	{ "http://www.listenlive.eu/nrj_se.m3u", "NRJ Sweden", 1 },
+	{ "http://194.16.21.227/mix_se_mp3.m3u", "Mix megapol", 1 },
+	{ "http://194.16.21.227/nrj_se_mp3.m3u", "NRJ Sweden", 1 },
 	{ "http://scb2.fantis.se:8080/listen.pls", "Pirate rock", 1 },
 	{ "http://stream-ice.mtgradio.com:8080/stat_rix_fm.m3u", "Rix FM", 1 },	
-	{ "http://www.listenlive.eu/thevoice_se.m3u", "The voice", 1 },
+	{ "http://194.16.21.227/voice_se_mp3.m3u", "The voice", 1 },
 	{ "", " Rap and Hiphop", 0 },
 	{ "http://shoutcast.unitedradio.it:1113/listen.pls", "105 Hip hop", 1 },
 	{ "http://www.jam.fm/streams/black-n-dance/jamfm.m3u", "Jam FM", 1 },
