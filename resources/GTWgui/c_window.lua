@@ -1,3 +1,19 @@
+--[[
+********************************************************************************
+	Project owner:		GTWGames												
+	Project name:		GTW-RPG	
+	Developers:			GTWCode
+	
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker:			http://forum.albonius.com/bug-reports/
+	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	
+	Version:			Open source
+	License:			GPL v.3 or later
+	Status:				Stable release
+********************************************************************************
+]]--
+
 --[[ Make a custom GTW window ]]--
 function createWindow(x, y, width, height, text, relative )
 	local window = guiCreateStaticImage(x, y, width, height, "img/back.png", relative )

@@ -1,14 +1,16 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
-	Owner:			GTW Games 	
-	Location:		Sweden
-	Developers:		MrBrutus
-	Copyrights:		See: "license.txt"
+	Project owner:		GTWGames												
+	Project name:		GTW-RPG	
+	Developers:			GTWCode
 	
-	Website:		http://code.albonius.com
-	Version:		2.0.4
-	Status:			Stable release
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker:			http://forum.albonius.com/bug-reports/
+	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	
+	Version:			Open source
+	License:			GPL v.3 or later
+	Status:				Stable release
 ********************************************************************************
 ]]--
 
@@ -235,7 +237,7 @@ end)
 --[[ Options in the button menu ]]--
 addEventHandler( "onClientGUIClick", root,
 function ( )
-	if not currentVehID then exports.GTWtopbar:dm("Please select a vehicle from the list!", 255, 0, 0) return end
+	--if not currentVehID then exports.GTWtopbar:dm("Please select a vehicle from the list!", 255, 0, 0) return end
 	if source == btn_show and currentVehID then
 		triggerServerEvent( "acorp_onShowVehicles", localPlayer, currentVehID ) 	
 	elseif source == btn_hide and currentVehID then

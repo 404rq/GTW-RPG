@@ -1,4 +1,4 @@
-<!-- 
+<!--
 ********************************************************************************
 	Project owner:		GTWGames												
 	Project name:		GTW-RPG	
@@ -15,9 +15,8 @@
 -->
 
 <meta>
-	<info author="GTWGames" name="GTWtopbar" description="Shows messages on the topbar" type="script" version="0" />
-	<script src="client.lua" type="client" />
-	<script src="server.lua" type="server" />
-	<export function="dm" type="client"/>
-	<export function="dm" type="server"/>
+    <info author="GTWCode" name="GTWcoremap" description="Core map for Grand Theft Walrus" version="0" type="map"></info>
+    <map src="core.map" dimension="0"></map>
+    <script src="mapEditorScriptingExtension_s.lua" type="server"></script>
+    <script src="mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 </meta>

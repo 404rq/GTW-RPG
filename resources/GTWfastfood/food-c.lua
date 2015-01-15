@@ -1,14 +1,16 @@
 --[[ 
 ********************************************************************************
-	Project:		GTW RPG [2.0.4]
-	Owner:			GTW Games 	
-	Location:		Sweden
-	Developers:		MrBrutus
-	Copyrights:		See: "license.txt"
+	Project owner:		GTWGames												
+	Project name:		GTW-RPG	
+	Developers:			GTWCode
 	
-	Website:		http://code.albonius.com
-	Version:		2.0.4
-	Status:			Stable release
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker:			http://forum.albonius.com/bug-reports/
+	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	
+	Version:			Open source
+	License:			GPL v.3 or later
+	Status:				Stable release
 ********************************************************************************
 ]]--
 
@@ -16,8 +18,7 @@ GUIEditor_Window = {}
 GUIEditor_Button = {}
 
 x,y = guiGetScreenSize() 
-GUIEditor_Window[1] = guiCreateWindow((x-320)/2,(y-297)/2, 320, 297, "Well Stacked Pizza Co. Menu", false)
-guiWindowSetSizable(GUIEditor_Window[1],false)
+GUIEditor_Window[1] = exports.GTWgui:createWindow((x-320)/2,(y-297)/2, 320, 297, "Well Stacked Pizza Co. Menu", false)
 guiSetVisible(GUIEditor_Window[1],false)
 GUIEditor_Button[1] = guiCreateButton(210,257,100,36,"Close",false,GUIEditor_Window[1])
 GUIEditor_Button[2] = guiCreateButton(10,100,160,36, "Buster("..prices[1].."$)",false,GUIEditor_Window[1])
@@ -71,6 +72,12 @@ function showGUI(hitPlayer, type)
 end
 addEvent("GTWfastfood.gui.show",true)
 addEventHandler("GTWfastfood.gui.show",getRootElement(),showGUI)
+
+exports.GTWgui:setDefaultFont(GUIEditor_Button[1], 10)
+exports.GTWgui:setDefaultFont(GUIEditor_Button[2], 10)
+exports.GTWgui:setDefaultFont(GUIEditor_Button[3], 10)
+exports.GTWgui:setDefaultFont(GUIEditor_Button[4], 10)
+exports.GTWgui:setDefaultFont(GUIEditor_Button[5], 10)
 
 function hideGUI()
 	guiSetVisible(GUIEditor_Window[1], false)
