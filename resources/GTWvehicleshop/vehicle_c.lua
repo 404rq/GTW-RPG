@@ -22,8 +22,6 @@ row,col = nil,nil
 --[[ Create vehicle management GUI ]]--
 x,y = guiGetScreenSize()
 window = exports.GTWgui:createWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle manager", false)
-guiWindowSetMovable(window, true)
-guiWindowSetSizable(window, false)
 btn_show = guiCreateButton(10, 350, 90, 30, "Show", false, window)
 btn_hide = guiCreateButton(100, 350, 90, 30, "Hide", false, window)
 btn_lock = guiCreateButton(200, 350, 90, 30, "Lock", false, window)
@@ -48,22 +46,21 @@ exports.GTWgui:setDefaultFont(btn_hide, 10)
 exports.GTWgui:setDefaultFont(btn_lock, 10)
 exports.GTWgui:setDefaultFont(btn_engine, 10)
 exports.GTWgui:setDefaultFont(btn_recover, 10)
+exports.GTWgui:setDefaultFont(btn_sell, 10)
 exports.GTWgui:setDefaultFont(vehicle_list, 10)
 
 --[[ Create vehicle trunk GUI ]]--
 window_trunk = exports.GTWgui:createWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle inventory", false)
-guiWindowSetMovable(window_trunk, true)
-guiWindowSetSizable(window_trunk, false)
-btn_withdraw = guiCreateButton(10, 350, 110, 30, "Withdraw", false, window_trunk)
-btn_deposit = guiCreateButton(120, 350, 110, 30, "Deposit", false, window_trunk)
+btn_withdraw = guiCreateButton(275, 133, 50, 40, "<", false, window_trunk)
+btn_deposit = guiCreateButton(275, 175, 50, 40, ">", false, window_trunk)
 btn_close = guiCreateButton(500, 350, 90, 30, "Close", false, window_trunk)
 guiSetVisible( window_trunk, false )
 
 --[[ Create the trunk grid list ]]--
 label_vehicle = guiCreateLabel( 10, 23, 250, 20, "Vehicle trunk", false, window_trunk )
 label_player = guiCreateLabel( 302, 23, 250, 20, "Your pocket", false, window_trunk )
-inventory_list = guiCreateGridList( 10, 43, 288, 305, false, window_trunk )
-player_items_list = guiCreateGridList( 302, 43, 288, 305, false, window_trunk )
+inventory_list = guiCreateGridList( 10, 43, 263, 305, false, window_trunk )
+player_items_list = guiCreateGridList( 327, 43, 263, 305, false, window_trunk )
 col7 = guiGridListAddColumn( inventory_list, "Item", 0.61 )
 col8 = guiGridListAddColumn( inventory_list, "Amount", 0.31 )
 col9 = guiGridListAddColumn( player_items_list, "Item", 0.61 )
@@ -76,8 +73,8 @@ exports.GTWgui:setDefaultFont(label_vehicle, 10)
 exports.GTWgui:setDefaultFont(label_player, 10)
 exports.GTWgui:setDefaultFont(inventory_list, 10)
 exports.GTWgui:setDefaultFont(player_items_list, 10)
-exports.GTWgui:setDefaultFont(btn_withdraw, 10)
-exports.GTWgui:setDefaultFont(btn_deposit, 10)
+exports.GTWgui:setDefaultFont(btn_withdraw, 16)
+exports.GTWgui:setDefaultFont(btn_deposit, 16)
 exports.GTWgui:setDefaultFont(btn_close, 10)
 
 --[[ Create a function to handle toggling of vehicle GUI ]]--
@@ -101,16 +98,16 @@ bindKey( "F2", "down", "vehicles" )
 function toggleInventoryGUI( source )
 	-- Show the vehicle inventory GUI
 	if getElementData(localPlayer,"isNearTrunk") then
-		if not guiGetVisible( window_trunk ) then
+		if not guiGetVisible( window_trunk ) and isElement(getElementData(localPlayer, "isNearTrunk")) then
 			showCursor( true )
 			guiSetVisible( window_trunk, true )
 			guiSetInputEnabled( true )
 			loadWeaponsToList() 
-			setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 1, 1000 )
+			setVehicleDoorOpenRatio( getElementData(localPlayer, "isNearTrunk"), 1, 1, 1000 )
 			if currentVehID then
 				triggerServerEvent( "acorp_onOpenInventory", localPlayer, currentVehID ) 
 			end
-		else
+		elseif isElement(getElementData(localPlayer, "isNearTrunk")) then
 			showCursor( false )
 			guiSetVisible( window_trunk, false )
 			guiSetInputEnabled( false )
@@ -210,11 +207,11 @@ function receiveInventoryItems(item)
 		
 		-- Load vehicles to list
 		local data_table = fromJSON(item)
-		--for id, item in pairs(data_table) do
+		for k, v in pairs(data_table) do
 			local row = guiGridListAddRow( inventory_list )
-			guiGridListSetItemText( inventory_list, row, col7, data_table[1], false, false )
-			guiGridListSetItemText( inventory_list, row, col8, data_table[2], false, false )
-		--end
+			guiGridListSetItemText( inventory_list, row, col7, k, false, false )
+			guiGridListSetItemText( inventory_list, row, col8, v, false, false )
+		end
 	end
 end
 addEvent( "acorp_onReceiveInventoryItems", true )
@@ -278,20 +275,28 @@ function ( )
 	-- Vehicle inventory
 	elseif source == btn_withdraw and currentVehID then
 		local row_pil, col_pil = guiGridListGetSelectedItem( player_items_list )
+		if row_pil == -1 or col_pil == -1 then return end
 		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, currentVehID, 
 			guiGridListGetItemText( player_items_list, row_pil, col9 ), guiGridListGetItemText( player_items_list, row_pil, col10 ))	
 		local tmp_row = guiGridListAddRow( inventory_list )
         guiGridListSetItemText( inventory_list, tmp_row, col7, guiGridListGetItemText( player_items_list, row_pil, col9 ), false, false )
         guiGridListSetItemText( inventory_list, tmp_row, col8, guiGridListGetItemText( player_items_list, row_pil, col10 ), false, false )
         guiGridListRemoveRow( player_items_list, row_pil )
+        -- Clear selection
+        guiGridListSetSelectedItem(player_items_list, -1, -1)
+        guiGridListSetSelectedItem(inventory_list, -1, -1)
 	elseif source == btn_deposit and currentVehID then
 		local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
+		if row_il == -1 or col_il == -1 then return end
 		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, currentVehID, 
 			guiGridListGetItemText( inventory_list, row_il, col7 ), guiGridListGetItemText( inventory_list, row_il, col8 ))
 		local tmp_row = guiGridListAddRow( player_items_list )
         guiGridListSetItemText( player_items_list, tmp_row, col9, guiGridListGetItemText( inventory_list, row_il, col7 ), false, false )
         guiGridListSetItemText( player_items_list, tmp_row, col10, guiGridListGetItemText( inventory_list, row_il, col8 ), false, false )
         guiGridListRemoveRow( inventory_list, row_il )
+        -- Clear selection
+        guiGridListSetSelectedItem(player_items_list, -1, -1)
+        guiGridListSetSelectedItem(inventory_list, -1, -1)
 	end
 end)
 

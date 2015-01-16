@@ -16,7 +16,6 @@
 
 -- Global data
 veh_data = dbConnect("sqlite", "veh.db")
-inventory_items = {{ }}
 inventory_markers = {}
 vehicle_owners = {}
 vehicles = {}
@@ -210,12 +209,6 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			for k, i in ipairs( fromJSON( upgrades )) do
 				addVehicleUpgrade( veh, i )
 			end
-			inventory_items[veh] = {}
-			if inventory and fromJSON( inventory ) then
-				for k, i in ipairs( fromJSON( inventory )) do
-					inventory_items[veh][k] = i
-				end
-			end
 		else
 			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", getAccountPlayer( getAccount( owner )), 255, 0, 0 )
 		end
@@ -271,9 +264,9 @@ function saveAndRemoveVehicle(veh,removeVeh)
 		local ID = getElementData( veh, "isOwnedVehicle" )
 		if ID then
 			-- Save to database
-			dbExec(veh_data, "UPDATE vehicles SET owner=?, locked=?, engine=?, health=?, fuel=?, paint=?, pos=?, color=?, upgrades=?, inventory=? WHERE ID=?", 
+			dbExec(veh_data, "UPDATE vehicles SET owner=?, locked=?, engine=?, health=?, fuel=?, paint=?, pos=?, color=?, upgrades=? WHERE ID=?", 
 				vehicle_owners[veh], locked, engine, health, fuel, paint, toJSON({x,y,z, rx,ry,rz}), 
-				toJSON({ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db}), toJSON(getVehicleUpgrades( veh )), toJSON(inventory_items[veh]), ID)
+				toJSON({ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db}), toJSON(getVehicleUpgrades( veh )), ID)
 						
 			-- Clean up and free memory
 			if removeVeh then
@@ -345,10 +338,46 @@ addEvent( "acorp_onVehicleEngineToggle", true )
 addEventHandler( "acorp_onVehicleEngineToggle", root, toggleVehicleEngine )
 
 --[[ Sell a vehicle from client GUI ]]--
+function returnWeaponsOnSell(query)
+	local result = dbPoll( query, 0 )
+	if not result then return end
+	local items = nil
+	local plr = nil
+	local veh_id = nil
+	
+	-- Get the json string
+    for _,row in ipairs( result ) do
+    	-- Get all relevant data for the vehicle
+    	items = row["inventory"]
+    	plr = getAccountPlayer(getAccount(row["owner"]))
+    	veh_id = row["ID"]
+    	break
+    end
+    
+    -- Extract data and give weapons back to the owner
+    local data_table = fromJSON(items)
+    outputChatBox("*** Weapons restored ***", plr, 200, 200, 200)
+	for k, v in pairs(data_table) do
+		giveWeapon(plr, getWeaponIDFromName(k), tonumber(v))
+		outputChatBox(k.." was successfully restored ("..tostring(v)..") bullets", plr, 255, 255, 255)
+	end
+	outputChatBox("*** End of message ***", plr, 200, 200, 200)
+    	
+    -- Send data to client
+    if player then
+    	triggerClientEvent( player, "acorp_onReceiveInventoryItems", player, vehicle_data_to_client )     		
+	end
+	
+	-- Remove vehicle from database
+	dbExec(veh_data, "DELETE FROM vehicles WHERE ID=?", veh_id)
+end
 function sellVehicle(veh_id, model)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and model then
-		-- Save to database
-		dbExec(veh_data, "DELETE FROM vehicles WHERE ID=?", veh_id)
+		-- Restore weapons to it's owner
+		dbQuery(returnWeaponsOnSell, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE owner=? AND ID=?", 
+			getAccountName(getPlayerAccount( client )), tonumber(veh_id))
+			
+		-- Return money
 		local price = 0
 		for i=1, #car_data do
 			if car_data[i] then
@@ -404,28 +433,102 @@ addEvent( "acorp_onVehicleRespawn", true )
 addEventHandler( "acorp_onVehicleRespawn", root, respawnVehicleToStart )
 
 --[[ Withdraw weapons to vehicle inventory ]]--
+temp_weapon_store = {}
+temp_ammo_store = {}
+function onVehicleWeaponWithdrawGet(query)
+	local result = dbPoll( query, 0 )
+	if not result then return end
+    for _, row in ipairs( result ) do
+    	-- Add weapon to JSON string (Only executed once)
+    	local input_table = fromJSON(row["inventory"])
+    	local plr_owner = getAccountPlayer(getAccount(row["owner"]))
+    	
+    	-- Debug info
+    	--outputChatBox(row["inventory"],plr_owner)
+    	
+    	-- Update value to be saved into database
+    	input_table[temp_weapon_store[plr_owner]] = ((input_table[
+    		temp_weapon_store[plr_owner]] or 0) + temp_ammo_store[plr_owner])
+    	local new_res = toJSON(input_table)
+    	
+    	-- Debug info
+    	--outputChatBox(new_res, plr_owner)
+    	 	    	
+    	-- Cleanup
+    	temp_weapon_store[plr_owner] = nil
+    	temp_ammo_store[plr_owner] = nil
+    	
+    	-- Save to database
+		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
+		break		
+	end
+end
 function onVehicleWeaponWithdraw(veh_id, weap, ammo)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
 		takeWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
 		-- Save to database
-		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", toJSON({weap,ammo}), veh_id)
+		-- Save to temp storage
+		temp_weapon_store[client] = weap
+		temp_ammo_store[client] = ammo
+		-- Save to database
+		dbQuery(onVehicleWeaponWithdrawGet, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
+		
 		exports.GTWtopbar:dm( "Your weapon has been withdrawed", client, 0, 255, 0 )
 	elseif not getPlayerAccount( client ) or isGuestAccount( getPlayerAccount( client )) then
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
+	else
+		exports.GTWtopbar:dm( "Error, please specify a weapon to put in your vehicle trunk!", client, 255, 0, 0 )
 	end
 end
 addEvent( "acorp_onVehicleWeaponWithdraw", true )
 addEventHandler( "acorp_onVehicleWeaponWithdraw", root, onVehicleWeaponWithdraw )
 
 --[[ Deposit from vehicle inventory ]]--
+function onVehicleWeaponDepositGet(query)
+	local result = dbPoll( query, 0 )
+	if not result then return end
+    for _, row in ipairs( result ) do
+    	-- Add weapon to JSON string (Only executed once)
+    	local input_table = fromJSON(row["inventory"])
+    	local plr_owner = getAccountPlayer(getAccount(row["owner"]))
+    	local new_val = (input_table[temp_weapon_store[plr_owner]] or 0) - temp_ammo_store[plr_owner]
+    	
+    	-- Debug info
+    	--outputChatBox(row["inventory"], plr_owner)
+    	
+    	-- Update value to be saved into database
+    	if new_val > 0 then
+    		input_table[temp_weapon_store[plr_owner]] = new_val
+    	else
+    		input_table[temp_weapon_store[plr_owner]] = nil
+    	end
+    	local new_res = toJSON(input_table)
+    	
+    	-- Debug info
+    	--outputChatBox(new_res, plr_owner)
+    	
+    	-- Cleanup
+    	temp_weapon_store[plr_owner] = nil
+    	temp_ammo_store[plr_owner] = nil
+    	
+    	-- Save to database
+		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
+		break		
+	end
+end
 function onVehicleWeaponDeposit(veh_id, weap, ammo)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
 		giveWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
+		-- Save to temp storage
+		temp_weapon_store[client] = weap
+		temp_ammo_store[client] = ammo
 		-- Save to database
-		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", "", veh_id)
+		dbQuery(onVehicleWeaponDepositGet, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 		exports.GTWtopbar:dm( "Your weapon has been deposited", client, 0, 255, 0 )
 	elseif not getPlayerAccount( client ) or isGuestAccount( getPlayerAccount( client )) then
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
+	else
+		exports.GTWtopbar:dm( "Error, please specify a weapon to put in your vehicle trunk!", client, 255, 0, 0 )
 	end
 end
 addEvent( "acorp_onVehicleWeaponDeposit", true )
@@ -437,10 +540,11 @@ function getInventoryWeapons(query)
 	if result then
 		local vehicle_data_to_client = nil
 		local player = nil
-    	for index, row in ipairs( result ) do
+    	for _,row in ipairs( result ) do
     		-- Get all relevant data for the vehicle
     		vehicle_data_to_client = row["inventory"]
     		player = getAccountPlayer(getAccount(row["owner"]))
+    		break
     	end
     	
     	-- Send data to client
@@ -470,7 +574,11 @@ function vehicleHeadLightColors(player, cmd, r,g,b)
         exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
     end
 end
+addCommandHandler("hlcolor", vehicleHeadLightColors)
 addCommandHandler("headlight", vehicleHeadLightColors)
+addCommandHandler("headlightcol", vehicleHeadLightColors)
+addCommandHandler("headlightcolor", vehicleHeadLightColors)
+addCommandHandler("setheadlight", vehicleHeadLightColors)
 
 function saveAllVehicles(quitType)
 	dbQuery(unloadMyVehicles, veh_data, "SELECT * FROM vehicles WHERE owner=?", getAccountName(getPlayerAccount( source )))
