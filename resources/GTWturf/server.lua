@@ -392,29 +392,29 @@ function player_Wasted(ammo, attacker, weapon, bodypart)
 			setElementData(source, "isInFriendlyTurf", false)
 		end
 	end
-	
-	-- Weapon stats 2015-01-04 Stat's increase on any kill
-	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
-	local wepSlot = getSlotFromWeapon(weapon)
-	local stats = 0
-	if wepSlot and (getPedStat(attacker, wepSlot+68) or 0) < 950 then
-		stats = math.random(weapon_stats_min, weapon_stats_max)
-		setPedStat(attacker, wepSlot+68, getPedStat(attacker, wepSlot+68)+stats)
-	end
 end
 addEventHandler("onPlayerWasted", root, player_Wasted)
 
-function pedWasted(totalAmmo, killer, killerWeapon, bodypart, stealth)
+function increaseStats(totalAmmo, killer, weapon, bodypart, stealth)
     -- Weapon stats 2015-01-04 Stat's increase on any kill
 	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
-	local wepSlot = getSlotFromWeapon(weapon)
-	local stats = 0
-	if wepSlot and (getPedStat(attacker, wepSlot+68) or 0) < 950 then
-		stats = math.random(weapon_stats_min, weapon_stats_max)
-		setPedStat(attacker, wepSlot+68, getPedStat(attacker, wepSlot+68)+stats)
-	end
+	local stat_key = 69
+	if weapon == 23 then stat_key = 70 end
+	if weapon == 24 then stat_key = 71 end
+	if weapon == 25 then stat_key = 72 end
+	if weapon == 26 then stat_key = 73 end
+	if weapon == 27 then stat_key = 74 end
+	if weapon == 28 then stat_key = 75 end
+	if weapon == 29 then stat_key = 76 end
+	if weapon == 30 then stat_key = 77 end
+	if weapon == 31 then stat_key = 78 end
+	if weapon == 34 then stat_key = 79 end
+	local stats = math.random(weapon_stats_min, weapon_stats_max)
+	if (getPedStat(attacker, stat_key) or 0)+stats > 1000 then return end
+	setPedStat(attacker, stat_key, (getPedStat(attacker, stat_key) or 0)+stats)
 end
-addEventHandler("onPedWasted", root, pedWasted) 
+addEventHandler("onPedWasted", root, increaseStats)
+addEventHandler("onPlayerWasted", root, increaseStats)
 
 -- Adds a new turf(Admin)
 function createTurf(player, cmd, sx, sy)

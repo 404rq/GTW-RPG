@@ -156,7 +156,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			z = z + 3
 			isFirstSpawn = true
 		end
-		if tonumber( getElementData( getAccountPlayer( getAccount( owner )), "Wanted" )) < 6 then
+		if tonumber(( getElementData( getAccountPlayer( getAccount( owner )), "Wanted" )) or 0) < 6 then
 			local veh = createVehicle( tonumber( model ), x,y,z )
 			if supported_cars[getElementModel(veh)] then
 				local dist = supported_cars[getElementModel(veh)]
