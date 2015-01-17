@@ -278,10 +278,10 @@ function ( )
 		guiGridListRemoveRow( vehicle_list, row )
 		currentVehID = nil
 	-- Vehicle inventory
-	elseif source == btn_withdraw and currentVehID then
+	elseif source == btn_withdraw then
 		local row_pil, col_pil = guiGridListGetSelectedItem( player_items_list )
 		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
-		if row_pil == -1 or col_pil == -1 then return end
+		if row_pil == -1 or col_pil == -1 or not veh_id then return end
 		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, veh_id, 
 			guiGridListGetItemText( player_items_list, row_pil, col9 ), guiGridListGetItemText( player_items_list, row_pil, col10 ))	
 		local tmp_row = guiGridListAddRow( inventory_list )
@@ -291,10 +291,10 @@ function ( )
         -- Clear selection
         guiGridListSetSelectedItem(player_items_list, -1, -1)
         guiGridListSetSelectedItem(inventory_list, -1, -1)
-	elseif source == btn_deposit and currentVehID then
+	elseif source == btn_deposit then
 		local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
 		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
-		if row_il == -1 or col_il == -1 then return end
+		if row_il == -1 or col_il == -1 or not veh_id then return end
 		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, veh_id, 
 			guiGridListGetItemText( inventory_list, row_il, col7 ), guiGridListGetItemText( inventory_list, row_il, col8 ))
 		local tmp_row = guiGridListAddRow( player_items_list )

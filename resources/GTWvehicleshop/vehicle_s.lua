@@ -443,13 +443,14 @@ addEventHandler( "acorp_onVehicleRespawn", root, respawnVehicleToStart )
 --[[ Withdraw weapons to vehicle inventory ]]--
 temp_weapon_store = {}
 temp_ammo_store = {}
+temp_plr_store = {}
 function onVehicleWeaponWithdrawGet(query)
 	local result = dbPoll( query, 0 )
 	if not result then return end
     for _, row in ipairs( result ) do
     	-- Add weapon to JSON string (Only executed once)
     	local input_table = fromJSON(row["inventory"])
-    	local plr_owner = getAccountPlayer(getAccount(row["owner"]))
+    	local plr_owner = temp_plr_store[row["ID"]]
     	
     	-- Debug info
     	--outputChatBox(row["inventory"],plr_owner)
@@ -465,6 +466,7 @@ function onVehicleWeaponWithdrawGet(query)
     	-- Cleanup
     	temp_weapon_store[plr_owner] = nil
     	temp_ammo_store[plr_owner] = nil
+    	temp_plr_store[row["ID"]] = nil
     	
     	-- Save to database
 		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
@@ -474,10 +476,12 @@ end
 function onVehicleWeaponWithdraw(veh_id, weap, ammo)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
 		takeWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
-		-- Save to database
+		
 		-- Save to temp storage
 		temp_weapon_store[client] = weap
 		temp_ammo_store[client] = ammo
+		temp_plr_store[veh_id] = client
+		
 		-- Save to database
 		dbQuery(onVehicleWeaponWithdrawGet, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 		
@@ -498,7 +502,7 @@ function onVehicleWeaponDepositGet(query)
     for _, row in ipairs( result ) do
     	-- Add weapon to JSON string (Only executed once)
     	local input_table = fromJSON(row["inventory"])
-    	local plr_owner = getAccountPlayer(getAccount(row["owner"]))
+    	local plr_owner = temp_plr_store[row["ID"]]
     	local new_val = (input_table[temp_weapon_store[plr_owner]] or 0) - temp_ammo_store[plr_owner]
     	
     	-- Debug info
@@ -518,6 +522,7 @@ function onVehicleWeaponDepositGet(query)
     	-- Cleanup
     	temp_weapon_store[plr_owner] = nil
     	temp_ammo_store[plr_owner] = nil
+    	temp_plr_store[row["ID"]] = nil
     	
     	-- Save to database
 		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
@@ -527,9 +532,12 @@ end
 function onVehicleWeaponDeposit(veh_id, weap, ammo)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
 		giveWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
+		
 		-- Save to temp storage
 		temp_weapon_store[client] = weap
 		temp_ammo_store[client] = ammo
+		temp_plr_store[veh_id] = client
+		
 		-- Save to database
 		dbQuery(onVehicleWeaponDepositGet, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 		exports.GTWtopbar:dm( "Your weapon has been deposited", client, 0, 255, 0 )
@@ -547,23 +555,27 @@ function getInventoryWeapons(query)
 	local result = dbPoll( query, 0 )
 	if result then
 		local vehicle_data_to_client = nil
-		local player = nil
+		local plr = nil
     	for _,row in ipairs( result ) do
     		-- Get all relevant data for the vehicle
     		vehicle_data_to_client = row["inventory"]
-    		player = getAccountPlayer(getAccount(row["owner"]))
-    		break
-    	end
-    	
-    	-- Send data to client
-    	if player then
-    		triggerClientEvent( player, "acorp_onReceiveInventoryItems", player, vehicle_data_to_client ) 
-		end    		
+    		plr = temp_plr_store[row["ID"]]
+    		
+    		-- Send data to client
+	    	if plr then
+	    		triggerClientEvent( plr, "acorp_onReceiveInventoryItems", plr, vehicle_data_to_client ) 
+			end  
+			
+			-- Cleanup
+			temp_plr_store[row["ID"]] = nil	
+			break
+		end		
 	end
 end
 function openInventory(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id then
-		dbQuery(getInventoryWeapons, veh_data, "SELECT inventory, owner FROM vehicles WHERE owner=? AND ID=?", getAccountName(getPlayerAccount( client )), tonumber(veh_id))
+		temp_plr_store[veh_id] = client
+		dbQuery(getInventoryWeapons, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 	else
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
