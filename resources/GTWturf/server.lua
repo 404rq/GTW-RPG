@@ -395,7 +395,7 @@ function player_Wasted(ammo, attacker, weapon, bodypart)
 end
 addEventHandler("onPlayerWasted", root, player_Wasted)
 
-function increaseStats(totalAmmo, killer, weapon, bodypart, stealth)
+function increaseStats(totalAmmo, attacker, weapon, bodypart, stealth)
     -- Weapon stats 2015-01-04 Stat's increase on any kill
 	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
 	local stat_key = 69
@@ -412,9 +412,15 @@ function increaseStats(totalAmmo, killer, weapon, bodypart, stealth)
 	local stats = math.random(weapon_stats_min, weapon_stats_max)
 	if (getPedStat(attacker, stat_key) or 0)+stats > 1000 then return end
 	setPedStat(attacker, stat_key, (getPedStat(attacker, stat_key) or 0)+stats)
+	setTimer(killerMessage, 123, 1, weapon, attacker, stat_key)
 end
 addEventHandler("onPedWasted", root, increaseStats)
 addEventHandler("onPlayerWasted", root, increaseStats)
+
+function killerMessage(weapon, attacker, stat_key)
+	exports.GTWtopbar:dm("STATS: Killer weapon: "..getWeaponNameFromID(weapon)..", Current value: "..
+		tostring(getPedStat(attacker, stat_key) or 0), attacker, 255, 100, 0)
+end
 
 -- Adds a new turf(Admin)
 function createTurf(player, cmd, sx, sy)
