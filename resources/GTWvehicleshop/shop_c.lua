@@ -16,7 +16,7 @@
 
 --{ x, y, z, dim, int, vehicleX, vehicleY, vehicleZ, vRotZ ,camX, camY, camZ, shopType }
 shops_Coords = {
-	-- Cars (one in each city)
+	-- Cars(one in each city)
 	{ 1671.5, 2189.1999511719, 9.6999998092651, 0, 0, 1669.5, 2193, 10.800000190735, 180, 1670.3000488281, 2189.6, 11.4, 1 },
 	{ -1979.275390625, 240.814453125, 34.17187, 0, 0, -1987.9033203125, 249.564453125, 37.303623199463, 314, -1980.6455078125, 261.7392578125, 39.171875, 1 },
 	{ 2130.1999511719, -1149.9000244141, 23.10000038147, 0, 0, 2121.6000976563, -1157, 24.10000038147, 0, 2116.6999511719, -1156.4000244141, 24.6, 1 },
@@ -68,76 +68,97 @@ shops_Coords = {
 dataShop = {}
 local gW, gH = guiGetScreenSize()
 
-dummieCar = createVehicle( 602, 0, 0, 0 )
-setElementFrozen( dummieCar, false )
-setVehicleDamageProof( dummieCar, true )
-setVehicleColor( dummieCar, 200, 200, 200, 200, 200, 200 )
-	
-GUI_Widget[1] = guiCreateButton(0.74, 0.86, 0.21, 0.06, "Buy", true)
-guiSetProperty(GUI_Widget[1], "NormalTextColour", "FFAAAAAA")
-GUI_Widget[2] = guiCreateGridList(0.06, 0.82, 0.22, 0.17, true)  
-GUI_Widget[3] = guiCreateButton(0.98, 0.805, 0.02, 0.02, "X", true )
-guiSetProperty(GUI_Widget[3], "NormalTextColour", "FFAAAAAA")
-GUI_Widget[4] = guiCreateLabel(0.36, 0.82, 0.32, 0.08, "--", true)
-guiSetFont(GUI_Widget[4], "clear-normal")
-guiLabelSetHorizontalAlign(GUI_Widget[4], "center", false)
-guiLabelSetVerticalAlign(GUI_Widget[4], "center")  
-GUI_Widget[5] = guiCreateLabel(0.43, 0.9, 0.18, 0.04, "$0.00", true)
-guiLabelSetHorizontalAlign(GUI_Widget[5], "center", false)
-guiLabelSetVerticalAlign(GUI_Widget[5], "center")    
-	
+dummieCar = createVehicle(602, 0, 0, 0)
+setElementFrozen(dummieCar, false)
+setVehicleDamageProof(dummieCar, true)
+setVehicleColor(dummieCar, 200, 200, 200, 200, 200, 200)
+
+btn_buy = guiCreateButton(0.74, 0.86, 0.21, 0.06, "Buy", true)
+guiSetProperty(btn_buy, "NormalTextColour", "FFAAAAAA")
+vehicle_list_shop = guiCreateGridList(0.01, 0.81, 0.25, 0.18, true)  
+btn_close = guiCreateButton(0.98, 0.805, 0.02, 0.02, "X", true)
+guiSetProperty(btn_close, "NormalTextColour", "FFAAAAAA")
+lbl_name = guiCreateLabel(0.36, 0.81, 0.32, 0.08, "--", true)
+guiSetFont(lbl_name, "clear-normal")
+guiLabelSetHorizontalAlign(lbl_name, "center", false)
+guiLabelSetVerticalAlign(lbl_name, "center")  
+lbl_price = guiCreateLabel(0.43, 0.91, 0.18, 0.04, "$0.00", true)
+guiLabelSetHorizontalAlign(lbl_price, "center", false)
+guiLabelSetVerticalAlign(lbl_price, "center")
+
+-- Apply new GUI style
+exports.GTWgui:setDefaultFont(btn_buy, 16)
+exports.GTWgui:setDefaultFont(btn_close, 10)
+exports.GTWgui:setDefaultFont(lbl_name, 14)
+exports.GTWgui:setDefaultFont(lbl_price, 20)
+exports.GTWgui:setDefaultFont(vehicle_list_shop, 10)
+
 function renderShopFurning()
 	dxDrawRectangle(0, gH * 0.8, gW, gH * 0.2, tocolor(0, 0, 0, 150), false)
 end	
-for k, i in ipairs( GUI_Widget ) do
-	guiSetVisible( i, false )
-end	
-function reloadShopItems( shopType )
-	if shopType then
-		guiGridListClear(GUI_Widget[2])
-		for cC = 1, guiGridListGetColumnCount( GUI_Widget[2] ) do
-			guiGridListRemoveColumn( GUI_Widget[2], 1 )
-		end
-		if type(shopType) == "number" then
-			local column = guiGridListAddColumn( GUI_Widget[2], shopNames[shopType], 0.75 ) 
-			for _, data in ipairs ( car_data[shopType] ) do
-				local row = guiGridListAddRow( GUI_Widget[2] )
-				guiGridListSetItemText( GUI_Widget[2], row, column, getVehicleNameFromModel( data[1] ), false, false )
-				guiGridListSetItemData( GUI_Widget[2], row, column, data[3] )
-			end
-			local vehName = guiGridListGetItemText( GUI_Widget[2], 1, 1 )
-			setElementModel( dummieCar, getVehicleModelFromName ( vehName ) )
-		end
+guiSetVisible(vehicle_list_shop, false)
+guiSetVisible(btn_close, false)
+guiSetVisible(btn_buy, false)
+guiSetVisible(lbl_name, false)
+guiSetVisible(lbl_price, false)
+
+--[[ Reload shop items list ]]--
+function reloadShopItems(shopType)
+	if not shopType then return end
+	guiGridListClear(vehicle_list_shop)
+	for cC = 1, guiGridListGetColumnCount(vehicle_list_shop) do
+		guiGridListRemoveColumn(vehicle_list_shop, 1)
 	end
+	if type(shopType) ~= "number" then return end
+	local column = guiGridListAddColumn(vehicle_list_shop, shopNames[shopType], 0.75) 
+	
+	-- List available vehicles
+	for _, data in ipairs(car_data[shopType]) do
+		local row = guiGridListAddRow(vehicle_list_shop)
+		guiGridListSetItemText(vehicle_list_shop, row, column, getVehicleNameFromModel(data[1]), false, false)
+		guiGridListSetItemData(vehicle_list_shop, row, column, data[3])
+	end
+	
+	-- Get name from dummie car
+	local vehName = guiGridListGetItemText(vehicle_list_shop, 1, 1)
+	setElementModel(dummieCar, getVehicleModelFromName(vehName))
+	
+	-- Select first item
+	guiGridListSetSelectedItem(vehicle_list_shop, 0, column)
 end
 
-function toggleVehiclesShop( open, x, y, z, cx, cy, cz, rz, int, dim )
+--[[ Toggle shop window ]]--
+function toggleVehiclesShop(open, x, y, z, cx, cy, cz, rz, int, dim)
 	if open then
 		if x and y and z and cx and cy and cz then
-			toggleAllControls( false, true, false)
-			showCursor( true )
-			for k, i in ipairs( GUI_Widget ) do
-				guiSetVisible( i, true )
-			end
-			addEventHandler( "onClientRender", root, renderShopFurning )
+			toggleAllControls(false, true, false)
+			showCursor(true)
+			guiSetVisible(vehicle_list_shop, true)
+			guiSetVisible(btn_close, true)
+			guiSetVisible(btn_buy, true)
+			guiSetVisible(lbl_name, true)
+			guiSetVisible(lbl_price, true)
+			addEventHandler("onClientRender", root, renderShopFurning)
 			setElementPosition(dummieCar, x, y, z)
-			setCameraMatrix( cx, cy, cz, x, y, z)
-			setElementRotation( dummieCar, 0, 0, tonumber(rz) or 0 )
+			setCameraMatrix(cx, cy, cz, x, y, z)
+			setElementRotation(dummieCar, 0, 0, tonumber(rz) or 0)
 			if int then
-				setElementInterior( dummieCar, int )
+				setElementInterior(dummieCar, int)
 			end
 			if dim then
-				setElementDimension( dummieCar, dim )
+				setElementDimension(dummieCar, dim)
 			end
 		end
 	elseif not open then
-		for k, i in ipairs( GUI_Widget ) do
-			guiSetVisible( i, false )
-		end
-		removeEventHandler( "onClientRender", getRootElement(), renderShopFurning )
-		setCameraTarget( localPlayer )
-		toggleAllControls( true, true, true)
-		showCursor( false )
+		guiSetVisible(vehicle_list_shop, false)
+		guiSetVisible(btn_close, false)
+		guiSetVisible(btn_buy, false)
+		guiSetVisible(lbl_name, false)
+		guiSetVisible(lbl_price, false)
+		removeEventHandler("onClientRender", getRootElement(), renderShopFurning)
+		setCameraTarget(localPlayer)
+		toggleAllControls(true, true, true)
+		showCursor(false)
 		setElementPosition(dummieCar, 0, 0, 0)
 		setElementInterior(dummieCar, 0)
 		setElementDimension(dummieCar, 0)
@@ -145,89 +166,88 @@ function toggleVehiclesShop( open, x, y, z, cx, cy, cz, rz, int, dim )
 		setElementCollisionsEnabled(dummieCar, false)
 	end
 end
-	
-addEventHandler( "onClientGUIClick", GUI_Widget[2],
-function ()
-	local row, column = guiGridListGetSelectedItem ( GUI_Widget[2] )
-	if row ~= -1 and column ~= -1 then
-		local vehName = guiGridListGetItemText( source, row, column )
-		if getVehicleModelFromName ( vehName ) then
-			dataShop[1] = guiGridListGetItemText( source, row, column )
-			dataShop[2] = tostring(guiGridListGetItemData( GUI_Widget[2], row, column) ) 
-			guiSetText(GUI_Widget[4], dataShop[1] )
-			guiSetText(GUI_Widget[5], "$"..dataShop[2]*priceMultiplier )
-			setElementModel( dummieCar, getVehicleModelFromName ( vehName ) )
+
+--[[ GUI elements click ]]--
+addEventHandler("onClientGUIClick", vehicle_list_shop,
+function()
+	local row, column = guiGridListGetSelectedItem(vehicle_list_shop)
+	if row == -1 or column == -1 then return end
+	local vehName = guiGridListGetItemText(source, row, column)
+	if getVehicleModelFromName(vehName) then
+		dataShop[1] = guiGridListGetItemText(source, row, column)
+		dataShop[2] = tostring(guiGridListGetItemData(vehicle_list_shop, row, column)) 
+		guiSetText(lbl_name, dataShop[1])
+		guiSetText(lbl_price, "$"..dataShop[2]*priceMultiplier)
+		setElementModel(dummieCar, getVehicleModelFromName(vehName))
+	end
+end)	
+addEventHandler("onClientGUIClick", btn_buy,
+function()
+	local row, column = guiGridListGetSelectedItem(vehicle_list_shop)
+	if row == -1 or column == -1 then return end
+	local vehName = guiGridListGetItemText(vehicle_list_shop, row, column)
+	if getVehicleModelFromName(vehName) then
+		if guiGridListGetItemData(vehicle_list_shop, row, column)*priceMultiplier <= getPlayerMoney() then
+			local x, y, z = getElementPosition(dummieCar)
+			local rx, ry, rz = getElementRotation(dummieCar)
+			local dim = getElementDimension(dummieCar)
+			local int = getElementInterior(dummieCar)
+			triggerServerEvent("acorp_onPlayerVehicleBuyRequest", localPlayer, getVehicleModelFromName(vehName), 
+				guiGridListGetItemData(vehicle_list_shop, row, column) * 1000, x, y, z, rx, ry, rz, dim, int)
+			toggleVehiclesShop(false)
+		else 
+			exports.GTWtopbar:dm("You can't afford this vehicle, you little twat!", 255, 0, 0)
 		end
 	end
 end)
-	
-addEventHandler( "onClientGUIClick", GUI_Widget[3],
-function ()
-	toggleVehiclesShop( false )
+addEventHandler("onClientGUIClick", btn_close,
+function()
+	toggleVehiclesShop(false)
 end)
 	
-addEventHandler( "onClientGUIClick", GUI_Widget[1],
-function ()
-	local row, column = guiGridListGetSelectedItem ( GUI_Widget[2] )
-	if row ~= -1 and column ~= -1 then
-		local vehName = guiGridListGetItemText( GUI_Widget[2], row, column )
-		if getVehicleModelFromName ( vehName ) then
-			if (guiGridListGetItemData ( GUI_Widget[2], row, column)*priceMultiplier) <= getPlayerMoney ( ) then
-				local x, y, z = getElementPosition( dummieCar )
-				local rx, ry, rz = getElementRotation( dummieCar )
-				local dim = getElementDimension( dummieCar )
-				local int = getElementInterior( dummieCar )
-				triggerServerEvent( "acorp_onPlayerVehicleBuyRequest", localPlayer, getVehicleModelFromName( vehName ), 
-					guiGridListGetItemData ( GUI_Widget[2], row, column) * 1000, x, y, z, rx, ry, rz, dim, int )
-				toggleVehiclesShop( false )
-			else 
-				exports.GTWtopbar:dm( "You can't afford this vehicle, you little twat!", 255, 0, 0 )
-			end
-		end
-	end
-end)
-	
---Shop creation
+--[[ Shop creation ]]--
 vehicleShops = {}
-for k, i in ipairs( shops_Coords ) do
-	local x, y, z, dim, int, vehicleX, vehicleY, vehicleZ, rotZ, camX, camY, camZ, shopType = unpack( i )
-	local aMarker = createMarker( x, y, z, "cylinder", 1.6, 200, 200, 200, 50 )
-	setElementDimension( aMarker, dim )
-	setElementInterior( aMarker, int )
+for k, i in ipairs(shops_Coords) do
+	local x, y, z, dim, int, vehicleX, vehicleY, vehicleZ, rotZ, camX, camY, camZ, shopType = unpack(i)
+	local aMarker = createMarker(x, y, z, "cylinder", 1.6, 200, 200, 200, 50)
+	setElementDimension(aMarker, dim)
+	setElementInterior(aMarker, int)
 	vehicleShops[aMarker] = {shopType, vehicleX, vehicleY, vehicleZ, camX, camY, camZ, rotZ}
-	--createBlip( vehicleX, vehicleY, vehicleZ, vehicleBlips[shopType], 1, 0, 0, 0, 255, 0, 180 )
-	--exports["radblips"]:createCustomBlipAt( vehicleX, vehicleY, vehicleBlips[shopType] )
-	local blip = exports.customblips:createCustomBlip( x, y, 16, 16, "icon/"..tostring(vehicleBlips[shopType])..".png", 100 ) 
-	exports.customblips:setCustomBlipRadarScale( blip, 1.6 )
+	--createBlip(vehicleX, vehicleY, vehicleZ, vehicleBlips[shopType], 1, 0, 0, 0, 255, 0, 180)
+	--exports["radblips"]:createCustomBlipAt(vehicleX, vehicleY, vehicleBlips[shopType])
+	local blip = exports.customblips:createCustomBlip(x, y, 16, 16, "icon/"..tostring(vehicleBlips[shopType])..".png", 100) 
+	exports.customblips:setCustomBlipRadarScale(blip, 1.6)
 end
-		
-addEventHandler( "onClientRender", getRootElement(),
-function ( )
-	for k, i in pairs ( vehicleShops ) do
-		local x, y, z = getElementPosition( k )
-		local px, py, pz = getElementPosition( localPlayer )
-		if getDistanceBetweenPoints3D( x, y, z + 0.4, px, py, pz ) < 18 then
-			local dx, dy = getScreenFromWorldPosition ( x, y, z + 1.4 )
+
+--[[ Draw label info ]]--
+addEventHandler("onClientRender", getRootElement(),
+function()
+	for k, i in pairs(vehicleShops) do
+		local x, y, z = getElementPosition(k)
+		local px, py, pz = getElementPosition(localPlayer)
+		if getDistanceBetweenPoints3D(x, y, z + 0.4, px, py, pz) < 18 then
+			local dx, dy = getScreenFromWorldPosition(x, y, z + 1.4)
 			if dx and dy then
 				local text = shopNames[(i[1])]
-				dxDrawText( text, dx - ( #text * 2 ), dy - 3, dx + ( #text * 2 ), dy + 2 , tocolor( 250, 250, 250, 250 ), 1, "bankgothic", "center", "center" )
+				dxDrawText(text, dx -(#text * 2), dy - 3, dx +(#text * 2), dy + 2 , tocolor(250, 250, 250, 250), 1, "bankgothic", "center", "center")
 			end
 		end
 	end
 end)
 
-addEventHandler( "onClientMarkerHit", getRootElement(),
-function ( thePlayer, matchDim )
+--[[ Hit vehicle marker ]]--
+addEventHandler("onClientMarkerHit", getRootElement(),
+function(thePlayer, matchDim)
 	if vehicleShops[source] then
 		if matchDim then
-			if not isPedInVehicle( thePlayer ) then
-				local x, y, z = getElementPosition( localPlayer )
-				local mx, my, mz = getElementPosition( source )
-				if getDistanceBetweenPoints3D( x, y, z, mx, my, mz ) < 2 then
-					local dim, int = getElementDimension( source ), getElementInterior( source ) 
-					toggleVehiclesShop( true, vehicleShops[source][2], vehicleShops[source][3], vehicleShops[source][4], vehicleShops[source][5], 
-						vehicleShops[source][6], vehicleShops[source][7], vehicleShops[source][8], dim, int )
-					reloadShopItems( tonumber(vehicleShops[source][1]) )
+			if not isPedInVehicle(thePlayer) then
+				local x, y, z = getElementPosition(localPlayer)
+				local mx, my, mz = getElementPosition(source)
+				if getDistanceBetweenPoints3D(x, y, z, mx, my, mz) < 2 then
+					local dim, int = getElementDimension(source), getElementInterior(source) 
+					toggleVehiclesShop(true, vehicleShops[source][2], vehicleShops[source][3], vehicleShops[source][4], vehicleShops[source][5], 
+						vehicleShops[source][6], vehicleShops[source][7], vehicleShops[source][8], dim, int)
+					reloadShopItems(tonumber(vehicleShops[source][1]))
 					setElementAlpha(dummieCar, 255)
 					setElementCollisionsEnabled(dummieCar, true)
 				end

@@ -104,14 +104,13 @@ function toggleInventoryGUI( source )
 			guiSetInputEnabled( true )
 			loadWeaponsToList() 
 			setVehicleDoorOpenRatio( getElementData(localPlayer, "isNearTrunk"), 1, 1, 1000 )
-			if currentVehID then
-				triggerServerEvent( "acorp_onOpenInventory", localPlayer, currentVehID ) 
-			end
-		elseif isElement(getElementData(localPlayer, "isNearTrunk")) then
+		else
 			showCursor( false )
 			guiSetVisible( window_trunk, false )
 			guiSetInputEnabled( false )
-			setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 0, 1000 )
+			if isElement(getElementData(localPlayer, "isNearTrunk")) then
+				setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 0, 1000 )
+			end
 		end
 	end
 end 
@@ -131,6 +130,10 @@ function loadWeaponsToList()
 				guiGridListSetItemText( player_items_list, row, col10, getPedTotalAmmo(localPlayer,slot), false, false )
 			end
 		end
+		
+		-- Load weapons from vehicle inventory
+		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
+		if veh_id then triggerServerEvent( "acorp_onOpenInventory", localPlayer, veh_id ) end
 	end
 end
 
@@ -265,7 +268,9 @@ function ( )
 		showCursor( false )
 		guiSetVisible( window_trunk, false )
 		guiSetInputEnabled( false )
-		setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 0, 1000 )
+		if getElementData(localPlayer,"isNearTrunk") then
+			setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 0, 1000 )
+		end
 	elseif source == btn_recover and currentVehID then
 		triggerServerEvent( "acorp_onVehicleRespawn", localPlayer, currentVehID )
 	elseif source == btn_sell and currentVehID then
@@ -275,8 +280,9 @@ function ( )
 	-- Vehicle inventory
 	elseif source == btn_withdraw and currentVehID then
 		local row_pil, col_pil = guiGridListGetSelectedItem( player_items_list )
+		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
 		if row_pil == -1 or col_pil == -1 then return end
-		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, currentVehID, 
+		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, veh_id, 
 			guiGridListGetItemText( player_items_list, row_pil, col9 ), guiGridListGetItemText( player_items_list, row_pil, col10 ))	
 		local tmp_row = guiGridListAddRow( inventory_list )
         guiGridListSetItemText( inventory_list, tmp_row, col7, guiGridListGetItemText( player_items_list, row_pil, col9 ), false, false )
@@ -287,8 +293,9 @@ function ( )
         guiGridListSetSelectedItem(inventory_list, -1, -1)
 	elseif source == btn_deposit and currentVehID then
 		local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
+		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
 		if row_il == -1 or col_il == -1 then return end
-		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, currentVehID, 
+		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, veh_id, 
 			guiGridListGetItemText( inventory_list, row_il, col7 ), guiGridListGetItemText( inventory_list, row_il, col8 ))
 		local tmp_row = guiGridListAddRow( player_items_list )
         guiGridListSetItemText( player_items_list, tmp_row, col9, guiGridListGetItemText( inventory_list, row_il, col7 ), false, false )

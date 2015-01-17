@@ -16,6 +16,7 @@
 
 -- Global data
 veh_data = dbConnect("sqlite", "veh.db")
+inventory_markers_veh = {}
 inventory_markers = {}
 vehicle_owners = {}
 vehicles = {}
@@ -115,7 +116,7 @@ function listAllMyVehicles(query)
 	local result = dbPoll( query, 0 )
 	if result then
 		local vehicle_data_to_client = {{ }}
-		local player = nil
+		local plr = nil
     	for index, row in ipairs( result ) do
     		-- Get all relevant data for the vehicle
     		vehicle_data_to_client[index] = { }
@@ -126,12 +127,12 @@ function listAllMyVehicles(query)
     		vehicle_data_to_client[index][5] = tonumber(row["locked"])
     		vehicle_data_to_client[index][6] = tonumber(row["engine"])
     		vehicle_data_to_client[index][7] = row["pos"]
-    		player = getAccountPlayer( getAccount( row["owner"] ))
+    		plr = getAccountPlayer( getAccount( row["owner"] ))
     	end
     	
     	-- Send data to client
-    	if player then
-    		triggerClientEvent( player, "acorp_onReceivePlayerVehicleData", player, vehicle_data_to_client ) 
+    	if plr then
+    		triggerClientEvent( plr, "acorp_onReceivePlayerVehicleData", plr, vehicle_data_to_client ) 
 		end    		
 	end
 end
@@ -160,20 +161,19 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			if supported_cars[getElementModel(veh)] then
 				local dist = supported_cars[getElementModel(veh)]
 				inventory_markers[veh] = createMarker(0, 0, -100, "cylinder", 3, 0, 0, 0, 0 )
+				inventory_markers_veh[inventory_markers[veh]] = veh
 				attachElements(inventory_markers[veh],veh,0,supported_cars[getElementModel(veh)],-1)
 				addEventHandler( "onMarkerHit", inventory_markers[veh], 
 				function(hitElement,matchingDimension)
-					if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
-						getAccountName(getPlayerAccount(hitElement)) == owner then
-						exports.GTWtopbar:dm( "Vehicle: Press F4 to open your trunk where you can store items", hitElement, 0, 255, 0 )
-						setElementData(hitElement,"isNearTrunk",veh)
+					if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" then
+						exports.GTWtopbar:dm( "Vehicle: Press F4 to open the vehicle inventory", hitElement, 0, 255, 0 )
+						setElementData(hitElement,"isNearTrunk",inventory_markers_veh[source])
 					end						
 				end) 
 				addEventHandler( "onMarkerLeave", inventory_markers[veh], 
-				function(hitElement,matchingDimension)
-					if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
-						getAccountName(getPlayerAccount(hitElement)) == owner then
-						setElementData(hitElement,"isNearTrunk",nil)
+				function(leaveElement,matchingDimension)
+					if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
+						setElementData(leaveElement,"isNearTrunk",nil)
 					end						
 				end) 
 			end
@@ -206,8 +206,10 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			if getElementHealth( veh ) < 300 then
 				setElementHealth( veh, 300 )
 			end
-			for k, i in ipairs( fromJSON( upgrades )) do
+			--outputChatBox(upgrades, getAccountPlayer( getAccount( owner )))
+			for k, i in pairs( fromJSON( upgrades )) do
 				addVehicleUpgrade( veh, i )
+				--outputChatBox(i, getAccountPlayer( getAccount( owner )))
 			end
 		else
 			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", getAccountPlayer( getAccount( owner )), 255, 0, 0 )
@@ -271,6 +273,9 @@ function saveAndRemoveVehicle(veh,removeVeh)
 			-- Clean up and free memory
 			if removeVeh then
 				-- Remove inventory marker
+				if inventory_markers_veh[inventory_markers[veh]] and isElement(inventory_markers_veh[inventory_markers[veh]]) then
+					inventory_markers_veh[inventory_markers[veh]] = nil
+				end	
 				if inventory_markers[veh] and isElement(inventory_markers[veh]) then
 					destroyElement(inventory_markers[veh])
 				end	
@@ -392,6 +397,9 @@ function sellVehicle(veh_id, model)
 		-- Clean up if vehicle isn't hidden while selling
 		if isElement(vehicles[veh_id]) then
 			local veh = vehicles[veh_id]
+			if inventory_markers_veh[inventory_markers[veh]] and isElement(inventory_markers_veh[inventory_markers[veh]]) then
+				inventory_markers_veh[inventory_markers[veh]] = nil
+			end	
 			if inventory_markers[veh] and isElement(inventory_markers[veh]) then
 				destroyElement(inventory_markers[veh])
 			end	
