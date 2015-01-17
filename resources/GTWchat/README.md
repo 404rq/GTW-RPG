@@ -1,11 +1,10 @@
-### Description
+# GTWchat
 GTWchat was mainly build for our RPG server, but later on we felt like some of the chats could be useful 
 on other GTW servers as well, by that we started to improve it's compatibility with other servers, chat's 
 will automatically be usable as long required features are running, central and global settings makes it 
 easy to modify as well as customize if needed.
 
-<br>
-**Functions available**
+## Functions available
 
 `cleanUpChat()`  
 _(server) "onPlayerQuit" cleans the antispam data tables to save RAM._
@@ -52,14 +51,11 @@ _(server) "onPlayerChat" Main, team and /me action chats, triggered by event._
 `displayChatBubble(string message, int messagetype, player plr)`  
 _(server) Display chatbubbles client side, default applied to main, team and local chats._
 
-<br>
-**Exported functions**
+## Exported functions
 
 None, _This resource doesn't have any exported functions._
 
-
-<br>
-**Requirements**
+## Requirements
 
 GTWtopbar<br>
 (Optional) GTWgroupsys (private license)<br>
