@@ -1,21 +1,34 @@
-Grand Theft Walrus
-=======
+# GTW-RPG
+This is a free, advanced and open RPG game mode and core for the game modification Multi Theft Auto (Modification to Grand Theft Auto San Andreas). It's inspired by the gigants in functionality, game logic and features but without limitations for the players. Instead it's balanced by consequences for those who doesn't play "realistic", the main goal with this project is realism, like a combination between Roleplay and Action based roleplay (ARPG or RPG if you prefer those terms instead). As the project is open, anyone may contribute, read more about that in our contributing file. 
 
-This is a free and open RPG gamemode for Multi Theft Auto (Modification to Grand Theft Auto San Andreas), written in lua. It's inspired by the gigants in functionality, game logic and features but without limitations for the players. Instead it's balanced by consequences for those who doesn't play "realistic", the main goal with this project is realism, like a combination between Roleplay and Action based roleplay (ARPG or RPG if you prefer that instead). Contributions can be done by anyone at http://code.albonius.com, however, access to this page require you to be a member in GTW Code, read more about how you can become that here: http://games.albonius.com/staff-applications/developer-team-application-guidelines/
+## Project goals
+What's the goal of this project:
+* High amount of useful features, especially misc features to ensure there's always somethnig to do and avoid players being bored
+* Extremly low performance specifications, the game mode must run just as fine on a 15 years old laptop (as server) as it does on the top of the line servers, (note that we don't want to limit functionality, some features are allowed to use more CPU time, but as long it can be more efficient it must be optimized).
+* High quality, official releases should not contain semi-finished features or trash code (and if possible exclude all known bugs).
+* Independency, you should not be forced to use the entire gamemode just because you're looking for a single feature, individual resources may be used as well and we try to document all resources in their readme files with available exports and if needed, required dependencies, (a common dependency are for instance GTWtopbar which is required from almost all included resources).
 
-Core features
-=======
-The most important resources are the core features, basically scripts which many other scripts depends on and with many exports, this includes a job management system which handles GUI, teams and other important things related to civilian jobs, a top bar dx message system used by almost all resources to display important information to the players in a more nice looking way. Grand Theft Walrus game servers uses an individual core resource that handle information such as gamemode, time and other related stuff beside these resources, there's also a couple of standalone resources from MTA community which we can't unclude in this project for obvious reasons, since they are optional we won't list them here.
+## Official developer
+Another option is to become an official developer, which gives you full access to this page. You can also become in game staff or moderator in our community "GTW Games" to help out testing this gamemode by playing the most recent version of it as soon it's released and give us feedback. Applications and information for that are found here:<br>
+http://forum.albonius.com/staff-applications/
 
-Details
-=======
+# Core features
+The most important resources are the core features, basically scripts which many other scripts depends on and with many exports, this includes a job management system which handles the GUI to apply for a job, team and other important things related to civilian jobs, a top bar dx message system used by almost all resources to display important notifications to the players in a more nice looking way. GTW Games servers uses an individual core resource that handle information such as gamemode, time and other related stuff beside these resources, there's also a couple of standalone resources made by developers who prefer other licenses than GNU which we can't unclude in this project for obvious reasons, since they are optional we won't list them here.
+
+# Details
 Beside the standardized core features, this project also includes a lot of misc features that might not be the first you think of when it comes to RPG but still pretty interesting, GTWtrains is a typical example of that, a system that manage and control AI trains around the map, trains that can be used to travel between the three cities or why not block people during car chases. Smaller features that we consider as "details" such as GTWsmoke which handles some smoking animations etc. Please note that this isn't the full gamemode running at Grand Thest Walrus game servers, in fact, it's the opposite. We are working to extend this gamemode however and more resources will be published as soon they are rewritten to work on other servers than just our own. The reason are for example usage of exports to private resources or dependencies of many large resources, where some of them is badly written currently.
 
-Support our developers by sending a small donation.<br>
-<a href='https://pledgie.com/campaigns/27635'><img alt='Click here to lend your support to: GTW RPG and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/27635.png?skin_name=chrome' border='0' ></a>
+## Donations
+There are many ways you may contribute into this project, see the contributing file for more information, another way is donations which ensure the ability to test the software on actual live servers.<br>
 
-Websites:
-=======
+<a target="_blank" href='https://pledgie.com/campaigns/27635'><img alt='Click here to lend your support to: GTW RPG and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/27635.png?skin_name=chrome' border='0' ></a>
+
+## Contributors
+GTW Code (organization)<br>
+MrBrutus<br>
+The Walrus<br>
+
+## Websites
 GTW games: http://games.albonius.com<br>
 GTW code:  http://code.albonius.com<br>
 Development: http://forum.albonius.com/mta-servers-development/
