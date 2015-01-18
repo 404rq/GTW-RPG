@@ -17,7 +17,7 @@
 <meta>
     <info author="GTWGames" name="GTWupdates" description="Show updates to online players" version="0" type="script" />
     <script src="updates.lua" type="client"></script>
-    <file src="updates.txt" download="true" />
+    <script src="updates_s.lua" type="server"></script>
     
     <export function="viewUpdateListGUI" type="client"/>
     <export function="getUpdatesList" type="client"/>

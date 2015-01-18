@@ -103,13 +103,12 @@ function toggleInventoryGUI( source )
 			guiSetVisible( window_trunk, true )
 			guiSetInputEnabled( true )
 			loadWeaponsToList() 
-			setVehicleDoorOpenRatio( getElementData(localPlayer, "isNearTrunk"), 1, 1, 1000 )
 		else
 			showCursor( false )
 			guiSetVisible( window_trunk, false )
 			guiSetInputEnabled( false )
 			if isElement(getElementData(localPlayer, "isNearTrunk")) then
-				setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 0, 1000 )
+				triggerServerEvent( "acorp_onCloseInventory", localPlayer )
 			end
 		end
 	end
@@ -268,8 +267,8 @@ function ( )
 		showCursor( false )
 		guiSetVisible( window_trunk, false )
 		guiSetInputEnabled( false )
-		if getElementData(localPlayer,"isNearTrunk") then
-			setVehicleDoorOpenRatio( getElementData(localPlayer,"isNearTrunk"), 1, 0, 1000 )
+		if isElement(getElementData(localPlayer, "isNearTrunk")) then
+			triggerServerEvent( "acorp_onCloseInventory", localPlayer )
 		end
 	elseif source == btn_recover and currentVehID then
 		triggerServerEvent( "acorp_onVehicleRespawn", localPlayer, currentVehID )
@@ -281,18 +280,114 @@ function ( )
 	elseif source == btn_withdraw then
 		local row_pil, col_pil = guiGridListGetSelectedItem( player_items_list )
 		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
+		
+		-- Validate operation
 		if row_pil == -1 or col_pil == -1 or not veh_id then return end
-		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, veh_id, 
-			guiGridListGetItemText( player_items_list, row_pil, col9 ), guiGridListGetItemText( player_items_list, row_pil, col10 ))	
-		local tmp_row = guiGridListAddRow( inventory_list )
-        guiGridListSetItemText( inventory_list, tmp_row, col7, guiGridListGetItemText( player_items_list, row_pil, col9 ), false, false )
-        guiGridListSetItemText( inventory_list, tmp_row, col8, guiGridListGetItemText( player_items_list, row_pil, col10 ), false, false )
-        guiGridListRemoveRow( player_items_list, row_pil )
-        -- Clear selection
-        guiGridListSetSelectedItem(player_items_list, -1, -1)
-        guiGridListSetSelectedItem(inventory_list, -1, -1)
+		
+		-- Get current values
+		local object = guiGridListGetItemText( player_items_list, row_pil, col9 )
+		local pocket = guiGridListGetItemText( player_items_list, row_pil, col10 )
+		
+		-- Get current data
+		local slot = getSlotFromWeapon( getWeaponIDFromName( object ))
+		local ammo = getPedAmmoInClip(localPlayer, slot)
+		local is_empty = false
+		
+		-- Justify values
+		if ammo > tonumber(guiGridListGetItemText(player_items_list, row_pil, col10)) then
+			ammo = tonumber(guiGridListGetItemText(player_items_list, row_pil, col10))
+		end
+		
+		-- Send to database
+		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, veh_id, object, ammo)	
+		
+		-- Manage lists add new item
+		local ex_row = isElementInList(inventory_list, object, col7)
+		if not ex_row then
+			local tmp_row = guiGridListAddRow( inventory_list )
+        	guiGridListSetItemText( inventory_list, tmp_row, col7, object, false, false )
+        	guiGridListSetItemText( inventory_list, tmp_row, col8, ammo, false, false )
+        else
+        	guiGridListSetItemText( inventory_list, ex_row, col8, tonumber(guiGridListGetItemText(inventory_list, ex_row, col8)) + ammo, false, false )
+        end
+        guiGridListSetItemText( player_items_list, row_pil, col10, tonumber(guiGridListGetItemText(player_items_list, row_pil, col10)) - ammo, false, false )
+        
+        -- Remove if empty
+        if guiGridListGetItemText(player_items_list, row_pil, col10) == "0" then
+        	guiGridListRemoveRow( player_items_list, row_pil )
+        	is_empty = true
+        end
+        
+        -- Reload data
+        --loadWeaponsToList()
+        
+        -- Clear selection if empty, otherwise reselect
+        if not is_empty then
+        	guiGridListSetSelectedItem(player_items_list, row_pil, col_pil)
+        	guiGridListSetSelectedItem(inventory_list, -1, -1)
+        else
+        	guiGridListSetSelectedItem(player_items_list, -1, -1)
+        	guiGridListSetSelectedItem(inventory_list, -1, -1)
+        end
+        
+        -- Restore GUI style !Important if using GTWgui
+        setTimer(resetGTWguistyle, 1000, 1)
 	elseif source == btn_deposit then
 		local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
+		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
+		
+		-- Validate operation
+		if row_il == -1 or col_il == -1 or not veh_id then return end
+		
+		-- Get current values
+		local object = guiGridListGetItemText( inventory_list, row_il, col7 )
+		local trunk = guiGridListGetItemText( inventory_list, row_il, col8 )
+		
+		-- Get current data
+		local ammo = getWeaponProperty(object, "std", "maximum_clip_ammo")
+		local is_empty = false
+		
+		-- Justify values
+		if ammo > tonumber(guiGridListGetItemText(inventory_list, row_il, col8)) then
+			ammo = tonumber(guiGridListGetItemText(inventory_list, row_il, col8))
+		end
+		
+		-- Send to database
+		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, veh_id, object, ammo)	
+		
+		-- Manage lists add new item
+		local ex_row = isElementInList(player_items_list, object, col9)
+		if not ex_row then
+			local tmp_row = guiGridListAddRow( player_items_list )
+        	guiGridListSetItemText( player_items_list, tmp_row, col9, object, false, false )
+        	guiGridListSetItemText( player_items_list, tmp_row, col10, ammo, false, false )
+        else
+        	guiGridListSetItemText( player_items_list, ex_row, col10, tonumber(guiGridListGetItemText(player_items_list, ex_row, col10)) + ammo, false, false )
+        end
+        guiGridListSetItemText( inventory_list, row_il, col8, tonumber(guiGridListGetItemText(inventory_list, row_il, col8)) - ammo, false, false )
+        
+        -- Remove if empty
+        if guiGridListGetItemText(inventory_list, row_il, col8) == "0" then
+        	guiGridListRemoveRow( inventory_list, row_il )
+        	is_empty = true
+        end
+        
+        -- Reload data
+        --loadWeaponsToList()
+        
+        -- Clear selection if empty, otherwise reselect
+        if not is_empty then
+        	guiGridListSetSelectedItem(player_items_list, -1, -1)
+        	guiGridListSetSelectedItem(inventory_list, row_il, col_il)
+        else
+        	guiGridListSetSelectedItem(player_items_list, -1, -1)
+        	guiGridListSetSelectedItem(inventory_list, -1, -1)
+        end
+        
+        -- Restore GUI style !Important if using GTWgui
+        setTimer(resetGTWguistyle, 1000, 1)
+	
+		--[[local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
 		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
 		if row_il == -1 or col_il == -1 or not veh_id then return end
 		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, veh_id, 
@@ -303,9 +398,25 @@ function ( )
         guiGridListRemoveRow( inventory_list, row_il )
         -- Clear selection
         guiGridListSetSelectedItem(player_items_list, -1, -1)
-        guiGridListSetSelectedItem(inventory_list, -1, -1)
+        guiGridListSetSelectedItem(inventory_list, -1, -1)]]--
 	end
 end)
+
+function resetGTWguistyle()
+	-- Apply GUI style again !Important if using GTWgui
+    exports.GTWgui:setDefaultFont(inventory_list, 10)
+	exports.GTWgui:setDefaultFont(player_items_list, 10)
+end
+
+--[[ Find element in list ]]--
+function isElementInList(g_list, text, col)
+	local items_count = guiGridListGetRowCount(g_list)
+	for r=0, items_count do
+		--outputChatBox("R: "..r..", C: "..col.." "..guiGridListGetItemText(g_list, r, col).." = "..text)
+		if guiGridListGetItemText(g_list, r, col) == text then return r end
+	end	
+	return false
+end
 
 function getPedWeapons(ped)
 	local playerWeapons = {}

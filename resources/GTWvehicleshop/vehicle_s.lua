@@ -156,63 +156,59 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			z = z + 3
 			isFirstSpawn = true
 		end
-		if tonumber(( getElementData( getAccountPlayer( getAccount( owner )), "Wanted" )) or 0) < 6 then
-			local veh = createVehicle( tonumber( model ), x,y,z )
-			if supported_cars[getElementModel(veh)] then
-				local dist = supported_cars[getElementModel(veh)]
-				inventory_markers[veh] = createMarker(0, 0, -100, "cylinder", 3, 0, 0, 0, 0 )
-				inventory_markers_veh[inventory_markers[veh]] = veh
-				attachElements(inventory_markers[veh],veh,0,supported_cars[getElementModel(veh)],-1)
-				addEventHandler( "onMarkerHit", inventory_markers[veh], 
-				function(hitElement,matchingDimension)
-					if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" then
-						exports.GTWtopbar:dm( "Vehicle: Press F4 to open the vehicle inventory", hitElement, 0, 255, 0 )
-						setElementData(hitElement,"isNearTrunk",inventory_markers_veh[source])
-					end						
-				end) 
-				addEventHandler( "onMarkerLeave", inventory_markers[veh], 
-				function(leaveElement,matchingDimension)
-					if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
-						setElementData(leaveElement,"isNearTrunk",nil)
-					end						
-				end) 
+		local veh = createVehicle( tonumber( model ), x,y,z )
+		if supported_cars[getElementModel(veh)] then
+			local dist = supported_cars[getElementModel(veh)]
+			inventory_markers[veh] = createMarker(0, 0, -100, "cylinder", 3, 0, 0, 0, 0 )
+			inventory_markers_veh[inventory_markers[veh]] = veh
+			attachElements(inventory_markers[veh],veh,0,supported_cars[getElementModel(veh)],-1)
+			addEventHandler( "onMarkerHit", inventory_markers[veh], 
+			function(hitElement,matchingDimension)
+				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" then
+					exports.GTWtopbar:dm( "Vehicle: Press F4 to open the vehicle inventory", hitElement, 0, 255, 0 )
+					setElementData(hitElement,"isNearTrunk",inventory_markers_veh[source])
+				end						
+			end) 
+			addEventHandler( "onMarkerLeave", inventory_markers[veh], 
+			function(leaveElement,matchingDimension)
+				if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
+					setElementData(leaveElement,"isNearTrunk",nil)
+				end						
+			end) 
+		end
+		if isFirstSpawn then
+			warpPedIntoVehicle( getAccountPlayer( getAccount( owner )), veh )
+		end
+		veh_blips[veh] = createBlipAttachedTo( veh, 0, 1, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
+		setElementRotation( veh, rx, ry, rz )					
+		vehicle_owners[veh] = owner
+		veh_id_num[veh] = ID
+		vehicles[ID] = veh
+		local ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db = unpack( fromJSON( color ))
+		local locked = false
+		if lock == 1 then
+			locked = true
+		end
+		if hlight then
+			local hr,hg,hb = unpack( fromJSON( hlight ))
+			if hr and hg and hb then
+				setVehicleHeadLightColor( veh, hr, hg, hb )
 			end
-			if isFirstSpawn then
-				warpPedIntoVehicle( getAccountPlayer( getAccount( owner )), veh )
-			end
-			veh_blips[veh] = createBlipAttachedTo( veh, 0, 1, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
-			setElementRotation( veh, rx, ry, rz )					
-			vehicle_owners[veh] = owner
-			veh_id_num[veh] = ID
-			vehicles[ID] = veh
-			local ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db = unpack( fromJSON( color ))
-			local locked = false
-			if lock == 1 then
-				locked = true
-			end
-			if hlight then
-				local hr,hg,hb = unpack( fromJSON( hlight ))
-				if hr and hg and hb then
-					setVehicleHeadLightColor( veh, hr, hg, hb )
-				end
-			end
-			setVehicleColor( veh, ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db )
-			setVehiclePaintjob( veh, tonumber( paint ))
-			setVehicleLocked( veh, locked )
-			setElementData( veh, "vehicleFuel", tonumber(fuel))
-			setElementHealth( veh, tonumber(health*10))
-			setElementData( veh, "owner", owner )
-			setElementData( veh, "isOwnedVehicle", tonumber(ID))
-			if getElementHealth( veh ) < 300 then
-				setElementHealth( veh, 300 )
-			end
-			--outputChatBox(upgrades, getAccountPlayer( getAccount( owner )))
-			for k, i in pairs( fromJSON( upgrades )) do
-				addVehicleUpgrade( veh, i )
-				--outputChatBox(i, getAccountPlayer( getAccount( owner )))
-			end
-		else
-			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", getAccountPlayer( getAccount( owner )), 255, 0, 0 )
+		end
+		setVehicleColor( veh, ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db )
+		setVehiclePaintjob( veh, tonumber( paint ))
+		setVehicleLocked( veh, locked )
+		setElementData( veh, "vehicleFuel", tonumber(fuel))
+		setElementHealth( veh, tonumber(health*10))
+		setElementData( veh, "owner", owner )
+		setElementData( veh, "isOwnedVehicle", tonumber(ID))
+		if getElementHealth( veh ) < 300 then
+			setElementHealth( veh, 300 )
+		end
+		--outputChatBox(upgrades, getAccountPlayer( getAccount( owner )))
+		for k, i in pairs( fromJSON( upgrades )) do
+			addVehicleUpgrade( veh, i )
+			--outputChatBox(i, getAccountPlayer( getAccount( owner )))
 		end
 	end
 end
@@ -422,14 +418,18 @@ addEventHandler( "acorp_onVehicleSell", root, sellVehicle )
 function respawnVehicleToStart(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
 		veh_id and not vehicles[veh_id] and not isElement(vehicles[veh_id]) then
-		local price = 999
-		if price and getPlayerMoney(client) > price then
-			takePlayerMoney( client, price )
-			-- Save to database
-			dbExec(veh_data, "UPDATE vehicles SET pos=? WHERE ID=?", toJSON({ 0,0,0, 0,0,0 }), veh_id)
-			exports.GTWtopbar:dm( "Your vehicle has been respawned!", client, 0, 255, 0 )
+		if tonumber(( getElementData( client, "Wanted" )) or 0) < 6 then
+			local price = 500
+			if price and getPlayerMoney(client) > price then
+				takePlayerMoney( client, price )
+				-- Save to database
+				dbExec(veh_data, "UPDATE vehicles SET pos=? WHERE ID=?", toJSON({ 0,0,0, 0,0,0 }), veh_id)
+				exports.GTWtopbar:dm( "Your vehicle has been respawned!", client, 0, 255, 0 )
+			else
+				exports.GTWtopbar:dm( "Poor bastard, you can't afford to recover your vehicle, you need $500!", client, 255, 0, 0 )
+			end
 		else
-			exports.GTWtopbar:dm( "Poor bastard, you can't afford to recover your vehicle, you need 999$!", client, 255, 0, 0 )
+			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", client, 255, 0, 0 )
 		end
 	elseif vehicles[veh_id] and isElement(vehicles[veh_id]) then
 		exports.GTWtopbar:dm( "You must hide your vehicle before you can recover it!", client, 255, 0, 0 )
@@ -575,6 +575,7 @@ end
 function openInventory(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id then
 		temp_plr_store[veh_id] = client
+		setVehicleDoorOpenRatio( getElementData(client, "isNearTrunk"), 1, 1, 1000 )
 		dbQuery(getInventoryWeapons, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 	else
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
@@ -582,6 +583,11 @@ function openInventory(veh_id)
 end
 addEvent( "acorp_onOpenInventory", true )
 addEventHandler( "acorp_onOpenInventory", root, openInventory )
+function closeInventory()
+	setVehicleDoorOpenRatio( getElementData(client, "isNearTrunk"), 1, 0, 1000 )
+end
+addEvent( "acorp_onCloseInventory", true )
+addEventHandler( "acorp_onCloseInventory", root, closeInventory )
 
 --[[ Toggle vehicle engine state from client ]]--
 function vehicleHeadLightColors(player, cmd, r,g,b)
