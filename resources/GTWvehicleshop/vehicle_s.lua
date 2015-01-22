@@ -179,7 +179,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 		if isFirstSpawn then
 			warpPedIntoVehicle( getAccountPlayer( getAccount( owner )), veh )
 		end
-		veh_blips[veh] = createBlipAttachedTo( veh, 0, 1, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
+		veh_blips[veh] = createBlipAttachedTo( veh, 3, 1, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
 		setElementRotation( veh, rx, ry, rz )					
 		vehicle_owners[veh] = owner
 		veh_id_num[veh] = ID

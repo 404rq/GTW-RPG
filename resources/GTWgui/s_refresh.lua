@@ -14,28 +14,54 @@
 ********************************************************************************
 ]]--
 
---[[ Make sure all calling resources are up to date ]]--
-restartList = {
-	"GTWaccounts",
-	"GTWclothes",
-	"GTWcivilians",
-	"GTWfastfood",
-	"GTWhelp",
-	"GTWmechanic",
-	"GTWphone",
-	"GTWstats",
-	"GTWteam",
-	"GTWupdates",
-	"GTWvehicles",
-	"GTWvehicleshop"
-}
+-- List of resources to refresh
+restartList = { }
 
---[[ Check all resources that use this GUI ]]--
-for k, v in ipairs(restartList) do
-	if getResourceFromName(v) then
-		restartResource(getResourceFromName(v))
+--[[ Load list from HDD and apply GUI ]]--
+function loadList( )
+	--[[ Load dynamic list of resources to refresh ]]--
+	--local settings_store = getAccount("SETTINGS")
+	--restartList = getAccountData(settings_store, "resources_to_refresh")
+	
+	--[[ Predefined static list of resources to refresh ]]--
+	restartList = {
+		["GTWaccounts"]=true,
+		["GTWclothes"]=true,
+		["GTWcivilians"]=true,
+		["GTWfastfood"]=true,
+		["GTWhelp"]=true,
+		["GTWmechanic"]=true,
+		["GTWphone"]=true,
+		["GTWstats"]=true,
+		["GTWteam"]=true,
+		["GTWupdates"]=true,
+		["GTWvehicles"]=true,
+		["GTWvehicleshop"]=true
+	}
+	
+	--[[ Check all resources that use this GUI ]]--
+	for k, v in pairs(restartList) do
+		if getResourceFromName(k) then
+			restartResource(getResourceFromName(k))
+			outputServerLog("GTWgui: refreshed: '"..k.."'")
+		end
 	end
+	
+	--[[ Inform online players that this refresh may cause some lag ]]--
+	exports.GTWtopbar:dm("Restarting GUI system, you may notice some lag for a few seconds, please be patient...", root, 255, 100, 0)
 end
+addEventHandler("onResourceStart", resourceRoot, loadList)
 
--- Info to online players
-exports.GTWtopbar:dm("Restarting GUI system, you may notice some lag for a few seconds, please be patient...", root, 255, 100, 0)
+--[[ Save refresh array in HDD ]]--
+function saveList( )
+	local settings_store = getAccount("SETTINGS")
+	setAccountData(settings_store, "resources_to_refresh", restartList)
+end
+addEventHandler("onResourceStop", resourceRoot, saveList)
+
+--[[ Add missing resource to dynamic refresh list ]]--
+function addToRefreshList(res)
+	restartList[res]=true	
+end
+addEvent("GTWgui.addToRefreshList", true)
+addEventHandler("GTWgui.addToRefreshList", resourceRoot, addToRefreshList)
