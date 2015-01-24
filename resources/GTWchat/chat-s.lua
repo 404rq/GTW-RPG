@@ -395,7 +395,7 @@ function useGlobalChat(message, messageType)
 		end    
 		outputServerLog("[CHAT] "..getPlayerName(source)..": "..message)
 		if not getElementData(source, "anon") then
-		   	displayChatBubble("(MAIN): "..firstToUpper(message), 2, source)
+		   	--displayChatBubble("(MAIN): "..firstToUpper(message), 2, source)
 		end
 				
 		-- Prevent spam and log the chat
@@ -421,7 +421,7 @@ function useGlobalChat(message, messageType)
 		end		
 		outputServerLog("[TEAM]["..getTeamName(getPlayerTeam(source)).."] "..getPlayerName(source)..": "..message)
 		if not getElementData(source, "anon") then
-		  	displayChatBubble("(TEAM): "..firstToUpper(message), 2, source)
+		  	--displayChatBubble("(TEAM): "..firstToUpper(message), 2, source)
 		end
 		for i, v in pairs(getElementsByType("player")) do
 		    if getPlayerTeam(v) and (team == getPlayerTeam(v) or isServerStaff(v)) then

@@ -165,7 +165,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			addEventHandler( "onMarkerHit", inventory_markers[veh], 
 			function(hitElement,matchingDimension)
 				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" then
-					exports.GTWtopbar:dm( "Vehicle: Press F4 to open the vehicle inventory", hitElement, 0, 255, 0 )
+					exports.GTWtopbar:dm( "Vehicle: Press F9 to open the vehicle inventory", hitElement, 0, 255, 0 )
 					setElementData(hitElement,"isNearTrunk",inventory_markers_veh[source])
 				end						
 			end) 

@@ -114,7 +114,7 @@ function toggleInventoryGUI( source )
 	end
 end 
 addCommandHandler( "inventory", toggleInventoryGUI )
-bindKey( "F4", "down", "inventory" )
+bindKey( "F9", "down", "inventory" )
 
 function loadWeaponsToList()
 	if col7 and col8 and col9 and col10 then
