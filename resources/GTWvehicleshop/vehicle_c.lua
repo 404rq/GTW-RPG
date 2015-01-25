@@ -39,6 +39,7 @@ col4 = guiGridListAddColumn( vehicle_list, "Locked", 0.1 )
 col5 = guiGridListAddColumn( vehicle_list, "Engine", 0.1 )
 col6 = guiGridListAddColumn( vehicle_list, "Location", 0.3 )
 guiGridListSetSelectionMode( vehicle_list, 0 )
+guiGridListSetSortingEnabled(vehicle_list, false)
 
 --[[ Apply GTWgui style ]]--
 exports.GTWgui:setDefaultFont(btn_show, 10)
