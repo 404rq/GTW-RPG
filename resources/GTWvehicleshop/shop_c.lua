@@ -192,7 +192,7 @@ function()
 			local rx, ry, rz = getElementRotation(dummieCar)
 			local dim = getElementDimension(dummieCar)
 			local int = getElementInterior(dummieCar)
-			triggerServerEvent("acorp_onPlayerVehicleBuyRequest", localPlayer, getVehicleModelFromName(vehName), 
+			triggerServerEvent("GTWvehicleshop.onPlayerVehicleBuyRequest", localPlayer, getVehicleModelFromName(vehName), 
 				guiGridListGetItemData(vehicle_list_shop, row, column) * 1000, x, y, z, rx, ry, rz, dim, int)
 			toggleVehiclesShop(false)
 		else 

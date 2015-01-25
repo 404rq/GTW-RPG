@@ -84,7 +84,7 @@ function toggleGUI( source )
 		showCursor( true )
 		guiSetVisible( window, true )
 		guiSetInputEnabled( true )
-		triggerServerEvent( "acorp_onListVehicles", localPlayer ) 
+		triggerServerEvent( "GTWvehicleshop.onListVehicles", localPlayer ) 
 	else
 		showCursor( false )
 		guiSetVisible( window, false )
@@ -108,7 +108,7 @@ function toggleInventoryGUI( source )
 			guiSetVisible( window_trunk, false )
 			guiSetInputEnabled( false )
 			if isElement(getElementData(localPlayer, "isNearTrunk")) then
-				triggerServerEvent( "acorp_onCloseInventory", localPlayer )
+				triggerServerEvent( "GTWvehicleshop.onCloseInventory", localPlayer )
 			end
 		end
 	end
@@ -132,7 +132,7 @@ function loadWeaponsToList()
 		
 		-- Load weapons from vehicle inventory
 		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
-		if veh_id then triggerServerEvent( "acorp_onOpenInventory", localPlayer, veh_id ) end
+		if veh_id then triggerServerEvent( "GTWvehicleshop.onOpenInventory", localPlayer, veh_id ) end
 	end
 end
 
@@ -199,8 +199,8 @@ function receiveVehicleData(data_table)
 		end
 	end
 end
-addEvent( "acorp_onReceivePlayerVehicleData", true )
-addEventHandler( "acorp_onReceivePlayerVehicleData", root, receiveVehicleData )
+addEvent( "GTWonReceivePlayerVehicleData", true )
+addEventHandler( "GTWonReceivePlayerVehicleData", root, receiveVehicleData )
 
 function receiveInventoryItems(item)
 	if col7 and col8 then
@@ -216,8 +216,8 @@ function receiveInventoryItems(item)
 		end
 	end
 end
-addEvent( "acorp_onReceiveInventoryItems", true )
-addEventHandler( "acorp_onReceiveInventoryItems", root, receiveInventoryItems )
+addEvent( "GTWonReceiveInventoryItems", true )
+addEventHandler( "GTWonReceiveInventoryItems", root, receiveInventoryItems )
 
 --[[ Toggle vehicle visibility on click ]]--
 addEventHandler("onClientGUIClick",vehicle_list,
@@ -238,28 +238,28 @@ addEventHandler( "onClientGUIClick", root,
 function ( )
 	--if not currentVehID then exports.GTWtopbar:dm("Please select a vehicle from the list!", 255, 0, 0) return end
 	if source == btn_show and currentVehID then
-		triggerServerEvent( "acorp_onShowVehicles", localPlayer, currentVehID ) 	
+		triggerServerEvent( "GTWvehicleshop.onShowVehicles", localPlayer, currentVehID ) 	
 	elseif source == btn_hide and currentVehID then
-		triggerServerEvent( "acorp_onHideVehicles", localPlayer, currentVehID ) 
+		triggerServerEvent( "GTWvehicleshop.onHideVehicles", localPlayer, currentVehID ) 
 	elseif source == btn_lock and currentVehID then
 		-- Update vehiclelist and lock status		
 		if guiGridListGetItemText( vehicle_list, row, col4 ) == "Yes" then
-			triggerServerEvent( "acorp_onLockVehicle", localPlayer, currentVehID, 0 )
+			triggerServerEvent( "GTWvehicleshop.onLockVehicle", localPlayer, currentVehID, 0 )
 			guiGridListSetItemText( vehicle_list, row, col4, "Open", false, false )
 			guiGridListSetItemColor( vehicle_list, row, col4, 255, 200, 0 )
 		else
-			triggerServerEvent( "acorp_onLockVehicle", localPlayer, currentVehID, 1 )
+			triggerServerEvent( "GTWvehicleshop.onLockVehicle", localPlayer, currentVehID, 1 )
 			guiGridListSetItemText( vehicle_list, row, col4, "Yes", false, false )
 			guiGridListSetItemColor( vehicle_list, row, col4, 0, 255, 0 )
 		end	
 	elseif source == btn_engine and currentVehID then
 		-- Update vehiclelist and engine status		
 		if guiGridListGetItemText( vehicle_list, row, col5 ) == "On" then
-			triggerServerEvent( "acorp_onVehicleEngineToggle", localPlayer, currentVehID, 0 )
+			triggerServerEvent( "GTWvehicleshop.onVehicleEngineToggle", localPlayer, currentVehID, 0 )
 			guiGridListSetItemText( vehicle_list, row, col5, "Off", false, false )
 			guiGridListSetItemColor( vehicle_list, row, col5, 255, 0, 0 )
 		else
-			triggerServerEvent( "acorp_onVehicleEngineToggle", localPlayer, currentVehID, 1 )
+			triggerServerEvent( "GTWvehicleshop.onVehicleEngineToggle", localPlayer, currentVehID, 1 )
 			guiGridListSetItemText( vehicle_list, row, col5, "On", false, false )
 			guiGridListSetItemColor( vehicle_list, row, col5, 0, 255, 0 )
 		end	
@@ -268,12 +268,12 @@ function ( )
 		guiSetVisible( window_trunk, false )
 		guiSetInputEnabled( false )
 		if isElement(getElementData(localPlayer, "isNearTrunk")) then
-			triggerServerEvent( "acorp_onCloseInventory", localPlayer )
+			triggerServerEvent( "GTWvehicleshop.onCloseInventory", localPlayer )
 		end
 	elseif source == btn_recover and currentVehID then
-		triggerServerEvent( "acorp_onVehicleRespawn", localPlayer, currentVehID )
+		triggerServerEvent( "GTWvehicleshop.onVehicleRespawn", localPlayer, currentVehID )
 	elseif source == btn_sell and currentVehID then
-		triggerServerEvent( "acorp_onVehicleSell", localPlayer, currentVehID, veh_data_list[row+1][2] )
+		triggerServerEvent( "GTWvehicleshop.onVehicleSell", localPlayer, currentVehID, veh_data_list[row+1][2] )
 		guiGridListRemoveRow( vehicle_list, row )
 		currentVehID = nil
 	-- Vehicle inventory
@@ -299,7 +299,7 @@ function ( )
 		end
 		
 		-- Send to database
-		triggerServerEvent( "acorp_onVehicleWeaponWithdraw", localPlayer, veh_id, object, ammo)	
+		triggerServerEvent( "GTWvehicleshop.onVehicleWeaponWithdraw", localPlayer, veh_id, object, ammo)	
 		
 		-- Manage lists add new item
 		local ex_row = isElementInList(inventory_list, object, col7)
@@ -353,7 +353,7 @@ function ( )
 		end
 		
 		-- Send to database
-		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, veh_id, object, ammo)	
+		triggerServerEvent( "GTWvehicleshop.onVehicleWeaponDeposit", localPlayer, veh_id, object, ammo)	
 		
 		-- Manage lists add new item
 		local ex_row = isElementInList(player_items_list, object, col9)
@@ -390,7 +390,7 @@ function ( )
 		--[[local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
 		local veh_id = getElementData( getElementData(localPlayer, "isNearTrunk"), "isOwnedVehicle")
 		if row_il == -1 or col_il == -1 or not veh_id then return end
-		triggerServerEvent( "acorp_onVehicleWeaponDeposit", localPlayer, veh_id, 
+		triggerServerEvent( "GTWonVehicleWeaponDeposit", localPlayer, veh_id, 
 			guiGridListGetItemText( inventory_list, row_il, col7 ), guiGridListGetItemText( inventory_list, row_il, col8 ))
 		local tmp_row = guiGridListAddRow( player_items_list )
         guiGridListSetItemText( player_items_list, tmp_row, col9, guiGridListGetItemText( inventory_list, row_il, col7 ), false, false )

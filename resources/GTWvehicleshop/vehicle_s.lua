@@ -54,8 +54,8 @@ function vehicleBuyRequest( model )
 	   	exports.GTWtopbar:dm( "You must be logged in to buy a vehicle!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onPlayerVehicleBuyRequest", true )
-addEventHandler( "acorp_onPlayerVehicleBuyRequest", root, vehicleBuyRequest )
+addEvent( "GTWvehicleshop.onPlayerVehicleBuyRequest", true )
+addEventHandler( "GTWvehicleshop.onPlayerVehicleBuyRequest", root, vehicleBuyRequest )
 
 --[[ Create a database table to store vehicle data ]]--
 addEventHandler("onResourceStart", getResourceRootElement(),
@@ -87,8 +87,8 @@ function getMyVehicles(veh_id)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onShowVehicles", true )
-addEventHandler( "acorp_onShowVehicles", root, getMyVehicles )
+addEvent( "GTWvehicleshop.onShowVehicles", true )
+addEventHandler( "GTWvehicleshop.onShowVehicles", root, getMyVehicles )
 
 --[[ Loads all vehicles for a specific player, requires that the player is logged in ]]--
 function unloadMyVehicles(query)
@@ -108,8 +108,8 @@ function hideMyVehicles(veh_id)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onHideVehicles", true )
-addEventHandler( "acorp_onHideVehicles", root, hideMyVehicles )
+addEvent( "GTWvehicleshop.onHideVehicles", true )
+addEventHandler( "GTWvehicleshop.onHideVehicles", root, hideMyVehicles )
 
 --[[ Loads all vehicles for a specific player, requires that the player is logged in ]]--
 function listAllMyVehicles(query)
@@ -132,7 +132,7 @@ function listAllMyVehicles(query)
     	
     	-- Send data to client
     	if plr then
-    		triggerClientEvent( plr, "acorp_onReceivePlayerVehicleData", plr, vehicle_data_to_client ) 
+    		triggerClientEvent( plr, "GTWvehicleshop.onReceivePlayerVehicleData", plr, vehicle_data_to_client ) 
 		end    		
 	end
 end
@@ -143,8 +143,8 @@ function listMyVehicles( )
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onListVehicles", true )
-addEventHandler( "acorp_onListVehicles", root, listMyVehicles )
+addEvent( "GTWvehicleshop.onListVehicles", true )
+addEventHandler( "GTWvehicleshop.onListVehicles", root, listMyVehicles )
 
 --[[ Create a vehicle based on data from the vehicle database ]]--
 function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, color, upgrades, inventory, hlight)
@@ -285,8 +285,8 @@ function saveAndRemoveVehicle(veh,removeVeh)
 		destroyElement(veh)
 	end
 end
-addEvent( "acorp_onPlayerVehicleDestroy", true )
-addEventHandler ( "acorp_onPlayerVehicleDestroy", root, saveAndRemoveVehicle )
+addEvent( "GTWvehicleshop.onPlayerVehicleDestroy", true )
+addEventHandler ( "GTWvehicleshop.onPlayerVehicleDestroy", root, saveAndRemoveVehicle )
 
 --[[ Lock vehicle from client ]]--
 function lockVehicle(veh_id, lock_id)
@@ -310,8 +310,8 @@ function lockVehicle(veh_id, lock_id)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onLockVehicle", true )
-addEventHandler( "acorp_onLockVehicle", root, lockVehicle )
+addEvent( "GTWvehicleshop.onLockVehicle", true )
+addEventHandler( "GTWvehicleshop.onLockVehicle", root, lockVehicle )
 
 --[[ Toggle vehicle engine state from client ]]--
 function toggleVehicleEngine(veh_id, engine_id)
@@ -335,8 +335,8 @@ function toggleVehicleEngine(veh_id, engine_id)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onVehicleEngineToggle", true )
-addEventHandler( "acorp_onVehicleEngineToggle", root, toggleVehicleEngine )
+addEvent( "GTWvehicleshop.onVehicleEngineToggle", true )
+addEventHandler( "GTWvehicleshop.onVehicleEngineToggle", root, toggleVehicleEngine )
 
 --[[ Sell a vehicle from client GUI ]]--
 function returnWeaponsOnSell(query)
@@ -366,7 +366,7 @@ function returnWeaponsOnSell(query)
     	
     -- Send data to client
     if player then
-    	triggerClientEvent( player, "acorp_onReceiveInventoryItems", player, vehicle_data_to_client )     		
+    	triggerClientEvent( player, "GTWonReceiveInventoryItems", player, vehicle_data_to_client )     		
 	end
 	
 	-- Remove vehicle from database
@@ -411,8 +411,8 @@ function sellVehicle(veh_id, model)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onVehicleSell", true )
-addEventHandler( "acorp_onVehicleSell", root, sellVehicle )
+addEvent( "GTWvehicleshop.onVehicleSell", true )
+addEventHandler( "GTWvehicleshop.onVehicleSell", root, sellVehicle )
 
 --[[ Respawn a broken vehicle ]]--
 function respawnVehicleToStart(veh_id)
@@ -437,8 +437,8 @@ function respawnVehicleToStart(veh_id)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onVehicleRespawn", true )
-addEventHandler( "acorp_onVehicleRespawn", root, respawnVehicleToStart )
+addEvent( "GTWvehicleshop.onVehicleRespawn", true )
+addEventHandler( "GTWvehicleshop.onVehicleRespawn", root, respawnVehicleToStart )
 
 --[[ Withdraw weapons to vehicle inventory ]]--
 temp_weapon_store = {}
@@ -492,8 +492,8 @@ function onVehicleWeaponWithdraw(veh_id, weap, ammo)
 		exports.GTWtopbar:dm( "Error, please specify a weapon to put in your vehicle trunk!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onVehicleWeaponWithdraw", true )
-addEventHandler( "acorp_onVehicleWeaponWithdraw", root, onVehicleWeaponWithdraw )
+addEvent( "GTWvehicleshop.onVehicleWeaponWithdraw", true )
+addEventHandler( "GTWvehicleshop.onVehicleWeaponWithdraw", root, onVehicleWeaponWithdraw )
 
 --[[ Deposit from vehicle inventory ]]--
 function onVehicleWeaponDepositGet(query)
@@ -547,8 +547,8 @@ function onVehicleWeaponDeposit(veh_id, weap, ammo)
 		exports.GTWtopbar:dm( "Error, please specify a weapon to put in your vehicle trunk!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onVehicleWeaponDeposit", true )
-addEventHandler( "acorp_onVehicleWeaponDeposit", root, onVehicleWeaponDeposit )
+addEvent( "GTWvehicleshop.onVehicleWeaponDeposit", true )
+addEventHandler( "GTWvehicleshop.onVehicleWeaponDeposit", root, onVehicleWeaponDeposit )
 
 --[[ Get weapons from inventory ]]--
 function getInventoryWeapons(query)
@@ -563,7 +563,7 @@ function getInventoryWeapons(query)
     		
     		-- Send data to client
 	    	if plr then
-	    		triggerClientEvent( plr, "acorp_onReceiveInventoryItems", plr, vehicle_data_to_client ) 
+	    		triggerClientEvent( plr, "GTWonReceiveInventoryItems", plr, vehicle_data_to_client ) 
 			end  
 			
 			-- Cleanup
@@ -581,13 +581,13 @@ function openInventory(veh_id)
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end
 end
-addEvent( "acorp_onOpenInventory", true )
-addEventHandler( "acorp_onOpenInventory", root, openInventory )
+addEvent( "GTWvehicleshop.onOpenInventory", true )
+addEventHandler( "GTWvehicleshop.onOpenInventory", root, openInventory )
 function closeInventory()
 	setVehicleDoorOpenRatio( getElementData(client, "isNearTrunk"), 1, 0, 1000 )
 end
-addEvent( "acorp_onCloseInventory", true )
-addEventHandler( "acorp_onCloseInventory", root, closeInventory )
+addEvent( "GTWvehicleshop.onCloseInventory", true )
+addEventHandler( "GTWvehicleshop.onCloseInventory", root, closeInventory )
 
 --[[ Toggle vehicle engine state from client ]]--
 function vehicleHeadLightColors(player, cmd, r,g,b)
