@@ -29,6 +29,7 @@ function loadList( )
 		["GTWclothes"]=true,
 		["GTWcivilians"]=true,
 		["GTWfastfood"]=true,
+		["GTWgroups"]=true,
 		["GTWhelp"]=true,
 		["GTWmechanic"]=true,
 		["GTWphone"]=true,

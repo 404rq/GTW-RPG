@@ -17,390 +17,51 @@
 --[[ All help related text is in this file ]]--
 list = {
 	{ "General", 0 },
-	{ "[English] Rules", 1, [[
+	{ "Server rules", 1, [[
 ********************************************************************
 Rules in English
 ********************************************************************
 
-NOTE: Please help us translate these rules into other languages. 
-      http://games.albonius.com/index.php?topic=667
-
-#1  Respect the freedom of speech, the freedom of speech is often 
-    defined as the ability for anyone to say anything and that's 
-    how we want to keep it, however to make that vision possible 
-    it's up to all of you to respect other players, in case of 
-    spam, insulting or flaming do not interact. Just ignore the 
-    other player or you may getting punished with him.
-      
-#2  Driving: Drive on the right side of the road, do not block 
-    other players, stay below 70km/h in the city, stop for red 
-    light if there are other players in the intersection, 
-    emergency vehicles must have their lights and sirens turned 
-    on to ignore the driving rules. (Law groups are responsible 
-    to catch those who ignore this rule, not the staff team)
-      
-#3  Respect role play situations, this is also a role play 
-    server and you are not allowed to interrupt by for example 
-    death match or crash your car into a group of people.
-      
-#4  Do not impersonate staff, other players, trademarks or 
-    other names you don't have the right to use. If you do
-    AC reserve the right to modify your name to anything we 
-    want without asking you.      
-      
-#5  Do not exploit bugs in our scripts, bugs may appear even in 
-    the best scripts but abusing them to gain unfair advantages 
-    over other players is not acceptable. Always report any bugs 
-    you may find to our developer team: 
-    (http://games.albonius.com/index.php?board=8.0)  
-      
-#6  Speak English in all chats, exceptions are if you're sure 
-    that everyone around understand the language you are talking 
-    for example inside a car, local chat in the middle of nowhere 
-    or in the group chat of a group where all members speaks the 
-    same language.
+#1 Do not spawn kill other players. (Applies around hospitals)
+#2 Drive on the right side of the road. Do not block other 
+    players, do not crash into other players unless you have 
+    a reason to do so, e.g in a police chase or to revenge.
+#3 Do not use any kind of hack or exploit bugs. GTW-RPG is an 
+    open source game mode which we claim to be stable and of 
+    high quality, it's therefore important to let us know about 
+    any bug you may find. Bug reports are rewardable, exploits 
+    are punishable.
+#4 Do not advertise, feel free to talk about anything as long 
+    you're not advertising it. If you don't get the difference 
+    here's an example: Talking: xBox vs PS3... Advertising: 
+    buy xBox here...
+#5 Do not obstruct or interrupt role play situations. It's not 
+    appropriate to show up with a minigun and kill a group of 
+    players standing together chatting for instance, do not use 
+    more violence than the situation require.
+#6 Do not spam the chats, repeating nonsense on purpose will lead 
+    to a mute, note that this mute are global and applies to many 
+    other servers running GTW-RPG resources as well.
+#7 Do NOT try this in gmae: apply for staff, suggest new features,
+    complaint on other players or staff, ask about stuff you'll 
+    find information about in the list to the left. This is not 
+    punishable but you may not get the response you expected.
+#8 Do not actively troll, provoke, annoy or insult other players. 
+    Instead, solve your conflicts here:
+    Report: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appeal: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Thank you for complying with our rules.
 
 ********************************************************************
-Help system:
-********************************************************************
-
-* In emergency situations contact server staff in game, 
-  staff can be recognized by the [GTW] tag or by being 
-  in the team named Government.
-
-* Use the "K" key to open in game support chat
-
-* Questions and concerns, visit our forum: 
-  http://games.albonius.com/index.php?board=10.0
-    
-* Found a bug or any issue in the scripts: 
-  http://games.albonius.com/index.php?board=8.0
-    
-* Lost or "hacked" accounts, PM any forum administrator at
-  http://games.albonius.com
-
-********************************************************************
-Fundamental:
-********************************************************************
-
-* The freedom of speech, everyone has the right to express 
-  their opinion. However we do not tolerate spam or vandalism 
-  either in the chat or in the forum.
-    
-* Democracy, it's up to our players to decide about the server 
-  development. Read more in our forum development section. You 
-  should therefore avoid asking for unfair advantages or request 
-  stuff in game, always visit the forum if you want a discussion 
-  like that.
-    
-* Server staff and ranks, courts and trials, any single case has 
-  the right to become tested here: 
-  http://games.albonius.com/index.php?board=11.0. 
-  Appeal punishments that you think is unfair or report staff 
-  that abuses their power and ignores the server rules.
-    
-* Everyone's right to dignity, no one deserves to be discriminated 
-  on any grounds. Exceptions may occur for head staff in case a 
-  users actions are directly harmful for the server or it's 
-  players, but only in very rare case where there is no other 
-  solution.
-
-********************************************************************
-Last edit:	2014-08-15
+Last edit:	2015-01-28
 ********************************************************************]] },
-	{ "[French] Rules", 1, [[
-********************************************************************
-Règles en Français 
-********************************************************************
-
-# 1 Respecter la liberté d'expression, la liberté de parole est souvent
-     définie comme la capacité pour quiconque de dire quoi que ce soit et c'est
-     comment nous voulons le garder, mais pour faire de cette vision possible
-     c'est à chacun d'entre vous de respecter les autres joueurs, en cas de
-     spam, insultant ou flamboyant n'interagissent pas. Ignorer la
-     autre joueur ou vous pouvez être punis avec lui.
-      
-# 2 conduite: conduire sur le côté droit de la route, ne pas obstruer
-     autres joueurs, restent en dessous 70 kmh dans la ville, arrêtez-rouge
-     lumière si il ya d'autres joueurs dans l'intersection,
-     véhicules d'urgence doivent avoir leurs lumières et sirènes se sont
-     à ignorer les règles de conduite. (Groupes de droit sont responsables
-     pour attraper ceux qui ignorent cette règle, pas l'équipe du personnel)
-      
-N ° 3 Respecter les situations de jeu de rôle, c'est aussi un jeu de rôle
-     serveur et vous ne sont pas autorisés à interrompre par exemple
-     match de la mort ou de crash de votre voiture dans un groupe de personnes.
-      
-# 4 Ne pas usurper l'identité d'un personnel, d'autres joueurs, des marques ou
-     d'autres noms que vous n'ont pas le droit d'utiliser. Si vous faites
-     GTW se réserve le droit de modifier votre nom à tout ce que nous
-     voulez sans vous demander.
-      
-# 5 Ne pas exploiter les bogues dans nos scripts, des bugs peuvent apparaître même dans
-     les meilleurs scripts, mais en abuser pour gagner des avantages inéquitables
-     sur les autres joueurs n'est pas acceptable. Toujours signaler les bugs
-     vous pouvez trouver à notre équipe de développement:
-     (http://games.albonius.com/index.php?board=8.0)
-      
-# 6 Parler en anglais dans toutes les conversations, les exceptions sont si vous êtes sûr
-     que tout le monde autour de comprendre la langue que vous parlez
-     par exemple dans une voiture, le chat local dans le milieu de nulle part
-     ou dans le groupe de discussion d'un groupe où tous les membres parle l'
-     même langue.
-
-Merci de se conformer à nos règles.
-
-********************************************************************
-Système d'aide:
-********************************************************************
-
-* Dans le personnel de serveur situations de contact d'urgence dans le jeu,
-   personnel peut être reconnue par la [GTW] tag ou en étant
-   dans l'équipe nommée gouvernement.
-
-* Utilisez la touche "K" pour ouvrir en appui de jeu de chat
-
-* Questions et préoccupations, visitez notre forum:
-   http://games.albonius.com/index.php?board=10.0
-    
-* Trouvé un bug ou une question dans les scripts:
-   http://games.albonius.com/index.php?board=8.0
-    
-* Perte ou comptes "piraté", PM tout administrateur de forum à
-   http://games.albonius.com
-
-********************************************************************
-fondamental:
-********************************************************************
-
-* La liberté d'expression, tout le monde a le droit d'exprimer
-   leur opinion. Cependant, nous ne tolérons pas le spam et le vandalisme
-   soit dans le chat ou dans le forum.
-    
-* La démocratie, c'est à nos joueurs de se prononcer sur le serveur
-   développement. Lire la suite dans notre section de développement du forum. vous
-   devrait donc éviter de demander des avantages déloyaux ou demande
-   des trucs dans le jeu, toujours visiter le forum si vous voulez une discussion
-   comme ça.
-    
-* Personnel Server et des rangs, des tribunaux et des procès, tout seul cas a
-   le droit de devenir testé ici:
-   http://games.albonius.com/index.php?board=11.0.
-   Peines d'appel que vous pensez est injuste personnel ou rapport
-   que les abus de leur pouvoir et ignore les règles du serveur.
-    
-* Le droit de toute personne à la dignité, personne ne mérite d'être discriminé
-   n'importe quel motif. Des exceptions peuvent se produire pour le personnel de la tête en cas de
-   les actions des utilisateurs sont directement nocifs pour le serveur ou il est
-   joueurs, mais seulement dans de très rares cas où il n'y a pas d'autre
-   solution.]]},
-   	{ "[Arabic] Rules", 1, [[
-********************************************************************
-القوانين في اللغة العربية                  
-********************************************************************
-# 1 احترام حرية التعبير، أي القدرة على قول أي شيء، وهذا
-     كيف نريد أن يكون الأمر، ولكن لجعل هذه الرؤية ممكنة
-     والامر متروك لكم جميعا على احترام اللاعبين الآخرين، في حالة
-     أزعجكم أحد، أو أهانكم لا تتفعل. فقط تجاهله
-     . أو قد تحصل على معاقبة معه
-# 2 القيادة:يجب عليك أن تقود على الجانب الأيمن من الطريق، لا تعترض
-     سبيل اللاعبين في المدينة، و عليك بالوقوف خلال الضوء الأحمر
-إذا كان هناك لاعبين آخرين في التقاطع    
-     السرعة المسموح بها في المدينة لا تتجاوز 70 كيلومتر/الساعة
-     يجب على سيارات الطوارئ  استعمال أضواء وصفارات الإنذار  لكي تستطيع 
-     تجاهل قواعد القيادة. (مجموعات القانون مسؤولة
-     (للقبض على أولئك الذين يتجاهلون هذه القاعدة، وليس فريق الموظفين)]] },
-	{ "[Indonesian] Rules", 1, [[
-********************************************************************
-Aturan dalam Bahasa Indonesia
-********************************************************************
-
-# 1 Menghormati kebebasan berbicara, kebebasan berbicara sering
-    didefinisikan sebagai kemampuan bagi siapa saja untuk mengatakan apa-apa dan itu
-    bagaimana kita ingin menyimpannya, namun untuk membuat visi itu mungkin
-    terserah kepada Anda untuk menghormati pemain lain, dalam kasus
-    spam, menghina atau gejolak tidak berinteraksi. Hanya mengabaikan
-    pemain lain atau Anda mungkin mendapatkan dihukum dengan dia.
-      
-# 2 Mengemudi: Mengemudi di sisi kanan jalan, tidak menghalangi
-    pemain lain, tetap di bawah 70 km / jam di kota, berhenti untuk merah
-    cahaya jika ada pemain lain di persimpangan,
-    kendaraan darurat harus memiliki lampu dan sirene berubah
-    untuk mengabaikan aturan mengemudi. (Kelompok Hukum bertanggung jawab
-    untuk menangkap orang-orang yang mengabaikan aturan ini, bukan tim staf)
-      
-# 3 Menghormati situasi role play, ini juga merupakan permainan peran
-    server dan Anda tidak diperbolehkan untuk mengganggu dengan misalnya
-    pertandingan kematian atau kecelakaan mobil Anda ke sekelompok orang.
-      
-# 4 Jangan meniru staf, pemain lain, merek dagang atau
-    nama lain Anda tidak memiliki hak untuk menggunakan. Jika Anda
-    AC berhak untuk mengubah nama Anda untuk apa pun yang kita
-    inginkan tanpa meminta Anda.
-      
-# 5 Jangan mengeksploitasi bug di script kita, bug dapat muncul bahkan di
-    script terbaik tapi menyalahgunakan mereka untuk mendapatkan keuntungan yang tidak adil
-    lebih dari pemain lain tidak dapat diterima. Selalu melaporkan bug
-    Disini: (Http://games.albonius.com/index.php?board=8.0)
-      
-# 6 Berbahasa Inggris di semua obrolan, pengecualian jika Anda yakin
-    bahwa semua orang di sekitar memahami bahasa Anda berbicara
-    misalnya di dalam mobil, obrolan lokal di antah berantah
-    atau dalam grup obrolan kelompok di mana semua anggota berbicara dengan
-    bahasa yang sama.
-
-Terima kasih untuk mematuhi aturan kami.
-
-********************************************************************
-Bantuan sistem:
-********************************************************************
-
-* Dalam staf darurat Server situasi kontak dalam permainan,
-  Staf dapat diakui oleh [GTW] tag atau dengan menjadi
-  di tim bernama Government.
-
-* Gunakan tombol "K" untuk membuka chat support.
-
-* Pertanyaan dan keprihatinan, kunjungi forum kami:
-  http://games.albonius.com/index.php?board=10.0
-    
-* Menemukan bug atau masalah di script:
-  http://games.albonius.com/index.php?board=8.0
-    
-* Kehilangan atau "hack" account, PM setiap administrator forum di
-  http://games.albonius.com
-
-********************************************************************
-Fundamental:
-********************************************************************
-
-* The kebebasan berbicara, setiap orang memiliki hak untuk mengekspresikan
-  pendapat mereka. Namun kita tidak mentolerir spam atau vandalisme
-  baik dalam obrolan atau forum.
-    
-* Demokrasi, terserah pemain kami untuk memutuskan tentang server
-  pembangunan. Baca lebih lanjut di bagian pengembangan forum kami. Anda
-  Oleh karena itu harus menghindari meminta keuntungan atau permintaan yang tidak adil
-  hal dalam permainan, selalu kunjungi forum jika Anda ingin diskusi
-  seperti itu.
-    
-* Staf Server dan jajaran, lapangan dan uji coba, setiap kasus tunggal memiliki
-  hak untuk menjadi diuji di sini:
-  http://games.albonius.com/index.php?board=11.0.
-  Hukuman Banding yang anda anggap tidak adil atau laporan staf
-  bahwa pelanggaran kekuasaan mereka dan mengabaikan aturan Server.
-    
-* Semua orang berhak untuk martabat, tidak ada yang layak untuk diskriminasi
-  dengan alasan apapun. Pengecualian dapat terjadi untuk staf kepala dalam kasus
-  pengguna tindakan secara langsung berbahaya bagi server atau itu
-  pemain, tetapi hanya dalam kasus yang sangat langka di mana tidak ada yang lain
-  solusi.
-
-********************************************************************
-Last edit: 2014/08/17
-********************************************************************
-]]},
-	{ "[Swedish] Rules", 1, [[
-********************************************************************
-Rules in Swedish
-********************************************************************
-
-#1  Respektera yttrandefriheten, yttrandefrihet definieras oftast 
-    som friheten att säga vad man vill helt utan begränsningsar, 
-    så vill vi fortsätta tillämpa det, det kräver dock att det inte 
-    missbrukas genom meningslösa personangrepp eller allmänt 
-    hat mot oliktänkande. Ignorera dem som missbrukar detta.
-
-#2  Håll till höger när du kör, håll dig också under 70km/t i 
-    områden med mycket folk eller ta konsekvenserna om du 
-    krockar, stanna vid rött ljus om det finns andra spelare i 
-    närheten. Lämna plats för utryckningsfordon, notera att
-    det är trafikpoliserna som håller koll på detta och inte 
-    serverns administratörer.
-      
-#3  Respektera rollspelssituationer, du får ej avbryta eller 
-    störa dem som håller på med rollspel, exempel på störande 
-    moment vore att döda någon utan anledning eller till 
-    exempel krascha din bil rakt in it en folksamling.
-     
-#4  Utge dig inte för att vara något du inte är, detta 
-    inkluderar allt från andra spelare, varumärken och företag,
-    grupper och gäng. Om du gör detta förbehåller vi oss 
-    rätten att ändra ditt namn till något helt annat utan att 
-    fråga dig först.    
-      
-#5  Rapportera eventuella buggar, vid missbruk av buggar
-    riskerar du att bli bannad från samtliga servrar. Du är 
-    inte skyldig att rapportera men vi uppskattar om du 
-    gör det. Du är däremot skyldig att inte missbruka buggar.
-    (http://games.albonius.com/index.php?board=8.0)  
-      
-#6  Tala engelska i alla globala chattar, det är dock tillåtet 
-    med andra språk i lokala chattar eller i grupper definierade
-    av etnicitet där alla talar samma språk, undvik dock 
-    främmande språk i närheten av andra spelare då detta 
-    kan uppfattas som kränkande.
-
-Tack för att du följer våra regler.
-
-********************************************************************
-Hjälp och support systemet:
-********************************************************************
-
-* I akuta situationer kan du kontakta en administratör, 
-    dessa definieras av [GTW] taggen i namnet. Eller genom 
-    team och occupation.
-
-* Tryck på "K" tangenten för att visa support chatten.
-
-* Frågor och svar hittar du i forumet: 
-  http://games.albonius.com/index.php?board=10.0
-    
-* Buggar kan du rapportera i forumet: 
-  http://games.albonius.com/index.php?board=8.0
-    
-* Behöver du hjälp med "hackade" konton eller andra 
-    problem relaterade till användarkontot kontaka en 
-    forum administratör här:
-  http://games.albonius.com
-
-********************************************************************
-Fundamental:
-********************************************************************
-
-* Yttrandefriheten gäller alla och du kan säga precis vad du vill 
-  till vem du vill, den enda begränsningen vi sätter är när det 
-  kommer till spam eller vandalism vilket betyder upprepade försök 
-  till sabotage mot själva servern. Censur mot dig kan då tillämpas.
-    
-* Vi tillämpar direktdemokrati inom våra servrar, detta betyder att 
-  alla spelare har rätt att rösta om olika funktioner samt lägga upp 
-  förslag på nya ideer eller framföra konstruktiv kritik. Vi diskuterar 
-  gärna allt som kan diskuteras i vårt forum.
-    
-* Alla har rätt att begära inträde till staff teamet, olika servrar 
-  tillämpar dock olika system men i allmänhet beskriver du dig själv 
-  och din erfarenhet och sedan får resterande spelare rösta på dig: 
-  http://games.albonius.com/index.php?board=11.0. 
-  Du kan också få eventuella straff prövade, samt rapportera andra 
-  spelare som inte följer reglerna, detta inkluderar också server staff, 
-  se "Complaints and reports" i forumet.
-    
-* Vi tillämpar FN's definition av mänskliga rättigheter, d.v.s allas lika 
-  rätt till värdighet. Ingen ska bli diskriminerad eller illa behandlad.
-
-********************************************************************
-Last edit:	2014-08-17
-********************************************************************
-]]},
 	{ "About GTW Games", 1, [[
 ********************************************************************
 About GTW Games
 ********************************************************************
 
-Welcome to GTW RPG 2.0, a server in the GTW Games concern.
+Welcome to GTW RPG 2.2-beta, a server in the GTW Games organization.
 
 GTW Games is an independent organization running multiple 
 game servers in many different online games such as Multi
@@ -416,23 +77,21 @@ for example. More information will be found on our webpage.
 General information:
 ********************************************************************
 
-Server name:            
-    GTW RPG 2.0 | games.albonius.com
-Official website:     
+Game mode:            
+    Grand Theft Walrus | games.albonius.com
+Website:     
     http://games.albonius.com
 Location:                    
     Karlstad - Sweden
 Languages:               
     English in global chats
-Host:                          
-    A.corp
-Owner:                         
-    MrBrutus @ GTW Games
-Admin:                
-    VPK4, ownbyurs11 @ GTW Games
+Owners:                         
+    Grand Theft Walrus community
+Admins:                
+    MrBrutus & The_Walrus @ GTW Games
 
 ********************************************************************
-Last edit:	2014-08-15
+Last edit:	2015-01-28
 ********************************************************************
 ]] },
 	{ "Accounts", 1, [[
@@ -493,8 +152,8 @@ weapons so use /setpos x y z for safely warps anywhere on the
 map or warp to player. Never warp a player to you, alwasy warp 
 to the player if you are gonna warp.
 
-NOTE4: [AC] or [GTW] Tags are no longer required, when youre in the staff 
-team "Government" youre a staff, otherwise youre a regular player 
+NOTE4: [GTW] Tags are not required, when youre in the staff 
+team "Government" you're a staff, otherwise youre a regular player 
 with some extra basic advantages.
 
 NOTE5: Vehicles spawned from /gv are only for transportation of 
@@ -512,10 +171,10 @@ for you.
 /detail     # Toggle details shader that makes everything look more elegant.
 /water      # Toggle water shader
 
-Weather commands sets your weather manually:
-/sunny
-/rainy
-/foggy
+You can't change the weather as it's based on location, the weather 
+won't make you lag which you can see on your FPS meter at top right
+on your screen, the roads may get slippery when it rains tho and 
+acceleration may be slower when you drive.
 ]]},
 	{ "FAQ", 1, [[
 ********************************************************************
@@ -529,7 +188,7 @@ A: GTW Games is an independent non profit organization hosted by
    
 Q: What does AC and GTW stands for?
 A: GTW - Grand Theft Walrus, our current name
-   AC - Artic community, an outdated name created by our previous owner.
+   AC - Artic community, our previous name.
    
 Q: What kind of server is this?
 A: This is our RPG server which has support for multiple gamemodes
@@ -542,12 +201,14 @@ A: This is our RPG server which has support for multiple gamemodes
    
 Q: How can I become staff?
 A: By writing a small application in our forum: 
-   http://games.albonius.com and wait for enough people to vote 
-   for you. At least 10 votes is required.
+   http://forum.albonius.com and wait for enough people to vote 
+   for you.
    
-Q: Are you a 24/7 server?
-A: Yes, in fact, we're running out own hosting company so the 
-   downtime is minimal.
+Q: What's your uptime?
+A: 99.7% in our first year, we're a self hosted community without 
+   charges and servers at many locations, our game mode is also 
+   open source just like the associated data, that means our 
+   server will always be available, even if GTW dies. 
    
 Q: How do I donate?
 A: Visit our website: http://games.albonius.com and choose an 
@@ -556,7 +217,7 @@ A: Visit our website: http://games.albonius.com and choose an
    
 Q: My question wasn't answered here, what should I do?
 A: Ask your question here: 
-   http://games.albonius.com/index.php?board=10.0
+   http://forum.albonius.com/questions-and-concerns/
 ]]},
 	{ "Vehicles", 0 },
 	{ "Vehicle rental", 1, [[

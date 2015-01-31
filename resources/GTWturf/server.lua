@@ -184,7 +184,7 @@ function onTurfEnter(hitElement)
 								setAccountData(playeraccount, "acorp_stats_turf_count", turfs_taken + 1)
 							end
 						end
-						local r,g,b = exports.GTWgroupsys:getGroupTurfColor(group)
+						local r,g,b = exports.GTWgroups:getGroupTurfColor(group)
 						if not r or not g or not b then
 							r,g,b = 255,255,255
 						end	
@@ -294,7 +294,7 @@ function changeTurfColor(plr, cmd, r, g, b)
 	local r, g, b = tonumber(r) or 255, tonumber(g) or 255, tonumber(b) or 255
 	local group = getElementData(plr,"Group")
 	if(not group) then return end
-	if(not exports.GTWgroupsys:checkGroupAccess(plr, 13)) then return end
+	if(not exports.GTWgroups:checkGroupAccess(plr, 13)) then return end
 	dbExec(db, "UPDATE turfs SET red=?, green=?, blue=? WHERE owner=?", r, g, b, group)
 	for w,area in ipairs(getElementsByType("radararea")) do
 		if getElementData(area,"owner") and getElementData(area,"owner") == group then
@@ -397,7 +397,7 @@ addEventHandler("onPlayerWasted", root, player_Wasted)
 
 function increaseStats(totalAmmo, attacker, weapon, bodypart, stealth)
     -- Weapon stats 2015-01-04 Stat's increase on any kill
-	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
+	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" or attacker == source then return end
 	local stat_key = 69
 	if weapon == 23 then stat_key = 70 end
 	if weapon == 24 then stat_key = 71 end

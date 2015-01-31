@@ -50,7 +50,7 @@ end
 function getGroupChatColor(group)
 	-- Call whatever group system you use and ask for a 
 	-- group as a string to receive it's chat color as RGB
-	local r,g,b = exports.GTWgroupsys:getGroupChatColor(group)
+	local r,g,b = exports.GTWgroups:getGroupChatColor(group)
 	if not r or not g or not b then
 		r,g,b = defR,defG,defB
 	end
