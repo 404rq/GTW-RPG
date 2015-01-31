@@ -200,8 +200,8 @@ function receiveVehicleData(data_table)
 		end
 	end
 end
-addEvent( "GTWonReceivePlayerVehicleData", true )
-addEventHandler( "GTWonReceivePlayerVehicleData", root, receiveVehicleData )
+addEvent( "GTWvehicleshop.onReceivePlayerVehicleData", true )
+addEventHandler( "GTWvehicleshop.onReceivePlayerVehicleData", root, receiveVehicleData )
 
 function receiveInventoryItems(item)
 	if col7 and col8 then
@@ -217,8 +217,8 @@ function receiveInventoryItems(item)
 		end
 	end
 end
-addEvent( "GTWonReceiveInventoryItems", true )
-addEventHandler( "GTWonReceiveInventoryItems", root, receiveInventoryItems )
+addEvent( "GTWvehicleshop.onReceiveInventoryItems", true )
+addEventHandler( "GTWvehicleshop.onReceiveInventoryItems", root, receiveInventoryItems )
 
 --[[ Toggle vehicle visibility on click ]]--
 addEventHandler("onClientGUIClick",vehicle_list,
