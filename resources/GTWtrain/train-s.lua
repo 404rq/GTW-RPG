@@ -49,9 +49,6 @@ function addMarkers ( res )
     		createMarker( spawnPoints[w][1], spawnPoints[w][2], spawnPoints[w][3]-4, "cylinder", 15, 255, 255, 255, 40 )
     	end
     end
-    
-    -- Credits in server log
-    outputServerLog( "[GTW] trains (v.2.0.4) by MrBrutus" )
 end
 addEventHandler( "onResourceStart", getResourceRootElement( ), addMarkers )
 
@@ -315,7 +312,7 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 			if math.random(10) < 6 and not isTimer(horncooldown[thePlayer]) then
 				useHorn(train[thePlayer][1])
 				if math.random(10) < 6 then
-					setTimer(useHorn, 2000, 1, train[thePlayer][1])
+					setTimer(useHorn, 6000, 1, train[thePlayer][1])
 				end
 				horncooldown[thePlayer] = setTimer(function() end, 10000, 1)
 			end

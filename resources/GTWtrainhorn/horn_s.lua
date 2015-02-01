@@ -15,7 +15,7 @@
 ]]--
 
 -- Available sounds
-local h_list = {
+h_list = {
 	"x_d9_horn1",
 	"2k_hornl",
 	"2k_hornh",
@@ -25,7 +25,8 @@ local h_list = {
 
 -- Bink keys to control the horn
 function bindTrainHorn(thePlayer, seat, jacked)
-    if (getVehicleType(source) == "Train" or getElementData(thePlayer, "anon")) and getElementType(thePlayer) == "player" then
+    if thePlayer and getElementType(thePlayer) == "player" and (getVehicleType(source) == "Train" 
+    	or getPlayerTeam(thePlayer) == getTeamFromName("Staff")) then
     	bindKey(thePlayer, "H", "down", toggleTrainHorn)
     	if not getElementData(source, "horn") then
     		setElementData(source, "horn", "sound/"..h_list[math.random(#h_list)]..".wav")

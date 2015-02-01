@@ -27,7 +27,10 @@ local h_list = {
 sound = {}
 function toggleTrainHorn(theTrain)
 	local theTrain2 = nil
-	local horn_signal = getElementData(theTrain, "horn") or h_list[math.random(#h_list)]
+	local horn_signal = getElementData(theTrain, "horn") or "sound/"..h_list[math.random(#h_list)]..".wav"
+	if not getElementData(theTrain, "horn") then
+		setElementData(theTrain, "horn", horn_signal)
+	end
 	for k=1, 20 do
 		if getVehicleTowedByVehicle( theTrain ) then
 			theTrain2 = getVehicleTowedByVehicle( theTrain )
