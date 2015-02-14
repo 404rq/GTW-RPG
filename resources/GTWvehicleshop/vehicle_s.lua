@@ -164,7 +164,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			attachElements(inventory_markers[veh],veh,0,supported_cars[getElementModel(veh)],-1)
 			addEventHandler( "onMarkerHit", inventory_markers[veh], 
 			function(hitElement,matchingDimension)
-				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" then
+				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and not getPedOccupiedVehicle(hitElement) then
 					exports.GTWtopbar:dm( "Vehicle: Press F9 to open the vehicle inventory", hitElement, 0, 255, 0 )
 					setElementData(hitElement,"isNearTrunk",inventory_markers_veh[source])
 				end						
@@ -357,12 +357,10 @@ function returnWeaponsOnSell(query)
     
     -- Extract data and give weapons back to the owner
     local data_table = fromJSON(items)
-    outputChatBox("*** Weapons restored ***", plr, 200, 200, 200)
 	for k, v in pairs(data_table) do
 		giveWeapon(plr, getWeaponIDFromName(k), tonumber(v))
 		outputChatBox(k.." was successfully restored ("..tostring(v)..") bullets", plr, 255, 255, 255)
 	end
-	outputChatBox("*** End of message ***", plr, 200, 200, 200)
     	
     -- Send data to client
     if player then

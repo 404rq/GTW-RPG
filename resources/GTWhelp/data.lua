@@ -439,6 +439,24 @@ access to stingers and barriers to setup road blocks, they'll also
 have fast cars for high speed car chases. ArmedForces deal with 
 the most wanted criminals uing tanks, hunters and hydras, SWAT 
 takes care of robberies and SAPD and FBI handles federal crimes.]] },
+	{ "Police chief", 1, [[
+Police chiefs make sure any player that work in the law enforcement 
+follow the law, it's a job with lot's of freedom and great 
+responsiblity and that's why we have police chiefs. You must 
+prove that you are trusted enough to handle this job, to do 
+so, write and post your application here:
+
+http://forum.albonius.com/law-board/police-chief-center-topic/
+
+Commands: (admin):
+/addpc <name>     -- Adds a police chief
+/removepc <name>  -- If you screw it up and needs to be kicked
+
+Commands: (police chiefs)
+/banfromlaw <name>
+/revokebanfromlaw <name>
+
+(name means the nick name of the affected player.]] },
 	{ "Police (codes)", 1, [[
 10-4   	Roger that
 10-10  	Off duty

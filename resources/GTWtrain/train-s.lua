@@ -258,7 +258,7 @@ function makeTrain( hitElement, matchingDimension, id )
 				end
 				
 				-- Play the horn
-				setTimer(useHorn, 1000, 1, train[hitElement][1])
+				setTimer(useHorn, math.random(500, 5000), 1, train[hitElement][1])
 				
 				-- Starting the syncer
 				local time = math.random(1200, 1800)*1000
@@ -309,9 +309,9 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 			trainSpeed = (trainSpeed*(distToStation/accelerationConst)*7)
 		end
 		if distToStation > 30 and distToStation < 400 then
-			if math.random(10) < 6 and not isTimer(horncooldown[thePlayer]) then
+			if math.random(10) < 4 and not isTimer(horncooldown[thePlayer]) then
 				useHorn(train[thePlayer][1])
-				if math.random(10) < 6 then
+				if math.random(10) < 4 then
 					setTimer(useHorn, 6000, 1, train[thePlayer][1])
 				end
 				horncooldown[thePlayer] = setTimer(function() end, 10000, 1)

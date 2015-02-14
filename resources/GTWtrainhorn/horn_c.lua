@@ -40,6 +40,7 @@ function toggleTrainHorn(theTrain)
 			getElementModel(theTrain) == 449 or getVehicleOccupant(theTrain)) then
 			x,y,z = getElementPosition(theTrain)
 			sound[k] = playSound3D(horn_signal, x, y, z, false )
+			setSoundVolume(sound[k], 0.3)
 			attachElements(sound[k], theTrain)
 			setSoundMaxDistance( sound[k], 500 )	
 		end

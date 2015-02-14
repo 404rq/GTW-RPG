@@ -16,7 +16,7 @@
 
 -- Define data members
 sound = nil
-volume = 80
+volume = 40
 bindKey( "B", "down", "phone" )
 
 -- Local bools
@@ -109,7 +109,7 @@ addEvent( "onSMSReceive", true )
 addEventHandler( "onSMSReceive", getRootElement(), onSMSReceive )
 
 radioList = guiCreateGridList ( 0.01, 0, 0.98, 0.9, true, tabRadio )
-editBox = guiCreateEdit ( 0.67, 0.91, 0.15, 0.08, "80", true, tabRadio )
+editBox = guiCreateEdit ( 0.67, 0.91, 0.15, 0.08, "40", true, tabRadio )
 button5 = guiCreateButton( 0.50, 0.91, 0.17, 0.08, "-", true, tabRadio )
 button4 = guiCreateButton( 0.82, 0.91, 0.17, 0.08, "+", true, tabRadio )
 column1 = guiGridListAddColumn( radioList, "Radio stations", 0.85 )

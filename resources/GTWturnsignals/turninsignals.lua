@@ -176,27 +176,3 @@ function startLights(veh)
 		end
 	end
 end
-
---[[ Attempt's to cleanup tables 2014-12-11 ]]--
-function cleanUp(plr, seat, jacked, door)
-	if (door or 0) > 0 then return end
-	if isTimer(syncTimer[source]) then
-		killTimer(syncTimer[source])
-	end
-	syncTimer[source] = nil
-	toggler[source] = nil
-	dtype[source] = nil
-	
-	-- Reset color
-	if currHeadLightColor[source] and currHeadLightColor[source][1] and currHeadLightColor[source][2] and currHeadLightColor[source][3] then
-		setVehicleHeadLightColor( source, currHeadLightColor[source][1],currHeadLightColor[source][2],currHeadLightColor[source][3] )
-		currHeadLightColor[source][1] = nil
-		currHeadLightColor[source][2] = nil
-		currHeadLightColor[source][3] = nil
-		currHeadLightColor[source] = nil
-	end
-	
-	-- Reset light state
-	startLights(veh)
-end
-addEventHandler("onVehicleStartExit", root, cleanUp)
