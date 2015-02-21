@@ -265,7 +265,7 @@ function()
 			guiSetText(SteroidsBuyEdit, "0")
 			guiSetText(HeroinBuyEdit, "0")
 		end
-		triggerServerEvent("setClientWL", localPlayer, 0.25, 1, "You committed the crime of buying drugs (0.25 stars)", false)
+		exports.GTWwanted:setWl(0.25, 0, "You committed the crime of buying drugs")
 	elseif source == CloseBuyDrugPanel then
 		guiSetVisible(DrugBuyWindow, false)
 		showCursor(false)

@@ -255,7 +255,7 @@ Weapons:
 	{ "default", "skin1", "skin2", "skin3" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 35, 500, "Desert eagle"}}},
-	["Police"]={ "Government", 0, [[
+	["Police Officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the 
 wanted people down and arrest them, the higher wanted 
 level the more payment, alive suspects are worth more 
@@ -274,7 +274,52 @@ Weapons:
 	]], { 280, 281, 282, 283, 288, 284 },
 	{ "Los Santos police", "San Fierro police", "Las Venturas police", "Highway patrol (Bone county)", "Highway patrol (Red county)", "Traffic officer" },
 	--[[WeaponID, amount, price, name]] 
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}},
+	["SAPD Officer"]={ "Government", 0, [[
+Type /wanted to find out who's wanted, then hunt the 
+wanted people down and arrest them, the higher wanted 
+level the more payment, alive suspects are worth more 
+so avoid killing unless you have to.
+
+Prison guard
+A side mission for the police job is to become a 
+prison guard, to to the prison at bayside marina 
+and kill anyone trying to escape or anyone trying 
+to help someone to escape. You get paid per kill.
+
+Weapons:
+- Tazer (silenced) (x8)
+- Teargas (x10)
+- Nightstick
+	]], { 283, 288 },
+	{ "Highway patrol (Bone county)", "Highway patrol (Red county)" },
+	--[[WeaponID, amount, price, name]] 
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}},
+	["Armed Forces"]={ "Government", 0, [[
+Type /wanted to find out who's wanted, then hunt the 
+wanted people down and arrest them, the higher wanted 
+level the more payment, alive suspects are worth more 
+so avoid killing unless you have to.
+
+Prison guard
+A side mission for the police job is to become a 
+prison guard, to to the prison at bayside marina 
+and kill anyone trying to escape or anyone trying 
+to help someone to escape. You get paid per kill.
+
+Weapons:
+- Tazer (silenced) (x8)
+- Teargas (x10)
+- Nightstick
+	]], { 287 },
+	{ "Soldier" },
+	--[[WeaponID, amount, price, name]] 
 	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}}
+}
+
+restricted_jobs = {
+	["SAPD Officer"]="SAPD",
+	["Armed Forces"]="ArmedForces"
 }
 
 markers = { }

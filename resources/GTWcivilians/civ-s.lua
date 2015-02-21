@@ -36,7 +36,12 @@ function onAcceptJob( ID, skinID )
     if getElementData(client, "Occupation") ~= ID then
     	setElementData(client, "Occupation", ID)
         setPlayerTeam(client, getTeamFromName(team))
-        local r,g,b = getTeamColor(getTeamFromName(team))
+        local r,g,b = 255,255,255
+        if getTeamFromName(team) then
+        	r,g,b = getTeamColor(getTeamFromName(team))
+        else
+        	outputServerLog("GTWcivilians: Team: '"..team.."' does not exist!")
+        end
         setPlayerNametagColor(client, r, g, b)
         setElementData(client, "admin", nil)
         exports.GTWtopbar:dm("("..ID..") Welcome to your new job!", client, 0, 255, 0)
@@ -46,6 +51,7 @@ addEvent( "GTWcivilians.accept", true )
 addEventHandler( "GTWcivilians.accept", root, onAcceptJob )
 
 function onBuyTool(name, ammo, price, weapon_id)
+	if not name or not ammo or not price or not weapon_id then return end
 	if getPlayerMoney(client) >= tonumber(price) then
 		giveWeapon(client, weapon_id, ammo, true)
 		takePlayerMoney(client, price)

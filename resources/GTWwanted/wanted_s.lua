@@ -14,38 +14,101 @@
 ********************************************************************************
 ]]--
 
-wanted_data = {{ }}
-reduce_timers = { }
+wanted_data = {
+	wanted_level 	= { },
+	violent_time	= { },
+	reduce_timers 	= { },
+	fine_charge		= { },
+}
+
+--[[ Load system data ]]--
+function load_system( )
+	for k,v in pairs(getElementsByType("player")) do
+		-- Restore wanted level and reduce timers
+		if (tonumber(getElementData(v, "Wanted")) or 0) < 0 then setElementData(v, "Wanted", 0) end
+		setWl(v, (tonumber(getElementData(v, "Wanted")) or 0), (tonumber(getElementData(v, "violent_seconds")) or 0))
+	end
+end
+addEventHandler("onResourceStart", resourceRoot, load_system)
+
+-- Possible bug here
+--[[function restore_wanted_level(_, pAcc)
+    -- Restore wanted level and reduce timers
+    if (tonumber(getElementData(source, "Wanted")) or 0) < 0 then setElementData(source, "Wanted", 0) end
+	setWl(source, (tonumber(getElementData(source, "Wanted")) or 0), (tonumber(getElementData(source, "violent_seconds")) or 0))
+end
+addEventHandler("onPlayerLogin", root, restore_wanted_level)]]--
+
+--[[ Make sure the graphical hud and scoreboards are up to date ]]--
+function update_graphical(plr)
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
+	local wanted_lvl = (wanted_data.wanted_level[plr] or 0)
+	
+	-- Update graphical wanted level
+	setElementData(plr, "Wanted", wanted_lvl)
+	if wanted_lvl <= 0 then
+		setElementData(plr, "Wanted", nil)
+	end
+	
+	-- Pass violent time to client
+	if (wanted_data.violent_time[plr] or 0) > 0 then
+		setElementData(plr, "violent_seconds", (wanted_data.violent_time[plr] or 0))
+	else
+		setElementData(plr, "violent_seconds", nil)
+	end
+	
+	-- Sync the amount of stars seen on screen
+	if wanted_lvl > 0 and wanted_lvl <= 1 then
+		setPlayerWantedLevel(plr, 1)
+	elseif wanted_lvl > 1 and wanted_lvl <= 6 then
+		setPlayerWantedLevel(plr, math.floor(wanted_lvl))
+	elseif wanted_lvl > 6 then
+		setPlayerWantedLevel(plr, 6)
+	else
+		setPlayerWantedLevel(plr, 0)
+	end
+end
 
 --[[ Reduce a players wanted level ]]--
-function reduce_wl(plr, first_time)
+function reduce_wl(plr)
 	-- Check if everything is represented
-	first_time = first_time or false
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
-	
-	-- Check that everything is properly set
-	verify_table_data(plr)
 
 	-- Check if it's time to interrupt
 	if non_violent(plr) then return end
 	
-	-- Last check before we proceed to reduce
-	if not wanted_data[plr] or not wanted_data[plr]["wanted_level"] or not 
-		wanted_data[plr]["wanted_level"] > 0 or wanted_data[plr]["violent"] then return end
-		
-	-- Reduce wantedlevel by 0.1 stars
-	if not first_time then
-		wanted_data[plr]["wanted_level"] = wanted_data[plr]["wanted_level"] - 0.1
+	-- Setup default reduce margins
+	local wl_reduce,viol_reduce = 0.02,1
+	
+	-- Justify reducement depending on distance to cop
+	local dist = exports.GTWpolice:distanceToCop(plr)
+	if dist < 1000 then wl_reduce = 0.01 end
+	if dist < 500 then wl_reduce = 0.005 end
+	if dist < 180 then wl_reduce = 0 end
+	if dist < 90 then wl_reduce = -0.001 end
+	
+	-- Set the team to criminal
+	if getPlayerTeam(plr) and getPlayerTeam(plr) ~= getTeamFromName("Criminals") and wanted_data.wanted_level[plr] > 1 then
+		setPlayerTeam(plr, getTeamFromName("Criminals"))
+		setPlayerNametagColor(plr, 170, 0, 0)
+		setElementData(plr, "Occupation", "Criminal")
+		local own_skin = exports.GTWclothes:getBoughtSkin(plr) or getElementModel(plr) or 0
+		setElementModel(plr, own_skin)
+		exports.GTWtopbar:dm("You are now a criminal due to your wanted level", plr, 255, 100, 0 )
 	end
 	
-	-- Update graphical wanted level
-	if wanted_data[plr]["wanted_level"] > 0 and wanted_data[plr]["wanted_level"] <= 1 then
-		setPlayerWantedLevel(plr, 1)
-	elseif wanted_data[plr]["wanted_level"] > 1 and wanted_data[plr]["wanted_level"] <= 6 then
-		setPlayerWantedLevel(plr, math.floor(wanted_data[plr]["wanted_level"]))
-	elseif wanted_data[plr]["wanted_level"] > 6 then
-		setPlayerWantedLevel(plr, 6)
+	-- Reduce wantedlevel by 0.1 stars
+	if wanted_data.violent_time[plr] <= 0 then
+		wanted_data.wanted_level[plr] = round(wanted_data.wanted_level[plr] - wl_reduce, 2)
+	elseif wanted_data.violent_time[plr] > 0 then
+		wanted_data.violent_time[plr] = math.floor(wanted_data.violent_time[plr] - viol_reduce)
+	else
+		wanted_data.wanted_level[plr] = nil
+		wanted_data.violent_time[plr] = nil
 	end
+	
+	-- Update graphical data
+	update_graphical(plr)
 end
 
 --[[ Round numeric values ]]--
@@ -58,72 +121,81 @@ end
 function non_violent(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	
-	-- Check that everything is properly set
-	verify_table_data(plr)
-	
 	-- Check if it's time to go unwanted
-	if wanted_data[plr]["wanted_level"] <= 0 and reduce_timers[plr] and isTimer(reduce_timers[plr]) then
-		killTimer(reduce_timers[plr])
-		setPlayerWantedLevel(plr, 0)
-		wanted_data[plr]["wanted_level"] = nil
+	if wanted_data.wanted_level[plr] <= 0 and isTimer(wanted_data.reduce_timers[plr]) then
+		killTimer(wanted_data.reduce_timers[plr])
+		wanted_data.wanted_level[plr] = nil
 		return true
 	end
 end
 
---[[ Initialize default values if not set ]]--
-function verify_table_data(plr)
-	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
-	if not wanted_data[plr] then wanted_data[plr] = { } end
-	if not wanted_data[plr]["wanted_level"] then wanted_data[plr]["wanted_level"] = 0 end
-	if not wanted_data[plr]["violent"] then wanted_data[plr]["violent"] = 0 end
-end
-
 --[[ Set player wanted level ]]--
-function setWl(plr, level, violent_time)
+function setWl(plr, level, violent_time, reason, add_to)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" or not level then return end
+	if not add_to then add_to = true end
 	
 	-- Set default value to violent time if not present
 	if not violent_time then violent_time = 0 end
 	
 	-- Start reduce timer if not running
-	if not reduce_timers[plr] then
-		reduce_timers[plr] = setTimer(reduce_wl, 10000, 0, plr)
+	if not isTimer(wanted_data.reduce_timers[plr]) then
+		wanted_data.reduce_timers[plr] = setTimer(reduce_wl, 1000, 0, plr)
+	end
+
+	-- Update wanted level
+	local p_level = (wanted_data.wanted_level[plr] or 0)
+	local p_viol_time = (wanted_data.violent_time[plr] or 0)
+	if p_level < 0 then p_level = 0 end
+	if add_to then
+		wanted_data.wanted_level[plr] = p_level + level
+	else
+		wanted_data.wanted_level[plr] = level
+	end
+	wanted_data.violent_time[plr] = p_viol_time + violent_time
+	
+	-- Wanted points for criminals
+	local pAcc = getPlayerAccount(plr)
+	local wp_stat = getAccountData( pAcc, "acorp_stats_wanted_points" ) or 0
+	setAccountData(pAcc, "acorp_stats_wanted_points", wp_stat+level)
+	
+	-- Display the reason for the player
+	if reason and reason ~= "" then
+		exports.GTWtopbar:dm(reason.." ("..round(level, 2).." stars)", plr, 200, 0, 0)
 	end
 	
-	-- Update graphical part
-	reduce_wl(plr, true)
+	-- If argument was 0 (fine)
+	if level == 0 and violent_time == 0 then
+		if isTimer(wanted_data.reduce_timers[plr]) then
+			killTimer(wanted_data.reduce_timers[plr])
+		end
+		wanted_data.wanted_level[plr] = nil
+		wanted_data.violent_time[plr] = nil
+	end
 	
-	-- Check that all values are present to prevent errors
-	verify_table_data(plr)
-	
-	-- Update wanted level
-	wanted_data[plr]["wanted_level"] = level
-	wanted_data[plr]["violent"] = violent_time
+	-- Update graphical data
+	update_graphical(plr)
 end
+
+function setServerWantedLevel(wl, violent_time, reason)
+	setWl(client, wl, violent_time, reason)
+end
+addEvent("GTWwanted.serverSetWl", true)
+addEventHandler("GTWwanted.serverSetWl", root, setServerWantedLevel) 
 
 --[[ Get player wanted level ]]--
 function getWl(plr)
-	if not plr or not isElement(plr) or getElementType(plr) ~= "player" or not level then return end
-	
-	-- Check that all values are present to prevent errors
-	verify_table_data(plr)
-	
-	-- Clean default values array
-	local alt = {
-		["wanted_level"]=0, 
-		["violent"]=0
-	}
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return 0,0 end
 	
 	-- Return all player wanted level data
-	return (wanted_data[plr]["wanted_level"] or 0), (wanted_data[plr]["violent"] or 0)
+	return (wanted_data.wanted_level[plr] or 0), (wanted_data.violent_time[plr] or 0)
 end
 
 --[[ Check if a player is on the law side ]]--
 function is_law_unit(plr)
-	if not plr or not isElement(plr) or getElementType(plr) ~= "player" or not level then return end
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	local law_teams = { 
-		"Government",
-		"Staff"
+		["Government"]=true,
+		["Staff"]=true,
 	}
 	if getPlayerTeam(plr) and law_teams[getTeamName(getPlayerTeam( plr ))] then
 		return true
@@ -133,18 +205,131 @@ function is_law_unit(plr)
 end
 
 --[[ Crime of damage other players ]]--
-function crime_death(attacker, attackerweapon, bodypart, loss)
-	if is_law_unit(attacker) then return end
-	local wl,viol = getWl(attacker)
-	setWl(attacker, (wl or 0)+1, (viol or 0)+4)
+function crime_damage(attacker, attackerweapon, bodypart, loss)
+	if not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" or attacker == source then return end
+	local wl,viol = getWl(source)
+	local is_jailed = exports.GTWjail:isJailed(source)
+	if is_law_unit(attacker) and (wl > 0 or getElementType(source) == "ped" or is_jailed) then return end
+	setWl(attacker, round((loss/150), 2), 5)
 end
-addEventHandler( "onPlayerDamage", root, crime_death )
+addEventHandler( "onPlayerDamage", root, crime_damage )
 
+--[[ Crime of killing other players ]]--
+function crime_death(totalAmmo, killer, killerWeapon, bodypart, stealth)
+	if not killer or not isElement(killer) or getElementType(killer) ~= "player" or killer == source then return end
+	local wl,viol = getWl(source)
+	local is_jailed = exports.GTWjail:isJailed(source)
+    if is_law_unit(killer) and (wl > 0 or is_jailed) then return end
+	local add_wl = 1.8
+	if getElementType(source) == "ped" then
+		add_wl = 1.2   -- Reduced by 0.6 for bots
+	end
+	setWl(killer, round(add_wl, 2), 50)
+end
+addEventHandler("onPedWasted", root, crime_death)
+addEventHandler("onPlayerWasted", root, crime_death)
+
+function checkSpeeding( )
+	-- Get the target
+	local target = getPedTarget( client )
+	local speedx, speedy, speedz = getElementVelocity( target )
+	local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
+	local kmh = actualspeed * 180
+	
+	-- Perform a check
+	if not isElement( target ) then return end
+	local speeder = getVehicleOccupants(target)[0]
+	if not speeder or (speeder and is_law_unit(speeder)) then return end
+			
+	-- Tell the speeder
+	local n_wl = round((kmh*1.3/400),2)
+	setWl(speeder, round(n_wl, 2), 0, "You committed the crime of speeding")
+	
+	-- Pay the cop for the catch
+	local money = math.floor(kmh*1.3)
+	exports.GTWtopbar:dm("You have catched: "..getPlayerName(speeder).." for speeding and earned: $"..tostring(money), client, 0, 255, 0 )
+	givePlayerMoney(client, money)
+end
+addEvent("GTWwanted.onSpeeding", true)
+addEventHandler("GTWwanted.onSpeeding", root, checkSpeeding)
+
+--[[ Display wanted level (DEBUG) ]]--
 function show_wl(plr)
 	local x,y = getWl(plr)
-	outputChatBox("WL: "..(x or 0)..", Violent: "..(y or 0), plr)
+	outputChatBox("WL: "..(x or 0)..", Violent: "..(y or 0), plr, 255, 100, 0)
 end
 addCommandHandler("wl", show_wl)
+
+--[[ Display wanted players ]]--
+function show_wanted_players(plr)
+	local c = 0
+	local cx,cy,cz = getElementPosition(plr)
+	for k,v in pairs(getElementsByType("player")) do
+		local x,y = getWl(v)
+		local px,py,pz = getElementPosition(v)
+		if x > 0 then
+			local dist = getDistanceBetweenPoints3D(px,py,pz, cx,cy,cz)
+			if getElementData(v, "Jailed") == "Yes" then
+				outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
+					round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 0, 255, 0)
+			else
+				outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
+					round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 255, 100, 0)
+			end
+			c = c + 1
+		end
+	end
+	if c == 0 then
+		outputChatBox("No wanted players was found, try again later", plr, 255, 100, 0)
+	end
+end
+addCommandHandler("wanted", show_wanted_players)
+addCommandHandler("wanteds", show_wanted_players)
+
+--[[ Pays a fine $500/star $200/violent second ]]--
+function pay_fine(plr, cmd, plr2)
+	local wl,viol = getWl(plr)
+	local price = math.floor((wl*300)+(viol*100))
+	if cmd == "adminfine" then
+		local accName = getAccountName( getPlayerAccount( plr )) 
+		if isObjectInACLGroup ("user."..accName, aclGetGroup ( "Admin" )) then
+			if plr2 and getPlayerFromName(plr2) then
+				setWl(getPlayerFromName(plr2), 0, 0)
+				exports.GTWtopbar:dm(getPlayerName(plr).." has removed your wanted level", getPlayerFromName(plr2), 255, 100, 0 )
+				exports.GTWtopbar:dm("You have removed "..plr2.."'s wanted level", plr, 255, 100, 0 )
+			else
+				setWl(plr, 0, 0)
+				exports.GTWtopbar:dm("You have removed your wanted level for free", plr, 255, 100, 0 )
+			end
+			return
+		end
+	end
+	if wl > 100 then
+		exports.GTWtopbar:dm("Your wanted level is to high!", plr, 255, 0, 0 )	
+		return 
+	end
+	if getPlayerMoney(plr) < price then
+		exports.GTWtopbar:dm("You can't afford a fine! $"..tostring(price), plr, 255, 0, 0 )	
+		return 
+	end
+	wanted_data.fine_charge[plr] = price
+	exports.GTWtopbar:dm("You have requested a fine, it will cost you $"..tostring(price)..", type /accept to continue", plr, 255, 100, 0 )
+end
+addCommandHandler("fine", pay_fine)
+addCommandHandler("payfine", pay_fine)
+addCommandHandler("surrender", pay_fine)
+addCommandHandler("giveup", pay_fine)
+addCommandHandler("adminfine", pay_fine)
+function accept_fine(plr)
+	if not wanted_data.fine_charge[plr] then return end
+	takePlayerMoney(plr, wanted_data.fine_charge[plr])
+	setWl(plr, 0, 0)
+	wanted_data.fine_charge[plr] = nil
+	exports.GTWtopbar:dm("You have paid a fine of $"..tostring(price), plr, 0, 255, 0 )
+end
+addCommandHandler("accept", accept_fine)
+addCommandHandler("acceptfine", accept_fine)
+addCommandHandler("confirm", accept_fine)
 
 -- OLD SHIT --
 
@@ -449,43 +634,7 @@ function playerDamage ( attacker, weapon, bodypart, loss )
 end
 addEventHandler( "onPlayerDamage", getRootElement(), playerDamage )
 
-function checkSpeeding( )
-	-- Get the target
-	local target = getPedTarget( client )
-	speedx, speedy, speedz = getElementVelocity( target )
-	actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
-	kmh = actualspeed * 180
-	
-	-- Perform a check
-	if isElement( target ) then
-		local speeder = getVehicleOccupants(target)[0]
-		if not isTimer( cooldown[speeder] ) and getPlayerTeam( speeder ) ~= getTeamFromName( "Staff" ) then
-			-- Tell the speeder
-			local wl = round((kmh*1.3/400),2)
-			exports.GTWtopbar:dm( "You committed the crime of speeding "..tostring(wl).." stars", speeder, 255, 0, 0 )
-			
-			-- Pay the cop
-			local money = math.floor(kmh*1.3)
-			exports.GTWtopbar:dm(	"You have catched: "..getPlayerName(speeder).." for speeding and earned: "..tostring(money).."$", client, 0, 255, 0 )
-			givePlayerMoney( client, money )
-			
-			-- Wanted points for criminals
-			local playeraccount = getPlayerAccount( speeder )
-			local wantedPoints = getAccountData( playeraccount, "acorp_stats_wanted_points" ) or 0
-			setAccountData( playeraccount, "acorp_stats_wanted_points", wantedPoints + 1 )
-			
-			-- Sync wanted level
-			setElementData( speeder, "Wanted", tonumber( getElementData( speeder, "Wanted" )) + wl )
-			setPlayerWantedAC( speeder, 0 )
-			if not isTimer( wlCountdown[speeder] ) then
-				wlCountdown[speeder] = setTimer( lowerWL, lowerWLTime, 0, speeder )
-			end
-			cooldown[source] = setTimer(function() end, 8000, 1)
-		end
-	end
-end
-addEvent( "onSpeeding", true )
-addEventHandler( "onSpeeding", root, checkSpeeding )
+
 
 function setClientWL( wl, violentmult, text, vehrelated )
 	-- Get element velocity (car crimes like speeding or crashes)
@@ -846,27 +995,6 @@ function setViolentStatus( thePlayer )
 		violent[thePlayer] = setTimer( function() end, violentTime, 1 )
 	end
 end
-
-function syncTracker( cop ) 
-	local dist = distanceToCrim( cop )
-	if dist < 3100 and dist > 180 then
-		setElementData( cop, "distToCrim", tostring(math.floor(dist)).."m, "..directionToCrim(cop))
-	elseif dist >= 3100 then
-		setElementData( cop, "distToCrim", "?" )
-	elseif dist <= 180 then
-		setElementData( cop, "distToCrim", "very close" )
-	end
-end
-
-addEventHandler("onPlayerLogin", getRootElement(),
-function()
-    setTimer( setViolentStatus, 300, 1, source )
-    if isTimer( trackSyncer[source] ) then
-        killTimer( trackSyncer[source] )
-    end
-    trackSyncer[source] = setTimer( syncTracker, 100, 0, source )
-    wlCountdown[source] = setTimer( lowerWL, lowerWLTime, 0, source )
-end)
 
 function playerQuit( quitType )
 	if isTimer( trackSyncer[source] ) then

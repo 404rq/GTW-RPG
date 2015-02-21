@@ -65,6 +65,7 @@ function()
 	guiGridListAddColumn( lst_skins, "ID", 0.15 )
 	exports.GTWgui:setDefaultFont(lst_skins, 10)
 	guiGridListSetSelectionMode(lst_skins, 0)
+	guiGridListSetSortingEnabled(lst_skins, false)
 	
 	-- Weapons and tools selection list
 	lst_weapons = guiCreateGridList( 0, 0, 1, 1, true, tab_weapons )
@@ -75,6 +76,7 @@ function()
 	guiGridListAddColumn( lst_weapons, "ID", 0.10 )
 	exports.GTWgui:setDefaultFont(lst_weapons, 10)
 	guiGridListSetSelectionMode(lst_weapons, 0)
+	guiGridListSetSortingEnabled(lst_weapons, false)
 	
 	-- Add all markers created by this system if any
 	addMarkersAndClearTable()
@@ -115,7 +117,7 @@ setTimer(addMarkersAndClearTable, 5000, 0)
 --[[ Shows the gui on marker hit and edit it's variables ]]--
 function showGUI( hitElement, matchingdimension, jobID )
  	if not isTimer(cooldown) and hitElement and isElement(hitElement) and getElementType(hitElement) == "player" 
- 		and not getPedOccupiedVehicle(hitElement) and hitElement == localPlayer 
+ 		and not getPedOccupiedVehicle(hitElement) and getElementData(hitElement, "Jailed") ~= "Yes" and hitElement == localPlayer 
  		and matchingdimension then
  		
  		-- Get job id from marker
@@ -123,6 +125,14 @@ function showGUI( hitElement, matchingdimension, jobID )
  		if source then ID = getElementData( source, "jobID" ) else
  		ID = jobID end
  		local team, max_wl, description, skins, skin_names, work_tools = unpack(work_items[ID])
+ 		
+ 		-- Check group membership
+ 		if restricted_jobs[ID] then
+ 			if restricted_jobs[ID] ~= getElementData(localPlayer, "Group") and getPlayerTeam(localPlayer) ~= getTeamFromName("Staff") then 
+ 				exports.GTWtopbar:dm( ID..": This job is restricted to: "..restricted_jobs[ID], 255, 100, 0 )
+ 				return 
+ 			end
+ 		end
  		
  		-- Check wanted level
  		if getPlayerWantedLevel() > max_wl then 
@@ -280,8 +290,16 @@ function staffWork(cmdName, ID)
 	 	elseif cmdName == "gominer" then
 	 		ID = "Ironminer"
 	 	elseif cmdName == "golaw" then
-	 		ID = "Police"
+	 		ID = "Police Officer"
+	 	elseif cmdName == "sapd" then
+	 		ID = "SAPD Officer"
+	 	elseif cmdName == "army" then
+	 		ID = "Armed Forces"
 		end
+	end
+	if getPlayerTeam(localPlayer) ~= getTeamFromName("Staff") and restricted_jobs[ID] ~= getElementData(localPlayer, "Group") then
+		exports.GTWtopbar:dm( ID..": This job is restricted to: "..restricted_jobs[ID], 255, 100, 0 )
+		return 
 	end
 	if ID then
 		showGUI(localPlayer, true, ID)
@@ -301,6 +319,10 @@ addCommandHandler( "gofireman", staffWork )
 addCommandHandler( "gomedic", staffWork )
 addCommandHandler( "gominer", staffWork )
 addCommandHandler( "golaw", staffWork )
+
+-- Group commands
+addCommandHandler( "sapd", staffWork )
+addCommandHandler( "army", staffWork )
 
 --[[ Closes the GUI on marker leave ]]--
 function closeGUI( leaveElement, matchingdimension )
