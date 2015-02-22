@@ -25,4 +25,4 @@ None, _This resource has no exports._
 <br>
 **Requirements**
 
-None, _This resource is independent and will work out of the box._
+GTWtrainhorn
