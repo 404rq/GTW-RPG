@@ -199,7 +199,9 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 		setVehiclePaintjob( veh, tonumber( paint ))
 		setVehicleLocked( veh, locked )
 		setElementData( veh, "vehicleFuel", tonumber(fuel))
-		setElementHealth( veh, tonumber(health*10))
+		local health = tonumber(health*10)
+		if health < 300 then health = 300 end
+		setElementHealth( veh, health )
 		setElementData( veh, "owner", owner )
 		setElementData( veh, "isOwnedVehicle", tonumber(ID))
 		if getElementHealth( veh ) < 300 then
@@ -416,7 +418,7 @@ addEventHandler( "GTWvehicleshop.onVehicleSell", root, sellVehicle )
 function respawnVehicleToStart(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
 		veh_id and not vehicles[veh_id] and not isElement(vehicles[veh_id]) then
-		if tonumber(( getElementData( client, "Wanted" )) or 0) < 6 then
+		if getElementData(client, "violent_seconds") or getElementData(client, "Jailed") == "Yes" then
 			local price = 500
 			if price and getPlayerMoney(client) > price then
 				takePlayerMoney( client, price )
@@ -426,8 +428,10 @@ function respawnVehicleToStart(veh_id)
 			else
 				exports.GTWtopbar:dm( "Poor bastard, you can't afford to recover your vehicle, you need $500!", client, 255, 0, 0 )
 			end
+		elseif getElementData(client, "Jailed") == "Yes" then
+			exports.GTWtopbar:dm( "You can not recover while you are jailed!", client, 255, 0, 0 )
 		else
-			exports.GTWtopbar:dm( "Due to your wanted level you can't use this feature!", client, 255, 0, 0 )
+			exports.GTWtopbar:dm( "You are to violent to recover, calm down!", client, 255, 0, 0 )
 		end
 	elseif vehicles[veh_id] and isElement(vehicles[veh_id]) then
 		exports.GTWtopbar:dm( "You must hide your vehicle before you can recover it!", client, 255, 0, 0 )
