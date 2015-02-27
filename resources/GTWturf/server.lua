@@ -44,7 +44,7 @@ function turfPayout(query)
 			local money = math.random(turf_payments_min,turf_payments_max)*(tonumber(turfs_counter[getElementData(player,"Group")] or 0)/#members)
 
 			-- Notice about turf money
-			if money > 1000 then money = 1000 end
+			if money > 4000 then money = 4000 end
 			if money > 50 then
 				givePlayerMoney(player,money)
 				outputChatBox("You have received: "..tostring(money).."$ from your turfs!", player, 0, 150, 0)

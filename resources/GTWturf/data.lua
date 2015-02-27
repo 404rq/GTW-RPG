@@ -21,8 +21,8 @@ time_syncer 	= { }									-- Timers to update the client status text with infor
 db 				= dbConnect("sqlite", "/turfs.db")		-- Database connection (SQLLite), mysql is supported as well, see syntax for dbConnect here:
 														-- https://wiki.multitheftauto.com/wiki/DbConnect
 payout_time_interval		= 600						-- Time interval between payments for owned turfs (seconds).
-turf_payments_max			= 500						-- Maximum payments for 1 single turf during payouts. Multiplyed by turfs count divided by gangmembers count  
-turf_payments_min			= 490						-- Minimum payments for 1 single turf during payouts. (See above)
+turf_payments_max			= 300						-- Maximum payments for 1 single turf during payouts. Multiplyed by turfs count divided by gangmembers count  
+turf_payments_min			= 290						-- Minimum payments for 1 single turf during payouts. (See above)
 lowest_amount_to_display 	= 50						-- Specify the lowest amount of money which is worth to notice the players about during payouts.
 
 team_criminals				= "Criminals"				-- Specify teams that are allowed to turf

@@ -418,7 +418,7 @@ addEventHandler( "GTWvehicleshop.onVehicleSell", root, sellVehicle )
 function respawnVehicleToStart(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
 		veh_id and not vehicles[veh_id] and not isElement(vehicles[veh_id]) then
-		if getElementData(client, "violent_seconds") or getElementData(client, "Jailed") == "Yes" then
+		if (tonumber(getElementData(client, "violent_seconds")) or 0) < 10 or getElementData(client, "Jailed") == "Yes" then
 			local price = 500
 			if price and getPlayerMoney(client) > price then
 				takePlayerMoney( client, price )

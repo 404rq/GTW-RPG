@@ -8,14 +8,20 @@
 	Bugtracker: 		http://forum.albonius.com/bug-reports/
 	Suggestions:		http://forum.albonius.com/mta-servers-development/
 	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status: 			Stable release
+	Version:    		Open source
+	License:    		GPL v.3 or later
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
--- All gates and their data
-gate = {
+-- ************************************************
+-- TABLE: gate_data IS PROPERTY OF GRAND THEFT 
+-- WALRUS, IT'S ONLY HERE TO ACT AS AN EXAMPLE 
+-- OF A CONFIGURATION FILE IN THIS SYSTEM, IF
+-- YOU WANT TO USE THIS DATA, MAKE SURE YOU HAVE:
+-- GTWcoremap AND GTWgroups UP AND RUNNING
+-- ************************************************
+gate_data = {
 	-- ObjectID		closeX 		closeY 		closeZ 		openX 		openY 		openZ 		rotX 	rotY 	rotZ 	colX 	colY 	colZ	colRad	Group			Scale
 	[1]={ 2957, 	1588.6, 	-1638.4,	14.8, 		1588.6, 	-1638.4, 	20,			0, 		0, 		0, 		1588, 	-1638, 	10, 	15,		"Government", 	1.8 },
 	[2]={ 10671,  	-1631, 		688.4, 		8.587, 		-1631, 		688.4, 		20.187, 	0, 		0, 		90, 	-1631, 	688, 	7.187, 	25,		"Government", 	2 },
@@ -46,11 +52,11 @@ ocpenSpeed = 3000
 
 -- Add all gates
 function mapLoad ( name )
-   	for k=1, #gate do
+   	for k=1, #gate_data do
 		-- Create objects
-		local gat = createObject( gate[k][1], gate[k][2], gate[k][3], gate[k][4], gate[k][8], gate[k][9], gate[k][10] )
-		local col = createColCircle( gate[k][11], gate[k][12], gate[k][13]+2, gate[k][14] )
-		setObjectScale( gat, gate[k][16] )
+		local gat = createObject( gate_data[k][1], gate_data[k][2], gate_data[k][3], gate_data[k][4], gate_data[k][8], gate_data[k][9], gate_data[k][10] )
+		local col = createColCircle( gate_data[k][11], gate_data[k][12], gate_data[k][13]+2, gate_data[k][14] )
+		setObjectScale( gat, gate_data[k][16] )
 	
 		-- Assign arrays of object pointers
 		gates[col] = gat

@@ -271,7 +271,10 @@ function show_wanted_players(plr)
 			local dist = getDistanceBetweenPoints3D(px,py,pz, cx,cy,cz)
 			if getElementData(v, "Jailed") == "Yes" then
 				outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
-					round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 0, 255, 0)
+					round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 0, 200, 0)
+			elseif (tonumber(getElementData(v, "violent_seconds")) or 0) > 0 then
+				outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
+					round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 200, 0, 0)
 			else
 				outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
 					round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 255, 100, 0)
@@ -290,6 +293,7 @@ addCommandHandler("wanteds", show_wanted_players)
 function pay_fine(plr, cmd, plr2)
 	local wl,viol = getWl(plr)
 	local price = math.floor((wl*300)+(viol*100))
+	local disttocop = exports.GTWpolice:distanceToCop(plr)
 	if cmd == "adminfine" then
 		local accName = getAccountName( getPlayerAccount( plr )) 
 		if isObjectInACLGroup ("user."..accName, aclGetGroup ( "Admin" )) then
@@ -304,12 +308,24 @@ function pay_fine(plr, cmd, plr2)
 			return
 		end
 	end
+	if (tonumber(getElementData(plr, "violent_seconds")) or 0) > 0 then
+		exports.GTWtopbar:dm("You are too violent to pay a fine!", plr, 255, 0, 0 )	
+		return 
+	end
 	if wl > 100 then
 		exports.GTWtopbar:dm("Your wanted level is to high!", plr, 255, 0, 0 )	
 		return 
 	end
 	if getPlayerMoney(plr) < price then
 		exports.GTWtopbar:dm("You can't afford a fine! $"..tostring(price), plr, 255, 0, 0 )	
+		return 
+	end
+	if wl == 0 then
+		exports.GTWtopbar:dm("You are clean!", plr, 0, 255, 0 )	
+		return 
+	end
+	if disttocop < 180 then
+		exports.GTWtopbar:dm("You can't pay a fine when a law enforcer is nearby, ("..tostring(180-disttocop).."m to safety)", plr, 255, 0, 0 )	
 		return 
 	end
 	wanted_data.fine_charge[plr] = price
