@@ -14,13 +14,10 @@
 ********************************************************************************
 ]]--
 
--- ************************************************
--- TABLE: gate_data IS PROPERTY OF GRAND THEFT 
--- WALRUS, IT'S ONLY HERE TO ACT AS AN EXAMPLE 
--- OF A CONFIGURATION FILE IN THIS SYSTEM, IF
--- YOU WANT TO USE THIS DATA, MAKE SURE YOU HAVE:
--- GTWcoremap AND GTWgroups UP AND RUNNING
--- ************************************************
+-- *****************************************************************************
+-- BELOW TABLE ARE MADE FOR SERVERS OWNED BY GRAND THEFT WALRUS, USE IT ONLY AS 
+-- AN EXAMPLE OF THE LAYOUT TO UNDERSTAND HOW THIS SYSTEM WORKS 
+-- *****************************************************************************
 gate_data = {
 	-- ObjectID		closeX 		closeY 		closeZ 		openX 		openY 		openZ 		rotX 	rotY 	rotZ 	colX 	colY 	colZ	colRad	Group			Scale
 	[1]={ 2957, 	1588.6, 	-1638.4,	14.8, 		1588.6, 	-1638.4, 	20,			0, 		0, 		0, 		1588, 	-1638, 	10, 	15,		"Government", 	1.8 },
@@ -34,15 +31,15 @@ gate_data = {
 	[9]={ 986, 		-1571.8, 	662.1, 		7.4,  		-1571.8, 	654.6, 		7.4, 		0,	 	0, 		90,	 	-1571,	661.8, 	6.8, 	20,		"Government", 	1 },
 	[10]={ 985, 	-1641.4, 	689, 		7.4,  		-1641.4, 	689, 		7.4, 		0,	 	0, 		90,	 	-1643, 	682, 	7.5, 	20,		"Government", 	1 },
 	[11]={ 986, 	-1641.4, 	681, 		7.4,  		-1641.4, 	673.1, 		7.4, 		0,	 	0, 		90,	 	-1643, 	682, 	7.5, 	20,		"Government", 	1 },
-	[12]={ 985, 	-2991.4, 	2359.1, 	7.1,  		-2984, 		2359.1, 	7.1, 		0,	 	0, 		0,	 	-2991, 	2359, 	7.2, 	25,		"Government", 	1 },
+	[12]={ 985, 	-2990.75, 	2358.6, 	7.6,  		-2984.4, 	2358.6, 	7.6, 		0,	 	0, 		0,	 	-2991, 	2359, 	7.2, 	25,		"Government", 	0.83 },
 	[13]={ 985, 	2237.5, 	2453.3, 	8.55,  		2237.5, 	2461.1, 	8.55, 		0,	 	0, 		90,	 	2237, 	2454, 	10.6, 	25,		"Government", 	1 },
-	[14]={ 985, 	1543.65, 	-1627.2, 	13.1,  		1543.65, 	-1634.7, 	13.1, 		0,	 	0, 		90,	 	1543, 	-1627, 	13.1, 	25,		"Government", 	1 },
+	[14]={ 986, 	1543.55, 	-1627.1, 	13.6,  		1543.55, 	-1634.7, 	13.6, 		0,	 	0, 		90,	 	1543, 	-1627, 	13.1, 	25,		"Government", 	0.93 },
 	[15]={ 985, 	-2228.5, 	2373.3, 	4.1,  		-2234.8, 	2379.6, 	4.1, 		0,	 	0, 		135,	-2228, 	2373, 	4.9, 	25,		"Government", 	1 },
 	[16]={ 985, 	284.7, 		1818.0, 	17.0,  		284.7, 		1811.6, 	17.0, 		0,	 	0, 		270,	284.7, 	1818.0, 16.6, 	10,		"Government", 	1 },
 	[17]={ 986, 	284.7, 		1826.0, 	17.0,  		284.7, 		1831.2, 	17.0, 		0,	 	0, 		270,	284.7, 	1826.0, 16.6, 	10,		"Government", 	1 },
 	[18]={ 985, 	131, 		1941.8, 	17.8,  		123, 		1941.8, 	17.8, 		0,	 	0, 		180,	131, 	1941.4, 18.0, 	10,		"Government", 	1 },
 	[19]={ 986, 	139, 		1941.8, 	17.8,  		147, 		1941.8, 	17.8, 		0,	 	0, 		180,	139, 	1941.4, 18.0, 	10,		"Government", 	1 },
-	[20]={ 986, 	-2974.8, 	2239.4, 	7.0,  		-2974.8, 	2247.0, 	7.0, 		0,	 	0, 		270,	-2974, 	2239.4, 7.0, 	10,		"Government", 	1 },
+	[20]={ 986, 	-2980.0, 	2253.1, 	7.0, 		-2987.7, 	2253.0, 	7.0,		0,		0,		0,	 	-2979, 	2252.9, 7.2,	10,		"Government",	1 },
 }
 
 -- Global data members
@@ -72,16 +69,16 @@ addEventHandler ( "onResourceStart", getResourceRootElement(), mapLoad )
 -- Gates open                           
 function openGate(plr)
 	local ID = cols[source]
-    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate[ID][15] or 
-    	getPlayerTeam(plr) == getTeamFromName(gate[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) then
-        moveObject(gates[source], ocpenSpeed, gate[ID][5], gate[ID][6], gate[ID][7] ) 
+    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or 
+    	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) then
+        moveObject(gates[source], ocpenSpeed, gate_data[ID][5], gate_data[ID][6], gate_data[ID][7] ) 
 	end
 end  
 -- Gates close
 function closeGate(plr)
     local ID = cols[source]
-    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate[ID][15] or 
-    	getPlayerTeam(plr) == getTeamFromName(gate[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) then
-        moveObject(gates[source], ocpenSpeed, gate[ID][2], gate[ID][3], gate[ID][4] ) 
+    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or 
+    	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) then
+        moveObject(gates[source], ocpenSpeed, gate_data[ID][2], gate_data[ID][3], gate_data[ID][4] ) 
 	end
 end

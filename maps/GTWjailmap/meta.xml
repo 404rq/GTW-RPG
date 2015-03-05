@@ -15,8 +15,8 @@
 -->
 
 <meta>
-    <info type="map" name="GTWcoremap" author="GTWCode" version="5" description="Core map for Grand Theft Walrus"></info>
-    <map src="GTWcoremap.map" dimension="0"></map>
+    <info type="map" name="GTWjail" author="GTWCode" version="5" description="Grand Theft Walrus Jail"></info>
+    <map src="GTWjail.map" dimension="0"></map>
     <script src="mapEditorScriptingExtension_s.lua" type="server"></script>
     <script src="mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
 </meta>

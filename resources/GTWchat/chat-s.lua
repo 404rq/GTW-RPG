@@ -146,6 +146,7 @@ function IRCMessageReceive(channel, message)
 	local res = getResourceFromName(nameOfIRCResource)
 	if getResourceState(res) ~= "running" then return end
 	if string.match(message, '%d%d*') then return end
+	if string.sub(message, 1, 1) == "!" then return end
 	local nick = exports[nameOfIRCResource]:ircGetUserNick(source)
 	outputChatBox("#444444[IRC] #CCCCCC"..nick..":#FFFFFF "..message, root, 255, 255, 255, true)
 	outputServerLog("[IRC] "..nick..": "..message)

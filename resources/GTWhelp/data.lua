@@ -87,8 +87,18 @@ Languages:
     English in global chats
 Owners:                         
     Grand Theft Walrus community
-Admins:                
-    MrBrutus & The_Walrus @ GTW Games
+Server Staff:                
+    MrBrutus
+    The_Walrus
+    ownbyurs11
+    (Pro)Hunter
+    Smart
+    Co0oLer
+    MHS
+    ludde_1337
+    RocK
+    Price
+    Groot
 
 ********************************************************************
 Last edit:	2015-01-28
@@ -607,6 +617,26 @@ if he accept use the /give <player_nick> <amount> command to send
 the money or visit any bank or atm, the cop will then use the 
 /release command to release you. You will still be wanted so be 
 careful.]] },
+	{ "Jail", 1, [[
+The Jail is located on it's own island built by concre on top of 
+smaller rock islands behind the mountains just west about Bayside 
+Marina, this is a place full of hiding spots, a place where cops
+and other law units can become prison guards and kill any criminal 
+trying to escape, (yes you can escape).
+
+7 guard towers with rockets will fire at anything coming nearby 
+except for law units, unless they are trying to help a criminal 
+escape. The place is only reachable by boat or helicopter and 
+prison guards has multiple spawners for these vehicles around 
+jail.
+
+To escape, you need to get far away from the jail, unnoticed and 
+survive both rockets and potential guards that may notice your 
+escape attempt, a successfull escape attempt will  gice you 10 
+stars, (making it the worst crime you can commit).
+
+Note that your weapons will be returned when you get released,
+but not if you escaped from jail during the session.]] },
 	{ "Shops", 0 },
 	{ "Fast food restaurants", 1, [[
 If you want to regain health but are far away from a hospital or 
@@ -705,7 +735,7 @@ B                -- Show your phone
 /gv                -- Spawn a vehicle
 /setpos x y z      -- Move anywhere on the map
 /mute <player_nick> <time_in_minutes> <reason>
-/jail <player_nick> <time_in_minutes> <reason>
+/jail <player_nick> <time_in_seconds> <reason>
 /ban <player_nick> <time_in_minutes> <reason>
 ]]},
 	{ "House system", 1, [[

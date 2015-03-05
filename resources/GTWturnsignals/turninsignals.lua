@@ -38,7 +38,7 @@ end
 
 -- Toggling lights
 function toggleLights( veh )
-	if isElement( veh ) then
+	if veh and isElement( veh ) and getElementType(veh) == "vehicle" then
 		setVehicleOverrideLights( veh, 2 ) 
 		if toggler[veh] == 1 then
 			setVehicleLightState( veh, 0, 1 )

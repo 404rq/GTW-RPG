@@ -76,13 +76,13 @@ guiSetVisible(DrugBuyWindow, false)
 guiSetAlpha(DrugBuyWindow, 0.98)
 
 WeedBuyLabel = guiCreateLabel(25, 38, 205, 15, "Weed (Low gravity)", false, DrugBuyWindow)
-WeedPriceLabel = guiCreateLabel(67.5, 58, 205, 15, "$2500", false, DrugBuyWindow)
+WeedPriceLabel = guiCreateLabel(67.5, 58, 205, 15, "$600", false, DrugBuyWindow)
 WeedBuyEdit = guiCreateEdit(47.5, 88, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(WeedBuyLabel, 251, 213, 3)
 guiLabelSetColor(WeedPriceLabel, 0, 255, 0)
 
 GodBuyLabel = guiCreateLabel(235, 38, 205, 15, "God (Increased max health)", false, DrugBuyWindow)
-GodPriceLabel = guiCreateLabel(280, 58, 205, 15, "$4500", false, DrugBuyWindow)
+GodPriceLabel = guiCreateLabel(280, 58, 205, 15, "$3000", false, DrugBuyWindow)
 GodBuyEdit = guiCreateEdit(260, 88, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(GodBuyLabel, 0, 253, 5)
 guiLabelSetColor(GodPriceLabel, 0, 255, 0)
@@ -90,13 +90,13 @@ guiLabelSetColor(GodPriceLabel, 0, 255, 0)
 --
 
 SpeedBuyLabel = guiCreateLabel(25, 125, 205, 15, "Speed (Faster action)", false, DrugBuyWindow)
-SpeedPriceLabel = guiCreateLabel(67.5, 145, 205, 15, "$6000", false, DrugBuyWindow)
+SpeedPriceLabel = guiCreateLabel(67.5, 145, 205, 15, "$1000", false, DrugBuyWindow)
 SpeedBuyEdit = guiCreateEdit(47.5, 175, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(SpeedBuyLabel, 250, 2, 194)
 guiLabelSetColor(SpeedPriceLabel, 0, 255, 0)
 
 LSDBuyLabel = guiCreateLabel(235, 125, 205, 15, "LSD (Hallucination)", false, DrugBuyWindow)
-LSDPriceLabel = guiCreateLabel(280, 145, 205, 15, "$3500", false, DrugBuyWindow)
+LSDPriceLabel = guiCreateLabel(280, 145, 205, 15, "$2000", false, DrugBuyWindow)
 LSDBuyEdit = guiCreateEdit(260, 175, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(LSDBuyLabel, 0, 248, 251)
 guiLabelSetColor(LSDPriceLabel, 0, 255, 0)
@@ -104,13 +104,13 @@ guiLabelSetColor(LSDPriceLabel, 0, 255, 0)
 --
 
 SteroidsBuyLabel = guiCreateLabel(25, 212, 205, 15, "Steroids (+2 hp every 8seconds)", false, DrugBuyWindow)
-SteroidsPriceLabel = guiCreateLabel(67.5, 232, 205, 15, "$5000", false, DrugBuyWindow)
+SteroidsPriceLabel = guiCreateLabel(67.5, 232, 205, 15, "$800", false, DrugBuyWindow)
 SteroidsBuyEdit = guiCreateEdit(47.5, 262, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(SteroidsBuyLabel, 2, 248, 60)
 guiLabelSetColor(SteroidsPriceLabel, 0, 255, 0)
 
 HeroinBuyLabel = guiCreateLabel(235, 212, 205, 15, "Heroin (Semi invincibility)", false, DrugBuyWindow)
-HeroinPriceLabel = guiCreateLabel(280, 232, 205, 15, "$6000", false, DrugBuyWindow)
+HeroinPriceLabel = guiCreateLabel(280, 232, 205, 15, "$4000", false, DrugBuyWindow)
 HeroinBuyEdit = guiCreateEdit(260, 262, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(HeroinBuyLabel, 201, 48, 196)
 guiLabelSetColor(HeroinPriceLabel, 0, 255, 0)
@@ -275,7 +275,7 @@ function()
 			if (getElementData(localPlayer, "Weed") or 0) > 0 then
 				setElementData(localPlayer, "Weed", (getElementData(localPlayer, "Weed") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Weed drug!", 255, 0, 255)
-				setGravity(0.002)
+				setGravity(0.006)
 				if not isTimer(WeedTimer) then
 					WeedTimer = setTimer(function() setGravity(0.008) exports.GTWtopbar:dm("Weed: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
 				else
@@ -305,7 +305,7 @@ function()
 			if (getElementData(localPlayer, "Speed") or 0) > 0 then
 				setElementData(localPlayer, "Speed", (getElementData(localPlayer, "Speed") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Speed drug!", 255, 0, 255)
-				setGameSpeed(1.3)
+				setGameSpeed(1.2)
 				if not isTimer(SpeedTimer) then
 					SpeedTimer = setTimer(function() setGameSpeed(1) exports.GTWtopbar:dm("Speed: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
 				else

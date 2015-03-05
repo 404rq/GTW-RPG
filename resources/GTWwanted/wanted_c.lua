@@ -36,8 +36,8 @@ function is_law_unit(plr)
 end
 
 --[[ Set and pass wanted level to the server ]]--
-function setWl(level, violent_time, reason)
-	triggerServerEvent("GTWwanted.serverSetWl", localPlayer, level, violent_time, reason)
+function setWl(level, violent_time, reason, require_nearby_cop)
+	triggerServerEvent("GTWwanted.serverSetWl", localPlayer, level, violent_time, reason, require_nearby_cop)
 end
 
 --[[ Return wanted level and remaining violent time ]]--
@@ -54,10 +54,14 @@ function crime_vehicle_collision(collider, force, bodyPart, x, y, z, nx, ny, nz)
 	local wl = force * getVehicleHandling(source).collisionDamageMultiplier * 0.001
 	local viol = 0
 	if wl > 0.5 then viol = 20 end
-	if wl < 0.01 then return end
+	if wl < 0.02 then return end
 	if source ~= getPedOccupiedVehicle(localPlayer) then return end
 	if is_law_unit(localPlayer) then return end	
-	setWl(wl, viol, "You comitted the crime of bad driving")
+	if viol == 0 then
+		setWl(wl, viol, "You comitted the crime of bad driving", true)
+	else
+		setWl(wl, viol, "You comitted the crime of bad driving", false)
+	end
 	cooldown = setTimer(function() end, 5000, 1)
 end
 addEventHandler("onClientVehicleCollision", root, crime_vehicle_collision)
