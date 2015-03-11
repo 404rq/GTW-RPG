@@ -97,10 +97,10 @@ function handleDisplay()
 						dxDrawRectangle(posx - (12 + (0.5 * width)),posy - (v[4] * 20) + 1,width + 23,13,tocolor(0,0,0,40))
 						dxDrawRectangle(posx - (12 + (0.5 * width)),posy - (v[4] * 20) + 4,width + 23,7,tocolor(0,0,0,80))
 						
-						local r,g,b = getTeamColor(getPlayerTeam(v[1]))
-						--if v[3] == 2 then
-						--	r,g,b = getTeamColor(getPlayerTeam(v[1]))
-						--end
+						local r,g,b = 200,200,200
+						if v[3] == 2 then
+							r,g,b = getTeamColor(getPlayerTeam(v[1]))
+						end
 						
 						dxDrawText(v[2],posx - (0.5 * width),posy - (v[4] * 20),posx - (0.5 * width),posy - (v[4] * 20),tocolor(r,g,b,255),1,"default","left","top",false,false,false)
 					end

@@ -54,6 +54,7 @@ radio = {
 	{ "http://listen.di.fm/public3/djmixes.pls?a5e45b0f69e2910bde3edcd4", "Digitally Imported DJ mixes", 1 },
 	{ "", " Mixed stations", 0 },
 	{ "http://www.181.fm/winamp.pls?station=181-power&style=mp3&description=Power%20181%20(Top%2040)&file=181-power.pls", "Power 181", 1 },
+	{ "http://stream.nightcoreradio.com:9040/main_stream.m3u", "Nightcore", 1 },
 	{ "http://46.165.204.52:38231/listen.pls", "Power69", 1 },
 	{ "http://www.radiogold.de/listen.pls", "Radio Gold (Germany)", 1 },
 	{ "http://217.151.151.91/live4.m3u", "Radio regenbogen (Germany)", 1 },

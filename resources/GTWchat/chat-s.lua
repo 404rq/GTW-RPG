@@ -39,12 +39,24 @@ local policeTeams = {
 	["Government"] = true, 
 }
 
+
+-- This will compeletly block below listed words
+local enable_word_censor 			= false
+-- This will only replace bad words listed below
+local enable_bad_word_replacement 	= true
+-- Word censoring, list of words
+local patterns = {
+	-- Bad word, replacement
+	{ "fuck", "feck" },
+	{ "mtasa://", "gtw://" },
+}
+
 --[[ Compatibility with other servers, deal with export calls here ]]--
 function dm(plr, msg, r, g, b, col)
 	-- Replaces outputChatBox with identical syntax
 	exports.GTWtopbar:dm(plr, msg, r, g, b, col)
 	
-	-- If you don't have GTWtopbar, uncommend this instead
+	-- If you don't have "GTWtopbar" up and running, uncomment this instead
 	--outputChatBox(plr, msg, r, g, b, col)
 end
 function getGroupChatColor(group)
@@ -57,8 +69,29 @@ function getGroupChatColor(group)
 	return r,g,b
 end
 
+--[[ Returns true if no matches was found, otherwise false (block output) ]]--
+function censorWords(input)
+	local res = true
+	for k,v in pairs(patterns) do
+		if string.find(input, v[1]) and not enable_bad_word_replacement then			
+			res = false
+		end
+	end
+	return res
+end
+
+--[[ Overriding chat helper function to allow word censoring ]]--
+function outputToChat(text, visible_to, red, green, blue, color_coded)
+	if enable_bad_word_replacement then
+		for k,v in pairs(patterns) do
+			string.gsub(text, v[1], v[2])
+		end
+	end
+	outputChatBox(text, visible_to, red, green, blue, color_coded)
+end
+
 --[[ Clear anti spam cache on quit ]]--
-function cleanUpChat(quitType)
+function cleanUpChat()
 	last_msg[source] = nil
 	cooldownTimers[source] = nil
 end
@@ -118,6 +151,10 @@ function validateChatInput(plr, chatID, text)
 		dm("Do not repeat yourself!", plr, 255, 100, 0)
 		return false
 	end
+	if enable_word_censor and not censorWords(text) then
+		dm("Your message contains illegal words!", plr, 255, 100, 0)
+		return false
+	end
 	-- Special case for car chat
 	if chatID == "car" and not getPedOccupiedVehicle(plr) then 
 		dm("Car chat can only be used inside vehicles!", plr, 255, 100, 0) 
@@ -148,7 +185,7 @@ function IRCMessageReceive(channel, message)
 	if string.match(message, '%d%d*') then return end
 	if string.sub(message, 1, 1) == "!" then return end
 	local nick = exports[nameOfIRCResource]:ircGetUserNick(source)
-	outputChatBox("#444444[IRC] #CCCCCC"..nick..":#FFFFFF "..message, root, 255, 255, 255, true)
+	outputToChat("#444444[IRC] #CCCCCC"..nick..":#FFFFFF "..message, root, 255, 255, 255, true)
 	outputServerLog("[IRC] "..nick..": "..message)
 end
 addEvent("onIRCMessage")
@@ -185,10 +222,10 @@ function useLocalChat(plr, n, ...)
 	   		local outText = RGBToHex(r,g,b).."(LOCAL) "..occupation.."["..tostring(sumOfLocal).."] "..RGBToHex(r,g,b)..nick..": "..RGBToHex(defR,defG,defB)
 			local length = string.len(outText..firstToUpper(msg))
 			if length < 128 then
-	   			outputChatBox(outText..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText..firstToUpper(msg), v, r,g,b, true)
 	   		else
-	   			outputChatBox(outText, v, r,g,b, true)
-	   			outputChatBox(RGBToHex(defR, defG, defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText, v, r,g,b, true)
+	   			outputToChat(RGBToHex(defR, defG, defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
 	  	end
 	end
@@ -218,10 +255,10 @@ function useCarChat(plr, n, ...)
 		local outText = "(CC) ["..tostring(n).."] "..nick..": "..RGBToHex(defR,defG,defB)
 		local length = string.len(outText..firstToUpper(msg))
 		if length < 128 then
-			outputChatBox(outText..firstToUpper(msg),v,200,0,200,true)
+			outputToChat(outText..firstToUpper(msg),v,200,0,200,true)
 		else
-			outputChatBox(outText,v,200,0,200,true)
-			outputChatBox(firstToUpper(msg),v,200,0,200,true)
+			outputToChat(outText,v,200,0,200,true)
+			outputToChat(firstToUpper(msg),v,200,0,200,true)
 		end
 	end
 		
@@ -249,10 +286,10 @@ function useEmergencyChat(plr, n, ...)
     		local outText = RGBToHex(r,g,b).."(E)("..getTeamName(getPlayerTeam(plr))..")"..occupation.." "..nick..": "
 			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
 			if length < 128 then
-	   			outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	   		else
-	   			outputChatBox(outText, v, r,g,b,true)
-	   			outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText, v, r,g,b,true)
+	   			outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
 	   	end
   	end	
@@ -277,10 +314,10 @@ function useGroupChat(plr, n, ...)
 	    		local outText = RGBToHex(r, g, b).."(GROUP) ["..getElementData(plr, "Group").."] "..nick..": "
 			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
 			if length < 128 then
-	   			outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	  		else
-	   			outputChatBox(outText, v, r,g,b, true)
-	   			outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText, v, r,g,b, true)
+	   			outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
     	end
   	end
@@ -308,10 +345,10 @@ function useStaffChat(plr, n, ...)
 	    	local outText = RGBToHex(255, 255, 255).."(STAFF) "..RGBToHex(r, g, b)..nick..": "
 			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
 			if length < 128 then
-	   			outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	  		else
-	   			outputChatBox(outText, v, r,g,b, true)
-	   			outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText, v, r,g,b, true)
+	   			outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
     	end
   	end
@@ -339,10 +376,10 @@ function useStaffTeamChat(plr, n, team, ...)
 	    	local outText = RGBToHex(255, 255, 255).."(STAFF-T) "..RGBToHex(r, g, b)..nick..": "
 			local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg))
 			if length < 128 then
-	   			outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText..RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	  		else
-	   			outputChatBox(outText, v, r,g,b, true)
-	   			outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
+	   			outputToChat(outText, v, r,g,b, true)
+	   			outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
     	end
   	end
@@ -359,7 +396,7 @@ function useActionChatDo(plr, n, ...)
 	local msg = table.concat({...}, " ")
 	if not validateChatInput(plr, "do", msg) then return end
 	local nick = getPlayerName(plr)
-	outputChatBox("* "..firstToUpper(msg).." ("..nick..")", root, 255, 0, 255)
+	outputToChat("* "..firstToUpper(msg).." ("..nick..")", root, 255, 0, 255)
 	   	
 	-- Prevent spam and log the chat
 	last_msg[plr]["do"] = msg
@@ -382,17 +419,14 @@ function useGlobalChat(message, messageType)
 	    	occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
 	    end
 		local px,py,pz = getElementPosition(source)
-		local loc = getZoneName(px,py,pz)
-		if not loc then
-			loc = "Guest"
-		end
+		local loc = getElementData(source, "Location") or getZoneName(px,py,pz)
 		local outText = "("..loc..") "..occupation.." "..getPlayerName(source)..": "
 		local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(message))
 		if length < 128 then
-		   	outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(message), root, r,g,b, true)
+		   	outputToChat(outText..RGBToHex(defR,defG,defB)..firstToUpper(message), root, r,g,b, true)
 		else
-		 	outputChatBox(outText, root, r,g,b, true)
-		  	outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(message), root, r,g,b, true)
+		 	outputToChat(outText, root, r,g,b, true)
+		  	outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(message), root, r,g,b, true)
 		end    
 		outputServerLog("[CHAT] "..getPlayerName(source)..": "..message)
 		if not getElementData(source, "anon") then
@@ -405,7 +439,7 @@ function useGlobalChat(message, messageType)
 	elseif messageType == 1 then
 		if not validateChatInput(source, "me", message) then return end
 	  	local nick = getPlayerName(source)
-		outputChatBox("* "..nick..": "..firstToUpper(message), root, 255, 0, 255)
+		outputToChat("* "..nick..": "..firstToUpper(message), root, 255, 0, 255)
 		outputServerLog("[*ME*] "..getPlayerName(source)..": "..message)
 		
 		-- Prevent spam and log the chat
@@ -422,7 +456,7 @@ function useGlobalChat(message, messageType)
 		end		
 		outputServerLog("[TEAM]["..getTeamName(getPlayerTeam(source)).."] "..getPlayerName(source)..": "..message)
 		if not getElementData(source, "anon") then
-		  	--displayChatBubble("(TEAM): "..firstToUpper(message), 2, source)
+		  	displayChatBubble("(TEAM): "..firstToUpper(message), 2, source)
 		end
 		for i, v in pairs(getElementsByType("player")) do
 		    if getPlayerTeam(v) and (team == getPlayerTeam(v) or isServerStaff(v)) then
@@ -433,10 +467,10 @@ function useGlobalChat(message, messageType)
 				local outText = "(TEAM) "..occupation.." "..getPlayerName(source)..": "
 				local length = string.len(outText..RGBToHex(defR,defG,defB)..firstToUpper(message))
 				if length < 128 then
-			    	outputChatBox(outText..RGBToHex(defR,defG,defB)..firstToUpper(message), v, r,g,b, true)
+			    	outputToChat(outText..RGBToHex(defR,defG,defB)..firstToUpper(message), v, r,g,b, true)
 			    else
-			    	outputChatBox(outText, v, r,g,b, true)
-			    	outputChatBox(RGBToHex(defR,defG,defB)..firstToUpper(message), v, r,g,b, true)
+			    	outputToChat(outText, v, r,g,b, true)
+			    	outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(message), v, r,g,b, true)
 			    end
 			end
 		end

@@ -16,8 +16,8 @@
 
 --[[ All help related text is in this file ]]--
 list = {
-	{ "General", 0 },
-	{ "Server rules", 1, [[
+	{ "Rules", 0 },
+	{ "English", 1, [[
 ********************************************************************
 Rules in English
 ********************************************************************
@@ -42,7 +42,7 @@ Rules in English
 #6 Do not spam the chats, repeating nonsense on purpose will lead 
     to a mute, note that this mute are global and applies to many 
     other servers running GTW-RPG resources as well.
-#7 Do NOT try this in gmae: apply for staff, suggest new features,
+#7 Do NOT try this in game: apply for staff, suggest new features,
     complaint on other players or staff, ask about stuff you'll 
     find information about in the list to the left. This is not 
     punishable but you may not get the response you expected.
@@ -56,6 +56,175 @@ Thank you for complying with our rules.
 ********************************************************************
 Last edit:	2015-01-28
 ********************************************************************]] },
+	{ "Swedish (Svenska)", 1, [[
+********************************************************************
+Rules in Swedish (Svenska)
+********************************************************************
+
+#1 Spawn kill är ej tillåtet (gäller framförallt vid sjukhus)
+#2 Håll till höger när du kör, blockera ej andra spelare, krocka 
+    inte medveted med andra spelare om du inte har en anledning
+    som exempelvis hämnd eller en biljakt (tjuv och polis).
+#3 Missbruka inte eventuella buggar, GTW-RPG är baserat på öppen 
+    källkod och bör vara stabilt, belöning utlovas till den som 
+    upptäcker och rapporterar buggar beroende på dess storlek, 
+    missbruk av buggar bestraffas.
+#4 Reklam är ej tillåten, vi tillämpar yttrandefrihet så du får 
+    självklart prata om precis vad du vill, så länge du inte öppet 
+    gör reklam för en produkt exempelvis.
+#5 Avbryt ej rolspel, servern stödjer både role-play och RPG, om 
+    en grupp spelare står och sysslar med /me och /do rollspel är 
+    det olämpligt att dyka upp med minigun och ha ihjäl dem eller 
+    meja ner dem med din bil.
+#6 SPAM är ej tillåten, toleransen här är dock hög men får du en 
+    varning bör du lugna dig en aning.
+#7 Administrativa uppgifter delas INTE ut till den som skriker 
+    högst, detsamma gäller för serverns utveckling (förslag och 
+    dylikt) samt klagomål på andra spelare med mera, allt sånt 
+    hanteras i forumet.
+#8 Att aktivt trolla eller provocera är ej heller tillåtet, lös 
+    era konflikter här:
+    Klagomål: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Försvar: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+    
+Tack för att du respekterar våra regler!
+
+- MrBrutus (President of Grand Theft Walrus, Developer, Administrator)
+
+********************************************************************
+Last edit:	2015-03-07
+********************************************************************]] },
+	{ "Danish (Danska)", 1, [[
+********************************************************************
+Rules in Danish (Danska)
+********************************************************************
+
+#1 Du må ikke gyde dræbe andre spillere. (Gælder omkring hospitaler)
+#2 Kørsel på højre side af vejen. Bloker ikke andre
+    spillere, ikke køre ind i andre spillere, medmindre du har
+    en grund til det, fx i en politi jagt eller til hævn.
+#3 Brug ikke nogen form for hack eller udnytte bugs. GTW-RPG er en
+    open source game mode, som vi hævder at være stabil og
+    høj kvalitet, er det derfor vigtigt at lade os vide om
+    enhver fejl du kan finde. Fejlrapporter er rewardable, exploits
+    er strafbare.
+#4 Du må ikke annoncere, er du velkommen til at tale om noget, så længe
+    du er ikke reklame det. Hvis du ikke får forskellen
+    Her er et eksempel: Talking: Xbox vs PS3 ... Reklame:
+    indkøbe xBox her ...
+#5 Du må ikke hindre eller afbryde rollespil situationer. Det er ikke
+    hensigtsmæssigt at dukke op med en minigun og dræbe en gruppe af
+    spillere står sammen chatter for eksempel, brug ikke
+    mere vold end situationen kræver.
+#6 ikke spam de chats, gentage nonsens med vilje vil føre
+    til en stum, bemærke, at denne mute er globale og gælder for mange
+    andre servere, der kører ressourcer GTW-RPG så godt.
+#7 Du må ikke prøve dette i gmae: ansøge om personale, foreslå nye funktioner,
+    klage på andre spillere eller medarbejdere, spørge om ting, du vil
+    find oplysninger om i listen til venstre. Dette er ikke
+    strafbar, men du kan ikke få det svar du forventede.
+#8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere.
+    I stedet løse dine konflikter her:
+    Betænkning: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appel: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+
+Tak for at overholde vores regler.
+- Google Translate, (by: Petteri from Finland)
+
+********************************************************************
+Last edit:	2015-03-07
+********************************************************************]] },
+	{ "Dutch (Nederlands)", 1, [[
+********************************************************************
+Rules in Dutch (Nederlands)
+********************************************************************
+
+#1 Geen andere spelers spawnkillen. (Geld rond ziekenhuizen)
+#2 Rijd aan de rechterkant van de weg. 
+    Blokkeer geen andere spelers, rijd niet in andere spelers zonder een geldige reden. bv. in een politie achtervolging of wraak.
+#3 Gebruik geen soort van hack of misbruik geen bugs. 
+    GTW-RPG is een open source game modus waarbij we zeggen dat hij stabiel en van hoge kwaliteit is, het is daarom belangrijk dat je ons laat weten van een bug die je vind. 
+    Bug reports zijn beloonbaar, misbruik is strafbaar.
+#4 Adverteer niet, voel je vrij om over alles te praten zolang je het niet adverteerd. 
+    Als je het verschil niet snapt dan is hier een voorbeeld: Praten: Xbox vs PS3... Adverteren: Koop je Xbox hier...
+#5 Onderbreek of belemmer rolspel situaties niet. 
+    Het is niet volwassen om met een minigun te komen en een groep van spelers die aan het praten zijn te vermoorden, gebruik niet meer geweld dan dat de situatie nodig heeft.
+#6 Spam de chat niet, onzin herhalen met opzet zal leiden tot een mute, denk eraan dat deze mute globaal werkt en dus in alle andere GTW servers werken.
+#7 Probeer dit spel NIET: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden. 
+    Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
+#8 Ga niet actief trollen, provoceren, irriteren of spelers uitschelden. Inplaats daarvan, los je problemen hier op:
+    Report: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Aanvraag: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+	
+Bedankt om mee te werken met ons reglement.
+- ownbyurs11 (Global moderator, Moderator in game)
+
+********************************************************************
+Last edit:	2015-03-07
+********************************************************************]] },
+	{ "Italian (Italiano)", 1, [[
+********************************************************************
+Rules in Italian (Italiano)
+********************************************************************
+
+#1 Non spawn-killare gli altri giocatori. (Questa regola vale vicino agli ospedali)
+#2 Guida sul lato destro della strada. Non bloccare gli altri
+    giocatori, non schiantarti contro gli altri giocatori a meno che non hai
+    una ragione per farlo, per esempio in un inseguimento o per vendetta.
+#3 Non usare nessun tipo di hack e non abusare dei bug. GTW-RPG è una
+    modalità di gioco open source che affermiamo sia stabile e di
+    alta qualità, quindi è importante notificarci riguardo
+    qualsiasi bug che riesci a trovare. Vieni ricompensato se segnali un bug,
+    ma vieni punito se abusi di un exploit.
+#4 Non pubblicizzare, sii libero di parlare di qualsiasi cosa purché
+    non la pubblicizzi. Se non capisci la differenza, eccoti un
+    esempio: Parlare: xBox vs PS3... Pubblicizzare:
+    compra la xBox qua...
+#5 Non ostruire o interrompere situazioni role play. Non è
+    appropriato presentarsi con una minigun e uccidere un gruppo di
+    giocatori che stanno insieme a parlare per esempio, non usare
+    più violenza di quanto la situazione richiede.
+#6 Non spammare nelle chat, ripetere cose senza senso porterà
+    ad essere mutati,tieni conto che questo mute è globale e viene applicato a molti
+    altri server che usano le risorse di GTW-RPG.
+#7 NON fare questo nel gioco: chiedere per diventare staff, suggerire nuove idee,
+    lamentarsi di altri giocatori o staffer, chiedere cose ovvie allo staff che
+    puoi trovare nella lista alla tua sinistra. Questo non è punibile ma
+    potrai non ottenere la riposta che ti aspettavi.
+#8 Non trollare, provocare, annoiare o insultare gli altri giocatori.
+    Invece, risolvi i tuoi conflitti qua:
+    Segnalazioni: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appelli: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+
+Grazie per aver letto le regole.
+- Franckf
+
+********************************************************************
+Last edit:	2015-03-07
+********************************************************************]] },
+	{ "Urdu (Urdu)", 1, [[
+********************************************************************
+Rules in Urdu (Urdu)
+********************************************************************
+
+#1 Jab player spawn hota hai to use kill mat kareu. (Hospitals ke ird gird)
+#2 Road ki right side pe drive kareu, kisi waja ke bagaar gaari ko doosre players ki gaari pe na mareu. Sirf kareu agar aap ke paas koi acha reason ho jese ke police chase meu ya phir revenge ke liye.
+#3 Kisi bhi tarha ka hack na use kareu aur bugs ko abuse na kareu. GTW aik open source community hai. Agar aap ko koi bug milta hai to aap please GTW forums pe GTW developers ko is bugs ka batain. Aap ko is ka reward diya jai ga.
+#4 Aap please advertise na kareu. Aap kisi bhi cheez ke bare meu baat kar sakte hain lekin please aap advertise na kareu.
+#5 Roleplay situations ko interept na kareu. Ye theek nahi hai ke aap aik minigun kisi group ko dekha kar group ko maar deu.
+#6 Do not spam the chats, repeating nonsense on purpose will lead #6 Chat mein spamming na kareu aur nonsense material bhi post na kareu, warna aap mute ho jain gay.
+#7 Game mein ye na kareu: staff ke liye apply, new features ko add karne ki suggestion, dosre players ya staff ki complaint.
+#8 Kisi ko troll, annoy ya insult na kareu. Aap yahan pe jaa sakte hain:
+Report: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+Appeal: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+          
+Shukriya hamare rules parhane ke liye.
+- ccv
+
+********************************************************************
+Last edit:	2015-03-07
+********************************************************************]] },
+	{ "General", 0 },
 	{ "About GTW Games", 1, [[
 ********************************************************************
 About GTW Games

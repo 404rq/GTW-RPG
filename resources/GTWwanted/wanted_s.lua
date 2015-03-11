@@ -90,10 +90,12 @@ function reduce_wl(crim)
 	
 	-- Justify reducement depending on distance to cop
 	local dist = exports.GTWpolice:distanceToCop(crim)
-	if dist < 1000 then wl_reduce = 0.01 end
-	if dist < 500 then wl_reduce = 0.005 end
-	if dist < 180 then wl_reduce = 0 end
-	if dist < 90 then wl_reduce = -0.001 end
+	if dist > 3000 and not is_law_unit(crim) then wl_reduce = 0.04 end
+	if dist > 2000 and not is_law_unit(crim) then wl_reduce = 0.03 end
+	if dist < 1000 and not is_law_unit(crim) then wl_reduce = 0.01 end
+	if dist < 500 and not is_law_unit(crim) then wl_reduce = 0.005 end
+	if dist < 180 and not is_law_unit(crim) then wl_reduce = 0 end
+	if dist < 90 and not is_law_unit(crim) then wl_reduce = -0.001 end
 	
 	-- Set the team to criminal
 	if getPlayerTeam(crim) and getPlayerTeam(crim) ~= getTeamFromName("Criminals") and wanted_data.wanted_level[crim] > 1 then
@@ -138,13 +140,33 @@ function non_violent(plr)
 end
 
 --[[ Set player wanted level ]]--
-function setWl(plr, level, violent_time, reason, add_to)
+function setWl(plr, level, violent_time, reason, add_to, reduce_health)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" or not level then return end
 	if not add_to then add_to = true end
+	if not reduce_health then reduce_health = false end
 	
 	-- Don't set wanted level if crime is comitted in jail
 	local is_jailed = exports.GTWjail:isJailed(plr)
 	if is_jailed and add_to then return end
+	
+	if is_law_unit(plr) then level = (level/10) end
+	if is_law_unit(plr) then violent_time = (violent_time/10) end
+	
+	-- If the crime was in a vehicle collision, reduce health
+	if reduce_health and getPedOccupiedVehicle(plr) then
+		local driver = getVehicleOccupants(getPedOccupiedVehicle(plr))[0]
+		for k,v in pairs(getVehicleOccupants(getPedOccupiedVehicle(plr))) do
+			local new_health = getElementHealth(v)-(level*50)
+			if new_health > 0 then
+				setElementHealth(v, new_health)
+			else
+				killPed(v)
+			end
+		end
+		
+		-- Cancel if suspect isn't the driver
+		if driver ~= plr then return end
+	end	
 	
 	-- Set default value to violent time if not present
 	if not violent_time then violent_time = 0 end
@@ -189,7 +211,7 @@ function setWl(plr, level, violent_time, reason, add_to)
 	update_graphical(plr)
 end
 
-function setServerWantedLevel(wl, violent_time, reason, require_nearby_cop)
+function setServerWantedLevel(wl, violent_time, reason, require_nearby_cop, reduce_health)
 	-- A value indicating if the crime require a cop to be nearby
 	if require_nearby_cop then
 		local dist = exports.GTWpolice:distanceToCop(client)
@@ -197,7 +219,7 @@ function setServerWantedLevel(wl, violent_time, reason, require_nearby_cop)
 	end
 	
 	-- Set the wanted level
-	setWl(client, wl, violent_time, reason)
+	setWl(client, wl, violent_time, reason, true, reduce_health)
 end
 addEvent("GTWwanted.serverSetWl", true)
 addEventHandler("GTWwanted.serverSetWl", root, setServerWantedLevel) 
@@ -262,6 +284,11 @@ function crime_grand_theft_auto(plr, seat, jacked)
 end
 addEventHandler("onVehicleEnter", root, crime_grand_theft_auto)
 
+function reduce_functionality(loss)
+    
+end
+addEventHandler("onVehicleDamage", root, reduce_functionality)
+
 function checkSpeeding( )
 	-- Get the target
 	local target = getPedTarget( client )
@@ -309,6 +336,7 @@ function show_wanted_players(plr)
 		* Red: suspect is violent, kill arrest is allowed]]--
 		local is_arrested = exports.GTWpolice:isArrested(v)
 		local is_jailed = exports.GTWjail:isJailed(v)
+		local location = getElementData(v, "Location") or getZoneName(px,py,pz)
 		if is_jailed then
 			local endTime = tonumber( getElementData( v, "jailTime" ))
 			local currentTime = tonumber( getElementData( v, "jailTime2" ))
@@ -316,15 +344,15 @@ function show_wanted_players(plr)
 			c = c + 1
 		elseif is_arrested and x > 0 then
 			outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
-				round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 255, 200, 0)
+				round(y, 2)..", Location: "..location.." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 255, 200, 0)
 			c = c + 1
 		elseif x > 0 and y > 0 then
 			outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
-				round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 200, 0, 0)
+				round(y, 2)..", Location: "..location.." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 200, 0, 0)
 			c = c + 1
 		elseif x > 0 then
 			outputChatBox(getPlayerName(v)..": Wanted level: "..round(x, 2)..", Violent time (s): "..
-				round(y, 2)..", Location: "..getZoneName(px,py,pz).." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 255, 100, 0)
+				round(y, 2)..", Location: "..location.." ("..getZoneName(px,py,pz,true)..") "..math.floor(dist).."m", plr, 255, 100, 0)
 			c = c + 1
 		end
 	end

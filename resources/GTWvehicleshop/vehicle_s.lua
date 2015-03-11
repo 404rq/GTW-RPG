@@ -148,6 +148,8 @@ addEventHandler( "GTWvehicleshop.onListVehicles", root, listMyVehicles )
 
 --[[ Create a vehicle based on data from the vehicle database ]]--
 function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, color, upgrades, inventory, hlight)
+	if not getAccount( owner ) or not getAccountPlayer( getAccount( owner )) or getElementData(
+		getAccountPlayer( getAccount( owner )), "Jailed") == "Yes" then return end
 	if not vehicles[ID] then
 		local x,y,z, rx,ry,rz = unpack( fromJSON( pos ))
 		local isFirstSpawn = false
@@ -418,7 +420,7 @@ addEventHandler( "GTWvehicleshop.onVehicleSell", root, sellVehicle )
 function respawnVehicleToStart(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
 		veh_id and not vehicles[veh_id] and not isElement(vehicles[veh_id]) then
-		if (tonumber(getElementData(client, "violent_seconds")) or 0) < 10 or getElementData(client, "Jailed") == "Yes" then
+		if (tonumber(getElementData(client, "violent_seconds")) or 0) < 10 and getElementData(client, "Jailed") ~= "Yes" then
 			local price = 500
 			if price and getPlayerMoney(client) > price then
 				takePlayerMoney( client, price )
@@ -426,7 +428,7 @@ function respawnVehicleToStart(veh_id)
 				dbExec(veh_data, "UPDATE vehicles SET pos=? WHERE ID=?", toJSON({ 0,0,0, 0,0,0 }), veh_id)
 				exports.GTWtopbar:dm( "Your vehicle has been respawned!", client, 0, 255, 0 )
 			else
-				exports.GTWtopbar:dm( "Poor bastard, you can't afford to recover your vehicle, you need $500!", client, 255, 0, 0 )
+				exports.GTWtopbar:dm( "You can't afford to recover your vehicle, you need $500!", client, 255, 0, 0 )
 			end
 		elseif getElementData(client, "Jailed") == "Yes" then
 			exports.GTWtopbar:dm( "You can not recover while you are jailed!", client, 255, 0, 0 )
@@ -453,7 +455,7 @@ function onVehicleWeaponWithdrawGet(query)
     	-- Add weapon to JSON string (Only executed once)
     	local input_table = fromJSON(row["inventory"])
     	local plr_owner = temp_plr_store[row["ID"]]
-    	
+    	if not plr_owner or not input_table then break end
     	-- Debug info
     	--outputChatBox(row["inventory"],plr_owner)
     	
