@@ -21,7 +21,36 @@ Beside the standardized core features, this project also includes a lot of misc 
 ## Donations
 There are many ways you may contribute into this project, see the contributing file for more information, another way is donations which ensure the ability to test the software on actual live servers.<br>
 
-<a target="_blank" href='https://pledgie.com/campaigns/27635'><img alt='Click here to lend your support to: GTW RPG and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/27635.png?skin_name=chrome' border='0' ></a>
+<script src="http://coinwidget.com/widget/coin.js"></script>
+<script>
+CoinWidgetCom.go({
+	wallet_address: "1PXprys6XcGbBjywPBM8ZrqVBesHAMimyP"
+	, currency: "bitcoin"
+	, counter: "amount"
+	, alignment: "bl"
+	, qrcode: true
+	, auto_show: false
+	, lbl_button: "Donate"
+	, lbl_address: "GTW Games:"
+	, lbl_count: "donations"
+	, lbl_amount: "BTC"
+});
+</script><br><br>
+<script src="http://coinwidget.com/widget/coin.js"></script>
+<script>
+CoinWidgetCom.go({
+	wallet_address: "LXWTxRs1wB1JSPE2ZKYVjTeuCZhhPmqCpV"
+	, currency: "litecoin"
+	, counter: "amount"
+	, alignment: "bl"
+	, qrcode: true
+	, auto_show: false
+	, lbl_button: "Donate"
+	, lbl_address: "GTW Games:"
+	, lbl_count: "donations"
+	, lbl_amount: "LTC"
+});
+</script>
 
 ## Contributors
 GTW Code (organization)<br>
