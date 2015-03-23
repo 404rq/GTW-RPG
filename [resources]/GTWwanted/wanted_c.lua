@@ -120,7 +120,6 @@ function crime_target_weapon(target)
 		local speedx, speedy, speedz = getElementVelocity(target)
 		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
 		local kmh = actualspeed * 180
-
 		if kmh > 70 and not isTimer(cooldown_speeding) then
 			triggerServerEvent("GTWwanted.onSpeeding", localPlayer, target)
 			cooldown_speeding = setTimer(function() end, 10000, 1)
@@ -146,3 +145,20 @@ function crime_target_weapon(target)
     end
 end
 addEventHandler("onClientPlayerTarget", root, crime_target_weapon)
+
+function show_max_train_speed()
+	if not getPedOccupiedVehicle(localPlayer) then return end 
+	if getVehicleType(getPedOccupiedVehicle(localPlayer)) ~= "Train" then return end
+	local max_speed = getElementData(localPlayer, "GTWwanted.maxTrainSpeed") or 0
+	local kmh = getElementData(localPlayer, "GTWwanted.currentTrainSpeed") or 0
+	local sx,sy = guiGetScreenSize( )
+	local r,g,b = 170,170,170
+	if (kmh+30) > max_speed then r,g,b = 255,200,0 end
+	if kmh > max_speed then r,g,b = 255,0,0 end
+	if kmh < 0 then kmh = 0 end
+	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-408, sy-33, 0, 0, 
+		tocolor( 0, 0, 0, 255 ), 0.7, "bankgothic" )
+	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-410, sy-35, 0, 0, 
+		tocolor( r, g, b, 255 ), 0.7, "bankgothic" )
+end
+addEventHandler("onClientRender", root, show_max_train_speed)

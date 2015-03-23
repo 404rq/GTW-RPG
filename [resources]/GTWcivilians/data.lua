@@ -40,8 +40,8 @@ for every passenger you pickup.
 Weapons:
 - Desert eagle (5x)
 - Baseball bat
-	]], { -1, 60, 91, 93, 171, 172, 194, 253, 255 },
-	{ "default", "skin1", "skin2", "skin3", "skin4", "skin5", "skin6", "skin7", "skin8" },
+	]], { -1, 60, 171, 172, 194, 253, 255 },
+	{ "default", "Chinese casual dressed man", "White well dressed man", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Black man with uniform", "White man with mustache" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 35, 500, "Desert eagle"}}},
 	["Train Driver"]={ "Civilians", 0, [[
@@ -66,8 +66,8 @@ every passenger you pickup.
 Weapons:
 - Desert eagle (3x)
 - Baseball bat
-	]], { -1, 7, 60, 71, 91, 93, 171, 172, 194, 261 },
-	{ "default", "skin1", "skin2", "skin3", "skin4", "skin5", "skin6", "skin7", "skin8", "skin9" },
+	]], { -1, 60, 171, 172, 194, 253, 255 },
+	{ "default", "Chinese casual dressed man", "White well dressed man", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Black man with uniform", "White man with mustache" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 21, 300, "Desert eagle"}}},
 	["Taxi Driver"]={ "Civilians", 2, [[
@@ -84,8 +84,8 @@ you pickup.
 Weapons:
 - Pistol (4x)
 - Knife
-	]], { -1, 9, 14, 41, 44, 60, 69, 72, 93, 171, 172 },
-	{ "default", "skin1", "skin2", "skin3", "skin4", "skin5", "skin6", "skin7", "skin8", "skin9", "skin10" },
+	]], { -1, 9, 14, 41, 44, 60, 72 },
+	{ "default", "Casual African girl", "Casual african man", "Casual latino girl", "Casual latino man", "Chinese casual dressed man", "White casual dressed man" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {22, 68, 200, "Pistol"}}},
 	["Trucker"]={ "Civilians", 1, [[
@@ -102,8 +102,8 @@ weigth of your cargo.
 Weapons:
 - Desert eagle (2x)
 - Baseball bat
-	]], { -1, 93, 95, 133, 171, 172, 191, 194, 201, 202, 206 },
-	{ "default", "skin1", "skin2", "skin3", "skin4", "skin5", "skin6", "skin7", "skin8", "skin9", "skin10" },
+	]], { -1, 31, 112, 133, 172, 194, 198, 202 },
+	{ "default", "White country girl", "Russian trucker", "Trucker with red hat", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Trucker girl", "Beer trucker" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 14, 200, "Desert eagle"}}},
 	["Pilot"]={ "Civilians", 0, [[
@@ -119,8 +119,8 @@ you pickup.
 Weapons:
 - Pistol (3x)
 - Nightstick
-	]], { -1, 61, 71, 171, 172 },
-	{ "default", "skin1", "skin2", "skin3", "skin4" },
+	]], { -1, 61, 71 },
+	{ "default", "Pilot (official)", "Security guard" },
 	--[[WeaponID, amount, price, name]] 
 	{{3, 1, 0, "Nightstick"}, {22, 51, 200, "Pistol"}}},
 	["Mechanic"]={ "Civilians", 4, [[
@@ -137,7 +137,7 @@ Weapons:
 - AK-47 (4x)
 - Baseball bat
 	]], { 50, 268, 305, 309 },
-	{ "skin1", "skin2", "skin3", "skin4" },
+	{ "Mechanic (official)", "Dwaine", "Jethro", "Janitor" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {30, 30, 700, "AK-47"}}},
 	["Fisher"]={ "Civilians", 5, [[
@@ -184,7 +184,7 @@ Weapons:
 - Desert eagle (x7)
 - Baseball bat
 	]], { -1, 157, 158, 159, 160, 161, 162 },
-	{ "default", "skin1", "skin2", "skin3", "skin4", "skin5", "skin6" },
+	{ "default", "Hillbilly girl", "Farmer man", "Hillbilly boy", "Farmer man (old)", "Farmer (official)", "Hillbilly (probably inbred)" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 49, 700, "Desert eagle"}, {33, 30, 3200, "Country rifle"}}},
 	["Tram Driver"]={ "Civilians", 1, [[
@@ -204,8 +204,8 @@ every passenger you pickup.
 Weapons:
 - Desert eagle (4x)
 - Baseball bat
-	]], { -1, 60, 91, 93, 171, 172, 194, 255 },
-	{ "default", "skin1", "skin2", "skin3", "skin4", "skin5", "skin6", "skin7" },
+	]], { -1, 60, 171, 172, 194, 253, 255 },
+	{ "default", "Chinese casual dressed man", "White well dressed man", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Black man with uniform", "White man with mustache" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 28, 400, "Desert eagle"}}},
 	["Fireman"]={ "Emergency service", 0, [[
@@ -222,7 +222,7 @@ suspect with your water canon etc.
 Weapons:
 - Fire extingusher
 	]], { 277, 278, 279 },
-	{ "skin1", "skin2", "skin3" },
+	{ "LSFD worker", "LVFD worker", "SFFD worker" },
 	--[[WeaponID, amount, price, name]] 
 	{{42, 5000, 300, "Fire extinguesher"}}},
 	["Paramedic"]={ "Emergency service", 0, [[
@@ -236,7 +236,7 @@ may give you a bonus reward to thank you.
 Weapons:
 - Spray can
 	]], { 274, 275, 276 },
-	{ "skin1", "skin2", "skin3" },
+	{ "Black doctor", "Latino doctor", "White doctor" },
 	--[[WeaponID, amount, price, name]] 
 	{{41, 500, 200, "Healing spray"}}},
 	["Iron miner"]={ "Civilians", 3, [[
@@ -252,7 +252,7 @@ Weapons:
 - Desert eagle (x5)
 - Baseball bat
 	]], { -1, 27, 153, 260 },
-	{ "default", "skin1", "skin2", "skin3" },
+	{ "default", "White iron miner", "The foreman", "Black iron miner" },
 	--[[WeaponID, amount, price, name]] 
 	{{5, 1, 40, "Baseball bat"}, {24, 35, 500, "Desert eagle"}}},
 	["Police Officer"]={ "Government", 0, [[
@@ -317,6 +317,7 @@ Weapons:
 	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}}
 }
 
+-- Restrict jobs to specific groups
 restricted_jobs = {
 	["SAPD Officer"]="SAPD",
 	["Armed Forces"]="ArmedForces"

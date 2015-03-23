@@ -76,7 +76,7 @@ guiSetVisible(DrugBuyWindow, false)
 guiSetAlpha(DrugBuyWindow, 0.98)
 
 WeedBuyLabel = guiCreateLabel(25, 38, 205, 15, "Weed (Low gravity)", false, DrugBuyWindow)
-WeedPriceLabel = guiCreateLabel(67.5, 58, 205, 15, "$600", false, DrugBuyWindow)
+WeedPriceLabel = guiCreateLabel(67.5, 58, 205, 15, "$900", false, DrugBuyWindow)
 WeedBuyEdit = guiCreateEdit(47.5, 88, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(WeedBuyLabel, 251, 213, 3)
 guiLabelSetColor(WeedPriceLabel, 0, 255, 0)
@@ -90,7 +90,7 @@ guiLabelSetColor(GodPriceLabel, 0, 255, 0)
 --
 
 SpeedBuyLabel = guiCreateLabel(25, 125, 205, 15, "Speed (Faster action)", false, DrugBuyWindow)
-SpeedPriceLabel = guiCreateLabel(67.5, 145, 205, 15, "$1000", false, DrugBuyWindow)
+SpeedPriceLabel = guiCreateLabel(67.5, 145, 205, 15, "$1100", false, DrugBuyWindow)
 SpeedBuyEdit = guiCreateEdit(47.5, 175, 75, 18, "0", false, DrugBuyWindow)
 guiLabelSetColor(SpeedBuyLabel, 250, 2, 194)
 guiLabelSetColor(SpeedPriceLabel, 0, 255, 0)
@@ -275,7 +275,7 @@ function()
 			if (getElementData(localPlayer, "Weed") or 0) > 0 then
 				setElementData(localPlayer, "Weed", (getElementData(localPlayer, "Weed") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Weed drug!", 255, 0, 255)
-				setGravity(0.006)
+				setGravity(0.005)
 				if not isTimer(WeedTimer) then
 					WeedTimer = setTimer(function() setGravity(0.008) exports.GTWtopbar:dm("Weed: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
 				else
@@ -305,7 +305,7 @@ function()
 			if (getElementData(localPlayer, "Speed") or 0) > 0 then
 				setElementData(localPlayer, "Speed", (getElementData(localPlayer, "Speed") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Speed drug!", 255, 0, 255)
-				setGameSpeed(1.2)
+				setGameSpeed(1.4)
 				if not isTimer(SpeedTimer) then
 					SpeedTimer = setTimer(function() setGameSpeed(1) exports.GTWtopbar:dm("Speed: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
 				else

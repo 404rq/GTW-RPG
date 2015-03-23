@@ -48,14 +48,12 @@ end)
 function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
     if not clickedElement then return end
     local dist = getDistanceBetweenPoints3D(worldX, worldY, worldZ, getElementPosition(localPlayer)) or 0
-    if getElementType(clickedElement) == "vehicle" and(not getPedOccupiedVehicle(localPlayer) or
+    local is_staff = exports.GTWstaff:isStaff(localPlayer)
+    if getElementType(clickedElement) == "vehicle" and (not getPedOccupiedVehicle(localPlayer) or
         getPedOccupiedVehicle(localPlayer) ~= clickedElement) and 
-       ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and 
-        getElementData(localPlayer, "Occupation") == "Mechanic") or
-       (getElementData(localPlayer, "Occupation") == "Admin" or 
-		getElementData(localPlayer, "Occupation") == "Developer" or
-		getElementData(localPlayer, "Occupation") == "Moderator")) and 
-		(dist < 20) and not guiGetInputEnabled() then
+        ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and 
+        getElementData(localPlayer, "Occupation") == "Mechanic") or is_staff) and 
+		dist < 20 and not guiGetInputEnabled() then
         -- Open GUI as staff
         if getElementData(localPlayer, "Occupation") ~= "Mechanic" then
         	guiSetText(btn_repair, "Destroy")

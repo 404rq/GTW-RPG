@@ -248,7 +248,7 @@ function showGUI( hitElement, matchingdimension, jobID )
     		local ammo = guiGridListGetItemText(lst_weapons, r,2)
     		local price = guiGridListGetItemText(lst_weapons, r,3)
     		local weapon_id = guiGridListGetItemText(lst_weapons, r,4)
-    		if not isTimer(cooldown2) then
+    		if not isTimer(cooldown2) and r > -1 and c > -1 then
     			triggerServerEvent("GTWcivilians.buyTools", localPlayer, name, ammo, price, weapon_id)
     			cooldown2 = setTimer(function() end, 200, 1)
     		end
@@ -287,8 +287,8 @@ function staffWork(cmdName, ID)
 	 		ID = "Fireman"
 	 	elseif cmdName == "gomedic" then
 	 		ID = "Paramedic"
-	 	elseif cmdName == "gominer" then
-	 		ID = "Ironminer"
+	 	elseif cmdName == "goironminer" then
+	 		ID = "Iron miner"
 	 	elseif cmdName == "golaw" then
 	 		ID = "Police Officer"
 	 	elseif cmdName == "sapd" then
@@ -297,8 +297,11 @@ function staffWork(cmdName, ID)
 	 		ID = "Armed Forces"
 		end
 	end
-	if getPlayerTeam(localPlayer) ~= getTeamFromName("Staff") and restricted_jobs[ID] ~= getElementData(localPlayer, "Group") then
-		exports.GTWtopbar:dm( ID..": This job is restricted to: "..restricted_jobs[ID], 255, 100, 0 )
+	
+	-- Check if a user is in the staff team, if so, allow access
+	local is_staff = exports.GTWstaff:isStaff(localPlayer)
+	if (not is_staff and restricted_jobs[ID] and restricted_jobs[ID] ~= getElementData(localPlayer, "Group")) or (not restricted_jobs[ID] and not is_staff) then
+		exports.GTWtopbar:dm( ID..": Only staff and official groups can use this command!", 255, 100, 0 )
 		return 
 	end
 	if ID then
@@ -317,7 +320,7 @@ addCommandHandler( "gomechanic", staffWork )
 addCommandHandler( "gotram", staffWork )
 addCommandHandler( "gofireman", staffWork )
 addCommandHandler( "gomedic", staffWork )
-addCommandHandler( "gominer", staffWork )
+addCommandHandler( "goironminer", staffWork )
 addCommandHandler( "golaw", staffWork )
 
 -- Group commands
