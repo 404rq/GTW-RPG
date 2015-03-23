@@ -1,0 +1,38 @@
+To install, add below lines to your configuration file:
+"mods/deathmatch/mtaserver.conf"
+
+<!-- Important imports -->
+<resource src="GTWgui" startup="1" protected="1" />
+<resource src="GTWtopbar" startup="1" protected="0" />
+
+<!-- GTW resources -->
+<resource src="GTWantispam" startup="1" protected="0" />
+<resource src="GTWchat" startup="1" protected="0" />
+<resource src="GTWcivilians" startup="1" protected="0" />
+<resource src="GTWdrugsys" startup="1" protected="0" />
+<resource src="GTWfarmer" startup="1" protected="0" />
+<resource src="GTWfastfood" startup="1" protected="0" />
+<resource src="GTWfisher" startup="1" protected="0" />
+<resource src="GTWgates" startup="1" protected="0" />
+<resource src="GTWhelp" startup="1" protected="0" />
+<resource src="GTWjail" startup="1" protected="0" />
+<resource src="GTWmechanic" startup="1" protected="0" />
+<resource src="GTWphone" startup="1" protected="0" />
+<resource src="GTWplayerblips" startup="1" protected="0" />
+<resource src="GTWrob" startup="1" protected="0" />
+<resource src="GTWsmoke" startup="1" protected="0" />
+<resource src="GTWtrain" startup="1" protected="0" />
+<resource src="GTWtrainhorn" startup="1" protected="0" />
+<resource src="GTWturf" startup="1" protected="0" />
+<resource src="GTWturnsignals" startup="1" protected="0" />
+<resource src="GTWupdates" startup="1" protected="0" />
+<resource src="GTWwanted" startup="1" protected="0" />
+<resource src="GTWweather" startup="1" protected="0" />
+<resource src="GTWvehicleshop" startup="1" protected="0" />
+
+<!-- GTW maps -->
+<resource src="GTWbluehellpatch" startup="1" protected="1" />
+<resource src="GTWcoremap" startup="1" protected="1" />
+<resource src="GTWjailmap" startup="1" protected="1" />
+<resource src="GTWsapdbase" startup="1" protected="1" />
+<resource src="GTWswatbase" startup="1" protected="1" />
