@@ -14,6 +14,7 @@
 ********************************************************************************
 ]]--
 
+-- On accepting the job
 function onAcceptJob( ID, skinID )
 	-- Get job data
     local team, max_wl, description, skins = unpack(work_items[ID])
@@ -50,6 +51,7 @@ end
 addEvent( "GTWcivilians.accept", true )
 addEventHandler( "GTWcivilians.accept", root, onAcceptJob )
 
+-- Manage job tools
 function onBuyTool(name, ammo, price, weapon_id)
 	if not name or not ammo or not price or not weapon_id then return end
 	if getPlayerMoney(client) >= tonumber(price) then
@@ -61,3 +63,43 @@ function onBuyTool(name, ammo, price, weapon_id)
 end
 addEvent( "GTWcivilians.buyTools", true )
 addEventHandler( "GTWcivilians.buyTools", root, onBuyTool )
+
+-- Team service and scoreboard
+function addTeamData ( )
+	-- Add info columns to scoreboard
+	exports.scoreboard_2015:scoreboardAddColumn("Occupation", root, 100)
+	exports.scoreboard_2015:scoreboardAddColumn("Group", root, 100)
+	exports.scoreboard_2015:scoreboardAddColumn("Money", root, 75)
+	exports.scoreboard_2015:scoreboardAddColumn("Playtime", root, 50)
+	--exports.scoreboard_2015:scoreboardAddColumn("Jailed", root, 35)
+	
+	-- Create teams
+	staffTeam = createTeam( "Staff", 255, 255, 255 )
+	govTeam = createTeam( "Government", 110, 110, 110 )
+	emergencyTeam = createTeam( "Emergency service", 0, 150, 200 )
+   	civilianTeam = createTeam( "Civilians", 200, 150, 0 )
+	gangstersTeam = createTeam( "Gangsters", 135, 0, 135 )
+	criminalTeam = createTeam( "Criminals", 170, 0, 0 )
+	unemployedTeam = createTeam( "Unemployed", 255, 255, 0 )
+	
+	-- Restore teams
+	for i,p in pairs(getElementsByType( "player" )) do
+		if not getElementData(p, "teamsystem_team") then
+			setPlayerTeam(p, getTeamFromName("Unemployed"))
+			setElementData(p, "Occupation", "")
+		else
+			setPlayerTeam(p, getTeamFromName( getElementData(p, "teamsystem_team")))
+			setElementData(p, "teamsystem_team", nil)
+		end
+	end
+end
+addEventHandler( "onResourceStart", getResourceRootElement(), addTeamData )
+
+addEventHandler( "onResourceStop", getResourceRootElement(), 
+function ( resource )
+	for i,p in pairs(getElementsByType( "player" )) do
+		if getPlayerTeam(p) then
+			setElementData(p, "teamsystem_team", getTeamName(getPlayerTeam(p)))
+		end
+	end
+end)

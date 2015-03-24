@@ -18,7 +18,7 @@ spam = {}
 function checkSpam(cmd)
 	if not (spam[source]) then
 		spam[source] = 1
-	elseif (spam[source] == 10) then
+	elseif (spam[source] == 20) then
 		cancelEvent()
 		exports.GTWtopbar:dm("Do not spam commands!",source,255,0,0)
 	else
