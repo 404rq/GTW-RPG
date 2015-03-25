@@ -1,10 +1,4 @@
-# GTW-RPG Rsources
-These are the resources, mainly written in lua, indexed by a meta file (meta.xml) for Multi Theft Auto 
-servers, read more about installation and configuration of the mtasa server here:
-http://wiki.multitheftauto.com/wiki/Server_Manual
+### Resources
+Resources are folders with lua code and a meta file (meta.xml) to index included code, all resources are stored in this server folder whos name is surrounded with brackets to let's the server know it's a folder and not just one big resource. See "contributing" on main for more information about how to contribute to GTW-RPG or "installation" for detailed instructions in how you can install these resources on your own server. 
 
-## Support our developers
-Do you like GTW-RPG? we kindly accept any donation as we accept other contributions and improvements. Help us improve GTW-RPG further and share your opinions about the project.
-
-
-<a target="_blank" href='https://pledgie.com/campaigns/27635'><img alt='Click here to lend your support to: GTW RPG and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/27635.png?skin_name=chrome' border='0' ></a>
+Each resource has a readme file with more information and requirements (other resources that must be running in order to use a specific resource). If you find any bug or other issues please report them to us, alternatively fork and post a pull request if you know how to solve the problem.
