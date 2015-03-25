@@ -1,26 +1,21 @@
-### Description
-GTWgui, also known as Walrus GUI is an alternative to dx GUI's based on standard CE GUI elements, by 
-using images any design could be applied to these GUI's without risk of loosing useful event's and 
-functionality as well as saving valuable CPU resources for the clients, 
+Applies custom font styles and create CE GUI windows with a custom style, NOTE that this has to be loaded before any resource calling it's functions, resources who use this GUI system must also be reloaded whenever this resource is reloaded (after this). NOTE2 other solutions to include nice looking GUI's are being worked on which will make this resource unused in the future.
 
-<br>
-**Functions available**
-
-None _not available yet._
-
-<br>
-**Exported functions**
+## Functions available
 
 `element window = createWindow(float x, float y, float width, float height, string text, bool relative)`  
 _(client) Create a CE GUI window with custom background based on an image and returns it._
 
-setDefaultFont(element guiElement, float fontSize)
+`setDefaultFont(element guiElement, float fontSize)`  
 _(client) Apply a new font at given size to any element._
 
-<br>
-**Requirements**
+## Exported functions
 
-s_refresh.lua (server file), this is an included script that automatically refresh any resource using 
-this resources GUI, run this if you restart GTWgui after calling it from another resource to prevent 
-random controls from spawning at top left.
-GTWtopbar<br>
+`element window = createWindow(float x, float y, float width, float height, string text, bool relative)`  
+_(client) Create a CE GUI window with custom background based on an image and returns it._
+
+`setDefaultFont(element guiElement, float fontSize)`  
+_(client) Apply a new font at given size to any element._
+
+## Requirements
+
+GTWtopbar
