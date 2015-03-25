@@ -1,18 +1,14 @@
-### Description
-GTWfarmer, work as a farmer, plant seeds, watch them grow in an hour and do other usefull stuff while waiting. This is a part of GTWcivilians and not a ful job. 
+Farmer job which let you buy and plant seeds, see them grow into crops, harvest and sell the crops. To become a farmer you must be in the team "Civilians" with the occupation "Farmer", (This functionality is provided by GTWcivilians). Press the N key to plant seeds anywhere on the map while driving a tractor.
 
-<br>
-**Functions available**
+## Functions available
 
-_No information available, please try again later or look into the source code._
+Not available, _There is no information about this resource functions available currently, see the source code for details, or fork and contribute by yourself (pull request)._
 
-<br>
-**Exported functions**
+## Exported functions
 
-None, _This resource has no exports._
+None, _This resource doesn't have any exported functions._
 
+## Requirements
 
-<br>
-**Requirements**
-
-GTWcivilians
+GTWcivilians<br>
+GTWtopbar
