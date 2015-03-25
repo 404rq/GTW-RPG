@@ -1,5 +1,4 @@
-# GTWantispam
-This resource check all incoming commands, count them and block overflow in case of spam, it will also warn the player
+Simple antispam tool to check all incoming commands, count them and block on overflow to prevent spam, it will also warn the affected player.
 
 ## Functions available
 
