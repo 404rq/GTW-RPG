@@ -49,6 +49,7 @@ function loadList( )
 	end
 	
 	--[[ Inform online players that this refresh may cause some lag ]]--
+	if not getResourceFromName("GTWtopbar") then return end
 	exports.GTWtopbar:dm("Restarting GUI system, you may notice some lag for a few seconds, please be patient...", root, 255, 100, 0)
 end
 addEventHandler("onResourceStart", resourceRoot, loadList)

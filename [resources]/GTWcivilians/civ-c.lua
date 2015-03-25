@@ -134,6 +134,9 @@ function showGUI( hitElement, matchingdimension, jobID )
  			end
  		end
  		
+ 		-- Freeze the player
+ 		setElementFrozen(hitElement, true)
+ 		
  		-- Check wanted level
  		if getPlayerWantedLevel() > max_wl then 
  			exports.GTWtopbar:dm( ID..": Go away, we don't hire criminals!", 255, 0, 0 )
@@ -352,6 +355,9 @@ function acceptJob()
  	fadeCamera(false)
  	setTimer(resetAndCloseGUI, 1000, 1)
  	cooldown = setTimer(function() end, 3000, 1)
+ 	
+ 	-- Unfreeze player
+ 	setTimer(setElementFrozen, 2000, 1, localPlayer, false)
     
 	-- Closing the gui
  	guiSetVisible( work_window, false )
@@ -365,6 +371,9 @@ function closeGUIbutton()
  	guiSetVisible( work_window, false )
  	guiSetInputEnabled( false )
  	showCursor( false )
+ 	
+ 	-- Unfreeze player
+ 	setTimer(setElementFrozen, 2000, 1, localPlayer, false)
  	
  	-- Reset camera details
  	fadeCamera(false)

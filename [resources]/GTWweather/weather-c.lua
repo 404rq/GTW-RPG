@@ -14,29 +14,20 @@
 ********************************************************************************
 ]]--
 
-local current_zone,new_zone = 0,1
-function onWeatherReturn( weather, zoone )
-	setWeather(weather)
-	current_zone = zoone
-end
-addEvent("GTWweather.onWeatherReturn", true)
-addEventHandler("GTWweather.onWeatherReturn", localPlayer, onWeatherReturn)
+function set_rainy() 
+	setWeather (8) 
+end 
+addCommandHandler("rainy", set_rainy) 
+addCommandHandler("rain", set_rainy)
 
-function askForWeather()
-	local x,y,z = getElementPosition(localPlayer)
-	x,y,z = math.floor((x+3)/1000),math.floor((y+3)/1000),math.floor((z+3)/1000)
-	local z_counter = 1
-	for i=1, 6 do
-		for j=1, 6 do
-			if x == i and y == j then new_zone = z_counter break end
-			z_counter = z_counter + 1
-		end
-	end
-	if new_zone ~= current_zone then
-		triggerServerEvent("GTWweather.onAskForWeather", resourceRoot, current_weather)
-	end
+function set_foggy() 
+   	setWeather (9) 
 end
+addCommandHandler("foggy", set_foggy)
+addCommandHandler("fog", set_foggy)
 
--- Initialize and update each
-askForWeather()
-setTimer(askForWeather, 1000, 0)
+function set_sunny() 
+	setWeather (0) 
+end 
+addCommandHandler("sunny", set_sunny) 
+addCommandHandler("sun", set_sunny)
