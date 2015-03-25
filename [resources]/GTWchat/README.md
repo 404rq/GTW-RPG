@@ -1,8 +1,4 @@
-# GTWchat
-GTWchat was mainly build for our RPG server, but later on we felt like some of the chats could be useful 
-on other GTW servers as well, by that we started to improve it's compatibility with other servers, chat's 
-will automatically be usable as long required features are running, central and global settings makes it 
-easy to modify as well as customize if needed.
+Chat system with many chats available like: main, team, local. Some custom chats: car chat, group chat (require a group system), staff chats and of course role play chats /me* and /do*. The system also comes with chatbubbles and great documentation in it's source code to make modifications easier.
 
 ## Functions available
 
