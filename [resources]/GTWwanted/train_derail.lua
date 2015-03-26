@@ -1,30 +1,30 @@
 --[[ 
 ********************************************************************************
 	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
+	Project name: 		GTW-RPG	
+	Developers:   		GTWCode
 	
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
+	Bugtracker: 		http://forum.albonius.com/bug-reports/
 	Suggestions:		http://forum.albonius.com/mta-servers-development/
 	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Version:    		Open source
+	License:    		GPL v.3 or later
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
 -- Local index over places where trains can derail
 local train_derail_points = {
 	-- Train derail points
-	{2186, -1941, 15, 70},
-	{2200, -1736, 15, 70},
-	{2212, -1648, 17, 70},
-	{2274, -1487, 22, 70},
-	{2287, -1384, 24, 70},
-	{2286, -1150, 26, 70},
-	{2241, -1578, 19, 100},
-	{2039, -573, 72, 110},
+    {2186, -1941, 15, 70},
+    {2200, -1736, 15, 70},
+    {2212, -1648, 17, 70},
+    {2274, -1487, 22, 70},
+    {2287, -1384, 24, 70},
+    {2286, -1150, 26, 70},
+    {2241, -1578, 19, 100},
+    {2039, -573, 72, 110},
     {2071, -371, 65, 110},
     {2367, -285, 23, 110},
     {2748, -276, 19, 80},
