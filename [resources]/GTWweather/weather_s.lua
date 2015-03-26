@@ -1,16 +1,16 @@
 --[[ 
 ********************************************************************************
-Project owner:	GTWGames												
-Project name:	GTW-RPG	
-Developers: 	GTWCode
+	Project owner:		GTWGames												
+	Project name: 		GTW-RPG	
+	Developers:   		GTWCode
 	
-Source code:	https://github.com/GTWCode/GTW-RPG/
-Suggestions:	http://forum.albonius.com/mta-servers-development/
-Bugtracker: 	http://forum.albonius.com/bug-reports/
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.albonius.com/bug-reports/
+	Suggestions:		http://forum.albonius.com/mta-servers-development/
 	
-Version:		Open source
-License:		GPL v.3 or later
-Status: 		Stable release
+	Version:    		Open source
+	License:    		GPL v.3 or later
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -34,7 +34,7 @@ we = {
 function chWeather( ) 
 	local wid = math.random( #we ) 
 	setWeatherBlended( we[wid] ) 
-	outputServerLog("[Weather] Fading to: "..we[wid][1]) 
+	outputServerLog("[Weather] Fading to: "..we[wid]) 
 end
-setTimer( chWeather, math.random(30,60)*60*1000, 0 ) 
+setTimer( chWeather, math.random(130,180)*60*1000, 0 ) 
 setWeather( we[math.random( #we )] ) 
