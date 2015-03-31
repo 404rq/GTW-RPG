@@ -47,7 +47,6 @@ function turfPayout(query)
 			if money > 4000 then money = 4000 end
 			if money > 50 then
 				givePlayerMoney(player,money)
-				outputChatBox("You have received: "..tostring(money).."$ from your turfs!", player, 0, 150, 0)
 				exports.GTWtopbar:dm("You have received: "..tostring(money).."$ from your turfs!", player, 0, 255, 0)
 			end
 		end

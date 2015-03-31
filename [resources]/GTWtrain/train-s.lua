@@ -196,6 +196,10 @@ function makeTrain( hitElement, matchingDimension, id )
 					numberOfWagonsInTrain = math.random(1,maxAttach)
 				end
 				local locomotiveID = 537
+				local isChainOfEngines = false
+				if math.random(1,20) > 15 then
+					isChainOfEngines = true
+				end
 				for i=1,numberOfWagonsInTrain do
 					if i == 1 then
 						-- First locomotive
@@ -220,6 +224,9 @@ function makeTrain( hitElement, matchingDimension, id )
 						if i == 2 and math.random(1,10) < 6 and allowDoubleEngines and numberOfWagonsInTrain > 4 and locomotiveID == 537 then
 							vehID = 537
 						end
+						if isChainOfEngines then
+							vehID = locomotiveID
+						end
 						if spawnPoints[spawner][5] == "tram" then
 							vehID = 449
 						end
@@ -237,24 +244,22 @@ function makeTrain( hitElement, matchingDimension, id )
 					setTrainDirection( train[hitElement][i], trainDirection[hitElement] )
 					setElementSyncer( train[hitElement][i], hitElement )
 					setElementData( train[hitElement][i], "syncer", hitElement)
-					if not streamOut then
-						triggerClientEvent ( "train.onstream", getRootElement(), train[hitElement][i])
-					end
+					
+					-- Adds a blip to each carriage (DEBUG only)
+				    createBlipAttachedTo( train[hitElement][i], 0, 1, 255, 200, 0, 255, 0, 180 )
+				    setVehicleColor( train[hitElement][i], 0, 0, 0, 0, 0, 0)
 				end
 				 -- Adds a ped to every trailer
 				for j=1,numberOfWagonsInTrain do
 					-- Create a ped for every wagon to control it
-					pilot[hitElement][j] = createPed(280, 1, 1, 1)
+					pilot[hitElement][j] = createPed(194, 1, 1, 1)
 						
 					-- Make the ped invisible for 
 					-- the look and feel of the train
-					setElementAlpha( pilot[hitElement][j], 0 )
+					--setElementAlpha( pilot[hitElement][j], 0 )
 						
 					-- Wrap the peds into the train
 				    warpPedIntoVehicle( pilot[hitElement][j], train[hitElement][j])
-				    
-				    -- Adds a blip to each carriage (DEBUG only)
-				    --createBlipAttachedTo( pilot[hitElement][j], 0, 1, 0, 0, 0, 50, 0, 99999 )
 				end
 				
 				-- Play the horn
@@ -298,6 +303,7 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 		local stationID = 0
 		local typeOfMarker = "station"
 		stationID,typeOfMarker = findNearestTrainStation( train[thePlayer][1] )
+		if not stationID then cleanUp(thePlayer) return end
 		local px,py,pz = getElementPosition( train[thePlayer][1] )
 		local lx,ly,lz = getElementPosition( train[thePlayer][1] )
 		local mmx,mmy,mmz = getElementPosition( train[thePlayer][math.floor((numberOfWagons)/2)] )
@@ -309,12 +315,12 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 			trainSpeed = (trainSpeed*(distToStation/accelerationConst)*7)
 		end
 		if distToStation > 30 and distToStation < 400 then
-			if math.random(10) < 4 and not isTimer(horncooldown[thePlayer]) then
+			if math.random(10) < 3 and not isTimer(horncooldown[thePlayer]) then
 				useHorn(train[thePlayer][1])
-				if math.random(10) < 4 then
+				if math.random(10) < 3 then
 					setTimer(useHorn, 6000, 1, train[thePlayer][1])
 				end
-				horncooldown[thePlayer] = setTimer(function() end, 10000, 1)
+				horncooldown[thePlayer] = setTimer(function() end, 15000, 1)
 			end
 		end
 		if trainSpeed > maxSpeed then
@@ -411,14 +417,3 @@ function quitPlayer( )
 	end
 end
 addEventHandler( "onPlayerQuit", getRootElement(), quitPlayer )
-
-function cleanUpFromClient( theTrain )
-	if theTrain and isElement(theTrain) then
-		local thePlayer = getElementSyncer(theTrain)
-    	if thePlayer and isElement(thePlayer) then
-    		cleanUp(thePlayer)
-    	end
-    end
-end
-addEvent( "GTWtrain.onClientTrainStreamOut", true )
-addEventHandler( "GTWtrain.onClientTrainStreamOut", root, cleanUpFromClient )
