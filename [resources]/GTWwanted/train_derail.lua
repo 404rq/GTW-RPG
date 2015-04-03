@@ -114,9 +114,7 @@ function check_derail()
 			for j,dp in pairs(train_derail_points) do
 				local dx,dy,dz,speed = unpack(dp)
 				local dist = getDistanceBetweenPoints3D(px,py,pz, dx,dy,dz)
-				local speedx,speedy,speedz = getElementVelocity(plr)
-				local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
-				local kmh = (actualspeed * 180)-5
+				local kmh = getTrainSpeed(getPedOccupiedVehicle(plr))
 				if dist < n_dist then 
 					n_dist = dist 
 					n_speed = speed
