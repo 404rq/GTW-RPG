@@ -134,9 +134,6 @@ function showGUI( hitElement, matchingdimension, jobID )
  			end
  		end
  		
- 		-- Freeze the player
- 		setElementFrozen(hitElement, true)
- 		
  		-- Check wanted level
  		if getPlayerWantedLevel() > max_wl then 
  			exports.GTWtopbar:dm( ID..": Go away, we don't hire criminals!", 255, 0, 0 )
@@ -156,6 +153,9 @@ function showGUI( hitElement, matchingdimension, jobID )
  			guiSetVisible(btn_accept, true)
  			guiSetText(btn_cancel, "Cancel")
  		end
+ 		
+ 		-- Freeze the player
+ 		setElementFrozen(hitElement, true)
  		
  		-- Move to skin selection area
  		g_px,g_py,g_pz = getElementPosition(localPlayer)
@@ -394,4 +394,5 @@ function resetAndCloseGUI()
  	setElementRotation(localPlayer, g_prx,g_pry,g_prz)
  	destroyElement(dummyped)
  	setCameraTarget(localPlayer)
+ 	setElementFrozen(localPlayer, false)
 end
