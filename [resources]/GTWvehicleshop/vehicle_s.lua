@@ -360,7 +360,7 @@ function returnWeaponsOnSell(query)
     end
     
     -- Extract data and give weapons back to the owner
-    local data_table = fromJSON(items)
+    local data_table = fromJSON(items) or { }
 	for k, v in pairs(data_table) do
 		giveWeapon(plr, getWeaponIDFromName(k), tonumber(v))
 		outputChatBox(k.." was successfully restored ("..tostring(v)..") bullets", plr, 255, 255, 255)
