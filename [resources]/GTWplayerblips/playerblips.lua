@@ -108,6 +108,7 @@ end
 --[[ Check if team have changed and update blips ]]--
 function updateBlipColor(plr)
 	-- Check if team exist and has changed
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	if not getPlayerTeam(plr) then return end
 	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) then return end
 	
