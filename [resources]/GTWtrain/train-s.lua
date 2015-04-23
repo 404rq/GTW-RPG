@@ -21,6 +21,7 @@ respawnTimers 	= {}
 -- Global data
 train 			= {{ }} 
 pilot 			= {{ }}
+blips			= {{ }}
 trainDirection	= { }
 syncTimer 		= { }
 cooldown 		= { }
@@ -180,6 +181,9 @@ function makeTrain( hitElement, matchingDimension, id )
 		if not pilot[hitElement] then
 			pilot[hitElement] = {}
 		end
+		if not blips[hitElement] then
+			blips[hitElement] = {}
+		end
 		
 		-- Check for already existing trains
 		if not isElement( train[hitElement][1] ) then
@@ -233,7 +237,7 @@ function makeTrain( hitElement, matchingDimension, id )
 						local x,y,z = getElementPosition( train[hitElement][1] )
 						train[hitElement][i] = createVehicle(vehID, x, y, z )
 						if spawnPoints[spawner][5] == "tram" then
-							setVehicleColor( train[hitElement][i], 135, 135, 135, 255, 255, 255 )
+							--setVehicleColor( train[hitElement][i], 135, 135, 135, 255, 255, 255 )
 						end
 						setTimer( setVehicleOverrideLights, 50, 1, train[hitElement][i], 1 )
 						setTrainDerailable( train[hitElement][i], false )
@@ -246,8 +250,8 @@ function makeTrain( hitElement, matchingDimension, id )
 					setElementData( train[hitElement][i], "syncer", hitElement)
 					
 					-- Adds a blip to each carriage (DEBUG only)
-				    createBlipAttachedTo( train[hitElement][i], 0, 1, 255, 200, 0, 255, 0, 180 )
-				    setVehicleColor( train[hitElement][i], 0, 0, 0, 0, 0, 0)
+				    blips[hitElement][i] = createBlipAttachedTo( train[hitElement][i], 0, 1, 255, 200, 0, 255, 0, 180 )
+				    --setVehicleColor( train[hitElement][i], 0, 0, 0, 0, 0, 0)
 				end
 				 -- Adds a ped to every trailer
 				for j=1,numberOfWagonsInTrain do
@@ -381,6 +385,10 @@ function cleanUp( trainID )
 				destroyElement ( pilot[trainID][d] )
 				pilot[trainID][d] = nil
 			end
+			if isElement ( blips[trainID][d] ) then
+				destroyElement ( blips[trainID][d] )
+				blips[trainID][d] = nil
+			end
 		end
 		train[trainID] = nil
 		if isTimer( syncTimer[trainID] ) then
@@ -409,6 +417,10 @@ function quitPlayer( )
 			if isElement ( pilot[source][d] ) then
 				destroyElement ( pilot[source][d] )
 				pilot[source][d] = nil
+			end
+			if isElement ( blips[source][d] ) then
+				destroyElement ( blips[source][d] )
+				blips[source][d] = nil
 			end
 			if isTimer( syncTimer[source] ) then
 				killTimer( syncTimer[source] )
