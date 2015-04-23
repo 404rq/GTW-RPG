@@ -19,6 +19,9 @@ function result(str_result, plr)
 	local text = str_result
 	plr = getPlayerFromName(plr)
 	
+	-- Verify that the player is still online
+	if not plr then return end
+	
 	-- Format from wiki to MTA text field
 	text = string.gsub(text,"'''", "")
 	
@@ -28,7 +31,7 @@ end
 
 -- Call remote server II to receive latest GTW updates
 function onUpdateRequest( )	
-	callRemote( "http://s2.albonius.com/mta-mods/get.php", result, getPlayerName(client))
+	callRemote( "http://gs.gtw-games.org:81/updates/get.php", result, getPlayerName(client))
 end
 addEvent("GTWupdates.request", true)
 addEventHandler("GTWupdates.request", resourceRoot, onUpdateRequest)

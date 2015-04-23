@@ -37,17 +37,17 @@ function requestUpdates()
 	-- Request updates list from GTW server IV (s4.albonius.com) on open 
 	oldText = guiGetText(text)
 	if oldText == "" then
-		guiSetText(text, "Connecting to s4.albonius.com for latest updates, please wait...")
+		guiSetText(text, "Connecting to gs.gtw-games.org for latest updates, please wait...")
 	end
 	triggerServerEvent("GTWupdates.request", resourceRoot)
 	function onResponseFromServer(message)
 	    -- Report changes to online players
 	    if oldText ~= message and guiGetVisible(window) then
 	    	guiSetText(text,message)
-	    	exports.GTWtopbar:dm("Updates downloaded from: 's4.albonius.com'", 180, 180, 180 )
+	    	exports.GTWtopbar:dm("Updates downloaded from: gs.gtw-games.org", 180, 180, 180 )
 	    elseif oldText ~= message then
 	    	guiSetText(text,message)
-	    	exports.GTWtopbar:dm("Updates has been added! Use /updates to see what's new", 180, 180, 180 )
+	    	exports.GTWtopbar:dm("Updates downloaded from: gs.gtw-games.org! Use /updates to see what's new", 180, 180, 180 )
 	    end
 	end
 	addEvent( "GTWupdates.respond", true )
