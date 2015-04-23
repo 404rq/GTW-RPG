@@ -67,11 +67,11 @@ addEventHandler( "GTWcivilians.buyTools", root, onBuyTool )
 -- Team service and scoreboard
 function addTeamData ( )
 	-- Add info columns to scoreboard
-	exports.scoreboard_2015:scoreboardAddColumn("Occupation", root, 100)
-	exports.scoreboard_2015:scoreboardAddColumn("Group", root, 100)
-	exports.scoreboard_2015:scoreboardAddColumn("Money", root, 75)
-	exports.scoreboard_2015:scoreboardAddColumn("Playtime", root, 50)
-	--exports.scoreboard_2015:scoreboardAddColumn("Jailed", root, 35)
+	exports.scoreboard:scoreboardAddColumn("Occupation", root, 90)
+	exports.scoreboard:scoreboardAddColumn("Group", root, 130)
+	exports.scoreboard:scoreboardAddColumn("Money", root, 70)
+	exports.scoreboard:scoreboardAddColumn("Playtime", root, 50)
+	exports.scoreboard:scoreboardAddColumn("Jailed", root, 30)
 	
 	-- Create teams
 	staffTeam = createTeam( "Staff", 255, 255, 255 )
