@@ -21,43 +21,11 @@ Beside the standardized core features, this project also includes a lot of misc 
 ## Donations
 There are many ways you may contribute into this project, see the contributing file for more information, another way is donations which ensure the ability to test the software on actual live servers.<br>
 
-<script src="http://coinwidget.com/widget/coin.js"></script>
-<script>
-CoinWidgetCom.go({
-	wallet_address: "1PXprys6XcGbBjywPBM8ZrqVBesHAMimyP"
-	, currency: "bitcoin"
-	, counter: "amount"
-	, alignment: "bl"
-	, qrcode: true
-	, auto_show: false
-	, lbl_button: "Donate"
-	, lbl_address: "GTW Games:"
-	, lbl_count: "donations"
-	, lbl_amount: "BTC"
-});
-</script><br><br>
-<script src="http://coinwidget.com/widget/coin.js"></script>
-<script>
-CoinWidgetCom.go({
-	wallet_address: "LXWTxRs1wB1JSPE2ZKYVjTeuCZhhPmqCpV"
-	, currency: "litecoin"
-	, counter: "amount"
-	, alignment: "bl"
-	, qrcode: true
-	, auto_show: false
-	, lbl_button: "Donate"
-	, lbl_address: "GTW Games:"
-	, lbl_count: "donations"
-	, lbl_amount: "LTC"
-});
-</script>
-
 ## Contributors
-GTW Code (organization)<br>
-MrBrutus<br>
+Mr.Moose<br>
 The Walrus<br>
+The Penguin
 
 ## Websites
-GTW games: http://games.albonius.com<br>
-GTW code:  http://code.albonius.com<br>
-Development: http://forum.albonius.com/mta-servers-development/
+GTW main page: http://www.gtw-games.org<br>
+Development discussions: http://forum.gtw-games.org/mta-servers-development/
