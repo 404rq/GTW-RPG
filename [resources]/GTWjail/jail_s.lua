@@ -24,11 +24,11 @@ jail_data = {
 --[[ Public list of release points indexed by code ]]--
 release_locations = {
 	["LSPD"]={ "Los Santos police department", 1540, -1654, 14, 270 },
-	["SFPD"]={ "San Fierro police department", 1540, -1654, 14, 270 },
-	["LVPD"]={ "Las Venturas police department", 1540, -1654, 14, 270 },
-	["EQPD"]={ "El Quebrados police department", 1540, -1654, 14, 270 },
-	["FCPD"]={ "Fort Carson police department", 1540, -1654, 14, 270 },
-	["APPD"]={ "Angel Pine police department", 1540, -1654, 14, 270 },
+	["SFPD"]={ "San Fierro police department", -1622, 721, 15, 0 },
+	["LVPD"]={ "Las Venturas police department",  2306, 2422, 11, 180 },
+	["EQPD"]={ "El Quebrados police department", -1416, 2627, 56, 90 },
+	["FCPD"]={ "Fort Carson police department",  -209, 973, 19, 270 },
+	["APPD"]={ "Angel Pine police department", -2171, -2382, 31, 144 },
 }
 
 --[[ Sends a player to jail ]]--
@@ -249,7 +249,7 @@ function jail_escape(crim)
 	end
 	
 	-- Set the wanted level
-	exports.GTWwanted:setWl(crim, 10, 300, "You committed the crime of jailbreak")
+	exports.GTWwanted:setWl(crim, 1, 360, "You committed the crime of jailbreak")
 end
 
 -- Show the time left when jailed
