@@ -39,9 +39,12 @@ end
 function repair_veh(veh, repairTime)
 	if not veh or not isElement(veh) then outPutTopbarMessage("No vehicle found", client, 255, 0, 0) return end
 	local acc = getElementData(veh, "owner")
-	if not acc then return end
-	local owner = getAccountPlayer(getAccount(acc))
-	if not owner then outPutTopbarMessage("The owner of this vehicle is currently offline!", client, 255, 0, 0) return end
+	local acc2,owner = nil,nil
+	if acc then
+		acc2 = getAccount(acc)
+		owner = getAccountPlayer(acc2)
+	end
+	if not owner then outPutTopbarMessage("The owner of this vehicle is currently offline", client, 255, 100, 0) end
 	
 	-- Freeze elements during repair
 	setElementFrozen(veh, true)
@@ -49,7 +52,7 @@ function repair_veh(veh, repairTime)
 	setPedAnimation(client, "GRAFFITI", "spraycan_fire", -1, true, false)
 	showCursor(client, true)
 	outPutTopbarMessage("Reparing vehicle...", client, 0, 255, 0)
-	outPutTopbarMessage("Your vehicle is repaired...", owner, 0, 255, 0)
+	if owner then outPutTopbarMessage("Your vehicle is repaired...", owner, 0, 255, 0) end
 	
 	-- Reset after repair
 	setTimer(fixVehicle, math.floor(repairTime), 1, veh)
@@ -57,7 +60,7 @@ function repair_veh(veh, repairTime)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, client, false)
 	setTimer(outPutTopbarMessage, math.floor(repairTime), 1, "Vehicle was sucsessfully repaired!", client, 0, 255, 0)
-	setTimer(outPutTopbarMessage, math.floor(repairTime), 1, "Your vehicle was repaired by: "..getPlayerName(client), owner, 0, 255, 0)
+	if owner then setTimer(outPutTopbarMessage, math.floor(repairTime), 1, "Your vehicle was repaired by: "..getPlayerName(client), owner, 0, 255, 0) end
 	setTimer(pay_repair, math.floor(repairTime), 1, client, owner)
 	setTimer(setPedAnimation, math.floor(repairTime), 1, client, nil, nil)
 				
@@ -74,9 +77,12 @@ addEventHandler("GTWmechanic.repair", root, repair_veh)
 function refuel_veh(veh, refuelTime)
 	if not veh or not isElement(veh) then outPutTopbarMessage("No vehicle found", client, 255, 0, 0) return end
 	local acc = getElementData(veh, "owner")
-	if not acc then return end
-	local owner = getAccountPlayer(getAccount(acc))
-	if not owner then outPutTopbarMessage("The owner of this vehicle is currently offline!", client, 255, 0, 0) return end
+	local acc2,owner = nil,nil
+	if acc then
+		acc2 = getAccount(acc)
+		owner = getAccountPlayer(acc2)
+	end
+	if not owner then outPutTopbarMessage("The owner of this vehicle is currently offline", client, 255, 100, 0) end
 	
 	-- Freeze elements during repair
 	setElementFrozen(veh, true)
@@ -84,14 +90,14 @@ function refuel_veh(veh, refuelTime)
 	setPedAnimation(client, "GRAFFITI", "spraycan_fire", -1, true, false)
 	showCursor(client, true)
 	outPutTopbarMessage("Refueling vehicle...", client, 0, 255, 0)
-	outPutTopbarMessage("Your vehicle is being refuled...", owner, 0, 255, 0)
+	if owner then outPutTopbarMessage("Your vehicle is being refuled...", owner, 0, 255, 0) end
 	
 	-- Reset after repair
 	setTimer(showCursor, math.floor(refuelTime), 1, client, false)
 	setTimer(setElementFrozen, math.floor(refuelTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(refuelTime), 1, client, false)
 	setTimer(outPutTopbarMessage, math.floor(refuelTime), 1, "Vehicle was sucsessfully refuled!", client, 0, 255, 0)
-	setTimer(outPutTopbarMessage, math.floor(refuelTime), 1, "Your vehicle was refuled by: "..getPlayerName(client), owner, 0, 255, 0)
+	if owner then setTimer(outPutTopbarMessage, math.floor(refuelTime), 1, "Your vehicle was refuled by: "..getPlayerName(client), owner, 0, 255, 0) end
 	setTimer(setPedAnimation, math.floor(refuelTime), 1, client, nil, nil)
 	setTimer(pay_refuel, math.floor(refuelTime), 1, client, owner)
 	setTimer(setElementData, math.floor(refuelTime), 1, veh, "vehicleFuel", 100)

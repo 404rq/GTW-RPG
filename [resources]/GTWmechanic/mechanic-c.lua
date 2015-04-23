@@ -78,7 +78,7 @@ addEventHandler("onClientClick", root, openVehicleMenu)
 function repair_destroy()
 	if not isElement(element) or not guiGetEnabled(btn_repair) or not source == btn_repair then return end
 	if getElementData(localPlayer, "Occupation") == "Mechanic" then			
-		if getElementData(element, "owner") then
+		if getElementHealth(element) < 1000 then
 			local repairTime = (1000-getElementHealth(element))*30
 			if repairTime < 5000 then
 				repairTime = 5000
@@ -95,7 +95,7 @@ function repair_destroy()
 			setTimer(destroyElement, repairTime, 1, mech_pb)
 			triggerServerEvent("GTWmechanic.repair", root, element, repairTime)
 		else
-			topBarMessage("This vehicle has no owner!", 255, 0, 0)
+			topBarMessage("This vehicle is already in good condition!", 255, 100, 0)
 		end
 	else
 		triggerServerEvent("GTWmechanic.destroy", getRootElement(), element)
@@ -107,9 +107,9 @@ end
 --[[ Refule or display information? that's another question ]]--
 function refuel_information()
 	if not isElement(element) or not guiGetEnabled(btn_refuel) or not source == btn_refuel then return end
-	if getElementData(localPlayer, "Occupation") == "Mechanic" then			
-		if getElementData(element, "owner") then
-			local fuel = getElementData(element, "vehicleFuel") or 0
+	if getElementData(localPlayer, "Occupation") == "Mechanic" then	
+		local fuel = getElementData(element, "vehicleFuel") or 0	
+		if fuel < 100 then		
 			local refuleTime = (100-fuel)*100
 			if refuleTime < 5000 then
 				refuleTime = 5000
@@ -126,7 +126,7 @@ function refuel_information()
 			setTimer(destroyElement, refuleTime, 1, mech_pb)
 			triggerServerEvent("GTWmechanic.refuel", root, element, refuleTime)
 		else
-			topBarMessage("This vehicle has no owner!", 255, 0, 0)
+			topBarMessage("This vehicle already has enough fuel!", 255, 100, 0)
 		end
 	else
 		--exports.GTWtopbar:dm("Vehicle was sucsessfully removed!", 0, 255, 0)
