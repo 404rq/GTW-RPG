@@ -1,6 +1,8 @@
-# GTW Maps
-Maps are modifications to in game objects relative to the default map of GTA San Andreas, maps available here are mainly bases for groups which usually means a building with fence around and some extra details, a way to keep unwanted players away from a protected zone. The core map adds details such as trees, benches, thelephone boots, bushes and makes the game look more realistic in general, the core map is the only map that cover the whole map.
+## Maps
+Maps are a type of xml files used to move, add or remove in game objects that belongs to the map. As Multi Theft Auto offers a great map editor for Grand Theft Auto San Andreas you'll also find some great maps in this project. Like the core map for instance which contains details allover the world to make everything look more realistic. A jail island for our jail resource and some bases for groups/gangs/famileis you name it.  
 
 ## Donations
-Support our developers by donating to this project.<br>
-<a target="_blank" href='https://pledgie.com/campaigns/27635'><img alt='Click here to lend your support to: GTW RPG and make a donation at pledgie.com !' src='https://pledgie.com/campaigns/27635.png?skin_name=chrome' border='0' ></a>
+If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.gtw-games.org or by these Bitcoin respective Litecoin adresses below:
+
+LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`<br>
+BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`
