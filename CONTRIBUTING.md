@@ -18,7 +18,7 @@ An issue report must fullify the following requirements:
 * Analysis of potential consequenses and other potential triggers
 
 You may also report bugs in our community forum:
-http://forum.albonius.com/bug-reports/
+http://forum.gtw-games.org/bug-reports/
 
 
 ## Pull request
@@ -34,6 +34,9 @@ And that's it, contributing shouldn't be harder than that, right.
 
 
 ## Guidelines & coding standards
-Coming soon...
-
-
+More information comes soon, until then we suggest you follow below list of requirements for our definition of clean code:
+* Indentation, indentation applies to every keyword that requires an "end" if more than 1 line are used. For example `function` or `if, else`, functions in functions etc.
+* Comments, a multiline comment is standard above functions to describe shorty their purpose `--[[ This function does a, b, c etc.. ]]--`, within the code it will be sufficient with single line comments `-- Like this one`. Use one new line above every comment and split it up into blocks with a few lines to make it easy to read, comments are not always required but as long they are helpful they should be there.
+* Header, all files should have a header at the top with information about authors, the GTW-RPG project, links to our websites as well as this page. Check the current files to get this block of information.
+* Optimize! any code that uses to much system resources is bad code. To save memory, make sure objects are cleaned up and data related to specific players are removed/saved and then removed when the player leaves. Don't add to much objects unless it's needed, for instance a real example would be GTWtrain with ~500 nodes, adding a marker on all these locations would require lot's of memory. 
+* Don't waste CPU performance, same reasons as above. High CPU usage could cause lag as the FPS won't be able to stay at 60, even older PC's must be able to play at 60 FPS and this isn't hard to accomplish as the game itself is very optimized in the beginning.
