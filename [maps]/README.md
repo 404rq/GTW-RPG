@@ -4,5 +4,5 @@ Maps are a type of xml files used to move, add or remove in game objects that be
 ## Donations
 If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.gtw-games.org or by these Bitcoin respective Litecoin adresses below:
 
-LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`<br>
-BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`
+BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
+LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
