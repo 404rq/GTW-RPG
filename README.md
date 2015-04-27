@@ -26,9 +26,9 @@ BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
 LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
 
 ## Contributors
-Mr.Moose<br>
-The Walrus<br>
-The Penguin
+TheMoose<br>
+TheWalrus<br>
+ThePenguin
 
 ## Websites
 GTW main page: http://www.gtw-games.org<br>
