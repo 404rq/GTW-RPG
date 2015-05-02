@@ -21,7 +21,8 @@ login_cache = { }
 addEvent("GTWaccounts:attemptClientLogin", true)
 addEventHandler("GTWaccounts:attemptClientLogin", root, function(user, pass)
 	if isGuestAccount(getPlayerAccount(source)) then
-		if not getAccount(user) then
+		local accnt = getAccount(user)
+		if not accnt then
 			return doStatus("This account doesn't exist\non the server.", source, 0)
 		end		
 		if not logIn(source, accnt, pass) then
