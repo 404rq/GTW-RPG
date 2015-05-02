@@ -1,6 +1,8 @@
-To install, add below lines to your configuration file:
-"mods/deathmatch/mtaserver.conf"
+To install GTW-RPG resources and start them together with your server, add below lines to 
+your servers configuration file. It's located at: "mods/deathmatch/mtaserver.conf" in
+your servers root folder.
 
+```xml
 <!-- Important imports -->
 <resource src="GTWgui" startup="1" protected="1" />
 <resource src="GTWtopbar" startup="1" protected="0" />
@@ -36,4 +38,9 @@ To install, add below lines to your configuration file:
 <resource src="GTWcoremap" startup="1" protected="1" />
 <resource src="GTWjailmap" startup="1" protected="1" />
 <resource src="GTWsapdbase" startup="1" protected="1" />
-<resource src="GTWswatbase" startup="1" protected="1" />
+<resource src="GTWswatbase" startup="1" protected="1" />`
+```
+
+Important! do not alter the order, some resorces depends on other resources and must 
+therefore be started in certain order. Errors may occur otherwise. When possible, we
+use alphabethical order (ascending) to make it easy to find certain resources.
