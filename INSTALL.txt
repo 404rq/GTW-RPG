@@ -6,6 +6,7 @@ To install, add below lines to your configuration file:
 <resource src="GTWtopbar" startup="1" protected="0" />
 
 <!-- GTW resources -->
+<resource src="GTWaccounts" startup="1" protected="0" />
 <resource src="GTWantispam" startup="1" protected="0" />
 <resource src="GTWchat" startup="1" protected="0" />
 <resource src="GTWcivilians" startup="1" protected="0" />
