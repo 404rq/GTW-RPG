@@ -250,7 +250,7 @@ function makeTrain( hitElement, matchingDimension, id )
 					setElementData( train[hitElement][i], "syncer", hitElement)
 					
 					-- Adds a blip to each carriage (DEBUG only)
-				    blips[hitElement][i] = createBlipAttachedTo( train[hitElement][i], 0, 1, 255, 200, 0, 255, 0, 180 )
+				    blips[hitElement][i] = createBlipAttachedTo( train[hitElement][i], 0, 1, 200, 200, 200, 255, 0, 180 )
 				    --setVehicleColor( train[hitElement][i], 0, 0, 0, 0, 0, 0)
 				end
 				 -- Adds a ped to every trailer

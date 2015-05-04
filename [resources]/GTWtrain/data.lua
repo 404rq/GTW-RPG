@@ -15,8 +15,8 @@
 ]]--
 
 -- Settings
-maxAttachedTrailers 	= 6
-minAttachedTrailers 	= 2
+maxAttachedTrailers 	= 7
+minAttachedTrailers 	= 4
 allowDoubleEngines 		= true					-- True: Make some longer trains spawn with 2 locomotives
 allowBoxTrailers		= true					-- True: All trailers will not be flat, some box trailers will spawn as well
 cleanUpDistance 		= 110					-- Defines how far away the syncer can go before the train should be removed
@@ -30,9 +30,9 @@ end
 timeNextTrainInterval	= math.random(40,60)	-- Time before a new train will spawn if the player stay in the same trigger point
 
 -- Speed and acceleration
-maxSpeed				= 0.4					-- 64	km/h
-minSpeed				= 0.002					-- 2.3	km/h
-accelerationConst		= 300					-- How slow or fast the acceleration will be, high value means slow acceleration, low means fast
+maxSpeed				= 0.35					-- 64	km/h
+minSpeed				= 0.003					-- 2.3	km/h
+accelerationConst		= 350					-- How slow or fast the acceleration will be, high value means slow acceleration, low means fast
 stationHoldTimer		= { }
 stationLeaveTimer		= { }
 
