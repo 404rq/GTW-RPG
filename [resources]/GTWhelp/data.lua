@@ -5,8 +5,8 @@
 	Developers:			GTWCode
 	
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	Bugtracker:			http://forum.gtw-games.org/bug-reports/
+	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
 	
 	Version:			Open source
 	License:			GPL v.3 or later
@@ -48,8 +48,8 @@ Rules in English
     punishable but you may not get the response you expected.
 #8 Do not actively troll, provoke, annoy or insult other players. 
     Instead, solve your conflicts here:
-    Report: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appeal: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Report: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appeal: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Thank you for complying with our rules.
 
@@ -84,12 +84,13 @@ Rules in Swedish (Svenska)
     hanteras i forumet.
 #8 Att aktivt trolla eller provocera är ej heller tillåtet, lös 
     era konflikter här:
-    Klagomål: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Försvar: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Klagomål: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Försvar: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
     
 Tack för att du respekterar våra regler!
 
-- MrBrutus (President of Grand Theft Walrus, Developer, Administrator)
+Translated by:
+- Mr.Moose (President of Grand Theft Walrus, Developer, Administrator)
 
 ********************************************************************
 Last edit:	2015-03-07
@@ -125,11 +126,13 @@ Rules in Danish (Danska)
     strafbar, men du kan ikke få det svar du forventede.
 #8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere.
     I stedet løse dine konflikter her:
-    Betænkning: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appel: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Betænkning: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appel: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Tak for at overholde vores regler.
-- Google Translate, (by: Petteri from Finland)
+
+Translated by:
+- The.Penguin (Developer & Administrator)
 
 ********************************************************************
 Last edit:	2015-03-07
@@ -153,11 +156,13 @@ Rules in Dutch (Nederlands)
 #7 Probeer dit spel NIET: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden. 
     Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
 #8 Ga niet actief trollen, provoceren, irriteren of spelers uitschelden. Inplaats daarvan, los je problemen hier op:
-    Report: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Aanvraag: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Report: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Aanvraag: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
 	
 Bedankt om mee te werken met ons reglement.
-- ownbyurs11 (Global moderator, Moderator in game)
+
+Translated by:
+- WhoopeeTheClown (Global moderator, In game staff)
 
 ********************************************************************
 Last edit:	2015-03-07
@@ -193,11 +198,13 @@ Rules in Italian (Italiano)
     potrai non ottenere la riposta che ti aspettavi.
 #8 Non trollare, provocare, annoiare o insultare gli altri giocatori.
     Invece, risolvi i tuoi conflitti qua:
-    Segnalazioni: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appelli: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Segnalazioni: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appelli: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Grazie per aver letto le regole.
-- Franckf
+
+Translated by:
+- Franckf (Community member)
 
 ********************************************************************
 Last edit:	2015-03-07
@@ -215,11 +222,13 @@ Rules in Urdu (Urdu)
 #6 Do not spam the chats, repeating nonsense on purpose will lead #6 Chat mein spamming na kareu aur nonsense material bhi post na kareu, warna aap mute ho jain gay.
 #7 Game mein ye na kareu: staff ke liye apply, new features ko add karne ki suggestion, dosre players ya staff ki complaint.
 #8 Kisi ko troll, annoy ya insult na kareu. Aap yahan pe jaa sakte hain:
-Report: http://forum.albonius.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-Appeal: http://forum.albonius.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+Report: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+Appeal: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
           
 Shukriya hamare rules parhane ke liye.
-- ccv
+
+Translated by:
+- ccv (Contributor)
 
 ********************************************************************
 Last edit:	2015-03-07
@@ -247,22 +256,25 @@ General information:
 ********************************************************************
 
 Game mode:            
-    Grand Theft Walrus | games.albonius.com
+    Grand Theft Walrus | www.gtw-games.org
 Website:     
-    http://games.albonius.com
+    http://www.gtw-games.org
 Location:                    
     Karlstad - Sweden
 Languages:               
     English in global chats
 Owners:                         
     Grand Theft Walrus community
-Server Staff:                
-    MrBrutus
-    The_Walrus
-    ownbyurs11
+Server staff and contributors:
+  Developers, Administrators:
+    Mr.Moose
+    TheWalrus
+    ThePenguin
+  In game staff, forum moderators:
+    WhoopeeTheClown
     (Pro)Hunter
+  In game staff (support):  
     Smart
-    Co0oLer
     MHS
     ludde_1337
     RocK
@@ -360,43 +372,46 @@ acceleration may be slower when you drive.
 Frequently asked questions
 ********************************************************************
 
+Q: Does GTW has a website?
+A: Yes: www.gtw-games.org
+
+Q: Does GTW has a forum?
+A: Yes: forum.gtw-games.org
+
+Q: What's our uptime?
+A: 99.7% in our first year, we're a self hosted community without 
+   charges and servers at many locations, our game mode is also 
+   open source just like the associated data, that means our 
+   server will always be available. 
+   
+Q: What kind of server is this?
+A: This server runs the open source game mode GTW-RPG which is a
+   type of RPG/Real life/Roleplay mix. Players choose by themselves
+   how they want to play their game and how much roleplay or 
+   realism they want.    
+   
+Q: How can I become staff?
+A: By writing a small application in our forum at: 
+   forum.gtw-games.org and wait for enough people to vote 
+   for you.
+   
 Q: What is GTW Games?
-A: GTW Games is an independent non profit organization hosted by 
-   A.corp since 2013, read more on our website:
-   http://games.albonius.com.
+A: Grand Theft Walrus games is an independent non profit organization 
+   hosted by A.corp since 2013, read more on our website:
+   www.gtw-games.org.
    
 Q: What does AC and GTW stands for?
 A: GTW - Grand Theft Walrus, our current name
    AC - Artic community, our previous name.
    
-Q: What kind of server is this?
-A: This is our RPG server which has support for multiple gamemodes
-   you choose by yourself how you want to play, we have CnR events
-   which also includes a stealth based law and criminal system. 
-   Gangwars with turfs and a whole bunch of roleplay features that 
-   makes everything more realistic, you may use /me and /do for 
-   roleplay but we do support more than that, call it ARPG - 
-   (Action role play game).
-   
-Q: How can I become staff?
-A: By writing a small application in our forum: 
-   http://forum.albonius.com and wait for enough people to vote 
-   for you.
-   
-Q: What's your uptime?
-A: 99.7% in our first year, we're a self hosted community without 
-   charges and servers at many locations, our game mode is also 
-   open source just like the associated data, that means our 
-   server will always be available, even if GTW dies. 
-   
 Q: How do I donate?
-A: Visit our website: http://games.albonius.com and choose an 
-   option to the right, you can use either PayPal or ZayPay SMS 
-   donations currently.
+A: Visit our forum: www.gtw-games.org and choose an 
+   option to the right, you can choose between PayPal, Bitcoin or 
+   Litecoin currently. 
    
 Q: My question wasn't answered here, what should I do?
 A: Ask your question here: 
-   http://forum.albonius.com/questions-and-concerns/
+   forum.gtw-games.org/questions-and-concerns/
 ]]},
 	{ "Vehicles", 0 },
 	{ "Vehicle rental", 1, [[
@@ -528,6 +543,16 @@ fish will bite and how much money you might make by fishing.
 This job is located in Los santos near the lighthouse and in 
 San Fierro on the west side near city hall and the bank.
 ]] },
+	{ "Iron miner", 1, [[********************************************************************
+Iron miner:
+********************************************************************
+This job is located at the quarry near Las Venturas, get the job,
+find an empty area in the desert, plant some dynamite with your 'n' 
+key. Then walk up to the newly created rocks to start mine from them
+
+You can see all minerals at the bottom of your screen and then sell 
+them near the quarry when you'r 'pocket' is full. 
+]] },
 	{ "Mechanic", 1, [[********************************************************************
 Mechanic:
 ********************************************************************
@@ -625,7 +650,7 @@ responsiblity and that's why we have police chiefs. You must
 prove that you are trusted enough to handle this job, to do 
 so, write and post your application here:
 
-http://forum.albonius.com/law-board/police-chief-center-topic/
+http://forum.gtw-games.org/law-board/police-chief-center-topic/
 
 Commands: (admin):
 /addpc <name>     -- Adds a police chief
@@ -701,14 +726,14 @@ Server staff is also a part of the goverment team, there are three
 ranks currently, Admin, Super moderator and Moderator, the staff 
 duty is mainly about keeping an eye of the game play and help new 
 players, anyone can apply to join the staff team here: 
-http://games.albonius.com/index.php?topic=3.0
+forum.gtw-games.org/staff-applications/multi-theft-auto-staff-application-guidelines/
 
 If a staff is abusing his power we kindly ask you to report him here:
-http://games.albonius.com/index.php?topic=357.0]] },
+forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/]] },
 	{ "Developers", 1, [[
 Developers is also a part of the government team, GTW Games is based
 on open source which means that anyone are free to contribute, or use
-the code under the MIT licence, official developers are people that 
+the code under the GNU v1.3 licence, official developers are people that 
 applied to become official.]] },
 	{ "Criminals", 0 },
 	{ "The basics", 1, [[
@@ -861,7 +886,7 @@ F1               -- Toggle help
 F2               -- Show the vehicle GUI where you 
                     can manage your own vehicles.
 F3 | /stats      -- Show the stats window
-F4               -- (nearby vehicle) open the vehicle trunk
+F4               -- Use drugs
 F5               -- Show the job management GUI, current job 
                     stats and quick buttons to end your work 
                     or become a criminal.
@@ -872,6 +897,7 @@ F6               -- Open group system, create a group/gang
                     or if you just want to chat privately.
 F7 (admin)       -- The admin panel (staff only)
 F8               -- Show the console
+F9               -- (nearby vehicle) open the vehicle trunk
 F10              -- All available animations.
 F11              -- The map over San Andreas
 F12              -- Take a screenshot
@@ -890,8 +916,7 @@ B                -- Show your phone
 /fine              -- Attempts to pay a fine to get rid 
                       of your wanted level. Warning! it's 
                       expensive and may fail.
-/give              -- (See bank, may be used for bribery 
-                      at own risk)
+/sell              -- Start/stop selling drugs                     
                       
 :: Public transportation ::
 /taxi              -- Call for a taxi
@@ -918,7 +943,7 @@ everything between.
 You may also rent your house as a landlord or rent from someone else,
 all this will be configured in the house GUI which is simple to 
 understand, type: /househelp for more info or ask anyone else.]] },
-	{ "AC Phone", 1, [[
+	{ "The phone", 1, [[
 Press 'B' to open your nokia phone which you may use to listen to 
 radio, send SMS to other players or to call for services. ]] },
 	{ "Trains", 1, [[
