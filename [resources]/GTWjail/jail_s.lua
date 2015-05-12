@@ -31,6 +31,9 @@ release_locations = {
 	["APPD"]={ "Angel Pine police department", -2171, -2382, 31, 144 },
 }
 
+weapons 	= { }
+ammo 		= { }
+
 --[[ Sends a player to jail ]]--
 function Jail(crim, time, police_dept, reason, admin)
 	if not crim or not isElement(crim) or getElementType(crim) ~= "player" then return end
@@ -59,12 +62,12 @@ function Jail(crim, time, police_dept, reason, admin)
 	setElementData(crim, "isKillArrested", nil)
 	
 	-- Get and save weapons temporary
-	local weapons = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-	local ammo = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-	for k,wep in pairs(weapons) do
-	   	weapons[k] = getPedWeapon(crim, k)
-	   	setPedWeaponSlot(crim, getSlotFromWeapon(weapons[k]))
-	   	ammo[k] = getPedTotalAmmo(crim, k)
+	weapons[crim] = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	ammo[crim] = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	for k,wep in ipairs(weapons[crim]) do
+	   	weapons[crim][k] = getPedWeapon(crim, k)
+	   	setPedWeaponSlot(crim, getSlotFromWeapon(weapons[crim][k]))
+	   	ammo[crim][k] = getPedTotalAmmo(crim, k)
 	end
 	
 	-- Move to jail
@@ -76,11 +79,11 @@ function Jail(crim, time, police_dept, reason, admin)
 	setTimer(fadeCamera, 1500, 1, crim, true)
 	
 	-- Restore weapons
-	if weapons then
-		for k,wep in ipairs(weapons) do
-		   	if weapons[k] and ammo[k] then
-		   		if ammo[k] > 5000 then ammo[k] = 5000 end
-		   		setTimer(giveWeapon, 1500, 1, crim, weapons[k], ammo[k], false)
+	if weapons[crim] then
+		for k,wep in ipairs(weapons[crim]) do
+		   	if weapons[crim][k] and ammo[crim][k] then
+		   		if ammo[crim][k] > 5000 then ammo[crim][k] = 5000 end
+		   		setTimer(giveWeapon, 1500, 1, crim, weapons[crim][k], ammo[crim][k], false)
 		   	end
 		end
 	end
@@ -108,12 +111,12 @@ end
 function resume_jail(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if jail_data.is_jailed[source] then
 		-- Get and save weapons temporary
-		local weapons = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-		local ammo = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-		for k,wep in pairs(weapons) do
-		   	weapons[k] = getPedWeapon(source, k)
-		   	setPedWeaponSlot(source, getSlotFromWeapon(weapons[k]))
-		   	ammo[k] = getPedTotalAmmo(source, k)
+		weapons[source] = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+		ammo[source] = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+		for k,wep in ipairs(weapons) do
+		   	weapons[source][k] = getPedWeapon(source, k)
+		   	setPedWeaponSlot(source, getSlotFromWeapon(weapons[source][k]))
+		   	ammo[source][k] = getPedTotalAmmo(source, k)
 		end
 	
 		local rand_x = math.random(1,10)
@@ -124,11 +127,11 @@ function resume_jail(totalAmmo, killer, killerWeapon, bodypart, stealth)
 		setTimer(fadeCamera, 2500, 1, source, true, 3)
 		
 		-- Restore weapons
-		if weapons then
-			for k,wep in ipairs(weapons) do
-			   	if weapons[k] and ammo[k] then
-			   		if ammo[k] > 5000 then ammo[k] = 5000 end
-			   		setTimer(giveWeapon, 3000, 1, source, weapons[k], ammo[k], false)
+		if weapons[source] then
+			for k,wep in ipairs(weapons[source]) do
+			   	if weapons[source][k] and ammo[source][k] then
+			   		if ammo[source][k] > 5000 then ammo[source][k] = 5000 end
+			   		setTimer(giveWeapon, 3000, 1, source, weapons[source][k], ammo[source][k], false)
 			   	end
 			end
 		end
@@ -176,12 +179,12 @@ function Unjail(crim, police_dept, reason, admin)
 	end
 	
 	-- Get and save weapons temporary
-	local weapons = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-	local ammo = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-	for k,wep in pairs(weapons) do
-	   	weapons[k] = getPedWeapon(crim, k)
-	   	setPedWeaponSlot(crim, getSlotFromWeapon(weapons[k]))
-	   	ammo[k] = getPedTotalAmmo(crim, k)
+	weapons[crim] = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	ammo[crim] = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	for k,wep in ipairs(weapons[crim]) do
+	   	weapons[crim][k] = getPedWeapon(crim, k)
+	   	setPedWeaponSlot(crim, getSlotFromWeapon(weapons[crim][k]))
+	   	ammo[crim][k] = getPedTotalAmmo(crim, k)
 	end
 	
 	-- Release and spawn
@@ -193,11 +196,11 @@ function Unjail(crim, police_dept, reason, admin)
 	setTimer(fadeCamera, 1500, 1, crim, true)
 	
 	-- Restore weapons
-	if weapons then
-		for k,wep in ipairs(weapons) do
-		   	if weapons[k] and ammo[k] then
-		   		if ammo[k] > 5000 then ammo[k] = 5000 end
-		   		setTimer(giveWeapon, 1500, 1, crim, weapons[k], ammo[k], false)
+	if weapons[crim] then
+		for k,wep in ipairs(weapons[crim]) do
+		   	if weapons[crim][k] and ammo[crim][k] then
+		   		if ammo[crim][k] > 5000 then ammo[crim][k] = 5000 end
+		   		setTimer(giveWeapon, 1500, 1, crim, weapons[crim][k], ammo[crim][k], false)
 		   	end
 		end
 	end
@@ -212,8 +215,8 @@ function check_escape()
 	for k,v in pairs(getElementsByType("player")) do
 		if getElementData(v, "Occupation") == "Prisoner" then
 			local x,y,z = getElementPosition(v)
-			local dist = getDistanceBetweenPoints3D(-3000, 2305, 8, x,y,z)
-			if dist > 350 and getElementInterior(v) == 0 and getElementDimension(v) == 0 then
+			local dist = getDistanceBetweenPoints3D(-3030, 2255, 8, x,y,z)
+			if dist > 220 and getElementInterior(v) == 0 and getElementDimension(v) == 0 then
 				jail_escape(v)
 			end
 		end
@@ -249,7 +252,7 @@ function jail_escape(crim)
 	end
 	
 	-- Set the wanted level
-	exports.GTWwanted:setWl(crim, 1, 360, "You committed the crime of jailbreak")
+	exports.GTWwanted:setWl(crim, 1, 240, "You committed the crime of jailbreak")
 end
 
 -- Show the time left when jailed
@@ -268,7 +271,7 @@ function isJailed(crim)
 end
 
 function set_control_states(crim, n_state)
-	toggleControl(crim, "fire", n_state)
+	--toggleControl(crim, "fire", n_state)
 	toggleControl(crim, "aim_weapon", n_state)
 	toggleControl(crim, "enter_exit", n_state)
 	toggleControl(crim, "next_weapon", n_state)
