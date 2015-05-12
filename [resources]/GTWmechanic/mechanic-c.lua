@@ -130,14 +130,12 @@ function refuel_information()
 		end
 	else
 		--exports.GTWtopbar:dm("Vehicle was sucsessfully removed!", 0, 255, 0)
-		local owner = getElementData(element, "owner")
-		local fuel = getElementData(element, "vehicleFuel")
-		local health = getElementHealth(element)
-		if owner and fuel and health then
-			outputChatBox("INFO: owner="..owner..", fuel="..fuel..", health="..health, 255, 255, 255)
-		else
-			outputChatBox("INFO: no information available", 255, 255, 255)
-		end
+		local owner = getElementData(element, "owner") or "none"
+		local fuel = getElementData(element, "vehicleFuel") or 100
+		local health = getElementHealth(element) or 100
+		local is_locked = isVehicleLocked(element)
+		if is_locked then is_locked = "true" else is_locked = "false" end
+		outputChatBox("INFO: owner="..owner..", fuel="..fuel..", health="..health..", islocked="..is_locked, 255, 255, 255)
 	end
 	guiSetVisible(window, false)
 	showCursor(false)
