@@ -165,5 +165,6 @@ health = {
 }
 
 -- object arrays
-marker = {}
-ped = {}
+marker 	= { }
+blip 	= { }
+ped 	= { }
