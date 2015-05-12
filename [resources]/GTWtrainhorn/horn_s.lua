@@ -15,21 +15,34 @@
 ]]--
 
 -- Available sounds
-h_list = {
-	"x_d9_horn1",
-	"2k_hornl",
-	"2k_hornh",
-	"7k_hornl",
-	"7k_hornh"
+h_list_freight = {
+	"x_gp_horn1",
+	"x_gp_horn1_alt",
+	"gp_horn1"
+}
+h_list_streak = {
+	"k31_horn1",
+	"2k_hornl",	
+	"7k_hornl"
+}
+h_list_tram = {
+	"k31_horn1"	
 }
 
 -- Bink keys to control the horn
 function bindTrainHorn(thePlayer, seat, jacked)
-    if thePlayer and getElementType(thePlayer) == "player" and (getVehicleType(source) == "Train" 
+    if thePlayer and getElementType(thePlayer) == "player" and (getElementModel(source) == 537 or 
+    	getElementModel(source) == 538 or getElementModel(source) == 449 
     	or getPlayerTeam(thePlayer) == getTeamFromName("Staff")) then
     	bindKey(thePlayer, "H", "down", toggleTrainHorn)
     	if not getElementData(source, "horn") then
-    		setElementData(source, "horn", "sound/"..h_list[math.random(#h_list)]..".wav")
+    		if getElementModel(source) == 537 then
+    			setElementData(source, "horn", "sound/"..h_list_freight[math.random(#h_list_freight)]..".wav")
+    		elseif getElementModel(source) == 538 then
+    			setElementData(source, "horn", "sound/"..h_list_streak[math.random(#h_list_streak)]..".wav")
+    		elseif getElementModel(source) == 449 then
+    			setElementData(source, "horn", "sound/"..h_list_tram[math.random(#h_list_tram)]..".wav")
+    		end
     	end
     end
 end
@@ -37,8 +50,10 @@ addEventHandler("onVehicleEnter", root, bindTrainHorn)
 
 -- Toggle the horn sound
 function toggleTrainHorn(thePlayer, cmd)
-	if getPedOccupiedVehicle(thePlayer) and (getVehicleType(getPedOccupiedVehicle(thePlayer)) == "Train" or getElementData(thePlayer, "anon")) then
-		triggerClientEvent(root, "GTWtrainhorn.toggle", thePlayer, getPedOccupiedVehicle(thePlayer))
+	local train = getPedOccupiedVehicle(thePlayer)
+	if train and (getElementModel(train) == 537 or getElementModel(train) == 538 or 
+		getElementModel(train) == 449) and getVehicleOccupants(train)[0] == thePlayer then
+		triggerClientEvent(root, "GTWtrainhorn.toggle", thePlayer, train)
 	end
 end
 
