@@ -371,7 +371,7 @@ addCommandHandler("unjail", admin_jail_release)
 -- Jail a criminal
 function Jail(crim, cop, pay_the_cop)
 	if isElement(crim) and getPlayerTeam(crim) then
-		if getElementData(crim, "Jailed") ~= "Yes" and getPlayerWantedLevel(crim) > 0 then
+		if --[[getElementData(crim, "Jailed") ~= "Yes" and]] getPlayerWantedLevel(crim) > 0 then
 			-- Prevent escape
 			local wl = math.floor(tonumber(getElementData(crim, "Wanted") or 0))
 			local viol_sec = math.floor(tonumber(getElementData(crim, "violent_seconds") or 0))
