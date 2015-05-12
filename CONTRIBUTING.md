@@ -32,6 +32,9 @@ how you do it:
 
 And that's it, contributing shouldn't be harder than that, right.
 
+### Branch organization
+GTW-RPG has two branches currently, master and development. Master is basically for finished and tested code ready to release while development can be used for beta features, testing, and features that isn't fully finished yet but still interesting enough to include.
+
 
 ## Guidelines & coding standards
 More information comes soon, until then we suggest you follow below list of requirements for our definition of clean code:
