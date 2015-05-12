@@ -125,7 +125,7 @@ end)
 
 -- Give all players their unique ID once resource is restarted
 addEventHandler("onResourceStart", resourceRoot, function()
-	for i, v in ipairs(getElementsByType("player")) do
+	for i, v in pairs(getElementsByType("player")) do
 		setElementData(v, "ID", tostring(i))
 	end
 end)
@@ -141,7 +141,63 @@ end
 
 -- Fade camera and set the player as target on login
 addEventHandler("onPlayerLogin", root,
-function()
+function(_, playeraccount)
     fadeCamera(source, true, 5)
 	setCameraTarget(source, source)
+	
+	-- Get position
+	local posX = getAccountData(playeraccount, "acorp.loc.x")
+    local posY = getAccountData(playeraccount, "acorp.loc.y")
+    local posZ = getAccountData(playeraccount, "acorp.loc.z") 
+    local rotZ = getAccountData(playeraccount, "acorp.loc.rot.z")
+	
+	-- Get player location x y z
+    if (posX and posY and posZ) then
+       	spawnPlayer(source, posX, posY, posZ, rotZ, getElementModel(source), getElementInterior(source), getElementDimension(source), getPlayerTeam(source))
+		setCameraTarget(source, source)
+	else
+		local x,y,z,r = unpack(spawn_loc[math.random(#spawn_loc)])
+		spawnPlayer(source, x, y, z+3, r, skin_id[math.random(#skin_id)], 0, 0, getTeamFromName("Unemployed"))
+		setElementFrozen(source, true)
+		setTimer(setElementFrozen, 1000, 1, source, false)
+    end
+end)
+
+--[[ Show downloading information ]]--
+addEventHandler("onPlayerJoin", root, function()
+    s_display[source] = {}
+    s_text[source] = {}
+    
+    s_text[source][1] = textCreateTextItem("Downloading resources, please wait...", 0.5, 0.5,1,200,200,200,255,2.2,"center","center",200) 
+	s_text[source][2] = textCreateTextItem("#  www.gtw-games.org  #", 0.5, 0.91,1,200,200,200,255,1.4,"center","center",200) 
+	s_text[source][3] = textCreateTextItem("Grand Theft Walrus # Real life/RPG", 0.5, 0.1,1,200,200,200,255,1.4,"center","center",200) 
+	
+    for w=1, #s_text[source] do
+    	s_display[source][w] = textCreateDisplay()
+		textDisplayAddObserver(s_display[source][w], source)
+		textDisplayAddText(s_display[source][w], s_text[source][w]) 
+	end
+end)
+
+addEvent("onClientSend",true)
+addEventHandler("onClientSend",root,
+function()
+	if isGuestAccount(getPlayerAccount(client)) then
+		-- Clear text from screen
+		if s_display[client] then
+			for k=1, #s_display[client] do
+				textDisplayRemoveObserver(s_display[client][k], client)
+			   	s_display[client][k] = nil
+			   	s_text[client][k] = nil
+			end 
+		end
+		
+		-- Setup a default view
+		local x,y,z,x2,y2,z2 = unpack(s_views[math.random(#s_views)])
+		setCameraMatrix( client, x,y,z, x2,y2,z2, 2 )
+		fadeCamera(client, true, 1)
+		
+		-- Ability fopr clients to see if a player is logged in or not
+		setElementData(client, "isLoggedIn", true)
+	end
 end)
