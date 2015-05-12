@@ -30,9 +30,22 @@ function addMarkers(res)
     	setElementDimension(marker[k], markers[k][4])
 		setElementInterior(marker[k], markers[k][5])	
 	end
+	
+	-- Setup invincible peds
+	respawn_all_peds()
+	setTimer(respawn_all_peds, 60*60*12*1000, 0)
+end
+addEventHandler("onResourceStart", resourceRoot, addMarkers)
+
+-- Respawn ped if dead
+function respawn_all_peds()
 	for k=1, #blips do	
+		-- Clean up old data
+		if isElement(blip[k]) then destroyElement(blip[k]) end
+		if isElement(ped[k]) then destroyElement(ped[k]) end
+		
 		-- Create blips
-		createBlip(blips[k][1], blips[k][2], blips[k][3], blips[k][4], 1, 0, 0, 0, 255, 111, 180)
+		blip[k] = createBlip(blips[k][1], blips[k][2], blips[k][3], blips[k][4], 1, 0, 0, 0, 255, 111, 180)
 		ped[k] = createPed(peds[k][7], peds[k][1], peds[k][2], peds[k][3])
 		setElementData(marker[k], "location", peds[k][8])
 		
@@ -43,7 +56,6 @@ function addMarkers(res)
 		setElementData(ped[k], "robLoc", peds[k][8])
     end
 end
-addEventHandler("onResourceStart", resourceRoot, addMarkers)
 
 -- Open the gui
 function showGUI(hitPlayer, matchingDimension)

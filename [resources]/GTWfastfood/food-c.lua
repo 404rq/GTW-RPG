@@ -117,6 +117,7 @@ function(player)
 end)
 
 function cancelPedDamage(attacker)
+	setTimer(setElementHealth, 5000, 1, source, 100)
 	cancelEvent() -- cancel any damage done to peds
 end
-addEventHandler("onClientPedDamage", resourceRoot, cancelPedDamage)
+addEventHandler("onClientPedWasted", resourceRoot, cancelPedDamage)

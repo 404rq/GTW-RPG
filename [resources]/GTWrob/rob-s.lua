@@ -58,7 +58,16 @@ peds = {
 
 cancelTimers = {}
 function loadPeds()
+	respawn_all_peds()
+	setTimer(respawn_all_peds, 60*60*12*1000, 0)
+end
+addEventHandler("onResourceStart", resourceRoot, loadPeds)
+
+function respawn_all_peds()
 	for k=1, #peds do
+		-- Destroy element if it exist
+		if isElement(ped[k]) then destroyElement(ped[k]) end
+		
 		-- Create the ped
     	ped[k] = createPed( peds[k][7], peds[k][1], peds[k][2], peds[k][3] )
 		setElementDimension( ped[k], peds[k][4] )
@@ -67,7 +76,6 @@ function loadPeds()
 		setElementData( ped[k], "robLoc", peds[k][8] )
 	end
 end
-addEventHandler("onResourceStart", resourceRoot, loadPeds)
 
 -- Robbery time
 function CounterTime( crim )
