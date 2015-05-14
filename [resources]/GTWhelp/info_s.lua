@@ -1,4 +1,4 @@
-<!-- 
+--[[ 
 ********************************************************************************
 	Project owner:		GTWGames												
 	Project name:		GTW-RPG	
@@ -12,16 +12,13 @@
 	License:			GPL v.3 or later
 	Status:				Stable release
 ********************************************************************************
--->
+]]--
 
-<meta>
-	<info author="GTWGames" version="0" name="GTWhelp" description="Documentation GUI with help pages" type="script" />
-	<script src="data.lua" type="client" />
-	<script src="help_c.lua" type="client" />
-	
-	<script src="info_c.lua" type="client" />
-	<script src="info_s.lua" type="server" />
-	
-	<export function="hpm" type="client"/>
-	<export function="hpm" type="server"/>
-</meta>
+function hpm(message, thePlayer, red, green, blue, colorCoded)
+	if colorCoded == nil then
+		colorCoded = false
+	end		
+	if isElement(thePlayer) then
+		triggerClientEvent(thePlayer, "GTWhelp.onTextAdd", root, message, red, green, blue, colorCoded)
+	end
+end
