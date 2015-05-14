@@ -1,0 +1,20 @@
+<!--
+********************************************************************************
+	Project owner:		GTWGames												
+	Project name:		GTW-RPG	
+	Developers:			GTWCode
+	
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker:			http://forum.gtw-games.org/bug-reports/
+	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
+	
+	Version:			Open source
+	License:			GPL v.3 or later
+	Status:				Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" name="Nametag system" description="Handle custom nametags" version="1" type="script" />
+    <script src="nametag_c.lua" type="client" />
+</meta>

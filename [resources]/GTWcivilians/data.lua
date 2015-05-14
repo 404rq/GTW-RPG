@@ -254,7 +254,7 @@ Weapons:
 	]], { -1, 27, 153, 260 },
 	{ "default", "White iron miner", "The foreman", "Black iron miner" },
 	--[[WeaponID, amount, price, name]] 
-	{{5, 1, 40, "Baseball bat"}, {24, 35, 500, "Desert eagle"}}},
+	{{6, 1, 60, "Shovel"}, {24, 35, 500, "Desert eagle"}}},
 	["Police Officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the 
 wanted people down and arrest them, the higher wanted 
