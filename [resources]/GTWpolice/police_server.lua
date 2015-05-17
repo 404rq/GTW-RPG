@@ -151,17 +151,20 @@ function kill_arrest(ammo, attacker, weapon, bodypart)
 	
 	-- Suicide arrest
 	local police = nearestCop(source)
-	if police and isElement(police) and (getElementData(source, "violent_seconds") or 0) > 0 and distanceToCop(source) < 180 then
-		setTimer(Jail, 11000, 1, source, police)
+	local is_jailed = exports.GTWjail:isJailed(source)
+	if police and isElement(police) and (getElementData(source, "violent_seconds") or 0) > 0 and distanceToCop(source) < 180 and not is_jailed then
+		setTimer(Jail, 11000, 1, source, police, false)
 		setElementData(source, "isKillArrested", true)
-		exports.GTWtopbar:dm( "You have been arrested for suicide", source, 255, 0, 0 )
+		exports.GTWtopbar:dm(getPlayerName(source).." comitted suicide nearby", police, 255, 100, 0 )
+		exports.GTWtopbar:dm("You have been arrested for suicide", source, 255, 0, 0 )
+		return
 	end
 	
 	-- Kill arrest
-	if not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
+	if not is_jailed and not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
 	if not getPlayerTeam(attacker) or not lawTeams[getTeamName(getPlayerTeam(attacker))] or 
 		lawTeams[getTeamName(getPlayerTeam(source))] or not getElementData(source, "violent_seconds") then return end
-	setTimer(Jail, 11000, 1, source, attacker, true)
+	setTimer(Jail, 11000, 1, source, attacker, false)
 	setElementData(source, "isKillArrested", true)
 	exports.GTWtopbar:dm( "You kill arrested "..getPlayerName(source), attacker, 255, 100, 0 )
 	exports.GTWtopbar:dm( "You have been kill arrested by: "..getPlayerName(attacker), source, 255, 0, 0 )
