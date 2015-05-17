@@ -272,13 +272,13 @@ addEventHandler("onPedWasted", root, crime_death)
 addEventHandler("onPlayerWasted", root, crime_death)
 
 function crime_grand_theft_auto_attempt(plr, seat, jacked)
-    if not jacked or not isElement(jacked) or getElementType(jacked) ~= "player" then return end
+    if not jacked or not isElement(jacked) or getElementType(jacked) ~= "player" or seat > 0  then return end
     if is_law_unit(plr) then return end
     setWl(plr, 0.2, 5, "You committed the crime of grand theft auto (attempt)")
 end
 addEventHandler("onVehicleStartEnter", root, crime_grand_theft_auto_attempt)
 function crime_grand_theft_auto(plr, seat, jacked)
-    if not jacked or not isElement(jacked) or getElementType(jacked) ~= "player" then return end
+    if not jacked or not isElement(jacked) or getElementType(jacked) ~= "player" or seat > 0 then return end
     if is_law_unit(plr) then return end
     setWl(plr, 0.8, 25, "You committed the crime of grand theft auto")
 end
