@@ -368,7 +368,7 @@ function returnWeaponsOnSell(query)
     	
     -- Send data to client
     if player then
-    	triggerClientEvent( player, "GTWonReceiveInventoryItems", player, vehicle_data_to_client )     		
+    	triggerClientEvent( player, "GTWvehicleshop.onReceiveInventoryItems", player, vehicle_data_to_client )     		
 	end
 	
 	-- Remove vehicle from database
@@ -567,7 +567,7 @@ function getInventoryWeapons(query)
     		
     		-- Send data to client
 	    	if plr then
-	    		triggerClientEvent( plr, "GTWonReceiveInventoryItems", plr, vehicle_data_to_client ) 
+	    		triggerClientEvent( plr, "GTWvehicleshop.onReceiveInventoryItems", plr, vehicle_data_to_client ) 
 			end  
 			
 			-- Cleanup
