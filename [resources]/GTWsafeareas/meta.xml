@@ -1,0 +1,21 @@
+<!--
+********************************************************************************
+	Project owner:		GTWGames												
+	Project name:		GTW-RPG	
+	Developers:			GTWCode
+	
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker:			http://forum.albonius.com/bug-reports/
+	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	
+	Version:			Open source
+	License:			GPL v.3 or later
+	Status:				Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" name="Safe areas" description="Manage safe areas around government buildings" type="script" version="42"></info>
+    <script src="safearea_s.lua" type="server"></script>
+    <script src="safearea_c.lua" type="client"></script>
+</meta>
