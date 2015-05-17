@@ -51,6 +51,9 @@ function Jail(crim, time, police_dept, reason, admin)
 	setElementData(crim, "jailTime", (time*1000)+getTickCount())
 	setElementData(crim, "jailTime2", getTickCount())	
 	
+	-- Set police department for release
+	setElementData(crim, "GTWjail.pdr", police_dept)
+	
 	-- Sets a value indication that the player is jailed
 	jail_data.is_jailed[crim] = true
 	setElementData(crim, "Jailed", "Yes")
@@ -91,8 +94,8 @@ function Jail(crim, time, police_dept, reason, admin)
 	-- Set team and occupation
 	setPlayerNametagColor(crim, 170, 0, 0)
 	
-	-- Set occupation to prisoner after 30 seconds, you can't escape until this time has passed
-	setTimer(setElementData, 30000, 1, crim, "Occupation", "Prisoner")
+	-- Set occupation to prisoner after 5 seconds, you can't escape until this time has passed
+	setTimer(setElementData, 5000, 1, crim, "Occupation", "Prisoner")
 	
 	-- Assign release timer
 	jail_data.release_timers[crim] = setTimer(Unjail, time*1000, 1, crim, police_dept)
@@ -125,6 +128,9 @@ function resume_jail(totalAmmo, killer, killerWeapon, bodypart, stealth)
 		setTimer(spawnPlayer, 2100, 1, source, -2965+((-5)+rand_x), 2305+((-5)+rand_y), 8, 180, getElementModel(source), 0, 0, getTeamFromName("Criminals"))
 		setTimer(set_control_states, 3000, 1, source, false)
 		setTimer(fadeCamera, 2500, 1, source, true, 3)
+		
+		-- Set occupation to prisoner after 5 seconds, you can't escape until this time has passed
+		setTimer(setElementData, 5000, 1, source, "Occupation", "Prisoner")
 		
 		-- Restore weapons
 		if weapons[source] then
@@ -222,6 +228,43 @@ function check_escape()
 		end
 	end
 end
+
+--[[ Extend the time in jail due to crimes commited inside the walls ]]--
+function extend_jail_time(crim, time_s)
+	-- Verify that the timers is running
+	if not isTimer(jail_data.release_timers[crim]) or
+		not isTimer(jail_data.info_timers[crim]) then return end
+	
+	-- Get time left
+	local time_left_ms,i2,i3 = getTimerDetails(jail_data.release_timers[crim])
+	
+	-- Update graphical part
+	setElementData(crim, "jailTime", (time_left_ms+(time_s*1000))+getTickCount())
+	setElementData(crim, "jailTime2", getTickCount())	
+	
+	-- Reset current timers
+	if isTimer(jail_data.release_timers[crim]) then
+		killTimer(jail_data.release_timers[crim])
+	end
+	jail_data.release_timers[crim] = nil
+	if isTimer(jail_data.info_timers[crim]) then
+		killTimer(jail_data.info_timers[crim])
+	end
+	jail_data.info_timers[crim] = nil
+	
+	-- Get police department for release
+	local police_dept = getElementData(crim, "GTWjail.pdr") or "LSPD"
+	
+	-- Make new timers
+	jail_data.release_timers[crim] = setTimer(Unjail, (time_left_ms+(time_s*1000)), 1, crim, police_dept)
+	jail_data.info_timers[crim] = setTimer(sync_time_display, 1000, math.floor(time_left_ms/1000)+time_s, crim)
+end
+
+function increase_wl_on_hitting_guards(attacker, weapon, bodypart, loss)
+	if not jail_data.is_jailed[attacker] then return end
+	extend_jail_time(attacker, math.floor(loss*6))
+end
+addEventHandler("onPlayerDamage", root, increase_wl_on_hitting_guards)
 
 -- Escape
 function jail_escape(crim)
