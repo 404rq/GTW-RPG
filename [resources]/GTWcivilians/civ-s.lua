@@ -22,6 +22,12 @@ function onAcceptJob( ID, skinID )
     -- Check if a skin was passed
     if not skinID then return end
     
+    local is_law_banned = exports.GTWpolicechief:isLawBanned(client)
+    if team == "Government" and is_law_banned then 
+    	exports.GTWtopbar:dm( "You are banned from the government team! choose another job.", client, 255, 0, 0 )
+    	return 
+    end
+    
     -- Note that -1 means default player skin
     if skinID > -1 then
     	setElementModel( client, skinID )
