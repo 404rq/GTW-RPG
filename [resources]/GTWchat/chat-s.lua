@@ -208,15 +208,16 @@ function useLocalChat(plr, n, ...)
 	end
 	-- (2014-11-19) Count local players
 	local sumOfLocal = 0
-	for n,v in ipairs(getElementsByType("player")) do
+	for n,v in pairs(getElementsByType("player")) do
 	   	if isPlayerInRangeOfPoint(v, px,py,pz, chat_range) then
 	   		sumOfLocal = sumOfLocal + 1
 	  	end
 	end
-	for n,v in ipairs(getElementsByType("player")) do
+	for n,v in pairs(getElementsByType("player")) do
 	   	if isPlayerInRangeOfPoint(v, px,py,pz, chat_range) then
 	   		local occupation = ""
-	   		if getElementData(plr, "isPoliceChief") and getPlayerTeam(plr) and policeTeams[getTeamName(getPlayerTeam(plr))] then
+	   		local is_police_chief = exports.GTWpolicechief:isPoliceChief(plr)
+	   		if is_police_chief and getPlayerTeam(plr) and policeTeams[getTeamName(getPlayerTeam(plr))] then
 	   			occupation = RGBToHex(defR, defG, defB).."[PoliceChief]"..RGBToHex(r,g,b)
 	   		end
 	   		local outText = RGBToHex(r,g,b).."(LOCAL) "..occupation.."["..tostring(sumOfLocal).."] "..RGBToHex(r,g,b)..nick..": "..RGBToHex(defR,defG,defB)
@@ -278,7 +279,8 @@ function useEmergencyChat(plr, n, ...)
 	local r,g,b = getTeamColor(getPlayerTeam(plr))
 	local nick = getPlayerName(plr)	
 	local occupation = ""
-   	if getElementData(plr, "isPoliceChief") and policeTeams[getTeamName(getPlayerTeam(plr))] then
+	local is_police_chief = exports.GTWpolicechief:isPoliceChief(plr)
+   	if is_police_chief and policeTeams[getTeamName(getPlayerTeam(plr))] then
    		occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
    	end
 	for m,v in pairs(getElementsByType("player")) do
@@ -415,7 +417,8 @@ function useGlobalChat(message, messageType)
 	    if getPlayerTeam(source) then
 	    	r,g,b = getTeamColor(getPlayerTeam(source))
 	    end
-	    if getElementData(source, "isPoliceChief") and getPlayerTeam(source) and policeTeams[getTeamName(getPlayerTeam(source))] then
+	    local is_police_chief = exports.GTWpolicechief:isPoliceChief(source)
+	    if is_police_chief and getPlayerTeam(source) and policeTeams[getTeamName(getPlayerTeam(source))] then
 	    	occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
 	    end
 		local px,py,pz = getElementPosition(source)
@@ -451,7 +454,8 @@ function useGlobalChat(message, messageType)
 		if not team then return end
 		local r,g,b = getTeamColor(getPlayerTeam(source))
 		local occupation = ""
-		if getElementData(source, "isPoliceChief") and policeTeams[getTeamName(getPlayerTeam(source))] then
+		local is_police_chief = exports.GTWpolicechief:isPoliceChief(source)
+		if is_police_chief and policeTeams[getTeamName(getPlayerTeam(source))] then
 			occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
 		end		
 		outputServerLog("[TEAM]["..getTeamName(getPlayerTeam(source)).."] "..getPlayerName(source)..": "..message)
