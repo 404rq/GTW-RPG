@@ -155,6 +155,38 @@ end
 addCommandHandler("revokebanfromlaw", revoke_law_ban)
 addCommandHandler("revokelawban", revoke_law_ban)
 
+--[[ List banned cops ]]--
+function list_banned_cops(plr)
+	local list = ""
+    for k,v in pairs(banned_cops_data) do
+    	local name = nil
+    	if getAccountPlayer(getAccount(k)) then
+    		name = getPlayerName(getAccountPlayer(getAccount(k)))
+    		if name then k = k.." ("..name..")" end
+    	end
+    	list = list..k..", "
+    end
+    outputChatBox("Lawbans: "..list, plr, 200, 200, 200)
+end
+addCommandHandler("listlawbans", list_banned_cops)
+addCommandHandler("listlawban", list_banned_cops)
+
+--[[ List police chiefs ]]--
+function list_police_chiefs(plr)
+    local list = ""
+    for k,v in pairs(police_chiefs_data) do
+    	local name = nil
+    	if getAccountPlayer(getAccount(k)) then
+    		name = getPlayerName(getAccountPlayer(getAccount(k)))
+    		if name then k = k.." ("..name..")" end
+    	end
+    	list = list..k..", "
+    end
+    outputChatBox("Police chiefs: "..list, plr, 200, 200, 200)
+end
+addCommandHandler("listpolicechiefs", list_police_chiefs)
+addCommandHandler("listpolicechief", list_police_chiefs)
+
 --[[ Exported: check if a player is a police chief ]]--
 function isPoliceChief(plr)
 	if not plr or not getPlayerAccount(plr) or not getAccountName(getPlayerAccount(plr)) then return false end
