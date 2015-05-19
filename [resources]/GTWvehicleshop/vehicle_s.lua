@@ -166,15 +166,22 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			attachElements(inventory_markers[veh],veh,0,supported_cars[getElementModel(veh)],-1)
 			addEventHandler( "onMarkerHit", inventory_markers[veh], 
 			function(hitElement,matchingDimension)
-				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and not getPedOccupiedVehicle(hitElement) then
+				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and 
+					not getPedOccupiedVehicle(hitElement) and not getElementData(inventory_markers_veh[source],
+					"GTWvehicleshop.the_near_player_trunk") then
 					exports.GTWtopbar:dm( "Vehicle: Press F9 to open the vehicle inventory", hitElement, 0, 255, 0 )
-					setElementData(hitElement,"isNearTrunk",inventory_markers_veh[source])
+					setElementData(hitElement,"GTWvehicleshop.the_near_veh_trunk",inventory_markers_veh[source])
+					setElementData(inventory_markers_veh[source],"GTWvehicleshop.the_near_player_trunk",hitElement)
+				elseif getElementData(inventory_markers_veh[source], "GTWvehicleshop.the_near_player_trunk") then
+					local name = getPlayerName(getElementData(inventory_markers_veh[source], "GTWvehicleshop.the_near_player_trunk"))
+					exports.GTWtopbar:dm( "Vehicle: "..name.." is browsing the trunk of this vehicle, please wait", hitElement, 255, 100, 0 )
 				end						
 			end) 
 			addEventHandler( "onMarkerLeave", inventory_markers[veh], 
 			function(leaveElement,matchingDimension)
 				if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
-					setElementData(leaveElement,"isNearTrunk",nil)
+					setElementData(leaveElement,"GTWvehicleshop.the_near_veh_trunk",nil)
+					setElementData(inventory_markers_veh[source],"GTWvehicleshop.the_near_player_trunk",nil)
 				end						
 			end) 
 		end
@@ -507,29 +514,31 @@ function onVehicleWeaponDepositGet(query)
     	-- Add weapon to JSON string (Only executed once)
     	local input_table = fromJSON(row["inventory"])
     	local plr_owner = temp_plr_store[row["ID"]]
-    	local new_val = (input_table[temp_weapon_store[plr_owner]] or 0) - temp_ammo_store[plr_owner]
-    	
-    	-- Debug info
-    	--outputChatBox(row["inventory"], plr_owner)
-    	
-    	-- Update value to be saved into database
-    	if new_val > 0 then
-    		input_table[temp_weapon_store[plr_owner]] = new_val
-    	else
-    		input_table[temp_weapon_store[plr_owner]] = nil
-    	end
-    	local new_res = toJSON(input_table)
-    	
-    	-- Debug info
-    	--outputChatBox(new_res, plr_owner)
-    	
-    	-- Cleanup
-    	temp_weapon_store[plr_owner] = nil
-    	temp_ammo_store[plr_owner] = nil
-    	temp_plr_store[row["ID"]] = nil
-    	
-    	-- Save to database
-		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
+    	if input_table and plr_owner and temp_weapon_store[plr_owner] then
+    		local new_val = (input_table[temp_weapon_store[plr_owner]] or 0) - temp_ammo_store[plr_owner]
+	    	
+	    	-- Debug info
+	    	--outputChatBox(row["inventory"], plr_owner)
+	    	
+	    	-- Update value to be saved into database
+	    	if new_val > 0 then
+	    		input_table[temp_weapon_store[plr_owner]] = new_val
+	    	else
+	    		input_table[temp_weapon_store[plr_owner]] = nil
+	    	end
+	    	local new_res = toJSON(input_table)
+	    	
+	    	-- Debug info
+	    	--outputChatBox(new_res, plr_owner)
+	    	
+	    	-- Cleanup
+	    	temp_weapon_store[plr_owner] = nil
+	    	temp_ammo_store[plr_owner] = nil
+	    	temp_plr_store[row["ID"]] = nil
+	    	
+	    	-- Save to database
+			dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
+		end
 		break		
 	end
 end
@@ -579,7 +588,7 @@ end
 function openInventory(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id then
 		temp_plr_store[veh_id] = client
-		setVehicleDoorOpenRatio( getElementData(client, "isNearTrunk"), 1, 1, 1000 )
+		setVehicleDoorOpenRatio( getElementData(client, "GTWvehicleshop.the_near_veh_trunk"), 1, 1, 1000 )
 		dbQuery(getInventoryWeapons, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 	else
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
@@ -588,7 +597,7 @@ end
 addEvent( "GTWvehicleshop.onOpenInventory", true )
 addEventHandler( "GTWvehicleshop.onOpenInventory", root, openInventory )
 function closeInventory()
-	setVehicleDoorOpenRatio( getElementData(client, "isNearTrunk"), 1, 0, 1000 )
+	setVehicleDoorOpenRatio( getElementData(client, "GTWvehicleshop.the_near_veh_trunk"), 1, 0, 1000 )
 end
 addEvent( "GTWvehicleshop.onCloseInventory", true )
 addEventHandler( "GTWvehicleshop.onCloseInventory", root, closeInventory )
