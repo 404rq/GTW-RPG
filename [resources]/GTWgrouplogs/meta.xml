@@ -1,0 +1,10 @@
+<meta>
+    <min_mta_version server="1.3.4-0.00000" client="1.3.4-0.00000" />
+    <script src="logs.lua" type="server" />
+    <script src="log.lua" type="client" />
+    
+    <export function="viewLog" type="server" />
+    <export function="logSomething" type="server" />
+    <export function="getLastNick" type="server" />
+    <info version="6"></info>
+</meta>
