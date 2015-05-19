@@ -161,7 +161,7 @@ function kill_arrest(ammo, attacker, weapon, bodypart)
 	end
 	
 	-- Kill arrest
-	if not is_jailed and not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
+	if is_jailed or not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
 	if not getPlayerTeam(attacker) or not lawTeams[getTeamName(getPlayerTeam(attacker))] or 
 		lawTeams[getTeamName(getPlayerTeam(source))] or not getElementData(source, "violent_seconds") then return end
 	setTimer(Jail, 11000, 1, source, attacker, false)

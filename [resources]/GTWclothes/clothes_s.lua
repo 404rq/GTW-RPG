@@ -70,8 +70,7 @@ addEventHandler("onResourceStart", resourceRoot, make_the_shop)
 function on_marker_hit(plr, matchingDim)
 	if (plr and getElementType(plr) == "player" and matchingDim) then
 		local skins = get_skins()
-		triggerClientEvent(plr, "GTWclothes.showSkin", plr, skins)
-		triggerClientEvent(plr, "GTWclothes.showSkin", plr, skins)
+		triggerClientEvent(plr, "GTWclothes.show_skin", plr, skins)
 	end
 end
 
