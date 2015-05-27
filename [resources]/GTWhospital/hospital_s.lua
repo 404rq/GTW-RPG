@@ -16,20 +16,21 @@
 
 -- Temporary storage of weapons
 timers			= { }
+awaiting_spawn	= { }
 weapon_list 	= {{ }}
 ammo_list 		= {{ }}
 
 -- List of available hospitals
 hs_table = {
-	[1]={ 1177, -1320, 13, 270 },
-	[2]={ -2666, 630, 13.5, 180 },
-	[3]={ 1607.1225585938, 1817.8732910156, 9.8203125, 0 },
-	[4]={ 2040, -1420, 16.2, 90 },
-	[5]={ -2200, -2308, 29.6, -45 },
-	[6]={ 208.095703125, -65.3193359375, 0.5, 175.78668212891 },
-	[7]={ 1245.779296875, 336.87890625, 18.5, 341.87503051758 },
-	[8]={ -317.4208984375, 1056.3779296875, 18.7, 356.13000488281 },
-	[9]={ -1514.7568359375, 2527.89453125, 54.7, 1.7880554199219 },
+	[1]={ 1177,		-1320,	10.8203125, 		270, 	1607.376953125, 1829.578125, 10.8203125	},
+	[2]={ -2666, 	630,	13.567041397095, 	180, 	1188.3798828125, -1324.5927734375, 13.567041397095 },
+	[3]={ 1607,		1818, 	14.453125, 			0, 		-2666.046875, 620.7353515625, 14.453125 },
+	[4]={ 2040, 	-1420, 	16.9921875, 		90, 	2031.8486328125, -1419.5927734375, 16.9921875 },
+	[5]={ -2200, 	-2308, 	30.625, 			-45, 	-2193.5888671875, -2301.6630859375, 30.625 },
+	[6]={ 208, 		-65.3, 	1.4357746839523, 	180, 	208.310546875, -75.525390625, 1.4357746839523 },
+	[7]={ 1245.8, 	336.9, 	19.40625, 			-20, 	1250.3759765625, 346.681640625, 19.40625 },
+	[8]={ -317.4, 	1056.4, 19.59375, 			0,		-316.8125, 1066.306640625, 19.59375 },
+	[9]={ -1514.8, 	2527.9, 55.6875, 			1.790, 	-1514.283203125, 2536.412109375, 55.6875 },
 }
 
 -- Cost of the healthcare
@@ -41,7 +42,7 @@ hs_spawn_protection_time 	= 20
 function load_hospitals()
 	for i=1, #hs_table do
 		createBlip(hs_table[i][1], hs_table[i][2], hs_table[i][3], 22, 1, 0, 0, 0, 255, 2, 180)
-		local h_marker = createMarker(hs_table[i][1], hs_table[i][2], hs_table[i][3], "cylinder", 2, 0, 200, 0, 30)
+		local h_marker = createMarker(hs_table[i][1], hs_table[i][2], hs_table[i][3]-1, "cylinder", 2, 0, 200, 0, 30)
 		addEventHandler("onMarkerHit", h_marker, hs_start_heal) 
 		addEventHandler("onMarkerLeave", h_marker, hs_stop_heal)
 	end
@@ -70,7 +71,7 @@ function get_nearest_hospital(plr)
 	-- Check if jailed or not and return either hospital or jail
 	local isJailed = exports.GTWjail:isJailed(thePlayer)
 	if not isJailed then
-		return n_loc[1]+math.random(-2,2),n_loc[2]+math.random(-2,2),n_loc[3]+2,n_loc[4]
+		return n_loc[1]+math.random(-2,2),n_loc[2]+math.random(-2,2),n_loc[3]+2,n_loc[4],n_loc[5],n_loc[6],n_loc[7]
 	else
 		return -2965+math.random(-2,2),2305+math.random(-2,2),8,180
 	end
@@ -96,9 +97,9 @@ end
 
 --[[ Respawn after death "onPlayerSpawn" ]]--
 function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
-	-- Play the spawn sound
-	playSoundFrontEnd(source, 16)
-	
+	-- Check if a player is picked up by an ambulance
+	if not awaiting_spawn[source] then return end
+
 	-- Restore weapons
 	if weapon_list[source] and ammo_list[source] then
 		for k,wep in ipairs(weapon_list[source]) do
@@ -117,26 +118,44 @@ function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
 	local isJailed = exports.GTWjail:isJailed(source)
 	if isJailed then return end
 	
+	-- Set camera view target
+	local x,y,z, r, vx,vy,vz = get_nearest_hospital(source)
+	setCameraMatrix(source, vx,vy,vz, x,y,z, 0,75)
+	
 	-- Fade in the camera and set it's target	
 	fadeCamera(source, true, 6,255,255,255)
-	setCameraTarget(source, source)
+	
 	
 	-- Make sure the player is not frozen
 	setElementFrozen(source, false)
+	toggle_controls(source, false)
+	setTimer(finish_spawn, 8000, 1, source)
 	
 	-- Set health to 30
 	setElementHealth(source, 30)
 	
-	-- Enable controls
-	toggle_controls(source, true)
-	
-	-- Enable spawn protection
-	triggerClientEvent(source, "GTWhospital.setSpawnProtection", source, hs_spawn_protection_time)
+	-- Reset ambulance data
+	awaiting_spawn[source] = nil
 	  
 	-- Infom the player about his respawn	  
 	exports.GTWtopbar:dm("Hospital: You have been healed at "..getZoneName(x,y,z)..", for a cost of $"..hs_charge, source, 255, 100, 0)
 end
 addEventHandler("onPlayerSpawn", root, player_Spawn)
+
+--[[ Helper function for spawn triggers and style ]]--
+function finish_spawn(plr)
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
+	setCameraTarget(plr, plr)
+	
+	-- Enable controls
+	toggle_controls(plr, true)
+	
+	-- Play a spawn sound
+	playSoundFrontEnd(plr, 11)
+	
+	-- Enable spawn protection
+	triggerClientEvent(plr, "GTWhospital.setSpawnProtection", plr, hs_spawn_protection_time)
+end
 
 --[[ On player wasted, fade out and send to hospital ]]--
 function on_death(ammo, attacker, weapon, bodypart)
@@ -160,10 +179,13 @@ function on_death(ammo, attacker, weapon, bodypart)
 	
 	-- Take some of the money
 	takePlayerMoney(source, hs_charge)
-	fadeCamera(source, false, 6, 0, 0, 0)
+	fadeCamera(source, false, 8, 0, 0, 0)
 	
 	-- Respawn player after "hs_respawn_time" seconds
-	plr_respawn(source)
+	setTimer(plr_respawn, hs_respawn_time*1000, 1, source)
+	
+	-- Add to respawn
+	awaiting_spawn[source] = true
 	
 	-- Notify player about his death
 	exports.GTWtopbar:dm("Hospital: You are dead! an ambulance will pick you up soon", source, 255, 100, 0)
@@ -173,14 +195,17 @@ addEventHandler("onPlayerWasted", root, on_death)
 --[[ Helper function to spawn player ]]--
 function plr_respawn(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
-	local x,y,z, r = get_nearest_hospital(plr)
-	setTimer(spawnPlayer, hs_respawn_time*1000, 1, plr, x,y,z+1, r, getElementModel(plr), 0,0, getPlayerTeam(plr))
+	local x,y,z, r, vx,vy,vz = get_nearest_hospital(plr)
+	spawnPlayer(plr, x,y,z+1, r, getElementModel(plr), 0,0, getPlayerTeam(plr))
 end
 
 --[[ Dump weapons into users database on quit ]]--
 function dump_weapons()
 	-- Get player account
     local acc = getPlayerAccount(source)
+    
+    -- Reset ambulance data
+	awaiting_spawn[source] = nil
     
     -- Check if there is any weapons in memory
     if not weapon_list[source] then return end
