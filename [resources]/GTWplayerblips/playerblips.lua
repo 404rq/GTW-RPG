@@ -65,7 +65,7 @@ end
 
 --[[ Update blip when a player spawn ]]--
 function onPlayerSpawn(spawnpoint)
-	updatePlayerBlip(source)
+	refreshAllBlips()
 end
 function updatePlayerBlip(plr)
 	-- Remove current blips if any
