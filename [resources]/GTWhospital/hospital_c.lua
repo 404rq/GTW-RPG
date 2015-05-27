@@ -25,11 +25,11 @@ addEvent("GTWhospital.setSpawnProtection", true)
 addEventHandler("GTWhospital.setSpawnProtection", localPlayer, set_spawn_protection)
 
 --[[ Protect players from taking damage on spawn]]--
-function stopMinigunDamage(attacker, weapon, bodypart)
+function protect_spawn(attacker, weapon, bodypart)
 	if not isTimer(is_spawn_protected) then return end
 	cancelEvent()
 end
-addEventHandler ( "onClientPlayerDamage", localPlayer, protect_spawn)
+addEventHandler("onClientPlayerDamage", localPlayer, protect_spawn)
 
 --[[ Protect players from being choked upon spawn ]]--
 function protect_spawn_choke(weaponID, responsiblePed)

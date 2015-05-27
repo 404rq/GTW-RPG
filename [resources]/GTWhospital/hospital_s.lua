@@ -100,15 +100,15 @@ function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
 	playSoundFrontEnd(source, 16)
 	
 	-- Restore weapons
-	if weapon[source] and ammo[source] then
-		for k,wep in ipairs(weapon[source]) do
-			if weapon[source][k] and ammo[source][k] then
+	if weapon_list[source] and ammo_list[source] then
+		for k,wep in ipairs(weapon_list[source]) do
+			if weapon_list[source][k] and ammo_list[source][k] then
 				-- Return ammo to the player
-				giveWeapon(source, weapon[source][k], ammo[source][k], false)
+				giveWeapon(source, weapon_list[source][k], ammo_list[source][k], false)
 				
 				-- Clean up used space
-				weapon[source][k] = nil
-				ammo[source][k] = nil
+				weapon_list[source][k] = nil
+				ammo_list[source][k] = nil
 			end
 		end
 	end
@@ -141,14 +141,14 @@ addEventHandler("onPlayerSpawn", root, player_Spawn)
 --[[ On player wasted, fade out and send to hospital ]]--
 function on_death(ammo, attacker, weapon, bodypart)
 	-- Save all weapons currently hold by a player
-	weapon[source] 	= { 0,0,0,0,0,0,0,0,0,0,0,0 }
-	ammo[source] 	= { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	weapon_list[source] 	= { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	ammo_list[source] 	= { 0,0,0,0,0,0,0,0,0,0,0,0 }
 	
 	-- Check all weapon slots and save their ammo
-	for k,v in ipairs(weapon[source]) do
-		weapon[source][k] = getPedWeapon(source, k)
+	for k,v in ipairs(weapon_list[source]) do
+		weapon_list[source][k] = getPedWeapon(source, k)
 		setPedWeaponSlot(source, k)
-		ammo[source][k] = getPedTotalAmmo(source, k)
+		ammo_list[source][k] = getPedTotalAmmo(source, k)
 	end
 	
 	-- Check if jailed or not
@@ -159,17 +159,23 @@ function on_death(ammo, attacker, weapon, bodypart)
 	if getPedOccupiedVehicle(source) then removePedFromVehicle(source) end	
 	
 	-- Take some of the money
-	takePlayerMoney(plr, hs_charge)
+	takePlayerMoney(source, hs_charge)
 	fadeCamera(source, false, 6, 0, 0, 0)
 	
 	-- Respawn player after "hs_respawn_time" seconds
-	local x,y,z, r = get_nearest_hospital(plr)
-	setTimer(spawnPlayer, hs_respawn_time*1000, 1, plr, x,y,z+1, r, getElementModel(plr), 0,0, getPlayerTeam(plr))
+	plr_respawn(source)
 	
 	-- Notify player about his death
 	exports.GTWtopbar:dm("Hospital: You are dead! an ambulance will pick you up soon", source, 255, 100, 0)
 end
 addEventHandler("onPlayerWasted", root, on_death)
+
+--[[ Helper function to spawn player ]]--
+function plr_respawn(plr)
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
+	local x,y,z, r = get_nearest_hospital(plr)
+	setTimer(spawnPlayer, hs_respawn_time*1000, 1, plr, x,y,z+1, r, getElementModel(plr), 0,0, getPlayerTeam(plr))
+end
 
 --[[ Dump weapons into users database on quit ]]--
 function dump_weapons()
@@ -180,7 +186,7 @@ function dump_weapons()
     if not weapon_list[source] then return end
     
     -- Save the weapons and ammo stored in memory
-    for k,w in ipairs(weapons) do
+    for k,w in ipairs(weapon_list[source]) do
 	    if weapon_list[source][k] and ammo_list[source][k] then
 	   		setAccountData(acc, "acorp.weapon."..tostring(k), weapon_list[source][k])
 	   		setAccountData(acc, "acorp.ammo."..tostring(k), ammo_list[source][k])
