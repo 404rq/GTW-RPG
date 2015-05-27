@@ -233,6 +233,65 @@ Translated by:
 ********************************************************************
 Last edit:	2015-03-07
 ********************************************************************]] },
+	{ "Egyptian (Masry)", 1, [[
+********************************************************************
+Rules in Egyptian (Masry)
+********************************************************************
+#1 Mate2telsh awl lama el la3eeb yes7a, w dah kman fel mostashfa.
+#2 Dayman so2 3ala el yemeen, mate8batsh el nas bel 3ayabeya aw 7aga zay keda. Te2dar te3mel keda 3ashan ta5od ha2ak aw law enta shorta w betegry wara 7aramy.
+#3 Mate3mlsh Hack lel server. Ay bug tela2ee fel server e3melo report 3ala el mawka3 w momken ta5od floos law tele3 begad w etsala7. Ay taree2 3ashan teksab beeha haga zay haraka w ta5od floos deeh hata5od punish feeha.
+#4 Etkalem 3an ay haga bas mat7awelsh enak tesa5an el nas 3ala haga masalan Xbox ded el PS4.
+#5 Ew3a tera5em 3ala el nas w homa beye3mlo 7agat akenaha fel ha2eeya aw teegy te2teel magmoo3a men el nas w homa bey3melo haga.
+#6 Ew3a tekteb 7agat keteer fel chat ya3ny te3melaha spam aw tekteb aya haga malhash ay talateen lazma aw teba2 haga mesh kwayesa.
+#7 Ew3a te7awel fel le3ba enak te3mel apply lel staff aw te2ool 3ala fekra lel server aw teshteky 3ala 7ad aw tesa2l haga tela2eeha fel list 3ala el shemal w momken ta5od fe deeh punish.
+#8 Matra5emsh 3ala ay 7ad fel server, aw teshtem 7ad, aw te2ool kelma we7sha fel chat badal keda eshteky 3ala 7ad hena:
+   El shakwa: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Law et3amalak ban w 3yzo yetshal: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+
+Shokran 3ashan betrakez fel hagat deeh!
+
+Translated by:
+- Smart (Supporter)
+********************************************************************
+Last edit:	2015-05-27
+********************************************************************]] },
+	{ "Portuguese (Portuguese)", 1, [[
+********************************************************************
+Rules in Portuguese (Portuguese)
+********************************************************************
+#1 Não faça spawn kill em outros jogadores. (Aplica-se ao redor de hospitais)
+#2 Dirigir sempre no lado direito da estrada. Não bloquear os outros jogadores, 
+	não bater em outros jogadores, a menos que você tenha uma razão para 
+	fazer isso, por exemplo, em uma perseguição policial ou por vingança.
+#3 Não use qualquer tipo de hack ou exploração de bugs. GTW-RPG é um modo de jogo 
+    de código aberto que pretendemos deixar estável e de alta qualidade, 
+	Portanto, é importante que você nos informe sobre
+	qualquer bug, que você encontrar. Relatórios de bug são recompensados, explarações
+	são puníveis..
+#4 Não anunciar, sinta-se livre para falar sobre qualquer coisa, contanto
+	que você não anuncie. Se você não entende a diferença
+	aqui está um exemplo: Falando: xBox vs PS3... Publicidade: 
+	compre xBox aqui...
+#5 Não obstrua ou interrompa as situações de role play. Não é apropriado aparecer 
+	com uma minigun e matar um grupo de jogadores que estão juntos conversando, 
+	por exemplo. Não use mais violência do que a situação requer.
+#6 Não faça spam no chat, se repetir propositalmente você sera mutado, note que o mute é 
+	global e aplicado em todos os servidores GTW.
+#7 Não tente isso em jogo: pedir para ser staff, sugerir novas funcionalidades,
+    reclamar sobre outros jogadores ou staff, Perguntar sobre coisas que estão no menu à esquerda. 
+	Isso não é punível, mas você pode não obter a resposta que você esperava.
+#8 Não seja um troll, não provoque, irrite ou insulte os outros jogadores. 
+    Em vez disso, resolve seus conflitos aqui:
+    Reporte: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Apelação: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+
+Obrigado por cumprir com as nossas regras.
+
+Translated by:
+- EHLuC & EHPHUCK (Community members)
+********************************************************************
+Last edit:	2015-05-27
+********************************************************************]] },
 	{ "General", 0 },
 	{ "About GTW Games", 1, [[
 ********************************************************************
