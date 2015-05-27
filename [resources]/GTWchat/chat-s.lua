@@ -362,6 +362,7 @@ function useStaffChat(plr, n, ...)
 end
 addCommandHandler("staff", useStaffChat)
 addCommandHandler("mod", useStaffChat)
+addCommandHandler("s", useStaffChat)
 
 --[[ Staff chat, to reply to a certain team ]]--
 function useStaffTeamChat(plr, n, team, ...)
