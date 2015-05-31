@@ -37,3 +37,8 @@ function protect_spawn_choke(weaponID, responsiblePed)
 	cancelEvent()
 end
 addEventHandler("onClientPlayerChoke", localPlayer, protect_spawn_choke)
+
+function onSoundEvent(cmd, sound)
+    playSoundFrontEnd(tonumber(sound))
+end
+addCommandHandler("sound", onSoundEvent)
