@@ -38,11 +38,19 @@ end)
 addEvent("GTWaccounts:onClientAttemptRegistration", true)
 addEventHandler("GTWaccounts:onClientAttemptRegistration", root, function(user, pass, facc)
 	if user and pass then
+		-- Save current
+		local old_usr = user
+		
+		-- Validate input
 		local char = "[^0-9a-zA-Z_]"
 		user = string.gsub(user, char, "")
+		
 		local acn = getAccount(user)
 		if acn then
 			return doStatus("This account already exists\non the server.", client, -1)
+		end
+		if old_usr ~= user then
+			return doStatus("Invalid user name, you may only use \nthe following symbols: 0-9, a-z, A-Z or _", client, -1)
 		end
 		local friend = getAccount(facc)
 		local acn = addAccount(user, pass)
