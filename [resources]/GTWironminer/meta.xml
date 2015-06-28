@@ -1,0 +1,21 @@
+<!--
+********************************************************************************
+	Project owner:		GTWGames												
+	Project name:		GTW-RPG	
+	Developers:			GTWCode
+	
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker:			http://forum.albonius.com/bug-reports/
+	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	
+	Version:			Open source
+	License:			GPL v.3 or later
+	Status:				Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" name="Iron miner job" version="47" description="A realistic iron miner job" type="script" />
+    <script src="iron_s.lua" type="server" />
+    <script src="iron_c.lua" type="client" />
+</meta>
