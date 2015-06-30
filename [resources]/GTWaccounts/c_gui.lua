@@ -161,7 +161,7 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
 end)
 
 -- Notify server about any restarted client resource
-addEventHandler("onClientResourceStart", root,
+addEventHandler("onClientResourceStart", resourceRoot,
 function(startedRes)
-    triggerServerEvent("onClientSend",localPlayer)
+    triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
 end)

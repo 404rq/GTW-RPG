@@ -187,8 +187,8 @@ addEventHandler("onPlayerJoin", root, function()
 	end
 end)
 
-addEvent("onClientSend",true)
-addEventHandler("onClientSend",root,
+addEvent("GTWaccounts.onClientSend",true)
+addEventHandler("GTWaccounts.onClientSend",resourceRoot,
 function()
 	if isGuestAccount(getPlayerAccount(client)) then
 		-- Clear text from screen
