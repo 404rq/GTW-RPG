@@ -157,11 +157,6 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
 		setTimer(CreateLoginScreen, 1000, 1)
 		showChat(false)
+		triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
 	end
-end)
-
--- Notify server about any restarted client resource
-addEventHandler("onClientResourceStart", resourceRoot,
-function(startedRes)
-    triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
 end)
