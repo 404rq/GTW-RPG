@@ -18,6 +18,7 @@ iron_objects 		= {{ }}
 iron_markers 		= {{ }}
 associated_rocks 	= { }
 bomb_price 			= 1200
+bomb_cooldown 		= { }
 
 function calculate_profit(plr)
 	local total = 0
@@ -59,6 +60,10 @@ function plant_bomb(plr)
 		exports.GTWtopbar:dm("Ironminer: You are to poor to afford the bomb!", plr, 255, 0, 0)		
 		return 
 	end
+	if bomb_cooldown[plr] and isTimer(bomb_cooldown[plr]) then
+		exports.GTWtopbar:dm("Ironminer: Please allow up to 5 minutes before you plant the next bomb!", plr, 255, 0, 0)		
+		return
+	end
 	
 	-- Check if inside a vehicle
 	if getPedOccupiedVehicle(plr) then 
@@ -76,6 +81,9 @@ function plant_bomb(plr)
 	
 	-- Create a bunch of rocks to mine from
 	setTimer(create_miner, 11000, 1, plr, x,y,z-0.8)
+	
+	-- Apply a bomb cooldown
+	bomb_cooldown[plr] = setTimer(function() end, 300*1000, 1)
 end
 addCommandHandler("plantbomb", plant_bomb)
 
@@ -98,9 +106,10 @@ function clean_up_and_install(plr)
 			destroyElement(iron_markers[plr][k])
 			iron_markers[plr][k] = nil
 		end
-		iron_objects[plr] = { }
-		iron_markers[plr] = { }
+		
 	end
+	if not iron_objects[plr] then iron_objects[plr] = { } end
+	if not iron_markers[plr] then iron_markers[plr] = { } end
 end
 
 -- Setup the mining place
