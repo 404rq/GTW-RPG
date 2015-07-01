@@ -163,6 +163,12 @@ function(_, playeraccount)
     if (posX and posY and posZ) then
        	spawnPlayer(source, posX, posY, posZ, rotZ, getElementModel(source), getElementInterior(source), getElementDimension(source), getPlayerTeam(source))
 		setCameraTarget(source, source)
+		
+		-- Temporary (from 2015-07-01) restore health and armor
+		local health = getAccountData(playeraccount, "acorp.health")
+        local armor = getAccountData(playeraccount, "acorp.armor")
+        setPedArmor(source, armor) 
+        setElementHealth(source, health) 
 	else
 		local x,y,z,r = unpack(spawn_loc[math.random(#spawn_loc)])
 		spawnPlayer(source, x, y, z+3, r, skin_id[math.random(#skin_id)], 0, 0, getTeamFromName("Unemployed"))
@@ -187,8 +193,8 @@ addEventHandler("onPlayerJoin", root, function()
 	end
 end)
 
-addEvent("onClientSend",true)
-addEventHandler("onClientSend",root,
+addEvent("GTWaccounts.onClientSend",true)
+addEventHandler("GTWaccounts.onClientSend",root,
 function()
 	if isGuestAccount(getPlayerAccount(client)) then
 		-- Clear text from screen
