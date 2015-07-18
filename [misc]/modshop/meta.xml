@@ -1,0 +1,21 @@
+<meta>
+    <info author="Dennis/UniOn" version="32" type="script" name="vehicle modshop" />
+    
+    <!-- The modshop files by Dennis aka UniOn -->
+    <script src="GUI/client.luac" type="client" />
+    <script src="client.lua" type="client" />
+    <script src="server.lua" type="server" />
+    
+    <!-- Colorpicker by Aiboforcen (Version 1.0.4) -->
+    <script src="colorpicker/picker_client.lua" type="client" />
+    <file src="colorpicker/cursor.png" />
+    <file src="colorpicker/h.png" />
+    <file src="colorpicker/sv.png" />
+    <file src="colorpicker/blank.png" />
+    
+    <!-- Exports -->
+    <export function="getUpgradeName" type="client" />
+    <export function="getUpgradePrice" type="client" />
+    <export function="isVehicleModding" type="server" />
+    <export function="isPlayerModding" type="server" />
+</meta>

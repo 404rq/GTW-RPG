@@ -1,0 +1,31 @@
+<help>
+Alternate HUD 1.4.5 (4th Release version)
+
+This is a resource that replaces the GTA HUD with a custom one. It removes all the HUD (except oxygen, map, and altimeter). 
+
+In this version, changes include:
+- Re-positioned DX drawings for the second time.
+- Flipped ammo and total ammo.
+- Total ammo issue fixed.
+- Toggleable HUD (Look at the commands)
+- Commands are altered.
+- Custom wanted stars are now implemented  *MTA SA 1.1 onwards!*
+- Hides the GTA wanted stars  *MTA SA 1.1 onwards!*
+
+Commands:
+- /showhud or /hidegtahud  : Shows the alternate HUD, and hides the GTA HUD excluding the radar.
+- /hidehud  or /showgtahud : Hides the alternate HUD, and shows the GTA HUD excluding the radar.
+- /hideall : Hides both alternate HUD and GTA HUD. (Hides the radar too)
+- /showradar : Shows the radar.
+- /hideradar : Hides the radar.
+
+Editing is allowed without my permission, but you must credit the author first.
+
+Credits goes to:
+- 50p : For helping me most of my work and the better weapon icons used here.
+- Doomed_Space_marine : For giving me a very useful hint on the variables, and helped me on how to make tables.
+- R3mp : For the guieditor and helping me to understand about guiGetScreenSize.
+- Dragon: For helping me making a part of DX text visible or invisible according to weapon.
+- Dre++ : Allowing me to learn from his HUD script, thus improving my script.
+And all the others who already tried to help me.
+</help>

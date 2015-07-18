@@ -1,0 +1,73 @@
+<meta>
+    <info author="Sr.zika" version="32" type="script" name="Icons radar" description="novos icones no radar" />
+    
+    <script src="shader.lua" type="client" />
+    
+    <file src="shader/shader.fx" />
+    
+    <file src="img/arrow.png" />
+    <file src="img/radardisc.png" />
+    <file src="img/radar_airYard.png" />
+    <file src="img/radar_ammugun.png" />
+    <file src="img/radar_barbers.png" />
+    <file src="img/radar_BIGSMOKE.png" />
+    <file src="img/radar_boatyard.png" />
+    <file src="img/radar_bulldozer.png" />
+    <file src="img/radar_burgerShot.png" />
+    <file src="img/radar_cash.png" />
+    <file src="img/radar_CATALINAPINK.png" />
+    <file src="img/radar_centre.png" />
+    <file src="img/radar_CESARVIAPANDO.png" />
+    <file src="img/radar_chicken.png" />
+    <file src="img/radar_dateDisco.png" />
+    <file src="img/radar_dateDrink.png" />
+    <file src="img/radar_dateFood.png" />
+    <file src="img/radar_diner.png" />
+    <file src="img/radar_emmetGun.png" />
+    <file src="img/radar_enemyAttack.png" />
+    <file src="img/radar_fire.png" />
+    <file src="img/radar_Flag.png" />
+    <file src="img/radar_gangB.png" />
+    <file src="img/radar_gangG.png" />
+    <file src="img/radar_gangN.png" />
+    <file src="img/radar_gangP.png" />
+    <file src="img/radar_gangY.png" />
+    <file src="img/radar_girlfriend.png" />
+    <file src="img/radar_gym.png" />
+    <file src="img/radar_hostpital.png" />
+    <file src="img/radar_impound.png" />
+    <file src="img/radar_light.png" />
+    <file src="img/radar_LocoSyndicate.png" />
+    <file src="img/radar_MADDOG.png" />
+    <file src="img/radar_mafiaCasino.png" />
+    <file src="img/radar_MCSTRAP.png" />
+    <file src="img/radar_modGarage.png" />
+    <file src="img/radar_north.png" />
+    <file src="img/radar_OGLOC.png" />
+    <file src="img/radar_pizza.png" />
+    <file src="img/radar_police.png" />
+    <file src="img/radar_propertyG.png" />
+    <file src="img/radar_propertyR.png" />
+    <file src="img/radar_qmark.png" />
+    <file src="img/radar_race.png" />
+    <file src="img/radar_runway.png" />
+    <file src="img/radar_RYDER.png" />
+    <file src="img/radar_saveGame.png" />
+    <file src="img/radar_school.png" />
+    <file src="img/radar_spray.png" />
+    <file src="img/radar_SWEET.png" />
+    <file src="img/radar_tattoo.png" />
+    <file src="img/radar_THETRUTH.png" />
+    <file src="img/radar_TORENO.png" />
+    <file src="img/radar_TorenoRanch.png" />
+    <file src="img/radar_triads.png" />
+    <file src="img/radar_triadsCasino.png" />
+    <file src="img/radar_truck.png" />
+    <file src="img/radar_tshirt.png" />
+    <file src="img/radar_waypoint.png" />
+    <file src="img/radar_WOOZIE.png" />
+    <file src="img/radar_ZERO.png" />
+    <file src="img/siteM16.png" />
+    <file src="img/siterocket.png" />
+    <file src="img/skipicon.png" />
+</meta>
