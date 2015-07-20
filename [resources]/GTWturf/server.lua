@@ -409,7 +409,8 @@ function increaseStats(totalAmmo, attacker, weapon, bodypart, stealth)
 	if weapon == 31 then stat_key = 78 end
 	if weapon == 34 then stat_key = 79 end
 	local stats = math.random(weapon_stats_min, weapon_stats_max)
-	if (getPedStat(attacker, stat_key) or 0)+stats > 1000 then return end
+	if (getPedStat(attacker, stat_key) or 0) == 1000 then return end
+	if (getPedStat(attacker, stat_key) or 0)+stats > 1000 then stats = (1000-getPedStat(attacker, stat_key)) end
 	setPedStat(attacker, stat_key, (getPedStat(attacker, stat_key) or 0)+stats)
 	setTimer(killerMessage, 123, 1, weapon, attacker, stat_key)
 end

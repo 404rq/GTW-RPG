@@ -173,6 +173,9 @@ function crime_damage_vehicle(attacker, weapon, loss, x, y, z, tyre)
 	-- Verify cooldown timer
 	if isTimer(damage_cooldown) then return end
 	
+	-- Break here if law unit to prevent getting wanted for aiming
+	if is_law_unit(localPlayer) then return end
+	
 	-- Apply wanted level
 	setWl(0.08, 3, "You comitted the crime of vandalism (vehicle)")
     damage_cooldown = setTimer(function() end, 1000, 1)
