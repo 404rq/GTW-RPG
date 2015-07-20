@@ -19,7 +19,7 @@ cooldown 			= nil
 fire_cooldown 		= nil
 damage_cooldown		= nil
 target_cooldown		= nil
-cooldown_speeding 	= nil
+speeding_cooldown 	= nil
 
 --[[ Check if a player is on the law side ]]--
 function is_law_unit(plr)
@@ -120,9 +120,9 @@ function crime_target_weapon(target)
 		local speedx, speedy, speedz = getElementVelocity(target)
 		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
 		local kmh = actualspeed * 180
-		if kmh > 70 and not isTimer(cooldown_speeding) then
+		if kmh > 70 and not isTimer(speeding_cooldown) then
 			triggerServerEvent("GTWwanted.onSpeeding", localPlayer, target)
-			cooldown_speeding = setTimer(function() end, 10000, 1)
+			speeding_cooldown = setTimer(function() end, 10000, 1)
 		end
 	end
 	
@@ -162,3 +162,19 @@ function show_max_train_speed()
 		tocolor( r, g, b, 255 ), 0.7, "bankgothic" )
 end
 addEventHandler("onClientRender", root, show_max_train_speed)
+
+function crime_damage_vehicle(attacker, weapon, loss, x, y, z, tyre)
+	-- Verify that the attacker is a player element
+	if not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
+	
+	-- Verify that the attacker is the local player
+	if attacker ~= localPlayer then return end
+	
+	-- Verify cooldown timer
+	if isTimer(damage_cooldown) then return end
+	
+	-- Apply wanted level
+	setWl(0.08, 3, "You comitted the crime of vandalism (vehicle)")
+    damage_cooldown = setTimer(function() end, 1000, 1)
+end
+addEventHandler("onClientVehicleDamage", root, crime_damage_vehicle)
