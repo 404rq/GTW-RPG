@@ -1,0 +1,39 @@
+<!--
+********************************************************************************
+	Project owner:		GTWGames												
+	Project name: 		GTW-RPG	
+	Developers:   		GTWCode
+	
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
+	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
+	
+	Version:    		Open source
+	License:    		GPL v.3 or later
+	Status:     		Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" version="25" type="script" /> 
+    <script src="c_gui.lua" type="client" protected="true"/>
+    <script src="group_c.lua" type="client" protected="true"/>
+    <script src="group_s.lua" type="server" />
+    <script src="s_colors.lua" type="server" />
+    <script src="s_exports.lua" type="server" />
+    
+    <export function="removeRank" type="server" />
+    <export function="isRank" type="server" />
+    <export function="getGroupMembers" type="server" />
+    <export function="getPlayerGroup" type="server" />
+    <export function="getPlayerGroupRank" type="server" />
+    <export function="getPlayerWarningLevel" type="server" />
+    <export function="getPlayerJoinDate" type="server" />
+    <export function="outputGroupMessage" type="server" />
+    <export function="checkGroupAccess" type="server" />
+    <export function="getPermissionCount" type="server" />
+    <export function="getGroupRankCount" type="server" />
+    <export function="viewWindow" type="server" />
+    <export function="getGroupChatColor" type="server" />
+    <export function="getGroupTurfColor" type="server" />
+</meta>
