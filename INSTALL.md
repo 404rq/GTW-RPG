@@ -72,6 +72,7 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="GTWturf" startup="1" protected="0" />
     <resource src="GTWturnsignals" startup="1" protected="0" />
     <resource src="GTWupdates" startup="1" protected="0" />
+    <resource src="GTWvehicles" startup="1" protected="0" />
     <resource src="GTWvehicleshop" startup="1" protected="0" />
     <resource src="GTWwanted" startup="1" protected="0" />
     <resource src="GTWweather" startup="1" protected="0" />
@@ -97,13 +98,26 @@ This will list requirements for a certain resource and then allow the required f
 For the "lazy" developers, here's a precompiled section of required ACL rights to add in your ACL file located at "_mods/deathmatch/ACL.xml_", ideally right after the opening <acl> tag at line 1. This procedure will allow the resources the access they need to work, GTWaccounts needs access to create accounts, GTWupdates needs access to callRemote in order to featch the update list and GTWgui needs the ability to refresh resources using the GUI system to prevent annoying bugs in the GUI causing controls to appear allover the screen when the window is destroyed.
 
 ```xml
+    <!-- Staff group "supporter" and "developer", you may define your own rights/permissions 
+    	for these groups based on your needs, although it's only used by the resource GTWstaff 
+    	to check the rights and purpose of various accounts, Admin and Moderator are already 
+    	defined standard groups which you can find in the default ACL file -->	
+    <group name="Supporter">
+        <acl name="Moderator" />
+        <object name="user.YOUR_ACCOUNT_NAME" />
+    </group>
+    <group name="Developer">
+        <acl name="SuperModerator" />
+        <object name="user.YOUR_ACCOUNT_NAME" />
+    </group>
+    <!-- ACL rights for the resources -->	
     <group name="GTW_RPG">
         <acl name="GTW_RPG" />
         <object name="resource.GTWupdates" />
         <object name="resource.GTWaccounts" />
         <object name="resource.GTWgui" />
     </group>
-  	<acl name="GTW_RPG">
+    <acl name="GTW_RPG">
         <right name="function.callRemote" access="true" />
         <right name="function.restartResource" access="true" />
         <right name="function.addAccount" access="true" />
