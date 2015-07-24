@@ -60,6 +60,10 @@ CloseUseDrugPanel = guiCreateButton(170, 250, 90, 40, "Close", false, DrugUseWin
 
 bindKey("F4", "down",
 function()
+	if getPedOccupiedVehicle(localPlayer) and not guiGetVisible(DrugUseWindow) then
+		exports.GTWtopbar:dm("You can not use drugs while in a vehicle!", 255, 0, 0)
+		return
+	end
 	guiSetVisible(DrugUseWindow, not guiGetVisible(DrugUseWindow))
 	showCursor(guiGetVisible(DrugUseWindow))
 	guiSetText(WeedLabel, getElementData(localPlayer, "Weed") or 0)
