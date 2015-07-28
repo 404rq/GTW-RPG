@@ -1,16 +1,16 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode, Price (Contributor)
+	Project owner: 		GTWGames
+	Project name:		GTW-RPG
+	Developers:		GTWCode, Price (Contributor)
 	
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	Bugtracker:		http://forum.gtw-games.org/bug-reports/
+	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
 	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Version:		Open source
+	License:		GPL v.3 or later
+	Status:			Stable release
 ********************************************************************************
 ]]--
 
@@ -84,7 +84,7 @@ function(player)
 		setElementFrozen(player, false)
 		toggleAllControls(player, true)
 		setPedAnimation(player, false)
-		exports.GTWtopbar:dm("Sell drug is off", player, 255, 0, 0)
+		exports.GTWtopbar:dm("Drugs: You're no longer selling drugs", player, 255, 100, 0)
 	else
 		local MaxWeed = getElementData(player, "Weed") or 0
 		local MaxGod = getElementData(player, "God") or 0
@@ -102,7 +102,7 @@ function(player)
 			setElementFrozen(player, true)
 			toggleAllControls(player, false, true, false)
 			setPedAnimation(player, "DEALER", "DEALER_IDLE", -1, true, false)
-			exports.GTWtopbar:dm("Sell drug is on", player, 0, 255, 0)
+			exports.GTWtopbar:dm("Drugs: You're selling drugs, use /sell to stop selling", player, 255, 100, 0)
 		end
 	end
 end)
