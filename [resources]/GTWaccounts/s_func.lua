@@ -23,7 +23,7 @@ addEventHandler("GTWaccounts:attemptClientLogin", root, function(user, pass)
 	if isGuestAccount(getPlayerAccount(source)) then
 		local accnt = getAccount(user)
 		if not accnt then
-			return doStatus("This account doesn't exist\non the server.", source, 0)
+			return doStatus("Account name was not found\nPress 'Register' to create\na new account and play.", source, 0)
 		end		
 		if not logIn(source, accnt, pass) then
 			return doStatus("Incorrect password for\nthis account.", source, -1)
@@ -47,7 +47,7 @@ addEventHandler("GTWaccounts:onClientAttemptRegistration", root, function(user, 
 		
 		local acn = getAccount(user)
 		if acn then
-			return doStatus("This account already exists\non the server.", client, -1)
+			return doStatus("Account name is already in use, please try another one.", client, -1)
 		end
 		if old_usr ~= user then
 			return doStatus("Invalid user name, you may only use \nthe following symbols: 0-9, a-z, A-Z or _", client, -1)
