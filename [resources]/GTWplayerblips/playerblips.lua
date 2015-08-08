@@ -15,8 +15,8 @@
 ]]--
 
 --[[ Global data and settings ]]--
-colorUpdater 	= { }
-playersTeam 	= { }
+colorUpdater 	= {}
+playersTeam 	= {}
 stealthTeams 	= {
 	["Government"]=true,
 	["Criminals"]=true,
@@ -31,10 +31,13 @@ function validateVisiblity(plr, spectator)
 		local is_admin = exports.GTWstaff:isAdmin(spectator)
 		-- Admins sees all players
 		if is_admin then return true end
-		-- They are in different teams and should not see each others
-		if getPlayerTeam(plr) ~= getPlayerTeam(spectator) then return false end
-		-- They are in the same team and should see each others
-		if getPlayerTeam(plr) == getPlayerTeam(spectator) then return true end
+		-- They are in different teams and should not see each other
+		if getPlayerTeam(plr) ~= getPlayerTeam(spectator) then 
+			return false
+		else
+			-- They are in the same team and should see each other
+			return true
+		end
 	elseif plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) then
 		return true
 	end
@@ -47,9 +50,9 @@ function refreshAllBlips(resource)
   		cleanPlayerBlips(plr)
   		
   		-- Get team color or black
-		local r,g,b = 0,0,0
+		local r, g, b = 0, 0, 0
 		if getPlayerTeam(plr) then
-			r,g,b = getTeamColor(getPlayerTeam(plr))
+			r, g, b = getTeamColor(getPlayerTeam(plr))
 			playersTeam[plr] = getTeamName(getPlayerTeam(plr))
 		end
 		
@@ -70,9 +73,9 @@ end
 function updatePlayerBlip(plr)
 	-- Remove current blips if any
   	cleanPlayerBlips(plr)
-  		
+  	
   	-- Get team color or black
-	local r,g,b = 0,0,0
+	local r, g, b = 0, 0, 0
 	if getPlayerTeam(plr) then
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		playersTeam[plr] = getTeamName(getPlayerTeam(plr))
@@ -85,7 +88,7 @@ function updatePlayerBlip(plr)
 		end
 	end
 	if not isTimer(colorUpdater[plr]) then
-		colorUpdater[plr] = setTimer(updateBlipColor,500,0,plr)
+		colorUpdater[plr] = setTimer(updateBlipColor, 500, 0, plr)
 	end
 end
 
@@ -132,7 +135,7 @@ addEventHandler("onPlayerWasted", root, onPlayerWasted)
 function cleanPlayerBlips(plr)
 	local attached = getAttachedElements(plr)
 	if not attached then return end
-	for k,element in pairs(attached) do
+	for k, element in pairs(attached) do
 		if element and getElementType(element) == "blip" then
 			destroyElement(element)
 		end
@@ -143,7 +146,7 @@ end
 function hasPlayerBlip(plr)
 	local attached = getAttachedElements(plr)
 	if not attached then return end
-	for k,element in pairs(attached) do
+	for k, element in pairs(attached) do
 		if element and getElementType(element) == "blip" then
 			return true
 		end
