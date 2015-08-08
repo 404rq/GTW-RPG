@@ -1,13 +1,13 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
+	Project owner:		GTWGames
+	Project name: 		GTW-RPG
 	Developers:   		GTWCode
-	
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
 	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
 	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+
 	Version:    		Open source
 	License:    		GPL v.3 or later
 	Status:     		Stable release
@@ -34,8 +34,8 @@ hs_table = {
 }
 
 -- Cost of the healthcare
-hs_charge 					= 500
-hs_respawn_time 			= 10
+hs_charge 			= 500
+hs_respawn_time 		= 10	-- Check GTWjail respawn times if you decide to change this value!
 hs_spawn_protection_time 	= 20
 
 --[[ Load all the hospitals from the table ]]--
@@ -43,7 +43,7 @@ function load_hospitals()
 	for i=1, #hs_table do
 		createBlip(hs_table[i][1], hs_table[i][2], hs_table[i][3], 22, 1, 0, 0, 0, 255, 2, 180)
 		local h_marker = createMarker(hs_table[i][1], hs_table[i][2], hs_table[i][3]-1, "cylinder", 2, 0, 200, 0, 30)
-		addEventHandler("onMarkerHit", h_marker, hs_start_heal) 
+		addEventHandler("onMarkerHit", h_marker, hs_start_heal)
 		addEventHandler("onMarkerLeave", h_marker, hs_stop_heal)
 	end
 end
@@ -57,17 +57,17 @@ function get_nearest_hospital(plr)
 		-- Get the distance for each point
 		local px,py,pz=getElementPosition(plr)
         local dist = getDistanceBetweenPoints2D(px,py,v[1],v[2])
-		
+
 		-- Update coordinates if distance is smaller
 		if dist < min then
 			n_loc = v
 			min = dist
 		end
-	        
+
 		-- 2015-03-01 Dead in interior? respawn at LS hospital
 		if getElementInterior(plr) > 0 then break end
 	end
-	
+
 	-- Check if jailed or not and return either hospital or jail
 	local isJailed = exports.GTWjail:isJailed(thePlayer)
 	if not isJailed then
@@ -106,38 +106,38 @@ function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
 			if weapon_list[source][k] and ammo_list[source][k] then
 				-- Return ammo to the player
 				giveWeapon(source, weapon_list[source][k], ammo_list[source][k], false)
-				
+
 				-- Clean up used space
 				weapon_list[source][k] = nil
 				ammo_list[source][k] = nil
 			end
 		end
 	end
-	
+
 	-- Check if jailed
 	local isJailed = exports.GTWjail:isJailed(source)
 	if isJailed then return end
-	
+
 	-- Set camera view target
 	local x,y,z, r, vx,vy,vz = get_nearest_hospital(source)
 	setCameraMatrix(source, vx,vy,vz, x,y,z, 0,75)
-	
-	-- Fade in the camera and set it's target	
+
+	-- Fade in the camera and set it's target
 	fadeCamera(source, true, 6,255,255,255)
-	
-	
+
+
 	-- Make sure the player is not frozen
 	setElementFrozen(source, false)
 	toggle_controls(source, false)
 	setTimer(finish_spawn, 8000, 1, source)
-	
+
 	-- Set health to 30
 	setElementHealth(source, 30)
-	
+
 	-- Reset ambulance data
 	awaiting_spawn[source] = nil
-	  
-	-- Infom the player about his respawn	  
+
+	-- Infom the player about his respawn
 	exports.GTWtopbar:dm("Hospital: You have been healed at "..getZoneName(x,y,z)..", for a cost of $"..hs_charge, source, 255, 100, 0)
 end
 addEventHandler("onPlayerSpawn", root, player_Spawn)
@@ -146,13 +146,13 @@ addEventHandler("onPlayerSpawn", root, player_Spawn)
 function finish_spawn(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	setCameraTarget(plr, plr)
-	
+
 	-- Enable controls
 	toggle_controls(plr, true)
-	
+
 	-- Play a spawn sound
 	playSoundFrontEnd(plr, 11)
-	
+
 	-- Enable spawn protection
 	triggerClientEvent(plr, "GTWhospital.setSpawnProtection", plr, hs_spawn_protection_time)
 end
@@ -162,31 +162,31 @@ function on_death(ammo, attacker, weapon, bodypart)
 	-- Save all weapons currently hold by a player
 	weapon_list[source] 	= { 0,0,0,0,0,0,0,0,0,0,0,0 }
 	ammo_list[source] 	= { 0,0,0,0,0,0,0,0,0,0,0,0 }
-	
+
 	-- Check all weapon slots and save their ammo
 	for k,v in ipairs(weapon_list[source]) do
 		weapon_list[source][k] = getPedWeapon(source, k)
 		setPedWeaponSlot(source, k)
 		ammo_list[source][k] = getPedTotalAmmo(source, k)
 	end
-	
+
 	-- Check if jailed or not
 	local isJailed = exports.GTWjail:isJailed(source)
 	if isJailed then return end
-	
+
 	-- Make sure warp to hospital is possible
-	if getPedOccupiedVehicle(source) then removePedFromVehicle(source) end	
-	
+	if getPedOccupiedVehicle(source) then removePedFromVehicle(source) end
+
 	-- Take some of the money
 	takePlayerMoney(source, hs_charge)
 	fadeCamera(source, false, 8, 0, 0, 0)
-	
+
 	-- Respawn player after "hs_respawn_time" seconds
 	setTimer(plr_respawn, hs_respawn_time*1000, 1, source)
-	
+
 	-- Add to respawn
 	awaiting_spawn[source] = true
-	
+
 	-- Notify player about his death
 	exports.GTWtopbar:dm("Hospital: You are dead! an ambulance will pick you up soon", source, 255, 100, 0)
 end
@@ -203,13 +203,13 @@ end
 function dump_weapons()
 	-- Get player account
     local acc = getPlayerAccount(source)
-    
+
     -- Reset ambulance data
 	awaiting_spawn[source] = nil
-    
+
     -- Check if there is any weapons in memory
     if not weapon_list[source] then return end
-    
+
     -- Save the weapons and ammo stored in memory
     for k,w in ipairs(weapon_list[source]) do
 	    if weapon_list[source][k] and ammo_list[source][k] then
@@ -219,7 +219,7 @@ function dump_weapons()
 	end
 end
 addEventHandler("onPlayerQuit", root, dump_weapons)
- 
+
 --[[ Heal player once in a health marker ]]--
 function hospital_heal(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
@@ -241,7 +241,7 @@ function hospital_heal(plr)
 end
 
 --[[ Start an healing timer, increasing the health of a player ]]--
-function hs_start_heal(hitElement, matchingDimension) 
+function hs_start_heal(hitElement, matchingDimension)
 	if isTimer(timers[hitElement]) then killTimer(timers[hitElement]) end
 	if getElementHealth(hitElement) < 90 then
 		exports.GTWtopbar:dm("Stay in the marker to get healed!", hitElement, 255, 100, 0)
