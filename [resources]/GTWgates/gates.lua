@@ -57,7 +57,7 @@ function load_gates(name)
    	for k=1, #gate_data do
 		-- Create objects
 		local gat = createObject( gate_data[k][1], gate_data[k][2], gate_data[k][3], gate_data[k][4], gate_data[k][8], gate_data[k][9], gate_data[k][10] )
-		local col = createColCircle( gate_data[k][11], gate_data[k][12], gate_data[k][13]+2, gate_data[k][14] )
+		local col = createColSphere( gate_data[k][11], gate_data[k][12], gate_data[k][13]+2, gate_data[k][14] )
 		setObjectScale( gat, gate_data[k][16] )
 	
 		-- Assign arrays of object pointers

@@ -17,6 +17,7 @@
 -- Global client properites
 p_account = nil
 p_loggedIn = false
+sec_login_attempts = 0
 
 -- Display status messages from the server
 addEvent("GTWaccounts:onStatusReceive", true)
@@ -36,7 +37,7 @@ function CreateLoginScreen()
 	x,y = guiGetScreenSize()
 	window = exports.GTWgui:createWindow((x-350)/2, (y-450)/2, 350, 450, "Grand Theft Walrus", false )
 	loginButton = guiCreateButton(230,400,100,40,"Login",false,window)
-	registerButton = guiCreateButton(128,400,100,40,"Signup",false,window)
+	registerButton = guiCreateButton(128,400,100,40,"Register",false,window)
 	updatesButton = guiCreateButton(10,400,116,40,"What's new",false,window)
 	labelUser = guiCreateLabel(30, 40, 290, 25, "Username:", false, window)
 	labelPwrd = guiCreateLabel(30, 100, 290, 25, "Password:", false, window)
@@ -93,6 +94,11 @@ addEventHandler("onClientGUIClick",root,function()
 		guiSetText(labelInfo, "Attempting to login...")
 		fadeCamera(false, 1)
 		setTimer(triggerServerEvent, 1100, 1, "GTWaccounts:attemptClientLogin", localPlayer, guiGetText(textUser), guiGetText(textPwrd))
+		if sec_login_attempts > 2 then
+			-- Kick after 3 failed login attempts
+			triggerServerEvent("GTWaccounts:kickClientSpammer", localPlayer)
+		end
+		sec_login_attempts = sec_login_attempts + 1
 	-- On registration
 	elseif source == registerButton then
 		triggerServerEvent("GTWaccounts:onClientAttemptRegistration", localPlayer, guiGetText(textUser), guiGetText(textPwrd), guiGetText(textFacc))

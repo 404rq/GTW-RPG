@@ -1,16 +1,16 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode, Price (Contributor)
+	Project owner: 		GTWGames
+	Project name:		GTW-RPG
+	Developers:		GTWCode, Price (Contributor)
 	
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	Bugtracker:		http://forum.gtw-games.org/bug-reports/
+	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
 	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Version:		Open source
+	License:		GPL v.3 or later
+	Status:			Stable release
 ********************************************************************************
 ]]--
 
