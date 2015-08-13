@@ -1,13 +1,13 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
+	Project owner:		GTWGames
+	Project name: 		GTW-RPG
 	Developers:   		GTWCode
-	
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
 	Bugtracker: 		http://forum.albonius.com/bug-reports/
 	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+
 	Version:    		Open source
 	License:    		GPL v.3 or later
 	Status:     		Stable release
@@ -22,8 +22,10 @@
     <script src="misc.lua" type="server" />
     <script src="exports.lua" type="server" />
     <script src="blips.lua" type="server" />
-    
+
     <export function="distanceToCop" type="server" />
     <export function="nearestCop" type="server" />
     <export function="isArrested" type="server" />
+    <export function="isLawUnit" type="server" />
+    <export function="isLawUnit" type="client" />
 </meta>

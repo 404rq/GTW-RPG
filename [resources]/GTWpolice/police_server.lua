@@ -46,7 +46,7 @@ function arrest_or_taze(attacker, attackerweapon)
 
 	-- Arrest players
 	if attackerweapon == 3 and wl > 0 and not getPedOccupiedVehicle(source) and
-		lawTeams[getTeamName(getPlayerTeam(attacker))] and getElementData(source, "Jailed") ~= "Yes" and
+		isLawUnit(attacker) and getElementData(source, "Jailed") ~= "Yes" and
 		not police_data.arrested_players[attacker] and not police_data.is_arrested[crim] then
 
         -- Setting the control data
@@ -120,7 +120,7 @@ function arrest_or_taze(attacker, attackerweapon)
 	local isJailed = exports.GTWjail:isJailed(source)
 	elseif attackerweapon == 23 and wl > 0 and getPlayerWantedLevel(source) > 0 and
 		not getPedOccupiedVehicle(attacker) and not getPedOccupiedVehicle(source) and
-		lawTeams[getTeamName(getPlayerTeam(attacker))] and not isJailed then
+		isLawUnit(attacker) and not isJailed then
 		-- Random generator
 		local sx,sy,sz = getElementPosition(source)
 		local ax,ay,az = getElementPosition(attacker)
@@ -144,7 +144,7 @@ addEventHandler("onPlayerDamage", root, arrest_or_taze)
 
 function kill_arrest(ammo, attacker, weapon, bodypart)
 	-- Release a suspect hold by a killed police officer
-	if getPlayerTeam(source) and lawTeams[getTeamName(getPlayerTeam(source))] and police_data.arrested_players[source] then
+	if getPlayerTeam(source) and isLawUnit(source) and police_data.arrested_players[source] then
 		releaseCrim(police_data.arrested_players[source], "releaseondeath")
 		return
 	end
@@ -162,8 +162,8 @@ function kill_arrest(ammo, attacker, weapon, bodypart)
 
 	-- Kill arrest
 	if is_jailed or not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
-	if not getPlayerTeam(attacker) or not lawTeams[getTeamName(getPlayerTeam(attacker))] or
-		lawTeams[getTeamName(getPlayerTeam(source))] or not getElementData(source, "violent_seconds") then return end
+	if not getPlayerTeam(attacker) or not isLawUnit(attacker) or
+		isLawUnit(source) or not getElementData(source, "violent_seconds") then return end
 	setTimer(Jail, 18000, 1, source, attacker, false)
 	setElementData(source, "isKillArrested", true)
 	exports.GTWtopbar:dm( "You kill arrested "..getPlayerName(source), attacker, 255, 100, 0 )
@@ -269,7 +269,7 @@ function syncArrest(crim, cop)
 			lastAnim[crim] = 2
 		end
 
-		if not lawTeams[getTeamName(getPlayerTeam(cop))] or isPedDead(cop) then
+		if not isLawUnit(cop) or isPedDead(cop) then
 			if isElement(crim) then
 				--detachElements(p)
 				if isTimer(prisonerSyncTimers[crim]) then
@@ -544,7 +544,7 @@ function enterLawVehicle(plr, seat, jacked)
 		end
 		if ((source and(policeVehicles[getElementModel(source)] or
 			fireVehicles[getElementModel(source)] or medicVehicles[getElementModel(source)]))
-			and getPlayerTeam(plr) and not lawTeams[getTeamName(getPlayerTeam(plr))]
+			and getPlayerTeam(plr) and not isLawUnit(plr)
 			and seat and seat == 0) then
 		end
     end
@@ -719,7 +719,7 @@ function quitPlayer(quitType)
 		setAccountData(acc, "acorp.police.isArrested", "NO")
 	end
 	for w,cop in ipairs(getElementsByType("player")) do
-		if getPlayerTeam(cop) and lawTeams[getTeamName(getPlayerTeam(cop))] then
+		if getPlayerTeam(cop) and isLawUnit(cop) then
 			if police_data.arrested_players[cop] == source then
 				police_data.arrested_players[cop] = nil
 			end
@@ -730,3 +730,17 @@ function quitPlayer(quitType)
 	end
 end
 addEventHandler("onPlayerQuit", root, quitPlayer)
+
+--[[ Validate if a player is a law unit or not ]]--
+function isLawUnit(plr)
+	-- Check some stuff
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return false end
+	if not getPlayerTeam(plr) then return false end
+
+	-- Verify if law unit
+	if lawTeams[getTeamName(getPlayerTeam(plr))] then
+		return true
+	else
+		return false
+	end
+end

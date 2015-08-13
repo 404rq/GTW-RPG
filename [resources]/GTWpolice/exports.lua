@@ -1,13 +1,13 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
+	Project owner:		GTWGames
+	Project name: 		GTW-RPG
 	Developers:   		GTWCode
-	
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
 	Bugtracker: 		http://forum.albonius.com/bug-reports/
 	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+
 	Version:    		Open source
 	License:    		GPL v.3 or later
 	Status:     		Stable release
@@ -17,9 +17,9 @@
 -- Distance to cop
 function distanceToCop(crim)
 	local copIsNearby = false
-	local dist = 99999		
-	for w,cop in ipairs(getElementsByType("player")) do 
-		if getPlayerTeam(cop) and lawTeams[getTeamName(getPlayerTeam(cop))] and getPlayerTeam(cop) ~= getTeamFromName("Staff") then
+	local dist = 99999
+	for w,cop in ipairs(getElementsByType("player")) do
+		if getPlayerTeam(cop) and isLawUnit(cop) and getPlayerTeam(cop) ~= getTeamFromName("Staff") then
 			cx,cy,cz = getElementPosition(cop)
 			px,py,pz = getElementPosition(crim)
 			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and cop ~= crim then
@@ -34,10 +34,10 @@ end
 -- Find nearest cop
 function nearestCop(player)
 	local copIsNearby = false
-	local dist = 99999	
-	local nearCop = nil	
-	for w,cop in ipairs(getElementsByType("player")) do 
-		if getPlayerTeam(cop) and lawTeams[getTeamName(getPlayerTeam(cop))] then
+	local dist = 99999
+	local nearCop = nil
+	for w,cop in ipairs(getElementsByType("player")) do
+		if getPlayerTeam(cop) and isLawUnit(cop) then
 			cx,cy,cz = getElementPosition(cop)
 			px,py,pz = getElementPosition(player)
 			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist then
@@ -54,16 +54,16 @@ end
 function distanceToCrim(player)
 	if not player or not isElement(player) then return end
 	local crimIsNearby = false
-	local dist = 99999	
-	for w,crim in ipairs(getElementsByType("player")) do 
-		if getPlayerWantedLevel(crim) > 0 and crim ~= player and 
-			getElementInterior(crim) == getElementInterior(player) and  
-			getElementDimension(crim) == getElementDimension(player) and 
-			not lawTeams[getTeamName(getPlayerTeam(crim))] then
+	local dist = 99999
+	for w,crim in ipairs(getElementsByType("player")) do
+		if getPlayerWantedLevel(crim) > 0 and crim ~= player and
+			getElementInterior(crim) == getElementInterior(player) and
+			getElementDimension(crim) == getElementDimension(player) and
+			not isLawUnit(crim) then
 			cx,cy,cz = getElementPosition(crim)
 			px,py,pz = getElementPosition(player)
-			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and 
-				getElementData(crim, "Jailed") ~= "Yes" and 
+			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and
+				getElementData(crim, "Jailed") ~= "Yes" and
 				not police_data.is_arrested[crim] then
 				dist = getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz)
 			end
@@ -79,13 +79,13 @@ end
 function directionToCrim(player)
 	local crimIsNearby = false
 	local dir = "North"
-	local dist = 9999	
-	for w,crim in ipairs(getElementsByType("player")) do 
+	local dist = 9999
+	for w,crim in ipairs(getElementsByType("player")) do
 		if getPlayerWantedLevel(crim) > 0 and crim ~= player then
 			cx,cy,cz = getElementPosition(crim)
 			px,py,pz = getElementPosition(player)
-			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and 
-				getElementData(crim, "Jailed") ~= "Yes" and 
+			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and
+				getElementData(crim, "Jailed") ~= "Yes" and
 				not police_data.is_arrested[crim] then
 				dist = getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz)
 				if py > cy-1 then
