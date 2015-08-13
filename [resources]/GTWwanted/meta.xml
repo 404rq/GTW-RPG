@@ -25,4 +25,6 @@
     <export function="setWl" type="client" />
     <export function="getWl" type="server" />
     <export function="getWl" type="client" />
+    <export function="is_law_unit" type="server" />
+    <export function="is_law_unit" type="client" />
 </meta>
