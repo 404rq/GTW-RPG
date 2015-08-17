@@ -41,7 +41,7 @@ addEvent("GTWaccounts:kickClientSpammer", true)
 addEventHandler("GTWaccounts:kickClientSpammer", root,
 	function()
 		kickPlayer(client, "Calm down and read the status message before going insane!")
-	end
+	end)
 
 -- On register request
 addEvent("GTWaccounts:onClientAttemptRegistration", true)
