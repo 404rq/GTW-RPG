@@ -1,13 +1,13 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
 	License:    		GPL v.3 or later
 	Status:     		Stable release
@@ -48,12 +48,12 @@ function CreateLoginScreen()
 	checkBoxPwrd = guiCreateCheckBox(30, 180, 290, 20, "Remember Password", false, false, window)
 	guiEditSetMasked(textPwrd, true)
 	guiSetInputEnabled(true)
-	
+
 	-- Friends invite bonus
 	labelFacc = guiCreateLabel(30, 300, 190, 25, "Send your friend a gift", false, window)
 	textFacc = guiCreateEdit(30,325,260,25,"",false,window)
 	faccButtonHelp = guiCreateButton(290,325,30,25,"?",false,window)
-	
+
 	-- Set GUI font
 	exports.GTWgui:setDefaultFont(loginButton, 10)
 	exports.GTWgui:setDefaultFont(registerButton, 10)
@@ -69,7 +69,7 @@ function CreateLoginScreen()
 	exports.GTWgui:setDefaultFont(textFacc, 10)
 	exports.GTWgui:setDefaultFont(faccButtonHelp, 10)
 	showCursor(true)
-	
+
 	-- Load login details from xml
 	local f = xmlLoadFile('@data.xml', 'account')
 	if f then
@@ -79,7 +79,7 @@ function CreateLoginScreen()
 		guiSetText(textPwrd, tostring(pass))
 		if user ~= "" then
 			guiCheckBoxSetSelected(checkBoxUser, true)
-		end 
+		end
 		if pass ~= "" then
 			guiCheckBoxSetSelected(checkBoxPwrd, true)
 		end
@@ -87,7 +87,7 @@ function CreateLoginScreen()
 end
 
 -- Login GUI click events
-addEventHandler("onClientGUIClick",root,function() 
+addEventHandler("onClientGUIClick",root,function()
 	-- On login (asyncron function)
 	if source == loginButton then
 		guiLabelSetColor(labelInfo, 255, 255, 255)
@@ -117,10 +117,10 @@ addEvent("GTWaccounts:onClientPlayerLogin", true)
 addEventHandler("GTWaccounts:onClientPlayerLogin", root, function(acnt)
 	exports.GTWtopbar:dm("Welcome to Grand Theft Walrus, "..getPlayerName(localPlayer).."!", 255, 255, 255)
 	local f = xmlCreateFile("@data.xml", "account")
-	local user, pass = "", "" 
+	local user, pass = "", ""
 	if guiCheckBoxGetSelected(checkBoxUser) then
 		user = guiGetText(textUser)
-	end 
+	end
 	if guiCheckBoxGetSelected(checkBoxPwrd) then
 		pass = guiGetText(textPwrd)
 	end
@@ -132,7 +132,7 @@ addEventHandler("GTWaccounts:onClientPlayerLogin", root, function(acnt)
 	showCursor(false)
 	guiSetInputEnabled(false)
 	showChat(true)
-	
+
 	-- Set account obtained from the server and login status
 	p_loggedIn = true
 	p_account = acnt

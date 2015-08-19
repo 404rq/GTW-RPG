@@ -1,12 +1,12 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames
+	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
-	Developers:   		GTWCode
+	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
 	License:    		GPL v.3 or later
