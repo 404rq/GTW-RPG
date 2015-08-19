@@ -54,18 +54,18 @@ function requestUpdates()
 	addEventHandler("GTWupdates.respond", localPlayer, onResponseFromServer)]]--
 
 	-- Load updates from local file
-	local update_file = fileOpen("updates.txt", true)
+	--[[local update_file = fileOpen("updates.txt", true)
 	local content = ""
 	if not update_file then return end
 	local buffer
-	while not fileIsEOF(hFile) do
-	 	buffer = fileRead(hFile, 500)
-		content .= buffer
+	while not fileIsEOF(update_file) do
+	 	buffer = fileRead(update_file, 500)
+		content = content..buffer
 	end
-	fileClose(update_file)
+	fileClose(update_file)]]--
 
 	-- Add text to list
-	guiSetText(text, content)
+	guiSetText(text, str_updates)
 end
 setTimer(requestUpdates,10000,0)
 

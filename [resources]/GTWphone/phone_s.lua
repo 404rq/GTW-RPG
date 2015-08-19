@@ -1,13 +1,13 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
 	License:    		GPL v.3 or later
 	Status:     		Stable release
@@ -34,7 +34,7 @@ function sendSMS( to, message )
 	    players[client] = to
 	    players[to] = client
 	    lastMsg[client] = message
-	    
+
 	    -- Server logs added 2014-02-11
 	    outputServerLog( "SMS: "..getPlayerName(client).." -> "..getPlayerName(to)..": "..message )
 	elseif string.len(message) < 2 then
@@ -60,7 +60,7 @@ function reply_to_sms( plr_from, commandName, ... )
 	    triggerClientEvent( players[plr_from], "onSMSReceive", players[plr_from], message, getPlayerName(plr_from))
 	    triggerClientEvent( plr_from, "onSMSReceive", plr_from, message, getPlayerName(plr_from))
 	    lastMsg[plr_from] = message
-	    
+
 	    -- Server logs added 2014-02-11
 	    outputServerLog( "SMS: "..getPlayerName(plr_from).." -> "..getPlayerName(players[plr_from])..": "..message )
 	elseif string.len(message) < 2 then
@@ -198,7 +198,7 @@ function call_service( rec )
 			end
 		end
 	end
-	
+
 	-- Check for spam or show the status
 	if isTimer( cooldown[client] ) then
 		exports.GTWtopbar:dm( "Due to spam you can't call right now, wait a couple of seconds then try again.", client, 255, 0, 0 )
