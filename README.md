@@ -26,7 +26,7 @@ BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
 LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
 
 ## Videos
-[![GTW-RPG vehicle system](http://img.youtube.com/vi/x89n19ufIrk/0.jpg)](http://www.youtube.com/watch?v=x89n19ufIrk)
+[![GTW-RPG vehicle system](http://img.youtube.com/vi/x89n19ufIrk/0.jpg)](http://www.youtube.com/watch?v=x89n19ufIrk)<br>
 _Overview of the vehicle system, a part in this pack of resources_
 
 ## Contributors
