@@ -26,8 +26,14 @@ BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
 LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
 
 ## Videos
+[![GTW-RPG vehicle system](http://img.youtube.com/vi/IKAHKrxKUbk/0.jpg)](http://www.youtube.com/watch?v=IKAHKrxKUbk)<br>
+_Overview of the civilian job system included in this pack (GTWcivilians)_
+
 [![GTW-RPG vehicle system](http://img.youtube.com/vi/x89n19ufIrk/0.jpg)](http://www.youtube.com/watch?v=x89n19ufIrk)<br>
-_Overview of the vehicle system, a part in this pack of resources_
+_Overview of the vehicle system, a part in this pack of resources (GTWvehicleshop)_
+
+[![GTW-RPG vehicle system](http://img.youtube.com/vi/H_HLtxBT9VA/0.jpg)](http://www.youtube.com/watch?v=H_HLtxBT9VA)<br>
+_Overview of the police and wanted level system + jail map (GTWpolice, GTWwanted, GTWjail...)_
 
 ## Contributors
 Mr_Moose<br>
