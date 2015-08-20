@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -22,11 +22,11 @@ h_list_freight = {
 }
 h_list_streak = {
 	"k31_horn1",
-	"2k_hornl",	
+	"2k_hornl",
 	"7k_hornl"
 }
 h_list_tram = {
-	"k31_horn1"	
+	"k31_horn1"
 }
 
 -- Toggle the horn sound
@@ -47,21 +47,21 @@ function toggleTrainHorn(theTrain)
 	for k=1, 20 do
 		if getVehicleTowedByVehicle( theTrain ) then
 			theTrain2 = getVehicleTowedByVehicle( theTrain )
-		end 
-		
-		if theTrain and (getElementModel(theTrain) == 537 or getElementModel(theTrain) == 538 or 
+		end
+
+		if theTrain and (getElementModel(theTrain) == 537 or getElementModel(theTrain) == 538 or
 			getElementModel(theTrain) == 449 or getVehicleOccupant(theTrain)) then
 			x,y,z = getElementPosition(theTrain)
 			sound[k] = playSound3D(horn_signal, x, y, z, false )
 			setSoundVolume(sound[k], 0.25)
 			attachElements(sound[k], theTrain)
-			setSoundMaxDistance( sound[k], 400 )	
+			setSoundMaxDistance( sound[k], 400 )
 		end
-		
+
 		if not getVehicleTowedByVehicle( theTrain ) then
 			return
 		end
-		
+
 		theTrain = theTrain2
 	end
 end

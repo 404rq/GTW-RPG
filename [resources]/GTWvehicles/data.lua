@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -26,43 +26,43 @@ paymentsHolder 	= { }
 paymentsCounter = { }
 
 -- Define police vehlices (cars and helicopters including army, swat, sapd and fbi)
-veh_police = { 
-	[596]=true, 
-	[597]=true, 
-	[598]=true, 
-	[599]=true, 
-	[490]=true, 
-	[528]=true, 
-	[523]=true, 
-	[427]=true, 
-	[432]=true, 
-	[601]=true, 
-	[428]=true, 
-	[433]=true, 
-	[470]=true, 
-	[497]=true, 
-	[425]=true, 
+veh_police = {
+	[596]=true,
+	[597]=true,
+	[598]=true,
+	[599]=true,
+	[490]=true,
+	[528]=true,
+	[523]=true,
+	[427]=true,
+	[432]=true,
+	[601]=true,
+	[428]=true,
+	[433]=true,
+	[470]=true,
+	[497]=true,
+	[425]=true,
 	[520]=true
 }
 
 -- Emergency lights vehicles
-veh_fireman = { 
-	[407]=true, 
-	[544]=true 
+veh_fireman = {
+	[407]=true,
+	[544]=true
 }
-veh_medic = { 
-	[416]=true 
+veh_medic = {
+	[416]=true
 }
 
--- Table over vehicles to display in the list	
+-- Table over vehicles to display in the list
 spawn_names = {
 	-- veh1-name, veh2-name, veh3-name, ...
 	[1]={ "Caddy", "Faggio", "Moonbeam", "Oceanic", "Premier", "Remington", "Sanchez" },
 	[2]={ "Taxi", "Cabbie" },
-	[3]={ "Cement Truck", "DFT-30", "Flatbed", "Linerunner", "Packer", "Roadtrain", "Tanker" }, 
+	[3]={ "Cement Truck", "DFT-30", "Flatbed", "Linerunner", "Packer", "Roadtrain", "Tanker" },
 	[4]={ "Police LS", "Police SF", "Police LV", "Police Ranger", "HPV1000" },
-	[5]={ "Fire Truck" }, 
-	[6]={ "Barracks", "Enforcer", "Hydra", "Hunter", "HPV1000", "Patriot" }, 
+	[5]={ "Fire Truck" },
+	[6]={ "Barracks", "Enforcer", "Hydra", "Hunter", "HPV1000", "Patriot" },
 	[7]={ "Ambulance" },
 	[8]={ "Bus", "Coach" },
 	[9]={ "Towtruck" },
@@ -189,7 +189,7 @@ valid_search_keys = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b"
 -- Data for the markers
 spawn_markers = {
 	-- x, y, z, rot, type [(optional) spawnx, spawny, spawnz]
-	-- Free vehicle spawners	
+	-- Free vehicle spawners
 	{ 1804.6162109375, -1932.7001953125, 12.286363983154, 2.2220153808594, 1 },
     { 1923.5849609375, -1794.5556640625, 12.2828125, 271.29779052734, 1 },
     { 995.8515625, -913.4345703125, 41.0796875, 186.05355834961, 1 },
@@ -222,18 +222,18 @@ spawn_markers = {
     { -2239.435546875, -2553.177734375, 30.921875, 65.081268310547, 1 },
     { -2642.7412109375, 1376.2841796875, 6.1545429229736, 180.29113769531, 1 },
     { 2379.626953125, -1416.3828125, 23.013847351074, 1.9143981933594, 1 },
-	
+
 	-- Taxi driver markers
 	{ -1391, -336, 13, 22, 2 },
 	{ 1667, -2313, 12.5, 90, 2 },
-	
+
 	-- Trucker vehicle markers
 	{ -76, -1127, 0, 70, 3 },
 	{ 2750, -2446, 12.5, 270, 3 },
 	{ -1701, 18, 2.5, 315, 3 },
 	{ 1439, 981, 9.8, 0, 3 },
 	{ 1068, 1920, 9.8, 0, 3 },
-	
+
 	-- Police vehicle spawners
 	{ 1558, -1609, 12, 180, 4 },
 	{ 1583, -1609, 12, 180, 4 },
@@ -245,16 +245,16 @@ spawn_markers = {
 	{ 614, -601, 16.3, 270, 4 },
 	{ -2178, -2368, 29.3, 52, 4 },
 	{ -1400, 2634.5, 54.7, 90, 4 },
-	
+
 	-- Firetruck spawners
 	{ -2020, 86.5, 26.8, 270, 5 },
 	{ 1750, -1454, 12.5, 270, 5 },
 	{ 1752, 2070, 9, 180, 5 },
-	
+
 	-- Army spawners
 	{ 205, 1911, 16.6, 180, 6 },
 	{ 307, 1804, 16.6, 0, 6 },
-	
+
 	-- Paramedic spawners
 	{ 1181, -1338.5, 12.5, 270, 7 },
 	{ 2000, -1413, 16, 180, 7 },
@@ -263,46 +263,46 @@ spawn_markers = {
 	{ -304.5, 1032, 18.5, 270, 7 },
 	{ -1522, 2525.6, 54.7, 0, 7 },
 	{ -2197, -2309.6, 29.6, 0, 7 },
-	
+
 	-- Bus driver spawners
 	{ 1780, -1900, 12.5, 270, 8 },
 	{ 1780, -1910, 12.5, 270, 8 },
 	{ -1630, 1290, 6, 135, 8 },
 	{ -1637, 1297, 6, 135, 8 },
 	{ 2293, 612, 9.8203125, 0, 8 },
-	
+
 	-- Mechanic spawners
 	{ -1917, 293, 40, 180, 9 },
 	{ 1045, -1031, 31, 180, 9 },
-	
+
 	-- SWAT vehicle spawners
 	{ 141.6, 492.9, 9.8, 180, 10 },
-	
+
 	-- SAPD vehicle spawners
 	{ 3203, -1978.3, 10.1, 0, 11 },
 	{ 3193.5, -1978.3, 10.1, 0, 11 },
-	
+
 	-- Admin vehicles reserved type 12
 	--{ 0, 0, 0, 0, 12 },
-	
+
 	-- Pilot airplanes
 	{ -1645, -152.5, 13.1, 320, 13 },
 	{ 1905, -2282, 12.5, 270, 13 },
 	{ 1477, 1800, 9.8, 180, 13 },
-	
+
 	-- Tram drivers
 	{ -2265, 528, 34.2, 0, 14 },
-	
+
 	-- Train drivers
 	{ 1455, 2626, 10.4, 0, 15 },
 	{ 1727.67578125, -1962.3818359375, 13.1171875, 90, 15 },
 	{ -1949.6611328125, 185.0634765625, 25.18125, 90, 15 },
-	
+
 	-- Pilot tugs
 	{ 1713, 1597, 9.2, 70, 16 },
 	{ -1557, -432, 5, 70, 16 },
 	{ 1969, -2183, 12.5, 180, 16 },
-	
+
 	-- Police helicopter
 	{ -1680, 706, 29.6, 90, 17 },
 	{ 1565.9853515625, -1650.3994140625, 27.402114868164, 0, 17 },
@@ -312,20 +312,20 @@ spawn_markers = {
 	{ 127.90000152588, 475.79998779297, 28.5, 90, 17 },
 	{ -2968.0556640625, 2400.9914550781, 2.9926643371582, 83, 17 },
 	{ -2227.6689453125, 2326.6142578125, 6.546875, 0, 17 },
-	
+
 	-- FBI vehicles
 	{ 595.7373046875, -1518.490234375, 14.145399093628, 0, 18 },
 	{ 600.7373046875, -1518.490234375, 13.95884418487, 0, 18 },
-	
+
 	-- Admin basic vehicles reserved type 19
 	--{ 0, 0, 0, 0, 19 },
-	
+
 	-- Police boats (predator)
 	{ -3009.6098632812, 2431.9736328125, 0.8984375, 116, 20 },
 	{ -2215.7509765625, 2423.7001953125, 1.4990310668945, 40, 20 },
 	{ -2978.75390625, 2191.5498046875, 0, 200, 20 },
 	--{ -3036.6728515625, 2365.6142578125, 6.2578125, 90, 20, -3038.9501953125, 2373.2509765625, 1 },
-	
+
 	-- Police bikes (jail)
 	{ -2948, 2263, 6.26, 115, 21 },
 }

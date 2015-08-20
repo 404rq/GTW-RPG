@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -45,7 +45,7 @@ end
 addEventHandler("onClientResourceStart", resourceRoot, client_load_markers)
 
 --[[ Initialize the spawner GUI ]]--
-gx,gy = guiGetScreenSize() 
+gx,gy = guiGetScreenSize()
 window = exports.GTWgui:createWindow(((gx-600)/2),((gy-450)/2),600,450,"GTWalrus vehicles",false)
 txt_search = guiCreateEdit(10, 32, 580, 30, "", false, window)
 guiEditSetCaretIndex(txt_search, 1)
@@ -56,7 +56,7 @@ col_details = guiGridListAddColumn(veh_grid, "Details", 0.4)
 col_price = guiGridListAddColumn(veh_grid, "Price", 0.15)
 btn_spawn = guiCreateButton(10, 410, 138, 36, "Rent", false, window)
 btn_cancel = guiCreateButton(452, 410, 138, 36, "Cancel", false, window)
-guiSetVisible(window,false) 
+guiSetVisible(window,false)
 exports.GTWgui:setDefaultFont(veh_grid, 10)
 exports.GTWgui:setDefaultFont(btn_spawn, 10)
 exports.GTWgui:setDefaultFont(btn_cancel, 10)
@@ -106,7 +106,7 @@ function getValidVehicleModels()
 	local invalidModels = {
 		['435']=true, ['449']=true, ['450']=true, ['537']=true,
 		['538']=true, ['569']=true, ['570']=true, ['584']=true,
-		['590']=true, ['591']=true, ['606']=true, ['607']=true, 
+		['590']=true, ['591']=true, ['606']=true, ['607']=true,
 		['608']=true
 	}
 	for i=400, 609 do
@@ -133,7 +133,7 @@ function createVehGui(isStaff, filter)
 	        elseif not filter then
 	        	row = guiGridListAddRow(veh_grid)
 	        end
-	        
+
 	        -- Do the rest if the row was added
 	        if row then
 		    	guiGridListSetItemText(veh_grid, row, col_name, tostring(vehicle), false, false)
@@ -216,7 +216,7 @@ function spawn_the_vehicle()
 	else
 		exports.GTWtopbar:dm("You are not in the staff team!", 255, 0, 0)
 	end
-end    
+end
 addCommandHandler("gv", spawn_the_vehicle)
 
 -- Show the gui window

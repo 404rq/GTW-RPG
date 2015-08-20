@@ -1,20 +1,20 @@
 --[[
 ********************************************************************************
-	Project owner: 		GTWGames
-	Project name:		GTW-RPG
-	Developers:		GTWCode, Price (Contributor)
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Price
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
-	Version:		Open source
-	License:		GPL v.3 or later
-	Status:			Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
-sec = {{{{{{},{},{},{}}}}}} 			
+sec = {{{{{{},{},{},{}}}}}}
 
 local sx, sy = guiGetScreenSize()
 guiSetInputMode("no_binds_when_editing")
@@ -237,7 +237,7 @@ function()
 		local HeroinAmount = tonumber(guiGetText(HeroinBuyEdit))
 		local Cost = tonumber(string.sub(guiGetText(TotalLabel), 2))
 		if Cost > 0 then
-			if drugDealer then 
+			if drugDealer then
 				if getElementData(drugDealer, "DurgsDealer") then
 					MaxWeed = getElementData(drugDealer, "Weed") or 0
 					MaxGod = getElementData(drugDealer, "God") or 0
@@ -340,7 +340,7 @@ function()
 			if (getElementData(localPlayer, "Steroids") or 0) > 0 then
 				setElementData(localPlayer, "Steroids", (getElementData(localPlayer, "Steroids") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Steroids drug!", 255, 0, 255)
-				if not isTimer(SteroidsHealthTimer) then 
+				if not isTimer(SteroidsHealthTimer) then
 					SteroidsHealthTimer = setTimer(function() setElementHealth(localPlayer, getElementHealth(localPlayer) + 2) end, 8000, 0)
 				end
 				if not isTimer(SteroidsTimer) then
@@ -429,7 +429,7 @@ function drawCircle(x, y, z, radius, color)
         sx, sy, sz = ex, ey
     end
 end
- 
+
 addEventHandler("onClientRender", root,
 function()
 	local drugTimeTable = {}

@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Sebbe (smart), Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -102,12 +102,12 @@ end
 --[[ Count permissions for a certain group ]]--
 function getPermissionCount(group, rank)
 	if (not cache_data[group]) then return false end
-	local count = 0	
+	local count = 0
 	if (cache_data[group] and cache_data[group][rank]) then
 		for ind, data in pairs(cache_data[group][rank]) do
 			count = count + 1
 		end
-	end	
+	end
 	return count
 end
 
@@ -131,10 +131,10 @@ function viewWindow(player)
 	local msg = ""
 	if (group and group ~= "none" and groups_table[group] and groups_table[group][2]) then
 		msg = groups_table[group][2]
-	end	
+	end
 	if (group and rank and cache_data[group] and cache_data[group][rank]) then
 		permRank = cache_data[group][rank]
-	end	
+	end
 	triggerClientEvent(client, "GTWgroups.done", client, group, rank, dateJoined, msg, permRank)
 end
 addEvent("GTWgroups.viewWindow", true)
@@ -145,7 +145,7 @@ function kickAccount(account)
 	if getAccountGroupRank(account) ~= "Founder" then
 		dbExec(db, "DELETE FROM groupmember WHERE account=?", tostring(account))
 		groups_data[account] = nil
-	
+
 		local plr = getAccountPlayer(getAccount(account))
 		if (plr) then
 			gang_data[plr] = nil

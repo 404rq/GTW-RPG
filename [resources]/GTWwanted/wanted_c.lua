@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -24,7 +24,7 @@ speeding_cooldown 	= nil
 --[[ Check if a player is on the law side ]]--
 function is_law_unit(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
-	local law_teams = { 
+	local law_teams = {
 		["Government"]=true,
 		["Staff"]=true,
 	}
@@ -55,7 +55,7 @@ function crime_vehicle_collision(collider, force, bodyPart, x, y, z, nx, ny, nz)
 	local viol = 0
 	if wl > 0.5 then viol = 20 end
 	if wl < 0.02 then return end
-	if source ~= getPedOccupiedVehicle(localPlayer) then return end	
+	if source ~= getPedOccupiedVehicle(localPlayer) then return end
 	if viol == 0 then
 		setWl(wl, viol, "You comitted the crime of bad driving", true, true)
 	else
@@ -70,9 +70,9 @@ function crime_fire_weapon(weapon, ammo, ammoInClip, hitX, hitY, hitZ, hitElemen
 	if hitElement == localPlayer or source ~= localPlayer then return end
 	if is_law_unit(localPlayer) and hitElement and isElement(hitElement) and ((
 		getElementType(hitElement) == "player" and getWl(hitElement) > 0) or (
-		getElementType(hitElement) == "vehicle" and getVehicleOccupant(hitElement) 
-		and getWl(getVehicleOccupant(hitElement)) > 0)) then return end	
-	
+		getElementType(hitElement) == "vehicle" and getVehicleOccupant(hitElement)
+		and getWl(getVehicleOccupant(hitElement)) > 0)) then return end
+
 	-- Get number of occupants
 	occuCount = 0
 	if hitElement and isElement(hitElement) and getElementType(hitElement) == "vehicle" and getVehicleOccupants(hitElement) then
@@ -80,7 +80,7 @@ function crime_fire_weapon(weapon, ammo, ammoInClip, hitX, hitY, hitZ, hitElemen
   			occuCount = occuCount + 1
 		end
 	end
-	
+
 	-- Get wanted for shooting at vehicles or other objects
     if weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and getElementType(hitElement) == "vehicle" and occuCount > 0 then
        	setWl(0.3+occuCount, 30+(20*occuCount), "You comitted the crime of vandalism and threat (vehicle with passengers)")
@@ -111,27 +111,27 @@ function crime_target_weapon(target)
 	if not target or target == localPlayer or source ~= localPlayer then return end
 	if target and isElement(target) and ((
 		getElementType(target) == "player" and getWl(target) > 0) or (
-		getElementType(target) == "vehicle" and getVehicleOccupant(target) 
-		and getWl(getVehicleOccupant(target)) > 0)) then return end	
-	
+		getElementType(target) == "vehicle" and getVehicleOccupant(target)
+		and getWl(getVehicleOccupant(target)) > 0)) then return end
+
 	-- Speeding camera allow law units to catch speeders
-	if is_law_unit(localPlayer) and getControlState("aim_weapon") and 
+	if is_law_unit(localPlayer) and getControlState("aim_weapon") and
 		getPedWeapon(localPlayer) == 43 and isElement(target) then
 		local speedx, speedy, speedz = getElementVelocity(target)
-		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5) 
+		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5)
 		local kmh = actualspeed * 180
 		if kmh > 70 and not isTimer(speeding_cooldown) then
 			triggerServerEvent("GTWwanted.onSpeeding", localPlayer, target)
 			speeding_cooldown = setTimer(function() end, 10000, 1)
 		end
 	end
-	
+
 	-- Break here if law unit to prevent getting wanted for aiming
 	if is_law_unit(localPlayer) then return end
-	
+
 	-- Get wanted for aiming at other players, vehicles or objects
-	if getPedWeapon(localPlayer) ~= 41 and getPedWeapon(localPlayer) ~= 42 and getPedWeapon(localPlayer) ~= 43 and 
-		not isTimer(target_cooldown) and getControlState("aim_weapon") then 
+	if getPedWeapon(localPlayer) ~= 41 and getPedWeapon(localPlayer) ~= 42 and getPedWeapon(localPlayer) ~= 43 and
+		not isTimer(target_cooldown) and getControlState("aim_weapon") then
         if getElementType(target) == "player" or getElementType(target) == "ped" then
          	setWl(0.08, 4, "You comitted the crime of threat")
          	target_cooldown = setTimer(function() end, 5000, 1)
@@ -147,7 +147,7 @@ end
 addEventHandler("onClientPlayerTarget", root, crime_target_weapon)
 
 function show_max_train_speed()
-	if not getPedOccupiedVehicle(localPlayer) then return end 
+	if not getPedOccupiedVehicle(localPlayer) then return end
 	if getVehicleType(getPedOccupiedVehicle(localPlayer)) ~= "Train" then return end
 	local max_speed = getElementData(localPlayer, "GTWwanted.maxTrainSpeed") or 0
 	local kmh = getElementData(localPlayer, "GTWwanted.currentTrainSpeed") or 0
@@ -156,9 +156,9 @@ function show_max_train_speed()
 	if (kmh+30) > max_speed then r,g,b = 255,200,0 end
 	if kmh > max_speed then r,g,b = 255,0,0 end
 	if kmh < 0 then kmh = 0 end
-	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-408, sy-33, 0, 0, 
+	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-408, sy-33, 0, 0,
 		tocolor( 0, 0, 0, 255 ), 0.7, "bankgothic" )
-	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-410, sy-35, 0, 0, 
+	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-410, sy-35, 0, 0,
 		tocolor( r, g, b, 255 ), 0.7, "bankgothic" )
 end
 addEventHandler("onClientRender", root, show_max_train_speed)
@@ -166,16 +166,16 @@ addEventHandler("onClientRender", root, show_max_train_speed)
 function crime_damage_vehicle(attacker, weapon, loss, x, y, z, tyre)
 	-- Verify that the attacker is a player element
 	if not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
-	
+
 	-- Verify that the attacker is the local player
 	if attacker ~= localPlayer then return end
-	
+
 	-- Verify cooldown timer
 	if isTimer(damage_cooldown) then return end
-	
+
 	-- Break here if law unit to prevent getting wanted for aiming
 	if is_law_unit(localPlayer) then return end
-	
+
 	-- Apply wanted level
 	setWl(0.08, 3, "You comitted the crime of vandalism (vehicle)")
     damage_cooldown = setTimer(function() end, 1000, 1)

@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -62,6 +62,7 @@ function removeText(infotable)
 		end
 	end
 end
+
 function getTextsToRemove()
 	for i,v in ipairs(textsToDraw) do
 		if v[1] == source then
@@ -69,6 +70,7 @@ function getTextsToRemove()
 		end
 	end
 end
+
 function handleDisplay()
 	if showthebubbles then
 		for i,v in ipairs(textsToDraw) do
@@ -84,11 +86,11 @@ function handleDisplay()
 					local posx,posy = getScreenFromWorldPosition(x,y,z+0.020*distance+0.10)
 					local elementtoignore1 = getPedOccupiedVehicle(getLocalPlayer()) or getLocalPlayer()
 					local elementtoignore2 = getPedOccupiedVehicle(v[1]) or v[1]
-					if posx and distance <= 45 and ( isLineOfSightClear(cx,cy,cz,px,py,pz,true,true,false,true,false,true,true,elementtoignore1) or 
-						isLineOfSightClear(cx,cy,cz,px,py,pz,true,true,false,true,false,true,true,elementtoignore2) ) and ( not maxbubbles or  
-						v[4] < maxbubbles ) then 
+					if posx and distance <= 45 and ( isLineOfSightClear(cx,cy,cz,px,py,pz,true,true,false,true,false,true,true,elementtoignore1) or
+						isLineOfSightClear(cx,cy,cz,px,py,pz,true,true,false,true,false,true,true,elementtoignore2) ) and ( not maxbubbles or
+						v[4] < maxbubbles ) then
 						local width = dxGetTextWidth(v[2],1,"default")
-						
+
 						dxDrawRectangle(posx - (3 + (0.5 * width)),posy - (2 + (v[4] * 20)),width + 5,19,tocolor(0,0,0,80))
 						dxDrawRectangle(posx - (6 + (0.5 * width)),posy - (2 + (v[4] * 20)),width + 11,19,tocolor(0,0,0,40))
 						dxDrawRectangle(posx - (8 + (0.5 * width)),posy - (1 + (v[4] * 20)),width + 15,17,tocolor(0,0,0,80))
@@ -96,12 +98,12 @@ function handleDisplay()
 						dxDrawRectangle(posx - (10 + (0.5 * width)),posy - (v[4] * 20) + 1,width + 19,13,tocolor(0,0,0,80))
 						dxDrawRectangle(posx - (12 + (0.5 * width)),posy - (v[4] * 20) + 1,width + 23,13,tocolor(0,0,0,40))
 						dxDrawRectangle(posx - (12 + (0.5 * width)),posy - (v[4] * 20) + 4,width + 23,7,tocolor(0,0,0,80))
-						
+
 						local r,g,b = 200,200,200
 						if v[3] == 2 then
 							r,g,b = getTeamColor(getPlayerTeam(v[1]))
 						end
-						
+
 						dxDrawText(v[2],posx - (0.5 * width),posy - (v[4] * 20),posx - (0.5 * width),posy - (v[4] * 20),tocolor(r,g,b,255),1,"default","left","top",false,false,false)
 					end
 				end
@@ -125,7 +127,7 @@ end
 
 function toggleBubblesOnOff()
 	showthebubbles = not showthebubbles
-	outputChatBox("Toggled chatbubbles " ..( not showthebubbles and 
+	outputChatBox("Toggled chatbubbles " ..( not showthebubbles and
 		"#FF0000off#FFFFFF." or "#00FF00on#FFFFFF." ),255,255,255,true)
 end
 

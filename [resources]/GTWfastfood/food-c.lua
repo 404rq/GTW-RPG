@@ -1,23 +1,23 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
 GUIEditor_Window = {}
 GUIEditor_Button = {}
 
-x,y = guiGetScreenSize() 
+x,y = guiGetScreenSize()
 GUIEditor_Window[1] = exports.GTWgui:createWindow((x-320)/2,(y-297)/2, 320, 297, "Well Stacked Pizza Co. Menu", false)
 guiSetVisible(GUIEditor_Window[1],false)
 GUIEditor_Button[1] = guiCreateButton(210,257,100,36,"Close",false,GUIEditor_Window[1])

@@ -1,15 +1,15 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 -->
@@ -18,6 +18,6 @@
     <info author="GTWGames" name="GTWphone" type="script" description="Adds a phone where the user can select radio stations, send SMS, or call services" version="0"></info>
     <script src="phone_s.lua" type="server"></script>
     <script src="phone_c.lua" type="client" protected="true"></script>
-    
+
     <file src="lumia920.png" />
 </meta>

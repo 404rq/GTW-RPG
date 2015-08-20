@@ -1,3 +1,18 @@
+--[[
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		El Med, Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+]]--
 local message 	= { }
 local lastnick 	= { }
 
@@ -14,9 +29,9 @@ end
 
 function loadGroupLogs(handler)
 	local data = dbPoll(handler, 0)
-	
+
 	if (not data) then return end
-	
+
 	for ind, dat in pairs(data) do
 		local group = dat.name
 		if (not message[group]) then message[group] = {} end
@@ -25,10 +40,10 @@ function loadGroupLogs(handler)
 end
 dbQuery(loadGroupLogs, db, "SELECT * FROM groupLog")
 
- 
+
 function loadNicks(query)
         local d = dbPoll(query, 0)
-       
+
         if (d) then
                 for ind, data in pairs(d) do
                         lastnick[data.account] = data.nick
@@ -53,7 +68,14 @@ end
 function getLastNick(account)
         return lastnick[account] or "N/A"
 end
- 
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
+
 function setLastNick(player)
         local account = getAccountName(getPlayerAccount(player))
         if (lastnick[account]) then

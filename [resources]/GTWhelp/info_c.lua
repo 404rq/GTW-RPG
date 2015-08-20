@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -24,20 +24,20 @@ local isColorCoded = false
 function hpm(message, red, green, blue, colorCoded)
 	if colorCoded == nil then
 		colorCoded = false
-	end	
+	end
 	text = message
 	r = red
 	g = green
 	b = blue
 	isColorCoded = colorCoded
-	
-	-- Fix the ability to set the same 
+
+	-- Fix the ability to set the same
 	-- message twice with anti spam included
 	if isTimer( timer ) then
 		killTimer( timer )
 	end
 	timer = setTimer( function() text = "" end, 10000, 1 )
-	
+
 	-- Play notification sound
 	playSound("sound/beep.mp3")
 end
@@ -54,7 +54,7 @@ addEventHandler("onClientRender", root, function( )
 	if ( #messages > 7 ) then
 		table.remove ( messages, 1 )
 	end
-	
+
 	for index, data in ipairs ( messages ) do
 		local v1 = data[1]
 		local v2 = data[2]
@@ -66,7 +66,7 @@ addEventHandler("onClientRender", root, function( )
 		local v8 = data[8]
 		dxDrawRectangle( sx/2 - 100, sy-((-101)+(index*100)), 200, 100, tocolor( 0, 0, 0, v4 ) )
 		dxDrawText( v1, sx/2, (-100)+(index*46), sx/2, 0, tocolor( v5, v6, v7, v4+75 ), 0.7, "bankgothic", "center", "center", false, true, false, v8 )
-		
+
 		if ( tick >= v3 ) then
 			messages[index][4] = v4-2
 			if ( v4 <= 1 ) then

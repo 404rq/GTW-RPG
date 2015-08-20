@@ -1,16 +1,16 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 -->
 
@@ -20,10 +20,10 @@
 	<script src="vehicle_s.lua" type="server" />
 	<script src="vehicle_c.lua" type="client" />
 	<script src="shop_c.lua" type="client" />
-	
-	<file src="icon/bike-shop.png" type="client" />	
+
+	<file src="icon/bike-shop.png" type="client" />
 	<file src="icon/boat-shop.png" type="client" />
-	<file src="icon/car-shop.png" type="client" />	
+	<file src="icon/car-shop.png" type="client" />
 	<file src="icon/plane-shop.png" type="client" />
 	<file src="icon/train-shop.png" type="client" />
 	<file src="icon/truck-shop.png" type="client" />

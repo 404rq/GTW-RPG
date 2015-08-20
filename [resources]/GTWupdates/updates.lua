@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -27,17 +27,17 @@ exports.GTWgui:setDefaultFont(text, 10)
 -- Add close button and triggers
 local closeButton = guiCreateButton(10,560,780,30,"Close window",false,window)
 exports.GTWgui:setDefaultFont(closeButton, 10)
-addEventHandler("onClientGUIClick",closeButton,function() 
+addEventHandler("onClientGUIClick",closeButton,function()
 	guiSetVisible(window, false)
 	showCursor(false)
 end)
 
 -- Refresh and toggle updates list
 function requestUpdates()
-	-- Request updates list from GTW server IV (s4.albonius.com) on open 
-	oldText = guiGetText(text)
+	-- Request updates list from RageQuit network (unavailable)
+	--[[oldText = guiGetText(text)
 	if oldText == "" then
-		guiSetText(text, "Connecting to gs.gtw-games.org for latest updates, please wait...")
+		guiSetText(text, "Connecting to hub.404rq.com for latest updates, please wait...")
 	end
 	triggerServerEvent("GTWupdates.request", resourceRoot)
 	function onResponseFromServer(message)
@@ -51,14 +51,28 @@ function requestUpdates()
 	    end
 	end
 	addEvent( "GTWupdates.respond", true )
-	addEventHandler("GTWupdates.respond", localPlayer, onResponseFromServer)
+	addEventHandler("GTWupdates.respond", localPlayer, onResponseFromServer)]]--
+
+	-- Load updates from local file
+	--[[local update_file = fileOpen("updates.txt", true)
+	local content = ""
+	if not update_file then return end
+	local buffer
+	while not fileIsEOF(update_file) do
+	 	buffer = fileRead(update_file, 500)
+		content = content..buffer
+	end
+	fileClose(update_file)]]--
+
+	-- Add text to list
+	guiSetText(text, str_updates)
 end
 setTimer(requestUpdates,10000,0)
 
 function viewUpdateListGUI()
 	guiSetVisible(window, not guiGetVisible(window))
 	guiBringToFront(window)
-	requestUpdates()	
+	requestUpdates()
 end
 function toggleUpdateListGUI()
 	guiSetVisible(window, not guiGetVisible(window))

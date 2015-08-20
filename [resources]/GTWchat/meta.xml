@@ -1,21 +1,21 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWchat" description="Local chat, chat bubbles and mute system for MTA SA" version="0" type="script"/>
+    <info author="GTWGames" name="GTWchat" description="Local chat, chat bubbles and mute system for MTA SA" version="26" type="script"/>
     <script src="chat-s.lua" type="server"/>
     <script src="chat-c.lua" type="client"/>
 </meta>

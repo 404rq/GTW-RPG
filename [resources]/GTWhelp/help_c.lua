@@ -1,23 +1,23 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
 local x,y = guiGetScreenSize()
 local window = exports.GTWgui:createWindow((x-850)/2, (y-550)/2, 850, 550, "Grand Theft Walrus - Documentation", false )
 local textBox = guiCreateMemo( 246, 30, 594, 510, "", false, window )
-local gList = guiCreateGridList( 10, 30, 230, 510, false, window ) 
+local gList = guiCreateGridList( 10, 30, 230, 510, false, window )
 exports.GTWgui:setDefaultFont(textBox, 10)
 exports.GTWgui:setDefaultFont(gList, 10)
 guiGridListSetSelectionMode(gList,2)
@@ -28,7 +28,7 @@ showCursor(false)
 
 local F1wndShowing = false
 bindKey('f1','down',
-function()	
+function()
 	if F1wndShowing == true then
 	    guiSetVisible(window, false)
         showCursor(false)
@@ -38,7 +38,7 @@ function()
         guiSetVisible(window, true)
         showCursor(true)
         guiSetInputEnabled( true )
-        F1wndShowing = true 
+        F1wndShowing = true
     end
 end)
 
@@ -50,7 +50,7 @@ for i,val in ipairs(list) do
     local rowID = guiGridListAddRow(gList)
     if val[2] == 0 then
     	guiGridListSetItemText(gList, rowID, 1, val[1], true, true)
-    	guiGridListSetItemColor( gList, rowID, 1, 100, 100, 100 ) 
+    	guiGridListSetItemColor( gList, rowID, 1, 100, 100, 100 )
     else
     	guiGridListSetItemText(gList, rowID, 1, val[1], false, true)
     	Text[rowID] = list[rowID+1][3]

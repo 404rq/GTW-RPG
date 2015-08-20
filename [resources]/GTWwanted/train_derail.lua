@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -74,7 +74,7 @@ local train_derail_points = {
     {"tram",-1536, 922, 7, 40},
     {"tram",-1578, 1017, 7, 70},
     {"tram",-1589, 1181, 7, 80},
-	{"tram",-1782, 1376, 7, 70},  
+	{"tram",-1782, 1376, 7, 70},
     {"tram",-1782, 1376, 7, 70},
     {"tram",-1852, 1370, 7, 70},
     {"tram",-1919, 1315, 7, 60},
@@ -108,7 +108,7 @@ addCommandHandler("tloc", train_location)
 
 function check_derail()
 	for i,plr in pairs(getElementsByType("player")) do
-		local the_train = getPedOccupiedVehicle(plr) 
+		local the_train = getPedOccupiedVehicle(plr)
 		if the_train and getVehicleType(the_train) == "Train" then
 			local px,py,pz = getElementPosition(getPedOccupiedVehicle(plr))
 			local n_dist,n_speed,c_speed = 9999,0,0
@@ -118,15 +118,15 @@ function check_derail()
 				local t_type,dx,dy,dz,speed = unpack(dp)
 				local dist = getDistanceBetweenPoints3D(px,py,pz, dx,dy,dz)
 				local kmh = math.floor(math.abs(getTrainSpeed(getPedOccupiedVehicle(plr))*160))
-				if dist < n_dist and train_type == t_type then 
-					n_dist = dist 
+				if dist < n_dist and train_type == t_type then
+					n_dist = dist
 					n_speed = speed
-					c_speed = kmh					
+					c_speed = kmh
 				end
 				if dist < 30 and kmh > speed then
 					setTrainDerailed(the_train, true)
 					setWl(plr, 5, 0, "You committed the crime of dangerous driving (derailed train)")
-				end		
+				end
 			end
 			setElementData(plr, "GTWwanted.maxTrainSpeed", n_speed)
 			setElementData(plr, "GTWwanted.currentTrainSpeed", c_speed)

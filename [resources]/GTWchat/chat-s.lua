@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -30,13 +30,13 @@ local defR,defG,defB		= 240, 235, 255
 -- Change only if you have the IRC module and renamed the irc resource
 local nameOfIRCResource	= "irc"
 
--- Define law 
+-- Define law
 local lawTeams = {
 	["Government"] = true,
 	["Emergency service"] = true,
 }
 local policeTeams = {
-	["Government"] = true, 
+	["Government"] = true,
 }
 
 -- This will compeletly block below listed words
@@ -54,13 +54,13 @@ local patterns = {
 function dm(plr, msg, r, g, b, col)
 	-- Replaces outputChatBox with identical syntax
 	exports.GTWtopbar:dm(plr, msg, r, g, b, col)
-	
+
 	-- If you don't have "GTWtopbar" up and running, uncomment this instead
 	--outputChatBox(plr, msg, r, g, b, col)
 end
 
 function getGroupChatColor(group)
-	-- Call whatever group system you use and ask for a 
+	-- Call whatever group system you use and ask for a
 	-- group as a string to receive it's chat color as RGB
 	local r,g,b = exports.GTWgroups:getGroupChatColor(group)
 	if not r or not g or not b then
@@ -73,7 +73,7 @@ end
 function censorWords(input)
 	local res = true
 	for k,v in pairs(patterns) do
-		if string.find(input, v[1]) and not enable_bad_word_replacement then			
+		if string.find(input, v[1]) and not enable_bad_word_replacement then
 			res = false
 		end
 	end
@@ -127,7 +127,7 @@ function isServerStaff(plr)
 	-- Check if the player is in any of the staff ACL groups
 	local acc = getAccountName(getPlayerAccount(plr))
 	if isObjectInACLGroup("user."..acc, aclGetGroup("Admin")) or
-		isObjectInACLGroup("user."..acc, aclGetGroup("Developer")) or 
+		isObjectInACLGroup("user."..acc, aclGetGroup("Developer")) or
 		isObjectInACLGroup("user."..acc, aclGetGroup("Moderator")) or
 		isObjectInACLGroup("user."..acc, aclGetGroup("Supporter")) then
 		return true
@@ -138,13 +138,13 @@ end
 
 --[[ Handle spam and mutes, returns true if passed, false if failed ]]--
 function validateChatInput(plr, chatID, text)
-	if isPlayerMuted(plr) then 
-		dm("You are muted, visit games.albonius.com if you wish to appeal your mute", plr, 255, 100, 0) 
-		return false 
+	if isPlayerMuted(plr) then
+		dm("You are muted, visit games.albonius.com if you wish to appeal your mute", plr, 255, 100, 0)
+		return false
 	end
-	if isTimer(cooldownTimers[plr]) then 
-		dm("Do not spam the chat!", plr, 255, 100, 0) 
-		return false 
+	if isTimer(cooldownTimers[plr]) then
+		dm("Do not spam the chat!", plr, 255, 100, 0)
+		return false
 	end
 	if last_msg[plr][chatID] and last_msg[plr][chatID] == text then
 		dm("Do not repeat yourself!", plr, 255, 100, 0)
@@ -155,16 +155,16 @@ function validateChatInput(plr, chatID, text)
 		return false
 	end
 	-- Special case for car chat
-	if chatID == "car" and not getPedOccupiedVehicle(plr) then 
-		dm("Car chat can only be used inside vehicles!", plr, 255, 100, 0) 
+	if chatID == "car" and not getPedOccupiedVehicle(plr) then
+		dm("Car chat can only be used inside vehicles!", plr, 255, 100, 0)
 		return false
 	end
 	-- Special case for law chat
-	if chatID == "law" and getPlayerTeam(plr) and not lawTeams[getTeamName(getPlayerTeam(plr))] then 
+	if chatID == "law" and getPlayerTeam(plr) and not lawTeams[getTeamName(getPlayerTeam(plr))] then
 		dm("You are not a law enforcer!", plr, 255, 100, 0)
 		return false
 	end
-	if chatID == "law" and not getPlayerTeam(plr) then 
+	if chatID == "law" and not getPlayerTeam(plr) then
 		dm("You are not in a team!", plr, 255, 100, 0)
 		return false
 	end
@@ -229,7 +229,7 @@ function useLocalChat(plr, n, ...)
 	   		end
 	  	end
 	end
-		
+
 	-- Prevent spam and log the chat
 	last_msg[plr]["local"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -242,13 +242,13 @@ addCommandHandler("lc", useLocalChat, false, false)
 --[[ Car and vehicle chat]]--
 function useCarChat(plr, n, ...)
 	local msg = table.concat({...}, " ")
-	if not validateChatInput(plr, "car", msg) then return end	
+	if not validateChatInput(plr, "car", msg) then return end
 	local r,g,b = defR,defG,defB
 	if getPlayerTeam(plr) then
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 	end
 	local veh = getPedOccupiedVehicle(plr)
-	local nick = getPlayerName(plr)	
+	local nick = getPlayerName(plr)
 	for n, v in pairs(getVehicleOccupants(veh)) do
 		local outText = "(CC) ["..tostring(n).."] "..nick..": "..RGBToHex(defR,defG,defB)
 		local length = string.len(outText..firstToUpper(msg))
@@ -259,7 +259,7 @@ function useCarChat(plr, n, ...)
 			outputToChat(firstToUpper(msg),v,200,0,200,true)
 		end
 	end
-		
+
 	-- Prevent spam and log the chat
 	last_msg[plr]["car"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -274,7 +274,7 @@ function useEmergencyChat(plr, n, ...)
 	local msg = table.concat({...}, " ")
 	if not validateChatInput(plr, "law", msg) then return end
 	local r,g,b = getTeamColor(getPlayerTeam(plr))
-	local nick = getPlayerName(plr)	
+	local nick = getPlayerName(plr)
 	local occupation = ""
 	local is_police_chief = exports.GTWpolicechief:isPoliceChief(plr)
    	if is_police_chief and policeTeams[getTeamName(getPlayerTeam(plr))] then
@@ -291,8 +291,8 @@ function useEmergencyChat(plr, n, ...)
 	   			outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
 	   	end
-  	end	
-  	
+  	end
+
   	-- Prevent spam and log the chat
 	last_msg[plr]["law"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -305,7 +305,7 @@ addCommandHandler("e", useEmergencyChat, false, false)
 --[[ Group chat, (only appliable on servers running a group system) ]]--
 function useGroupChat(plr, n, ...)
 	local msg = table.concat({...}, " ")
-	if not validateChatInput(plr, "group", msg) then return end	
+	if not validateChatInput(plr, "group", msg) then return end
 	local r, g, b = getGroupChatColor(getElementData(plr, "Group")) or defR,defG,defB
 	local nick = getPlayerName(plr)
 	for n, v in pairs(getElementsByType("player")) do
@@ -320,7 +320,7 @@ function useGroupChat(plr, n, ...)
 	   		end
     		end
   	end
-  		
+
   	-- Prevent spam and log the chat
 	last_msg[plr]["group"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -332,7 +332,7 @@ addCommandHandler("gc", useGroupChat, false, false)
 --[[ Staff chat, private chat for members of the staff team ]]--
 function useStaffChat(plr, n, ...)
 	local msg = table.concat({...}, " ")
-	if not validateChatInput(plr, "mod", msg) then return end	
+	if not validateChatInput(plr, "mod", msg) then return end
 	if not isServerStaff(plr) then return end
 	local r,g,b = defR,defG,defB
 	if getPlayerTeam(plr) then
@@ -351,7 +351,7 @@ function useStaffChat(plr, n, ...)
 	   		end
     		end
   	end
-  		
+
   	-- Prevent spam and log the chat
 	last_msg[plr]["mod"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -364,7 +364,7 @@ addCommandHandler("s", useStaffChat, false, false)
 --[[ Staff chat, to reply to a certain team ]]--
 function useStaffTeamChat(plr, n, team, ...)
 	local msg = table.concat({...}, " ")
-	if (not validateChatInput(plr, "mod-team", msg)) or (not isServerStaff(plr)) then return end	
+	if (not validateChatInput(plr, "mod-team", msg)) or (not isServerStaff(plr)) then return end
 	local r, g, b = defR, defG, defB
 	if team and getTeamFromName(team) then
 		r, g, b = getTeamColor(getTeamFromName(team))
@@ -382,7 +382,7 @@ function useStaffTeamChat(plr, n, team, ...)
 	   		end
     		end
   	end
-  		
+
   	-- Prevent spam and log the chat
 	last_msg[plr]["mod-team"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -396,7 +396,7 @@ function useActionChatDo(plr, n, ...)
 	if not validateChatInput(plr, "do", msg) then return end
 	local nick = getPlayerName(plr)
 	outputToChat("* "..firstToUpper(msg).." ("..nick..")", root, 255, 0, 255)
-	   	
+
 	-- Prevent spam and log the chat
 	last_msg[plr]["do"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
@@ -427,12 +427,12 @@ function useGlobalChat(message, messageType)
 		else
 		 	outputToChat(outText, root, r,g,b, true)
 		  	outputToChat(RGBToHex(defR,defG,defB)..firstToUpper(message), root, r,g,b, true)
-		end    
+		end
 		outputServerLog("[CHAT] "..getPlayerName(source)..": "..message)
 		--[[if not getElementData(source, "anon") then
 		   	--displayChatBubble("(MAIN): "..firstToUpper(message), 2, source)
 		end]]--
-				
+
 		-- Prevent spam and log the chat
 		last_msg[source]["main"] = message
 		cooldownTimers[source] = setTimer(function() end, antiSpamTime, 1)
@@ -441,11 +441,11 @@ function useGlobalChat(message, messageType)
 	  	local nick = getPlayerName(source)
 		outputToChat("* "..nick..": "..firstToUpper(message), root, 255, 0, 255)
 		outputServerLog("[*ME*] "..getPlayerName(source)..": "..message)
-		
+
 		-- Prevent spam and log the chat
 		last_msg[source]["me"] = message
 		cooldownTimers[source] = setTimer(function() end, antiSpamTime, 1)
-	elseif (messageType == 2) then	    
+	elseif (messageType == 2) then
 		if not validateChatInput(source, "team", message) then return end
 		local team = getPlayerTeam(source)
 		if not team then return end
@@ -454,7 +454,7 @@ function useGlobalChat(message, messageType)
 		local is_police_chief = exports.GTWpolicechief:isPoliceChief(source)
 		if is_police_chief and policeTeams[getTeamName(getPlayerTeam(source))] then
 			occupation = RGBToHex(defR,defG,defB).."[PoliceChief]"..RGBToHex(r,g,b)
-		end		
+		end
 		outputServerLog("[TEAM]["..getTeamName(getPlayerTeam(source)).."] "..getPlayerName(source)..": "..message)
 		if not getElementData(source, "anon") then
 		  	displayChatBubble("(TEAM): "..firstToUpper(message), 2, source)
@@ -475,7 +475,7 @@ function useGlobalChat(message, messageType)
 				end
 			end
 		end
-				
+
 		-- Prevent spam and log the chat
 		last_msg[source]["team"] = message
 		cooldownTimers[source] = setTimer(function() end, antiSpamTime, 1)
@@ -486,10 +486,10 @@ addEventHandler("onPlayerChat", root, useGlobalChat)
 --[[ Send chat message to clients to display a chat bubble ]]--
 function displayChatBubble(message, messagetype, plr)
 	if isPlayerMuted(plr) then return end
-	if source then 
+	if source then
 		triggerClientEvent("GTWchat.makeChatBubble", source, message, messagetype, plr)
-	else 
-		triggerClientEvent("GTWchat.makeChatBubble", plr, message, messagetype, plr) 
+	else
+		triggerClientEvent("GTWchat.makeChatBubble", plr, message, messagetype, plr)
 	end
 end
 
@@ -513,6 +513,13 @@ function firstToUpper(str)
     	return str
     end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 --[[ Show help and available commands ]]--
 function displayHelp(plr)

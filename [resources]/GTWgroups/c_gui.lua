@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Sebbe (smart), Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -43,13 +43,13 @@ function makeGUI()
 	createGroupEdit = guiCreateEdit(486, 10, 150, 30, "", false, minePanel)
 	leaveGroupButton = guiCreateButton(640, 44, 100, 30, "Leave", false, minePanel)
 	groupListButton = guiCreateButton(238, 450, 110, 36, "Group List", false, minePanel)
-	
+
 	exports.GTWgui:setDefaultFont(rejectInviteButton, 10)
 	exports.GTWgui:setDefaultFont(acceptInviteButton, 10)
 	exports.GTWgui:setDefaultFont(createGroupButton, 10)
 	exports.GTWgui:setDefaultFont(leaveGroupButton, 10)
 	exports.GTWgui:setDefaultFont(groupListButton, 10)
-	
+
 	adminPanel = guiCreateTab("Management", mainPanel)
 
 	adminMembsList = guiCreateGridList(10, 10, 730, 430, false, adminPanel)
@@ -66,7 +66,7 @@ function makeGUI()
 	viewWarnsButton = guiCreateButton(541, 444, 104, 36, "Warn Player", false, adminPanel)
 	viewMessageButton = guiCreateButton(645, 444, 104, 36, "Set Message", false, adminPanel)
 	--kickPlayerButton = guiCreateButton(216, 220, 92, 30, "Kick Player", false, adminPanel)
-	
+
 	exports.GTWgui:setDefaultFont(adminMembsList, 10)
 	exports.GTWgui:setDefaultFont(viewSetRankButton, 10)
 	exports.GTWgui:setDefaultFont(logButton, 10)
@@ -75,7 +75,7 @@ function makeGUI()
 	exports.GTWgui:setDefaultFont(manageRanksButton, 10)
 	exports.GTWgui:setDefaultFont(viewWarnsButton, 10)
 	exports.GTWgui:setDefaultFont(viewMessageButton, 10)
-	
+
 	messageWindow = guiCreateWindow(602, 341, 455, 350, "Group Message", false)
 	guiWindowSetSizable(messageWindow, false)
 	guiSetAlpha(messageWindow, 1.00)
@@ -84,7 +84,7 @@ function makeGUI()
 	messageCloseButton = guiCreateButton(165, 311, 108, 29, "Close", false, messageWindow)
 	messageSaveButton = guiCreateButton(10, 311, 108, 29, "Save", false, messageWindow)
 	guiSetVisible(messageWindow, false)
-	
+
 	inviteWindow = guiCreateWindow(680, 277, 301, 414, "Invite Player", false)
 	guiWindowSetSizable(inviteWindow, false)
 	guiSetAlpha(inviteWindow, 1.00)
@@ -116,7 +116,7 @@ function makeGUI()
 	warningCloseButton = guiCreateButton(9, 130, 88, 27, "Close", false, warnWindow)
 	warnButton = guiCreateButton(179, 132, 88, 25, "Warn", false, warnWindow)
 	guiSetVisible(warnWindow, false)
-	
+
 	permWindow = guiCreateWindow(679, 289, 275, 446, "Rank Management", false)
 	guiWindowSetSizable(permWindow, false)
 	guiSetAlpha(permWindow, 1.00)
@@ -126,11 +126,11 @@ function makeGUI()
 	permEditButton = guiCreateButton(9, 403, 72, 33, "Edit", false, permWindow)
 	permDeleteButton = guiCreateButton(99, 403, 72, 33, "Delete", false, permWindow)
 	permCloseButton = guiCreateButton(185, 403, 72, 33, "Close", false, permWindow)
-	rankScrollPanel = guiCreateScrollPane(9, 51, 250, 307, false, permWindow) 
+	rankScrollPanel = guiCreateScrollPane(9, 51, 250, 307, false, permWindow)
 	permAddEdit = guiCreateEdit(12, 364, 159, 21, "", false, permWindow)
 	addRankButton = guiCreateButton(185, 362, 72, 23, "Add Rank", false, permWindow)
 	guiSetVisible(permWindow, false)
-	
+
 	--[[GUIEditor.window[1] = guiCreateWindow(652, 300, 296, 301, "Set Rank", false)
 	guiWindowSetSizable(GUIEditor.window[1], false)
 	guiSetAlpha(GUIEditor.window[1], 1.00)
@@ -158,9 +158,9 @@ function makeGUI()
 	accountSelectedRank = guiCreateLabel(0, 21, 296, 55, "Account Selected:\nCurrent Rank:\nWL:", false, setRankWindow)
 	guiSetFont(accountSelectedRank, "clear-normal")
 	guiLabelSetColor(accountSelectedRank, 0, 255, 0)
-	guiLabelSetHorizontalAlign(accountSelectedRank, "center", false)    
+	guiLabelSetHorizontalAlign(accountSelectedRank, "center", false)
 	guiSetVisible(setRankWindow, false)
-	
+
 	addEventHandler("onClientGUIClick", addRankButton, addRank, false)
 	addEventHandler("onClientGUIClick", setRankButton, setRank, false)
 	addEventHandler("onClientGUIClick", viewSetRankButton, viewSetRank, false)
@@ -183,7 +183,7 @@ function makeGUI()
 	addEventHandler("onClientGUIClick", inviteCloseButton, function() guiSetVisible(inviteWindow, false) end, false)
 	addEventHandler("onClientGUIClick", leaveGroupButton, confirmDelete, false)
 	addEventHandler("onClientGUIClick", permDeleteButton, deleteGroupRankAttempt, false)
-	
+
 	addEventHandler("onClientGUIClick", inviteButton, invite_player, false)
 	addEventHandler("onClientGUIChanged", inviteSearchEdit, search_invite, false)
 	addEventHandler("onClientGUIChanged", listEdit, search_group_list, false)
@@ -194,7 +194,7 @@ function makeGUI()
 	addEventHandler("onClientGUIClick", warningReasonEdit, function() if (guiGetText(source) == "Reason") then guiSetText(source, "") end end, false)
 	addEventHandler("onClientGUIClick", warningLevelEdit, function() if (guiGetText(source) == "Warning Level") then guiSetText(source, "") end end, false)
 	addEventHandler("onClientGUIClick", inviteSearchEdit, function() if (guiGetText(source) == "Search..") then guiSetText(source, "") end end, false)
-	
+
 	centerAllWindows(resourceRoot)
 end
 addEventHandler("onClientResourceStart", resourceRoot, makeGUI)

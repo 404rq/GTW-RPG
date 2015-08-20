@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -39,7 +39,7 @@ end
 -- Toggling lights
 function toggleLights( veh )
 	if veh and isElement( veh ) and getElementType(veh) == "vehicle" then
-		setVehicleOverrideLights( veh, 2 ) 
+		setVehicleOverrideLights( veh, 2 )
 		if toggler[veh] == 1 then
 			setVehicleLightState( veh, 0, 1 )
 			setVehicleLightState( veh, 1, 1 )
@@ -123,15 +123,15 @@ function lightHandler( player, cmd )
 					setVehicleLightState( veh2, 3, 1 )
 				end
 			end
-			
+
 			if not currHeadLightColor[veh] then
 				currHeadLightColor[veh] = { }
 				currHeadLightColor[veh][1],currHeadLightColor[veh][2],currHeadLightColor[veh][3] = getVehicleHeadLightColor( veh )
 			end
-			
+
 			-- Set the new headlight color to yellow
 			setVehicleHeadLightColor( veh, 255, 200, 0 )
-			
+
 			-- Start the syn timer
 			if isTimer( syncTimer[veh] ) then
 				killTimer( syncTimer[veh] )
@@ -157,6 +157,13 @@ addCommandHandler( "lleft", lightHandler )
 addCommandHandler( "lright", lightHandler )
 addCommandHandler( "warn", lightHandler )
 
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
+
 --[[ Turn on all lights ]]--
 function startLights(veh)
 	if not veh or not isElement(veh) then return end
@@ -164,7 +171,7 @@ function startLights(veh)
 	setVehicleLightState( veh, 1, 0 )
 	setVehicleLightState( veh, 2, 0 )
 	setVehicleLightState( veh, 3, 0 )
-	setVehicleOverrideLights( veh, 2 ) 
+	setVehicleOverrideLights( veh, 2 )
 	if getVehicleTowedByVehicle( veh ) then
 		local veh2 = getVehicleTowedByVehicle( veh )
 		if veh2 then

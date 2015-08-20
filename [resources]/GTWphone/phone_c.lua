@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -26,9 +26,9 @@ local isRadioOn = false
 radio = {
 	{ "", " Local radio", 0 },
 	{ "http://sverigesradio.se/topsy/direkt/2576-hi-aac.pls", "[Sweden] Malmö (Hiphop/RnB)", 1 },
-	{ "http://194.16.21.227/mix_se_mp3.m3u", "[Sweden] Mix megapol", 1 },
+	{ "http://194.16.21.227/mix_gbg_se_mp3.m3u", "[Sweden] Mix megapol", 1 },
 	{ "http://194.16.21.227/nrj_se_mp3.m3u", "[Sweden] NRJ Sweden", 1 },
-	{ "http://stream-ice.mtgradio.com:8080/stat_rix_fm.m3u", "[Sweden] Rix FM", 1 },	
+	{ "http://stream-ice.mtgradio.com:8080/stat_rix_fm.m3u", "[Sweden] Rix FM", 1 },
 	{ "http://194.16.21.227/voice_se_mp3.m3u", "[Sweden] The voice", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_klassisk_aac_h.m3u", "[Norway] NRK classical", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_alltid_nyheter_aac_h.m3u", "[Norway] NRK news", 1 },
@@ -81,14 +81,14 @@ service = {
 }
 
 -- Create window
-x,y = guiGetScreenSize() 
+x,y = guiGetScreenSize()
 --phoneGui = guiCreateWindow ( x - 244, y - 500, 244, 500, "", false )
 img = guiCreateStaticImage((x/2)-150, (y/2)-300, 300, 600, "lumia920.png", false, nil )
 
 -- Tab panel for apps
 tabPanel = guiCreateTabPanel ( 10, 50, 280, 500, false, img )
 tabRadio = guiCreateTab( "Radio", tabPanel )
-tabPlayers = guiCreateTab( "SMS", tabPanel ) 
+tabPlayers = guiCreateTab( "SMS", tabPanel )
 tabPhone = guiCreateTab( "Phone", tabPanel )
 exports.GTWgui:setDefaultFont(tabRadio, 10)
 exports.GTWgui:setDefaultFont(tabPlayers, 10)
@@ -147,7 +147,7 @@ end
 phoneList = guiCreateGridList ( 0, 0, 1, 0.9, true, tabPhone )
 column2 = guiGridListAddColumn( phoneList, "Call service", 0.9 )
 btn_call_service = guiCreateButton( 0, 0.91, 1, 0.08, "Call service", true, tabPhone )
-if ( column2 ) then 
+if ( column2 ) then
 	for id, number in ipairs(service) do
 		local row = guiGridListAddRow ( phoneList )
 		guiGridListSetItemText ( phoneList, row, column2, service[id], false, false )
@@ -159,22 +159,22 @@ exports.GTWgui:setDefaultFont(btn_call_service, 10)
 -- Select radio station
 addEventHandler("onClientGUIDoubleClick",radioList,
 function()
-	local row,col = guiGridListGetSelectedItem( radioList ) 
+	local row,col = guiGridListGetSelectedItem( radioList )
 	if isElement( sound ) then
 		destroyElement ( sound )
 	end
 	if radio[row+1][1] then
-   		sound = playSound( radio[row+1][1] ) 
+   		sound = playSound( radio[row+1][1] )
    		isRadioOn = true
    	end
 	setSoundVolume( sound, tonumber( guiGetText ( editBox ))/100 )
-	
+
 	-- Turn off the car radio
 	setRadioChannel ( 0 )
 end)
 
 -- Stops the car radio if listening to phone radio
-setTimer(function() 
+setTimer(function()
 	if isRadioOn and getPedOccupiedVehicle(localPlayer) then
 		setRadioChannel ( 0 )
 	end
@@ -191,7 +191,7 @@ function togglePhone( source )
 		showCursor ( true )
 		guiSetVisible( img, true )
 		triggerServerEvent ( "onPhoneOpen", localPlayer )
-		
+
 		-- Update player list
 		if ( column ) then
 			-- Save selected item
@@ -204,7 +204,7 @@ function togglePhone( source )
 			-- Correct after refresh
 			guiGridListSetSelectedItem( playerList, row, col )
 		end
-		updateTimer[localPlayer] = setTimer( function() 
+		updateTimer[localPlayer] = setTimer( function()
 			-- Update player list
 			if ( column ) then
 				-- Save selected item
@@ -227,7 +227,7 @@ function togglePhone( source )
 		end
 		guiSetInputEnabled( false )
 	end
-end 
+end
 addCommandHandler( "phone", togglePhone, source )
 
 -- On editor focus
@@ -311,11 +311,11 @@ function sendSMS( )
    		local row,col = guiGridListGetSelectedItem( playerList )
    		local rec = guiGridListGetItemText(playerList, row, col )
    		local recPlayer = getPlayerFromName( rec )
-		if isElement( recPlayer ) and getElementType( recPlayer ) == "player" then	
+		if isElement( recPlayer ) and getElementType( recPlayer ) == "player" then
 			if recPlayer ~= localPlayer and string.len(guiGetText( smsTextBox )) < 1024 then
     			triggerServerEvent ( "onSendSMS", localPlayer, getPlayerFromName( rec ), guiGetText( smsTextBox ))
     			guiSetText( smsTextBox, "" )
-				guiSetInputEnabled( false )    			
+				guiSetInputEnabled( false )
     		else
     			exports.GTWtopbar:dm( "Phone: You can't SMS yourself!", 255, 0, 0)
     		end

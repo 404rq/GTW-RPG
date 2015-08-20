@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -89,29 +89,29 @@ function toggleGUI( source )
 		showCursor( true )
 		guiSetVisible( window, true )
 		guiSetInputEnabled( true )
-		triggerServerEvent( "GTWvehicleshop.onListVehicles", localPlayer ) 
+		triggerServerEvent( "GTWvehicleshop.onListVehicles", localPlayer )
 	else
 		showCursor( false )
 		guiSetVisible( window, false )
 		guiSetInputEnabled( false )
 	end
-end 
+end
 addCommandHandler( "vehicles", toggleGUI )
 bindKey( "F2", "down", "vehicles" )
 
 --[[ Create a function to handle toggling of vehicle inventory GUI ]]--
 function toggleInventoryGUI( plr )
-	-- Show the vehicle inventory GUI	
+	-- Show the vehicle inventory GUI
 	if not guiGetVisible( window_trunk ) and isElement(getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk")) then
 		local browsing_player = getElementData(getElementData(
-			localPlayer, "GTWvehicleshop.the_near_veh_trunk"), 
+			localPlayer, "GTWvehicleshop.the_near_veh_trunk"),
 			"GTWvehicleshop.the_near_player_trunk")
-		if getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk") and 
+		if getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk") and
 			browsing_player and browsing_player == localPlayer then
 			showCursor( true )
 			guiSetVisible( window_trunk, true )
 			guiSetInputEnabled( true )
-			loadWeaponsToList() 
+			loadWeaponsToList()
 		else
 			if not browsing_player then return end
 			exports.GTWtopbar:dm(getPlayerName(browsing_player).." is currently browsing this trunk, please wait!", 255, 0, 0)
@@ -124,7 +124,7 @@ function toggleInventoryGUI( plr )
 			triggerServerEvent( "GTWvehicleshop.onCloseInventory", localPlayer )
 		end
 	end
-end 
+end
 addCommandHandler( "inventory", toggleInventoryGUI )
 bindKey( "F9", "down", "inventory" )
 
@@ -141,7 +141,7 @@ function loadWeaponsToList()
 				guiGridListSetItemText( player_items_list, row, col10, getPedTotalAmmo(localPlayer,slot), false, false )
 			end
 		end
-		
+
 		-- Load weapons from vehicle inventory
 		local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
 		if veh_id then triggerServerEvent( "GTWvehicleshop.onOpenInventory", localPlayer, veh_id ) end
@@ -153,7 +153,7 @@ function receiveVehicleData(data_table)
 		-- Clear and refresh
 		guiGridListClear( vehicle_list )
 		veh_data_list = data_table
-		
+
 		-- Load vehicles to list
 		for id, veh in pairs(data_table) do
 			local row = guiGridListAddRow( vehicle_list )
@@ -218,7 +218,7 @@ function receiveInventoryItems(item)
 	if col7 and col8 then
 		-- Clear and refresh
 		guiGridListClear( inventory_list )
-		
+
 		-- Load vehicles to list
 		local data_table = fromJSON(item)
 		for k, v in pairs(data_table) do
@@ -235,7 +235,7 @@ addEventHandler( "GTWvehicleshop.onReceiveInventoryItems", root, receiveInventor
 addEventHandler("onClientGUIClick",vehicle_list,
 function()
 	row,col = guiGridListGetSelectedItem( vehicle_list )
-	if row and col and veh_data_list[row+1] then	
+	if row and col and veh_data_list[row+1] then
 		currentVehID = veh_data_list[row+1][1]
 		for w=0, #veh_data_list do
 			guiGridListSetItemColor( vehicle_list, w, col1, 255, 255, 255 )
@@ -256,13 +256,13 @@ addEventHandler( "onClientGUIClick", root,
 function ( )
 	--if not currentVehID then exports.GTWtopbar:dm("Please select a vehicle from the list!", 255, 0, 0) return end
 	if source == btn_show and currentVehID then
-		triggerServerEvent( "GTWvehicleshop.onShowVehicles", localPlayer, currentVehID ) 
-	end		
+		triggerServerEvent( "GTWvehicleshop.onShowVehicles", localPlayer, currentVehID )
+	end
 	if source == btn_hide and currentVehID then
 		triggerServerEvent( "GTWvehicleshop.onHideVehicles", localPlayer, currentVehID )
-	end		
+	end
 	if source == btn_lock and currentVehID then
-		-- Update vehiclelist and lock status		
+		-- Update vehiclelist and lock status
 		if guiGridListGetItemText( vehicle_list, row, col4 ) == "Yes" then
 			triggerServerEvent( "GTWvehicleshop.onLockVehicle", localPlayer, currentVehID, 0 )
 			guiGridListSetItemText( vehicle_list, row, col4, "Open", false, false )
@@ -272,9 +272,9 @@ function ( )
 			guiGridListSetItemText( vehicle_list, row, col4, "Yes", false, false )
 			guiGridListSetItemColor( vehicle_list, row, col4, 0, 255, 0 )
 		end
-	end		
+	end
 	if source == btn_engine and currentVehID then
-		-- Update vehiclelist and engine status		
+		-- Update vehiclelist and engine status
 		if guiGridListGetItemText( vehicle_list, row, col5 ) == "On" then
 			triggerServerEvent( "GTWvehicleshop.onVehicleEngineToggle", localPlayer, currentVehID, 0 )
 			guiGridListSetItemText( vehicle_list, row, col5, "Off", false, false )
@@ -283,7 +283,7 @@ function ( )
 			triggerServerEvent( "GTWvehicleshop.onVehicleEngineToggle", localPlayer, currentVehID, 1 )
 			guiGridListSetItemText( vehicle_list, row, col5, "On", false, false )
 			guiGridListSetItemColor( vehicle_list, row, col5, 0, 255, 0 )
-		end	
+		end
 	end
 	if source == btn_recover and currentVehID then
 		triggerServerEvent( "GTWvehicleshop.onVehicleRespawn", localPlayer, currentVehID )
@@ -313,14 +313,14 @@ function vehicle_shop_withdraw(withdraw_all)
 	if not withdraw_all then withdraw_all = false end
 	local row_pil, col_pil = guiGridListGetSelectedItem( player_items_list )
 	local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
-	
+
 	-- Validate operation
 	if row_pil == -1 or col_pil == -1 or not veh_id then return end
-	
+
 	-- Get current values
 	local object = guiGridListGetItemText( player_items_list, row_pil, col9 )
 	local pocket = guiGridListGetItemText( player_items_list, row_pil, col10 )
-	
+
 	-- Get current data
 	local slot = getSlotFromWeapon( getWeaponIDFromName( object ))
 	local ammo = getPedAmmoInClip(localPlayer, slot)
@@ -328,15 +328,15 @@ function vehicle_shop_withdraw(withdraw_all)
 		ammo = tonumber(guiGridListGetItemText(player_items_list, row_pil, col10))
 	end
 	local is_empty = false
-	
+
 	-- Justify values
 	if ammo > tonumber(guiGridListGetItemText(player_items_list, row_pil, col10)) then
 		ammo = tonumber(guiGridListGetItemText(player_items_list, row_pil, col10))
 	end
-	
+
 	-- Send to database
-	triggerServerEvent( "GTWvehicleshop.onVehicleWeaponWithdraw", localPlayer, veh_id, object, ammo)	
-	
+	triggerServerEvent( "GTWvehicleshop.onVehicleWeaponWithdraw", localPlayer, veh_id, object, ammo)
+
 	-- Manage lists add new item
 	local ex_row = isElementInList(inventory_list, object, col7)
 	if not ex_row then
@@ -347,16 +347,16 @@ function vehicle_shop_withdraw(withdraw_all)
        	guiGridListSetItemText( inventory_list, ex_row, col8, tonumber(guiGridListGetItemText(inventory_list, ex_row, col8)) + ammo, false, false )
     end
     guiGridListSetItemText( player_items_list, row_pil, col10, tonumber(guiGridListGetItemText(player_items_list, row_pil, col10)) - ammo, false, false )
-        
+
     -- Remove if empty
     if guiGridListGetItemText(player_items_list, row_pil, col10) == "0" then
       	guiGridListRemoveRow( player_items_list, row_pil )
      	is_empty = true
     end
-        
+
     -- Reload data
     --loadWeaponsToList()
-        
+
     -- Clear selection if empty, otherwise reselect
     if not is_empty then
      	guiGridListSetSelectedItem(player_items_list, row_pil, col_pil)
@@ -365,7 +365,7 @@ function vehicle_shop_withdraw(withdraw_all)
       	guiGridListSetSelectedItem(player_items_list, -1, -1)
       	guiGridListSetSelectedItem(inventory_list, -1, -1)
     end
-        
+
     -- Restore GUI style !Important if using GTWgui
     setTimer(resetGTWguistyle, 1000, 1)
 end
@@ -375,29 +375,29 @@ function vehicle_shop_deposit(deposit_all)
 	if not deposit_all then deposit_all = false end
 	local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
 	local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
-	
+
 	-- Validate operation
 	if row_il == -1 or col_il == -1 or not veh_id then return end
-	
+
 	-- Get current values
 	local object = guiGridListGetItemText( inventory_list, row_il, col7 )
 	local trunk = guiGridListGetItemText( inventory_list, row_il, col8 )
-	
+
 	-- Get current data
 	local ammo = getWeaponProperty(object, "std", "maximum_clip_ammo")
 	if deposit_all then
 		ammo = tonumber(guiGridListGetItemText(inventory_list, row_il, col8))
 	end
 	local is_empty = false
-	
+
 	-- Justify values
 	if ammo > tonumber(guiGridListGetItemText(inventory_list, row_il, col8)) then
 		ammo = tonumber(guiGridListGetItemText(inventory_list, row_il, col8))
 	end
-	
+
 	-- Send to database
-	triggerServerEvent( "GTWvehicleshop.onVehicleWeaponDeposit", localPlayer, veh_id, object, ammo)	
-	
+	triggerServerEvent( "GTWvehicleshop.onVehicleWeaponDeposit", localPlayer, veh_id, object, ammo)
+
 	-- Manage lists add new item
 	local ex_row = isElementInList(player_items_list, object, col9)
 	if not ex_row then
@@ -408,16 +408,16 @@ function vehicle_shop_deposit(deposit_all)
      	guiGridListSetItemText( player_items_list, ex_row, col10, tonumber(guiGridListGetItemText(player_items_list, ex_row, col10)) + ammo, false, false )
     end
     guiGridListSetItemText( inventory_list, row_il, col8, tonumber(guiGridListGetItemText(inventory_list, row_il, col8)) - ammo, false, false )
-        
+
     -- Remove if empty
     if guiGridListGetItemText(inventory_list, row_il, col8) == "0" then
       	guiGridListRemoveRow( inventory_list, row_il )
       	is_empty = true
     end
-        
+
     -- Reload data
     --loadWeaponsToList()
-        
+
     -- Clear selection if empty, otherwise reselect
     if not is_empty then
       	guiGridListSetSelectedItem(player_items_list, -1, -1)
@@ -426,14 +426,14 @@ function vehicle_shop_deposit(deposit_all)
       	guiGridListSetSelectedItem(player_items_list, -1, -1)
      	guiGridListSetSelectedItem(inventory_list, -1, -1)
     end
-        
+
     -- Restore GUI style !Important if using GTWgui
     setTimer(resetGTWguistyle, 1000, 1)
 
 	--[[local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
 	local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
 	if row_il == -1 or col_il == -1 or not veh_id then return end
-	triggerServerEvent( "GTWonVehicleWeaponDeposit", localPlayer, veh_id, 
+	triggerServerEvent( "GTWonVehicleWeaponDeposit", localPlayer, veh_id,
 		guiGridListGetItemText( inventory_list, row_il, col7 ), guiGridListGetItemText( inventory_list, row_il, col8 ))
 	local tmp_row = guiGridListAddRow( player_items_list )
     guiGridListSetItemText( player_items_list, tmp_row, col9, guiGridListGetItemText( inventory_list, row_il, col7 ), false, false )
@@ -456,7 +456,7 @@ function isElementInList(g_list, text, col)
 	for r=0, items_count do
 		--outputChatBox("R: "..r..", C: "..col.." "..guiGridListGetItemText(g_list, r, col).." = "..text)
 		if guiGridListGetItemText(g_list, r, col) == text then return r end
-	end	
+	end
 	return false
 end
 

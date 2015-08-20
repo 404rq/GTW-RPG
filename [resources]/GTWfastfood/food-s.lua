@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -24,13 +24,13 @@ function addMarkers(res)
 			markSize = 3
 			lower = 1
 		end
-    	marker[k] = createMarker(markers[k][1], markers[k][2], markers[k][3]-lower, "cylinder", markSize, 255, 255, 255, 30)
-    	addEventHandler("onMarkerHit", marker[k], showGUI)
-    	addEventHandler("onMarkerLeave", marker[k], hideGUI)
-    	setElementDimension(marker[k], markers[k][4])
-		setElementInterior(marker[k], markers[k][5])	
+    		marker[k] = createMarker(markers[k][1], markers[k][2], markers[k][3]-lower, "cylinder", markSize, 255, 255, 255, 30)
+    		addEventHandler("onMarkerHit", marker[k], showGUI)
+    		addEventHandler("onMarkerLeave", marker[k], hideGUI)
+    		setElementDimension(marker[k], markers[k][4])
+		setElementInterior(marker[k], markers[k][5])
 	end
-	
+
 	-- Setup invincible peds
 	respawn_all_peds()
 	setTimer(respawn_all_peds, 60*60*12*1000, 0)
@@ -39,16 +39,16 @@ addEventHandler("onResourceStart", resourceRoot, addMarkers)
 
 -- Respawn ped if dead
 function respawn_all_peds()
-	for k=1, #blips do	
+	for k=1, #blips do
 		-- Clean up old data
 		if isElement(blip[k]) then destroyElement(blip[k]) end
 		if isElement(ped[k]) then destroyElement(ped[k]) end
-		
+
 		-- Create blips
 		blip[k] = createBlip(blips[k][1], blips[k][2], blips[k][3], blips[k][4], 1, 0, 0, 0, 255, 111, 180)
 		ped[k] = createPed(peds[k][7], peds[k][1], peds[k][2], peds[k][3])
 		setElementData(marker[k], "location", peds[k][8])
-		
+
     	-- Create the ped
 		setElementDimension(ped[k], peds[k][4])
 		setElementInterior(ped[k], peds[k][5])
@@ -93,6 +93,13 @@ function hideGUI(leavePlayer)
 	end
 	triggerClientEvent(leavePlayer,"GTWfastfood.gui.hide",getRootElement(),leavePlayer)
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 -- Take money and increase health
 function buyFood(money, health)

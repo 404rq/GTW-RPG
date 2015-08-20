@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -19,7 +19,7 @@ marker	 		= {}
 respawnTimers 	= {}
 
 -- Global data
-train 			= {{ }} 
+train 			= {{ }}
 pilot 			= {{ }}
 blips			= {{ }}
 trainDirection	= { }
@@ -43,7 +43,7 @@ function addMarkers ( res )
     	addEventHandler( "onMarkerHit", marker[k], makeTrain )
     	addEventHandler( "onMarkerLeave", marker[k], markerLeave )
     end
-    
+
     -- Debug mode 2
     for w=1, #spawnPoints do
     	if setDebugMode == 2 then
@@ -69,11 +69,11 @@ function findNearestTrain ( thePlayer )
 	    local counter = 1
 	    for key,val in pairs( spawnPoints ) do
 	        local xx,yy,zz=getElementPosition( thePlayer )
-	        local x1=val[1] 
+	        local x1=val[1]
 	        local y1=val[2]
 	        local z1=val[3]
 	        local dist = getDistanceBetweenPoints2D(xx,yy,x1,y1)
-	
+
 	        if dist<min and dist>max then
 	          	nearest = val
 	          	min = dist
@@ -93,12 +93,12 @@ function findNearestTrainStation( loctrain )
 	    local markType = "station"
 	    for w=1, #trainLocations do
 	        local xx,yy,zz=getElementPosition( loctrain )
-	        local x1=trainLocations[w][1] 
-	        local y1=trainLocations[w][2] 
-	        local z1=trainLocations[w][3] 
-	        markType=trainLocations[w][5] 
+	        local x1=trainLocations[w][1]
+	        local y1=trainLocations[w][2]
+	        local z1=trainLocations[w][3]
+	        markType=trainLocations[w][5]
 	        local dist = getDistanceBetweenPoints2D(xx,yy,x1,y1)
-	
+
 	        if dist < min then
 	          	min = dist
 	          	counter = w
@@ -152,7 +152,7 @@ function makeTrain( hitElement, matchingDimension, id )
 	if isElement( hitElement ) and getElementType( hitElement ) == "vehicle" and getVehicleType( hitElement ) ~= "Train" then
 		hitElement = getVehicleOccupant( hitElement )
 	end
-	if isElement( hitElement ) and getElementType( hitElement ) == "player" and 
+	if isElement( hitElement ) and getElementType( hitElement ) == "player" and
 		getPedOccupiedVehicle( hitElement ) then
 		if getPlayerPing( hitElement ) > maxSyncerPing then
 			return
@@ -171,8 +171,8 @@ function makeTrain( hitElement, matchingDimension, id )
 	end
 	-- Break if other trains are nearby
 	if getNearbyTrain(hitElement) < 1500 then return end
-	if ( not isTimer( globcooldown ) and not isTimer( markercooldown[source] ) and 
-		getVehicleType( tmpveh ) and getVehicleType( tmpveh ) ~= "Train" and 
+	if ( not isTimer( globcooldown ) and not isTimer( markercooldown[source] ) and
+		getVehicleType( tmpveh ) and getVehicleType( tmpveh ) ~= "Train" and
 		numberOfActiveTrains < maxNumberOfTrains and findNearestTrainActive(hitElement) > 1100 ) then
 		-- Initialize
 		if not train[hitElement] then
@@ -184,12 +184,12 @@ function makeTrain( hitElement, matchingDimension, id )
 		if not blips[hitElement] then
 			blips[hitElement] = {}
 		end
-		
+
 		-- Check for already existing trains
 		if not isElement( train[hitElement][1] ) then
 			-- Cleanup
 			cleanUp( hitElement )
-			
+
 			-- Spawn the train
 			local spawner = findNearestTrain( hitElement )
 			if spawner then
@@ -213,7 +213,7 @@ function makeTrain( hitElement, matchingDimension, id )
 						if spawnPoints[spawner][5] == "tram" then
 							locomotiveID = 449
 						end
-						train[hitElement][i] = createVehicle(locomotiveID, spawnPoints[spawner][1], spawnPoints[spawner][2], spawnPoints[spawner][3]) 
+						train[hitElement][i] = createVehicle(locomotiveID, spawnPoints[spawner][1], spawnPoints[spawner][2], spawnPoints[spawner][3])
 						setTimer( setVehicleOverrideLights, 50, 1, train[hitElement][i], 0 )
 						setTrainDerailable( train[hitElement][1], false )
 					else
@@ -241,14 +241,14 @@ function makeTrain( hitElement, matchingDimension, id )
 						end
 						setTimer( setVehicleOverrideLights, 50, 1, train[hitElement][i], 1 )
 						setTrainDerailable( train[hitElement][i], false )
-						
+
 						-- MTA 1.4 attach using C++ algoritm rather than lua
 						attachTrailerToVehicle(train[hitElement][i-1], train[hitElement][i])
 					end
 					setTrainDirection( train[hitElement][i], trainDirection[hitElement] )
 					setElementSyncer( train[hitElement][i], hitElement )
 					setElementData( train[hitElement][i], "syncer", hitElement)
-					
+
 					-- Adds a blip to each carriage (DEBUG only)
 				    blips[hitElement][i] = createBlipAttachedTo( train[hitElement][i], 0, 1, 200, 200, 200, 255, 0, 180 )
 				    --setVehicleColor( train[hitElement][i], 0, 0, 0, 0, 0, 0)
@@ -257,28 +257,28 @@ function makeTrain( hitElement, matchingDimension, id )
 				for j=1,numberOfWagonsInTrain do
 					-- Create a ped for every wagon to control it
 					pilot[hitElement][j] = createPed(194, 1, 1, 1)
-						
-					-- Make the ped invisible for 
+
+					-- Make the ped invisible for
 					-- the look and feel of the train
 					--setElementAlpha( pilot[hitElement][j], 0 )
-						
+
 					-- Wrap the peds into the train
 				    warpPedIntoVehicle( pilot[hitElement][j], train[hitElement][j])
 				end
-				
+
 				-- Play the horn
 				setTimer(useHorn, math.random(500, 5000), 1, train[hitElement][1])
-				
+
 				-- Starting the syncer
 				local time = math.random(1200, 1800)*1000
 				syncTimer[hitElement] = setTimer( sync, 200, 0, hitElement, maxSpeed, numberOfWagonsInTrain )
 				setTimer( cleanUp, time, 1, hitElement )
 				cooldown[hitElement] = setTimer ( function() end, 60000, 1 ) -- The minimum time a train can exist
-				
+
 				-- Debuginfo
 				--outputServerLog("[TRAIN] Train ("..numberOfWagonsInTrain..") was created at: "..getZoneName(spawnPoints[spawner][1],
 					--spawnPoints[spawner][2], spawnPoints[spawner][3])..", by: "..getPlayerName(hitElement))
-				
+
 				-- Anti spam to save performance
 				globcooldown = setTimer( function() end, timeToNextTrain*1000, 1 )
 				getNewInterval()
@@ -351,11 +351,11 @@ function sync( thePlayer, trainSpeed, numberOfWagons )
 			-- Compensation to allow the train to leave
 			stationLeaveTimer[thePlayer] = setTimer( function() end, time+15000 , 1 )
 		end
-		
+
 		if not isTimer(stationHoldTimer[thePlayer]) then
 			-- Set the speed
 			setVehicleEngineState( train[thePlayer][1], true )
-			setTrainSpeed( train[thePlayer][1], trainSpeed )	
+			setTrainSpeed( train[thePlayer][1], trainSpeed )
 		end
 		if distToStation < 4 and trainLocations[stationID][5] == "block" then
 			setTrainSpeed( train[thePlayer][1], 0.0 )
@@ -394,16 +394,23 @@ function cleanUp( trainID )
 		if isTimer( syncTimer[trainID] ) then
 			killTimer( syncTimer[trainID] )
 		end
-		
+
 		-- Change global direction
 		if #train == 0 then
 			globaldist = not globaldist
 		end
-		
+
 		-- Debuginfo
 		--setTimer( outputServerLog, 100, 1, "[TRAIN] Train ("..getPlayerName(trainID)..") was destroyed succsessfully" )
 	end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 -- Clean up and remove attached data
 function quitPlayer( )

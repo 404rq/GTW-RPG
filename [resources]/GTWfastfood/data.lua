@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -30,7 +30,7 @@ markers = {
 	[10]={ 373.9, -118.8, 1000.4, 9, 5, "pizza" },
 	[11]={ 373.9, -118.8, 1000.4, 10, 5, "pizza" },
 	[12]={ 373.9, -118.8, 1000.4, 11, 5, "pizza" },
-	
+
 	-- Cluckin' Bell
 	[13]={ 369, -6, 1000.8515625, 2, 9, "cluckin_bell" },
 	[14]={ 369, -6, 1000.8515625, 1, 9, "cluckin_bell" },
@@ -57,7 +57,7 @@ markers = {
 	[33]={ 375.6, -67.5, 1000.5, 3, 10, "burger" },
 	[34]={ 375.6, -67.5, 1000.5, 4, 10, "burger" },
 	[35]={ 375.6, -67.5, 1000.5, 10, 10, "burger" },
-	
+
 	-- Drive thru's at the end
 	[36]={ 1214, -905, 41.922645568848, 0, 0, "burger" },
 	[37]={ 799.91015625, -1629.6396484375, 12.109879493713, 0, 0, "burger" },
@@ -84,7 +84,7 @@ peds = {
 	[10]={ 373.8, -117.27, 1000.4, 9, 5, 180, 155, "Well Stack Pizza Co." },
 	[11]={ 373.8, -117.27, 1000.4, 10, 5, 180, 155, "Well Stack Pizza Co." },
 	[12]={ 373.8, -117.27, 1000.4, 11, 5, 180, 155, "Well Stack Pizza Co." },
-	
+
 	-- Cluckin' Bell
 	[13]={ 369, -4.4, 1001.8, 2, 9, 180, 167, "Cluckin' Bell" },
 	[14]={ 369, -4.4, 1001.8, 1, 9, 180, 167, "Cluckin' Bell" },
@@ -98,7 +98,7 @@ peds = {
 	[22]={ 369, -4.4, 1001.8, 4, 9, 180, 167, "Cluckin' Bell" },
 	[23]={ 369, -4.4, 1001.8, 3, 9, 180, 167, "Cluckin' Bell" },
 	[24]={ 369, -4.4, 1001.8, 0, 9, 180, 167, "Cluckin' Bell" },
-	
+
 	-- Burger shot
 	[25]={ 376, -66, 1000.5, 0, 10, 180, 205, "Burger Shot" },
 	[26]={ 376, -66, 1000.5, 1, 10, 180, 205, "Burger Shot" },
@@ -143,7 +143,7 @@ blips = {
 	[22]={ 2398, -1899, 14, 14 },
 	[23]={ 2420, -1510, 25, 14 },
 	[24]={ 173, 1177, 15, 14 },
-	
+
 	-- Burger shot
 	[25]={ 812, -1616, 14, 10 },
 	[26]={ 1199, -918, 44, 10 },

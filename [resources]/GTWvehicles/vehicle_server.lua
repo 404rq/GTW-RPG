@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -42,7 +42,7 @@ end
 function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
     if isElement(client) and vehID and rot and price then
     	local money = getPlayerMoney(client)
-	    if money >= price and getPlayerWantedLevel(client) == 0 and 
+	    if money >= price and getPlayerWantedLevel(client) == 0 and
 	    	getElementInterior(client) == 0 then
 	   	 	if isElement(vehicles[client]) then
 	   	 		triggerEvent("acorp_onDestroyVehilce", client, client)
@@ -57,7 +57,7 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 		   	 	end
 				-- Destroys the old vehicle
 				destroyElement(vehicles[client])
-				
+
 				-- Pay for previous vehicle
 				if isTimer(paymentsHolder[client]) then
 					killTimer(paymentsHolder[client])
@@ -73,16 +73,16 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 						exports.GTWtopbar:dm("Your pilot license doesn't allow large aircraft yet!(Must be above 40)", client, 255, 0, 0)
 						return
 					end
-				end				
+				end
 		    	local x,y,z = getElementPosition(client)
 		    	if spawnx and spawny and spawnz then
 		    		x,y,z = spawnx,spawny,spawnz
 		    	end
-			   	vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot) 
+			   	vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot)
 			   	setVehicleFuelTankExplodable(vehicles[client], true)
 			   	setVehicleHandling(vehicles[client], "headLight ", "big")
 			   	setVehicleHandling(vehicles[client], "tailLight", "big")
-			   	
+
 			   	-- Semi truck trailers
 			   	--[[if vehID == 403 or vehID == 514 or vehID == 515 then
 			   		if vehID == 403 then
@@ -100,7 +100,7 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 			   		setTimer(detachElements, 50, 1, trailers[client])
 			   		setTimer(attachTrailerToVehicle, 1000, 1, vehicles[client], trailers[client])
 			   	end]]--
-			   	
+
 			   	-- Train carriages
 			   	if vehID == 537 or vehID == 538 or vehID == 449 then
 			   		setTrainDirection(vehicles[client],true)
@@ -146,7 +146,7 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 					-- Create cars
 					local engines = 1
 					if numberOfCarriages > 4 and (getElementModel(vehicles[client]) == 538 or getElementModel(vehicles[client]) == 537) then
-						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)					
+						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						numberOfCarriages = numberOfCarriages - 1
@@ -154,20 +154,20 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 					end
 					-- Extra freight engines
 					if numberOfCarriages > 6 and getElementModel(vehicles[client]) == 537 then
-						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)					
+						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						numberOfCarriages = numberOfCarriages - 1
 						engines = engines + 1
 					end
 					for c=1, numberOfCarriages do
-						carriage = createVehicle(vehID, x, y, z, 0, 0, rot)					
+						carriage = createVehicle(vehID, x, y, z, 0, 0, rot)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 					end
 					-- Adds an extra freight locomotive at the end
 					if numberOfCarriages > 4 and (getElementModel(vehicles[client]) == 538 or getElementModel(vehicles[client]) == 537) then
-						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)					
+						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						engines = engines + 1
@@ -177,7 +177,7 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 			   	end
 			    setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
 			    setElementData(vehicles[client], "owner", getAccountName(getPlayerAccount(client)))
-			    setElementData(client, "currVeh", getElementModel(vehicles[client]))			
+			    setElementData(client, "currVeh", getElementModel(vehicles[client]))
 			    warpPedIntoVehicle(client, vehicles[client])
 				-- Start the rental price counter
 				paymentsCounter[client] = price
@@ -197,8 +197,8 @@ addEventHandler("GTWvehicles.spawnvehicle", resourceRoot, spawn_vehicle)
 
 --[[ Set the color of the new vehicle ]]--
 function set_vehicle_color(m_type)
-    if isElement(vehicles[client]) then	
-		local p_text, free_fuel, r1,g1,b1, r2,g2,b2 = unpack(properties[m_type])   
+    if isElement(vehicles[client]) then
+		local p_text, free_fuel, r1,g1,b1, r2,g2,b2 = unpack(properties[m_type])
 	    if p_text ~= "" then
 	    	setVehiclePlateText(vehicles[client], p_text)
 	    end
@@ -224,7 +224,7 @@ function destroy_vehicle(plr, force_delete)
    	 		destroyElement(trailers[plr])
    	 	end
    	 	triggerEvent("GTWvehicles.onDestroyVehilce", plr, plr)
-		
+
 		destroyElement(vehicles[plr])
 		setElementData(plr, "currVeh", 0)
 		if isTimer(paymentsHolder[plr]) then
@@ -249,7 +249,7 @@ addEventHandler("onPlayerLogout", root, onPlayerLogout)
 function sport(thePlayer, command)
 	local veh = getPedOccupiedVehicle(thePlayer)
 	if not veh or not isElement(veh) or getVehicleType(veh) ~= "Automobile" then return end
-    if isElement(veh) and getElementData(veh, "gearType") ~= "Sport"  then 
+    if isElement(veh) and getElementData(veh, "gearType") ~= "Sport"  then
 		setElementData(veh, "gearType", "Sport")
 		exports.GTWtopbar:dm("Gear box: profile is: Sport, use /drive or /race to change", thePlayer, 255, 200, 0)
 		setVehicleHandling(veh, "maxVelocity", nil, false)
@@ -259,8 +259,8 @@ addCommandHandler("sport", sport)
 function sport2(thePlayer, command)
 	local veh = getPedOccupiedVehicle(thePlayer)
 	if not veh or not isElement(veh) or getVehicleType(veh) ~= "Automobile" then return end
-    if isElement(veh) and getElementData(veh, "gearType") ~= "Sport" and(veh_police[getElementModel(veh)] or 
-    		veh_fireman[getElementModel(veh)] or veh_medic[getElementModel(veh)]) then 
+    if isElement(veh) and getElementData(veh, "gearType") ~= "Sport" and(veh_police[getElementModel(veh)] or
+    		veh_fireman[getElementModel(veh)] or veh_medic[getElementModel(veh)]) then
 		setElementData(veh, "gearType", "Sport")
 		setVehicleHandling(veh, "maxVelocity", nil, false)
     end
@@ -269,7 +269,7 @@ addCommandHandler("sport2", sport2)
 function drive(thePlayer, command)
 	local veh = getPedOccupiedVehicle(thePlayer)
 	if not veh or not isElement(veh) or getVehicleType(veh) ~= "Automobile" then return end
-    if isElement(veh) and getElementData(thePlayer, "gearType") ~= "Drive" then 
+    if isElement(veh) and getElementData(thePlayer, "gearType") ~= "Drive" then
 		setElementData(veh, "gearType", "Drive")
 		exports.GTWtopbar:dm("Gear box: profile is: Drive, use /sport or /race to change", thePlayer, 255, 200, 0)
 		setVehicleHandling(veh, "maxVelocity", nil, false)
@@ -281,7 +281,7 @@ addCommandHandler("drive", drive)
 function raceMode(thePlayer, command)
 	local veh = getPedOccupiedVehicle(thePlayer)
 	if not veh or not isElement(veh) or getVehicleType(veh) ~= "Automobile" then return end
-    if isElement(veh) and getElementData(veh, "gearType") ~= "Race" and not slow_vehicles[getElementModel(veh)] then 
+    if isElement(veh) and getElementData(veh, "gearType") ~= "Race" and not slow_vehicles[getElementModel(veh)] then
 		setElementData(veh, "gearType", "Race")
 		exports.GTWtopbar:dm("Gear box: profile is: Race, use /sport or /drive to change", thePlayer, 255, 200, 0)
 		setVehicleHandling(veh, "maxVelocity", nil, false)
@@ -366,7 +366,7 @@ addCommandHandler("drop", dropPlayer)
 -- Turn a train around
 function turnTrain(player, command)
 	local train_engine = getPedOccupiedVehicle(player)
-	if train_engine and getElementType(train_engine) == "vehicle" and 
+	if train_engine and getElementType(train_engine) == "vehicle" and
 		getVehicleType(train_engine) == "Train" and not getVehicleEngineState(train_engine) then
 		setTrainDirection(train_engine, not getTrainDirection(train_engine))
 	end
@@ -394,11 +394,11 @@ function gearBox(veh, player)
 	 		elseif mass > 3000 then
 	 			mass =(mass/2)
 	 		end
-	 		
+
 	 		local speedx, speedy, speedz = getElementVelocity(veh)
-			local actualspeed =(speedx^2 + speedy^2 + speedz^2)^(0.5) 
+			local actualspeed =(speedx^2 + speedy^2 + speedz^2)^(0.5)
 			local kmh = actualspeed * 180
-			
+
 			if kmh <= getRelMass(30, mass) then
 				setVehicleHandling(veh, "maxVelocity", getRelMass(80, mass))
 			elseif kmh >= getRelMass(30, mass) and kmh < getRelMass(70, mass) and kmh < currVehTopSpeed[veh] then
@@ -437,11 +437,11 @@ function gearBox(veh, player)
 	 		elseif mass > 3000 then
 	 			mass =(mass/2)
 	 		end
-	 		
+
 	 		local speedx, speedy, speedz = getElementVelocity(veh)
-			local actualspeed =(speedx^2 + speedy^2 + speedz^2)^(0.5) 
+			local actualspeed =(speedx^2 + speedy^2 + speedz^2)^(0.5)
 			local kmh = actualspeed * 180
-			
+
 			if kmh <= getRelMass(30, mass) then
 				setVehicleHandling(veh, "maxVelocity", 900)
 			elseif kmh >= getRelMass(30, mass) and kmh < 70 and kmh < currVehTopSpeed[veh] then

@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -39,7 +39,7 @@ cells = {
     [7]={ "LSPD", 6, 0, 264, 87.1, 1001.5, 271.39666748047, 1 },
     [8]={ "LSPD", 6, 1, 264, 87.1, 1001.5, 271.39666748047, 1 },
     [9]={ "LSPD", 6, 2, 264, 87.1, 1001.5, 271.39666748047, 1 },
-    
+
     -- SFPD
     [10]={ "SFPD", 10, 0, 227, 111, 999.5, 0, 2 },
     [11]={ "SFPD", 10, 0, 223, 111, 999.5, 0, 2 },
@@ -49,7 +49,7 @@ cells = {
     [15]={ "SFPD", 10, 1, 223, 111, 999.5, 0, 2 },
     [16]={ "SFPD", 10, 1, 219, 111, 999.5, 0, 2 },
     [17]={ "SFPD", 10, 1, 215, 111, 999.5, 0, 2 },
-    
+
     -- LVPD
     [18]={ "LVPD", 3, 0, 198.27734375, 161, 1003.1, 0, 3 },
     [19]={ "LVPD", 3, 0, 193.87890625, 175, 1003.1, 180, 3 },
@@ -57,19 +57,19 @@ cells = {
     [21]={ "LVPD", 3, 1, 198.27734375, 161, 1003.1, 0, 3 },
     [22]={ "LVPD", 3, 1, 193.87890625, 175, 1003.1, 180, 3 },
     [23]={ "LVPD", 3, 1, 198.27734375, 175, 1003.1, 180, 3 },
-    
+
     -- Fort Carson
     [24]={ "FCPD", 5, 1, 318, 312, 999.4, 270, 4 },
     [25]={ "FCPD", 5, 1, 318, 316, 999.4, 270, 4 },
-    
+
     -- El Quebrados
     [26]={ "EQPD", 5, 0, 318, 312, 999.4, 270, 5 },
     [27]={ "EQPD", 5, 0, 318, 316, 999.4, 270, 5 },
-    
+
     -- Angel pine
     [28]={ "APPD", 5, 2, 318, 312, 999.4, 270, 6 },
     [29]={ "APPD", 5, 2, 318, 316, 999.4, 270, 6 },
-    
+
     -- Jail
     [30]={ "LSPD", 0, 0, -3028, 2360, 6.26, 180, 1 },
     [31]={ "LSPD", 0, 0, -2975, 2204, 0.8, 270, 1 },
@@ -101,7 +101,7 @@ light1 = {}
 -- Define a table indexed by cops telling how many arrests he got
 arrested_players = { }
 
--- Define law 
+-- Define law
 lawTeams = {
 	["Staff"] = true,
 	["Government"] = true,
@@ -109,36 +109,36 @@ lawTeams = {
 }
 
 -- Define police vehlices (cars and helicopters including army, swat, sapd and fbi)
-policeVehicles = { 
-	[596]=true, 
-	[597]=true, 
-	[598]=true, 
-	[599]=true, 
-	[490]=true, 
-	[528]=true, 
-	[523]=true, 
-	[427]=true, 
-	[432]=true, 
-	[601]=true, 
-	[428]=true, 
-	[433]=true, 
-	[470]=true, 
-	[497]=true, 
-	[425]=true, 
-	[520]=true 
+policeVehicles = {
+	[596]=true,
+	[597]=true,
+	[598]=true,
+	[599]=true,
+	[490]=true,
+	[528]=true,
+	[523]=true,
+	[427]=true,
+	[432]=true,
+	[601]=true,
+	[428]=true,
+	[433]=true,
+	[470]=true,
+	[497]=true,
+	[425]=true,
+	[520]=true
 }
 -- Emergency lights vehicles
-fireVehicles = { 
-	[407]=true, 
-	[544]=true 
+fireVehicles = {
+	[407]=true,
+	[544]=true
 }
-medicVehicles = { 
-	[416]=true 
+medicVehicles = {
+	[416]=true
 }
 trainVeh = {
-	[449]=true, 
-	[537]=true, 
-	[538]=true, 
-	[569]=true, 
-	[570]=true 
+	[449]=true,
+	[537]=true,
+	[538]=true,
+	[569]=true,
+	[570]=true
 }

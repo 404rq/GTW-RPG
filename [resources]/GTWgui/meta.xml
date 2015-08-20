@@ -1,16 +1,16 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 -->
 
@@ -18,10 +18,10 @@
 	<info author="GTWGames" type="script" name="GTWgui" description="Manage walrus GUI elements and custom fonts" version="0" />
 	<script src="c_window.lua" type="client" />
 	<script src="s_refresh.lua" type="server" />
-	
+
 	<file src="img/back.png" download="true"/>
 	<file src="fonts/RobotoSlab-Bold.ttf" download="true"/>
-	
+
 	<export function="createWindow" type="client"/>
 	<export function="setDefaultFont" type="client"/>
 </meta>

@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -41,13 +41,13 @@ car_data[1] = {
 	{ 562, "sport", 97700 },
 	{ 565, "sport", 98800 },
 }
-car_data[2] = {	
+car_data[2] = {
 	-- Muscle Cars
 	{ 402, "muscle", 122300 },
 	{ 542, "muscle", 122300 },
 	{ 603, "muscle", 122300 },
 	{ 475, "muscle", 122300 },
-	
+
 	{ 412, "lowrider", 78800 },
 	{ 466, "lowrider", 55300 },
 	{ 534, "lowrider", 77600 },
@@ -57,7 +57,7 @@ car_data[2] = {
 	{ 575, "lowrider", 82300 },
 	{ 576, "lowrider", 74400 },
 }
-car_data[3] = {	
+car_data[3] = {
 	-- Bikes and bicycles
 	{ 581, "bike", 32000 },
 	{ 509, "bike", 800 },
@@ -72,7 +72,7 @@ car_data[3] = {
 	{ 468, "bike", 43300 },
 	{ 586, "bike", 31220 },
 }
-car_data[4] = {	
+car_data[4] = {
 	-- Aircraft
 	{ 592, "aircraft", 1122000 },
 	{ 577, "aircraft", 1122000 },
@@ -89,7 +89,7 @@ car_data[4] = {
 	{ 469, "aircraft", 422000 },
 	{ 513, "aircraft", 344000 },
 }
-car_data[5] = {	
+car_data[5] = {
 	-- Watercraft
 	{ 472, "watercraft", 53220 },
 	{ 473, "watercraft", 17320 },
@@ -101,7 +101,7 @@ car_data[5] = {
 	{ 446, "watercraft", 42320 },
 	{ 454, "watercraft", 87500 },
 }
-car_data[6] = {	
+car_data[6] = {
 	-- Trucks and vans
 	{ 403, "trucks", 298800 },
 	{ 414, "trucks", 199500 },
@@ -120,7 +120,7 @@ car_data[6] = {
 	{ 573, "trucks", 438800 },
 	{ 578, "trucks", 378800 },
 	{ 588, "trucks", 387700 },
-	
+
 	{ 413, "vans", 44200 },
 	{ 418, "vans", 52300 },
 	{ 422, "vans", 48300 },
@@ -134,7 +134,7 @@ car_data[6] = {
 	{ 582, "vans", 94300 },
 }
 
-car_data[7] = {	
+car_data[7] = {
 	-- Railroad cars
 	{ 537, "train", 998300 },
 	{ 538, "train", 998400 },
@@ -163,12 +163,12 @@ supported_cars = {
 	[540] = -4,
 	[421] = -4,
 	[529] = -4,
-	
+
 	[402] = -4,
 	[542] = -4,
 	[603] = -4,
 	[475] = -4,
-	
+
 	[602] = -3,
 	[496] = -3,
 	[401] = -3,
@@ -188,7 +188,7 @@ supported_cars = {
 	[439] = -3,
 	[549] = -3,
 	[491] = -3,
-	
+
 	[536] = -4,
 	[575] = -4,
 	[534] = -4,
@@ -196,7 +196,7 @@ supported_cars = {
 	[535] = -4,
 	[576] = -4,
 	[412] = -4,
-	
+
 	[411] = -4,
 	[415] = -4,
 	[429] = -4,

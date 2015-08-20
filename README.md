@@ -10,8 +10,8 @@ What's the goal of this project:
 * Independency, you should not be forced to use the entire gamemode just because you're looking for a single feature, individual resources may be used as well and we try to document all resources in their readme files with available exports and if needed, required dependencies, (a common dependency are for instance GTWtopbar which is required from almost all included resources).
 
 ## Testing the software
-The latest version of these resources will always run on our servers: (mtasa://gs.gtw-games.org:22005 for instance). These servers are open 24/7 for anyone who would like to join and experience these resources live as well as contributing by testing and report potential bugs you may find. You can also become in game staff or moderator in our community "GTW Games" to help out testing this gamemode by playing the most recent version of it as soon it's released and give us feedback. Applications and information for that are found here:<br>
-http://forum.gtw-games.org/staff-applications/
+The latest version of these resources will always run on our servers: (mtasa://gs.404rq.com:22005 for instance). These servers are open 24/7 for anyone who would like to join and experience these resources live as well as contributing by testing and report potential bugs you may find. You can also become in game staff or moderator in our community "GTW Games" to help out testing this gamemode by playing the most recent version of it as soon it's released and give us feedback. Applications and information for that are found here:<br>
+http://forum.404rq.com/staff-applications/
 
 # Core features
 The most important resources are the core features, basically scripts which many other scripts depends on and with many exports, this includes a job management system which handles the GUI to apply for a job, team and other important things related to civilian jobs, a top bar dx message system used by almost all resources to display important notifications to the players in a more nice looking way. GTW Games servers uses an individual core resource that handle information such as gamemode, time and other related stuff beside these resources, there's also a couple of standalone resources made by developers who prefer other licenses than GNU which we can't unclude in this project for obvious reasons, since they are optional we won't list them here.
@@ -20,17 +20,17 @@ The most important resources are the core features, basically scripts which many
 Beside the standardized core features, this project also includes a lot of misc features that might not be the first you think of when it comes to RPG but still pretty interesting, GTWtrains is a typical example of that, a system that manage and control AI trains around the map, trains that can be used to travel between the three cities or why not block people during car chases. Smaller features that we consider as "details" such as GTWsmoke which handles some smoking animations etc. Please note that this isn't the full gamemode running at Grand Thest Walrus game servers, in fact, it's the opposite. We are working to extend this gamemode however and more resources will be published as soon they are rewritten to work on other servers than just our own. The reason are for example usage of exports to private resources or dependencies of many large resources, where some of them is badly written currently.
 
 ## Donations
-If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.gtw-games.org or by these Bitcoin respective Litecoin adresses below:
+If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.404rq.com or by these Bitcoin respective Litecoin adresses below:
 
 BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
 LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
 
 ## Contributors
-TheMoose<br>
+Mr_Moose<br>
 TheWalrus<br>
-ThePenguin
+The_Penguin
 
 ## Websites
-GTW main page: http://www.gtw-games.org<br>
-Bug reports (by users): http://forum.gtw-games.org/bug-reports/<br>
-Development discussions: http://forum.gtw-games.org/mta-servers-development/
+Main page: http://www.404rq.com<br>
+Bug reports (by users): http://forum.404rq.com/bug-reports/<br>
+Development discussions: http://forum.404rq.com/mta-servers-development/

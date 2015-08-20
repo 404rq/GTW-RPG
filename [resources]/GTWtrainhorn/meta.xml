@@ -1,16 +1,16 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 -->
 
@@ -18,12 +18,12 @@
 	<info author="GTWGames" name="GTWtrainhorn" version="0" type="script" description="Adds various train horn sounds" />
 	<script src="horn_c.lua" type="client" />
 	<script src="horn_s.lua" type="server" />
-	
+
 	<file src="sound/x_gp_horn1.wav" download="true" />
 	<file src="sound/x_gp_horn1_alt.wav" download="true" />
 	<file src="sound/gp_horn1.wav" download="true" />
 	<file src="sound/2k_hornl.wav" download="true" />
-	<file src="sound/7k_hornh.wav" download="true" />	
+	<file src="sound/7k_hornh.wav" download="true" />
 	<file src="sound/k31_horn1.wav" download="true" />
 	<export function="triggerTrainHorn" type="server" />
 </meta>
