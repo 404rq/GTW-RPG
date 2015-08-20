@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -42,10 +42,10 @@ function vehicleBuyRequest( model )
 		if model and price and getPlayerMoney(client) >= price then
 			takePlayerMoney( client, price )
 			exports.GTWtopbar:dm( "You have bought a "..getVehicleNameFromModel( model ), client, 0, 255, 0 )
-			
+
 			-- Save new vehicles to database
-			dbExec(veh_data, "INSERT INTO vehicles VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?)", 
-				getAccountName(getPlayerAccount( client )), model, 0, 0, 100, 100, 3, toJSON({0,0,0, 0,0,0}), 
+			dbExec(veh_data, "INSERT INTO vehicles VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?)",
+				getAccountName(getPlayerAccount( client )), model, 0, 0, 100, 100, 3, toJSON({0,0,0, 0,0,0}),
 				toJSON({200,200,200, 200,200,200, 0,0,0, 0,0,0}), toJSON({}), toJSON({}), toJSON({}))
 		elseif getPlayerMoney(client) < price then
 			exports.GTWtopbar:dm( "You can't afford this vehicle you little twat!", client, 255, 0, 0 )
@@ -59,7 +59,7 @@ addEventHandler( "GTWvehicleshop.onPlayerVehicleBuyRequest", root, vehicleBuyReq
 
 --[[ Create a database table to store vehicle data ]]--
 addEventHandler("onResourceStart", getResourceRootElement(),
-function()	
+function()
 	dbExec(veh_data, "CREATE TABLE IF NOT EXISTS vehicles (ID INTEGER PRIMARY KEY, owner TEXT, model NUMERIC, "..
 		"locked NUMERIC, engine NUMERIC, health NUMERIC, fuel NUMERIC, paint NUMERIC, pos TEXT, color TEXT, upgrades TEXT, inventory TEXT, headlight TEXT)")
 end)
@@ -69,14 +69,14 @@ function loadMyVehicles(query)
 	local result = dbPoll( query, 0 )
 	if result then
     	for _, row in ipairs( result ) do
-            addVehicle(row["ID"], row["owner"], row["model"], row["locked"], row["engine"], 
-            	row["health"], row["fuel"], row["paint"], row["pos"], row["color"], 
-            	row["upgrades"], row["inventory"], row["headlight"])        
+            addVehicle(row["ID"], row["owner"], row["model"], row["locked"], row["engine"],
+            	row["health"], row["fuel"], row["paint"], row["pos"], row["color"],
+            	row["upgrades"], row["inventory"], row["headlight"])
     	end
 	end
 end
 function getMyVehicles(veh_id)
-	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and 
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and
 		getElementInterior(client) == 0 and getElementDimension(client) == 0 then
 		dbQuery(loadMyVehicles, veh_data, "SELECT * FROM vehicles WHERE owner=? AND ID=?", getAccountName(getPlayerAccount( client )), tonumber(veh_id))
 	elseif getElementInterior(client) ~= 0 or getElementDimension(client) ~= 0 then
@@ -95,7 +95,7 @@ function unloadMyVehicles(query)
 	local result = dbPoll( query, 0 )
 	if result then
     	for _, row in ipairs( result ) do
-            saveAndRemoveVehicle(vehicles[row["ID"]],true)        
+            saveAndRemoveVehicle(vehicles[row["ID"]],true)
     	end
 	end
 end
@@ -129,11 +129,11 @@ function listAllMyVehicles(query)
     		vehicle_data_to_client[index][7] = row["pos"]
     		plr = getAccountPlayer( getAccount( row["owner"] ))
     	end
-    	
+
     	-- Send data to client
     	if plr then
-    		triggerClientEvent( plr, "GTWvehicleshop.onReceivePlayerVehicleData", plr, vehicle_data_to_client ) 
-		end    		
+    		triggerClientEvent( plr, "GTWvehicleshop.onReceivePlayerVehicleData", plr, vehicle_data_to_client )
+		end
 	end
 end
 function listMyVehicles( )
@@ -164,9 +164,9 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			inventory_markers[veh] = createMarker(0, 0, -100, "cylinder", 3, 0, 0, 0, 0 )
 			inventory_markers_veh[inventory_markers[veh]] = veh
 			attachElements(inventory_markers[veh],veh,0,supported_cars[getElementModel(veh)],-1)
-			addEventHandler( "onMarkerHit", inventory_markers[veh], 
+			addEventHandler( "onMarkerHit", inventory_markers[veh],
 			function(hitElement,matchingDimension)
-				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and 
+				if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
 					not getPedOccupiedVehicle(hitElement) and not getElementData(inventory_markers_veh[source],
 					"GTWvehicleshop.the_near_player_trunk") then
 					exports.GTWtopbar:dm( "Vehicle: Press F9 to open the vehicle inventory", hitElement, 0, 255, 0 )
@@ -175,21 +175,21 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 				elseif getElementData(inventory_markers_veh[source], "GTWvehicleshop.the_near_player_trunk") then
 					local name = getPlayerName(getElementData(inventory_markers_veh[source], "GTWvehicleshop.the_near_player_trunk"))
 					exports.GTWtopbar:dm( "Vehicle: "..name.." is browsing the trunk of this vehicle, please wait", hitElement, 255, 100, 0 )
-				end						
-			end) 
-			addEventHandler( "onMarkerLeave", inventory_markers[veh], 
+				end
+			end)
+			addEventHandler( "onMarkerLeave", inventory_markers[veh],
 			function(leaveElement,matchingDimension)
 				if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" then
 					setElementData(leaveElement,"GTWvehicleshop.the_near_veh_trunk",nil)
 					setElementData(inventory_markers_veh[source],"GTWvehicleshop.the_near_player_trunk",nil)
-				end						
-			end) 
+				end
+			end)
 		end
 		if isFirstSpawn then
 			warpPedIntoVehicle( getAccountPlayer( getAccount( owner )), veh )
 		end
 		veh_blips[veh] = createBlipAttachedTo( veh, 3, 1, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
-		setElementRotation( veh, rx, ry, rz )					
+		setElementRotation( veh, rx, ry, rz )
 		vehicle_owners[veh] = owner
 		veh_id_num[veh] = ID
 		vehicles[ID] = veh
@@ -273,19 +273,19 @@ function saveAndRemoveVehicle(veh,removeVeh)
 		local ID = getElementData( veh, "isOwnedVehicle" )
 		if ID then
 			-- Save to database
-			dbExec(veh_data, "UPDATE vehicles SET owner=?, locked=?, engine=?, health=?, fuel=?, paint=?, pos=?, color=?, upgrades=? WHERE ID=?", 
-				vehicle_owners[veh], locked, engine, health, fuel, paint, toJSON({x,y,z, rx,ry,rz}), 
+			dbExec(veh_data, "UPDATE vehicles SET owner=?, locked=?, engine=?, health=?, fuel=?, paint=?, pos=?, color=?, upgrades=? WHERE ID=?",
+				vehicle_owners[veh], locked, engine, health, fuel, paint, toJSON({x,y,z, rx,ry,rz}),
 				toJSON({ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db}), toJSON(getVehicleUpgrades( veh )), ID)
-						
+
 			-- Clean up and free memory
 			if removeVeh then
 				-- Remove inventory marker
 				if inventory_markers_veh[inventory_markers[veh]] and isElement(inventory_markers_veh[inventory_markers[veh]]) then
 					inventory_markers_veh[inventory_markers[veh]] = nil
-				end	
+				end
 				if inventory_markers[veh] and isElement(inventory_markers[veh]) then
 					destroyElement(inventory_markers[veh])
-				end	
+				end
 				vehicles[ID] = nil
 				vehicle_owners[veh] = nil
 				destroyElement(veh_blips[veh])
@@ -301,7 +301,7 @@ addEventHandler ( "GTWvehicleshop.onPlayerVehicleDestroy", root, saveAndRemoveVe
 
 --[[ Lock vehicle from client ]]--
 function lockVehicle(veh_id, lock_id)
-	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and
 		veh_id and vehicles[veh_id] and isElement(vehicles[veh_id]) then
 		if isVehicleLocked( vehicles[veh_id] ) then
 			setVehicleLocked( vehicles[veh_id], false )
@@ -326,7 +326,7 @@ addEventHandler( "GTWvehicleshop.onLockVehicle", root, lockVehicle )
 
 --[[ Toggle vehicle engine state from client ]]--
 function toggleVehicleEngine(veh_id, engine_id)
-	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and
 		veh_id and vehicles[veh_id] and isElement(vehicles[veh_id]) then
 		if getVehicleEngineState( vehicles[veh_id] ) then
 			setVehicleEngineState( vehicles[veh_id], false )
@@ -356,7 +356,7 @@ function returnWeaponsOnSell(query)
 	local items = nil
 	local plr = nil
 	local veh_id = nil
-	
+
 	-- Get the json string
     for _,row in ipairs( result ) do
     	-- Get all relevant data for the vehicle
@@ -365,55 +365,55 @@ function returnWeaponsOnSell(query)
     	veh_id = row["ID"]
     	break
     end
-    
+
     -- Extract data and give weapons back to the owner
     local data_table = fromJSON(items) or { }
 	for k, v in pairs(data_table) do
 		giveWeapon(plr, getWeaponIDFromName(k), tonumber(v))
 		outputChatBox(k.." was successfully restored ("..tostring(v)..") bullets", plr, 255, 255, 255)
 	end
-    	
+
     -- Send data to client
     if player then
-    	triggerClientEvent( player, "GTWvehicleshop.onReceiveInventoryItems", player, vehicle_data_to_client )     		
+    	triggerClientEvent( player, "GTWvehicleshop.onReceiveInventoryItems", player, vehicle_data_to_client )
 	end
-	
+
 	-- Remove vehicle from database
 	dbExec(veh_data, "DELETE FROM vehicles WHERE ID=?", veh_id)
 end
 function sellVehicle(veh_id, model)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and model then
 		-- Restore weapons to it's owner
-		dbQuery(returnWeaponsOnSell, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE owner=? AND ID=?", 
+		dbQuery(returnWeaponsOnSell, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE owner=? AND ID=?",
 			getAccountName(getPlayerAccount( client )), tonumber(veh_id))
-			
+
 		-- Return money
 		local price = 0
 		for i=1, #car_data do
 			if car_data[i] then
 				for key, value in pairs(car_data[i]) do
-					if value[1] and value[1] == model then				
+					if value[1] and value[1] == model then
 						price = value[3]
 					end
 				end
 			end
 		end
-		
+
 		-- Clean up if vehicle isn't hidden while selling
 		if isElement(vehicles[veh_id]) then
 			local veh = vehicles[veh_id]
 			if inventory_markers_veh[inventory_markers[veh]] and isElement(inventory_markers_veh[inventory_markers[veh]]) then
 				inventory_markers_veh[inventory_markers[veh]] = nil
-			end	
+			end
 			if inventory_markers[veh] and isElement(inventory_markers[veh]) then
 				destroyElement(inventory_markers[veh])
-			end	
+			end
 			vehicle_owners[veh] = nil
 			destroyElement(veh_blips[veh])
 			destroyElement(veh)
 			vehicles[veh_id] = nil
 		end
-		
+
 		givePlayerMoney(client, math.floor(price*priceMultiplier*0.9))
 		exports.GTWtopbar:dm( "Your vehicle has been sold for 90% of it's price", client, 0, 255, 0 )
 	else
@@ -425,7 +425,7 @@ addEventHandler( "GTWvehicleshop.onVehicleSell", root, sellVehicle )
 
 --[[ Respawn a broken vehicle ]]--
 function respawnVehicleToStart(veh_id)
-	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and 
+	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and
 		veh_id and not vehicles[veh_id] and not isElement(vehicles[veh_id]) then
 		if (tonumber(getElementData(client, "violent_seconds")) or 0) < 10 and getElementData(client, "Jailed") ~= "Yes" then
 			local price = 500
@@ -465,37 +465,37 @@ function onVehicleWeaponWithdrawGet(query)
     	if not plr_owner or not input_table then break end
     	-- Debug info
     	--outputChatBox(row["inventory"],plr_owner)
-    	
+
     	-- Update value to be saved into database
     	input_table[temp_weapon_store[plr_owner]] = ((input_table[
     		temp_weapon_store[plr_owner]] or 0) + temp_ammo_store[plr_owner])
     	local new_res = toJSON(input_table)
-    	
+
     	-- Debug info
     	--outputChatBox(new_res, plr_owner)
-    	 	    	
+
     	-- Cleanup
     	temp_weapon_store[plr_owner] = nil
     	temp_ammo_store[plr_owner] = nil
     	temp_plr_store[row["ID"]] = nil
-    	
+
     	-- Save to database
 		dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
-		break		
+		break
 	end
 end
 function onVehicleWeaponWithdraw(veh_id, weap, ammo)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
 		takeWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
-		
+
 		-- Save to temp storage
 		temp_weapon_store[client] = weap
 		temp_ammo_store[client] = ammo
 		temp_plr_store[veh_id] = client
-		
+
 		-- Save to database
 		dbQuery(onVehicleWeaponWithdrawGet, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
-		
+
 		exports.GTWtopbar:dm( "Your weapon has been withdrawed", client, 0, 255, 0 )
 	elseif not getPlayerAccount( client ) or isGuestAccount( getPlayerAccount( client )) then
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
@@ -516,10 +516,10 @@ function onVehicleWeaponDepositGet(query)
     	local plr_owner = temp_plr_store[row["ID"]]
     	if input_table and plr_owner and temp_weapon_store[plr_owner] then
     		local new_val = (input_table[temp_weapon_store[plr_owner]] or 0) - temp_ammo_store[plr_owner]
-	    	
+
 	    	-- Debug info
 	    	--outputChatBox(row["inventory"], plr_owner)
-	    	
+
 	    	-- Update value to be saved into database
 	    	if new_val > 0 then
 	    		input_table[temp_weapon_store[plr_owner]] = new_val
@@ -527,30 +527,30 @@ function onVehicleWeaponDepositGet(query)
 	    		input_table[temp_weapon_store[plr_owner]] = nil
 	    	end
 	    	local new_res = toJSON(input_table)
-	    	
+
 	    	-- Debug info
 	    	--outputChatBox(new_res, plr_owner)
-	    	
+
 	    	-- Cleanup
 	    	temp_weapon_store[plr_owner] = nil
 	    	temp_ammo_store[plr_owner] = nil
 	    	temp_plr_store[row["ID"]] = nil
-	    	
+
 	    	-- Save to database
 			dbExec(veh_data, "UPDATE vehicles SET inventory=? WHERE ID=?", new_res, row["ID"])
 		end
-		break		
+		break
 	end
 end
 function onVehicleWeaponDeposit(veh_id, weap, ammo)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and veh_id and weap and ammo then
 		giveWeapon(client, getWeaponIDFromName(weap), tonumber(ammo))
-		
+
 		-- Save to temp storage
 		temp_weapon_store[client] = weap
 		temp_ammo_store[client] = ammo
 		temp_plr_store[veh_id] = client
-		
+
 		-- Save to database
 		dbQuery(onVehicleWeaponDepositGet, veh_data, "SELECT inventory, owner, ID FROM vehicles WHERE ID=?", tonumber(veh_id))
 		exports.GTWtopbar:dm( "Your weapon has been deposited", client, 0, 255, 0 )
@@ -573,16 +573,16 @@ function getInventoryWeapons(query)
     		-- Get all relevant data for the vehicle
     		vehicle_data_to_client = row["inventory"]
     		plr = temp_plr_store[row["ID"]]
-    		
+
     		-- Send data to client
 	    	if plr then
-	    		triggerClientEvent( plr, "GTWvehicleshop.onReceiveInventoryItems", plr, vehicle_data_to_client ) 
-			end  
-			
+	    		triggerClientEvent( plr, "GTWvehicleshop.onReceiveInventoryItems", plr, vehicle_data_to_client )
+			end
+
 			-- Cleanup
-			temp_plr_store[row["ID"]] = nil	
+			temp_plr_store[row["ID"]] = nil
 			break
-		end		
+		end
 	end
 end
 function openInventory(veh_id)
@@ -605,7 +605,7 @@ addEventHandler( "GTWvehicleshop.onCloseInventory", root, closeInventory )
 --[[ Toggle vehicle engine state from client ]]--
 function vehicleHeadLightColors(player, cmd, r,g,b)
     if getPlayerAccount( player ) and not isGuestAccount( getPlayerAccount( player )) and
-        r and g and b and veh_id_num[getPedOccupiedVehicle(player)] then      
+        r and g and b and veh_id_num[getPedOccupiedVehicle(player)] then
        	-- Save to database and update colors
         dbExec(veh_data, "UPDATE vehicles SET headlight=? WHERE ID=?", toJSON({r,g,b}), veh_id_num[getPedOccupiedVehicle(player)])
         setVehicleHeadLightColor( getPedOccupiedVehicle(player), r, g, b )
@@ -618,6 +618,13 @@ addCommandHandler("headlight", vehicleHeadLightColors)
 addCommandHandler("headlightcol", vehicleHeadLightColors)
 addCommandHandler("headlightcolor", vehicleHeadLightColors)
 addCommandHandler("setheadlight", vehicleHeadLightColors)
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 function saveAllVehicles(quitType)
 	dbQuery(unloadMyVehicles, veh_data, "SELECT * FROM vehicles WHERE owner=?", getAccountName(getPlayerAccount( source )))

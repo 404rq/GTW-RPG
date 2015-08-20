@@ -1,27 +1,27 @@
 <!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Sebbe (smart), Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" version="25" type="script" /> 
+    <info author="GTWGames" version="25" type="script" />
     <script src="c_gui.lua" type="client" protected="true"/>
     <script src="group_c.lua" type="client" protected="true"/>
     <script src="group_s.lua" type="server" />
     <script src="s_colors.lua" type="server" />
     <script src="s_exports.lua" type="server" />
-    
+
     <export function="removeRank" type="server" />
     <export function="isRank" type="server" />
     <export function="getGroupMembers" type="server" />

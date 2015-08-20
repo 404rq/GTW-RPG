@@ -1,23 +1,23 @@
 <!--
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
-	Version:		Open source
-	License:		GPL v.3 or later
-	Status:			Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 -->
 
 <meta>
     <info author="GTWGames" name="Police chief system" version="13" type="script" />
     <script src="head_officer.lua" type="server" />
-    
+
     <export function="isPoliceChief" type="server" />
     <export function="isLawBanned" type="server" />
 </meta>

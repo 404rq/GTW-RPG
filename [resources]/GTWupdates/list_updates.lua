@@ -9,13 +9,13 @@
 	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
 
 str_updates = [['''Wednesday 19, August 2015 (GTWcore v-2.4-beta r-7766)'''
-* Fixed broken radio links in phone 
+* Fixed broken radio links in phone
 * Using a local file for updates instead of the old online service making it easier to find the latest news, this document can be found on Github as well
 * Three failed login attempts will now result in a kick to stop spammers
 

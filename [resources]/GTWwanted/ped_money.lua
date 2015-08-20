@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -44,7 +44,7 @@ function givePickupMoney(plr)
     removeEventHandler("onPickupHit", source, givePickupMoney)
     destroyElement(source)
    	givePlayerMoney(plr, profit[plr])
-   	
+
    	-- Get wanted for stealing money
    	setWl(plr, round(0.6, 2), 10, "You committed the crime of robbery")
 end

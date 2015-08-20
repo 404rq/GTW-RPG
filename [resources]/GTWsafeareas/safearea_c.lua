@@ -1,21 +1,21 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
 has_been_warned = nil
-rocket_launchers = {    
+rocket_launchers = {
     {"jail", -3008.18,2442.19,25.47},
 	{"jail", -3110.78,2354.36,28.37},
 	{"jail", -3110.51,2254.5,28.37},
@@ -43,28 +43,28 @@ function protectPrison()
 		local old_dist = 999
 		for i,rl in pairs(rocket_launchers) do
 			local dist = getDistanceBetweenPoints3D(rl[2],rl[3],rl[4], x,y,z)
-			if dist < 180 and (not getPlayerTeam(v) or 
+			if dist < 180 and (not getPlayerTeam(v) or
 				not allowed_government_teams[getTeamName(getPlayerTeam(v))]) and rl[1] == "jail" and
 				(isElementInWater(v) or getPedOccupiedVehicle(v) or z > 20) and not getElementData(v, "arrested") then
-				if old_dist > dist then 
-					old_dist = dist 
+				if old_dist > dist then
+					old_dist = dist
 					nx,ny,nz = rl[2],rl[3],rl[4]
 				end
 			end
-			if has_been_warned and dist < 150 and z > 40 and (not getPlayerTeam(v) or 
+			if has_been_warned and dist < 150 and z > 40 and (not getPlayerTeam(v) or
 				not allowed_government_teams[getTeamName(getPlayerTeam(v))]) and rl[1] == "a51" then
-				if old_dist > dist then 
-					old_dist = dist 
+				if old_dist > dist then
+					old_dist = dist
 					nx,ny,nz = rl[2],rl[3],rl[4]
 				end
-			elseif not has_been_warned  and dist < 150 and z > 40 and (not getPlayerTeam(v) or 
+			elseif not has_been_warned  and dist < 150 and z > 40 and (not getPlayerTeam(v) or
 				not allowed_government_teams[getTeamName(getPlayerTeam(v))]) and rl[1] == "a51" then
 				has_been_warned = true
 				setTimer(reset_warning, 300000, 1)
 				exports.GTWtopbar:dm("This is a restricted area, leave or get shot!", 255, 100, 0)
 			end
 		end
-		
+
 		-- Fire if there is a nearest rocket
 		if nx == 0 or ny == 0 or nz == 0 then return end
 		createProjectile(v, 20, nx,ny,nz, 1, v)

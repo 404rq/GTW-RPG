@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -22,17 +22,17 @@ h_list_freight = {
 }
 h_list_streak = {
 	"k31_horn1",
-	"2k_hornl",	
+	"2k_hornl",
 	"7k_hornl"
 }
 h_list_tram = {
-	"k31_horn1"	
+	"k31_horn1"
 }
 
 -- Bink keys to control the horn
 function bindTrainHorn(thePlayer, seat, jacked)
-    if thePlayer and getElementType(thePlayer) == "player" and (getElementModel(source) == 537 or 
-    	getElementModel(source) == 538 or getElementModel(source) == 449 
+    if thePlayer and getElementType(thePlayer) == "player" and (getElementModel(source) == 537 or
+    	getElementModel(source) == 538 or getElementModel(source) == 449
     	or getPlayerTeam(thePlayer) == getTeamFromName("Staff")) then
     	bindKey(thePlayer, "H", "down", toggleTrainHorn)
     	if not getElementData(source, "horn") then
@@ -46,12 +46,12 @@ function bindTrainHorn(thePlayer, seat, jacked)
     	end
     end
 end
-addEventHandler("onVehicleEnter", root, bindTrainHorn) 
+addEventHandler("onVehicleEnter", root, bindTrainHorn)
 
 -- Toggle the horn sound
 function toggleTrainHorn(thePlayer, cmd)
 	local train = getPedOccupiedVehicle(thePlayer)
-	if train and (getElementModel(train) == 537 or getElementModel(train) == 538 or 
+	if train and (getElementModel(train) == 537 or getElementModel(train) == 538 or
 		getElementModel(train) == 449) and getVehicleOccupants(train)[0] == thePlayer then
 		triggerClientEvent(root, "GTWtrainhorn.toggle", thePlayer, train)
 	end
@@ -63,3 +63,10 @@ function triggerTrainHorn(theTrain)
 		triggerClientEvent(root, "GTWtrainhorn.toggle", theTrain, theTrain)
 	end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)

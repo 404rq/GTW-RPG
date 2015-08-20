@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Sebbe (smart), Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -76,7 +76,7 @@ function log_group(group, message)
 	if (log) then
 		outputServerLog("GROUP: "..group.." - "..message)
 	end
-	
+
 	if (show_debug_info) then
 		outputDebugString("GROUP: "..group.." - "..message)
 	end
@@ -109,8 +109,8 @@ dbQuery(load_ranks, db, "SELECT * FROM groupRanks")
 
 --[[ Load all the group related data into tables ]]--
 function load_group_data(query)
-	local g_table = dbPoll(query, 0)	
-	if (not g_table) then return end	
+	local g_table = dbPoll(query, 0)
+	if (not g_table) then return end
 	for ind, data in ipairs(g_table) do
 		groups_table[data.name] = {data.leader, data.message, data.chatcolor, data.notecolor, data.date, data.turfcolor}
 	end
@@ -119,8 +119,8 @@ dbQuery(load_group_data, db, "SELECT * FROM groups")
 
 --[[ Load group data by accounts ]]--
 function load_client_group(query)
-	local g_table = dbPoll(query, 0)	
-	if (not g_table) then return end	
+	local g_table = dbPoll(query, 0)
+	if (not g_table) then return end
 	for ind, data in ipairs(g_table) do
 		if not getAccount(data.account) then return end
 		local player = getAccountPlayer(getAccount(data.account))
@@ -181,7 +181,7 @@ function attempt_make_group(name)
 		exports.GTWtopbar:dm("Group name length must be longer than 2 characters", client, 255, 0, 0)
 		return
 	end
-	
+
 	if (not getPlayerGroup(client) or getPlayerGroup(client) == "None" or getPlayerGroup(client) == "nil") then
 		local date, time = get_time()
 		local date = date.." - "..time
@@ -228,7 +228,7 @@ end
 
 --[[ Lave the group and remove if empty ]]--
 function leave_group(player)
-	if (not player) then player = client end	
+	if (not player) then player = client end
 	local group = getPlayerGroup(player)
 	if (not group) then return end
 	if (getPlayerGroupRank(player) == "Founder") then
@@ -277,7 +277,7 @@ function make_invite(player)
 	local group = getPlayerGroup(client)
 	exports.GTWtopbar:dm(getPlayerName(client).." has sent and invite for you to join "..group, player, 0, 255, 0)
 	exports.GTWtopbar:dm("Sent an invite to "..getPlayerName(player).." to join "..group, client, 0, 255, 0)
-	triggerClientEvent(player, "GTWgroups.addInviteToList", player, group, getPlayerName(client), time) 
+	triggerClientEvent(player, "GTWgroups.addInviteToList", player, group, getPlayerName(client), time)
 end
 addEvent("GTWgroups.makeInvite", true)
 addEventHandler("GTWgroups.makeInvite", root, make_invite)
@@ -326,7 +326,7 @@ function warn_account(account, lvl, reason)
 		exports.GTWtopbar:dm("You cannot warn this account because it has more permissions attributes than yours", client, 255, 0, 0)
 		return
 	end
-	
+
 	if (tonumber(groups_data[account][3] + lvl) < 1) then
 		add = 0
 	elseif (tonumber(groups_data[account][3] + lvl) >= 100) then
@@ -340,7 +340,7 @@ function warn_account(account, lvl, reason)
 	else
 		add = groups_data[account][3] + lvl
 	end
-	
+
 	if (online) then
 		outputGroupMessage(getPlayerName(online).." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")", group)
 		log_group(group, getPlayerName(online).." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")")
@@ -350,7 +350,7 @@ function warn_account(account, lvl, reason)
 		log_group(group, "Account: "..account.." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")")
 		outputGroupMessage("Account: "..account.." has been warned by "..getPlayerName(client).." ("..lvl.." ("..reason..") Total: "..add..")", group)
 	end
-	
+
 	groups_data[account][3] = add
 	dbExec(db, "UPDATE groupmember SET warningLvl=? WHERE account=?", tostring(add), tostring(account))
 	viewWindow(client)
@@ -437,6 +437,13 @@ function list_player_ranks()
 end
 addEvent("GTWgroups.printTheRanks", true)
 addEventHandler("GTWgroups.printTheRanks", root, list_player_ranks)
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 --[[ Aet a rank for an account ]]--
 function set_account_rank(rank, account)

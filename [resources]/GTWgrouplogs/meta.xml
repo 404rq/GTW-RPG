@@ -1,10 +1,26 @@
+<!--
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		El Med, Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+-->
 <meta>
-    <min_mta_version server="1.3.4-0.00000" client="1.3.4-0.00000" />
-    <script src="logs.lua" type="server" />
-    <script src="log.lua" type="client" />
-    
-    <export function="viewLog" type="server" />
-    <export function="logSomething" type="server" />
-    <export function="getLastNick" type="server" />
-    <info version="6"></info>
+        <info author="El Med" name="Group logs" version="1" type="script" />
+        <min_mta_version server="1.3.4-0.00000" client="1.3.4-0.00000" />
+        <script src="logs.lua" type="server" />
+        <script src="log.lua" type="client" />
+
+        <export function="viewLog" type="server" />
+        <export function="logSomething" type="server" />
+        <export function="getLastNick" type="server" />
+        <info version="6"></info>
 </meta>

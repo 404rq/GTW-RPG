@@ -1,33 +1,35 @@
-<!-- 
+<!--
 ********************************************************************************
-	Project:		GTW RPG
-	Owner:			GTW Games 	
-	Location:		Sweden
-	Developers:		MrBrutus
-	Copyrights:		See: "license.txt"
-	
-	Website:		http://code.albonius.com
-	Version:		(git)
-	Status:			Stable release
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWfastfood" description="Pizza, burger and chicken fast food resturants in SA" version="0" type="script" />
-    <script src="data.lua" type="shared" />
-    <script src="food-s.lua" type="server" />
-    <script src="food-c.lua" type="client" />
+    	<info author="GTWGames" name="GTWfastfood" description="Pizza, burger and chicken fast food resturants in SA" version="0" type="script" />
+    	<script src="data.lua" type="shared" />
+    	<script src="food-s.lua" type="server" />
+    	<script src="food-c.lua" type="client" />
 
-    <file src="img/BURHEAL.png" />	
+    	<file src="img/BURHEAL.png" />
 	<file src="img/BURHIG.png" />
-	<file src="img/BURLOW.png" />	
+	<file src="img/BURLOW.png" />
 	<file src="img/BURMED.png" />
-	<file src="img/CLUHEAL.png" />	
+	<file src="img/CLUHEAL.png" />
 	<file src="img/CLUHIG.png" />
-	<file src="img/CLULOW.png" />	
+	<file src="img/CLULOW.png" />
 	<file src="img/CLUMED.png" />
-	<file src="img/PIZHEAL.png" />	
+	<file src="img/PIZHEAL.png" />
 	<file src="img/PIZHIG.png" />
-	<file src="img/PIZLOW.png" />	
+	<file src="img/PIZLOW.png" />
 	<file src="img/PIZMED.png" />
 </meta>

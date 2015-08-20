@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -61,7 +61,7 @@ function make_the_shop()
 	end
 	for i2, shop_blip in pairs(shop_blips) do
 		local x, y, z = shop_blip.x, shop_blip.y, shop_blip.z
-		blip = createBlip( x, y, z, 45, 2, 0, 0, 0, 255, 2, 180 ) 
+		blip = createBlip( x, y, z, 45, 2, 0, 0, 0, 255, 2, 180 )
 	end
 end
 addEventHandler("onResourceStart", resourceRoot, make_the_shop)
@@ -81,13 +81,20 @@ function buy_the_skin(model)
 		exports.GTWtopbar:dm("You have succesfully bought a new skin!", client, 0, 255, 0)
 		setAccountData(getPlayerAccount(client), "clothes.boughtSkin", model)
 		setElementData(client, "clothes.boughtSkin", model)
-		setElementModel(client, model)	
+		setElementModel(client, model)
 	else
 		exports.GTWtopbar:dm( "Feck off you little pleb, get yourself some cash before you come back.", client, 255, 0, 0 )
 	end
 end
 addEvent("GTWclothes.buy_the_skin", true)
 addEventHandler("GTWclothes.buy_the_skin", root, buy_the_skin)
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 --[[ Exported function to get the current skin ]]--
 function getBoughtSkin(player)

@@ -1,22 +1,22 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
 
 -- *****************************************************************************
--- BELOW TABLE ARE MADE FOR SERVERS OWNED BY GRAND THEFT WALRUS, USE IT ONLY AS 
--- AN EXAMPLE OF THE LAYOUT TO UNDERSTAND HOW THIS SYSTEM WORKS 
+-- BELOW TABLE ARE MADE FOR SERVERS OWNED BY GRAND THEFT WALRUS, USE IT ONLY AS
+-- AN EXAMPLE OF THE LAYOUT TO UNDERSTAND HOW THIS SYSTEM WORKS
 -- *****************************************************************************
 gate_data = {
 	-- ObjectID	closeX 		closeY 		closeZ 		openX 		openY 		openZ 		rotX 	rotY 	rotZ 	colX 	colY 	colZ	colRad	Group		Scale	Interior	Dimension
@@ -39,10 +39,10 @@ gate_data = {
 	[17]={ 	986, 	284.7, 		1826.0, 	17.0,  		284.7, 		1831.2, 	17.0, 		0, 	0, 	270,	284.7, 	1826.0, 16.6, 	5,	"Government", 	1,	0,		0 },
 	[18]={ 	985, 	131, 		1941.8, 	17.8,  		123, 		1941.8, 	17.8, 		0, 	0, 	180,	131, 	1941.4, 18.0, 	5,	"Government", 	1,	0,		0 },
 	[19]={ 	986, 	139, 		1941.8, 	17.8,  		147, 		1941.8, 	17.8, 		0, 	0, 	180,	139, 	1941.4, 18.0, 	5,	"Government", 	1,	0,		0 },
-	[20]={ 	986, 	-2980.0, 	2253.1, 	7.0, 		-2987.7, 	2253.0, 	7.0,		0,	0,	0,	-2979, 	2252.9, 7.2,	6,	"Government",	1,	0,		0 },	
+	[20]={ 	986, 	-2980.0, 	2253.1, 	7.0, 		-2987.7, 	2253.0, 	7.0,		0,	0,	0,	-2979, 	2252.9, 7.2,	6,	"Government",	1,	0,		0 },
 	[21]={ 	986, 	-2954.8, 	2136.5, 	7.0,  		-2949.0, 	2138, 		7.0,		0,	0,	190,	-2954,	2136.7, 7.0,	6,	"Government",	1,	0,		0 },
 	[22]={ 	986, 	-2996.1, 	2305.1, 	7.9,  		-2995.86, 	2306.6, 	7.9,		0,	0,	268.6,	-2996, 	2303.9, 7.0,	6,	"Government",	1,	0,		0 },
- 	[23]={ 	985, 	-3085.2, 	2314.7, 	7.0,  		-3085.5, 	2307.5, 	7.0,		0,	0,	267,	-3084.8,2314.6, 7.0,	6,	"Government",	1,	0,		0 },	 
+ 	[23]={ 	985, 	-3085.2, 	2314.7, 	7.0,  		-3085.5, 	2307.5, 	7.0,		0,	0,	267,	-3084.8,2314.6, 7.0,	6,	"Government",	1,	0,		0 },
 	[24]={ 	986,	-2953.4, 	2255.8, 	6.55, 	 	-2953.4, 	2249.5, 	6.55,		0,	0,	90,	-2953.4,2256.3, 7.0, 	6,	"Government", 	1, 	0,		0 },
 }
 
@@ -58,19 +58,19 @@ function load_gates(name)
 		local gat = createObject( gate_data[k][1], gate_data[k][2], gate_data[k][3], gate_data[k][4], gate_data[k][8], gate_data[k][9], gate_data[k][10] )
 		local col = createColSphere( gate_data[k][11], gate_data[k][12], gate_data[k][13]+2, gate_data[k][14] )
 		setObjectScale( gat, gate_data[k][16] )
-	
+
 		-- Assign arrays of object pointers
 		gates[col] = gat
 		cols[col] = k
-		
+
 		-- Set interior
 		setElementInterior(gat, gate_data[k][17])
 		setElementInterior(col, gate_data[k][17])
-		
+
 		-- Set dimension
 		setElementDimension(gat, gate_data[k][18])
 		setElementDimension(col, gate_data[k][18])
-		
+
 		-- Add event handlers
 		addEventHandler("onColShapeHit", col, open_gate )
 		addEventHandler("onColShapeLeave", col, close_gate )
@@ -78,27 +78,34 @@ function load_gates(name)
 end
 addEventHandler("onResourceStart", resourceRoot, load_gates)
 
--- Gates open                           
+-- Gates open
 function open_gate(plr, matching_dimension)
 	if not matching_dimension then return end
 	local ID = cols[source]
 	local px,py,pz = getElementPosition(plr)
-    if plr and isElement(plr) and getElementType(plr) == "player" and 
-    	( getElementData(plr, "Group" ) == gate_data[ID][15] or 
-    	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or 
-    	getPlayerTeam(plr) == getTeamFromName("Staff")) and 
+    if plr and isElement(plr) and getElementType(plr) == "player" and
+    	( getElementData(plr, "Group" ) == gate_data[ID][15] or
+    	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or
+    	getPlayerTeam(plr) == getTeamFromName("Staff")) and
     	pz + 5 > gate_data[ID][4] and pz - 5 < gate_data[ID][4] then
-    	
+
     	-- Open the gate
-        moveObject(gates[source], openSpeed, gate_data[ID][5], gate_data[ID][6], gate_data[ID][7] ) 
+        moveObject(gates[source], openSpeed, gate_data[ID][5], gate_data[ID][6], gate_data[ID][7] )
 	end
-end  
+end
 -- Gates close
 function close_gate(plr, matching_dimension)
 	if not matching_dimension then return end
     local ID = cols[source]
-    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or 
+    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or
     	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) then
-        moveObject(gates[source], openSpeed, gate_data[ID][2], gate_data[ID][3], gate_data[ID][4] ) 
+        moveObject(gates[source], openSpeed, gate_data[ID][2], gate_data[ID][3], gate_data[ID][4] )
 	end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)

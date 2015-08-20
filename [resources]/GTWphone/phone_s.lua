@@ -9,7 +9,7 @@
 	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -209,6 +209,13 @@ function call_service( rec )
 end
 addEvent( "GTWphone.onSendCall", true )
 addEventHandler( "GTWphone.onSendCall", root, call_service )
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 function RGBToHex(red, green, blue, alpha)
 	if((red < 0 or red > 255 or green < 0 or green > 255 or blue < 0 or blue > 255) or (alpha and (alpha < 0 or alpha > 255))) then

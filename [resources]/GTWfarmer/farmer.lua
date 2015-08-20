@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -41,9 +41,9 @@ end
 
 -- Plant the seed
 function plantSeed( player )
-	if getPlayerTeam(player) == getTeamFromName("Civilians") and getElementData(player, "Occupation") == "Farmer" and 
-		getPlayerMoney(player) > seed_moey and getPedOccupiedVehicle(player) and getElementModel( getPedOccupiedVehicle( player )) == 531 
-		and player_plants[player] < 200 then	
+	if getPlayerTeam(player) == getTeamFromName("Civilians") and getElementData(player, "Occupation") == "Farmer" and
+		getPlayerMoney(player) > seed_moey and getPedOccupiedVehicle(player) and getElementModel( getPedOccupiedVehicle( player )) == 531
+		and player_plants[player] < 200 then
 		-- Plant the seed
 		local x,y,z = getElementPosition(player)
 		if not plants_pos then
@@ -61,33 +61,33 @@ function plantSeed( player )
 			if not plants_pos[player][player_plants[player]] then
 				plants_pos[player][player_plants[player]] = { }
 			end
-			
+
 			-- Make the plant grow up
 			plants_age[plant] = 0;
 			local currentPlantsCounter = player_plants[player]
 			plants_pos[player][currentPlantsCounter][1] = x
 			plants_pos[player][currentPlantsCounter][2] = y
 			plants_pos[player][currentPlantsCounter][3] = z
-			
+
 			local time_to_grow = math.random(285, 320)
-			setTimer( function() 
+			setTimer( function()
 				setObjectScale( plant, getObjectScale(plant)+0.005 )
 				plants_age[plant] = plants_age[plant] + 1
 			end, 4000, time_to_grow )
-			
+
 			-- Status message
 			exports.GTWtopbar:dm( "Farmer: Your seed has been planted, make sure it's safe from intruders!", player, 0, 255, 0 )
 			player_plants[player] = player_plants[player] + 1;
-			
+
 			-- Show status
-			setTimer( function() 
+			setTimer( function()
 				if isElement(blip) then
 					setBlipColor( blip, 0, 255, 0, 100 )
 				end
 			end, time_to_grow*4000, 1 )
-			
+
 			-- Clean up
-			setTimer( function() 
+			setTimer( function()
 				if isElement(plant) then
 					destroyElement(plant)
 					destroyElement(plantCol)
@@ -96,17 +96,17 @@ function plantSeed( player )
 					plants_pos[player][currentPlantsCounter][1] = nil
 					plants_pos[player][currentPlantsCounter][2] = nil
 					plants_pos[player][currentPlantsCounter][3] = nil
-					
+
 					-- Status message
 					if isElement(player) then
 						exports.GTWtopbar:dm( "Farmer: Your plant rotted and was destroyed", player, 255, 200, 0 )
 					end
 				end
 			end, 7200000, 1 )
-			
+
 			addEventHandler( "onColShapeHit", plantCol,
     		function ( hitElement, matchingdimension )
-        		if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and 
+        		if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
         			getPedOccupiedVehicle(hitElement) and getElementModel( getPedOccupiedVehicle( hitElement )) == 532 and
 					plants_age[plant] and plants_age[plant] > time_to_grow - 1 then
 					-- Clear and makes a bale
@@ -116,19 +116,19 @@ function plantSeed( player )
         			setElementCollisionsEnabled( plant, false )
         			local px,py,pz = getElementPosition(plant)
         			setElementPosition(plant, px,py,pz+1.1)
-        		
+
         			-- Status message
 					exports.GTWtopbar:dm( "Farmer: One of your plants has been harvested", player, 255, 200, 0 )
-        		elseif hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and 
+        		elseif hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
         			not getPedOccupiedVehicle(hitElement) and getElementModel(plant) == 1454 then
         			-- Pay for the bale
         			givePlayerMoney(hitElement,math.random(900,1100))
-        			
+
         			-- Increase stats by 1/plant
 					local playeraccount = getPlayerAccount( hitElement )
 					local farmer_plants = getAccountData( playeraccount, "acorp_stats_plants_harvested" ) or 0
 					setAccountData( playeraccount, "acorp_stats_plants_harvested", farmer_plants + 1 )
-        			
+
         			-- Status message
 					exports.GTWtopbar:dm( "Farmer: One of your plants has been sold", player, 255, 200, 0 )
 					player_plants[player] = player_plants[player] - 1
@@ -152,18 +152,24 @@ function plantSeed( player )
 end
 addCommandHandler( "plant", plantSeed )
 
-for w,pl in pairs(getElementsByType("player")) do 
+for w,pl in pairs(getElementsByType("player")) do
 	bindKey( pl, "n", "down", "plant" )
 	player_plants[pl] = 0
 end
 addEventHandler("onPlayerLogin", root,
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 function()
     bindKey( source, "n", "down", "plant" )
     player_plants[source] = 0
 end)
 
-function enterVehicle( thePlayer, seat, jacked ) 
-    if getElementModel(source) == 531 and getElementData(thePlayer, "Occupation") == "Farmer" then 
+function enterVehicle( thePlayer, seat, jacked )
+    if getElementModel(source) == 531 and getElementData(thePlayer, "Occupation") == "Farmer" then
 		exports.GTWtopbar:dm( "Farmer: Press n to plant your seed", thePlayer, 255, 200, 0 )
     end
 end

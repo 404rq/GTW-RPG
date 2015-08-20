@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -19,7 +19,7 @@ local sx,sy = guiGetScreenSize()
 
 --[[ Make GUI for context menu ]]--
 addEventHandler("onClientResourceStart", getResourceRootElement(getThisResource()),
-function()	
+function()
 	window = exports.GTWgui:createWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
 	btn_repair = guiCreateButton(10, 30, 180, 40, "Repair", false, window)
 	btn_refuel = guiCreateButton(10, 70, 180, 40, "Refuel", false, window)
@@ -35,7 +35,7 @@ function()
 	exports.GTWgui:setDefaultFont(btn_enter, 10)
 	exports.GTWgui:setDefaultFont(btn_staff_repair, 10)
 	guiSetVisible(window, false)
-	
+
 	-- Button click events
 	addEventHandler("onClientGUIClick", btn_repair, repair_destroy)
 	addEventHandler("onClientGUIClick", btn_refuel, refuel_information)
@@ -50,9 +50,9 @@ function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, wo
     local dist = getDistanceBetweenPoints3D(worldX, worldY, worldZ, getElementPosition(localPlayer)) or 0
     local is_staff = exports.GTWstaff:isStaff(localPlayer)
     if getElementType(clickedElement) == "vehicle" and (not getPedOccupiedVehicle(localPlayer) or
-        getPedOccupiedVehicle(localPlayer) ~= clickedElement) and 
-        ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and 
-        getElementData(localPlayer, "Occupation") == "Mechanic") or is_staff) and 
+        getPedOccupiedVehicle(localPlayer) ~= clickedElement) and
+        ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and
+        getElementData(localPlayer, "Occupation") == "Mechanic") or is_staff) and
 		dist < 20 and not guiGetInputEnabled() then
         -- Open GUI as staff
         if getElementData(localPlayer, "Occupation") ~= "Mechanic" then
@@ -77,7 +77,7 @@ addEventHandler("onClientClick", root, openVehicleMenu)
 --[[ Repair or destroy?, that's the question ]]--
 function repair_destroy()
 	if not isElement(element) or not guiGetEnabled(btn_repair) or not source == btn_repair then return end
-	if getElementData(localPlayer, "Occupation") == "Mechanic" then			
+	if getElementData(localPlayer, "Occupation") == "Mechanic" then
 		if getElementHealth(element) < 1000 then
 			local repairTime = (1000-getElementHealth(element))*30
 			if repairTime < 5000 then
@@ -107,9 +107,9 @@ end
 --[[ Refule or display information? that's another question ]]--
 function refuel_information()
 	if not isElement(element) or not guiGetEnabled(btn_refuel) or not source == btn_refuel then return end
-	if getElementData(localPlayer, "Occupation") == "Mechanic" then	
-		local fuel = getElementData(element, "vehicleFuel") or 0	
-		if fuel < 100 then		
+	if getElementData(localPlayer, "Occupation") == "Mechanic" then
+		local fuel = getElementData(element, "vehicleFuel") or 0
+		if fuel < 100 then
 			local refuleTime = (100-fuel)*100
 			if refuleTime < 5000 then
 				refuleTime = 5000

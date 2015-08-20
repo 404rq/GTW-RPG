@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -19,7 +19,7 @@ function addWorkItem(key, data)
 	if work_items[key] then
 		work_items[key] = nil
 	end
-	
+
 	-- Update key data
 	work_items[key] = data
 end
@@ -40,7 +40,7 @@ table.insert(markers, { "Taxi Driver", 0, 0, 1682.873046875, -2334.2265625, 13.5
 table.insert(markers, { "Taxi Driver", 0, 0, -1386.431640625, -347.787109375, 14.1484375, "civilian" })
 table.insert(markers, { "Trucker", 0, 0, 2748.546875, -2437.6142578125, 13.64318561554, "civilian" })
 table.insert(markers, { "Trucker", 0, 0, -77.9697265625, -1136.0869140625, 1.078125, "civilian" })
-table.insert(markers, { "Trucker", 0, 0, -1688.2958984375, -17.8037109375, 3.5546875, "civilian" })	
+table.insert(markers, { "Trucker", 0, 0, -1688.2958984375, -17.8037109375, 3.5546875, "civilian" })
 table.insert(markers, { "Pilot", 0, 0, -1546, -442, 6, "civilian" })
 table.insert(markers, { "Pilot", 0, 0, 1958, -2182, 13.5, "civilian" })
 table.insert(markers, { "Pilot", 0, 0, 1717, 1615.6, 10, "civilian" })

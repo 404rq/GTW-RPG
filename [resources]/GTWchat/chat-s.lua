@@ -1,16 +1,16 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames
-	Project name:		GTW-RPG
-	Developers:		GTWCode
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
-	Version:		Open source
-	License:		GPL v.3 or later
-	Status:			Stable release
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -513,6 +513,13 @@ function firstToUpper(str)
     	return str
     end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 --[[ Show help and available commands ]]--
 function displayHelp(plr)

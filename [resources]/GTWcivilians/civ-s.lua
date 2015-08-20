@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -18,16 +18,16 @@
 function onAcceptJob( ID, skinID )
 	-- Get job data
     local team, max_wl, description, skins = unpack(work_items[ID])
-    
+
     -- Check if a skin was passed
     if not skinID then return end
-    
+
     local is_law_banned = exports.GTWpolicechief:isLawBanned(client)
-    if team == "Government" and is_law_banned then 
+    if team == "Government" and is_law_banned then
     	exports.GTWtopbar:dm( "You are banned from the government team! choose another job.", client, 255, 0, 0 )
-    	return 
+    	return
     end
-    
+
     -- Note that -1 means default player skin
     if skinID > -1 then
     	setElementModel( client, skinID )
@@ -38,7 +38,7 @@ function onAcceptJob( ID, skinID )
     	exports.GTWtopbar:dm( "Select a skin before applying for the job!", client, 255, 0, 0 )
     	return
     end
-    
+
     -- Check if a player already have the job or not
     if getElementData(client, "Occupation") ~= ID then
     	setElementData(client, "Occupation", ID)
@@ -78,7 +78,7 @@ function addTeamData ( )
 	exports.scoreboard:scoreboardAddColumn("Money", root, 70)
 	exports.scoreboard:scoreboardAddColumn("Playtime", root, 50)
 	exports.scoreboard:scoreboardAddColumn("Jailed", root, 30)
-	
+
 	-- Create teams
 	staffTeam = createTeam( "Staff", 255, 255, 255 )
 	govTeam = createTeam( "Government", 110, 110, 110 )
@@ -87,7 +87,7 @@ function addTeamData ( )
 	gangstersTeam = createTeam( "Gangsters", 135, 0, 135 )
 	criminalTeam = createTeam( "Criminals", 170, 0, 0 )
 	unemployedTeam = createTeam( "Unemployed", 255, 255, 0 )
-	
+
 	-- Restore teams
 	for i,p in pairs(getElementsByType( "player" )) do
 		if not getElementData(p, "teamsystem_team") then
@@ -101,7 +101,14 @@ function addTeamData ( )
 end
 addEventHandler( "onResourceStart", getResourceRootElement(), addTeamData )
 
-addEventHandler( "onResourceStop", getResourceRootElement(), 
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
+
+addEventHandler( "onResourceStop", getResourceRootElement(),
 function ( resource )
 	for i,p in pairs(getElementsByType( "player" )) do
 		if getPlayerTeam(p) then

@@ -9,7 +9,7 @@
 	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -210,6 +210,13 @@ addEventHandler("onPlayerJoin", root,
 		end
 	end
 )
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 addEvent("GTWaccounts.onClientSend",true)
 addEventHandler("GTWaccounts.onClientSend", root,

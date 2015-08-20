@@ -1,16 +1,16 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames
-	Project name:		GTW-RPG
-	Developers:		GTWCode
-	
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
 
-	Version:		Open source
-	License:		GPL v.3 or later
-	Status:			Stable release
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -62,6 +62,7 @@ function removeText(infotable)
 		end
 	end
 end
+
 function getTextsToRemove()
 	for i,v in ipairs(textsToDraw) do
 		if v[1] == source then
@@ -69,6 +70,7 @@ function getTextsToRemove()
 		end
 	end
 end
+
 function handleDisplay()
 	if showthebubbles then
 		for i,v in ipairs(textsToDraw) do

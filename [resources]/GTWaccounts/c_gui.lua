@@ -9,7 +9,7 @@
 	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -18,6 +18,7 @@
 p_account = nil
 p_loggedIn = false
 sec_login_attempts = 0
+login_cooldown = nil
 
 -- Display status messages from the server
 addEvent("GTWaccounts:onStatusReceive", true)
@@ -90,8 +91,9 @@ end
 addEventHandler("onClientGUIClick",root,function()
 	-- On login (asyncron function)
 	if source == loginButton then
+		if isTimer(login_cooldown) then return end
 		guiLabelSetColor(labelInfo, 255, 255, 255)
-		guiSetText(labelInfo, "Attempting to login...")
+		guiSetText(labelInfo, "Attempting to login... (3 seconds)")
 		fadeCamera(false, 1)
 		setTimer(triggerServerEvent, 1100, 1, "GTWaccounts:attemptClientLogin", localPlayer, guiGetText(textUser), guiGetText(textPwrd))
 		if sec_login_attempts > 2 then
@@ -99,6 +101,7 @@ addEventHandler("onClientGUIClick",root,function()
 			triggerServerEvent("GTWaccounts:kickClientSpammer", localPlayer)
 		end
 		sec_login_attempts = sec_login_attempts + 1
+		login_cooldown = setTimer(function() end, 3000, 1)
 	-- On registration
 	elseif source == registerButton then
 		triggerServerEvent("GTWaccounts:onClientAttemptRegistration", localPlayer, guiGetText(textUser), guiGetText(textPwrd), guiGetText(textFacc))

@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -20,7 +20,7 @@ function show_time_left( )
 		local timeMsg = getElementData( localPlayer, "captureTime" )
 		local sx, sy = guiGetScreenSize( )
 		if timeMsg and timeMsg ~= "none" then
-			dxDrawText ( timeMsg, (sx/2)-250, sy-50, 0, 0, 
+			dxDrawText ( timeMsg, (sx/2)-250, sy-50, 0, 0,
 				tocolor( 200, 200, 200, 255 ), 0.8, "bankgothic" )
 		end
 	end

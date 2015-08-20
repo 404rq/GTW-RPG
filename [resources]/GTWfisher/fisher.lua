@@ -1,16 +1,16 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -105,7 +105,7 @@ fish_data = {
 	[81]={ "a human hand", 3 },
 	[82]={ "a Nurse shark", 32 },
 	[83]={ "an eel", 3 },
-	[84]={ "a piraya", 7 },	
+	[84]={ "a piraya", 7 },
 	[85]={ "a North american darter", 21 },
 	[86]={ "a Nibble fish", 22 },
 	[87]={ "a Noodlefish", 18 },
@@ -126,10 +126,10 @@ fish_data = {
 
 -- Handle fishing
 function fishing_get()
-	local fishers = getElementsByType( "player" )	
-	for k,fisher in pairs(fishers) do 
-		if getPedContactElement( fisher ) and isElement( getPedContactElement( fisher )) and 
-			getElementType( getPedContactElement( fisher )) == "vehicle" and 
+	local fishers = getElementsByType( "player" )
+	for k,fisher in pairs(fishers) do
+		if getPedContactElement( fisher ) and isElement( getPedContactElement( fisher )) and
+			getElementType( getPedContactElement( fisher )) == "vehicle" and
 			getVehicleType( getPedContactElement( fisher )) == "Boat" and
 			getPlayerTeam( fisher ) == getTeamFromName( "Civilians" ) and
 			getElementData( fisher, "Occupation" ) == "Fisher" then
@@ -141,7 +141,7 @@ function fishing_get()
 			local x,y,z = getElementPosition( fisher )
 			local dist = getDistanceBetweenPoints3D( x,y,z, fish_last_pos[fisher][1],fish_last_pos[fisher][2],fish_last_pos[fisher][3] )
 			fish_last_pos[fisher][1],fish_last_pos[fisher][2],fish_last_pos[fisher][3] = x,y,z
-			
+
 			-- Check distance before payment
 			if dist > 0.1 then
 				-- This player is a fisher
@@ -150,7 +150,7 @@ function fishing_get()
 				givePlayerMoney( fisher, fish_data[ID][2] )
 			end
 		end
-	end	
+	end
 end
 
 -- Generates a new time
@@ -161,6 +161,13 @@ function new_timer()
 	fish_market = math.random(10000,30000)
 	fisher_timer = setTimer( fishing_get, fish_market, 0 )
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 function fish_market( player )
 	if fish_market_time < 14000 then

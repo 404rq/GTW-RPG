@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Sebbe (smart), Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -56,12 +56,12 @@ function printTheRanks(ranks)
 	guiComboBoxClear(setRankCombo)
 	guiSetVisible(setRankWindow, true)
 	guiBringToFront(setRankWindow)
-	
+
 	for ind, data in pairs(ranks) do
 		valid_ranks[ind] = true
 		guiComboBoxAddItem(setRankCombo, tostring(ind))
 	end
-	
+
 	local account = guiGridListGetItemText(adminMembsList, guiGridListGetSelectedItem(adminMembsList), 2)
 	local rank = guiGridListGetItemText(adminMembsList, guiGridListGetSelectedItem(adminMembsList), 3)
 	local wl = guiGridListGetItemText(adminMembsList, guiGridListGetSelectedItem(adminMembsList), 5)
@@ -154,7 +154,7 @@ function doneWithRanks(ranksTable, selected)
 	end
 	guiSetVisible(permWindow, true)
 	guiBringToFront(permWindow, true)
-	
+
 	if (selected) then
 		local newRank = id[selected]
 		guiComboBoxSetSelected(rankCombo, newRank)
@@ -273,12 +273,12 @@ addEventHandler("GTWgroups.addGroupList", root, add_group_list)
 
 --[[ Search in group list ]]--
 function search_group_list()
-	guiGridListClear(groupListGrid)	
-	local text = guiGetText(source)	
+	guiGridListClear(groupListGrid)
+	local text = guiGetText(source)
 	if (not text or text == "") then
 		triggerServerEvent("GTWgroups.addGroupList", root)
 		return
-	end	
+	end
 	for ind, data in pairs(gTable) do
 		if (string.find(ind:lower(), text:lower(), 1, true)) then
 			local row = guiGridListAddRow(groupListGrid)
@@ -300,14 +300,14 @@ function viewWindow(group, rank, datejoined, msg, perms)
 		guiSetEnabled(adminPanel, false)
 		guiSetEnabled(leaveGroupButton, false)
 		guiSetEnabled(reject_inviteButton, true)
-		guiSetEnabled(accept_inviteButton, true)	
+		guiSetEnabled(accept_inviteButton, true)
 	else
 		guiSetEnabled(leaveGroupButton, true)
 		guiSetEnabled(createGroupEdit, false)
 		guiSetEnabled(createGroupButton, false)
 		guiSetEnabled(adminPanel, true)
 		guiSetEnabled(reject_inviteButton, false)
-		guiSetEnabled(accept_inviteButton, false)	
+		guiSetEnabled(accept_inviteButton, false)
 		guiSetText(createGroupEdit, tostring(group))
 		guiSetText(dateJoinedLabel, "Date Joined: "..tostring(datejoined))
 		guiSetText(myGroupLabel, "My Group: "..tostring(group))
@@ -315,13 +315,13 @@ function viewWindow(group, rank, datejoined, msg, perms)
 		printManagment()
 		guiGridListClear(adminMembsList)
 	end
-	
+
 	if (perms and type(perms) == "table") then
 			local manageRanks = false
 			if (perms[2] or perms[3]) then
 				manageRanks = true
 			end
-			
+
 			if (perms[4] or perms[5]) then
 				warn = true
 			end
@@ -348,7 +348,7 @@ function addToList(account, rank, warning, joined, lastTime, lastNick, online)
 	guiGridListSetItemText(adminMembsList, row, 3, tostring(rank), false, false)
 	guiGridListSetItemText(adminMembsList, row, 4, tostring(lastTime), false, false)
 	guiGridListSetItemText(adminMembsList, row, 5, tostring(warning), false, false)
-	
+
 	if (online) then
 		guiGridListSetItemColor(adminMembsList, row, 1, 0, 255, 0)
 		guiGridListSetItemColor(adminMembsList, row, 2, 0, 255, 0)
@@ -378,7 +378,7 @@ function make_group()
 		exports.GTWtopbar:dm("You must leave your current group first", 255, 0, 0, "default-bold", true, 0.15)
 		return
 	end
-	
+
 	local name = guiGetText(createGroupEdit)
 	local name = string.gsub(name, " ", "_")
 	if (name and name ~= "" and name:len() > 2) then
@@ -403,7 +403,7 @@ end
 --[[ Filter available players to invite ]]--
 function search_invite()
 	local text = guiGetText(source)
-	guiGridListClear(inviteList)	
+	guiGridListClear(inviteList)
 	if (not text or text == "") then
 		openInviteSearch()
 		return

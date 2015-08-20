@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -23,19 +23,19 @@ function initialize_skin_shop()
 	btn_buy = guiCreateButton(10, 456, 158, 40, "Buy skin ($50)", false, window)
 	btn_close = guiCreateButton(172, 456, 158, 40, "Close", false, window)
 	guiSetVisible(window, false)
-	
+
 	-- Apply GTW GUI styles
 	exports.GTWgui:setDefaultFont(skin_list_gui, 10)
 	exports.GTWgui:setDefaultFont(btn_buy, 10)
 	exports.GTWgui:setDefaultFont(btn_close, 10)
-	
+
 	-- Events for the buttons
-	addEventHandler("onClientGUIClick", btn_close, function( ) 
-		guiSetVisible(window, false) 
-		showCursor(false) 
-		setPlayerHudComponentVisible("all", true) 
-		setElementModel(localPlayer, model) 
-		setElementFrozen(localPlayer, false) 
+	addEventHandler("onClientGUIClick", btn_close, function( )
+		guiSetVisible(window, false)
+		showCursor(false)
+		setPlayerHudComponentVisible("all", true)
+		setElementModel(localPlayer, model)
+		setElementFrozen(localPlayer, false)
 	end, false)
 	addEventHandler("onClientGUIClick", btn_buy, buy_the_skin, false)
 	addEventHandler("onClientGUIClick", skin_list_gui, preview_skin, false)
@@ -44,7 +44,7 @@ addEventHandler("onClientResourceStart", resourceRoot, initialize_skin_shop)
 
 function show_skin(skinsTable)
 	if getPlayerMoney() < 20 then exports.GTWtopbar:dm("You can not afford to buy this skin", 255, 0, 0) return end
-	if getPlayerTeam(localPlayer) ~= getTeamFromName("Unemployed") and 
+	if getPlayerTeam(localPlayer) ~= getTeamFromName("Unemployed") and
 		getPlayerTeam(localPlayer) ~= getTeamFromName("Criminals") and
 		getPlayerTeam(localPlayer) ~= getTeamFromName("Gangsters") then
 	 	exports.GTWtopbar:dm("End your work before changing your skin, click F5 or use /endwork", 255, 0, 0) return end
@@ -81,7 +81,7 @@ function preview_skin()
 	setElementModel(localPlayer, id)
 end
 
-function buy_the_skin()	
+function buy_the_skin()
 	local row = guiGridListGetSelectedItem(skin_list_gui)
 	if (not row or row == -1) then return end
 	local id = guiGridListGetItemText(skin_list_gui, row, 2)

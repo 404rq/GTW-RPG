@@ -9,7 +9,7 @@
 	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -35,3 +35,10 @@ function onUpdateRequest( )
 end
 addEvent("GTWupdates.request", true)
 addEventHandler("GTWupdates.request", resourceRoot, onUpdateRequest)
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)

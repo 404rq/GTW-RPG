@@ -1,16 +1,16 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name:		GTW-RPG	
-	Developers:			GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker:			http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
-	
-	Version:			Open source
-	License:			GPL v.3 or later
-	Status:				Stable release
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -32,7 +32,7 @@ function install_user_acls(plr, pAcc)
         isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Supporter"))) then
 		acl_table.is_staff[plr] = true
 	end
-	
+
 	-- Check individual rights
 	if pAcc and isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Admin")) then
 		acl_table.is_admin[plr] = true
@@ -46,10 +46,10 @@ function install_user_acls(plr, pAcc)
 	if pAcc and isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Supporter")) then
 		acl_table.is_supporter[plr] = true
 	end
-	
+
 	-- Pass the the data to the client
 	setTimer(triggerClientEvent, 5000, 1, plr, "GTWstaff.sendToClient", plr, acl_table.is_staff[plr],
-		acl_table.is_admin[plr], acl_table.is_developer[plr], 
+		acl_table.is_admin[plr], acl_table.is_developer[plr],
 		acl_table.is_moderator[plr], acl_table.is_supporter[plr])
 end
 function assign_rights(_, pAcc)
@@ -82,3 +82,10 @@ end
 function isSupporter(plr)
 	return acl_table.is_supporter[plr] or false
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)

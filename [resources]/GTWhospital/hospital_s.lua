@@ -1,15 +1,15 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames
+	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
-	Developers:   		GTWCode
+	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -239,6 +239,13 @@ function hospital_heal(plr)
     	exports.GTWtopbar:dm("Hospital: You can't afford the healthcare!", plr, 255, 0, 0)
     end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 --[[ Start an healing timer, increasing the health of a player ]]--
 function hs_start_heal(hitElement, matchingDimension)

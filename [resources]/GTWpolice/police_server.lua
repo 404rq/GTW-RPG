@@ -1,15 +1,15 @@
 --[[
 ********************************************************************************
-	Project owner:		GTWGames
+	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
-	Developers:   		GTWCode
+	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.albonius.com/bug-reports/
-	Suggestions:		http://forum.albonius.com/mta-servers-development/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -730,6 +730,13 @@ function quitPlayer(quitType)
 	end
 end
 addEventHandler("onPlayerQuit", root, quitPlayer)
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
 
 --[[ Validate if a player is a law unit or not ]]--
 function isLawUnit(plr)

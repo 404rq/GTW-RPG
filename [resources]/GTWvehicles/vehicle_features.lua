@@ -1,15 +1,15 @@
---[[ 
+--[[
 ********************************************************************************
-	Project owner:		GTWGames												
-	Project name: 		GTW-RPG	
-	Developers:   		GTWCode
-	
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.gtw-games.org/bug-reports/
-	Suggestions:		http://forum.gtw-games.org/mta-servers-development/
-	
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
 	Version:    		Open source
-	License:    		GPL v.3 or later
+	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 ]]--
@@ -44,15 +44,15 @@ end
 function toggle_engine(plr, command)
 	if getPedOccupiedVehicleSeat(plr) == 0 then
     	local veh = getPedOccupiedVehicle(plr)
-    	if veh and ((getElementData(veh,"owner") and 
-    		getElementData(veh,"owner") == getAccountName(getPlayerAccount(plr))) or 
+    	if veh and ((getElementData(veh,"owner") and
+    		getElementData(veh,"owner") == getAccountName(getPlayerAccount(plr))) or
     		getElementData(veh, "hijack") or getElementData(veh, "npc")) then
 	    	if getVehicleEngineState(veh) then
 		        setVehicleEngineState(veh, false)
 		        setVehicleOverrideLights(veh, 1)
 		        if getVehicleType(veh) == "Train" then
 		        	local sx, sy, sz = getElementVelocity(veh)
-					local actualspeed =(sx^2 + sy^2 + sz^2)^(0.5) 
+					local actualspeed =(sx^2 + sy^2 + sz^2)^(0.5)
 					local kmh = actualspeed * 180
 		        	if kmh < 5 then
 		        		setElementFrozen(veh, true)
@@ -68,7 +68,7 @@ function toggle_engine(plr, command)
 							end
 						end
 		        	else
-		        		exports.GTWtopbar:dm("Slow down before turning off the engine!", plr, 255, 0, 0) 
+		        		exports.GTWtopbar:dm("Slow down before turning off the engine!", plr, 255, 0, 0)
 		        	end
 		        else
 		        	setControlState(plr, "handbrake", true)
@@ -92,7 +92,7 @@ function toggle_engine(plr, command)
 		        end
 		    end
 		else
-			exports.GTWtopbar:dm("You don't have the keys to this vehicle!", plr, 255, 0, 0) 
+			exports.GTWtopbar:dm("You don't have the keys to this vehicle!", plr, 255, 0, 0)
 		end
     end
 end
@@ -106,12 +106,12 @@ function toggle_lock(plr, command)
 	if not isElement(vehicles[plr]) or getPedOccupiedVehicle(plr) then
 		veh = getPedOccupiedVehicle(plr)
 	end
-    if isElement(veh) and getElementData(veh, "owner") then 
+    if isElement(veh) and getElementData(veh, "owner") then
 		local px,py,pz = getElementPosition(plr)
-		local vx,vy,vz = getElementPosition(veh)	
-		local dist = getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz)	
-		if dist < 90 then		
-        	if isVehicleLocked(veh) then 
+		local vx,vy,vz = getElementPosition(veh)
+		local dist = getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz)
+		if dist < 90 then
+        	if isVehicleLocked(veh) then
 	            setVehicleLocked(veh, false)
 	            for i=1, 20 do
             		if getVehicleTowedByVehicle(veh) then
@@ -122,9 +122,9 @@ function toggle_lock(plr, command)
 						veh = getVehicleTowedByVehicle(veh)
 					end
 				end
-				exports.GTWtopbar:dm("Your vehicle has been unlocked", plr, 255, 100, 0)            
-	        else                  
-	            setVehicleLocked(veh, true) 
+				exports.GTWtopbar:dm("Your vehicle has been unlocked", plr, 255, 100, 0)
+	        else
+	            setVehicleLocked(veh, true)
 	            for i=1, 20 do
             		if getVehicleTowedByVehicle(veh) then
 						local veh2 = getVehicleTowedByVehicle(veh)
@@ -134,13 +134,13 @@ function toggle_lock(plr, command)
 						veh = getVehicleTowedByVehicle(veh)
 					end
 				end
-				exports.GTWtopbar:dm("Your vehicle was locked sucsessfully", plr, 255, 100, 0)              
+				exports.GTWtopbar:dm("Your vehicle was locked sucsessfully", plr, 255, 100, 0)
 	        end
 	    else
-	    	exports.GTWtopbar:dm("You are too far away from your vehicle to use it's keys", plr, 255, 0, 0) 
+	    	exports.GTWtopbar:dm("You are too far away from your vehicle to use it's keys", plr, 255, 0, 0)
 	    end
 	else
-		exports.GTWtopbar:dm("You don't have the keys to this vehicle!", plr, 255, 0, 0) 
+		exports.GTWtopbar:dm("You don't have the keys to this vehicle!", plr, 255, 0, 0)
     end
 end
 addCommandHandler("lock", toggle_lock)
@@ -164,7 +164,7 @@ function startVehicle(plr, seat, jacked)
 				local result = getVehicleHandling(source)
 				currVehTopSpeed[source] = tonumber(result["maxVelocity"])
 				setTimer(showGearProfile, 95, 1, plr, source)
-			end				
+			end
 		end
 	end
 end
@@ -173,17 +173,17 @@ addEventHandler("onVehicleEnter", root, startVehicle)
 --[[ Unlock your own car on enter ]]--
 function unlock_my_own_vehicle(plr, seat, jacked)
 	if not getElementData(source, "owner") then return end
-	if (not getPlayerAccount(plr) or getAccountName(getPlayerAccount(plr)) ~= 
+	if (not getPlayerAccount(plr) or getAccountName(getPlayerAccount(plr)) ~=
 		getElementData(source, "owner")) and isVehicleLocked(source) then
 		exports.GTWtopbar:dm("This vehicle is locked and you don't have it's keys", plr, 255, 0, 0)
 		cancelEvent()
 		return
 	end
-	
+
 	-- Unlock and notice if owner
 	if isVehicleLocked(source) then
-		setVehicleLocked(source, false) 
-		exports.GTWtopbar:dm("Your vehicle has been unlocked", plr, 255, 100, 0) 
+		setVehicleLocked(source, false)
+		exports.GTWtopbar:dm("Your vehicle has been unlocked", plr, 255, 100, 0)
 	end
 end
 addEventHandler("onVehicleStartEnter", root, unlock_my_own_vehicle)
@@ -199,11 +199,11 @@ function limit_the_speed(plr, command, amount)
 				exports.GTWtopbar:dm("Vehicle top speed is now: "..tostring(currVehTopSpeed[veh]).."km/h", plr, 255, 100, 0)
 			else
 				exports.GTWtopbar:dm("Vehicle top speed has been resetted", plr, 255, 100, 0)
-			end			
+			end
 		else
 			if currVehTopSpeed[veh] and currVehTopSpeed[veh] < amount then amount = currVehTopSpeed[veh] end
 			setVehicleHandling(veh, "maxVelocity", amount, false)
-			exports.GTWtopbar:dm("Vehicle top speed is now: "..tostring(amount).."km/h", plr, 255, 100, 0) 
+			exports.GTWtopbar:dm("Vehicle top speed is now: "..tostring(amount).."km/h", plr, 255, 100, 0)
 		end
     end
 end
@@ -216,3 +216,10 @@ function topBar(message, plr, r, g, b)
 		exports.GTWtopbar:dm(message, plr, r, g, b)
 	end
 end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
+	outputChatBox("[GTW-RPG] "..getResourceName(
+	getThisResource())..", by: "..getResourceInfo(
+        getThisResource(), "author")..", v-"..getResourceInfo(
+        getThisResource(), "version")..", is represented", plr)
+end)
