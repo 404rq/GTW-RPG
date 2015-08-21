@@ -4,7 +4,7 @@ Resources are folders with lua code. They are based on a meta file (meta.xml) wh
 Each resource has a readme file with more information and requirements. For instance which other resources that must be running in order to use a specific resource. If you find any bug or other issues please report them to us, alternatively fork and post a pull request if you know how to solve the problem by yourself, all help is appreciated.
 
 ## Donations
-If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.gtw-games.org or by these Bitcoin respective Litecoin adresses below:
+If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.404rq.com or by these Bitcoin respective Litecoin adresses below:
 
 BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
-LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
+LTC: `LPs7Vm5NceCLpcvJXyHTdZnxkScBJFvvxg`
