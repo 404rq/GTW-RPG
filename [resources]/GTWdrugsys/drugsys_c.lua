@@ -74,7 +74,7 @@ function()
 	guiSetText(HeroinLabel, getElementData(localPlayer, "Heroin") or 0)
 end)
 
-DrugBuyWindow = guiCreateWindow(sx/2-(550/2), sy/2-(310/2), 600, 310, "Drug Panel by Price", false)
+DrugBuyWindow = guiCreateWindow(sx/2-(550/2), sy/2-(310/2), 600, 310, "Drugs by Price for GTW-RPG", false)
 guiWindowSetSizable(DrugBuyWindow, false)
 guiSetVisible(DrugBuyWindow, false)
 guiSetAlpha(DrugBuyWindow, 0.98)
@@ -269,7 +269,7 @@ function()
 			guiSetText(SteroidsBuyEdit, "0")
 			guiSetText(HeroinBuyEdit, "0")
 		end
-		exports.GTWwanted:setWl(0.25, 0, "You committed the crime of buying drugs")
+		exports.GTWwanted:setWl(0.25, 0, "You committed the crime of buying drugs", true, false)
 	elseif source == CloseBuyDrugPanel then
 		guiSetVisible(DrugBuyWindow, false)
 		showCursor(false)
@@ -369,6 +369,9 @@ function()
 				exports.GTWtopbar:dm("You don't have any Heroin drug!", 255, 0, 0)
 			end
 		end
+
+		-- Become wanted
+		exports.GTWwanted:setWl(0.8, 30, "You committed the crime of using drugs in public", true, false)
 	elseif source == CloseUseDrugPanel then
 		guiSetVisible(DrugUseWindow, false)
 		showCursor(false)
@@ -376,8 +379,8 @@ function()
 end)
 
 function hardToDie()
-	local rnd = math.random(1, 3)
-	if rnd == 3 then
+	local rnd = math.random(1, 5)
+	if rnd == 5 then
 		cancelEvent()
 	end
 end
@@ -429,6 +432,31 @@ function drawCircle(x, y, z, radius, color)
         sx, sy, sz = ex, ey
     end
 end
+
+--[[ Disable unfair drugs when entering a vehicle ]]--
+addEventHandler("onClientVehicleEnter", getRootElement(),
+function(thePlayer, seat)
+	if thePlayer == localPlayer then
+            	if isTimer(WeedTimer) then
+			killTimer(WeedTimer)
+			setGravity(0.008)
+		end
+		if isTimer(GodTimer) then
+			killTimer(GodTimer)
+			triggerServerEvent("takeDrug", localPlayer, "God", 0)
+		end
+		if isTimer(SpeedTimer) then
+			killTimer(SpeedTimer)
+			setGameSpeed(1)
+		end
+		if isTimer(SteroidsHealthTimer) then
+			killTimer(SteroidsHealthTimer)
+		end
+		if isTimer(HeroinTimer) then
+			killTimer(HeroinTimer)
+		end
+        end
+end)
 
 addEventHandler("onClientRender", root,
 function()

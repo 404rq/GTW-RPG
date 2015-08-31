@@ -76,34 +76,37 @@ end)
 sellMarkers = {}
 
 addCommandHandler("sell",
-function(player)
-	if isElement(sellMarkers[player]) then
-		destroyElement(sellMarkers[player])
-		sellMarkers[player] = nil
-		setElementData(player, "DurgsDealer", false)
-		setElementFrozen(player, false)
-		toggleAllControls(player, true)
-		setPedAnimation(player, false)
-		exports.GTWtopbar:dm("Drugs: You're no longer selling drugs", player, 255, 100, 0)
+function(plr)
+	if not getPlayerTeam(plr) or getPlayerTeam(plr) ~= getTeamFromName("Criminals") then return end
+ 	if isElement(sellMarkers[plr]) then
+		destroyElement(sellMarkers[plr])
+		sellMarkers[plr] = nil
+		setElementData(plr, "DurgsDealer", false)
+		setElementFrozen(plr, false)
+		toggleAllControls(plr, true)
+		setPedAnimation(plr, false)
+		exports.GTWtopbar:dm("Drugs: You're no longer selling drugs", plr, 255, 100, 0)
+		bindKey(plr, "w", "down", "sell")
 	else
-		local MaxWeed = getElementData(player, "Weed") or 0
-		local MaxGod = getElementData(player, "God") or 0
-		local MaxSpeed = getElementData(player, "Speed") or 0
-		local MaxLSD = getElementData(player, "LSD") or 0
-		local MaxSteroids = getElementData(player, "Steroids") or 0
-		local MaxHeroin = getElementData(player, "Heroin") or 0
+		local MaxWeed = getElementData(plr, "Weed") or 0
+		local MaxGod = getElementData(plr, "God") or 0
+		local MaxSpeed = getElementData(plr, "Speed") or 0
+		local MaxLSD = getElementData(plr, "LSD") or 0
+		local MaxSteroids = getElementData(plr, "Steroids") or 0
+		local MaxHeroin = getElementData(plr, "Heroin") or 0
 		if MaxWeed <= 0 and MaxGod <= 0 and MaxSpeed <= 0 and MaxLSD <= 0 and MaxSteroids <= 0 and MaxHeroin <= 0 then
-			exports.GTWtopbar:dm("You don't have any drugs to sell!", player, 255, 0, 0)
+			exports.GTWtopbar:dm("You don't have any drugs to sell!", plr, 255, 0, 0)
 		else
-			local x, y, z = getElementPosition(player)
-			sellMarkers[player] = createMarker(x, y, z-1, "cylinder", 1, 255, 0, 255, 0)
-			setElementData(sellMarkers[player], "sellDrugMarker", player)
-			setElementData(player, "DurgsDealer", true)
-			setElementFrozen(player, true)
-			toggleAllControls(player, false, true, false)
-			setPedAnimation(player, "DEALER", "DEALER_IDLE", -1, true, false)
-			exports.GTWtopbar:dm("Drugs: You're selling drugs, use /sell to stop selling", player, 255, 100, 0)
+			local x, y, z = getElementPosition(plr)
+			sellMarkers[plr] = createMarker(x, y, z-1, "cylinder", 1, 255, 0, 255, 0)
+			setElementData(sellMarkers[plr], "sellDrugMarker", plr)
+			setElementData(plr, "DurgsDealer", true)
+			setElementFrozen(plr, true)
+			toggleAllControls(plr, false, true, false)
+			setPedAnimation(plr, "DEALER", "DEALER_IDLE", -1, true, false)
+			exports.GTWtopbar:dm("Drugs: You're selling drugs, use /sell to stop selling", plr, 255, 100, 0)
 		end
+		unbindKey(plr, "w", "down", "sell")
 	end
 end)
 
