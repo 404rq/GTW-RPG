@@ -16,21 +16,21 @@
 
 -- Temporary storage of weapons
 timers			= { }
-awaiting_spawn	= { }
-weapon_list 	= {{ }}
+awaiting_spawn		= { }
+weapon_list 		= {{ }}
 ammo_list 		= {{ }}
 
 -- List of available hospitals
-hs_table = {
-	[1]={ 1177,		-1320,	10.8203125, 		270, 	1607.376953125, 1829.578125, 10.8203125	},
-	[2]={ -2666, 	630,	13.567041397095, 	180, 	1188.3798828125, -1324.5927734375, 13.567041397095 },
-	[3]={ 1607,		1818, 	14.453125, 			0, 		-2666.046875, 620.7353515625, 14.453125 },
-	[4]={ 2040, 	-1420, 	16.9921875, 		90, 	2031.8486328125, -1419.5927734375, 16.9921875 },
-	[5]={ -2200, 	-2308, 	30.625, 			-45, 	-2193.5888671875, -2301.6630859375, 30.625 },
-	[6]={ 208, 		-65.3, 	1.4357746839523, 	180, 	208.310546875, -75.525390625, 1.4357746839523 },
-	[7]={ 1245.8, 	336.9, 	19.40625, 			-20, 	1250.3759765625, 346.681640625, 19.40625 },
-	[8]={ -317.4, 	1056.4, 19.59375, 			0,		-316.8125, 1066.306640625, 19.59375 },
-	[9]={ -1514.8, 	2527.9, 55.6875, 			1.790, 	-1514.283203125, 2536.412109375, 55.6875 },
+hs_table = {  -- x	y	z			rot	view x			view y			view z
+	[1]={ 1177,	-1320,	14.137756347656, 	270, 	1200.6923828125, 	-1324.9873046875, 	20.398437	},
+	[2]={ -2666, 	630,	13.567041397095, 	180, 	-2664.4501953125, 	611.0771484375, 	20.454549789429 },
+	[3]={ 1607,	1818, 	10.8203125, 		0, 	1607.3310546875, 	1839.7470703125, 	16.8203125 	},
+	[4]={ 2040, 	-1420, 	16.9921875, 		90, 	2031.8486328125, 	-1419.5927734375, 	22.9921875 	},
+	[5]={ -2200, 	-2308, 	30.625, 		-45, 	-2193.5888671875, 	-2301.6630859375, 	36.625 		},
+	[6]={ 208, 	-65.3, 	1.4357746839523, 	180, 	208.310546875, 		-75.525390625, 		7.4357746839523 },
+	[7]={ 1245.8, 	336.9, 	19.40625, 		-20, 	1250.3759765625, 	346.681640625, 		25.40625 	},
+	[8]={ -317.4, 	1056.4, 19.59375, 		0,	-316.8125, 		1066.306640625, 	25.59375 	},
+	[9]={ -1514.8, 	2527.9, 55.6875, 		1.790, 	-1514.283203125, 	2536.412109375, 	61.6875 	},
 }
 
 -- Cost of the healthcare
@@ -56,7 +56,7 @@ function get_nearest_hospital(plr)
 	for k,v in ipairs(hs_table) do
 		-- Get the distance for each point
 		local px,py,pz=getElementPosition(plr)
-        local dist = getDistanceBetweenPoints2D(px,py,v[1],v[2])
+        	local dist = getDistanceBetweenPoints2D(px,py,v[1],v[2])
 
 		-- Update coordinates if distance is smaller
 		if dist < min then
@@ -71,9 +71,9 @@ function get_nearest_hospital(plr)
 	-- Check if jailed or not and return either hospital or jail
 	local isJailed = exports.GTWjail:isJailed(thePlayer)
 	if not isJailed then
-		return n_loc[1]+math.random(-2,2),n_loc[2]+math.random(-2,2),n_loc[3]+2,n_loc[4],n_loc[5],n_loc[6],n_loc[7]
+		return n_loc[1]+math.random(-1,1),n_loc[2]+math.random(-1,1),n_loc[3],n_loc[4],n_loc[5],n_loc[6],n_loc[7]
 	else
-		return -2965+math.random(-2,2),2305+math.random(-2,2),8,180
+		return -2965+math.random(-5,5),2305+math.random(-5,5),9,270
 	end
 end
 
@@ -82,12 +82,12 @@ function toggle_controls(plr, n_state)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	toggleControl(plr, "jump", n_state)
 	toggleControl(plr, "sprint", n_state)
-    toggleControl(plr, "crouch", n_state)
-    toggleControl(plr, "fire", n_state)
-    toggleControl(plr, "aim_weapon", n_state)
-    toggleControl(plr, "enter_exit", n_state)
-    toggleControl(plr, "enter_passenger", n_state)
-    toggleControl(plr, "forwards", n_state)
+    	toggleControl(plr, "crouch", n_state)
+    	toggleControl(plr, "fire", n_state)
+    	toggleControl(plr, "aim_weapon", n_state)
+    	toggleControl(plr, "enter_exit", n_state)
+    	toggleControl(plr, "enter_passenger", n_state)
+    	toggleControl(plr, "forwards", n_state)
 	toggleControl(plr, "walk", n_state)
  	toggleControl(plr, "backwards", n_state)
   	toggleControl(plr, "left", n_state)
@@ -225,19 +225,19 @@ function hospital_heal(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	local health = getElementHealth(plr)
 	local charge = math.floor(hs_charge/10)
-    if health < 90 and getPlayerMoney(plr) >= charge then
-    	setElementHealth(plr, health+10)
-    	takePlayerMoney(plr, charge)
-    elseif getPlayerMoney(plr) >= charge then
-    	setElementHealth(plr, 100)
-    	takePlayerMoney(plr, charge)
-    	exports.GTWtopbar:dm("Hospital: Go away, you're fine!", plr, 255, 100, 0)
-    	if isTimer(timers[plr]) then
+    	if health < 90 and getPlayerMoney(plr) >= charge then
+    		setElementHealth(plr, health+10)
+    		takePlayerMoney(plr, charge)
+    	elseif getPlayerMoney(plr) >= charge then
+    		setElementHealth(plr, 100)
+    		takePlayerMoney(plr, charge)
+    		exports.GTWtopbar:dm("Hospital: Go away, you're fine!", plr, 255, 100, 0)
+    		if isTimer(timers[plr]) then
 			killTimer(timers[plr])
 		end
-    elseif getPlayerMoney(plr) < charge then
-    	exports.GTWtopbar:dm("Hospital: You can't afford the healthcare!", plr, 255, 0, 0)
-    end
+    	elseif getPlayerMoney(plr) < charge then
+    		exports.GTWtopbar:dm("Hospital: You can't afford the healthcare!", plr, 255, 0, 0)
+    	end
 end
 
 addCommandHandler("gtwinfo", function(plr, cmd)
@@ -252,8 +252,8 @@ function hs_start_heal(hitElement, matchingDimension)
 	if isTimer(timers[hitElement]) then killTimer(timers[hitElement]) end
 	if getElementHealth(hitElement) < 90 then
 		exports.GTWtopbar:dm("Stay in the marker to get healed!", hitElement, 255, 100, 0)
-    	timers[hitElement] = setTimer(hospital_heal, 1400, 0, hitElement)
-    end
+    		timers[hitElement] = setTimer(hospital_heal, 1400, 0, hitElement)
+    	end
 end
 
 --[[ Stop and kill the heal timers ]]--
