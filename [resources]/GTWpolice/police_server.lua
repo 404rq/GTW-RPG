@@ -321,10 +321,8 @@ end
 
 -- Admin jail function
 function admin_jail(admin, cmd, crim, time, ...)
-    local accName = getAccountName(getPlayerAccount(admin))
-    if not isObjectInACLGroup("user."..accName, aclGetGroup("Admin")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Developer")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Moderator")) then
+    local is_staff = exports.GTWstaff:isStaff(admin)
+    if not is_staff then
     	outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
     	return
     end
@@ -350,10 +348,8 @@ addCommandHandler("jail", admin_jail)
 
 -- Admin unjail function
 function admin_jail_release(admin, cmd, crim)
-    local accName = getAccountName(getPlayerAccount(admin))
-    if not isObjectInACLGroup("user."..accName, aclGetGroup("Admin")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Developer")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Moderator")) then
+    local is_staff = exports.GTWstaff:isStaff(admin)
+    if not is_staff then
     	outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
     	return
     end

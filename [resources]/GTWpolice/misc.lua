@@ -116,8 +116,10 @@ function syncTracker( cop )
 end
 addEventHandler("onPlayerLogin", root,
 function()
-    tracker_timers[source] = setTimer( syncTracker, 500, 0, source )
+    tracker_timers[source] = setTimer( syncTracker, 1000, 0, source )
+    -- Bind the key to emergency lights
+    bindKey(source, "H", "down", "emlight")
 end)
 for k,v in pairs(getElementsByType("player")) do
-	tracker_timers[v] = setTimer( syncTracker, 500, 0, v )
+	tracker_timers[v] = setTimer( syncTracker, 1000, 0, v )
 end
