@@ -14,7 +14,14 @@
 ********************************************************************************
 ]]--
 
-str_updates = [['''Wednesday 19, August 2015 (GTWcore v-2.4-beta r-7766)'''
+str_updates = [['''Monday 31, August 2015 (GTWcore v-2.4-beta r-8616)'''
+* Using drugs near a law enforcer is now a crime
+* Stopping drugs when entering a vehicle to prevent the issue with modified vehicle handling
+* Fixed incorrect coordinates and camera angles in the hospital system
+* Made top bar messages color coded by default
+
+
+'''Wednesday 19, August 2015 (GTWcore v-2.4-beta r-7766)'''
 * Fixed broken radio links in phone
 * Using a local file for updates instead of the old online service making it easier to find the latest news, this document can be found on Github as well
 * Three failed login attempts will now result in a kick to stop spammers
