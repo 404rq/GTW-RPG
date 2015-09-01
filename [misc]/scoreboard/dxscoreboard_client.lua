@@ -1,6 +1,6 @@
 -- THESE CAN BE CHANGED
 triggerKey = "tab" -- default button to open/close scoreboard
-settingsKey = "F3" -- default button to open the settings window
+settingsKey = "F7" -- default button to open the settings window
 drawOverGUI = true -- draw scoreboard over gui?
 seperationSpace = 80 -- the space between top/bottom screen and scoreboard top/bottom in pixels
 
@@ -18,11 +18,11 @@ useColors = true
 drawSpeed = 1
 scoreboardScale = 1
 teamHeaderFont = "clear"
-contentFont = "default"
-columnFont = "default"
+contentFont = dxCreateFont("ITCKRIST.ttf",20)
+columnFont = dxCreateFont("ITCKRIST.ttf",20)
 serverInfoFont = "default"
 rmbFont = "clear"
-cBlack = tocolor( 68, 68, 68 )
+cBlack = tocolor( 68,68,68 )-- 3 puta 68
 cWhite = tocolor( 255, 255, 255 )
 cSettingsBox = tocolor( 255, 255, 255, 150 )
 MAX_PRIRORITY_SLOT = 500
@@ -49,9 +49,9 @@ fontScale = { -- To make all fonts be equal in height
 	["diploma"] = 0.5,
 	["beckett"] = 0.5
 }
-customFont = "default-bold"
+customFont = dxCreateFont("ITCKRIST.ttf",20)
 fontScaleRace = 5
-colorCode = {200,200,200}
+colorCode = {255,255,255}
 
 selectedRows = {}
 
@@ -74,8 +74,8 @@ addEventHandler( "onClientResourceStart", getResourceRootElement( getThisResourc
 		local resource = getResourceFromName("race")
 		if resource then
 			customFont,fontScaleRace,colorCode = call(resource,"getRaceSettings")
-			if not customFont then customFont = "default-bold" end
-			if not customFont then customFont = "default-bold" end
+			if not customFont then customFont = dxCreateFont("ITCKRIST.ttf",20) end
+			if not customFont then customFont = dxCreateFont("ITCKRIST.ttf",20) end
 			if not fontScaleRace then fontScaleRace = 5 end
 			if not colorCode then colorCode = {0,176,255} end
 		end
@@ -546,7 +546,7 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 				dxDrawImage( sX/2-8, topY+scoreboardDimensions.height+4, 17, 11, "arrow.png", 180, 0, 0, cWhite, drawOverGUI )
 			end
 			local topHeight = dxGetFontHeight( fontscale(serverInfoFont, s(1.25)), serverInfoFont )+dxGetFontHeight( fontscale(serverInfoFont, s(1)), serverInfoFont )+s(10)
-			dxDrawRectangle(topX,topY,topX+scoreboardDimensions.width,topHeight,tocolor(0,0,0,255))
+			dxDrawRectangle(topX,topY,topX+scoreboardDimensions.width,topHeight,tocolor(0,0,0,100))----------------------------------------
 			local y = topY+s(5)
 			if serverInfo.server and showServerInfo then
 				dxDrawText(serverInfo.server, topX+s(5), y, topX+scoreboardDimensions.width-s(10), y+dxGetFontHeight( fontscale(serverInfoFont, scoreboardScale), serverInfoFont ), cServerInfo, fontscale(serverInfoFont, s(1.25)), serverInfoFont, "left", "top", false, false, drawOverGUI )
@@ -614,7 +614,7 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 				local team, player
 				
 				if element and isElement( element ) and getElementType( element ) == "team" then
-					dxDrawRectangle( topX, y, scoreboardDimensions.width, dxGetFontHeight( fontscale(teamHeaderFont, scoreboardScale), teamHeaderFont )*1.5, cTeam, drawOverGUI )
+					dxDrawRectangle( topX, y, scoreboardDimensions.width, dxGetFontHeight( fontscale(teamHeaderFont, scoreboardScale), teamHeaderFont )*1.5, tocolor(255,255,255,80), drawOverGUI )-- predazdnji argument: cTeam
 					-- Highlight the the row on which the cursor lies on
 					--[[if checkCursorOverRow( rtPass, topX+s(5), topX+scoreboardDimensions.width-s(5), y, y+dxGetFontHeight( fontscale(teamHeaderFont, scoreboardScale), teamHeaderFont ) ) then
 						dxDrawRectangle( topX+s(5), y, scoreboardDimensions.width-s(10), dxGetFontHeight( fontscale(teamHeaderFont, scoreboardScale), teamHeaderFont ), cHighlight, drawOverGUI )
@@ -687,9 +687,9 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 				elseif element and isElement( element ) and getElementType( element ) == "player" then
 					-- Highlight local player's name
 					if element == getLocalPlayer() then
-						dxDrawRectangle( topX+s(5), y+s(1), scoreboardDimensions.width-s(10), dxGetFontHeight( fontscale(contentFont, scoreboardScale), contentFont ), cSelection, drawOverGUI )
+						dxDrawRectangle( topX+s(5), y+s(1), scoreboardDimensions.width-s(10), dxGetFontHeight( fontscale(contentFont, scoreboardScale), contentFont ), tocolor(0,0,0,100), drawOverGUI ) -- predzadnje cSelection
 					else
-						dxDrawRectangle( topX+s(5), y+s(1), scoreboardDimensions.width-s(10), dxGetFontHeight( fontscale(contentFont, scoreboardScale), contentFont ), tocolor(0,0,0,200), drawOverGUI )
+						dxDrawRectangle( topX+s(5), y+s(1), scoreboardDimensions.width-s(10), dxGetFontHeight( fontscale(contentFont, scoreboardScale), contentFont ), tocolor(0,0,0,100), drawOverGUI )
 					end
 					-- Highlight the the row on which the cursor lies on
 					--[[if checkCursorOverRow( rtPass, topX+s(5), topX+scoreboardDimensions.width-s(5), y, y+dxGetFontHeight( fontscale(contentFont, scoreboardScale), contentFont ) ) then
@@ -754,7 +754,6 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 									dxDrawImage ( topX+theX, y, itemWidth, itemHeight, content.src, content.rot, content.rotOffX, content.rotOffY, content.color, drawOverGUI )
 								end
 							else
-								if content == "?" then content = "SE" end
 								if column.name == "country" and content ~= "?" then
 									local countryName = getCountryNameFromCode(content) or content
 									local countryString = ":admin/client/images/flags/"..content:lower()..".png"
@@ -785,9 +784,8 @@ function doDrawScoreboard( rtPass, onlyAnim, sX, sY )
 				index = index + 1
 			end
 			index = 1
-			dxDrawRectangle(topX,y,scoreboardDimensions.width,s(20),tocolor(0,0,0,255))
-			dxDrawText("Grand Theft Walrus",topX+s(10),y,topX+scoreboardDimensions.width-(10),y+s(20),
-				tocolor(255,255,255,255),fontscale(contentFont, s(0.8)), contentFont,"right","center",true)
+			dxDrawRectangle(topX,y,scoreboardDimensions.width,s(20),tocolor(0,0,0,100))
+			dxDrawText("RageQuit 404 - community",topX+s(10),y,topX+scoreboardDimensions.width-(10),y+s(20),tocolor ( 135, 135, 135),fontscale(contentFont, s(0.8)), contentFont,"right","center",true)
 		end
 	end
 end

@@ -1,6 +1,7 @@
 <meta>
-    <info author="Awwu" type="script" name="Scoreboard" description="DirectX scoreboard resource" addon="race" showInResourceBrowser="true" version="10" />
+    <info author="To[X]ic" type="script" name="Scoreboard" description="DirectX scoreboard resource" addon="race" showInResourceBrowser="true" version="6" />
     
+    <file src="ITCKRIST.ttf" />
     <script src="dxscoreboard_exports.lua" type="server" />
     <script src="dxscoreboard_http.lua" type="server" />
     <script src="dxscoreboard_client.lua" type="client" />
