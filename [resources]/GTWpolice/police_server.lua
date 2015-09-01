@@ -16,7 +16,7 @@
 
 police_data = {
 	is_arrested 		= { },
-	is_tazed 			= { },
+	is_tazed 		= { },
 	arrested_players 	= { },
 }
 tracker_timers = { }
@@ -164,7 +164,7 @@ function kill_arrest(ammo, attacker, weapon, bodypart)
 	if is_jailed or not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
 	if not getPlayerTeam(attacker) or not isLawUnit(attacker) or
 		isLawUnit(source) or not getElementData(source, "violent_seconds") then return end
-	setTimer(Jail, 18000, 1, source, attacker, false)
+	setTimer(Jail, 18000, 1, source, attacker, true)
 	setElementData(source, "isKillArrested", true)
 	exports.GTWtopbar:dm( "You kill arrested "..getPlayerName(source), attacker, 255, 100, 0 )
 	exports.GTWtopbar:dm( "You have been kill arrested by: "..getPlayerName(attacker), source, 255, 0, 0 )
