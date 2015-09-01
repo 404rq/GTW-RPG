@@ -1,5 +1,5 @@
 <meta>
-    <info author="XX3" version="56" name="Alternate HUD" description="A new exotic HUD, made by me. more info in help." type="script" />
+    <info author="XX3" version="67" name="Alternate HUD" description="A new exotic HUD, made by me. more info in help." type="script" />
     
     <script src="client.lua" type="client" />
     <config src="help.xml" type="client" />
