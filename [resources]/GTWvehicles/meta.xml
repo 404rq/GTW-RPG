@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Vehicle spawn system" description="Vehicle spawn system for MTA SA" type="script" version="175"></info>
+    <info author="GTWGames" name="Vehicle spawn system" description="Vehicle spawn system for MTA SA" type="script" version="179"></info>
     <script src="data.lua" type="shared" protected="true"></script>
     <script src="vehicle_features.lua" type="server"></script>
     <script src="vehicle_server.lua" type="server"></script>

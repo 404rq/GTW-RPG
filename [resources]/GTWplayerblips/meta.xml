@@ -15,6 +15,6 @@
 -->
 
 <meta>
-	<info author="GTWGames" type="script" name="GTWplayerblips" description="Display player blips and manage their visibility" version="0" />
-  	<script src="playerblips.lua" type="server" />
+    <info author="GTWGames" type="script" name="GTWplayerblips" description="Display player blips and manage their visibility" version="4" />
+    <script src="playerblips.lua" type="server" />
 </meta>
