@@ -15,12 +15,12 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Job system" description="Handles civilian jobs and their gui" version="52" type="script" />
+    <info author="GTWGames" name="Job system" description="Handles civilian jobs and their gui" version="58" type="script" />
     <script src="data.lua" type="shared" />
     <script src="civ-s.lua" type="server" />
     <script src="civ-c.lua" type="client" />
     <script src="exports.lua" type="shared" />
-
+    
     <export function="addWorkItem" type="shared" />
     <export function="addMarker" type="shared" />
 </meta>
