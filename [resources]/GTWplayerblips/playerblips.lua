@@ -28,9 +28,8 @@ function validateVisiblity(plr, spectator)
 	-- Player is either cop or criminal and may be hidden?
 	if plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) and
 		stealthTeams[getTeamName(getPlayerTeam(plr))] and stealthTeams[getTeamName(getPlayerTeam(spectator))] then
-		local is_admin = exports.GTWstaff:isAdmin(spectator)
-		-- Admins sees all players
-		if is_admin then return true end
+		-- Memembers of the team staff sees all blips
+		if getPlayerTeam(spectator) == getTeamFromName("Staff") then return true end
 		-- They are in different teams and should not see each others
 		if getPlayerTeam(plr) ~= getPlayerTeam(spectator) then return false end
 		-- They are in the same team and should see each others
