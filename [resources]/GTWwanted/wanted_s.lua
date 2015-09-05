@@ -89,6 +89,7 @@ function reduce_wl(crim)
 	local wl_reduce,viol_reduce = 0.02,1
 
 	-- Justify reducement depending on distance to cop
+	-- NOTE Remember to check "alternate_hud" when changing these values
 	local dist = exports.GTWpolice:distanceToCop(crim)
 	if dist > 3000 and not is_law_unit(crim) then wl_reduce = 0.04 end
 	if dist > 2000 and not is_law_unit(crim) then wl_reduce = 0.03 end
@@ -154,9 +155,10 @@ function setWl(plr, level, violent_time, reason, add_to, reduce_health)
 
 	-- If the crime was in a vehicle collision, reduce health
 	if reduce_health and getPedOccupiedVehicle(plr) then
-		local driver = getVehicleOccupants(getPedOccupiedVehicle(plr))[0]
+                local loss = level/(getVehicleHandling(getPedOccupiedVehicle(plr)).mass * 0.00001)
+		local driver = getVehicleOccupant(getPedOccupiedVehicle(plr), 0)
 		for k,v in pairs(getVehicleOccupants(getPedOccupiedVehicle(plr))) do
-			local new_health = getElementHealth(v)-(level*50)
+			local new_health = getElementHealth(v) - loss
 			if new_health > 0 then
 				setElementHealth(v, new_health)
 			else
@@ -261,10 +263,12 @@ function crime_death(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if not killer or not isElement(killer) or getElementType(killer) ~= "player" or killer == source then return end
 	local wl,viol = getWl(source)
 	local is_jailed = exports.GTWjail:isJailed(source)
-    if is_law_unit(killer) and (wl > 0 or is_jailed) then return end
-	local add_wl = 1.8
+
+	-- Law units will not get wanted for killing players with wanted level or that are jailed
+    	if is_law_unit(killer) and (wl > 1 or is_jailed) then return end
+	local add_wl = 2.0
 	if getElementType(source) == "ped" then
-		add_wl = 1.2   -- Reduced by 0.6 for bots
+		add_wl = 1.0   -- Reduced by 1.0 for bots
 	end
 	setWl(killer, round(add_wl, 2), 50)
 end
@@ -272,15 +276,15 @@ addEventHandler("onPedWasted", root, crime_death)
 addEventHandler("onPlayerWasted", root, crime_death)
 
 function crime_grand_theft_auto_attempt(plr, seat, jacked)
-    if not jacked or not isElement(jacked) or getElementType(jacked) ~= "player" or seat > 0  then return end
+    if not jacked or seat > 0  then return end
     if is_law_unit(plr) then return end
     setWl(plr, 0.2, 5, "You committed the crime of grand theft auto (attempt)")
 end
 addEventHandler("onVehicleStartEnter", root, crime_grand_theft_auto_attempt)
 function crime_grand_theft_auto(plr, seat, jacked)
-    if not jacked or not isElement(jacked) or getElementType(jacked) ~= "player" or seat > 0 then return end
+    if not jacked or seat > 0 then return end
     if is_law_unit(plr) then return end
-    setWl(plr, 0.8, 25, "You committed the crime of grand theft auto")
+    setWl(plr, 1.0, 10, "You committed the crime of grand theft auto")
 end
 addEventHandler("onVehicleEnter", root, crime_grand_theft_auto)
 
