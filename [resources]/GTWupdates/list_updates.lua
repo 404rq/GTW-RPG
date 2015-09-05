@@ -14,7 +14,27 @@
 ********************************************************************************
 ]]--
 
-str_updates = [['''Monday 31, August 2015 (GTWcore v-2.4-beta r-8616)'''
+str_updates = [['''Saturday 05, September 2015 (GTWcore v-2.4-beta r-8951)'''
+* Added color codes in hud wanted level for criminals to see if there's a law enforcer nearby and possibly how far away
+* Added more detailed information in a dashboard for busdrivers like where to drive and distance.
+* Added automatic doors for busdrivers
+* Added a cloose button to GTW windows and moved "X click" to GTWgui, this is a great way to deal with any GUI related issues without having to reconnect
+* Increased wanted level for killing other players to 2.0 and lowered peds to 1.0
+* Changed payment system for turfs so that the size of the area is important when capture it
+* Lowered the turf payment for owned turfs and increased the capture payment, turfs are woth more if there are many gangwars around
+* Made the capture time for turfs depending on the turf size.
+* Completly renewed the busdriver job, optimized and resolved all bugs, (new features will be added within short)
+* Added more car shops and over 50 new vehicles to choose between
+* Added 3 new car shop types
+
+
+'''Tuesday 01, September 2015 (GTWcore v-2.4-beta r-8885)'''
+* Updated security and messages in the account system
+* Updated outdated urls
+* Improved our development server and distribution system to allow quicker updates
+
+
+'''Monday 31, August 2015 (GTWcore v-2.4-beta r-8616)'''
 * Using drugs near a law enforcer is now a crime
 * Stopping drugs when entering a vehicle to prevent the issue with modified vehicle handling
 * Fixed incorrect coordinates and camera angles in the hospital system
