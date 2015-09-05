@@ -15,11 +15,11 @@
 -->
 
 <meta>
-    	<info author="GTWGames" name="GTWupdates" description="Show updates to online players" version="0" type="script" />
-        <script src="list_updates.lua" type="client"></script>
-    	<script src="updates.lua" type="client"></script>
-    	<script src="updates_s.lua" type="server"></script>
-
-    	<export function="viewUpdateListGUI" type="client"/>
-    	<export function="getUpdatesList" type="client"/>
+    <info author="GTWGames" name="GTWupdates" description="Show updates to online players" version="4" type="script" />
+    <script src="list_updates.lua" type="client"></script>
+    <script src="updates.lua" type="client"></script>
+    <script src="updates_s.lua" type="server"></script>
+    
+    <export function="viewUpdateListGUI" type="client" />
+    <export function="getUpdatesList" type="client" />
 </meta>

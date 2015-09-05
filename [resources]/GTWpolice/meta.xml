@@ -15,14 +15,14 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Police system" version="104" type="script" />
+    <info author="GTWGames" name="Police system" version="108" type="script" />
     <script src="data.lua" type="shared" protected="true" />
     <script src="police_client.lua" type="client" protected="true" />
     <script src="police_server.lua" type="server" />
     <script src="misc.lua" type="server" />
     <script src="exports.lua" type="server" />
     <script src="blips.lua" type="server" />
-
+    
     <export function="distanceToCop" type="server" />
     <export function="nearestCop" type="server" />
     <export function="isArrested" type="server" />

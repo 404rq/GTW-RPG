@@ -16,7 +16,7 @@
 
 police_data = {
 	is_arrested 		= { },
-	is_tazed 			= { },
+	is_tazed 		= { },
 	arrested_players 	= { },
 }
 tracker_timers = { }
@@ -149,25 +149,26 @@ function kill_arrest(ammo, attacker, weapon, bodypart)
 		return
 	end
 
-	-- Suicide arrest
-	local police = nearestCop(source)
+	-- Kill arrest occurs if there is an attacker that killed the suspect and the suspect is violent
 	local is_jailed = exports.GTWjail:isJailed(source)
-	if police and isElement(police) and (getElementData(source, "violent_seconds") or 0) > 0 and distanceToCop(source) < 180 and not is_jailed then
-		setTimer(Jail, 18000, 1, source, police, false)
+	if not is_jailed and attacker and isElement(attacker) and getElementType(attacker) == "player" and
+		getPlayerTeam(attacker) and isLawUnit(attacker) and getElementData(source, "violent_seconds") then
+		setTimer(Jail, 18000, 1, source, attacker, true)
+		setElementData(source, "isKillArrested", true)
+		exports.GTWtopbar:dm( "You kill arrested "..getPlayerName(source), attacker, 255, 100, 0 )
+		exports.GTWtopbar:dm( "You have been kill arrested by: "..getPlayerName(attacker), source, 255, 0, 0 )
+		return
+	end
+
+	-- Suicide arrest, works if there's no attacker only, the nearest cop get's the payment if any
+	local police = nearestCop(source)
+	if police and isElement(police) and getElementData(source, "violent_seconds") and distanceToCop(source) < 180 and not is_jailed then
+		setTimer(Jail, 18000, 1, source, police, true)
 		setElementData(source, "isKillArrested", true)
 		exports.GTWtopbar:dm(getPlayerName(source).." comitted suicide nearby", police, 255, 100, 0 )
 		exports.GTWtopbar:dm("You have been arrested for suicide", source, 255, 0, 0 )
 		return
 	end
-
-	-- Kill arrest
-	if is_jailed or not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" then return end
-	if not getPlayerTeam(attacker) or not isLawUnit(attacker) or
-		isLawUnit(source) or not getElementData(source, "violent_seconds") then return end
-	setTimer(Jail, 18000, 1, source, attacker, false)
-	setElementData(source, "isKillArrested", true)
-	exports.GTWtopbar:dm( "You kill arrested "..getPlayerName(source), attacker, 255, 100, 0 )
-	exports.GTWtopbar:dm( "You have been kill arrested by: "..getPlayerName(attacker), source, 255, 0, 0 )
 end
 addEventHandler("onPlayerWasted", root, kill_arrest)
 
@@ -321,10 +322,8 @@ end
 
 -- Admin jail function
 function admin_jail(admin, cmd, crim, time, ...)
-    local accName = getAccountName(getPlayerAccount(admin))
-    if not isObjectInACLGroup("user."..accName, aclGetGroup("Admin")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Developer")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Moderator")) then
+    local is_staff = exports.GTWstaff:isStaff(admin)
+    if not is_staff then
     	outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
     	return
     end
@@ -350,10 +349,8 @@ addCommandHandler("jail", admin_jail)
 
 -- Admin unjail function
 function admin_jail_release(admin, cmd, crim)
-    local accName = getAccountName(getPlayerAccount(admin))
-    if not isObjectInACLGroup("user."..accName, aclGetGroup("Admin")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Developer")) and
-    	not isObjectInACLGroup("user."..accName, aclGetGroup("Moderator")) then
+    local is_staff = exports.GTWstaff:isStaff(admin)
+    if not is_staff then
     	outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
     	return
     end

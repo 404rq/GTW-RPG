@@ -37,7 +37,7 @@ defaultSettings = {
 		["r"] = 68,
 		["g"] = 68,
 		["b"] = 68,
-		["a"] = 100
+		["a"] = 170
 	},
 	["selection_color"] = {
 		["r"] = 82,

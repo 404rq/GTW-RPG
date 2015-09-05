@@ -17,7 +17,7 @@
 -- Object ids: 822 plant, 1454 bale
 -- Globals
 plants_age 		= { }
-player_plants 	= { }
+player_plants 		= { }
 plants_pos		= {{{ }}}
 seed_moey 		= 300
 
@@ -109,7 +109,8 @@ function plantSeed( player )
         		if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
         			getPedOccupiedVehicle(hitElement) and getElementModel( getPedOccupiedVehicle( hitElement )) == 532 and
 					plants_age[plant] and plants_age[plant] > time_to_grow - 1 then
-					-- Clear and makes a bale
+
+				-- Clear and makes a bale
         			plants_age[plant] = nil
         			setElementModel(plant, 1454)
         			setBlipColor( blip, 255, 200, 0, 100 )
@@ -118,29 +119,29 @@ function plantSeed( player )
         			setElementPosition(plant, px,py,pz+1.1)
 
         			-- Status message
-					exports.GTWtopbar:dm( "Farmer: One of your plants has been harvested", player, 255, 200, 0 )
+				exports.GTWtopbar:dm( "Farmer: One of your plants has been harvested", player, 255, 200, 0 )
         		elseif hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
         			not getPedOccupiedVehicle(hitElement) and getElementModel(plant) == 1454 then
         			-- Pay for the bale
         			givePlayerMoney(hitElement,math.random(900,1100))
 
         			-- Increase stats by 1/plant
-					local playeraccount = getPlayerAccount( hitElement )
-					local farmer_plants = getAccountData( playeraccount, "acorp_stats_plants_harvested" ) or 0
-					setAccountData( playeraccount, "acorp_stats_plants_harvested", farmer_plants + 1 )
+				local playeraccount = getPlayerAccount( hitElement )
+				local farmer_plants = getAccountData( playeraccount, "acorp_stats_plants_harvested" ) or 0
+				setAccountData( playeraccount, "acorp_stats_plants_harvested", farmer_plants + 1 )
 
         			-- Status message
-					exports.GTWtopbar:dm( "Farmer: One of your plants has been sold", player, 255, 200, 0 )
-					player_plants[player] = player_plants[player] - 1
+				exports.GTWtopbar:dm( "Farmer: One of your plants has been sold", player, 255, 200, 0 )
+				player_plants[player] = player_plants[player] - 1
         			if isElement(plant) then
-						destroyElement(plant)
-						destroyElement(plantCol)
-						destroyElement(blip)
-						plants_pos[player][currentPlantsCounter][1] = nil
-						plants_pos[player][currentPlantsCounter][2] = nil
-						plants_pos[player][currentPlantsCounter][3] = nil
-						plants_age[plant] = nil
-					end
+					destroyElement(plant)
+					destroyElement(plantCol)
+					destroyElement(blip)
+					plants_pos[player][currentPlantsCounter][1] = nil
+					plants_pos[player][currentPlantsCounter][2] = nil
+					plants_pos[player][currentPlantsCounter][3] = nil
+					plants_age[plant] = nil
+				end
         		end
     		end)
     	else
@@ -156,14 +157,13 @@ for w,pl in pairs(getElementsByType("player")) do
 	bindKey( pl, "n", "down", "plant" )
 	player_plants[pl] = 0
 end
-addEventHandler("onPlayerLogin", root,
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
         getThisResource(), "author")..", v-"..getResourceInfo(
         getThisResource(), "version")..", is represented", plr)
 end)
-function()
+addEventHandler("onPlayerLogin", root, function()
     bindKey( source, "n", "down", "plant" )
     player_plants[source] = 0
 end)

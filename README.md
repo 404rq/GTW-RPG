@@ -23,7 +23,17 @@ Beside the standardized core features, this project also includes a lot of misc 
 If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: www.404rq.com or by these Bitcoin respective Litecoin adresses below:
 
 BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
-LTC: `Ld7tGVyh6FeJ1aGxf4oeU7nEMA7wxU4neq`
+LTC: `LPs7Vm5NceCLpcvJXyHTdZnxkScBJFvvxg`
+
+## Videos
+[![GTW-RPG vehicle system](http://img.youtube.com/vi/IKAHKrxKUbk/0.jpg)](http://www.youtube.com/watch?v=IKAHKrxKUbk)<br>
+_Overview of the civilian job system included in this pack (GTWcivilians)_
+
+[![GTW-RPG vehicle system](http://img.youtube.com/vi/x89n19ufIrk/0.jpg)](http://www.youtube.com/watch?v=x89n19ufIrk)<br>
+_Overview of the vehicle system, a part in this pack of resources (GTWvehicleshop)_
+
+[![GTW-RPG vehicle system](http://img.youtube.com/vi/H_HLtxBT9VA/0.jpg)](http://www.youtube.com/watch?v=H_HLtxBT9VA)<br>
+_Overview of the police and wanted level system + jail map (GTWpolice, GTWwanted, GTWjail...)_
 
 ## Contributors
 Mr_Moose<br>

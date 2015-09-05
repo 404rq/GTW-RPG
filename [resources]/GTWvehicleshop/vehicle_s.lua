@@ -358,24 +358,24 @@ function returnWeaponsOnSell(query)
 	local veh_id = nil
 
 	-- Get the json string
-    for _,row in ipairs( result ) do
-    	-- Get all relevant data for the vehicle
-    	items = row["inventory"]
-    	plr = getAccountPlayer(getAccount(row["owner"]))
-    	veh_id = row["ID"]
-    	break
-    end
+        for _,row in ipairs( result ) do
+                -- Get all relevant data for the vehicle
+                items = row["inventory"]
+                plr = getAccountPlayer(getAccount(row["owner"]))
+    	        veh_id = row["ID"]
+    	        break
+        end
 
-    -- Extract data and give weapons back to the owner
-    local data_table = fromJSON(items) or { }
+        -- Extract data and give weapons back to the owner
+        local data_table = fromJSON(items or "") or { }
 	for k, v in pairs(data_table) do
 		giveWeapon(plr, getWeaponIDFromName(k), tonumber(v))
 		outputChatBox(k.." was successfully restored ("..tostring(v)..") bullets", plr, 255, 255, 255)
 	end
 
-    -- Send data to client
-    if player then
-    	triggerClientEvent( player, "GTWvehicleshop.onReceiveInventoryItems", player, vehicle_data_to_client )
+        -- Send data to client
+        if player then
+    	           triggerClientEvent( player, "GTWvehicleshop.onReceiveInventoryItems", player, vehicle_data_to_client )
 	end
 
 	-- Remove vehicle from database
@@ -414,8 +414,8 @@ function sellVehicle(veh_id, model)
 			vehicles[veh_id] = nil
 		end
 
-		givePlayerMoney(client, math.floor(price*priceMultiplier*0.9))
-		exports.GTWtopbar:dm( "Your vehicle has been sold for 90% of it's price", client, 0, 255, 0 )
+		givePlayerMoney(client, math.floor(price*priceMultiplier*0.8))
+		exports.GTWtopbar:dm( "Your vehicle has been sold for 80% of it's price", client, 0, 255, 0 )
 	else
 		exports.GTWtopbar:dm( "You must be logged in to own and use your vehicles!", client, 255, 0, 0 )
 	end

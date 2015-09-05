@@ -24,4 +24,5 @@
 
 	<export function="createWindow" type="client"/>
 	<export function="setDefaultFont" type="client"/>
+	<export function="toggleCursor" type="client"/>
 </meta>

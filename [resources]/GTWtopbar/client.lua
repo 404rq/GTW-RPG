@@ -19,12 +19,9 @@ local text = ""
 local text2 = ""
 local messages =  { }
 local r,g,b = 255,255,255
-local isColorCoded = false
+local isColorCoded = true
 
 function dm( message, red, green, blue, colorCoded )
-	if colorCoded == nil then
-		colorCoded = false
-	end
 	text = message
 	r = red
 	g = green

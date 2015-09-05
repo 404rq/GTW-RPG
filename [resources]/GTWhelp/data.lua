@@ -22,7 +22,7 @@ list = {
 Rules in English
 ********************************************************************
 
-#1 Do not spawn kill other players. (Applies around hospitals)
+#1 Do not spawn kill other players.
 #2 Drive on the right side of the road. Do not block other
     players, do not crash into other players unless you have
     a reason to do so, e.g in a police chase or to revenge.
@@ -48,8 +48,8 @@ Rules in English
     punishable but you may not get the response you expected.
 #8 Do not actively troll, provoke, annoy or insult other players.
     Instead, solve your conflicts here:
-    Report: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appeal: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Report: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appeal: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Thank you for complying with our rules.
 
@@ -84,8 +84,8 @@ Rules in Swedish (Svenska)
     hanteras i forumet.
 #8 Att aktivt trolla eller provocera är ej heller tillåtet, lös
     era konflikter här:
-    Klagomål: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Försvar: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Klagomål: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Försvar: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Tack för att du respekterar våra regler!
 
@@ -126,8 +126,8 @@ Rules in Danish (Danska)
     strafbar, men du kan ikke få det svar du forventede.
 #8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere.
     I stedet løse dine konflikter her:
-    Betænkning: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appel: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Betænkning: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appel: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Tak for at overholde vores regler.
 
@@ -156,8 +156,8 @@ Rules in Dutch (Nederlands)
 #7 Probeer dit spel NIET: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden.
     Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
 #8 Ga niet actief trollen, provoceren, irriteren of spelers uitschelden. Inplaats daarvan, los je problemen hier op:
-    Report: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Aanvraag: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Report: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Aanvraag: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Bedankt om mee te werken met ons reglement.
 
@@ -198,8 +198,8 @@ Rules in Italian (Italiano)
     potrai non ottenere la riposta che ti aspettavi.
 #8 Non trollare, provocare, annoiare o insultare gli altri giocatori.
     Invece, risolvi i tuoi conflitti qua:
-    Segnalazioni: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appelli: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Segnalazioni: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Appelli: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Grazie per aver letto le regole.
 
@@ -222,8 +222,8 @@ Rules in Urdu (Urdu)
 #6 Do not spam the chats, repeating nonsense on purpose will lead #6 Chat mein spamming na kareu aur nonsense material bhi post na kareu, warna aap mute ho jain gay.
 #7 Game mein ye na kareu: staff ke liye apply, new features ko add karne ki suggestion, dosre players ya staff ki complaint.
 #8 Kisi ko troll, annoy ya insult na kareu. Aap yahan pe jaa sakte hain:
-Report: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-Appeal: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+Report: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+Appeal: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Shukriya hamare rules parhane ke liye.
 
@@ -245,8 +245,8 @@ Rules in Egyptian (Masry)
 #6 Ew3a tekteb 7agat keteer fel chat ya3ny te3melaha spam aw tekteb aya haga malhash ay talateen lazma aw teba2 haga mesh kwayesa.
 #7 Ew3a te7awel fel le3ba enak te3mel apply lel staff aw te2ool 3ala fekra lel server aw teshteky 3ala 7ad aw tesa2l haga tela2eeha fel list 3ala el shemal w momken ta5od fe deeh punish.
 #8 Matra5emsh 3ala ay 7ad fel server, aw teshtem 7ad, aw te2ool kelma we7sha fel chat badal keda eshteky 3ala 7ad hena:
-   El shakwa: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Law et3amalak ban w 3yzo yetshal: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+   El shakwa: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Law et3amalak ban w 3yzo yetshal: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Shokran 3ashan betrakez fel hagat deeh!
 
@@ -282,8 +282,8 @@ Rules in Portuguese (Portuguese)
 	Isso não é punível, mas você pode não obter a resposta que você esperava.
 #8 Não seja um troll, não provoque, irrite ou insulte os outros jogadores.
     Em vez disso, resolve seus conflitos aqui:
-    Reporte: http://forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Apelação: http://forum.gtw-games.org/complaints-and-reports/complaints-appeal-your-punishment-356/
+    Reporte: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
+    Apelação: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
 
 Obrigado por cumprir com as nossas regras.
 
@@ -293,55 +293,37 @@ Translated by:
 Last edit:	2015-05-27
 ********************************************************************]] },
 	{ "General", 0 },
-	{ "About GTW Games", 1, [[
+	{ "RageQuit community", 1, [[
 ********************************************************************
-About GTW Games
-********************************************************************
-
-Welcome to GTW RPG 2.2-beta, a server in the GTW Games organization.
-
-GTW Games is an independent organization running multiple
-game servers in many different online games such as Multi
-Theft Auto, Minecraft, Conuter strike and Call of Duty.
-
-We beleive in democracy and freedom of speech and because
-of that wi have a very small amount of rules in our servers,
-you are free to do whatever you want as long you have fun
-and doesn't harm our servers in any way by exploiting bugs
-for example. More information will be found on our webpage.
-
-********************************************************************
-General information:
+RageQuit community
 ********************************************************************
 
-Game mode:
-    Grand Theft Walrus | www.gtw-games.org
-Website:
-    http://www.gtw-games.org
-Location:
-    Karlstad - Sweden
-Languages:
-    English in global chats
-Owners:
-    Grand Theft Walrus community
-Server staff and contributors:
-  Developers, Administrators:
-    Mr.Moose
-    TheWalrus
-    ThePenguin
-  In game staff, forum moderators:
-    WhoopeeTheClown
-    (Pro)Hunter
-  In game staff (support):
-    Smart
-    MHS
-    ludde_1337
-    RocK
-    Price
-    Groot
+Where the game is a true pleasure, we started as a small hobby
+project to give some new life to a bunch of old gaming PC's, thanks
+to the great Linux distribution "Debian" and a overkill network in
+northern Europe RageQuit has been growing over a couple of years and
+is now running multiple Multi Theft Auto and Minecraft servers.
+
+As our main interest always been the development we don't put much
+effort in limitations of the free speech or other bureocratic
+"rules", instead we're trying to make our game mode enjoyable for
+as many players as possible, this includes everything from design
+details to pure performance, we hate FPS lag and bad ping just as
+much as you do.
+
+We're one of feew communities almost completly built on open source
+software, especially the GTW-RPG project for Multi Theft Auto which
+we are the main contributors to. We also offers total freedom of
+speech and high security on our servers so that you don't have to
+loose any of your valuable game progress or items you worked hard
+for.
+
+Find our more on our websites:
+www.404rq.com
+forum.404rq.com
 
 ********************************************************************
-Last edit:	2015-01-28
+Last edit:	2015-09-01
 ********************************************************************
 ]] },
 	{ "Accounts", 1, [[
@@ -432,10 +414,10 @@ Frequently asked questions
 ********************************************************************
 
 Q: Does GTW has a website?
-A: Yes: www.gtw-games.org
+A: Yes: www.404rq.com
 
 Q: Does GTW has a forum?
-A: Yes: forum.gtw-games.org
+A: Yes: forum.404rq.com
 
 Q: What's our uptime?
 A: 99.7% in our first year, we're a self hosted community without
@@ -451,26 +433,26 @@ A: This server runs the open source game mode GTW-RPG which is a
 
 Q: How can I become staff?
 A: By writing a small application in our forum at:
-   forum.gtw-games.org and wait for enough people to vote
+   forum.404rq.com and wait for enough people to vote
    for you.
 
 Q: What is GTW Games?
 A: Grand Theft Walrus games is an independent non profit organization
    hosted by A.corp since 2013, read more on our website:
-   www.gtw-games.org.
+   www.404rq.com.
 
 Q: What does AC and GTW stands for?
 A: GTW - Grand Theft Walrus, our current name
    AC - Artic community, our previous name.
 
 Q: How do I donate?
-A: Visit our forum: www.gtw-games.org and choose an
+A: Visit our forum: www.404rq.com and choose an
    option to the right, you can choose between PayPal, Bitcoin or
    Litecoin currently.
 
 Q: My question wasn't answered here, what should I do?
 A: Ask your question here:
-   forum.gtw-games.org/questions-and-concerns/
+   forum.404rq.com/questions-and-concerns/
 ]]},
 	{ "Vehicles", 0 },
 	{ "Vehicle rental", 1, [[
@@ -709,7 +691,7 @@ responsiblity and that's why we have police chiefs. You must
 prove that you are trusted enough to handle this job, to do
 so, write and post your application here:
 
-http://forum.gtw-games.org/law-board/police-chief-center-topic/
+http://forum.404rq.com/law-board/police-chief-center-topic/
 
 Commands: (admin):
 /addpc <name>     -- Adds a police chief
@@ -785,10 +767,10 @@ Server staff is also a part of the goverment team, there are three
 ranks currently, Admin, Super moderator and Moderator, the staff
 duty is mainly about keeping an eye of the game play and help new
 players, anyone can apply to join the staff team here:
-forum.gtw-games.org/staff-applications/multi-theft-auto-staff-application-guidelines/
+forum.404rq.com/staff-applications/multi-theft-auto-staff-application-guidelines/
 
 If a staff is abusing his power we kindly ask you to report him here:
-forum.gtw-games.org/complaints-and-reports/complaints-rules-and-guidelines-357/]] },
+forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/]] },
 	{ "Developers", 1, [[
 Developers is also a part of the government team, GTW Games is based
 on open source which means that anyone are free to contribute, or use

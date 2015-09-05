@@ -19,7 +19,7 @@ is_spawn_protected 	= nil
 
 --[[ Get spawn protection ]]--
 function set_spawn_protection(time_s)
-    is_spawn_protected = setTimer(function() end, time_s*1000, 1)
+        is_spawn_protected = setTimer(function() end, time_s*1000, 1)
 end
 addEvent("GTWhospital.setSpawnProtection", true)
 addEventHandler("GTWhospital.setSpawnProtection", localPlayer, set_spawn_protection)
@@ -38,7 +38,8 @@ function protect_spawn_choke(weaponID, responsiblePed)
 end
 addEventHandler("onClientPlayerChoke", localPlayer, protect_spawn_choke)
 
+--[[ Global spawn sound handler ]]--
 function onSoundEvent(cmd, sound)
-    playSoundFrontEnd(tonumber(sound))
+        playSoundFrontEnd(tonumber(sound))
 end
 addCommandHandler("sound", onSoundEvent)

@@ -173,11 +173,3 @@ end
 function topBarMessage(message, r, g, b)
     exports.GTWtopbar:dm(message, r, g, b)
 end
-function toggleCursor()
-	if isCursorShowing(localPlayer) then
-    	showCursor(false, false)
-    else
-    	showCursor(true, true)
-    end
-end
-bindKey("x", "down", toggleCursor, "Toggle cursor")

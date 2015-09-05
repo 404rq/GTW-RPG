@@ -76,8 +76,8 @@ function addTeamData ( )
 	exports.scoreboard:scoreboardAddColumn("Occupation", root, 90)
 	exports.scoreboard:scoreboardAddColumn("Group", root, 130)
 	exports.scoreboard:scoreboardAddColumn("Money", root, 70)
-	exports.scoreboard:scoreboardAddColumn("Playtime", root, 50)
-	exports.scoreboard:scoreboardAddColumn("Jailed", root, 30)
+	exports.scoreboard:scoreboardAddColumn("Playtime", root, 70)
+	exports.scoreboard:scoreboardAddColumn("Jailed", root, 40)
 
 	-- Create teams
 	staffTeam = createTeam( "Staff", 255, 255, 255 )

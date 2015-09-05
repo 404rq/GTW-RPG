@@ -1,5 +1,5 @@
 -- Made By XX3, from scratch with MS Notepad. Purpose: To make a new exotic compact HUD.
--- You may edit this resource, but please credit me if you wanted to post an edited / extended version. 
+-- You may edit this resource, but please credit me if you wanted to post an edited / extended version.
 -- PS: I was in MTA SA to show what Indonesia is really made of! :D
 
 
@@ -46,10 +46,12 @@
 	meleespecialweapons[45] = true
 	meleespecialweapons[46] = true
 
+local wl_red,wl_green,wl_blue = 255,255,255
+
 function DXdraw()
 	-- Makes sure the hud is hidden
-	showPlayerHudComponent("armour", false)    
-    showPlayerHudComponent("health", false) 
+	showPlayerHudComponent("armour", false)
+    showPlayerHudComponent("health", false)
     showPlayerHudComponent("money", false)
     showPlayerHudComponent("clock", false)
     showPlayerHudComponent("weapon", false)
@@ -66,7 +68,7 @@ function DXdraw()
 
 		armor = getPedArmor(getLocalPlayer())
 		lineLength2 = 114 *(armor / 100) -- Armor bar
-		
+
 		ammoinclip = getPedAmmoInClip(getLocalPlayer()) -- The ammo inside the clip
 		totalammo = getPedTotalAmmo(getLocalPlayer())-getPedAmmoInClip(getLocalPlayer()) -- The total ammo minus ammo inside clip
 		totalammo2 = getPedTotalAmmo(getLocalPlayer())
@@ -77,14 +79,12 @@ function DXdraw()
 		moneycount=getPlayerMoney(getLocalPlayer())
 		money= '$'..convertNumber(moneycount) -- Money
 
-		local hour, mins = getTime()
-		time = hour .. ":" ..(((mins < 10) and "0"..mins) or mins) -- Time. This one makes the minutes always show by 2 digits(3:05 instead of 3:5)
 		local wantedlevel = getPlayerWantedLevel(getLocalPlayer()) --Getting the player's wanted level.
-		
-		
+
+
 -------- Dynamic health colour thanks to 50p ----------
-		tick = getTickCount() 
-		
+		tick = getTickCount()
+
 -- For active health bar
       local maxHealth = 100;  -- get max health stat
 		local colourPercent =(health / maxHealth) * 200;
@@ -109,20 +109,20 @@ else
 end
 local color1 = tocolor(red1, green1, 0, 190)
 local color2 = tocolor(red, green, 0, 230)
- 
+
  -- Health & armor background
  --dxDrawRectangle(sWidth-206,29,92,33.0,tocolor(0,0,0,200),false)
- 
+
  -- For the health bar
  if getTickCount() %1500 < 500 and health <= 20 and armor <=0 then -- If health is less than 20%, armor is 0%, the health bar will blink by hiding the health bar every 1.5 seconds.
- 
- else 
+
+ else
  dxDrawRectangle(sWidth-205,30,114.0,14.0,color1, false) -- Health inactive bar
  dxDrawRectangle(sWidth-205,30,lineLength1,14.0,color2,false) --Health active bar
  end
- 
+
  if armor <= 0 then
- 
+
  else
 dxDrawRectangle(sWidth-205,47,lineLength2,14.0,tocolor(200,200,200,230),false) -- Armor active bar
 dxDrawRectangle(sWidth-205,47,114.0,14.0,tocolor(50,50,50,190),false) -- Armor inactive bar
@@ -137,6 +137,13 @@ if moneycount >= 0 then
 else
 	dxDrawText(tostring(money),sWidth-302,66,sWidth-7,57,tocolor(150,0,0,220),1.2,"pricedown","right","top",false,false,false) -- Money DX text
 end
+
+local time = getRealTime()
+local hours = time.hour
+local minutes = time.minute
+if hours < 10 then hours = "0"..hours end
+if minutes < 10 then minutes = "0"..minutes end
+time = hours..":"..minutes
 dxDrawText(tostring(time),sWidth-81,31,sWidth-10,16,tocolor(250,250,250,200),1.0,"diploma","center","top",false,false,false) -- GTA Time DX text
 
 -- Now decide if the optional stuff should be drawn
@@ -146,7 +153,7 @@ if noreloadweapons [getPedWeapon(getLocalPlayer())] then
 	dxDrawText(tostring(showammo3),sWidth-453,0,sWidth-297,20,tocolor(200,200,200,200),0.9,"bankgothic","right","top",false,false,false)
 elseif meleespecialweapons [getPedWeapon(getLocalPlayer())] then
 	-- Draw Nothing for melee and special weapons.
-else 
+else
 	-- Weapons that reloads.
 	--dxDrawRectangle(sWidth-450,0,170,34,tocolor(0,0,0,200),false)
 	dxDrawText(tostring(showammo2).."/"..tostring(showammo1),sWidth-450,0,sWidth-295,20,tocolor(0,0,0,255),0.9,"bankgothic","right","top",false,false,false)
@@ -158,33 +165,47 @@ local weaponID = getPedWeapon(getLocalPlayer()); -- Get weapon ID
 dxDrawImage(sWidth-268,0,52.0,52.0,"icons/".. tostring(weaponID) .. ".png",0.0,0.0,0.0,tocolor(255,255,255,200),false) -- Weapon icons image. Check the icons file if you want to take and replace weapon icons.
 
 function showWlText()
+	-- Compare last wanted level with current to see if it's increasing or reducing
+	if not lastWL then lastWL = 0 end
+	if not getElementData(localPlayer,"Wanted") then setElementData(localPlayer,"Wanted",0) end
+	local diff = math.abs(lastWL - getElementData(localPlayer,"Wanted"))
+	if lastWL < getElementData(localPlayer,"Wanted") then
+		crimInfoString = "increasing"
+		lastWL = getElementData(localPlayer,"Wanted")
+	elseif lastWL >= getElementData(localPlayer,"Wanted") then
+		crimInfoString = "reducing"
+		lastWL = getElementData(localPlayer,"Wanted")
+	end
+	if round(diff,2) == 0.04 then
+		wl_red,wl_green,wl_blue = 0,255,0
+	elseif round(diff,2) == 0.03 then
+		wl_red,wl_green,wl_blue = 50,255,50
+	elseif round(diff,2) == 0.01 then
+		wl_red,wl_green,wl_blue = 100,255,100
+	elseif round(diff,3) == 0.005 then
+		wl_red,wl_green,wl_blue = 255,255,255
+	elseif round(diff,3) == 0.001 then	-- Usually negative
+		wl_red,wl_green,wl_blue = 150,0,0
+	end
 	if getElementData(localPlayer, "violent_seconds") then
+		wl_red,wl_green,wl_blue = 255,255,255
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
 			" WP\n"..round(getElementData(localPlayer, "violent_seconds") or 0, 3)..
-			" seconds left",0,125,sWidth-8,19.0,tocolor(0,0,0,255),0.6,
+			" seconds left",0,127,sWidth-9,19.0,tocolor(0,0,0,255),0.6,
 			"bankgothic","right","top",false,false,false)
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
 			" WP\n"..round(getElementData(localPlayer, "violent_seconds") or 0, 3)..
-			" seconds left",0,128,sWidth-10,19.0,tocolor(255,255,255,200),0.6,
+			" seconds left",0,128,sWidth-10,19.0,tocolor(wl_red,wl_green,wl_blue,255),0.6,
 			"bankgothic","right","top",false,false,false)
 		if getElementData(localPlayer, "violent_seconds") == 0 then
 			setElementData(localPlayer, "violent_seconds", nil)
 		end
 	else
-		if not lastWL then lastWL = 0 end
-		if not getElementData(localPlayer,"Wanted") then setElementData(localPlayer,"Wanted",0) end
-		if lastWL < getElementData(localPlayer,"Wanted") then
-			crimInfoString = "increasing"
-			lastWL = getElementData(localPlayer,"Wanted")
-		elseif lastWL > getElementData(localPlayer,"Wanted") then
-			crimInfoString = "reducing"
-			lastWL = getElementData(localPlayer,"Wanted")
-		end
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
-			" WP\n"..crimInfoString,0,125,sWidth-8,19.0,tocolor(0,0,0,255),0.6,
+			" WP\n"..crimInfoString,0,127,sWidth-9,19.0,tocolor(0,0,0,255),0.6,
 			"bankgothic","right","top",false,false,false)
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
-			" WP\n"..crimInfoString,0,128,sWidth-10,19.0,tocolor(255,255,255,200),0.6,
+			" WP\n"..crimInfoString,0,128,sWidth-10,19.0,tocolor(wl_red,wl_green,wl_blue,255),0.6,
 			"bankgothic","right","top",false,false,false)
 	end
 end
@@ -239,8 +260,8 @@ if wantedlevel == 0 then
 					dxDrawImage(sWidth-105,105,16.0,19.0,"images/star.png",0.0,0.0,0.0,tocolor(255,255,255,255),false)
 					dxDrawImage(sWidth-126,105,16.0,19.0,"images/star.png",0.0,0.0,0.0,tocolor(255,255,255,255),false)
 					showWlText()
-		end	
-	end		
+		end
+	end
 end -- End of the DX Drawing function
 
 
@@ -256,18 +277,18 @@ function hudChanger()
     showPlayerHudComponent("ammo", false)
     showPlayerHudComponent("money", false)
 	showPlayerHudComponent("wanted", false)
-	showPlayerHudComponent("breath", false)	
+	showPlayerHudComponent("breath", false)
 end
 
 addCommandHandler("showhud", hudChanger) -- Shows the Alternate HUD
-addCommandHandler("hidegtahud", hudChanger) -- Hides the GTA HUD 
-addEventHandler("onClientResourceStart", resourceroot, hudChanger) 
+addCommandHandler("hidegtahud", hudChanger) -- Hides the GTA HUD
+addEventHandler("onClientResourceStart", resourceroot, hudChanger)
 addEventHandler("onPlayerJoin", resourceroot, hudChanger) -- The same, but also on player join.
 
 function hudChanger2()
 	removeEventHandler("onClientRender", getRootElement(), DXdraw)
-    showPlayerHudComponent("armour", true)    
-    showPlayerHudComponent("health", true) 
+    showPlayerHudComponent("armour", true)
+    showPlayerHudComponent("health", true)
     showPlayerHudComponent("money", true)
     showPlayerHudComponent("clock", true)
     showPlayerHudComponent("weapon", true)
@@ -277,7 +298,7 @@ function hudChanger2()
 	showPlayerHudComponent("breath", true)
 end
 addCommandHandler("hidehud", hudChanger2) -- Removes the HUD, and shows the GTA HUD.
-addCommandHandler("showgtahud", hudChanger2) 
+addCommandHandler("showgtahud", hudChanger2)
 addEventHandler("onClientResourceStop", resourceroot, hudChanger2) -- When you stop the resource, executes.
 
 function hudChanger3()
@@ -302,13 +323,13 @@ function round(number, digits)
 end
 
 --[[ Convert number e.g 100000 -> 100.000 ]]--
-function convertNumber ( number )  
-	local formatted = number  
-	while true do      
-		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", "%1.%2")    
-		if ( k==0 ) then      
-			break   
-		end  
-	end  
+function convertNumber ( number )
+	local formatted = number
+	while true do
+		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", "%1.%2")
+		if ( k==0 ) then
+			break
+		end
+	end
 	return formatted
 end

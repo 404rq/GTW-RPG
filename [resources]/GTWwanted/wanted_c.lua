@@ -15,7 +15,7 @@
 ]]--
 
 -- Global variables
-cooldown 			= nil
+cooldown 		= nil
 fire_cooldown 		= nil
 damage_cooldown		= nil
 target_cooldown		= nil
@@ -82,19 +82,20 @@ function crime_fire_weapon(weapon, ammo, ammoInClip, hitX, hitY, hitZ, hitElemen
 	end
 
 	-- Get wanted for shooting at vehicles or other objects
-    if weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and getElementType(hitElement) == "vehicle" and occuCount > 0 then
-       	setWl(0.3+occuCount, 30+(20*occuCount), "You comitted the crime of vandalism and threat (vehicle with passengers)")
-       	fire_cooldown = setTimer(function() end, 7000, 1)
-    elseif weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and getElementType(hitElement) == "vehicle" then
-     	setWl(0.3, 5, "You comitted the crime of vandalism (vehicle)")
-     	fire_cooldown = setTimer(function() end, 7000, 1)
-    elseif weapon ~= 41 and weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and (getElementType(hitElement) == "player" or getElementType(hitElement) == "ped") then
-    	setWl(0.5, 10, "You comitted the crime of violence and threat")
-    	fire_cooldown = setTimer(function() end, 7000, 1)
-    elseif weapon ~= 41 and not (weapon == 42 and isPedOnFire(hitElement)) and weapon ~= 43 and getElementInterior(localPlayer) > 0 then
-    	setWl(0.2, 5, "You comitted the crime of vandalism and threat")
-    	fire_cooldown = setTimer(function() end, 7000, 1)
-    end
+    	if weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and getElementType(hitElement) == "vehicle" and occuCount > 0 then
+       		setWl(0.3+occuCount, 30+(20*occuCount), "You comitted the crime of vandalism and threat (vehicle with passengers)")
+       		fire_cooldown = setTimer(function() end, 7000, 1)
+    	elseif weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and getElementType(hitElement) == "vehicle" then
+     		setWl(0.3, 5, "You comitted the crime of vandalism (vehicle)")
+     		fire_cooldown = setTimer(function() end, 7000, 1)
+    	elseif weapon ~= 41 and weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and (getElementType(hitElement) == "player" or
+		getElementType(hitElement) == "ped") then
+    		setWl(0.5, 10, "You comitted the crime of violence and threat")
+    		fire_cooldown = setTimer(function() end, 7000, 1)
+    	elseif weapon ~= 41 and not (weapon == 42 and isPedOnFire(hitElement)) and weapon ~= 43 and getElementInterior(localPlayer) > 0 then
+    		setWl(0.2, 5, "You comitted the crime of vandalism and threat")
+    		fire_cooldown = setTimer(function() end, 7000, 1)
+    	end
 end
 addEventHandler("onClientPlayerWeaponFire", root, crime_fire_weapon)
 
@@ -102,7 +103,7 @@ addEventHandler("onClientPlayerWeaponFire", root, crime_fire_weapon)
 function crime_damage_peds(attacker, weapon, bodypart, loss)
 	if isTimer(damage_cooldown) or attacker ~= localPlayer or is_law_unit(attacker) then return end
 	setWl(loss/100, 5, "You comitted the crime of violence and threat")
-    damage_cooldown = setTimer(function() end, 1000, 1)
+    	damage_cooldown = setTimer(function() end, 1000, 1)
 end
 addEventHandler("onClientPedDamage", root, crime_damage_peds)
 
@@ -178,6 +179,6 @@ function crime_damage_vehicle(attacker, weapon, loss, x, y, z, tyre)
 
 	-- Apply wanted level
 	setWl(0.08, 3, "You comitted the crime of vandalism (vehicle)")
-    damage_cooldown = setTimer(function() end, 1000, 1)
+    	damage_cooldown = setTimer(function() end, 1000, 1)
 end
 addEventHandler("onClientVehicleDamage", root, crime_damage_vehicle)

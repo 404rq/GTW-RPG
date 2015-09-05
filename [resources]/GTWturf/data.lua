@@ -20,9 +20,7 @@ cooldown 			= { }						-- Cooldown timer to prevent spam kills for stats farming
 time_syncer 			= { }						-- Timers to update the client status text with information about how much time is left to capture a turf
 db 				= dbConnect("sqlite", "/turfs.db")		-- Database connection (SQLLite), mysql is supported as well, see syntax for dbConnect here:
 										-- https://wiki.multitheftauto.com/wiki/DbConnect
-payout_time_interval		= 1800						-- Time interval between payments for owned turfs (seconds).
-turf_payments_max		= 300						-- Maximum payments for 1 single turf during payouts. Multiplyed by turfs count divided by gangmembers count
-turf_payments_min		= 290						-- Minimum payments for 1 single turf during payouts. (See above)
+payout_time_interval		= 600						-- Time interval between payments for owned turfs (seconds).
 lowest_amount_to_display 	= 50						-- Specify the lowest amount of money which is worth to notice the players about during payouts.
 
 team_criminals			= "Criminals"					-- Specify teams that are allowed to turf
@@ -34,6 +32,5 @@ armor_max			= 35						-- The maximum amount of armor the killer will get after k
 armor_min			= 25						-- The minimum amount of armor the killer will get after killing an enemy
 weapon_stats_max		= 15						-- The maximum amount of stats for the current weapon the killer will gain after killing an enemy
 weapon_stats_min		= 5						-- The minimum amount of stats for the current weapon the killer will gain after killing an enemy
-turf_capture_payment_max 	= 900						-- Maximum payment for capturing a turf
-turf_capture_payment_min	= 800						-- Minimum payment for capturing a turf
-time_to_capture			= 180 						-- Time before a gang captures a turf (seconds)
+
+time_reduce_factor		= 0.06						-- A value to be multiplied with sizex * sizey of a turf entered to decide how much time it takes to capture it

@@ -26,6 +26,8 @@ function loadList( )
 	--[[ Predefined static list of resources to refresh ]]--
 	restartList = {
 		["GTWaccounts"]=true,
+		["GTWammunation"]=true,
+		["GTWbusdriver"]=true,
 		["GTWclothes"]=true,
 		["GTWcivilians"]=true,
 		["GTWfastfood"]=true,
@@ -35,6 +37,7 @@ function loadList( )
 		["GTWphone"]=true,
 		["GTWstats"]=true,
 		["GTWteam"]=true,
+		["GTWtransport"]=true,
 		["GTWupdates"]=true,
 		["GTWvehicles"]=true,
 		["GTWvehicleshop"]=true

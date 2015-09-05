@@ -1,6 +1,20 @@
+<!--
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+-->
+
 <meta>
-    <info type="map" version="1.0.0"></info>
-    <map src="swat-base.map" dimension="0"></map>
-    <script src="mapEditorScriptingExtension_s.lua" type="server"></script>
-    <script src="mapEditorScriptingExtension_c.lua" type="client" validate="false"></script>
+    <info type="map" version="10"></info>
+    <script src="swat_base.lua" type="client"></script>
 </meta>
