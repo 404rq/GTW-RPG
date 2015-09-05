@@ -46,6 +46,8 @@
 	meleespecialweapons[45] = true
 	meleespecialweapons[46] = true
 
+local wl_red,wl_green,wl_blue = 255,255,255
+
 function DXdraw()
 	-- Makes sure the hud is hidden
 	showPlayerHudComponent("armour", false)
@@ -163,33 +165,47 @@ local weaponID = getPedWeapon(getLocalPlayer()); -- Get weapon ID
 dxDrawImage(sWidth-268,0,52.0,52.0,"icons/".. tostring(weaponID) .. ".png",0.0,0.0,0.0,tocolor(255,255,255,200),false) -- Weapon icons image. Check the icons file if you want to take and replace weapon icons.
 
 function showWlText()
+	-- Compare last wanted level with current to see if it's increasing or reducing
+	if not lastWL then lastWL = 0 end
+	if not getElementData(localPlayer,"Wanted") then setElementData(localPlayer,"Wanted",0) end
+	local diff = math.abs(lastWL - getElementData(localPlayer,"Wanted"))
+	if lastWL < getElementData(localPlayer,"Wanted") then
+		crimInfoString = "increasing"
+		lastWL = getElementData(localPlayer,"Wanted")
+	elseif lastWL >= getElementData(localPlayer,"Wanted") then
+		crimInfoString = "reducing"
+		lastWL = getElementData(localPlayer,"Wanted")
+	end
+	if round(diff,2) == 0.04 then
+		wl_red,wl_green,wl_blue = 0,255,0
+	elseif round(diff,2) == 0.03 then
+		wl_red,wl_green,wl_blue = 50,255,50
+	elseif round(diff,2) == 0.01 then
+		wl_red,wl_green,wl_blue = 100,255,100
+	elseif round(diff,3) == 0.005 then
+		wl_red,wl_green,wl_blue = 255,255,255
+	elseif round(diff,3) == 0.001 then	-- Usually negative
+		wl_red,wl_green,wl_blue = 150,0,0
+	end
 	if getElementData(localPlayer, "violent_seconds") then
+		wl_red,wl_green,wl_blue = 255,255,255
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
 			" WP\n"..round(getElementData(localPlayer, "violent_seconds") or 0, 3)..
-			" seconds left",0,125,sWidth-8,19.0,tocolor(0,0,0,255),0.6,
+			" seconds left",0,127,sWidth-9,19.0,tocolor(0,0,0,255),0.6,
 			"bankgothic","right","top",false,false,false)
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
 			" WP\n"..round(getElementData(localPlayer, "violent_seconds") or 0, 3)..
-			" seconds left",0,128,sWidth-10,19.0,tocolor(255,255,255,200),0.6,
+			" seconds left",0,128,sWidth-10,19.0,tocolor(wl_red,wl_green,wl_blue,255),0.6,
 			"bankgothic","right","top",false,false,false)
 		if getElementData(localPlayer, "violent_seconds") == 0 then
 			setElementData(localPlayer, "violent_seconds", nil)
 		end
 	else
-		if not lastWL then lastWL = 0 end
-		if not getElementData(localPlayer,"Wanted") then setElementData(localPlayer,"Wanted",0) end
-		if lastWL < getElementData(localPlayer,"Wanted") then
-			crimInfoString = "increasing"
-			lastWL = getElementData(localPlayer,"Wanted")
-		elseif lastWL > getElementData(localPlayer,"Wanted") then
-			crimInfoString = "reducing"
-			lastWL = getElementData(localPlayer,"Wanted")
-		end
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
-			" WP\n"..crimInfoString,0,125,sWidth-8,19.0,tocolor(0,0,0,255),0.6,
+			" WP\n"..crimInfoString,0,127,sWidth-9,19.0,tocolor(0,0,0,255),0.6,
 			"bankgothic","right","top",false,false,false)
 		dxDrawText(round(getElementData(localPlayer,"Wanted") or 0, 3)..
-			" WP\n"..crimInfoString,0,128,sWidth-10,19.0,tocolor(255,255,255,200),0.6,
+			" WP\n"..crimInfoString,0,128,sWidth-10,19.0,tocolor(wl_red,wl_green,wl_blue,255),0.6,
 			"bankgothic","right","top",false,false,false)
 	end
 end
