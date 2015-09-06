@@ -155,7 +155,10 @@ function show_max_train_speed()
 	local sx,sy = guiGetScreenSize( )
 	local r,g,b = 170,170,170
 	if (kmh+30) > max_speed then r,g,b = 255,200,0 end
-	if kmh > max_speed then r,g,b = 255,0,0 end
+	if (kmh+20) > max_speed then r,g,b = 255,100,0 end
+	if (kmh+10) > max_speed then r,g,b = 255,0,0 end
+	if kmh > max_speed then r,g,b = 200,0,0 end
+	if kmh > max_speed+5 then r,g,b = 150,0,0 end
 	if kmh < 0 then kmh = 0 end
 	dxDrawText ( "Train: Speed limit: "..math.floor(kmh).."/"..max_speed, sx-408, sy-33, 0, 0,
 		tocolor( 0, 0, 0, 255 ), 0.7, "bankgothic" )
