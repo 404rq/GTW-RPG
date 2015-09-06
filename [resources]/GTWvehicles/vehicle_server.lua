@@ -79,7 +79,6 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 		    		x,y,z = spawnx,spawny,spawnz
 		    	end
 			   	vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot)
-			   	setVehicleFuelTankExplodable(vehicles[client], true)
 			   	setVehicleHandling(vehicles[client], "headLight ", "big")
 			   	setVehicleHandling(vehicles[client], "tailLight", "big")
 
