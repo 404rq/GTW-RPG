@@ -17,8 +17,8 @@
 <meta>
     	<info author="GTWGames" name="GTWfastfood" description="Pizza, burger and chicken fast food resturants in SA" version="0" type="script" />
     	<script src="data.lua" type="shared" />
-    	<script src="food-s.lua" type="server" />
-    	<script src="food-c.lua" type="client" />
+    	<script src="food_s.lua" type="server" />
+    	<script src="food_c.lua" type="client" />
 
     	<file src="img/BURHEAL.png" />
 	<file src="img/BURHIG.png" />
