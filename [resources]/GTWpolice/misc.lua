@@ -39,15 +39,14 @@ for ww=1, #armor_pickups do
 end
 
 -- Emergency lights
-function toggleEmergencyLights(source)
-    local theVehicle = getPedOccupiedVehicle(source)
-    if(theVehicle and isElement(theVehicle) and getPedOccupiedVehicleSeat(source) == 0) then
-    	if not isTimer(light1[theVehicle]) and not isTimer(light2[theVehicle]) and(policeVehicles[getElementModel(theVehicle)] or
-    		fireVehicles[getElementModel(theVehicle)] or medicVehicles[getElementModel(theVehicle)]) then
-        	setVehicleOverrideLights(theVehicle, 2)
-        	light1[theVehicle] = setTimer(setLight, 100, 1, theVehicle)
-		elseif not getVehicleSirensOn(theVehicle) and(policeVehicles[getElementModel(theVehicle)] or
-    		fireVehicles[getElementModel(theVehicle)] or medicVehicles[getElementModel(theVehicle)]) then
+function toggleEmergencyLights(plr)
+    	local theVehicle = getPedOccupiedVehicle(plr)
+    	if(theVehicle and isElement(theVehicle) and getPedOccupiedVehicleSeat(plr) == 0) then
+    		if not isTimer(light1[theVehicle]) and not isTimer(light2[theVehicle]) and
+			lawTeams[getTeamName(getPlayerTeam(plr))] then
+        		setVehicleOverrideLights(theVehicle, 2)
+        		light1[theVehicle] = setTimer(setLight, 100, 1, theVehicle)
+		elseif lawTeams[getTeamName(getPlayerTeam(plr))] then
 			if isTimer(light1[theVehicle]) then
 				killTimer(light1[theVehicle])
 			end
@@ -61,18 +60,21 @@ function toggleEmergencyLights(source)
 			setVehicleLightState(theVehicle, 2, 0)
 			setVehicleLightState(theVehicle, 3, 0)
 		end
-    end
+    	end
 end
 addCommandHandler("emlight", toggleEmergencyLights)
+
 function setLight(theVehicle)
 	if isElement(theVehicle) then
     	light2[theVehicle] = setTimer(setLight2, 200, 1, theVehicle)
-		if(policeVehicles[getElementModel(theVehicle)]) then
+		if (policeVehicles[getElementModel(theVehicle)]) then
    			setVehicleHeadLightColor(theVehicle, 255, 0, 0)
-   		elseif(fireVehicles[getElementModel(theVehicle)]) then
+   		elseif (fireVehicles[getElementModel(theVehicle)]) then
    			setVehicleHeadLightColor(theVehicle, 255, 255, 0)
-   		elseif(medicVehicles[getElementModel(theVehicle)]) then
+   		elseif (medicVehicles[getElementModel(theVehicle)]) then
    			setVehicleHeadLightColor(theVehicle, 255, 255, 255)
+		else
+			setVehicleHeadLightColor(theVehicle, 0, 0, 255)
    		end
 		setVehicleLightState(theVehicle, 0, 1)
 		setVehicleLightState(theVehicle, 1, 0)
@@ -86,12 +88,14 @@ function setLight2(theVehicle)
 	if isElement(theVehicle) then
     	setVehicleHeadLightColor(theVehicle, 255, 255, 255)
 		light1[theVehicle] = setTimer(setLight, 200, 1, theVehicle)
-		if(policeVehicles[getElementModel(theVehicle)]) then
+		if (policeVehicles[getElementModel(theVehicle)]) then
    			setVehicleHeadLightColor(theVehicle, 0, 0, 255)
-   		elseif(fireVehicles[getElementModel(theVehicle)]) then
+   		elseif (fireVehicles[getElementModel(theVehicle)]) then
    			setVehicleHeadLightColor(theVehicle, 0, 255, 0)
-   		elseif(medicVehicles[getElementModel(theVehicle)]) then
+   		elseif (medicVehicles[getElementModel(theVehicle)]) then
    			setVehicleHeadLightColor(theVehicle, 255, 0, 0)
+		else
+			setVehicleHeadLightColor(theVehicle, 255, 0, 0)
    		end
 		setVehicleLightState(theVehicle, 0, 0)
 		setVehicleLightState(theVehicle, 1, 1)
