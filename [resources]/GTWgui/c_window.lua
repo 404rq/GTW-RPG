@@ -26,11 +26,12 @@ function createWindow(x, y, width, height, text, relative, source_resource)
 		triggerServerEvent("GTWgui.addToRefreshList", resourceRoot, source_resource)
 	end
 
-	-- Add a cloose button
-	local close_button = guiCreateButton(width-30, 0, 30, 28, "X", false, window)
-	addEventHandler("onClientGUIClick", close_button, function()
-		guiSetVisible(window, false)
-	end)
+	-- Add a close button TODO: repair this
+	--local close_button = guiCreateButton(width-30, 0, 30, 28, "X", false, window)
+	--addEventHandler("onClientGUIClick", close_button, function()
+	--	guiSetVisible(window, false)
+	--	showCursor(false, false)
+	--end)
 
 	-- Apply the new font style of the GUI
 	guiSetFont(winTitle, winTitleFont)
