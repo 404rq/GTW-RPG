@@ -58,22 +58,13 @@ end
 --[[ Open the menu GUI to choose food ]]--
 function open_menu(plr, r_type)
 	initialize_menu_choices(r_type)
-	--[[else
-		if img1 and isElement(img1) then destroyElement(img1) end
-		if img2 and isElement(img2) then destroyElement(img2) end
-		if img3 and isElement(img3) then destroyElement(img3) end
-		if img4 and isElement(img4) then destroyElement(img4) end
-		img1 = guiCreateStaticImage(10, 23, 160, 77, "img/PIZHEAL.png", false, win_menu)
-		img2 = guiCreateStaticImage(10, 140, 160, 77, "img/PIZHIG.png", false, win_menu)
-		img3 = guiCreateStaticImage(170, 23, 160, 77, "img/PIZLOW.png", false, win_menu)
-		img4 = guiCreateStaticImage(170, 140, 160, 77, "img/PIZMED.png", false, win_menu)
-	end]]
 	guiSetVisible(win_menu, true)
 	showCursor(true)
 end
 addEvent("GTWfastfood.gui.show",true)
 addEventHandler("GTWfastfood.gui.show", root, open_menu)
 
+--[[ Close the menu ]]--
 function close_menu()
 	guiSetVisible(win_menu, false)
 	showCursor(false)
@@ -106,7 +97,11 @@ function menu_click()
    		cooldown = setTimer(function() end, 200, 1)
   	end
 end
-addEventHandler("onClientGUIClick", root, menu_click)
+addEventHandler("onClientGUIClick", btn_close, menu_click)
+addEventHandler("onClientGUIClick", btn_choice_1, menu_click)
+addEventHandler("onClientGUIClick", btn_choice_2, menu_click)
+addEventHandler("onClientGUIClick", btn_choice_3, menu_click)
+addEventHandler("onClientGUIClick", btn_choice_4, menu_click)
 
 --[[ Protect fastfood workers from being killed ]]--
 function protect_worker(attacker)
