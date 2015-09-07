@@ -20,6 +20,7 @@
     	<script src="food_s.lua" type="server" />
     	<script src="food_c.lua" type="client" />
 
+        <!-- Fast food restaurants -->
     	<file src="img/BURHEAL.png" />
 	<file src="img/BURHIG.png" />
 	<file src="img/BURLOW.png" />
@@ -32,4 +33,14 @@
 	<file src="img/PIZHIG.png" />
 	<file src="img/PIZLOW.png" />
 	<file src="img/PIZMED.png" />
+
+        <!-- Fast food trucks -->
+        <file src="img/ICEPLATE.jpg" />
+        <file src="img/ICETREE.jpg" />
+        <file src="img/ICESIX.jpg" />
+        <file src="img/ICEALL.jpg" />
+        <file src="img/HOTSMALL.jpg" />
+        <file src="img/HOTMED.jpg" />
+        <file src="img/HOTBIG.jpg" />
+        <file src="img/BEER.jpg" />
 </meta>
