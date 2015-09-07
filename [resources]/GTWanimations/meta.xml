@@ -1,0 +1,22 @@
+<!--
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+-->
+
+<meta>
+    <info author="GTWGames" version="41" name="Animations" decription="Animations system with gui" type="script" />
+    <script src="data.lua" type="shared" />
+    <script src="animations_c.lua" type="client" />
+    <script src="animations_s.lua" type="server" />
+</meta>
