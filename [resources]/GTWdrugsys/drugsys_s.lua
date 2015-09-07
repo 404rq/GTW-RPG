@@ -75,7 +75,7 @@ end)
 
 sellMarkers = {}
 
-addCommandHandler("sell",
+addCommandHandler("selldrugs",
 function(plr)
 	if not getPlayerTeam(plr) or getPlayerTeam(plr) ~= getTeamFromName("Criminals") then return end
  	if isElement(sellMarkers[plr]) then
@@ -86,7 +86,7 @@ function(plr)
 		toggleAllControls(plr, true)
 		setPedAnimation(plr, false)
 		exports.GTWtopbar:dm("Drugs: You're no longer selling drugs", plr, 255, 100, 0)
-		bindKey(plr, "w", "down", "sell")
+		bindKey(plr, "w", "down", "selldrugs")
 	else
 		local MaxWeed = getElementData(plr, "Weed") or 0
 		local MaxGod = getElementData(plr, "God") or 0
@@ -106,7 +106,7 @@ function(plr)
 			setPedAnimation(plr, "DEALER", "DEALER_IDLE", -1, true, false)
 			exports.GTWtopbar:dm("Drugs: You're selling drugs, use /sell to stop selling", plr, 255, 100, 0)
 		end
-		unbindKey(plr, "w", "down", "sell")
+		unbindKey(plr, "w", "down", "selldrugs")
 	end
 end)
 
