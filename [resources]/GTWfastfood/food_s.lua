@@ -182,9 +182,10 @@ end
 --[[ This function validates if a food truck still exists and are allowed to sell ]]--
 function validate_food_truck(veh, cx,cy,cz, marker)
 	-- Make sure the vehicle is an existing vehicle
+	if not marker then return end
 	if not veh or not isElement(veh) or getElementType(veh) ~= "vehicle" then
 		-- Destroy validator timer
-		local t_validator = getElementData(food_truck, "GTWfastfood.validatorTimer")
+		local t_validator = getElementData(marker, "GTWfastfood.validatorTimer")
 		if isTimer(t_validator) then
 			killTimer(t_validator)
 		end
