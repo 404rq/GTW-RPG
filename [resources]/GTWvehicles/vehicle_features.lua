@@ -48,53 +48,27 @@ function toggle_engine(plr, command)
     		getElementData(veh,"owner") == getAccountName(getPlayerAccount(plr))) or
     		getElementData(veh, "hijack") or getElementData(veh, "npc")) then
 	    	if getVehicleEngineState(veh) then
-		        setVehicleEngineState(veh, false)
-		        setVehicleOverrideLights(veh, 1)
+                        -- Train engine cannot be turned off, train can only be stopped
 		        if getVehicleType(veh) == "Train" then
-		        	local sx, sy, sz = getElementVelocity(veh)
-					local actualspeed =(sx^2 + sy^2 + sz^2)^(0.5)
-					local kmh = actualspeed * 180
-		        	if kmh < 5 then
-		        		setElementFrozen(veh, true)
-		        		setTrainSpeed(veh, 0)
-		        		for i=1, 20 do
-            				if getVehicleTowedByVehicle(veh) then
-								local veh2 = getVehicleTowedByVehicle(veh)
-								setVehicleOverrideLights(veh2, 1)
-								setVehicleEngineState(veh2, false)
-								setElementFrozen(veh2, true)
-		        				setTrainSpeed(veh2, 0)
-								veh = getVehicleTowedByVehicle(veh)
-							end
-						end
-		        	else
-		        		exports.GTWtopbar:dm("Slow down before turning off the engine!", plr, 255, 0, 0)
-		        	end
+                                setTrainSpeed(veh, 0)
+                                toggleControl(plr, "accelerate", false)
+                                toggleControl(plr, "brake_reverse", false)
 		        else
+                                setVehicleEngineState(veh, false)
+        		        setVehicleOverrideLights(veh, 1)
 		        	setControlState(plr, "handbrake", true)
 		        end
-		    elseif tonumber(getElementData(veh, "vehicleFuel")) > 0 then
-		    	setVehicleEngineState(veh, true)
-		    	setVehicleOverrideLights(veh, 0)
-		    	if getVehicleType(veh) == "Train" then
-		        	setElementFrozen(veh, false)
-		        	for i=1, 20 do
-            			if getVehicleTowedByVehicle(veh) then
-							local veh2 = getVehicleTowedByVehicle(veh)
-							setVehicleOverrideLights(veh2, 0)
-							setVehicleEngineState(veh2, true)
-							setElementFrozen(veh2, false)
-							veh = getVehicleTowedByVehicle(veh)
-						end
-					end
-		        else
+		elseif tonumber(getElementData(veh, "vehicleFuel")) > 0 then
+		    	if getVehicleType(veh) ~= "Train" then
 		        	setControlState(plr, "handbrake", false)
+                                setVehicleEngineState(veh, true)
+        		    	setVehicleOverrideLights(veh, 0)
 		        end
 		    end
 		else
 			exports.GTWtopbar:dm("You don't have the keys to this vehicle!", plr, 255, 0, 0)
 		end
-    end
+        end
 end
 addCommandHandler("engine", toggle_engine)
 addCommandHandler("engineon", toggle_engine)
