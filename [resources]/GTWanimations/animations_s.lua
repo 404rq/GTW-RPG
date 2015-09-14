@@ -55,8 +55,12 @@ function start_anim(plr, cmd)
 	-- Validate Command
 	if not cmd_anim_map[cmd] then return end
 
+	-- Special case with looping animations
+	local anim_loop = true
+	if cmd == "handsup" then anim_loop = false end
+
 	-- Start animation
-    	setPedAnimation(plr, cmd_anim_map[cmd][1], cmd_anim_map[cmd][2], -1, true, false )
+    	setPedAnimation(plr, cmd_anim_map[cmd][1], cmd_anim_map[cmd][2], -1, anim_loop, false)
     	bindKey(plr, "w", "down", "stopanim")
 end
 addCommandHandler("handsup", start_anim)
