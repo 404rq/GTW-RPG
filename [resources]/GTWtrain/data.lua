@@ -20,9 +20,9 @@ Settings = {
 	update_sync_time	= 1000,          -- Time between each sync update
 	slow_speed		= 2,             -- Definition of slow speed
 	station_stop_time_ms	= 14000,         -- Time to stop at stations
-        max_track_distance      = 180,           -- How far away from the tracks can a player be before a train is created
+        max_track_distance      = 200,           -- How far away from the tracks can a player be before a train is created
         min_track_distance      = 80,            -- How close to the tracks can nay player be before a train is spawned
-	debug_level		= 2,             -- How many debug messages should display in server console
+	debug_level		= 0,             -- How many debug messages should display in server console
 }
 
 --[[ All train data are stored in this table ]]--

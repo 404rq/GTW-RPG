@@ -138,7 +138,7 @@ function sync_train_speed(train)
 		return
 	end
 
-	-- Check that there are players nearby
+	-- Check if there are players nearby
 	local x,y,z = getElementPosition(train)
 	local plr_dist = 9999
 	for k,v in pairs(getElementsByType("player")) do
@@ -147,17 +147,17 @@ function sync_train_speed(train)
 		if plr_dist > plr_dist2 then
 			plr_dist = plr_dist2
 		end
-
 	end
 
-	-- Destroy the train if there's no nearby players
-	if plr_dist > 400 then
-		destroy_train(d_train)
+	-- Destroy the train if the nearest player is more than 300m away
+	if plr_dist > 300 then
+		destroy_train(train)
+		return
 	end
 
 	-- Get the target speed
 	local dist, s_type, dir, t_type, tx,ty,tz, speed = get_next_node(x,y,z)
-	local cx,cy,cz = getElementPosition(Trains.cars[train][math.floor(#Trains.cars[train]/2)])
+	local cx,cy,cz = getElementPosition(train)
 	local center_dist = nearest_station(cx,cy,cz)
 	local curr_speed = getTrainSpeed(train)*160
 
@@ -262,6 +262,7 @@ function create_train(plr, cmd, args)
 		if args == "1" then direction = true end
 	end
 	setTrainDirection(new_train, direction)
+
 	if direction then
 		setTrainSpeed(new_train, math.abs(30/160))	-- Clockwise
 	else
@@ -273,13 +274,40 @@ function create_train(plr, cmd, args)
 	-- Add a new entry in the data table
 	Trains.cars[new_train] = { }
 
-	-- Generate some random cars
-	local front_car = new_train
+	-- Add an extra engine if freight train
 	local max_cars = 7
-	if engine_ID == 449 then
-		max_cars = 2
+	local start_at = 1
+	local t_length = math.random(2, max_cars)
+	local front_car = new_train
+	if t_length > 0 then
+		local tmp_ID = 537
+		if engine_ID == 538 then tmp_ID = 538 end
+
+		-- Calculate position relative to the engine
+		local rx,ry,rz = getElementRotation(front_car)
+		tx = 20 * math.sin(rz)
+		ty = 20 * math.cos(rz)
+
+		-- Create a second engine
+		local engine2 = createVehicle(tmp_ID, tx,ty,tz, 0,0,0, "")
+
+		-- Attach car to the train
+		attachTrailerToVehicle(front_car, engine2)
+		--setTrainDirection(engine2, not direction)
+
+		-- Add car to collection
+		Trains.cars[new_train][start_at] = engine2
+
+		-- Update front_car (the car in front of the next one)
+		front_car = engine2
+		start_at = 2
 	end
-	for index=1, math.random(2, max_cars) do
+
+	-- Generate some random cars
+	if engine_ID == 449 then
+		t_length = math.random(1, 2)
+	end
+	for index=start_at, t_length do
 		-- Generate a train type
 		local car_ID = 569
 		if engine_ID == 537 and math.random(1,11) > 8 then
@@ -315,9 +343,14 @@ function create_train(plr, cmd, args)
 	triggerClientEvent(plr, "GTWtrain.onStreamOut", plr, new_train)
 
 	-- Use the horn
-	exports.GTWtrainhorn:triggerTrainHorn(new_train)
+	use_horn(new_train)
 end
 addCommandHandler("maketrain", create_train)
+
+--[[ Helper function to execute train horn ]]--
+function use_horn(t_engine)
+	exports.GTWtrainhorn:triggerTrainHorn(t_engine)
+end
 
 --[[ Gather points indicating where the tracks are (Development only) ]]--
 function write_location(plr, cmd)
@@ -398,14 +431,16 @@ function destroy_train(d_train)
 	-- Destroy attached cars
 	for k,v in ipairs(Trains.cars[d_train]) do
 		if not isElement(v) then break end
-		if Settings.debug_level > 0 then
-			local tx,ty,tz = getElementPosition(v)
-			outputServerLog("Destroyed train at: {"..tx..", "..ty..", "..tz.."}")
-		end
 		destroyElement(v)
 		Trains.cars[d_train][k] = nil
 	end
 	Trains.cars[d_train] = nil
+
+	-- Write to debug logs
+	if Settings.debug_level > 0 then
+		local tx,ty,tz = getElementPosition(d_train)
+		outputServerLog("Destroyed train at: {"..tx..", "..ty..", "..tz.."}")
+	end
 
 	-- Destroy the engine
 	destroyElement(d_train)

@@ -22,6 +22,7 @@ end
 --[[ Check when the train streams out and destroys it ]]--
 function check_stream_out(c_train)
     	addEventHandler("onClientElementStreamOut", c_train, stream_out_train)
+	setElementStreamable(c_train, false)
 end
 addEvent("GTWtrain.onStreamOut", true)
 addEventHandler("GTWtrain.onStreamOut", root, check_stream_out)
