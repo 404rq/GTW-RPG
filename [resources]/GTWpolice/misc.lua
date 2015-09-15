@@ -15,7 +15,8 @@
 ]]--
 
 -- Armor pickups
-crimWantedCooldown = { }
+crimWantedCooldown	= { }
+emlightCounter		= { }
 armor_pickups = {
 	[1]={ 1565.52734375, -1635.310546875, 13.550964355469 },
 	[2]={ 3183.548828125, -1984.7590332031, 11.262499809265 },
@@ -25,6 +26,7 @@ armor_pickups = {
 	[6]={ -222.185546875, 988.0732421875, 19.630926132202 },
 	[7]={ -1389.2841796875, 2628.666015625, 55.984375 },
 	[8]={ -2241.72265625, 2318.0166015625, 4.984375 },
+	[9]={ -2977.486328125, 2243.716796875, 7.2578125 },
 }
 
 for ww=1, #armor_pickups do
@@ -32,14 +34,18 @@ for ww=1, #armor_pickups do
 	addEventHandler("onPickupHit", aPickup, function(plr)
 		if not isLawUnit(plr) and not isTimer(crimWantedCooldown[plr]) then
 		   	-- Set the wanted level
-    		exports.GTWwanted:setWl(plr, 0.2, 15, "You comitted the crime of burglary of armor in government building!")
-   			crimWantedCooldown[plr] = setTimer(function() end, 60000, 1)
+    			exports.GTWwanted:setWl(plr, 0.2, 15, "You comitted the crime of burglary of armor in government building!")
+   				crimWantedCooldown[plr] = setTimer(function() end, 60000, 1)
    		end
 	end)
 end
 
 -- Emergency lights
 function toggleEmergencyLights(plr)
+	if not isTimer(emlightCounter[plr]) then
+		emlightCounter[plr] = setTimer(function() end, 1000, 1)
+		return
+	end
     	local theVehicle = getPedOccupiedVehicle(plr)
     	if(theVehicle and isElement(theVehicle) and getPedOccupiedVehicleSeat(plr) == 0) then
     		if not isTimer(light1[theVehicle]) and not isTimer(light2[theVehicle]) and
@@ -123,6 +129,7 @@ function()
     tracker_timers[source] = setTimer( syncTracker, 1000, 0, source )
     -- Bind the key to emergency lights
     bindKey(source, "H", "down", "emlight")
+    bindKey(source, "H", "up", "emlight")
 end)
 for k,v in pairs(getElementsByType("player")) do
 	tracker_timers[v] = setTimer( syncTracker, 1000, 0, v )
