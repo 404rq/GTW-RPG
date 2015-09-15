@@ -34,7 +34,7 @@ addEventHandler("GTWaccounts:onStatusReceive", root, function(msg, statusCode)
 end)
 
 -- Setup the login GUI (GTWgui must be running)
-function CreateLoginScreen()
+function make_login()
 	x,y = guiGetScreenSize()
 	window = exports.GTWgui:createWindow((x-350)/2, (y-450)/2, 350, 450, "Grand Theft Walrus", false )
 	loginButton = guiCreateButton(230,400,100,40,"Login",false,window)
@@ -164,7 +164,7 @@ end
 -- Display login screen to players who isn't currently logged in
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
-		setTimer(CreateLoginScreen, 1000, 1)
+		setTimer(make_login, 1000, 1)
 		showChat(false)
 		triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
 	end
