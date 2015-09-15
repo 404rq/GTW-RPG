@@ -83,23 +83,24 @@ function open_gate(plr, matching_dimension)
 	if not matching_dimension then return end
 	local ID = cols[source]
 	local px,py,pz = getElementPosition(plr)
-    if plr and isElement(plr) and getElementType(plr) == "player" and
-    	( getElementData(plr, "Group" ) == gate_data[ID][15] or
-    	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or
-    	getPlayerTeam(plr) == getTeamFromName("Staff")) and
-    	pz + 5 > gate_data[ID][4] and pz - 5 < gate_data[ID][4] then
-
-    	-- Open the gate
-        moveObject(gates[source], openSpeed, gate_data[ID][5], gate_data[ID][6], gate_data[ID][7] )
+    	if plr and isElement(plr) and getElementType(plr) == "player" and
+    		( getElementData(plr, "Group") == gate_data[ID][15] or
+    		getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or
+    		getPlayerTeam(plr) == getTeamFromName("Staff")) and
+    		pz + 5 > gate_data[ID][4] and pz - 5 < gate_data[ID][4] then
+    		-- Open the gate
+        	moveObject(gates[source], openSpeed, gate_data[ID][5], gate_data[ID][6], gate_data[ID][7] )
 	end
 end
+
 -- Gates close
 function close_gate(plr, matching_dimension)
 	if not matching_dimension then return end
-    local ID = cols[source]
-    if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or
-    	getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) then
-        moveObject(gates[source], openSpeed, gate_data[ID][2], gate_data[ID][3], gate_data[ID][4] )
+    	local ID = cols[source]
+	local plr_count = #getElementsWithinColShape(source, "player")
+    	if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or
+    		getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) and plr_count == 0 then
+        	moveObject(gates[source], openSpeed, gate_data[ID][2], gate_data[ID][3], gate_data[ID][4])
 	end
 end
 
