@@ -199,6 +199,7 @@ function sync_train_speed(train)
 
 			-- Make the train continue it's ride after given time
 			setTimer(station_status, Settings.station_stop_time_ms, 1, train, true)
+			setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, train)
 		end
 
 		-- Is this really the end of the track? Well then we stop until cleanup
@@ -344,11 +345,13 @@ function create_train(plr, cmd, args)
 
 	-- Use the horn
 	use_horn(new_train)
+	setTimer(use_horn, 10000, 1, new_train)
 end
 addCommandHandler("maketrain", create_train)
 
 --[[ Helper function to execute train horn ]]--
 function use_horn(t_engine)
+	if not t_engine or not isElement(t_engine) then return end
 	exports.GTWtrainhorn:triggerTrainHorn(t_engine)
 end
 
