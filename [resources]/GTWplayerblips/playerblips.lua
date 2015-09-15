@@ -56,6 +56,8 @@ function refreshAllBlips(resource)
 		for y, spectator in pairs(getElementsByType("player")) do
 			if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
+			elseif not getElementData(plr,"anon") then
+				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 99999.0, spectator)
 			end
 		end
 		colorUpdater[plr] = setTimer(updateBlipColor, 500, 0, plr)
@@ -81,6 +83,8 @@ function updatePlayerBlip(plr)
 	for y, spectator in pairs(getElementsByType("player")) do
 		if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
+		elseif not getElementData(plr,"anon") then
+			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 99999.0, spectator)
 		end
 	end
 	if not isTimer(colorUpdater[plr]) then
