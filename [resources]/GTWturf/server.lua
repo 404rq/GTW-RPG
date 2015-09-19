@@ -38,7 +38,7 @@ function turfPayout(query)
             		turfs_counter[row["owner"]] = turfs_counter[row["owner"]] + ((row["sizeX"] * row["sizeY"])/1000)
     		end
 	end
-	for w,player in ipairs(getElementsByType("player")) do
+	for w,player in pairs(getElementsByType("player")) do
 		if getElementData(player, "Group") and getElementData(player, "Group") ~= "None" then
 			local members = getGroupMembers(player)
 			local money = turfs_counter[getElementData(player,"Group")] or 0

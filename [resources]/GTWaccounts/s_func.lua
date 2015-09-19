@@ -17,123 +17,152 @@
 -- Attempts cache
 login_cache = {}
 
--- On login request
+--[[ On client login request attempt ]]--
+function client_login_attempt(user, pass)
+	-- Player is already logged in
+	if not getPlayerAccount(client) or not isGuestAccount(getPlayerAccount(client)) then
+		triggerClientEvent(source, "GTWaccounts:onClientPlayerLogin", client, getAccountName(getPlayerAccount(client)))
+		return
+	end
+
+	-- Get any account with the provided name "user"
+	local acc = getAccount(user)
+
+	-- Does the account exist?
+	if not acc then
+		return display_status("Account name was not found\nPress 'Register' to create\na new account and play.", client, 0)
+	end
+
+	-- Yes it does exist, let's try to login with the given password "pass"
+	if not logIn(client, acc, pass) then
+		return display_status("Incorrect password for\nthis account.", client, -1)
+	end
+
+	-- Tell the client that the login was successfull
+	triggerClientEvent(source, "GTWaccounts:onClientPlayerLogin", client, user)
+end
 addEvent("GTWaccounts:attemptClientLogin", true)
-addEventHandler("GTWaccounts:attemptClientLogin", root,
-	function (user, pass)
-		if isGuestAccount(getPlayerAccount(source)) then
-			local accnt = getAccount(user)
-			if not accnt then
-				return doStatus("Account name was not found\nPress 'Register' to create\na new account and play.", source, 0)
-			end
-			if not logIn(source, accnt, pass) then
-				return doStatus("Incorrect password for\nthis account.", source, -1)
-			end
-			triggerClientEvent(source, "GTWaccounts:onClientPlayerLogin", source, user)
-		else
-			triggerClientEvent(source, "GTWaccounts:onClientPlayerLogin", source, getAccountName(getPlayerAccount(source)))
-		end
-	end
-)
+addEventHandler("GTWaccounts:attemptClientLogin", root, client_login_attempt)
 
--- Kick after 3 failed login attempts
+--[[ Kick after 3 failed login attempts ]]--
+function kick_after_three_fails()
+	kickPlayer(client, "Calm down and read the status message before going insane!")
+end
 addEvent("GTWaccounts:kickClientSpammer", true)
-addEventHandler("GTWaccounts:kickClientSpammer", root,
-	function()
-		kickPlayer(client, "Calm down and read the status message before going insane!")
-	end)
+addEventHandler("GTWaccounts:kickClientSpammer", root, kick_after_three_fails)
 
--- On register request
-addEvent("GTWaccounts:onClientAttemptRegistration", true)
-addEventHandler("GTWaccounts:onClientAttemptRegistration", root,
-	function (user, pass, facc)
-		if user and pass then
-			-- Save current
-			local old_usr = user
-
-			-- Validate input
-			local char = "[^0-9a-zA-Z_]"
-			user = string.gsub(user, char, "")
-
-			local acn = getAccount(user)
-			if acn then
-				return doStatus("Account name is already in use, please try another one.", client, -1)
-			end
-			if old_usr ~= user then
-				return doStatus("Invalid user name, you may only use \nthe following symbols: 0-9, a-z, A-Z or _", client, -1)
-			end
-			local friend = getAccount(facc)
-			local acn = addAccount(user, pass)
-			if acn then
-				doStatus("You have registered! \nYou can now login.", source, 1)
-				if friend and acn ~= friend and not getAccountData(acn, "GTWaccounts.invite.acc") and
-					getAccountData(friend, "GTWaccounts.invite.serial") ~= getPlayerSerial(client) and
-					getAccountData(friend, "GTWaccounts.invite.ip") ~= getPlayerIP(client) then
-					local friendPlayer = getAccountPlayer(friend)
-					if friendPlayer then
-						givePlayerMoney(friendPlayer, 4000)
-						outputChatBox("#66FF00[GTW]#FFFFFF Your friend just joined the server, here's your welcome bonus of 4'000$", friendPlayer, 255, 255, 255, true)
-						setAccountData(acn, "GTWaccounts.invite.acc", facc)
-						-- Friend has received money from ip and serial ...
-						if friend then
-							setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(client))
-							setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(client))
-						end
-					else
-						setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
-						setAccountData(acn, "GTWaccounts.invite.acc", facc)
-						-- Friend has received money from ip and serial ...
-						if friend then
-							setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(client))
-							setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(client))
-						end
-					end
-				else
-					exports.GTWtopbar:dm("A welcome bonus has already been sent to this player", client, 255, 100, 0)
-				end
-			else
-				doStatus("Failed to add account.", client, -1)
-			end
-		else
-			doStatus("Expected username and password.", client, 0)
-		end
+--[[ On client registration attempt ]]--
+function client_registration_attempt(user, pass, facc)
+	if not user or not pass then
+		display_status("Expected username and password!", client, 0)
+		return
 	end
-)
 
--- Manage the invite bonus
-function sendInviteBonus(thePlayer, cmd, facc)
+	-- Save current
+	local old_usr = user
+
+	-- Validate input
+	local char = "[^0-9a-zA-Z_]"
+	user = string.gsub(user, char, "")
+
+	-- This account name has already been used (converted names are validated too)
+	local acn = getAccount(user)
+	if acn then
+		return display_status("Account name is already in use, please try another one.", client, -1)
+	end
+
+	-- Invalid symbold where used, tell the user how a proper account name are written
+	if old_usr ~= user then
+		return display_status("Invalid user name, you may only use \nthe following symbols: 0-9, a-z, A-Z or _", client, -1)
+	end
+
+	-- Check if there's a friend provided
 	local friend = getAccount(facc)
-	if friend and facc then
-		local acn = getPlayerAccount(thePlayer)
-		if acn ~= friend and not getAccountData(acn, "GTWaccounts.invite.acc") and
-			getAccountData(friend, "GTWaccounts.invite.serial") ~= getPlayerSerial(thePlayer) and
-			getAccountData(friend, "GTWaccounts.invite.ip") ~= getPlayerIP(thePlayer) then
-			local friendPlayer = getAccountPlayer(friend)
-			if friendPlayer then
-				givePlayerMoney(friendPlayer, 4000)
-				outputChatBox("#66FF00[GTW]#FFFFFF Your friend just joined the server, here's youre welcome bonus of 4'000$", friendPlayer, 255, 255, 255, true)
-				setAccountData(acn, "GTWaccounts.invite.acc", facc)
-				-- Friend has received money from ip and serial ...
-				setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(thePlayer))
-				setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(thePlayer))
-			else
-				setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
-				setAccountData(acn, "GTWaccounts.invite.acc", facc)
-				-- Friend has received money from ip and serial ...
-				setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(thePlayer))
-				setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(thePlayer))
-			end
-		else
-			exports.GTWtopbar:dm("Welcome bonus has already been sent to this player", thePlayer, 255, 100, 0)
+	local acn = addAccount(user, pass)
+
+	-- Shit, something went wrong, unable to add the account, check the
+	-- servers error log for further information
+	if not acn then
+		display_status("Failed to add account.", client, -1)
+		return
+	end
+
+	-- Alright we're in, now let's see if this guy has a friend or not
+	display_status("You have registered! \nYou can now login.", source, 1)
+
+	-- Check the friend so that it really is a friend and not some kind of troll
+	if not friend or acn == friend or getAccountData(acn, "GTWaccounts.invite.acc") or
+		getAccountData(friend, "GTWaccounts.invite.serial") == getPlayerSerial(client) or
+		getAccountData(friend, "GTWaccounts.invite.ip") == getPlayerIP(client) then
+		exports.GTWtopbar:dm("A welcome bonus has already been sent to this player", client, 255, 100, 0)
+		return
+	end
+
+	-- Looks like this member has a friend on the server, let's find out
+	local friendPlayer = getAccountPlayer(friend)
+	if friendPlayer then
+		givePlayerMoney(friendPlayer, 4000)
+		outputChatBox("#66FF00[GTW]#FFFFFF Your friend just joined the server, here's your welcome bonus of 4'000$", friendPlayer, 255, 255, 255, true)
+		setAccountData(acn, "GTWaccounts.invite.acc", facc)
+
+		-- Friend has received money from ip and serial ...
+		if friend then
+			setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(client))
+			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(client))
 		end
 	else
-		outputChatBox("Correct syntax: /sendinvitebonus <friends_account_name>", thePlayer, 255, 255, 255)
+		setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
+		setAccountData(acn, "GTWaccounts.invite.acc", facc)
+
+		-- Friend has received money from ip and serial ...
+		if friend then
+			setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(client))
+			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(client))
+		end
 	end
 end
-addCommandHandler("sendinvitebonus", sendInviteBonus)
+addEvent("GTWaccounts:onClientAttemptRegistration", true)
+addEventHandler("GTWaccounts:onClientAttemptRegistration", root, client_registration_attempt)
+
+--[[ Didn't knew about this feature? don't worry, you can still give your friend his invite bonus ]]--
+function send_invite_bonus(thePlayer, cmd, facc)
+	-- Is there a friend provided?
+	local friend = getAccount(facc)
+	if not friend or not facc then
+		outputChatBox("Correct syntax: /sendinvitebonus <friends_account_name>", thePlayer, 255, 255, 255)
+		return
+	end
+
+	-- Alright, we're good. Let's send the bonus
+	local acn = getPlayerAccount(thePlayer)
+	if acn ~= friend and not getAccountData(acn, "GTWaccounts.invite.acc") and
+		getAccountData(friend, "GTWaccounts.invite.serial") ~= getPlayerSerial(thePlayer) and
+		getAccountData(friend, "GTWaccounts.invite.ip") ~= getPlayerIP(thePlayer) then
+		local friendPlayer = getAccountPlayer(friend)
+		if friendPlayer then
+			givePlayerMoney(friendPlayer, 4000)
+			outputChatBox("#66FF00[GTW]#FFFFFF Your friend just joined the server, here's youre welcome bonus of 4'000$", friendPlayer, 255, 255, 255, true)
+			setAccountData(acn, "GTWaccounts.invite.acc", facc)
+
+			-- Friend has received money from ip and serial ...
+			setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(thePlayer))
+			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(thePlayer))
+		else
+			setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
+			setAccountData(acn, "GTWaccounts.invite.acc", facc)
+
+			-- Friend has received money from ip and serial ...
+			setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(thePlayer))
+			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(thePlayer))
+		end
+	else
+		exports.GTWtopbar:dm("Welcome bonus has already been sent to this player", thePlayer, 255, 100, 0)
+	end
+end
+addCommandHandler("sendinvitebonus", send_invite_bonus)
 
 -- Send status message to clients, code -1 = red, 0 = yellow, 1 = green
-function doStatus(msg, p, statusCode)
+function display_status(msg, p, statusCode)
 	return triggerClientEvent(p, "GTWaccounts:onStatusReceive", p, msg, statusCode)
 end
 
@@ -199,9 +228,9 @@ addEventHandler("onPlayerJoin", root,
 		s_display[source] = {}
 		s_text[source] = {}
 
-		s_text[source][1] = textCreateTextItem("Downloading resources, please wait...", 0.5, 0.5,1,200,200,200,255,2.2,"center","center",200)
-		s_text[source][2] = textCreateTextItem("#  www.gtw-games.org  #", 0.5, 0.91,1,200,200,200,255,1.4,"center","center",200)
-		s_text[source][3] = textCreateTextItem("Grand Theft Walrus # Real life/RPG", 0.5, 0.1,1,200,200,200,255,1.4,"center","center",200)
+		s_text[source][1] = textCreateTextItem("Welcome to RageQuit community!", 0.5, 0.5,1,200,200,200,255,2.2,"center","center",200)
+		s_text[source][2] = textCreateTextItem("#  www.404rq.com | forum.404rq.com | code.404rq.com | media.404rq.com  #", 0.5, 0.91,1,200,200,200,255,1.4,"center","center",200)
+		s_text[source][3] = textCreateTextItem("Please wait while we're downloading the GTW-RPG v3.0 game mode for you...", 0.5, 0.1,1,200,200,200,255,1.4,"center","center",200)
 
 		for w=1, #s_text[source] do
 		   	s_display[source][w] = textCreateDisplay()

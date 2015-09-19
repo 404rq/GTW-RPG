@@ -67,10 +67,10 @@ function arrest_or_taze(attacker, attackerweapon)
         setElementFrozen(source, false)
 
         -- Arrest suspect
-		set_control_states(source, false)
+	set_control_states(source, false)
 
         -- Add jail markers
-	    for k=1, #cells do
+	   for k=1, #cells do
 	    	if not marker[k] then
 	    		marker[k] = {}
 	    	end
@@ -87,8 +87,8 @@ function arrest_or_taze(attacker, attackerweapon)
     			setElementData(marker[k][source], "cell", k)
     			setElementData(marker[k][source], "release", cells[k][8])
 	    	addEventHandler("onMarkerHit", marker[k][source], deliverSuspect)
-	    end
-	    for j=1, #blips do
+	end
+	for j=1, #blips do
 	    	if not blipList[j] then
 	    		blipList[j] = {}
 	    	end
@@ -96,26 +96,27 @@ function arrest_or_taze(attacker, attackerweapon)
 	    		destroyElement(blipList[j][source])
 	    	end
 	    	blipList[j][source] = createBlip(blips[j][1], blips[j][2], blips[j][3], 30, 2, 0, 0, 0, 255, 5, 1500, attacker)
-	    end
+	end
 
-	    local weapon = { 0,0,0,0,0,0,0,0,0,0,0,0 }
-		local ammo = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	local weapon = { 0,0,0,0,0,0,0,0,0,0,0,0 }
+	local ammo = { 0,0,0,0,0,0,0,0,0,0,0,0 }
 
 		-- Weapons save
-		for k,wep in ipairs(weapon) do
-			weapon[k] = getPedWeapon(source, k)
-			setPedWeaponSlot(source, getSlotFromWeapon(weapon[k]))
-			ammo[k] = getPedTotalAmmo(source, k)
-		end
-		local ccx,ccy,ccz = getElementPosition(source)
-		local rrx,rry,rrz = getElementRotation(source)
-		spawnPlayer(source, ccx, ccy, ccz, rrz, getElementModel(source), getElementInterior(attacker), getElementDimension(attacker), getPlayerTeam(source))
-		-- Weapons restore
-		for k,wep in ipairs(weapon) do
-		   	if weapon[k] and ammo[k] then
-		   		giveWeapon(source, weapon[k], ammo[k], false)
-		   	end
-		end
+	for k,wep in ipairs(weapon) do
+		weapon[k] = getPedWeapon(source, k)
+		setPedWeaponSlot(source, getSlotFromWeapon(weapon[k]))
+		ammo[k] = getPedTotalAmmo(source, k)
+	end
+	local ccx,ccy,ccz = getElementPosition(source)
+	local rrx,rry,rrz = getElementRotation(source)
+	spawnPlayer(source, ccx, ccy, ccz, rrz, getElementModel(source), getElementInterior(attacker), getElementDimension(attacker), getPlayerTeam(source))
+	-- Weapons restore
+	for k,wep in ipairs(weapon) do
+	   	if weapon[k] and ammo[k] then
+	   		giveWeapon(source, weapon[k], ammo[k], false)
+	   	end
+	end
+	
 	-- Taze suspect
 	local isJailed = exports.GTWjail:isJailed(source)
 	elseif attackerweapon == 23 and wl > 0 and getPlayerWantedLevel(source) > 0 and

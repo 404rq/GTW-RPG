@@ -14,6 +14,51 @@
 ********************************************************************************
 ]]--
 
+--[[ Fast food trucks ]]--
+fastfood_trucks = {
+	[423] = true,
+	[588] = true
+}
+
+-- Menu choices table
+menu_choices = {
+	["cluckin_bell"] = {
+		["title"] = "Clucki'n Bell menu",
+		["choice_1"]={ "Cluckin' Little Meal", 	"img/CLUHEAL.png"},
+		["choice_2"]={ "Cluckin' Big Meal", 	"img/CLUHIG.png"},
+		["choice_3"]={ "Cluckin' Big Meal", 	"img/CLULOW.png"},
+		["choice_4"]={ "Cluckin' Big Meal", 	"img/CLUMED.png"},
+	},
+	["burger"] = {
+		["title"] = "Burger Shot menu",
+		["choice_1"]={ "Moo kids Meal", 	"img/BURHEAL.png"},
+		["choice_2"]={ "Beef Tower Meal", 	"img/BURHIG.png"},
+		["choice_3"]={ "Meat Stack Meal", 	"img/BURLOW.png"},
+		["choice_4"]={ "Salad Meal", 		"img/BURMED.png"},
+	},
+	["pizza"] = {
+		["title"] = "Well Stacked Pizza Co. menu",
+		["choice_1"]={ "Buster", 		"img/BURHEAL.png"},
+		["choice_2"]={ "Double D-Luxe", 	"img/BURHIG.png"},
+		["choice_3"]={ "Full rack", 		"img/BURLOW.png"},
+		["choice_4"]={ "Salad Meal", 		"img/BURMED.png"},
+	},
+	["icecream"] = {
+		["title"] = "Mr. Whoopee menu",
+		["choice_1"]={ "Whoopee's special",	"img/ICEPLATE.jpg"},
+		["choice_2"]={ "Whoopee's six pack", 	"img/ICESIX.jpg"},
+		["choice_3"]={ "Whoopee's choice", 	"img/ICETREE.jpg"},
+		["choice_4"]={ "Whoopee's all in", 	"img/ICEALL.jpg"},
+	},
+	["hotdogs"] = {
+		["title"] = "Hotdog van menu",
+		["choice_1"]={ "Small hotdog", 		"img/HOTSMALL.jpg"},
+		["choice_2"]={ "Big hotdog", 		"img/HOTBIG.jpg"},
+		["choice_3"]={ "Skinny hotdog", 	"img/HOTMED.jpg"},
+		["choice_4"]={ "Beer", 			"img/BEER.jpg"},
+	},
+}
+
 -- Markers inside to buy fast food
 markers = {
 	-- x, y, z, dimension, interior, type, storeLocation
@@ -160,11 +205,11 @@ blips = {
 
 -- Food prices
 prices = {
-	3,6,7,4
+	6,12,14,8
 }
 -- Food health increase
 health = {
-	6,12,15,14
+	6,12,14,8
 }
 
 -- object arrays

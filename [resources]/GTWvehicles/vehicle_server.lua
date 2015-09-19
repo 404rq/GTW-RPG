@@ -79,7 +79,6 @@ function spawn_vehicle(vehID, rot, price, spawnx, spawny, spawnz)
 		    		x,y,z = spawnx,spawny,spawnz
 		    	end
 			   	vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot)
-			   	setVehicleFuelTankExplodable(vehicles[client], true)
 			   	setVehicleHandling(vehicles[client], "headLight ", "big")
 			   	setVehicleHandling(vehicles[client], "tailLight", "big")
 
@@ -364,11 +363,15 @@ end
 addCommandHandler("drop", dropPlayer)
 
 -- Turn a train around
-function turnTrain(player, command)
-	local train_engine = getPedOccupiedVehicle(player)
+function turnTrain(plr, command)
+	local train_engine = getPedOccupiedVehicle(plr)
 	if train_engine and getElementType(train_engine) == "vehicle" and
-		getVehicleType(train_engine) == "Train" and not getVehicleEngineState(train_engine) then
+		getVehicleType(train_engine) == "Train" and math.abs(getTrainSpeed(train_engine)) < 0.01 then
 		setTrainDirection(train_engine, not getTrainDirection(train_engine))
+		exports.GTWtopbar:dm("Successfully turned the train", plr, 0, 255, 0)
+	elseif train_engine and getElementType(train_engine) == "vehicle" and
+		getVehicleType(train_engine) == "Train" and math.abs(getTrainSpeed(train_engine)) >= 0.01 then
+		exports.GTWtopbar:dm("Stop the train before turning it's direction!", plr, 255, 0, 0)
 	end
 end
 addCommandHandler("turntrain", turnTrain)

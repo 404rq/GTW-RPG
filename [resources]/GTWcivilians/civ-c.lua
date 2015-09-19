@@ -296,6 +296,10 @@ function staffWork(cmdName, ID)
 	 		ID = "Police Officer"
 	 	elseif cmdName == "sapd" then
 	 		ID = "SAPD Officer"
+                elseif cmdName == "swat" then
+	 		ID = "SWAT Officer"
+                elseif cmdName == "fbi" then
+	 		ID = "FBI agent"
 	 	elseif cmdName == "army" then
 	 		ID = "Armed Forces"
 		end
@@ -303,7 +307,7 @@ function staffWork(cmdName, ID)
 
 	-- Check if a user is in the staff team, if so, allow access
 	local is_staff = exports.GTWstaff:isStaff(localPlayer)
-	if (not is_staff and restricted_jobs[ID] and restricted_jobs[ID] ~= getElementData(localPlayer, "Group")) or (not restricted_jobs[ID] and not is_staff) then
+	if restricted_jobs[ID] and (not is_staff or restricted_jobs[ID] ~= getElementData(localPlayer, "Group")) then
 		exports.GTWtopbar:dm( ID..": Only staff and official groups can use this command!", 255, 100, 0 )
 		return
 	end
@@ -327,6 +331,8 @@ addCommandHandler( "goironminer", staffWork )
 addCommandHandler( "golaw", staffWork )
 
 -- Group commands
+addCommandHandler( "fbi", staffWork )
+addCommandHandler( "swat", staffWork )
 addCommandHandler( "sapd", staffWork )
 addCommandHandler( "army", staffWork )
 

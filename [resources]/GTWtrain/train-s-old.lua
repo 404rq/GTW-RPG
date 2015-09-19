@@ -405,12 +405,7 @@ function cleanUp( trainID )
 	end
 end
 
-addCommandHandler("gtwinfo", function(plr, cmd)
-	outputChatBox("[GTW-RPG] "..getResourceName(
-	getThisResource())..", by: "..getResourceInfo(
-        getThisResource(), "author")..", v-"..getResourceInfo(
-        getThisResource(), "version")..", is represented", plr)
-end)
+
 
 -- Clean up and remove attached data
 function quitPlayer( )
