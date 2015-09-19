@@ -57,7 +57,7 @@ function refreshAllBlips(resource)
 			if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 			elseif not getElementData(plr,"anon") then
-				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 99999.0, spectator)
+				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
 			end
 		end
 		colorUpdater[plr] = setTimer(updateBlipColor, 500, 0, plr)
@@ -84,13 +84,16 @@ function updatePlayerBlip(plr)
 		if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 		elseif not getElementData(plr,"anon") then
-			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 99999.0, spectator)
+			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
 		end
 	end
 	if not isTimer(colorUpdater[plr]) then
 		colorUpdater[plr] = setTimer(updateBlipColor,500,0,plr)
 	end
 end
+
+-- Force blips update when "anon" command is used
+addCommandHandler("anon", updatePlayerBlip)
 
 --[[ Clean up when a player leaves ]]--
 function onPlayerQuit()
