@@ -19,6 +19,28 @@ setWeaponProperty(38, "pro", "damage", 2)
 setWeaponProperty(38, "std", "damage", 2)
 setWeaponProperty(38, "poor", "damage", 2)
 
+-- Reduce health when falling into cold water
+setTimer(function()
+	for k,v in pairs(getElementsByType("player")) do
+		if isElementInWater(v) then
+			local health = getElementHealth(v)
+			local new_health = health - 10
+			local x,y,z = getElementPosition(v)
+			-- Check if the area is north west (SF), south LS or if it's night
+			local hour, minutes = getTime()
+			if (y > 0 and x < 0) or (y < -2000 and x > 0) or hour > 18 or hour < 8 then
+				if new_health > 0 then
+					setElementHealth(v, new_health)
+					exports.GTWtopbar:dm("This water is cold! get up before you die!", v, 255, 0, 0)
+				else
+					killPed(v)
+					exports.GTWtopbar:dm("You frooze to death in the cold water", v, 100, 255, 100)
+				end
+			end
+		end
+	end
+end, 3000, 0)
+
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
