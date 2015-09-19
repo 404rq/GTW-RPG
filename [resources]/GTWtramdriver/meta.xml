@@ -1,0 +1,22 @@
+<!--
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		http://forum.404rq.com/bug-reports/
+	Suggestions:		http://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+-->
+
+<meta>
+    	<info author="GTWGames" name="train driver job" description="traindriver job" version="46" type="script" />
+	<script src="data.lua" type="shared" />
+    	<script src="tram_s.lua" type="server" />
+	<script src="tram_c.lua" type="client" />
+</meta>
