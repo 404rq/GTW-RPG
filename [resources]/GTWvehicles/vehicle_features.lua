@@ -54,16 +54,21 @@ function toggle_engine(plr, command)
                                 toggleControl(plr, "accelerate", false)
                                 toggleControl(plr, "brake_reverse", false)
 		        else
-                                setVehicleEngineState(veh, false)
         		        setVehicleOverrideLights(veh, 1)
 		        	setControlState(plr, "handbrake", true)
 		        end
+                        setVehicleEngineState(veh, false)
+                        exports.GTWtopbar:dm("Engine: Turned off successfully", plr, 255, 100, 0)
 		elseif tonumber(getElementData(veh, "vehicleFuel")) > 0 then
 		    	if getVehicleType(veh) ~= "Train" then
-		        	setControlState(plr, "handbrake", false)
-                                setVehicleEngineState(veh, true)
+		        	setControlState(plr, "handbrake", false)                                
         		    	setVehicleOverrideLights(veh, 0)
+                        else
+                                toggleControl(plr, "accelerate", true)
+                                toggleControl(plr, "brake_reverse", true)
 		        end
+                        setVehicleEngineState(veh, true)
+                        exports.GTWtopbar:dm("Engine: Turned on successfully", plr, 255, 100, 0)
 		    end
 		else
 			exports.GTWtopbar:dm("You don't have the keys to this vehicle!", plr, 255, 0, 0)
