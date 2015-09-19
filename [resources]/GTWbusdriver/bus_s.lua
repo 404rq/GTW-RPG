@@ -17,12 +17,26 @@
 -- Globally accessible tables
 local bus_payment_timers 	= { }
 
+function find_nearest_stop(plr, route)
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return 1 end
+	local x,y,z = getElementPosition(plr)
+	local ID,total_dist = 1,9999
+	for k=1, #bus_routes[route] do
+		local dist = getDistanceBetweenPoints3D(bus_routes[route][k][1],bus_routes[route][k][2],bus_routes[route][k][3], x,y,z)
+		if dist < total_dist then
+			total_dist = dist
+			ID = k
+		end
+	end
+	return ID
+end
+
 --[[ Calculate the ID for next busstop and inform the passengers ]]--
 function create_new_bus_stop(plr, ID)
 	-- There must be a route at this point
 	if not plr or not getElementData(plr, "GTWbusdriver.currentRoute") then return end
 
-	-- Did we reach the end of the line yet? if so then restart
+	-- Did we reach the end of the line yet? if so then restart the same route
 	if #bus_routes[getElementData(plr, "GTWbusdriver.currentRoute")] < ID then
 		ID = 1;
 		setElementData(plr, "GTWbusdriver.currentStop", 1)
@@ -47,6 +61,9 @@ function create_new_bus_stop(plr, ID)
 		setTimer(delayed_message, 5000, 1, "Next stop: "..getZoneName(x,y,z)..
 			" in "..getZoneName(x,y,z, true), pa, 55,200, 0)
 	end
+
+	-- Save the stop ID
+	setElementData(plr, "GTWbusdriver.currentStop", ID)
 end
 
 --[[ Drivers get's a route asigned while passengers has to pay when entering the bus ]]--
@@ -88,8 +105,8 @@ addEventHandler("onVehicleEnter", root, on_bus_enter)
 function start_new_route(route)
     	setElementData(client, "GTWbusdriver.currentRoute", route)
 	if not getElementData(client, "GTWbusdriver.currentStop") then
-		create_new_bus_stop(client, 1)
-		setElementData(client, "GTWbusdriver.currentStop", 1)
+		local first_stop = find_nearest_stop(client, route)
+		create_new_bus_stop(client, first_stop)
 	else
 		create_new_bus_stop(client, getElementData(client, "GTWbusdriver.currentStop"))
 	end
@@ -192,8 +209,8 @@ addCommandHandler("busdoor", toggle_bus_door)
 
 --[[ A little hack for developers to manually change the route ID ]]--
 function set_manual_stop(plr, cmd, ID)
-	local is_dev = exports.GTWstaff:is_staff(plr)
-	if not is_dev then return end
+	local is_staff = exports.GTWstaff:isStaff(plr)
+	if not is_staff then return end
 	setElementData(plr, "GTWbusdriver.currentStop", tonumber(ID) or 1)
 	create_new_bus_stop(plr, tonumber(ID) or 1)
 end
