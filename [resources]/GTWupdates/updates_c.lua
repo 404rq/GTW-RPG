@@ -35,39 +35,25 @@ end)
 -- Refresh and toggle updates list
 function requestUpdates()
 	-- Request updates list from RageQuit network (unavailable)
-	--[[oldText = guiGetText(text)
+	oldText = guiGetText(text)
 	if oldText == "" then
-		guiSetText(text, "Connecting to hub.404rq.com for latest updates, please wait...")
+		guiSetText(text, "Connecting to 404rq.com/updates/ for latest updates, please wait...")
 	end
 	triggerServerEvent("GTWupdates.request", resourceRoot)
 	function onResponseFromServer(message)
 	    -- Report changes to online players
 	    if oldText ~= message and guiGetVisible(window) then
-	    	guiSetText(text,message)
-	    	exports.GTWtopbar:dm("Updates downloaded from: gs.gtw-games.org", 180, 180, 180 )
+	    	guiSetText(text, message)
+	    	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/", 180, 180, 180 )
 	    elseif oldText ~= message then
-	    	guiSetText(text,message)
-	    	exports.GTWtopbar:dm("Updates downloaded from: gs.gtw-games.org! Use /updates to see what's new", 180, 180, 180 )
+	    	guiSetText(text, message)
+	    	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/! Use /updates to see what's new", 180, 180, 180 )
 	    end
 	end
 	addEvent( "GTWupdates.respond", true )
-	addEventHandler("GTWupdates.respond", localPlayer, onResponseFromServer)]]--
-
-	-- Load updates from local file
-	--[[local update_file = fileOpen("updates.txt", true)
-	local content = ""
-	if not update_file then return end
-	local buffer
-	while not fileIsEOF(update_file) do
-	 	buffer = fileRead(update_file, 500)
-		content = content..buffer
-	end
-	fileClose(update_file)]]--
-
-	-- Add text to list
-	guiSetText(text, str_updates)
+	addEventHandler("GTWupdates.respond", localPlayer, onResponseFromServer)
 end
-setTimer(requestUpdates,10000,0)
+setTimer(requestUpdates,5*60*1000,0)
 
 function viewUpdateListGUI()
 	guiSetVisible(window, not guiGetVisible(window))
