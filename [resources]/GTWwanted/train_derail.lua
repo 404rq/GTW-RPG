@@ -267,13 +267,11 @@ function check_derail()
 		if the_train and getVehicleType(the_train) == "Train" then
 			local px,py,pz = getElementPosition(getPedOccupiedVehicle(plr))
 			local n_dist,n_speed,c_speed = 9999,0,0
-			--[[local train_type = "train"
-			if getElementModel(the_train) == 449 then train_type = "tram" end]]
 			for j,dp in pairs(train_derail_points) do
 				local t_type,dx,dy,dz,speed = unpack(dp)
 				local dist = getDistanceBetweenPoints3D(px,py,pz, dx,dy,dz)
 				local kmh = math.floor(math.abs(getTrainSpeed(getPedOccupiedVehicle(plr))*160))
-				if dist < n_dist --[[and train_type == t_type]] then
+				if dist < n_dist then
 					n_dist = dist
 					n_speed = speed
 					c_speed = kmh
