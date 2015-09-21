@@ -16,7 +16,7 @@
 
 local sWidth, sHeight = guiGetScreenSize()
 function initialize_skin_shop()
-	window = exports.GTWgui:createWindow(sWidth-340, (sHeight-500)/2, 340, 500, "GTW skin shop", false)
+	window = guiCreateWindow(sWidth-340, (sHeight-500)/2, 340, 500, "GTW skin shop", false)
 	skin_list_gui = guiCreateGridList(10, 25, 320, 425, false, window)
 	col_name = guiGridListAddColumn(skin_list_gui, "Title", 0.45)
 	col_id = guiGridListAddColumn(skin_list_gui, "ID", 0.2)

@@ -20,7 +20,7 @@ local sx,sy = guiGetScreenSize()
 --[[ Make GUI for context menu ]]--
 addEventHandler("onClientResourceStart", getResourceRootElement(getThisResource()),
 function()
-	window = exports.GTWgui:createWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
+	window = guiCreateWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
 	btn_repair = guiCreateButton(10, 30, 180, 40, "Repair", false, window)
 	btn_refuel = guiCreateButton(10, 70, 180, 40, "Refuel", false, window)
 	btn_close = guiCreateButton(10, 240, 180, 40, "Close", false, window)

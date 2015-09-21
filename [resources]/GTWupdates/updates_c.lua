@@ -16,7 +16,7 @@
 
 -- Create the updates window
 local x,y = guiGetScreenSize()
-local window = exports.GTWgui:createWindow((x-800)/2, (y-600)/2, 800, 600, "Grand Theft Walrus - Server updates", false )
+local window = guiCreateWindow((x-800)/2, (y-600)/2, 800, 600, "Grand Theft Walrus - Server updates", false )
 local text = guiCreateMemo( 10, 30, 780, 526, "", false, window )
 
 -- Set readonly, apply GUI style and hide

@@ -33,7 +33,7 @@ addEventHandler("onClientResourceStart", resourceRoot,
 function()
 	-- Adding the gui
    	local guiX,guiY = guiGetScreenSize()
-    work_window = exports.GTWgui:createWindow(0, (guiY-350)/2, 372, 350, "Civilians", false)
+    work_window = guiCreateWindow(0, (guiY-350)/2, 372, 350, "Civilians", false)
 	guiSetVisible(work_window, false)
 
 	-- Tab panel

@@ -144,7 +144,7 @@ addEventHandler("onClientVehicleEnter", root, enter_the_bus)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_bus_route( )
 	-- Create the selection GUI
-	window = exports.GTWgui:createWindow((sx-450)/2, (sy-300)/2, 450, 300, "Select bus route", false)
+	window = guiCreateWindow((sx-450)/2, (sy-300)/2, 450, 300, "Select bus route", false)
 	local close_button = guiCreateButton(330, 260, 110, 36, "Close", false, window)
 	local routes_list = guiCreateGridList(10, 30, 430, 230, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.86 )

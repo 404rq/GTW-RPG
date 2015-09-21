@@ -15,7 +15,7 @@
 ]]--
 
 local x,y = guiGetScreenSize()
-local window = exports.GTWgui:createWindow((x-850)/2, (y-550)/2, 850, 550, "Grand Theft Walrus - Documentation", false )
+local window = guiCreateWindow((x-850)/2, (y-550)/2, 850, 550, "Grand Theft Walrus - Documentation", false )
 local textBox = guiCreateMemo( 246, 30, 594, 510, "", false, window )
 local gList = guiCreateGridList( 10, 30, 230, 510, false, window )
 exports.GTWgui:setDefaultFont(textBox, 10)

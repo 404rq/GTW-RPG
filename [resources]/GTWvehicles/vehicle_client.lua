@@ -46,7 +46,7 @@ addEventHandler("onClientResourceStart", resourceRoot, client_load_markers)
 
 --[[ Initialize the spawner GUI ]]--
 gx,gy = guiGetScreenSize()
-window = exports.GTWgui:createWindow(((gx-600)/2),((gy-450)/2),600,450,"GTWalrus vehicles",false)
+window = guiCreateWindow(((gx-600)/2),((gy-450)/2),600,450,"GTWalrus vehicles",false)
 txt_search = guiCreateEdit(10, 32, 580, 30, "", false, window)
 guiEditSetCaretIndex(txt_search, 1)
 veh_grid = guiCreateGridList(10, 64, 580, 344, false, window)
