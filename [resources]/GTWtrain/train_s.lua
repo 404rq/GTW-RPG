@@ -17,7 +17,7 @@
 --[[ Verify that a new train is allowed to spawn at given location ]]--
 function spawn_allowed(sx,sy,sz)
 	local c_dist = 9999
-	for k,v in pairs(getElementsByType("vehicle", resourceRoot)) do
+	for k,v in pairs(getElementsByType("vehicle")) do
 		if v and isElement(v) and getVehicleType(v) == "Train" then
 			local tx,ty,tz = getElementPosition(v)
 			local dist = getDistanceBetweenPoints3D(sx,sy,sz, tx,ty,tz)
@@ -280,7 +280,7 @@ function create_train(plr, cmd, args)
 	local start_at = 1
 	local t_length = math.random(2, max_cars)
 	local front_car = new_train
-	if t_length > 0 then
+	if t_length > 3 and  engine_ID ~= 449 then
 		local tmp_ID = 537
 		if engine_ID == 538 then tmp_ID = 538 end
 
