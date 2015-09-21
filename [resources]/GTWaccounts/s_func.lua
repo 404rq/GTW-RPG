@@ -30,12 +30,14 @@ function client_login_attempt(user, pass)
 
 	-- Does the account exist?
 	if not acc then
-		return display_status("Account name was not found\nPress 'Register' to create\na new account and play.", client, 0)
+		return display_status("Account name was not found Press 'Register'\n"..
+			"to create a new account with the current\n"..
+			"provided credentials", client, 0)
 	end
 
 	-- Yes it does exist, let's try to login with the given password "pass"
 	if not logIn(client, acc, pass) then
-		return display_status("Incorrect password for\nthis account.", client, -1)
+		return display_status("Incorrect password for this account.", client, -1)
 	end
 
 	-- Tell the client that the login was successfull
@@ -46,16 +48,29 @@ addEventHandler("GTWaccounts:attemptClientLogin", root, client_login_attempt)
 
 --[[ Kick after 3 failed login attempts ]]--
 function kick_after_three_fails()
-	kickPlayer(client, "Calm down and read the status message before going insane!")
+	-- Inform the player about how to signup
+	exports.GTWtopbar:dm("To register a new account: enter credentials in the fields, then click 'Register'", client, 255, 255, 255)
+
+	-- Ignore for now, a client cooldown timer prevent spam of login
+	--kickPlayer(client, "Calm down and read the status message before going insane!")
 end
 addEvent("GTWaccounts:kickClientSpammer", true)
 addEventHandler("GTWaccounts:kickClientSpammer", root, kick_after_three_fails)
 
 --[[ On client registration attempt ]]--
 function client_registration_attempt(user, pass, facc)
+	-- Check if any username or password where provided at all
 	if not user or not pass then
 		display_status("Expected username and password!", client, 0)
 		return
+	end
+
+	-- Check how many account that has been registred from this PC
+	local serial = getPlayerSerial(client)
+	local accounts = getAccountsBySerial(serial)
+	if #accounts > 1 then
+		return display_status("Two accounts has already been registred on "..
+			"\nthis PC! Contact an admin for further assistance.", client, -1)
 	end
 
 	-- Save current
@@ -68,7 +83,7 @@ function client_registration_attempt(user, pass, facc)
 	-- This account name has already been used (converted names are validated too)
 	local acn = getAccount(user)
 	if acn then
-		return display_status("Account name is already in use, please try another one.", client, -1)
+		return display_status("Account name is already in use, \nplease try another one.", client, -1)
 	end
 
 	-- Invalid symbold where used, tell the user how a proper account name are written
