@@ -14,6 +14,10 @@
 ********************************************************************************
 ]]--
 
+-- Hide default nametag
+setPlayerNametagShowing(localPlayer, false)
+
+-- Render the new nametag
 local x,y = guiGetScreenSize()
 function update_nametags()
 	for k,v in pairs(getElementsByType("player")) do
