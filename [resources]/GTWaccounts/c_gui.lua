@@ -179,6 +179,7 @@ end
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
 		setTimer(make_login, 1000, 1)
+		setBlurLevel(0)
 		showChat(false)
 		triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
 	end
