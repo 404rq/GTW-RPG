@@ -19,4 +19,6 @@
 	<script src="data.lua" type="shared" />
     	<script src="bus_s.lua" type="server" />
 	<script src="bus_c.lua" type="client" />
+
+        <include resource="GTWtopbar" />
 </meta>

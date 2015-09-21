@@ -25,6 +25,10 @@
     <export function="getPlayerId" type="client" />
     <export function="getPlayerId" type="server" />
 
+    <include resource="GTWgui" />
+    <include resource="GTWupdates" />
+    <include resource="GTWtopbar" />
+
     <aclrequest>
 	 <right name="function.addAccount" access="true" />
          <right name="function.callRemote" access="true" />
