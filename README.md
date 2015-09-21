@@ -25,6 +25,9 @@ If you like this project we kindly accept your donations as motivation to keep i
 BTC: `13R7WbbvVyXSzD58G484rsZFjzqFvp8LuS`<br>
 LTC: `LPs7Vm5NceCLpcvJXyHTdZnxkScBJFvvxg`
 
+For more ways to donate, please visit our donations page where more ways are listed, including paypal, credit card etc.
+http://www.404rq.com/donations/
+
 ## Videos
 [![GTW-RPG vehicle system](http://img.youtube.com/vi/IKAHKrxKUbk/0.jpg)](http://www.youtube.com/watch?v=IKAHKrxKUbk)<br>
 _Overview of the civilian job system included in this pack (GTWcivilians)_
