@@ -24,4 +24,9 @@
     <export function="isClientLoggedIn" type="client" />
     <export function="getPlayerId" type="client" />
     <export function="getPlayerId" type="server" />
+
+    <aclrequest>
+	 <right name="function.addAccount" access="true" />
+         <right name="function.callRemote" access="true" />
+     </aclrequest>
 </meta>
