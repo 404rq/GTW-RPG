@@ -23,7 +23,7 @@
 	<file src="sound/x_gp_horn1_alt.wav" download="true" />
 	<file src="sound/gp_horn1.wav" download="true" />
 	<file src="sound/2k_hornl.wav" download="true" />
-	<file src="sound/7k_hornh.wav" download="true" />
+	<file src="sound/7k_hornl.wav" download="true" />
 	<file src="sound/k31_horn1.wav" download="true" />
 	<export function="triggerTrainHorn" type="server" />
 </meta>
