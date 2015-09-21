@@ -14,9 +14,6 @@
 ********************************************************************************
 ]]--
 
--- Hide default nametag
-setPlayerNametagShowing(localPlayer, false)
-
 -- Render the new nametag
 local x,y = guiGetScreenSize()
 function update_nametags()
