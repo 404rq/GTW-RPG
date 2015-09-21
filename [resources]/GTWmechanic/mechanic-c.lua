@@ -48,11 +48,10 @@ end)
 function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
     if not clickedElement then return end
     local dist = getDistanceBetweenPoints3D(worldX, worldY, worldZ, getElementPosition(localPlayer)) or 0
-    local is_staff = exports.GTWstaff:isStaff(localPlayer)
     if getElementType(clickedElement) == "vehicle" and (not getPedOccupiedVehicle(localPlayer) or
         getPedOccupiedVehicle(localPlayer) ~= clickedElement) and
         ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and
-        getElementData(localPlayer, "Occupation") == "Mechanic") or is_staff) and
+        getElementData(localPlayer, "Occupation") == "Mechanic") or getPlayerTeam(localPlayer) == getTeamFromName("Staff")) and
 		dist < 20 and not guiGetInputEnabled() then
         -- Open GUI as staff
         if getElementData(localPlayer, "Occupation") ~= "Mechanic" then
