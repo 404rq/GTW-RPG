@@ -14,15 +14,14 @@
 ********************************************************************************
 ]]--
 
-function dm( message, thePlayer, red, green, blue, colorCoded )
-	if colorCoded == nil then
-		colorCoded = false
-	end
-	if isElement( thePlayer ) then
-		triggerClientEvent ( thePlayer, "onTextAdd", getRootElement(), message, red, green, blue, colorCoded )
-	end
+--[[ Dispaly a DX topbar message ]]--
+function dm(text, plr, r,g,b, col)
+	if col == nil then col = false end
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
+	triggerClientEvent(plr, "GTWtopbar.addText", root, text, r,g,b, col)
 end
 
+--[[ Display basic information ]]--
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
