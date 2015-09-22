@@ -31,14 +31,6 @@ function load_system( )
 end
 addEventHandler("onResourceStart", resourceRoot, load_system)
 
--- Possible bug here
---[[function restore_wanted_level(_, pAcc)
-    -- Restore wanted level and reduce timers
-    if (tonumber(getElementData(source, "Wanted")) or 0) < 0 then setElementData(source, "Wanted", 0) end
-	setWl(source, (tonumber(getElementData(source, "Wanted")) or 0), (tonumber(getElementData(source, "violent_seconds")) or 0))
-end
-addEventHandler("onPlayerLogin", root, restore_wanted_level)]]--
-
 --[[ Make sure the graphical hud and scoreboards are up to date ]]--
 function update_graphical(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end

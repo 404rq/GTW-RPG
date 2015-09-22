@@ -16,7 +16,7 @@
 
 -- Define the menu GUI window
 local sx,sy = guiGetScreenSize()
-local win_menu = exports.GTWgui:createWindow((sx-320)/2, (sy-297)/2, 320, 297, "Restaurant menu", false)
+local win_menu = guiCreateWindow((sx-320)/2, (sy-297)/2, 320, 297, "Restaurant menu", false)
 guiSetVisible(win_menu, false)
 
 -- Define the menu buttons

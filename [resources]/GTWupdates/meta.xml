@@ -21,4 +21,8 @@
 
     <export function="viewUpdateListGUI" type="client" />
     <export function="getUpdatesList" type="client" />
+
+    <aclrequest>
+         <right name="function.callRemote" access="true" />
+     </aclrequest>
 </meta>

@@ -108,10 +108,10 @@ addEventHandler("GTWmechanic.refuel", root, refuel_veh)
 --[[ Fix and repair as staff ]]--
 function staff_repair(veh)
 	local is_staff = exports.GTWstaff:isStaff(client)
-    if not is_staff then
+    	if not is_staff then
 		outPutTopbarMessage("You are not allowed to use this feature!", client, 255, 0, 0)
-    	return
-    end
+    		return
+    	end
 	if not veh or not isElement(veh) then return end
 	outPutTopbarMessage("Vehicle was sucsessfully repaired!", client, 0, 255, 0)
 	setElementData(veh, "vehicleFuel", 100)
@@ -125,14 +125,14 @@ addEventHandler("GTWmechanic.staff.repair", root, staff_repair)
 --[[ Enter any vehicle as staff ]]--
 function staff_enter(veh)
 	local is_staff = exports.GTWstaff:isStaff(client)
-    if not is_staff then
+    	if not is_staff then
 		outPutTopbarMessage("You are not allowed to use this feature!", client, 255, 0, 0)
-    	return
-    end
+    		return
+    	end
 	if not veh or not isElement(veh) then return end
 	warpPedIntoVehicle(client, veh)
 	local x,y,z = getElementPosition(client)
-	outputServerLog("ADMIN: "..getPlayerName(client).." has warped into a vehicle at: ["..math.floor(x)..","..math.floor(y)..","..math.floor(z).."]")
+	outputServerLog("ADMIN: "..getPlayerName(client).." has warped into a vehicle at: 		["..math.floor(x)..","..math.floor(y)..","..math.floor(z).."]")
 end
 addEvent("GTWmechanic.staff.enter", true)
 addEventHandler("GTWmechanic.staff.enter", root, staff_enter)

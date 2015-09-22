@@ -16,5 +16,6 @@
 
 <meta>
     <info author="GTWGames" name="Nametag system" description="Handle custom nametags" version="1" type="script" />
+    <script src="nametag_s.lua" type="server" />
     <script src="nametag_c.lua" type="client" />
 </meta>

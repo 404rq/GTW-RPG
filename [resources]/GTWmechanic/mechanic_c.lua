@@ -20,7 +20,7 @@ local sx,sy = guiGetScreenSize()
 --[[ Make GUI for context menu ]]--
 addEventHandler("onClientResourceStart", getResourceRootElement(getThisResource()),
 function()
-	window = exports.GTWgui:createWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
+	window = guiCreateWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
 	btn_repair = guiCreateButton(10, 30, 180, 40, "Repair", false, window)
 	btn_refuel = guiCreateButton(10, 70, 180, 40, "Refuel", false, window)
 	btn_close = guiCreateButton(10, 240, 180, 40, "Close", false, window)
@@ -48,11 +48,10 @@ end)
 function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
     if not clickedElement then return end
     local dist = getDistanceBetweenPoints3D(worldX, worldY, worldZ, getElementPosition(localPlayer)) or 0
-    local is_staff = exports.GTWstaff:isStaff(localPlayer)
     if getElementType(clickedElement) == "vehicle" and (not getPedOccupiedVehicle(localPlayer) or
         getPedOccupiedVehicle(localPlayer) ~= clickedElement) and
         ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and
-        getElementData(localPlayer, "Occupation") == "Mechanic") or is_staff) and
+        getElementData(localPlayer, "Occupation") == "Mechanic") or getPlayerTeam(localPlayer) == getTeamFromName("Staff")) and
 		dist < 20 and not guiGetInputEnabled() then
         -- Open GUI as staff
         if getElementData(localPlayer, "Occupation") ~= "Mechanic" then

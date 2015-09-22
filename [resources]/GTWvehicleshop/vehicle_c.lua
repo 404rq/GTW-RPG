@@ -21,7 +21,7 @@ row,col = nil,nil
 
 --[[ Create vehicle management GUI ]]--
 x,y = guiGetScreenSize()
-window = exports.GTWgui:createWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle manager", false)
+window = guiCreateWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle manager", false)
 btn_show = guiCreateButton(10, 350, 90, 30, "Show", false, window)
 btn_hide = guiCreateButton(100, 350, 90, 30, "Hide", false, window)
 btn_lock = guiCreateButton(200, 350, 90, 30, "Lock", false, window)
@@ -51,7 +51,7 @@ exports.GTWgui:setDefaultFont(btn_sell, 10)
 exports.GTWgui:setDefaultFont(vehicle_list, 10)
 
 --[[ Create vehicle trunk GUI ]]--
-window_trunk = exports.GTWgui:createWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle inventory", false)
+window_trunk = guiCreateWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle inventory", false)
 btn_withdraw = guiCreateButton(275, 73, 50, 40, "<", false, window_trunk)
 btn_deposit = guiCreateButton(275, 115, 50, 40, ">", false, window_trunk)
 btn_withdraw_all = guiCreateButton(275, 163, 50, 40, "<<", false, window_trunk)

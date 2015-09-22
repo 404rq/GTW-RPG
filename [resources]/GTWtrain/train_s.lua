@@ -17,7 +17,7 @@
 --[[ Verify that a new train is allowed to spawn at given location ]]--
 function spawn_allowed(sx,sy,sz)
 	local c_dist = 9999
-	for k,v in pairs(getElementsByType("vehicle", resourceRoot)) do
+	for k,v in pairs(getElementsByType("vehicle")) do
 		if v and isElement(v) and getVehicleType(v) == "Train" then
 			local tx,ty,tz = getElementPosition(v)
 			local dist = getDistanceBetweenPoints3D(sx,sy,sz, tx,ty,tz)
@@ -244,6 +244,7 @@ function create_train(plr, cmd, args)
 	end
 
 	local new_train = createVehicle(engine_ID, tx,ty,tz, 0,0,0, "")
+	createBlipAttachedTo(new_train, 0, 1, 200, 200, 200, 200, 0, 180)
 	setElementSyncer(new_train, plr)
 
 	-- Show debug info
@@ -280,7 +281,7 @@ function create_train(plr, cmd, args)
 	local start_at = 1
 	local t_length = math.random(2, max_cars)
 	local front_car = new_train
-	if t_length > 0 then
+	if t_length > 3 and  engine_ID ~= 449 then
 		local tmp_ID = 537
 		if engine_ID == 538 then tmp_ID = 538 end
 
@@ -291,6 +292,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a second engine
 		local engine2 = createVehicle(tmp_ID, tx,ty,tz, 0,0,0, "")
+		createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, engine2)
@@ -326,6 +328,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a random car
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
+		createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, car)
@@ -434,6 +437,7 @@ function destroy_train(d_train)
 	-- Destroy attached cars
 	for k,v in ipairs(Trains.cars[d_train]) do
 		if not isElement(v) then break end
+		destroy_attached_blips(v)
 		destroyElement(v)
 		Trains.cars[d_train][k] = nil
 	end
@@ -446,10 +450,25 @@ function destroy_train(d_train)
 	end
 
 	-- Destroy the engine
+	destroy_attached_blips(d_train)
 	destroyElement(d_train)
 end
 addEvent("GTWtrain.destroy", true)
 addEventHandler("GTWtrain.destroy", root, destroy_train)
+
+--[[ Destroy attached elements (blips) ]]--
+function destroy_attached_blips(elem)
+	if not isElement(elem) then return end
+	local elem_children = getAttachedElements(elem)
+
+	-- Make sure there are anything to delete
+	if not elem_children then return end
+
+	-- Destroy attached elements
+    	for k,v in pairs(elem_children) do
+		destroyElement(v)
+    	end
+end
 
 --[[ Control the engine clientside for better syncing
 	State: 0 - neutral, 1 - forward, 2 - backward ]]--

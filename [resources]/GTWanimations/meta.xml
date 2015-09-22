@@ -19,4 +19,7 @@
     <script src="data.lua" type="shared" />
     <script src="animations_c.lua" type="client" />
     <script src="animations_s.lua" type="server" />
+
+    <include resource="GTWtopbar" />
+    <include resource="GTWpolice" />
 </meta>

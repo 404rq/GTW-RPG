@@ -20,7 +20,7 @@
 	<script src="s_refresh.lua" type="server" />
 
 	<file src="img/back.png" download="true"/>
-	<file src="fonts/RobotoSlab-Bold.ttf" download="true"/>
+	<file src="fonts/roboto.ttf" download="true"/>
 
 	<export function="createWindow" type="client"/>
 	<export function="setDefaultFont" type="client"/>

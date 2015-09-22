@@ -32,12 +32,12 @@ we = {
 
 -- Update the weather
 function chWeather( )
-	local wid = math.random( #we )
-	setWeatherBlended( we[wid] )
-	outputServerLog("[Weather] Fading to: "..we[wid])
+	local wid = math.random(#we)
+	setWeatherBlended(we[wid])
+	setWaveHeight(math.random(1,100)*0.02)
 end
-setTimer( chWeather, math.random(130,180)*60*1000, 0 )
-setWeather( we[math.random( #we )] )
+setTimer(chWeather, math.random(130,180)*60*1000, 0)
+setWeather(we[math.random( #we )])
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(

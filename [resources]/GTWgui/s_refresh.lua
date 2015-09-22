@@ -24,7 +24,7 @@ function loadList( )
 	--restartList = getAccountData(settings_store, "resources_to_refresh")
 
 	--[[ Predefined static list of resources to refresh ]]--
-	restartList = {
+	--[[restartList = {
 		["GTWaccounts"]=true,
 		["GTWammunation"]=true,
 		["GTWbusdriver"]=true,
@@ -41,7 +41,7 @@ function loadList( )
 		["GTWupdates"]=true,
 		["GTWvehicles"]=true,
 		["GTWvehicleshop"]=true
-	}
+	}]]
 
 	--[[ Check all resources that use this GUI ]]--
 	for k, v in pairs(restartList) do

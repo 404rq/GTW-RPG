@@ -17,4 +17,6 @@
 <meta>
     <info author="GTWGames" name="GTWantispam" description="Fights command spam" version="0" type="script" />
     <script src="server.lua" type="server"/>
+
+    <include resource="GTWtopbar" />
 </meta>

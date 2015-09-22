@@ -36,7 +36,7 @@ end)
 -- Setup the login GUI (GTWgui must be running)
 function make_login()
 	x,y = guiGetScreenSize()
-	window = exports.GTWgui:createWindow((x-350)/2, (y-450)/2, 350, 450, "Grand Theft Walrus", false )
+	window = guiCreateWindow((x-350)/2, (y-450)/2, 350, 450, "RageQuit 404 | GTW-RPG v3.0", false )
 	loginButton = guiCreateButton(230,400,100,40,"Login",false,window)
 	registerButton = guiCreateButton(128,400,100,40,"Register",false,window)
 	updatesButton = guiCreateButton(10,400,116,40,"What's new",false,window)
@@ -93,7 +93,7 @@ addEventHandler("onClientGUIClick",root,function()
 	if source == loginButton then
 		if isTimer(login_cooldown) then return end
 		guiLabelSetColor(labelInfo, 255, 255, 255)
-		guiSetText(labelInfo, "Attempting to login... (3 seconds)")
+		guiSetText(labelInfo, "Attempting to login... please wait")
 		fadeCamera(false, 1)
 		setTimer(triggerServerEvent, 1100, 1, "GTWaccounts:attemptClientLogin", localPlayer, guiGetText(textUser), guiGetText(textPwrd))
 		if sec_login_attempts > 2 then
@@ -101,7 +101,10 @@ addEventHandler("onClientGUIClick",root,function()
 			triggerServerEvent("GTWaccounts:kickClientSpammer", localPlayer)
 		end
 		sec_login_attempts = sec_login_attempts + 1
-		login_cooldown = setTimer(function() end, 3000, 1)
+		login_cooldown = setTimer(function()
+			toggle_gui_enable(true)
+		end, 3000, 1)
+		toggle_gui_enable(false)
 	-- On registration
 	elseif source == registerButton then
 		triggerServerEvent("GTWaccounts:onClientAttemptRegistration", localPlayer, guiGetText(textUser), guiGetText(textPwrd), guiGetText(textFacc))
@@ -114,6 +117,17 @@ addEventHandler("onClientGUIClick",root,function()
 		guiLabelSetColor(labelInfo, 255, 255, 255)
 	end
 end)
+
+-- Enable/disable buttons
+function toggle_gui_enable(state)
+	guiSetEnabled(loginButton, state)
+	guiSetEnabled(registerButton, state)
+	guiSetEnabled(updatesButton, state)
+	guiSetEnabled(faccButtonHelp, state)
+	guiSetEnabled(textUser, state)
+	guiSetEnabled(textPwrd, state)
+	guiSetEnabled(textFacc, state)
+end
 
 -- On client attempt login
 addEvent("GTWaccounts:onClientPlayerLogin", true)
@@ -165,6 +179,7 @@ end
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
 		setTimer(make_login, 1000, 1)
+		setBlurLevel(0)
 		showChat(false)
 		triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
 	end

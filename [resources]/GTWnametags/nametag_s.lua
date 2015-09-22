@@ -1,4 +1,4 @@
-<!--
+--[[
 ********************************************************************************
 	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
@@ -12,10 +12,15 @@
 	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
--->
+]]--
 
-<meta>
-    <info author="GTWGames" name="GTWmechanic" description="Repair and refuel vehicles and get payed" version="0" type="script" />
-	<script src="mechanic_s.lua" type="server" />
-	<script src="mechanic_c.lua" type="client" />
-</meta>
+-- Hide default nametag
+function disable_nametag()
+        setPlayerNametagShowing(source, false)
+end
+addEventHandler("onPlayerJoin", root, disable_nametag)
+
+-- Hide default nametags for all players on start
+for k,v in pairs(getElementsByType("player")) do
+        setPlayerNametagShowing(v, false)
+end

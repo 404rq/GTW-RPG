@@ -44,6 +44,7 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <!-- GTW resources -->
     <resource src="GTWaccounts" startup="1" protected="0" />
     <resource src="GTWantispam" startup="1" protected="0" />
+    <resource src="GTWbusdriver" startup="1" protected="0" />
     <resource src="GTWchat" startup="1" protected="0" />
     <resource src="GTWcivilians" startup="1" protected="0" />
     <resource src="GTWclothes" startup="1" protected="0" />
@@ -68,7 +69,9 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="GTWsmoke" startup="1" protected="0" />
     <resource src="GTWstaff" startup="1" protected="0" />
     <resource src="GTWtrain" startup="1" protected="0" />
+    <resource src="GTWtraindriver" startup="1" protected="0" />
     <resource src="GTWtrainhorn" startup="1" protected="0" />
+    <resource src="GTWtramdriver" startup="1" protected="0" />
     <resource src="GTWturf" startup="1" protected="0" />
     <resource src="GTWturnsignals" startup="1" protected="0" />
     <resource src="GTWupdates" startup="1" protected="0" />
@@ -104,24 +107,14 @@ For the "lazy" developers, here's a precompiled section of required ACL rights t
     	defined standard groups which you can find in the default ACL file -->	
     <group name="Supporter">
         <acl name="Moderator" />
+        <!-- List your supporters here -->
         <object name="user.YOUR_ACCOUNT_NAME" />
     </group>
     <group name="Developer">
         <acl name="SuperModerator" />
+        <!-- List your developers here -->
         <object name="user.YOUR_ACCOUNT_NAME" />
     </group>
-    <!-- ACL rights for the resources -->	
-    <group name="GTW_RPG">
-        <acl name="GTW_RPG" />
-        <object name="resource.GTWupdates" />
-        <object name="resource.GTWaccounts" />
-        <object name="resource.GTWgui" />
-    </group>
-    <acl name="GTW_RPG">
-        <right name="function.callRemote" access="true" />
-        <right name="function.restartResource" access="true" />
-        <right name="function.addAccount" access="true" />
-    </acl>
 ```
 
 And that's it folks! now your server should be successfully up and running the GTW-RPG gamemode, if not, don't hesitate to ask for support in our forum located at: http://forum.gtw-games.org/programming-and-software/
