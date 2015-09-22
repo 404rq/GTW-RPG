@@ -16,13 +16,17 @@
 
 local timer = nil
 local messages =  { }
+local last_msg = ""
 
 --[[ Display a DX topbar message ]]--
 function dm(text, r,g,b, col)
 	-- Insert message
 	local tick = getTickCount()
+	if text == last_msg then return end
 	table.insert(messages, {text, true, tick + 8000, 170, r,g,b, col })
 	outputConsole("[TOPBAR] "..text)
+	last_msg = text
+	setTimer(function() last_msg = "" end, 10000, 1)
 end
 addEvent("GTWtopbar.addText", true)
 addEventHandler("GTWtopbar.addText", root, dm)
