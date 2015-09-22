@@ -31,7 +31,7 @@ end
 
 -- Call remote server II to receive latest GTW updates
 function onUpdateRequest( )
-	callRemote( "http://404rq.com/updates/get.php", result, getPlayerName(client))
+	callRemote( "http://404rq.com/update-list/get.php", result, getPlayerName(client))
 end
 addEvent("GTWupdates.request", true)
 addEventHandler("GTWupdates.request", resourceRoot, onUpdateRequest)

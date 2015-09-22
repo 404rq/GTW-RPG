@@ -47,7 +47,7 @@ function requestUpdates()
 	    	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/", 180, 180, 180 )
 	    elseif oldText ~= message then
 	    	guiSetText(text, message)
-	    	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/! Use /updates to see what's new", 180, 180, 180 )
+	    	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/! Use /updates to see what's new", 180, 180, 180)
 	    end
 	end
 	addEvent( "GTWupdates.respond", true )
