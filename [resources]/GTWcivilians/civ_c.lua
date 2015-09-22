@@ -24,8 +24,8 @@ local cooldown 		= nil
 local cooldown2		= nil
 
 -- Global data
-local dummyped			= nil
-local playerSkinID 		= 0
+local dummyped		= nil
+local playerSkinID 	= 0
 local playerCurrentSkin = 0
 
 --[[ Create the job window  ]]--
@@ -33,7 +33,7 @@ addEventHandler("onClientResourceStart", resourceRoot,
 function()
 	-- Adding the gui
    	local guiX,guiY = guiGetScreenSize()
-    work_window = guiCreateWindow(0, (guiY-350)/2, 372, 350, "Civilians", false)
+        work_window = guiCreateWindow(0, (guiY-350)/2, 372, 350, "Civilians", false)
 	guiSetVisible(work_window, false)
 
 	-- Tab panel
@@ -43,14 +43,14 @@ function()
 	tab_weapons = guiCreateTab("Rent weapons/tools", tab_panel)
 
 	-- Button accept
-    btn_accept = guiCreateButton(10, 310, 110, 36, "Accept", false, work_window)
-    guiSetProperty(btn_accept, "NormalTextColour", "FF00FF00")
-	addEventHandler("onClientGUIClick", btn_accept, acceptJob, false)
+        btn_accept = guiCreateButton(10, 310, 110, 36, "Accept", false, work_window)
+        guiSetProperty(btn_accept, "NormalTextColour", "FF00FF00")
+	addEventHandler("onClientGUIClick", btn_accept, accept_work, false)
 	exports.GTWgui:setDefaultFont(btn_accept, 10)
 
 	-- Button close
-    btn_cancel = guiCreateButton(252, 310, 110, 36, "Cancel", false, work_window)
-	addEventHandler("onClientGUIClick", btn_cancel, closeGUIbutton, false)
+        btn_cancel = guiCreateButton(252, 310, 110, 36, "Cancel", false, work_window)
+	addEventHandler("onClientGUIClick", btn_cancel, close_guibutton, false)
 	exports.GTWgui:setDefaultFont(btn_cancel, 10)
 
 	-- Memo with info
@@ -103,7 +103,7 @@ function addMarkersAndClearTable()
 		setElementInterior(mark, inter)
 		setElementDimension(mark, dim)
 		addEventHandler("onClientMarkerHit", mark, showGUI)
-		addEventHandler("onClientMarkerLeave", mark, closeGUI)
+		addEventHandler("onClientMarkerLeave", mark, close_gui)
 		setElementData( mark, "jobID", ID )
 	end
 
@@ -172,8 +172,6 @@ function showGUI( hitElement, matchingdimension, jobID )
  		setTimer(setElementInterior, 1000, 1, localPlayer, 0)
  		setTimer(setElementDimension, 1000, 1, dummyped, new_dim)
  		setTimer(setElementInterior, 1000, 1, dummyped, 0)
- 		--setTimer(setElementRotation, 1000, 1, localPlayer, g_prx,g_pry,180)
- 		--setTimer(setElementPosition, 1000, 1, localPlayer, -1618.2958984375, 1400.9755859375, 7.1753273010254)
  		setTimer(setCameraMatrix, 1000, 1, -1618.2958984375, 1398, 7.1753273010254, -1618.2958984375, 1400.9755859375, 7.1753273010254, 5, 100)
 
 	 	-- Set GUI information and save skin information
@@ -337,7 +335,7 @@ addCommandHandler( "sapd", staffWork )
 addCommandHandler( "army", staffWork )
 
 --[[ Closes the GUI on marker leave ]]--
-function closeGUI( leaveElement, matchingdimension )
+function close_gui( leaveElement, matchingdimension )
 	if ( leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player"
  		and not getPedOccupiedVehicle(leaveElement) and leaveElement == localPlayer
  		and matchingdimension ) then
@@ -345,7 +343,7 @@ function closeGUI( leaveElement, matchingdimension )
 end
 
 --[[ When the user clicks on the Accept job button ]]--
-function acceptJob()
+function accept_work()
 	-- Trigger server event
 	local ID = getElementData( localPlayer, "jobID" )
 	if not playerSkinID then
@@ -359,7 +357,7 @@ function acceptJob()
 
     -- Reset camera details
  	fadeCamera(false)
- 	setTimer(resetAndCloseGUI, 1000, 1)
+ 	setTimer(reset_close_gui, 1000, 1)
  	cooldown = setTimer(function() end, 3000, 1)
 
  	-- Unfreeze player
@@ -372,7 +370,7 @@ function acceptJob()
 end
 
 --[[ When the user clicks on the Close button ]]--
-function closeGUIbutton()
+function close_guibutton()
 	-- Closing the gui
  	guiSetVisible( work_window, false )
  	guiSetInputEnabled( false )
@@ -383,7 +381,7 @@ function closeGUIbutton()
 
  	-- Reset camera details
  	fadeCamera(false)
- 	setTimer(resetAndCloseGUI, 1000, 1)
+ 	setTimer(reset_close_gui, 1000, 1)
  	cooldown = setTimer(function() end, 3000, 1)
 
  	-- Reset Skin
@@ -391,7 +389,7 @@ function closeGUIbutton()
  	--setElementModel(localPlayer, skinID)
 end
 
-function resetAndCloseGUI()
+function reset_close_gui()
  	-- Fade and move the camera back to default
  	fadeCamera(true)
  	setElementDimension(localPlayer, g_pdim)
