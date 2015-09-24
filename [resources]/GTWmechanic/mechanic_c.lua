@@ -51,16 +51,17 @@ function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, wo
     if getElementType(clickedElement) == "vehicle" and (not getPedOccupiedVehicle(localPlayer) or
         getPedOccupiedVehicle(localPlayer) ~= clickedElement) and
         ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and
-        getElementData(localPlayer, "Occupation") == "Mechanic") or getPlayerTeam(localPlayer) == getTeamFromName("Staff")) and
-		dist < 20 and not guiGetInputEnabled() then
+        getElementData(localPlayer, "Occupation") == "Mechanic") or
+	getPlayerTeam(localPlayer) == getTeamFromName("Staff")) and
+	not guiGetInputEnabled() then
         -- Open GUI as staff
-        if getElementData(localPlayer, "Occupation") ~= "Mechanic" then
+        if getPlayerTeam(localPlayer) == getTeamFromName("Staff") then
         	guiSetText(btn_repair, "Destroy")
         	guiSetText(btn_refuel, "Information")
         	guiSetVisible(btn_enter, true)
         	guiSetVisible(btn_staff_repair, true)
         -- Open GUI as mechanic
-        else
+	elseif getElementData(localPlayer, "Occupation") == "Mechanic" and dist < 20 then
         	guiSetText(btn_repair, "Repair")
         	guiSetText(btn_refuel, "Refuel")
         	guiSetVisible(btn_enter, false)
