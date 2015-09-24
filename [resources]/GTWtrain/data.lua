@@ -16,12 +16,12 @@
 
 --[[ Resource settings, all settings goes here ]]--
 Settings = {
-	max_distance_to_spawn 	= 2000,          -- Nearest distance to other trains
-	update_sync_time	= 1000,          -- Time between each sync update
-	slow_speed		= 2,             -- Definition of slow speed
+	max_distance_to_spawn 	= 1100,          -- Nearest distance to other trains
+	update_sync_time	= 200,           -- Time between each sync update
+	slow_speed		= 3,             -- Definition of slow speed
 	station_stop_time_ms	= 14000,         -- Time to stop at stations
         max_track_distance      = 200,           -- How far away from the tracks can a player be before a train is created
-        min_track_distance      = 80,            -- How close to the tracks can nay player be before a train is spawned
+        min_track_distance      = 100,            -- How close to the tracks can nay player be before a train is spawned
 	debug_level		= 0,             -- How many debug messages should display in server console
 }
 

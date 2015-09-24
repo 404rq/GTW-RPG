@@ -150,7 +150,7 @@ function sync_train_speed(train)
 	end
 
 	-- Destroy the train if the nearest player is more than 300m away
-	if plr_dist > 300 then
+	if plr_dist > 200 then
 		destroy_train(train)
 		return
 	end
@@ -162,7 +162,7 @@ function sync_train_speed(train)
 	local curr_speed = getTrainSpeed(train)*160
 
 	-- If next point is a station and we're not leaving it then force the train to stop
-	if center_dist < 20 and not Trains.is_leaving[train] then
+	if center_dist < 10 and not Trains.is_leaving[train] then
 		speed = 3
 	elseif center_dist < 40 and not Trains.is_leaving[train] then
 		speed = 10
@@ -190,7 +190,7 @@ function sync_train_speed(train)
 		set_speed_policy(train, 0)
 
 		-- Now, let's check if we're at a station or end of the tracks, if so then we override
-		if not Trains.is_leaving[train] and center_dist < 8 and s_type == 1 then
+		if not Trains.is_leaving[train] and center_dist < 6 and s_type == 1 then
 			station_status(train, false)
 			setTrainSpeed(train, 0)
 			if Settings.debug_level > 0 then
@@ -203,7 +203,7 @@ function sync_train_speed(train)
 		end
 
 		-- Is this really the end of the track? Well then we stop until cleanup
-		if not Trains.is_leaving[train] and dist < 20 and s_type == 2 then
+		if not Trains.is_leaving[train] and (dist < 1.5 or center_dist < 1.5) and s_type == 2 then
 			station_status(train, false)
 			setTrainSpeed(train, 0)
 			if Settings.debug_level > 0 then
@@ -277,7 +277,7 @@ function create_train(plr, cmd, args)
 	Trains.cars[new_train] = { }
 
 	-- Add an extra engine if freight train
-	local max_cars = 7
+	local max_cars = 9
 	local start_at = 1
 	local t_length = math.random(2, max_cars)
 	local front_car = new_train
@@ -292,7 +292,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a second engine
 		local engine2 = createVehicle(tmp_ID, tx,ty,tz, 0,0,0, "")
-		createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
+		--createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, engine2)
@@ -328,7 +328,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a random car
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
-		createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
+		--createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, car)
@@ -376,21 +376,31 @@ function connect_carriages(plr)
 		return
 	end
 
+	-- Get last car in chain
+	while getVehicleTowedByVehicle(train) do
+		train = getVehicleTowedByVehicle(train)
+	end
+
 	-- Attach carriages
-	local px,py,pz = getElementPosition(train)
+	local ptx,pty,ptz = getElementPosition(train)
 	for k,v in pairs(getElementsByType("vehicle")) do
-		if getVehicleType(v) == "Train" then
-			local cx,cy,cz = getElementPosition(v)
-			local dist = getDistanceBetweenPoints3D(px,py,pz, cx,cy,cz)
+		if getVehicleType(v) == "Train" and v ~= train then
+			local ctx,cty,ctz = getElementPosition(v)
+			local dist = getDistanceBetweenPoints3D(ptx,pty,ptz, ctx,cty,ctz)
 			if dist < 25 and dist > 15 and math.abs(getTrainSpeed(train)) < 0.01 then
 				setTrainDirection(v, getTrainDirection(train))
-				attachTrailerToVehicle(train, v)
-				exports.GTWtopbar:dm("Train was attached successfully!", plr, 0, 255, 0)
+				if attachTrailerToVehicle(train, v) then
+					exports.GTWtopbar:dm("Train was attached successfully!", plr, 0,255,0)
+				else
+					exports.GTWtopbar:dm("Failed to attach trains ("..math.floor(dist, 2)..")", plr, 255,0,0)
+				end
 				break
 			elseif math.abs(getTrainSpeed(train)) >= 0.01 then
-				exports.GTWtopbar:dm("Turn your engine off before attaching or dettaching cars to your train!", plr, 255, 0, 0)
+				exports.GTWtopbar:dm("Turn your engine off before attaching or "..
+					"detaching cars to your train!", plr, 255,0,0)
 			else
-				exports.GTWtopbar:dm("There is no car close enough to attach! ("..dist..")", plr, 255, 0, 0)
+				exports.GTWtopbar:dm("There is no car close enough "..
+					"to attach! ("..math.floor(dist, 2)..")", plr, 255,0,0)
 			end
 		end
 	end
@@ -408,8 +418,16 @@ function disconnect_carriages(plr)
 
 	-- Detach carriages
 	if math.abs(getTrainSpeed(train)) < 0.01 then
-		detachTrailerFromVehicle(train)
-		exports.GTWtopbar:dm("Train was detached successfully!", plr, 0, 255, 0)
+		local train2 = train
+		while getVehicleTowedByVehicle(train2) do
+			train = train2
+			train2 = getVehicleTowedByVehicle(train2)
+		end
+		if detachTrailerFromVehicle(train) then
+			exports.GTWtopbar:dm("Train was detached successfully!", plr, 0,255,0)
+		else
+			exports.GTWtopbar:dm("Could not detach trains", plr, 255,0,0)
+		end
 	else
 		exports.GTWtopbar:dm("Turn your engine off before attaching or dettaching cars to your train!", plr, 255, 0, 0)
 	end
@@ -499,7 +517,7 @@ end
 setTimer(function()
 	local plr = getRandomPlayer( )
 	create_train(plr)
-end, 60*1000, 0)
+end, 30*1000, 0)
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
