@@ -16,18 +16,19 @@
 
 --[[ Resource settings, all settings goes here ]]--
 Settings = {
-	max_distance_to_spawn 	= 1100,          -- Nearest distance to other trains
+	max_distance_to_spawn 	= 2000,          -- Nearest distance to other trains
 	update_sync_time	= 200,           -- Time between each sync update
 	slow_speed		= 3,             -- Definition of slow speed
 	station_stop_time_ms	= 14000,         -- Time to stop at stations
-        max_track_distance      = 200,           -- How far away from the tracks can a player be before a train is created
-        min_track_distance      = 100,            -- How close to the tracks can nay player be before a train is spawned
+        max_track_distance      = 240,           -- How far away from the tracks can a player be before a train is created
+        min_track_distance      = 80,           -- How close to the tracks can nay player be before a train is spawned
 	debug_level		= 0,             -- How many debug messages should display in server console
 }
 
 --[[ All train data are stored in this table ]]--
 Trains = {
 	cars 			= {{ }},	-- Array of carriages attached to the train
+	blips			= {{ }},
 	is_running		= { },		-- Boolean indicating if train is moving or not
 	target_speed		= { },		-- The speed the train is trying to reach
 	engineer		= { },
