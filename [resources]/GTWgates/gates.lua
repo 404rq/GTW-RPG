@@ -39,21 +39,21 @@ gate_data = {
 	[17]={ 	986, 	284.7, 		1826.0, 	17.0,  		284.7, 		1831.2, 	17.0, 		0, 	0, 	270,	284.7, 	1826.0, 16.6, 	5,	"Government", 	1,	0,		0 },
 	[18]={ 	985, 	131, 		1941.8, 	17.8,  		123, 		1941.8, 	17.8, 		0, 	0, 	180,	131, 	1941.4, 18.0, 	5,	"Government", 	1,	0,		0 },
 	[19]={ 	986, 	139, 		1941.8, 	17.8,  		147, 		1941.8, 	17.8, 		0, 	0, 	180,	139, 	1941.4, 18.0, 	5,	"Government", 	1,	0,		0 },
-	[20]={ 	986, 	-2980.0, 	2253.1, 	6.9, 		-2987.7, 	2253.0, 	6.9,		0,	0,	0,	-2979, 	2252.9, 7.2,	5,	"Government",	1,	0,		0 },
+	[20]={ 	986, 	-2995.7, 	2252.7, 	6.9, 		-2999.7, 	2252.7, 	6.9,		0,	0,	0,	-2995.7, 2252.6, 7.0,	5,	"Government",	1,	0,		0 },
 	[21]={ 	986, 	-2954.8, 	2136.5, 	7.0,  		-2949.0, 	2138, 		7.0,		0,	0,	190,	-2954,	2136.7, 7.0,	6,	"Government",	1,	0,		0 },
 	[22]={ 	986, 	-2996.1, 	2305.1, 	7.9,  		-2995.86, 	2306.6, 	7.9,		0,	0,	268.6,	-2996, 	2303.9, 7.0,	6,	"Government",	1,	0,		0 },
  	[23]={ 	985, 	-3085.2, 	2314.7, 	7.0,  		-3085.5, 	2307.5, 	7.0,		0,	0,	267,	-3084.8,2314.6, 7.0,	6,	"Government",	1,	0,		0 },
 	[24]={ 	986,	-2953.4, 	2255.8, 	6.7, 	 	-2953.4, 	2249.1, 	6.7,		0,	0,	90,	-2953.4,2256.3, 7.0, 	4,	"Government", 	1, 	0,		0 },
 	[25]={ 	986,	-2944.7, 	2254.1, 	6.7, 	 	-2944.7, 	2246.7, 	6.7,		0,	0,	90,	-2944.7,2254.3, 7.0, 	4,	"Government", 	1, 	0,		0 },
 	-- ObjectID	closeX 		closeY 		closeZ 		openX 		openY 		openZ 		rotX 	rotY 	rotZ 	colX 	colY 	colZ	colRad	Group		Scale	Interior	Dimension
-	[26]={ 	986, 	-2995.7, 	2264.9, 	6.9, 		-2998.8, 	2264.9, 	6.9,		0,	0,	0,	-2992.8, 2264.9, 7.0,	4,	"Government",	1,	0,		0 },
+	[26]={ 	986, 	-2995.7, 	2264.7, 	6.9, 		-2999.7, 	2264.7, 	6.9,		0,	0,	0,	-2992.7, 2264.6, 7.0,	4,	"Government",	1,	0,		0 },
 	[27]={ 	986, 	-2990.7, 	2348.7,  	7.6,  		-2996.2, 	2348.7,  	7.6, 		0, 	0, 	0,	-2989.7, 2348.7,  7.6, 	4,	"Government", 	0.83,	0,		0 },
 }
 
 -- Global data members
 gates = { }
 cols = 	{ }
-openSpeed = 3000
+openSpeed = 2000
 
 -- Add all gates
 function load_gates(name)
@@ -102,8 +102,7 @@ function close_gate(plr, matching_dimension)
 	if not matching_dimension then return end
     	local ID = cols[source]
 	local plr_count = #getElementsWithinColShape(source, "player")
-    	if plr and isElement(plr) and getElementType(plr) == "player" and ( getElementData(plr, "Group" ) == gate_data[ID][15] or
-    		getPlayerTeam(plr) == getTeamFromName(gate_data[ID][15]) or getPlayerTeam(plr) == getTeamFromName("Staff")) and plr_count == 0 then
+    	if plr and isElement(plr) and getElementType(plr) == "player" and plr_count == 0 then
         	moveObject(gates[source], openSpeed, gate_data[ID][2], gate_data[ID][3], gate_data[ID][4])
 	end
 end
