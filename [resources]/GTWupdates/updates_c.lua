@@ -35,7 +35,7 @@ end)
 -- Refresh and toggle updates list
 function requestUpdates()
 	-- Request updates list from RageQuit network (unavailable)
-	oldText = guiGetText(text)
+	local oldText = guiGetText(text)
 	if oldText == "" then
 		guiSetText(text, "Connecting to 404rq.com/updates/ for latest updates, please wait...")
 	end
@@ -44,16 +44,18 @@ end
 setTimer(requestUpdates,5*60*1000,0)
 
 function onResponseFromServer(message)
-    -- Report changes to online players
-    if oldText ~= message and guiGetVisible(window) then
-	guiSetText(text, message)
-	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/", 180, 180, 180 )
-	return
-    elseif oldText ~= message then
-	guiSetText(text, message)
-	exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/! Use /updates to see what's new", 180, 180, 180)
-	return
-    end
+    	-- Report changes to online players
+    	local oldText = guiGetText(text)
+    	if oldText ~= message and guiGetVisible(window) then
+		guiSetText(text, message)
+		exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/", 180, 180, 180 )
+		return
+    	elseif oldText ~= message then
+		guiSetText(text, message)
+		exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/! "..
+			"Use /updates to see what's new", 180, 180, 180)
+		return
+    	end
 end
 addEvent( "GTWupdates.respond", true )
 addEventHandler("GTWupdates.respond", localPlayer, onResponseFromServer)
