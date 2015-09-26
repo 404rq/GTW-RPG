@@ -46,16 +46,17 @@ addEventHandler("onClientResourceStart", resourceRoot, client_load_markers)
 
 --[[ Initialize the spawner GUI ]]--
 gx,gy = guiGetScreenSize()
-window = guiCreateWindow(((gx-600)/2),((gy-450)/2),600,450,"GTWalrus vehicles",false)
-txt_search = guiCreateEdit(10, 32, 580, 30, "", false, window)
+window = guiCreateWindow(((gx-500)/2),((gy-400)/2),500,400,"Rental vehicles",false)
+txt_search = guiCreateEdit(10, 32, 480, 30, "", false, window)
 guiEditSetCaretIndex(txt_search, 1)
-veh_grid = guiCreateGridList(10, 64, 580, 344, false, window)
+veh_grid = guiCreateGridList(10, 64, 480, 294, false, window)
 guiGridListSetSelectionMode(veh_grid, 0)
-col_name = guiGridListAddColumn(veh_grid, "Name", 0.35)
-col_details = guiGridListAddColumn(veh_grid, "Details", 0.4)
-col_price = guiGridListAddColumn(veh_grid, "Price", 0.15)
-btn_spawn = guiCreateButton(10, 410, 138, 36, "Rent", false, window)
-btn_cancel = guiCreateButton(452, 410, 138, 36, "Cancel", false, window)
+col_name = guiGridListAddColumn(veh_grid, "Name", 0.45)
+col_price = guiGridListAddColumn(veh_grid, "Price", 0.2)
+col_details = guiGridListAddColumn(veh_grid, "Extra", 0.25)
+btn_spawn = guiCreateButton(10, 360, 138, 36, "Rent", false, window)
+guiSetProperty(btn_spawn, "NormalTextColour", "FF00FF00")
+btn_cancel = guiCreateButton(352, 360, 138, 36, "Cancel", false, window)
 guiSetVisible(window,false)
 exports.GTWgui:setDefaultFont(veh_grid, 10)
 exports.GTWgui:setDefaultFont(btn_spawn, 10)
@@ -71,32 +72,32 @@ function filter_list(button, press)
 	end
 	if not isValid then return end
 	-- Navigate in the list
-    if button == "arrow_d" then
-    	local row,col = guiGridListGetSelectedItem(veh_grid)
-    	local row_c = guiGridListGetRowCount(veh_grid)
+        if button == "arrow_d" then
+    	        local row,col = guiGridListGetSelectedItem(veh_grid)
+    	        local row_c = guiGridListGetRowCount(veh_grid)
 		if row + 1 >= row_c then return end
 		guiGridListSetSelectedItem(veh_grid, row+1, 1)
 		return
-    end
-    if button == "arrow_u" then
-    	local row,col = guiGridListGetSelectedItem(veh_grid)
+        end
+        if button == "arrow_u" then
+    	        local row,col = guiGridListGetSelectedItem(veh_grid)
 		if row - 1 < 0 then return end
 		guiGridListSetSelectedItem(veh_grid, row-1, 1)
 		return
-    end
-    if is_gv and button ~= "enter" then
-        createVehGui(true, guiGetText(txt_search))
-    elseif button ~= "enter" then
-    	createVehGui(false, guiGetText(txt_search))
-    end
-    if button == "enter" and not isTimer(e_cooldown) then
-    	local row,col = guiGridListGetSelectedItem(veh_grid)
-        if row and col and row ~= -1 and col ~= -1 then
-			trigger_server_spawn()
-        else
-           	exports.GTWtopbar:dm("Error: Please, select a vehicle of list.",255,0,0)
+        end
+        if is_gv and button ~= "enter" then
+                make_vehlist(true, guiGetText(txt_search))
+        elseif button ~= "enter" then
+    	        make_vehlist(false, guiGetText(txt_search))
+        end
+        if button == "enter" and not isTimer(e_cooldown) then
+    	        local row,col = guiGridListGetSelectedItem(veh_grid)
+                if row and col and row ~= -1 and col ~= -1 then
+		        trigger_server_spawn()
+                else
+           	        exports.GTWtopbar:dm("Error: Please, select a vehicle of list.", 255,0,0)
 		end
-    end
+        end
 end
 addEventHandler("onClientKey", root, filter_list)
 
@@ -119,8 +120,8 @@ function getValidVehicleModels()
 end
 
 --[[ Load vehicles into gridlist ]]--
-function createVehGui(isStaff, filter)
-    if typeOfMarker and not isStaff then
+function make_vehlist(is_staff, filter)
+    if typeOfMarker and not is_staff then
     	if isElement(veh_grid) then
     		guiGridListClear(veh_grid)
     	end
@@ -136,10 +137,41 @@ function createVehGui(isStaff, filter)
 
 	        -- Do the rest if the row was added
 	        if row then
-		    	guiGridListSetItemText(veh_grid, row, col_name, tostring(vehicle), false, false)
+                        -- Add extra Information
+                        if veh_extra[vehicle] then
+                                for k,v in ipairs(veh_extra[vehicle]) do
+                                        local row2 = guiGridListAddRow(veh_grid)
+                                        guiGridListSetItemText(veh_grid, row2, col_name, vehicle, false, false)
+                                        guiGridListSetItemText(veh_grid, row2, col_details, v, false, false)
+                                        guiGridListSetItemText(veh_grid, row2, col_price, tostring(
+                                                spawn_prices[typeOfMarker][i]).."$/minute", false, false)
+                                        if spawn_prices[typeOfMarker][i] > 0 then
+                        			guiGridListSetItemText(veh_grid, row2, col_price,
+                                                        tostring(spawn_prices[typeOfMarker][i]).."$/minute", false, false)
+                        			if spawn_prices[typeOfMarker][i] > getPlayerMoney() then
+                        				guiGridListSetItemColor(veh_grid, row2, col_name, 200, 0, 0)
+                        				guiGridListSetItemColor(veh_grid, row2, col_details, 200, 0, 0)
+                        				guiGridListSetItemColor(veh_grid, row2, col_price, 200, 0, 0)
+                        			else
+                        				guiGridListSetItemColor(veh_grid, row2, col_name, 0, 200, 0)
+                        				guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
+                        				guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
+                        			end
+                        		else
+                        			guiGridListSetItemText(veh_grid, row2, col_price, "Free", false, false)
+                        			guiGridListSetItemColor(veh_grid, row2, col_name, 0, 200, 0)
+                        			guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
+                        			guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
+                        		end
+                                end
+                        end
+
+                        -- Color code and set data
+		    	guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
 		        guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
 		        if spawn_prices[typeOfMarker][i] > 0 then
-		        	guiGridListSetItemText(veh_grid, row, col_price, tostring(spawn_prices[typeOfMarker][i]).."$/minute", false, false)
+		        	guiGridListSetItemText(veh_grid, row, col_price,
+                                        tostring(spawn_prices[typeOfMarker][i]).."$/minute", false, false)
 		        	if spawn_prices[typeOfMarker][i] > getPlayerMoney() then
 		        		guiGridListSetItemColor(veh_grid, row, col_name, 200, 0, 0)
 		        		guiGridListSetItemColor(veh_grid, row, col_details, 200, 0, 0)
@@ -155,11 +187,11 @@ function createVehGui(isStaff, filter)
 		        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
 		        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
 		        end
-		    end
+		  end
 	    end
 	    guiGridListSetSelectedItem(veh_grid, 0, 1)
 	end
-	if isStaff then
+	if is_staff then
 		typeOfMarker = 12
 		if isElement(veh_grid) then
     		guiGridListClear(veh_grid)
@@ -179,6 +211,19 @@ function createVehGui(isStaff, filter)
 	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
 	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
 	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
+
+                        -- Add extra Information
+                        if veh_extra[vehicle] then
+                                for k,v in ipairs(veh_extra[vehicle]) do
+                                        local row2 = guiGridListAddRow(veh_grid)
+                                        guiGridListSetItemText(veh_grid, row2, col_name, vehicle, false, false)
+                                        guiGridListSetItemText(veh_grid, row2, col_price, "Free", false, false)
+                                        guiGridListSetItemText(veh_grid, row2, col_details, v, false, false)
+                                        guiGridListSetItemColor(veh_grid, row2, col_name, 0, 200, 0)
+                	        	guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
+                	        	guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
+                                end
+                        end
 	        elseif not filter then
 	        	local row = guiGridListAddRow(veh_grid)
 	        	guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
@@ -187,6 +232,19 @@ function createVehGui(isStaff, filter)
 	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
 	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
 	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
+                        
+                        -- Add extra Information
+                        if veh_extra[vehicle] then
+                                for k,v in ipairs(veh_extra[vehicle]) do
+                                        local row2 = guiGridListAddRow(veh_grid)
+                                        guiGridListSetItemText(veh_grid, row2, col_name, vehicle, false, false)
+                                        guiGridListSetItemText(veh_grid, row2, col_price, "Free", false, false)
+                                        guiGridListSetItemText(veh_grid, row2, col_details, v, false, false)
+                                        guiGridListSetItemColor(veh_grid, row2, col_name, 0, 200, 0)
+                	        	guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
+                	        	guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
+                                end
+                        end
 	        end
 	    end
 	    guiGridListSetSelectedItem(veh_grid, 0, 1)
@@ -201,7 +259,7 @@ function spawn_the_vehicle()
 		local px,py,pz = getElementPosition(localPlayer)
 		local rx,ry,rz = getElementRotation(localPlayer)
 		rotation = rz
-		createVehGui(true)
+		make_vehlist(true)
 	    if(window ~= nil) then
 	        guiSetVisible(window, true)
 	        showCursor(true)
@@ -237,7 +295,7 @@ function marker_hit(hitElement)
 			(getPlayerTeam(localPlayer) == getTeamFromName(team) or team == "" or is_staff) and
 			((getElementData(localPlayer, "Occupation") == occupation) or occupation == "" or is_staff) or
 			((typeOfMarker == 4 or typeOfMarker == 17) and (getPlayerTeam(localPlayer) == getTeamFromName("Government"))) then
-	        createVehGui(false)
+	        make_vehlist(false)
 	        if(window ~= nil) then
 	            guiSetVisible(window, true)
 	            showCursor(true)
@@ -286,10 +344,11 @@ function trigger_server_spawn()
 	local row,col = guiGridListGetSelectedItem(veh_grid)
 	local vehName = guiGridListGetItemText(veh_grid, row, 1)
 	local vehID = getVehicleModelFromName(vehName)
-	local price = 0
+        local price = 0
+        local extra = guiGridListGetItemText(veh_grid, row, 3) or 0
 	local is_staff = exports.GTWstaff:isStaff(localPlayer)
 	if not is_staff then price = spawn_prices[typeOfMarker][(row+1)] end
-	triggerServerEvent("GTWvehicles.spawnvehicle",root, vehID,rotation,price,tmp_sx,tmp_sy,tmp_sz)
+	triggerServerEvent("GTWvehicles.spawnvehicle",root, vehID, rotation, price, extra, tmp_sx,tmp_sy,tmp_sz)
 	triggerServerEvent("GTWvehicles.colorvehicle",root, typeOfMarker)
 	triggerEvent("GTWvehicles.closeWindow", localPlayer)
 end
