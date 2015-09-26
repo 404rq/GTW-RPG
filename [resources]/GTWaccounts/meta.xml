@@ -19,6 +19,7 @@
     <script src="c_gui.lua" type="client" />
     <script src="s_data.lua" type="server" />
     <script src="s_func.lua" type="server" />
+    <script src="s_playtime.lua" type="server" />
 
     <export function="getPlayerAccount" type="client" />
     <export function="isClientLoggedIn" type="client" />
