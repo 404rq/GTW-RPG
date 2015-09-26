@@ -18,7 +18,7 @@ wanted_data = {
 	wanted_level 	= { },
 	violent_time	= { },
 	reduce_timers 	= { },
-	fine_charge		= { },
+	fine_charge	= { },
 }
 
 --[[ Load system data ]]--
