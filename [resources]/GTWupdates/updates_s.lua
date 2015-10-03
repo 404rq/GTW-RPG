@@ -14,6 +14,9 @@
 ********************************************************************************
 ]]--
 
+-- Update list cache
+local txt_cache = ""
+
 -- On receive updates
 function result(str_result, plr)
 	local text = str_result
@@ -23,10 +26,16 @@ function result(str_result, plr)
 	if not plr then return end
 
 	-- Format from wiki to MTA text field
-	text = string.gsub(text,"'''", "")
+	text = string.gsub(text, "'''", "")
 
-	-- Pass data back to client
-	triggerClientEvent(plr, "GTWupdates.respond", plr, text)
+	-- Check for real updates
+	if txt_cache ~= text then
+		-- Pass data back to client
+		triggerClientEvent(plr, "GTWupdates.respond", plr, text)
+
+		-- Store to cache
+		txt_cache = text
+	end
 end
 
 -- Call remote server II to receive latest GTW updates
