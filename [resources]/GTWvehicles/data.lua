@@ -90,7 +90,7 @@ spawn_names = {
 	[18]={ "Ambulance", "Enforcer", "HPV1000", "Police LS", "Police SF", "Police LV", "Police Ranger", "FBI Rancher", "FBI Truck" },
 	--[[[19]={ } (Slot 19 is reserved for staff) ]]
 	[20]={ "Predator" },
-	[21]={ "Mountain Bike", "HPV1000" },
+	[21]={ "Caddy", "Mountain Bike", "HPV1000" },
 }
 
 --[[ Rental price definitions (amount of $/minute) ]]--
@@ -114,7 +114,7 @@ spawn_prices = {
 	[17]={ 0, 0 },
 	[18]={ 0, 0, 0, 0, 0, 0, 0, 0, 0 },
 	[20]={ 0 },
-	[21]={ 0, 0 },
+	[21]={ 0, 0, 0 },
 }
 
 --[[ Spawner marker colors ]]--
