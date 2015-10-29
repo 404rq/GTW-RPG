@@ -17,6 +17,7 @@
 --[[ Turn vehicle headlights on or off ]]--
 function toggle_lights(plr, key, state)
         -- Make sure only the driver can control the lights
+        if not getPedOccupiedVehicle(plr) then return end
         if getPedOccupiedVehicleSeat(plr) > 0 then return end
         local veh = getPedOccupiedVehicle(plr)
 
