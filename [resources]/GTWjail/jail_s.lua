@@ -15,7 +15,7 @@
 ]]--
 
 jail_data = {
-	is_jailed 		= { },
+	is_jailed 	= { },
 	last_location	= { },
 	release_timers	= { },
 	info_timers 	= { },
@@ -224,6 +224,7 @@ function check_escape()
 			local dist = getDistanceBetweenPoints3D(-3030, 2255, 8, x,y,z)
 			if dist > 220 and getElementInterior(v) == 0 and getElementDimension(v) == 0 then
 				jail_escape(v)
+				outputChatBox(getPlayerName(v).." escaped from jail")
 			end
 		end
 	end
@@ -284,6 +285,7 @@ function jail_escape(crim)
 	setElementData(crim, "Jailed", nil)
 	setElementData(crim, "arrested", nil)
 	set_control_states(crim, true)
+	outputChatBox(getPlayerName(v).." escaped from jail")
 	setElementData(crim, "Occupation", "Criminal")
 
 	-- Notify cops
@@ -304,6 +306,10 @@ function sync_time_display(crim)
 		-- Count down
 		local time = getTickCount()
 		setElementData(crim, "jailTime2", time)
+
+		-- Make sure guns are disabled
+		set_control_states(crim, false)
+		setPedWeaponSlot(crim, 0)
 	end
 end
 
