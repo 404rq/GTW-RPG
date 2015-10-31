@@ -150,6 +150,14 @@ function start_vehicle(plr, seat, jacked)
 				setTimer(showGearProfile, 95, 1, plr, source)
 			end
 		end
+
+                -- Check if we should lock the vehicle again
+                if getElementData(source, "GTWvehicles.autolock") then
+                        setVehicleLocked(source, true)
+
+                        -- Reset to save memory
+                        setElementData(source, "GTWvehicles.autolock", nil)
+                end
 	end
 end
 addEventHandler("onVehicleEnter", root, start_vehicle)
@@ -159,6 +167,13 @@ function validate_lock(plr, seat, jacked)
         -- Skip check if the vehicle has no owner
 	if not getElementData(source, "owner") then return end
 
+        -- Always unlock automatically if the owner tries to enter
+        if getPlayerAccount(plr) and getAccountName(getPlayerAccount(plr)) ==
+        	getElementData(source, "owner") and isVehicleLocked(source) then
+                setVehicleLocked(source, false)
+                setElementData(source, "GTWvehicles.autolock", true)
+        end
+
         -- Notify if the vehicle is locked
 	if (not getPlayerAccount(plr) or getAccountName(getPlayerAccount(plr)) ~=
 		getElementData(source, "owner")) and isVehicleLocked(source) then
@@ -167,9 +182,9 @@ function validate_lock(plr, seat, jacked)
 
                 -- Check if the vehicle has a driver and notify that driver
                 local driver = getVehicleOccupant(source, 0)
-                if driver then
+                if driver and isElement(driver) and getElementType(driver) == "player" then
                         exports.GTWtopbar:dm(getPlayerName(plr)..
-                                " tries to enter your vehicle but it's locked", plr, 255,0,0)
+                                " tries to enter your vehicle but it's locked", driver, 255,0,0)
                 end
 
                 -- Cancel the event and break
