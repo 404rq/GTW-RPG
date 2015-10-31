@@ -26,19 +26,20 @@ function targetingActivated ( target )
 		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Gangsters" ) or
-		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) then
+		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) and
+		getElementData(localPlayer, "Occupation") ~= "Prisoner" then
 		-- Cooldown during robbery 5 minutes between each rob
-        triggerServerEvent( "onRob", localPlayer, target )
-        cooldown = setTimer(function() end, 300000, 1 )
-        info_cooldown = setTimer(function() end, 30000, 1 )
-    elseif not isTimer(info_cooldown) and getControlState("aim_weapon") and
+        	triggerServerEvent( "onRob", localPlayer, target )
+        	cooldown = setTimer(function() end, 300000, 1 )
+        	info_cooldown = setTimer(function() end, 30000, 1 )
+    	elseif not isTimer(info_cooldown) and getControlState("aim_weapon") and
 		getElementInterior( localPlayer ) > 0 and isElement( target ) and
 		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Gangsters" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) then
-    	exports.GTWtopbar:dm( "There are to many cops around! Get the hell out of here.", 255, 0, 0 )
-    end
+    		exports.GTWtopbar:dm( "You cannot rob this store right now!", 255, 0, 0 )
+    	end
 end
 addEventHandler ( "onClientPlayerTarget", root, targetingActivated )
 
