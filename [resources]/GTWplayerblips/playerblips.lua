@@ -28,6 +28,11 @@ function validateVisiblity(plr, spectator)
 	-- Player is either cop or criminal and may be hidden?
 	if plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) and
 		stealthTeams[getTeamName(getPlayerTeam(plr))] and stealthTeams[getTeamName(getPlayerTeam(spectator))] then
+		-- Special rules for jail, cops and criminals can't see eachothers
+		if getElementData(plr, "Occupation") == "Prisoner" and
+			getPlayerTeam(spectator) == getTeamFromName("Government") then return false end
+		if getElementData(spectator, "Occupation") == "Prisoner" and
+			getPlayerTeam(plr) == getTeamFromName("Government") then return false end
 		-- Memembers of the team staff sees all blips
 		if getPlayerTeam(spectator) == getTeamFromName("Staff") then return true end
 		-- They are in different teams and should not see each others
