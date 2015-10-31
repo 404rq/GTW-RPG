@@ -116,7 +116,7 @@ function arrest_or_taze(attacker, attackerweapon)
 	   		giveWeapon(source, weapon[k], ammo[k], false)
 	   	end
 	end
-	
+
 	-- Taze suspect
 	local isJailed = exports.GTWjail:isJailed(source)
 	elseif attackerweapon == 23 and wl > 0 and getPlayerWantedLevel(source) > 0 and
@@ -163,7 +163,7 @@ function kill_arrest(ammo, attacker, weapon, bodypart)
 
 	-- Suicide arrest, works if there's no attacker only, the nearest cop get's the payment if any
 	local police = nearestCop(source)
-	if police and isElement(police) and getElementData(source, "violent_seconds") and distanceToCop(source) < 180 and not is_jailed then
+	if police and isElement(police) and distanceToCop(source) < 180 and police ~= attacker and not is_jailed then
 		setTimer(Jail, 18000, 1, source, police, true)
 		setElementData(source, "isKillArrested", true)
 		exports.GTWtopbar:dm(getPlayerName(source).." comitted suicide nearby", police, 255, 100, 0 )
