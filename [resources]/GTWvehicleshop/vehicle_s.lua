@@ -252,7 +252,8 @@ function saveVehicle(veh)
 end
 
 --[[ Destroys and saves a vehicle into vehicle database ]]--
-function saveAndRemoveVehicle(veh,removeVeh)
+function saveAndRemoveVehicle(veh, removeVeh)
+        if not veh or not isElement(veh) or getElementType(veh) ~= "vehicle" then return end
 	-- Ensure that the vehicle is owned by a player
 	if vehicle_owners[veh] then
 		-- Get vehicle data
