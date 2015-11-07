@@ -472,16 +472,16 @@ function deleteturf(player, cmd)
 	local acc = getPlayerAccount(player)
 	if isObjectInACLGroup("user."..getAccountName(acc), aclGetGroup("Admin")) then
 		local x,y,z = getElementPosition(player)
-		dbExec(db, "DELETE FROM turfs WHERE X>? AND X<? AND Y>? AND Y<?", math.floor(x)-5, math.floor(x)+5, math.floor(y)-5, math.floor(y)+5)
+		dbExec(db, "DELETE FROM turfs WHERE X>? AND X<? AND Y>? AND Y<?", math.floor(x)-15, math.floor(x)+15, math.floor(y)-15, math.floor(y)+15)
 		local counter = 0
-		for w,area in ipairs(getElementsByType("radararea")) do
+		for w,area in pairs(getElementsByType("radararea")) do
 			local ax,ay,az = getElementPosition(area)
 			if ax >(x-5) and ax <(x+5) and ay >(y-5) and ay <(y+5) then
 				destroyElement(area)
 				counter = counter + 1
 			end
 		end
-		for w,colshape in ipairs(getElementsByType("colshape")) do
+		for w,colshape in pairs(getElementsByType("colshape")) do
 			local ax,ay,az = getElementPosition(colshape)
 			if ax >(x-5) and ax <(x+5) and ay >(y-5) and ay <(y+5) and getElementData(colshape, "owner") then
 				destroyElement(colshape)
