@@ -28,11 +28,6 @@ function validateVisiblity(plr, spectator)
 	-- Player is either cop or criminal and may be hidden?
 	if plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) and
 		stealthTeams[getTeamName(getPlayerTeam(plr))] and stealthTeams[getTeamName(getPlayerTeam(spectator))] then
-		-- Special rules for jail, cops and criminals can't see eachothers
-		if getElementData(plr, "Occupation") == "Prisoner" and
-			getPlayerTeam(spectator) == getTeamFromName("Government") then return false end
-		if getElementData(spectator, "Occupation") == "Prisoner" and
-			getPlayerTeam(plr) == getTeamFromName("Government") then return false end
 		-- Memembers of the team staff sees all blips
 		if getPlayerTeam(spectator) == getTeamFromName("Staff") then return true end
 		-- They are in different teams and should not see each others
@@ -61,7 +56,8 @@ function refreshAllBlips(resource)
 		for y, spectator in pairs(getElementsByType("player")) do
 			if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
-			elseif not getElementData(plr,"anon") then
+			elseif not getElementData(plr,"anon") and (getElementData(plr, "Occupation") ~= "Prisoner" and
+				getPlayerTeam(spectator) ~= getTeamFromName("Government")) then
 				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
 			end
 		end
