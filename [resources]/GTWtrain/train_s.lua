@@ -264,6 +264,7 @@ function create_train(plr, cmd, args)
 	local new_train = createVehicle(engine_ID, tx,ty,tz, 0,0,0, "")
 	local engine_blip = createBlipAttachedTo(new_train, 0, 1, 200, 200, 200, 200, 0, 180)
 	setElementSyncer(new_train, plr)
+	setTrainDerailable(new_train, false)
 
 	-- Show debug info
 	if Settings.debug_level > 0 then
@@ -313,6 +314,7 @@ function create_train(plr, cmd, args)
 		-- Create a second engine
 		local engine2 = createVehicle(tmp_ID, tx,ty,tz, 0,0,0, "")
 		local engine2_blip = createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
+		setTrainDerailable(engine2, false)
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, engine2)
@@ -350,6 +352,7 @@ function create_train(plr, cmd, args)
 		-- Create a random car
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
 		local blip = createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
+		setTrainDerailable(car, false)
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, car)
@@ -467,7 +470,7 @@ addCommandHandler("detachtrain", disconnect_carriages)
 --[[ Destroy the train ]]--
 function destroy_train(d_train)
 	if not d_train or not isElement(d_train) then return end
-	
+
 	-- Check so that there's no nearby players
 	local tx,ty,tz = getElementPosition(d_train)
 	for k,v in pairs(getElementsByType("player")) do
