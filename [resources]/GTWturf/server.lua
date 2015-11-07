@@ -46,7 +46,7 @@ function turfPayout(query)
 			-- Notice about turf money
 			if money > 0 then
 				givePlayerMoney(player,money)
-				exports.GTWtopbar:dm("You have received: "..tostring(money).."$ from your turfs!", player, 0, 255, 0)
+				exports.GTWtopbar:dm("You have received: "..tostring(math.floor(money)).."$ from your turfs!", player, 0, 255, 0)
 			end
 		end
 	end
@@ -194,7 +194,7 @@ function onTurfEnter(hitElement)
 						if not r or not g or not b then
 							r,g,b = 255,255,255
 						end
-						setRadarAreaColor(area, r, g, b, 130)
+						setRadarAreaColor(area, r, g, b, turf_alpha)
 						setRadarAreaFlashing(area, false)
 						setElementData(theTurf, "currAttacker", nil)
 						dbExec(db, "UPDATE turfs SET owner=?, red=?, green=?, blue=? WHERE X=? AND Y=?", group, r, g, b,
@@ -306,7 +306,7 @@ function changeTurfColor(plr, cmd, r, g, b)
 	dbExec(db, "UPDATE turfs SET red=?, green=?, blue=? WHERE owner=?", r, g, b, group)
 	for w,area in ipairs(getElementsByType("radararea")) do
 		if getElementData(area,"owner") and getElementData(area,"owner") == group then
-			setRadarAreaColor(area, r, g, b, 130)
+			setRadarAreaColor(area, r, g, b, turf_alpha)
 		end
 	end
 end
@@ -440,7 +440,7 @@ function claimTurf(player, cmd, sx, sy)
 		if not r or not g or not b then
 			r,g,b = 255,255,255
 		end
-		setRadarAreaColor(getElementData(player, "GTWturf.area"), r, g, b, 130)
+		setRadarAreaColor(getElementData(player, "GTWturf.area"), r, g, b, turf_alpha)
 		setRadarAreaFlashing(getElementData(player, "GTWturf.area"), false)
 		setElementData(getElementData(player, "GTWturf.theTurf"), "currAttacker", nil)
 		setElementData(getElementData(player, "GTWturf.theTurf"), "owner", group)
