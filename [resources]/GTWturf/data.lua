@@ -33,4 +33,5 @@ armor_min			= 25						-- The minimum amount of armor the killer will get after k
 weapon_stats_max		= 15						-- The maximum amount of stats for the current weapon the killer will gain after killing an enemy
 weapon_stats_min		= 5						-- The minimum amount of stats for the current weapon the killer will gain after killing an enemy
 
-time_reduce_factor		= 0.06						-- A value to be multiplied with sizex * sizey of a turf entered to decide how much time it takes to capture it
+time_reduce_factor		= 0.05						-- A value to be multiplied with sizex * sizey of a turf entered to decide how much time it takes to capture it
+turf_alpha			= 170						-- The global turf color alpha value
