@@ -24,11 +24,11 @@ setTimer(function()
 	for k,v in pairs(getElementsByType("player")) do
 		if isElementInWater(v) then
 			local health = getElementHealth(v)
-			local new_health = health - 10
+			local new_health = health - math.random(4, 12)
 			local x,y,z = getElementPosition(v)
 			-- Check if the area is north west (SF), south LS or if it's night
 			local hour, minutes = getTime()
-			if (y > 0 and x < 0) or (y < -2000 and x > 0) or hour > 18 or hour < 8 then
+			if (y > 1500 and x < 1000) or y < -2800 or hour > 22 or hour < 9 then
 				if new_health > 0 then
 					setElementHealth(v, new_health)
 					exports.GTWtopbar:dm("This water is cold! get up before you die!", v, 255, 0, 0)
