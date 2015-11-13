@@ -27,6 +27,9 @@ function dm(text, r,g,b, col)
 	outputConsole("[TOPBAR] "..text)
 	last_msg = text
 	setTimer(function() last_msg = "" end, 10000, 1)
+
+	-- Play a message notification sound
+	--playSoundFrontEnd(11)
 end
 addEvent("GTWtopbar.addText", true)
 addEventHandler("GTWtopbar.addText", root, dm)
