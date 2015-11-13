@@ -138,8 +138,11 @@ function make_vehlist(is_staff, filter)
 	        -- Do the rest if the row was added
 	        if row then
                         -- Add extra Information
-                        if veh_extra[vehicle] then
-                                for k,v in ipairs(veh_extra[vehicle]) do
+                        local veh_extra_data = veh_extra_plr
+                        if veh_extra_data[vehicle] then
+                                local is_admin = exports.GTWstaff:isAdmin(localPlayer) or false
+                                if is_admin then veh_extra_data = veh_extra end
+                                for k,v in ipairs(veh_extra_data[vehicle]) do
                                         local row2 = guiGridListAddRow(veh_grid)
                                         guiGridListSetItemText(veh_grid, row2, col_name, vehicle, false, false)
                                         guiGridListSetItemText(veh_grid, row2, col_details, v, false, false)
@@ -213,8 +216,11 @@ function make_vehlist(is_staff, filter)
 	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
 
                         -- Add extra Information
-                        if veh_extra[vehicle] then
-                                for k,v in ipairs(veh_extra[vehicle]) do
+                        local veh_extra_data = veh_extra_plr
+                        if veh_extra_data[vehicle] then
+                                local is_admin = exports.GTWstaff:isAdmin(localPlayer) or false
+                                if is_admin then veh_extra_data = veh_extra end
+                                for k,v in ipairs(veh_extra_data[vehicle]) do
                                         local row2 = guiGridListAddRow(veh_grid)
                                         guiGridListSetItemText(veh_grid, row2, col_name, vehicle, false, false)
                                         guiGridListSetItemText(veh_grid, row2, col_price, "Free", false, false)
@@ -232,7 +238,7 @@ function make_vehlist(is_staff, filter)
 	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
 	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
 	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
-                        
+
                         -- Add extra Information
                         if veh_extra[vehicle] then
                                 for k,v in ipairs(veh_extra[vehicle]) do
@@ -366,3 +372,33 @@ function close_the_window()
 end
 addEvent("GTWvehicles.closeWindow", true)
 addEventHandler("GTWvehicles.closeWindow", root, close_the_window)
+
+--[[ Check when the train streams out and destroys it ]]--
+function check_stream_out(c_train)
+	setElementStreamable(c_train, true)
+end
+addEvent("GTWvehicles.onStreamOut", true)
+addEventHandler("GTWvehicles.onStreamOut", root, check_stream_out)
+
+addEventHandler("onClientElementStreamIn", getRootElement( ),
+    function ( )
+        if not getElementData(source, "GTWvehicles.isTrailerTowingVehile") then return end
+        local trailer = getElementData(source, "GTWvehicles.attachedTrailer")
+        attachTrailerToVehicle(source, trailer)
+    end
+);
+addEventHandler( "onClientElementStreamOut", getRootElement( ),
+    function ( )
+            if getElementData(source, "GTWvehicles.isTrailerTowingVehile") then
+                    local trailer = getElementData(source, "GTWvehicles.attachedTrailer")
+                    if isElementStreamedIn(source) and isElementStreamedIn(trailer) then
+                            detachTrailerFromVehicle(source, trailer)
+                    end
+            elseif getElementData(source, "GTWvehicles.isTrailer") then
+                    local tower = getElementData(source, "GTWvehicles.towingVehicle")
+                    if isElementStreamedIn(tower) and isElementStreamedIn(source) then
+                            detachTrailerFromVehicle(tower, source)
+                    end
+            end
+    end
+);

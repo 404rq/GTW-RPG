@@ -89,21 +89,22 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   			end
 			   		end
 			   		trailers[client] = createVehicle(vehID, x, y, z, 0, 0, rot)
-			   		attachElements(trailers[client], vehicles[client], 0, -8)
-			   		setTimer(detachElements, 50, 1, trailers[client])
-			   		setTimer(attachTrailerToVehicle, 1000, 1, vehicles[client], trailers[client])
+                                        triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client])
+                                        attachTrailerToVehicle(vehicles[client], trailers[client])
+                                        setElementData(vehicles[client], "GTWvehicles.isTrailerTowingVehile", true)
+                                        setElementData(vehicles[client], "GTWvehicles.attachedTrailer", trailers[client])
+                                        setElementData(trailers[client], "GTWvehicles.isTrailer", true)
+                                        setElementData(trailers[client], "GTWvehicles.towingVehicle", vehicles[client])
+			   		--attachElements(trailers[client], vehicles[client], 0, -8)
+			   		--setTimer(detachElements, 50, 1, trailers[client])
+			   		--setTimer(attachTrailerToVehicle, 1000, 1, vehicles[client], trailers[client])
 			   	end
 
 			   	-- Train cars
 			   	if vehID == 537 or vehID == 538 or vehID == 449 then
 			   		setTrainDirection(vehicles[client], true)
 			   		if vehID == 537 then
-			   			local r_n = math.random(1,9)
-			   			if r_n < 5 then
-			   				vehID = 569
-			   			else
-			   				vehID = 590
-			   			end
+			   			vehID = 569
 			   		end
 			   		if vehID == 538 then
 			   			vehID = 570
@@ -118,6 +119,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					local engines = 1
 					if numberOfCarriages > 4 and (getElementModel(vehicles[client]) == 538 or getElementModel(vehicles[client]) == 537) then
 						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
+                                                triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						numberOfCarriages = numberOfCarriages - 1
@@ -126,19 +128,29 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					-- Extra freight engines
 					if numberOfCarriages > 6 and getElementModel(vehicles[client]) == 537 then
 						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
+                                                triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						numberOfCarriages = numberOfCarriages - 1
 						engines = engines + 1
 					end
+                                        local r_n = 0
 					for c=1, numberOfCarriages do
+                                                if getElementModel(vehicles[client]) == 537 then
+                                                        r_n = math.random(1,9)
+			   			        if r_n < 4 then
+			   				        vehID = 590
+                                                        end
+			   			end
 						carriage = createVehicle(vehID, x, y, z, 0, 0, rot)
+                                        	triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 					end
 					-- Adds an extra freight locomotive at the end
 					if numberOfCarriages > 4 and (getElementModel(vehicles[client]) == 538 or getElementModel(vehicles[client]) == 537) then
 						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
+                                                triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						engines = engines + 1
