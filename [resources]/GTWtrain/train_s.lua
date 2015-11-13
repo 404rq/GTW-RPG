@@ -313,7 +313,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a second engine
 		local engine2 = createVehicle(tmp_ID, tx,ty,tz, 0,0,0, "")
-		local engine2_blip = createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
+		--local engine2_blip = createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
 		setTrainDerailable(engine2, false)
 
 		-- Attach car to the train
@@ -351,7 +351,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a random car
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
-		local blip = createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
+		--local blip = createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
 		setTrainDerailable(car, false)
 
 		-- Attach car to the train
