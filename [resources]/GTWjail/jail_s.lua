@@ -285,7 +285,6 @@ function jail_escape(crim)
 	setElementData(crim, "Jailed", nil)
 	setElementData(crim, "arrested", nil)
 	set_control_states(crim, true)
-	outputChatBox(getPlayerName(v).." escaped from jail")
 	setElementData(crim, "Occupation", "Criminal")
 
 	-- Notify cops

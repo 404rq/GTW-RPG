@@ -21,7 +21,7 @@ police_data = {
 }
 tracker_timers = { }
 
--- Payment
+--[[ Pay the cop for arrest ]]--
 function pay_cop(cop, wl, viol_sec)
 	local money = 100
 	local payout = (money * wl) + (money * viol_sec/10)
@@ -35,7 +35,7 @@ function pay_cop(cop, wl, viol_sec)
 	return payout or 0
 end
 
--- Arrest a player
+--[[ Arrest or taze a player ]]--
 function arrest_or_taze(attacker, attackerweapon)
 	-- Get the team
 	if not attacker or not isElement(attacker) or getElementType(attacker) ~= "player"
@@ -143,6 +143,7 @@ function arrest_or_taze(attacker, attackerweapon)
 end
 addEventHandler("onPlayerDamage", root, arrest_or_taze)
 
+--[[ Check if the death is counted as a kill arrest ]]--
 function kill_arrest(ammo, attacker, weapon, bodypart)
 	-- Release a suspect hold by a killed police officer
 	if getPlayerTeam(source) and isLawUnit(source) and police_data.arrested_players[source] then
