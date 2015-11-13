@@ -15,35 +15,37 @@
 ]]--
 
 -- Update list cache
-local txt_cache = ""
+txt_cache = ""
 
 -- On receive updates
-function result(str_result, plr)
+function result_send(str_result)
 	local text = str_result
-	plr = getPlayerFromName(plr)
 
 	-- Verify that the player is still online
-	if not plr then return end
+	--if not plr then
+	--	outputServerLog("ERROR: GTWupdates: unable to fetch update list ("..plr_name)
+	--	return
+	--end
 
 	-- Format from wiki to MTA text field
 	text = string.gsub(text, "'''", "")
 
 	-- Check for real updates
 	if txt_cache ~= text then
-		-- Pass data back to client
-		triggerClientEvent(plr, "GTWupdates.respond", plr, text)
-
 		-- Store to cache
 		txt_cache = text
+
+		-- Pass data back to client
+		triggerClientEvent("GTWupdates.respond", root, text)
 	end
 end
 
 -- Call remote server II to receive latest GTW updates
 function onUpdateRequest( )
-	callRemote( "http://404rq.com/update-list/get.php", result, getPlayerName(client))
+	callRemote("http://www.404rq.com/update-list/get.php", result_send)
 end
 addEvent("GTWupdates.request", true)
-addEventHandler("GTWupdates.request", resourceRoot, onUpdateRequest)
+addEventHandler("GTWupdates.request", root, onUpdateRequest)
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(

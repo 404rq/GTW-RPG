@@ -26,7 +26,7 @@ guiSetVisible(window,false)
 exports.GTWgui:setDefaultFont(txt_memo, 10)
 
 -- Add close button and triggers
-local closeButton = guiCreateButton(10,560,780,30,"Close window",false,window)
+local closeButton = guiCreateButton(10,560,780,30, "Close window", false, window)
 exports.GTWgui:setDefaultFont(closeButton, 10)
 addEventHandler("onClientGUIClick",closeButton,function()
 	guiSetVisible(window, false)
@@ -34,17 +34,17 @@ addEventHandler("onClientGUIClick",closeButton,function()
 end)
 
 -- Refresh and toggle updates list
-function requestUpdates()
+function download_updates()
 	-- Request updates list from RageQuit network (unavailable)
 	old_text = guiGetText(txt_memo)
 	if old_text == "" then
 		guiSetText(txt_memo, "Connecting to 404rq.com/updates/ for latest updates, please wait...")
 	end
-	triggerServerEvent("GTWupdates.request", resourceRoot)
+	triggerServerEvent("GTWupdates.request", localPlayer)
 end
-setTimer(requestUpdates,5*60*1000,0)
+setTimer(download_updates, 5*60*1000, 0)
 
-function onResponseFromServer(message)
+function server_response(message)
     	-- Report changes to online players
     	if old_text ~= message and guiGetVisible(window) then
 		guiSetText(txt_memo, message)
@@ -55,21 +55,24 @@ function onResponseFromServer(message)
 			"Use /updates to see what's new", 180, 180, 180)
     	end
 end
-addEvent( "GTWupdates.respond", true )
-addEventHandler("GTWupdates.respond", root, onResponseFromServer)
+addEvent("GTWupdates.respond", true)
+addEventHandler("GTWupdates.respond", root, server_response)
 
+function toggle_gui()
+	guiSetVisible(window, not guiGetVisible(window))
+	showCursor(not isCursorShowing())
+	download_updates()
+end
+addCommandHandler("updates", toggle_gui)
+
+--[[ Exported function to get updates list ]]--
+function getUpdatesList()
+	return guiGetText(txt_memo)
+end
+
+--[[ Exploreted function to display updates GUI ]]--
 function viewUpdateListGUI()
 	guiSetVisible(window, not guiGetVisible(window))
 	guiBringToFront(window)
-	requestUpdates()
-end
-function toggleUpdateListGUI()
-	guiSetVisible(window, not guiGetVisible(window))
-	showCursor(not isCursorShowing())
-	requestUpdates()
-end
-addCommandHandler("updates", toggleUpdateListGUI)
-
-function getUpdatesList()
-	return guiGetText(txt_memo)
+	download_updates()
 end
