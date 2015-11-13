@@ -44,6 +44,7 @@ end
 --[[ Start or stop the engine of any vehicle ]]--
 function toggle_engine(plr, command)
         -- Make sure only the driver can use this
+        if not getPedOccupiedVehicle(plr) then return end
 	if getPedOccupiedVehicleSeat(plr) > 0 then return end
     	local veh = getPedOccupiedVehicle(plr)
 
@@ -58,20 +59,20 @@ function toggle_engine(plr, command)
                         toggleControl(plr, "accelerate", false)
                         toggleControl(plr, "brake_reverse", false)
 		else
-        	        setVehicleOverrideLights(veh, 1)
 			setControlState(plr, "handbrake", true)
 		end
+                setVehicleOverrideLights(veh, 1)
                 setVehicleEngineState(veh, false)
                 exports.GTWtopbar:dm("Engine: Turned off successfully", plr, 255, 100, 0)
         -- Start the engine if there's enough fuel
 	elseif tonumber(getElementData(veh, "vehicleFuel")) > 0 then
 	    	if getVehicleType(veh) ~= "Train" then
 	        	setControlState(plr, "handbrake", false)
-        	    	setVehicleOverrideLights(veh, 0)
                 else
                         toggleControl(plr, "accelerate", true)
                         toggleControl(plr, "brake_reverse", true)
 	        end
+                setVehicleOverrideLights(veh, 0)
                 setVehicleEngineState(veh, true)
                 exports.GTWtopbar:dm("Engine: Turned on successfully", plr, 255, 100, 0)
 	end
