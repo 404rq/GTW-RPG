@@ -16,7 +16,7 @@
 
 -- Time before a player capture the turf
 function show_time_left( )
-	if getElementData( localPlayer, "isInTurf" ) and not getElementData( localPlayer, "isInFriendlyTurf" ) then
+	if getElementData( localPlayer, "isInTurf" ) and not getElementData( localPlayer, "isInFriendlyTurf" ) and not isPlayerMapVisible( ) then
 		local timeMsg = getElementData( localPlayer, "captureTime" )
 		local sx, sy = guiGetScreenSize( )
 		if timeMsg and timeMsg ~= "none" then
