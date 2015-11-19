@@ -32,21 +32,33 @@ local nameOfIRCResource	= "irc"
 
 -- Define law
 local lawTeams = {
-	["Government"] = true,
-	["Emergency service"] = true,
+	["Government"] 			= true,
+	["Emergency service"] 		= true,
 }
 local policeTeams = {
-	["Government"] = true,
+	["Government"] 			= true,
 }
 
--- This will compeletly block below listed words
-local enable_word_censor 			= false
 -- This will only replace bad words listed below
 local enable_bad_word_replacement 	= true
 -- Word censoring, list of words
 local patterns = {
 	-- Bad word, replacement
 	{ "fuck", "feck" },
+	{ "fuk", "feck" },
+	{ "shit", "feck" },
+	{ "bitch", "feck" },
+	{ "cock", "feck" },
+	{ "cunt", "feck" },
+	{ "nigger", "feck" },
+	{ "dick", "feck" },
+	{ "whore", "feck" },
+	{ "fag", "feck" },
+	{ "pussy", "feck" },
+	{ "hoe", "feck" },
+	{ "slut", "feck" },
+	{ "twat", "feck" },
+	{ "tits", "feck" },
 	{ "mtasa://", "gtw://" },
 }
 
@@ -69,22 +81,11 @@ function getGroupChatColor(group)
 	return r,g,b
 end
 
---[[ Returns true if no matches was found, otherwise false (block output) ]]--
-function censorWords(input)
-	local res = true
-	for k,v in pairs(patterns) do
-		if string.find(input, v[1]) and not enable_bad_word_replacement then
-			res = false
-		end
-	end
-	return res
-end
-
 --[[ Overriding chat helper function to allow word censoring ]]--
 function outputToChat(text, visible_to, red, green, blue, color_coded)
 	if enable_bad_word_replacement then
 		for k,v in pairs(patterns) do
-			string.gsub(text, v[1], v[2])
+			text = string.gsub(text, v[1], v[2])
 		end
 	end
 	outputChatBox(text, visible_to, red, green, blue, color_coded)
@@ -148,10 +149,6 @@ function validateChatInput(plr, chatID, text)
 	end
 	if last_msg[plr][chatID] and last_msg[plr][chatID] == text then
 		dm("Do not repeat yourself!", plr, 255, 100, 0)
-		return false
-	end
-	if enable_word_censor and not censorWords(text) then
-		dm("Your message contains illegal words!", plr, 255, 100, 0)
 		return false
 	end
 	-- Special case for car chat
@@ -227,6 +224,7 @@ function useLocalChat(plr, n, ...)
 	   			outputToChat(outText, v, r,g,b, true)
 	   			outputToChat(RGBToHex(defR, defG, defB)..firstToUpper(msg), v, r,g,b, true)
 	   		end
+			playSoundFrontEnd(v, 11)
 	  	end
 	end
 
