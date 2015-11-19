@@ -39,6 +39,15 @@ end
 setTimer(chWeather, math.random(130,180)*60*1000, 0)
 setWeather(we[math.random( #we )])
 
+-- Remove speed blur level
+for k,v in pairs(getElementsByType("player")) do
+	setPlayerBlurLevel(v, 0)
+end
+function remove_speed_blur(old_acc, acc)
+    	setPlayerBlurLevel(source, 0)
+end
+addEventHandler("onPlayerLogin", root, remove_speed_blur)
+
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(

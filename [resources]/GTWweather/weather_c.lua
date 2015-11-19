@@ -14,9 +14,6 @@
 ********************************************************************************
 ]]--
 
--- Remove speed blur
-setBlurLevel(0)
-
 -- Set rain
 function set_rainy()
 	setWeather(8)
