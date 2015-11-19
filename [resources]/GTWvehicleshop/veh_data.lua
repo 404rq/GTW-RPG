@@ -150,6 +150,17 @@ car_data[6] = {
 	{ 572, "vans", 87300 },
 	{ 582, "vans", 94300 },
 	{ 583, "vans", 34300 },
+
+	-- Trailers
+	{ 606, "trailer", 8200 },
+	{ 607, "trailer", 6300 },
+	{ 608, "trailer", 7500 },
+	{ 610, "trailer", 4300 },
+	{ 611, "trailer", 6500 },
+	{ 584, "trailer", 53200 },
+	{ 435, "trailer", 53400 },
+	{ 450, "trailer", 52100 },
+	{ 591, "trailer", 48900 },
 }
 
 car_data[7] = {
