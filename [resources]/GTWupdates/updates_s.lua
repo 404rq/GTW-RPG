@@ -18,9 +18,7 @@
 txt_cache = ""
 
 -- On receive updates
-function result_send(str_result)
-	local text = str_result
-
+function result_send(text)
 	-- Verify that the player is still online
 	--if not plr then
 	--	outputServerLog("ERROR: GTWupdates: unable to fetch update list ("..plr_name)
@@ -40,9 +38,9 @@ function result_send(str_result)
 	end
 end
 
--- Call remote server II to receive latest GTW updates
+-- Call a local php file (get.php) to fetch update list from remote servers
 function onUpdateRequest( )
-	callRemote("http://www.404rq.com/update-list/get.php", result_send)
+	callRemote("http://127.0.0.1/mta-mods/get.php", result_send)
 end
 addEvent("GTWupdates.request", true)
 addEventHandler("GTWupdates.request", root, onUpdateRequest)
