@@ -126,7 +126,7 @@ function client_registration_attempt(user, pass, facc)
 			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(client))
 		end
 	else
-		setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
+		setAccountData(friend, "GTWdata.money", (getAccountData(friend, "GTWdata.money") or 0) + 4000)
 		setAccountData(acn, "GTWaccounts.invite.acc", facc)
 
 		-- Friend has received money from ip and serial ...
@@ -163,7 +163,7 @@ function send_invite_bonus(thePlayer, cmd, facc)
 			setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(thePlayer))
 			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(thePlayer))
 		else
-			setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
+			setAccountData(friend, "GTWdata.money", (getAccountData(friend, "GTWdata.money") or 0) + 4000)
 			setAccountData(acn, "GTWaccounts.invite.acc", facc)
 
 			-- Friend has received money from ip and serial ...
@@ -208,15 +208,19 @@ end
 
 -- Fade camera and set the player as target on login
 addEventHandler("onPlayerLogin", root,
-	function (_, playeraccount)
+	function (_, acc)
 		fadeCamera(source, true, 5)
 		setCameraTarget(source, source)
 
 		-- Get position
-		local posX = getAccountData(playeraccount, "acorp.loc.x")
-		local posY = getAccountData(playeraccount, "acorp.loc.y")
-		local posZ = getAccountData(playeraccount, "acorp.loc.z")
-		local rotZ = getAccountData(playeraccount, "acorp.loc.rot.z")
+		local posX = getAccountData(acc, "GTWdata.loc.x")
+		local posY = getAccountData(acc, "GTWdata.loc.y")
+		local posZ = getAccountData(acc, "GTWdata.loc.z")
+		local rotZ = getAccountData(acc, "GTWdata.loc.rot.z")
+
+		-- Set a value indicating this is the first spawn to
+	        -- ensure player data is loaded as soon the player spawns
+	        setElementData(source, "GTWdata.isFirstSpawn", true)
 
 		-- Get player location x y z
 	    	if (posX and posY and posZ) then
@@ -224,10 +228,10 @@ addEventHandler("onPlayerLogin", root,
 			setCameraTarget(source, source)
 
 			-- Temporary (from 2015-07-01) restore health and armor
-			local health = getAccountData(playeraccount, "acorp.health")
-			local armor = getAccountData(playeraccount, "acorp.armor")
-	        	setPedArmor(source, armor)
-			setElementHealth(source, health)
+			--local health = getAccountData(playeraccount, "GTWdata.health")
+			--local armor = getAccountData(playeraccount, "GTWdata.armor")
+	        	--setPedArmor(source, armor)
+			--setElementHealth(source, health)
 		else
 			local x,y,z,r = unpack(spawn_loc[math.random(#spawn_loc)])
 			spawnPlayer(source, x, y, z+3, r, skin_id[math.random(#skin_id)], 0, 0, getTeamFromName("Unemployed"))
@@ -280,7 +284,7 @@ addEventHandler("GTWaccounts.onClientSend", root,
 			setCameraMatrix( client, x,y,z, x2,y2,z2, 2 )
 			fadeCamera(client, true, 1)
 
-			-- Ability fopr clients to see if a player is logged in or not
+			-- Ability for clients to see if a player is logged in or not
 			setElementData(client, "isLoggedIn", true)
 		end
 	end

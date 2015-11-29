@@ -43,7 +43,7 @@ end
 --[[ Load the playtime on login (compatible with the old system) ]]--
 function load_playtime(_, acc)
         -- Look for any existing playtime in previous systems
-        local c_time = getAccountData(acc, "acorp.playtime") or 0
+        local c_time = getAccountData(acc, "GTWdata.playtime") or 0
         local l_time = getRealTime()
 
         -- Save the current timestamp as login time
