@@ -16,7 +16,7 @@
 
 -- Keep track of spam and vandalism
 local last_msg 			= {{ }}
-local cooldownTimers 	= { }
+local cooldownTimers 		= { }
 
 -- Global settings
 local characteraddition 	= 100
@@ -71,6 +71,7 @@ function dm(plr, msg, r, g, b, col)
 	--outputChatBox(plr, msg, r, g, b, col)
 end
 
+--[[ Returns the chat color for a specific group ]]--
 function getGroupChatColor(group)
 	-- Call whatever group system you use and ask for a
 	-- group as a string to receive it's chat color as RGB
@@ -188,14 +189,16 @@ addEvent("onIRCMessage")
 addEventHandler("onIRCMessage", root, IRCMessageReceive)
 
 --[[ Local chat ]]--
-function useLocalChat(plr, n, ...)
+function useLocalChat(plr, cmd, ...)
 	local msg = table.concat({...}, " ")
 	if not validateChatInput(plr, "local", msg) then return end
   	local px,py,pz = getElementPosition(plr)
 	local nick = getPlayerName(plr)
 	local r,g,b = 255,255,0
+	local chat_str = "(LOCAL)"
+	if cmd == "r" then chat_str = "(*CB* radio)" end
 	if not getElementData(plr, "anon") then
-	    displayChatBubble("(LOCAL): "..firstToUpper(msg), 0, plr)
+	    displayChatBubble(chat_str..": "..firstToUpper(msg), 0, plr)
 	end
   	if getPlayerTeam(plr) then
 		if getTeamColor(getPlayerTeam(plr)) then
@@ -216,7 +219,7 @@ function useLocalChat(plr, n, ...)
 	   		if is_police_chief and getPlayerTeam(plr) and policeTeams[getTeamName(getPlayerTeam(plr))] then
 	   			occupation = RGBToHex(defR, defG, defB).."[PoliceChief]"..RGBToHex(r,g,b)
 	   		end
-	   		local outText = RGBToHex(r,g,b).."(LOCAL) "..occupation.."["..tostring(sumOfLocal).."] "..RGBToHex(r,g,b)..nick..": "..RGBToHex(defR,defG,defB)
+	   		local outText = RGBToHex(r,g,b)..chat_str.." "..occupation.."["..tostring(sumOfLocal).."] "..RGBToHex(r,g,b)..nick..": "..RGBToHex(defR,defG,defB)
 			local length = string.len(outText..firstToUpper(msg))
 			if length < 128 then
 	   			outputToChat(outText..firstToUpper(msg), v, r,g,b, true)
@@ -231,11 +234,16 @@ function useLocalChat(plr, n, ...)
 	-- Prevent spam and log the chat
 	last_msg[plr]["local"] = msg
 	cooldownTimers[plr] = setTimer(function() end, antiSpamTime, 1)
-  	outputServerLog("[LOCAL] "..getPlayerName(plr)..": "..msg)
+	if cmd == "r" then
+  		outputServerLog("[CB] "..getPlayerName(plr)..": "..msg)
+	else
+		outputServerLog("[LOCAL] "..getPlayerName(plr)..": "..msg)
+	end
 end
 addCommandHandler("localchat", useLocalChat, false, false)
 addCommandHandler("local", useLocalChat, false, false)
 addCommandHandler("lc", useLocalChat, false, false)
+addCommandHandler("r", useLocalChat, false, false)
 
 --[[ Car and vehicle chat]]--
 function useCarChat(plr, n, ...)
