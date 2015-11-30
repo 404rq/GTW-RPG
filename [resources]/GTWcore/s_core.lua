@@ -235,32 +235,36 @@ end
 addCommandHandler("gtwversion", getGTWVersion)
 
 function manageGTWData(plr, cmd, acc, key, value)
-	local pAcc = getAccount(acc)
-        if not acc then pAcc = getPlayerAccount(plr) end
-        if not pAcc or not isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Admin")) then return end
-        if cmd == "gtwget" and key then
- 	        local val = getAccountData(sAcc, "gtw-version") or 0
- 	        outputChatBox("KEY: "..key..", has VALUE: "..value, plr, 255, 255, 255)
-        elseif cmd == "gtwset" and key and value then
-	        setAccountData(sAcc, key, value)
-	        outputChatBox("KEY: "..key..", was updated to: "..value..", successfully!", plr, 255, 255, 255)
-        elseif cmd == "gtwlist" then
-                local data = getAllAccountData()
+	local aAcc = getPlayerAccount(plr)
+        if not acc then
+                outputChatBox("Correct syntax: "..cmd.." <account> <key> [<value>]", plr, 200,200,200)
+                return
+        end
+        local pAcc = getAccount(acc)
+        if not acc or not pAcc or not isObjectInACLGroup("user."..getAccountName(aAcc), aclGetGroup("Admin")) then return end
+        if cmd == "getdata" and key then
+ 	        local val = getAccountData(pAcc, key) or ""
+ 	        outputChatBox("KEY: "..key..", has VALUE: "..val, plr, 200,200,200)
+        elseif cmd == "setdata" and key and value then
+	        setAccountData(pAcc, key, value)
+	        outputChatBox("KEY: "..key..", was updated to: "..value..", successfully!", plr, 200,200,200)
+        elseif cmd == "listdata" then
+                local data = getAllAccountData(pAcc)
                 if ( data ) then
                         outputConsole(" *** ACCOUNT DATA LIST ("..acc..") STARTED *** ", plr)
-                        for k,v in pairs ( data ) do
+                        for k,v in pairs(data) do
                                 outputConsole(k..": "..v, plr) -- print the key and value of each entry of data
                         end
                         outputConsole(" *** ACCOUNT DATA LIST END *** ", plr)
-                        outputChatBox("All keys was successfully listed, press F8 to view!", plr, 255, 255, 255)
+                        outputChatBox("All keys was successfully listed, press F8 to view!", plr, 200,200,200)
                 end
         else
-	        outputChatBox("Correct syntax: "..cmd.." <key> [<value>]", plr, 255, 255, 255)
+	        outputChatBox("Correct syntax: "..cmd.." <account> <key> [<value>]", plr, 200,200,200)
         end
 end
-addCommandHandler("gtwset", manageGTWData)
-addCommandHandler("gtwget", manageGTWData)
-addCommandHandler("gtwlist", manageGTWData)
+addCommandHandler("setdata", manageGTWData)
+addCommandHandler("getdata", manageGTWData)
+addCommandHandler("listdata", manageGTWData)
 
 function reset_account(admin, cmd, acc, passwd)
         local acc = getAccount(acc)

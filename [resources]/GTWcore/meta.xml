@@ -19,13 +19,14 @@
     <!-- Useful utils -->
     <script src="utils/s_func.lua" type="server" />
     <script src="utils/s_staff.lua" type="server" />
-    
+    <script src="utils/s_playtime.lua" type="server" />
+
     <!-- Misc features -->
     <script src="misc/s_data.lua" type="server" />
     <script src="misc/s_afk.lua" type="server" />
     <script src="misc/s_loc.lua" type="server" />
     <script src="misc/s_network.lua" type="server" />
-    
+
     <!-- Core features -->
     <script src="s_core.lua" type="server" />
     <script src="c_core.lua" type="client" protected="true" />

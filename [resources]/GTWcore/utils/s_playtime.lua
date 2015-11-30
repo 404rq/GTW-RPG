@@ -18,14 +18,16 @@
 start_times     = { }
 sync_timers     = { }
 
-function update_display(plr, old_time)
-        if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
+--[[ Display play time as up to date ]]--
+function update_display(plr, init_time)
+        if not plr or not isElement(plr) or
+                getElementType(plr) ~= "player" then return end
         if not getPlayerAccount(plr) then return end
 
         -- Get the actual online time in seconds
         local acc = getPlayerAccount(plr)
         local l_time = getRealTime()
-        local p_time = (l_time.timestamp - start_times[acc]) + old_time
+        local p_time = (l_time.timestamp - start_times[acc]) + init_time
 
         -- Get the online time formatted
         local seconds = tostring(p_time%60)
@@ -40,6 +42,13 @@ function update_display(plr, old_time)
         setElementData(plr, "Playtime", formatted_time)
 end
 
+--[[ Helper function to launch the play time system ]]--
+function start_playtime_counter(plr, init_time)
+        update_display(plr, math.floor(init_time))
+        sync_timers[plr] = setTimer(update_display,
+                1000, 0, plr, math.floor(init_time))
+end
+
 --[[ Load the playtime on login (compatible with the old system) ]]--
 function load_playtime(_, acc)
         -- Look for any existing playtime in previous systems
@@ -49,17 +58,20 @@ function load_playtime(_, acc)
         -- Save the current timestamp as login time
         start_times[acc] = l_time.timestamp
 
+        -- Set a insecure backup timestamp as login
+        -- time in case the table data is unreachable
+        setElementData(source, "GTWdata.temp.playtime", l_time.timestamp)
+
         -- Update display time
-        update_display(source, math.floor(c_time/1000))
-        sync_timers[source] = setTimer(update_display, 1000, 0, source, math.floor(c_time/1000))
+        start_playtime_counter(source, c_time/1000)
 end
 addEventHandler("onPlayerLogin", root, load_playtime)
 
 --[[ Save the playtime upon quit ]]--
 function save_playtime( )
         -- Get account of the player that left
-        if not getPlayerAccount(source) then return end
         local acc = getPlayerAccount(source)
+        if not acc or isGuestAccount(acc) then return end
 
         -- Kill sync timers
         if isTimer(sync_timers[source]) then
@@ -69,8 +81,12 @@ function save_playtime( )
 
         -- Calculate current playtime
         local l_time = getRealTime()
-        --local p_time = l_time.timestamp - start_times[acc]
-        --outputServerLog("ACCOUNTS: Player: "..getPlayerName(source).." left the game with a playtime of: "..p_time.." seconds")
+        local p_time = l_time.timestamp - (start_times[acc] or
+                getElementData(source, "GTWdata.temp.playtime") or 0)
+
+        -- Save playtime to database together with current
+        setAccountData(acc, "GTWdata.playtime", (getAccountData(acc,
+                "GTWdata.playtime") or 0) + ((p_time*1000) or 0))
 
         -- Clean memory
         start_times[acc] = nil
