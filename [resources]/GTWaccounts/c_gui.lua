@@ -36,7 +36,7 @@ end)
 -- Setup the login GUI (GTWgui must be running)
 function make_login()
 	x,y = guiGetScreenSize()
-	window = guiCreateWindow((x-350)/2, (y-450)/2, 350, 450, "RageQuit 404 | GTW-RPG v3.0", false )
+	window = guiCreateWindow((x-600)/2, (y-450)/2, 600, 450, "RageQuit 404 | GTW-RPG v3.0", false )
 	loginButton = guiCreateButton(230,400,100,40,"Login",false,window)
 	registerButton = guiCreateButton(128,400,100,40,"Register",false,window)
 	updatesButton = guiCreateButton(10,400,116,40,"What's new",false,window)
@@ -47,6 +47,12 @@ function make_login()
 	labelInfo = guiCreateLabel(30, 210, 290, 80, "", false, window)
 	checkBoxUser = guiCreateCheckBox(30, 160, 290, 20, "Remember Username", false, false, window)
 	checkBoxPwrd = guiCreateCheckBox(30, 180, 290, 20, "Remember Password", false, false, window)
+	-- Shaders control panel
+	labelShaders = guiCreateLabel(360, 40, 230, 25, "Select shaders:", false, window)
+	checkBoxDetail = guiCreateCheckBox(360, 80, 290, 20, "Enable detail shader", false, false, window)
+	checkBoxContrast = guiCreateCheckBox(360, 100, 290, 20, "Enable contrast shader", false, false, window)
+	checkBoxWater = guiCreateCheckBox(360, 120, 290, 20, "Enable water shader", false, false, window)
+	checkBoxCarPaint = guiCreateCheckBox(360, 140, 290, 20, "Enable car reflection shader", false, false, window)
 	guiEditSetMasked(textPwrd, true)
 	guiSetInputEnabled(true)
 
@@ -74,8 +80,12 @@ function make_login()
 	-- Load login details from xml
 	local f = xmlLoadFile('@data.xml', 'account')
 	if f then
-		local user = xmlNodeGetAttribute(xmlFindChild(f, 'user', 0), 'value')
-		local pass = xmlNodeGetAttribute(xmlFindChild(f, 'pass', 0), 'value')
+		local user = xmlNodeGetAttribute(xmlFindChild(f, 'user', 0), 'value') or ""
+		local pass = xmlNodeGetAttribute(xmlFindChild(f, 'pass', 0), 'value') or ""
+		local sh_detail = xmlNodeGetAttribute(xmlFindChild(f, 'detail', 0), 'value') or ""
+		local sh_contrast = xmlNodeGetAttribute(xmlFindChild(f, 'contrast', 0), 'value') or ""
+		local sh_water = xmlNodeGetAttribute(xmlFindChild(f, 'water', 0), 'value') or ""
+		local sh_carpaint = xmlNodeGetAttribute(xmlFindChild(f, 'carpaint', 0), 'value') or ""
 		guiSetText(textUser, tostring(user))
 		guiSetText(textPwrd, tostring(pass))
 		if user ~= "" then
@@ -83,6 +93,22 @@ function make_login()
 		end
 		if pass ~= "" then
 			guiCheckBoxSetSelected(checkBoxPwrd, true)
+		end
+		if sh_detail == "enabled" then
+			guiCheckBoxSetSelected(checkBoxDetail, true)
+			exports.shader_detail:toggleShaderDetail(true)
+		end
+		if sh_contrast == "enabled" then
+			guiCheckBoxSetSelected(checkBoxContrast, true)
+			exports.shader_contrast:toggleShaderContrast(true)
+		end
+		if sh_water == "enabled" then
+			guiCheckBoxSetSelected(checkBoxWater, true)
+			exports.shader_water:toggleShaderWater(true)
+		end
+		if sh_carpaint == "enabled" then
+			guiCheckBoxSetSelected(checkBoxCarPaint, true)
+			exports.shader_car_paint_reflect:toggleShaderCarPaint(true)
 		end
 	end
 end
@@ -115,6 +141,15 @@ addEventHandler("onClientGUIClick",root,function()
 	elseif source == faccButtonHelp then
 		guiSetText(labelInfo, "Enter your friends account name \nto send him/her an invite bonus\nof $4'000 as a reward.")
 		guiLabelSetColor(labelInfo, 255, 255, 255)
+	-- Toggle shaders
+	elseif source == checkBoxDetail then
+		exports.shader_detail:toggleShaderDetailCMD()
+	elseif source == checkBoxContrast then
+		exports.shader_contrast:toggleShaderContrastCMD()
+	elseif source == checkBoxWater then
+		exports.shader_water:toggleShaderWaterCMD()
+	elseif source == checkBoxCarPaint then
+		exports.shader_car_paint_reflect:toggleShaderCarPaintCMD()
 	end
 end)
 
@@ -143,6 +178,27 @@ addEventHandler("GTWaccounts:onClientPlayerLogin", root, function(acnt)
 	end
 	xmlNodeSetAttribute(xmlCreateChild(f, "user"), "value", user)
 	xmlNodeSetAttribute(xmlCreateChild(f, "pass"), "value", pass)
+	-- Save shaders
+	if guiCheckBoxGetSelected(checkBoxDetail) then
+		xmlNodeSetAttribute(xmlCreateChild(f, "detail"), "value", "enabled")
+	else
+		xmlNodeSetAttribute(xmlCreateChild(f, "detail"), "value", "disabled")
+	end
+	if guiCheckBoxGetSelected(checkBoxContrast) then
+		xmlNodeSetAttribute(xmlCreateChild(f, "contrast"), "value", "enabled")
+	else
+		xmlNodeSetAttribute(xmlCreateChild(f, "contrast"), "value", "disabled")
+	end
+	if guiCheckBoxGetSelected(checkBoxWater) then
+		xmlNodeSetAttribute(xmlCreateChild(f, "water"), "value", "enabled")
+	else
+		xmlNodeSetAttribute(xmlCreateChild(f, "water"), "value", "disabled")
+	end
+	if guiCheckBoxGetSelected(checkBoxCarPaint) then
+		xmlNodeSetAttribute(xmlCreateChild(f, "carpaint"), "value", "enabled")
+	else
+		xmlNodeSetAttribute(xmlCreateChild(f, "carpaint"), "value", "disabled")
+	end
 	xmlSaveFile(f)
 	xmlUnloadFile(f)
 	guiSetVisible(window, false)
