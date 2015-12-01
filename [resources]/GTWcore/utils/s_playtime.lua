@@ -92,3 +92,17 @@ function save_playtime( )
         start_times[acc] = nil
 end
 addEventHandler("onPlayerQuit", root, save_playtime)
+
+--[[ Restart play time system on resource restart ]]--
+function load_playtime_system()
+	for k,v in pairs(getElementsByType("player")) do
+                local acc = getPlayerAccount(v)
+                if getElementData(v, "GTWdata.temp.playtime") and
+                        acc and not isGuestAccount(acc) then
+                        start_times[acc] = getElementData(v, "GTWdata.temp.playtime")
+                        local c_time = getAccountData(acc, "GTWdata.playtime") or 0
+                        start_playtime_counter(v, c_time/1000)
+                end
+        end
+end
+addEventHandler("onResourceStart", resourceRoot, load_playtime_system)
