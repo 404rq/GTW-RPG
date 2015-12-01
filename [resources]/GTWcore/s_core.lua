@@ -16,7 +16,22 @@
 
 -- Initialize an account for settings
 local sAcc = getAccount("settings")
-if not sAcc then addAccount("settings", "rk54Qw33m0s43dW67GgF8") end
+
+-- If there is no account for settings, make one
+if not sAcc then
+        -- Generate a random password
+        -- Nobody is supposed to login as this account, although it won't hurt
+        local rnd_passwd = ""
+        for k=1, 10 do
+                rnd_passwd = rnd_passwd..math.random(1000, 9999)
+        end
+        addAccount("settings", rnd_passwd)
+        sAcc = getAccount("settings")
+
+        -- Notice server admins
+        outputServerLog("CORE: account for settings was created successfully")
+end
+
 
 --[[ Peak event for holidays ]]--
 current_peak = getAccountData(sAcc, "peak") or 0
