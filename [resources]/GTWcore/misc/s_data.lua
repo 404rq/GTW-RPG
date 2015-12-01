@@ -60,21 +60,12 @@ function load_data(plr)
         -- Load health and armor
         setElementHealth(plr, getAccountData(acc, "GTWdata.health") or 100)
         setPedArmor(plr, getAccountData(acc, "GTWdata.armor") or 0)
-        --local isWorker = getAccountData(acc, "GTWdata.is.worker")
-        --play_times[getAccountPlayer(acc)] = playTime or 0
-        --login_times[getAccountPlayer(acc)] = getTickCount()
+
+        -- Assuming first login, hand out start money and setup basic defaults
         local play_time = getAccountData(acc, "GTWdata.playtime") or 0
-        if play_time then
-        	local hour = tostring(math.floor(play_time/(1000*60*60)))
-	        local minute = tostring(math.floor(play_time/(1000*60))%60)
-	        local nMinute = math.floor(play_time/(1000*60))%60
-	        if nMinute < 10 then
-	        	minute = "0"..minute
-	        end
-	        --setElementData(source, "Playtime", hour..":"..minute)
-        else
-        	--setElementData(source, "Playtime", 0)
-        	setPlayerMoney(plr, 1337) -- Start money first time a user logs in
+        if not play_time then
+        	setPlayerMoney(plr, 1337)
+                setAccountData(acc, "GTWdata.playtime", 0)
        	end
 
         -- Load weapons and stats
@@ -145,9 +136,6 @@ function save_data(plr)
         setAccountData(acc, "GTWdata.col.r", r)
         setAccountData(acc, "GTWdata.col.g", g)
         setAccountData(acc, "GTWdata.col.b", b)
-
-        -- Save the playtime as integer
-        --setAccountData(acc, "GTWdata.playtime", playTime)
 
         -- Save current health and armor
         setAccountData(acc, "GTWdata.health", getElementHealth(plr))
