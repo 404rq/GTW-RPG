@@ -7,6 +7,7 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
 ```xml
     <!-- Important imports -->
     <resource src="GTWtopbar" startup="1" protected="0" />
+    <resource src="GTWgui" startup="1" protected="1" />
     <resource src="GTWcore" startup="1" protected="1" />
     
     <!-- Misc resource (non GTW-RPG) Must start before any 
