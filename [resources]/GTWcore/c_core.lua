@@ -15,38 +15,15 @@
 ]]--
 
 -- Trigger the peak on join
-triggerServerEvent("onPeakTrigger", root)
+triggerServerEvent("GTWcore.onPeakTrigger", root)
 
---[[ Quick cheat hack ]]--
-blip = { }
-function markPlayer(cmd, plr)
-	local target = getPlayerFromName(plr)
-	if not isElement(target) then return end
-	blip[plr] = createBlipAttachedTo( target, 23, 2, 0, 0, 0, 255, 0, 99999, localPlayer)
-end
-addCommandHandler("mark", markPlayer)
-function markPlayer(cmd, plr)
-	if isElement(blip[plr]) then
-		destroyElement(blip[plr])
-	end
-end
-addCommandHandler("unmark", markPlayer)
-function onQuitGame( reason )
-    local name = getPlayerName(source)
-    if isElement(blip[name]) then
-		destroyElement(blip[name])
-	end
-end
-addEventHandler( "onClientPlayerQuit", root, onQuitGame )
-
--- Set version and name information
+--[[ Display current version at screen bottom ]]--
 local sx, sy = guiGetScreenSize( )
---local lbl_info = guiCreateLabel(sx-400, sy-16, 300, 16, getElementData(root, "gtw-version"), false)
 function show_version_info( )
 	dxDrawText(getElementData(root, "gtw-version"), sx-409, sy-13, 0, 0,
-		tocolor( 40, 40, 40, 255 ), 1, "clear" )
+		tocolor(40, 40, 40, 255), 1, "clear" )
 	dxDrawText(getElementData(root, "gtw-version"), sx-410, sy-14, 0, 0,
-		tocolor( 180, 180, 180, 220 ), 1, "clear" )
+		tocolor(180, 180, 180, 220), 1, "clear" )
 
 	-- Local time
 	local hours, minutes = getTime()

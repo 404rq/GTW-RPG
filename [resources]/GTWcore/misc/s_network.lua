@@ -44,3 +44,9 @@ function player_logout(acc, _)
         cancelEvent()
 end
 addEventHandler("onPlayerLogout", root, player_logout)
+
+--[[ Display client IP adress ]]--
+function display_my_ip(plr)
+	outputChatBox("Your IP is: " .. getPlayerIP(plr), plr, 255,255,255)
+end
+addCommandHandler("myip", display_my_ip)
