@@ -5,8 +5,8 @@
 	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Bugtracker: 		https://forum.404rq.com/bug-reports/
+	Suggestions:		https://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -14,117 +14,89 @@
 ********************************************************************************
 ]]--
 
--- Initialize an account for settings
-local sAcc = getAccount("settings")
+-- Table to store server core settings during runtime
+server_settings = { }
 
--- If there is no account for settings, make one
-if not sAcc then
-        -- Generate a random password
-        -- Nobody is supposed to login as this account, although it won't hurt
-        local rnd_passwd = ""
-        for k=1, 10 do
-                rnd_passwd = rnd_passwd..math.random(1000, 9999)
+--[[ Load server configuration settings from xml ]]--
+function load_settings()
+        local data_file = xmlLoadFile("data/settings.xml")
+        local options = xmlNodeGetChildren(data_file)
+        for i,node in ipairs(options) do
+                local name = xmlNodeGetAttribute(node, "name")
+                server_settings[name] = xmlNodeGetValue(node)
         end
-        addAccount("settings", rnd_passwd)
-        sAcc = getAccount("settings")
+        xmlUnloadFile(data_file)
 
-        -- Notice server admins
-        outputServerLog("CORE: account for settings was created successfully")
+        -- Applying basic settings
+        for k,v in pairs(getElementsByType("player")) do
+                -- Bind the R key as reload for all players
+                bindKey(v, "r", "down", reload_weapon, "Reload")
+
+                -- Set the blur level
+                setPlayerBlurLevel(v, 0)
+
+                -- Apply jetpack and other advantages to staff
+           	applyStaffAdvantage(v)
+        end
+
+        -- Config server display options
+        setGameType(server_settings["gamemode"])
+        setMapName(server_settings["map"])
+
+        -- Override other settings (optional)
+    	setTimer(setGameType, 3600*1000, 0, server_settings["gamemode"])
+    	setTimer(setMapName, 3600*1000, 0, server_settings["map"])
 end
+addEventHandler("onResourceStart", resourceRoot, load_settings)
 
+--[[ Save server configuration settings to xml ]]--
+function save_settings()
+        local data_file = xmlLoadFile("data/settings.xml")
+        local options = xmlNodeGetChildren(data_file)
+        for i,node in ipairs(options) do
+                local name = xmlNodeGetAttribute(node, "name")
+                xmlNodeSetValue(node, server_settings[name])
+        end
+        xmlSaveFile(data_file)
+end
+addEventHandler("onResourceStop", resourceRoot, save_settings)
 
 --[[ Peak event for holidays ]]--
-current_peak = getAccountData(sAcc, "peak") or 0
-function sendPeak(plr)
-    if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
-    givePlayerMoney(plr, 1000)
-    exports.GTWtopbar:dm("Enjoy a peak bonus of $1000 for being online today!", plr, 255, 100, 0)
+function send_peak_bonus()
+        if tonumber(server_settings["peak"]) >= getPlayerCount() then return end
+        for i,v in pairs(getElementsByType("player")) do
+                givePlayerMoney(v, 1000)
+                exports.GTWtopbar:dm("Enjoy a peak bonus of $1000 for being online today!", v, 255, 100, 0)
+        end
+        server_settings["peak"] = tonumber(server_settings["peak"]) + 1
 end
-function doPeak()
-    if current_peak >= getPlayerCount() then return end
-    for i,v in ipairs(getElementsByType("player")) do
-        setTimer(sendPeak, 30000, 1, v)
-    end
-    current_peak = current_peak + 1
-    setAccountData(sAcc, "peak", current_peak or 0)
-end
-addEvent("onPeakTrigger", true)
-addEventHandler("onPeakTrigger", root, doPeak)
-function showPeak(plr)
-    exports.GTWtopbar:dm("Current peak are: "..current_peak.." players online", plr, 255, 100, 0)
-end
-addCommandHandler("peak", showPeak)
+addEvent("GTWcore.onPeakTrigger", true)
+addEventHandler("GTWcore.onPeakTrigger", root, send_peak_bonus)
 
---[[ Sync with local swedish time ]]--
---local time = getRealTime()
---setTime(time.hour, time.minute)
+--[[ Display current peak ]]--
+function show_current_peak(plr)
+        exports.GTWtopbar:dm("Current peak are: "..server_settings["peak"].." players online", plr, 255, 100, 0)
+end
+addCommandHandler("peak", show_current_peak)
+
+--[[ Sync with local client time ]]--
 setMinuteDuration(1000)
+
+--[[ Reset sky gradient and fog distance ]]--
 setFogDistance(0)
 resetSkyGradient()
 
--- Update time sync each day
---setTimer(function()
---	local time2 = getRealTime()
---	setTime(time2.hour, time2.minute)
---end, 24*3600*1000, 0)
-
 --[[ Allow players to reload weapons by pressing the R key ]]--
-function reloadGun(player, command)
-    reloadPedWeapon(player)
-end
-function resourceStart()
-    for k,v in pairs(getElementsByType("player")) do
-        bindKey(v, "r", "down", reloadGun, "Reload")
-        setPlayerBlurLevel(v, 36)
-
-        -- Apply jetpack and other advantages if staff
-       	applyStaffAdvantage(v)
-    end
-
-    -- Config
-    setGameType("GTW-RPG")
-    setMapName("GTW-RPG")
-	setTimer(setGameType, 3600*1000, 0, "GTW-RPG")
-	setTimer(setMapName, 3600*1000, 0, "GTW-RPG")
-end
-function playerJoin()
-    bindKey(source, "r", "down", reloadGun, "Reload")
-    setPlayerBlurLevel(source, 0)
-end
-addEventHandler("onResourceStart", root, resourceStart)
-addEventHandler("onPlayerJoin", root, playerJoin)
-
---[[ Countdown ]]--
-countdownTimers = {}
-function showCountDown(plr, cmd, seconds, text)
-	local x,y,z = getElementPosition(plr)
-	if seconds and text and math.floor(seconds) < 20 and math.floor(seconds) > 2 then
-		seconds = math.floor(seconds)
-    	for k,v in ipairs(getElementsByType("player")) do
-        	local rx,ry,rz = getElementPosition(v)
-        	if getDistanceBetweenPoints3D(x,y,z, rx,ry,rz) < 100 and not isTimer(countdownTimers[v]) then
-        		outputChatBox("-- "..getPlayerName(plr).." has requested a countdown --", v, 255, 255, 255)
-        		countdownTimers[v] = setTimer(countDownTimerCount, 1000, seconds, v, seconds)
-        		setTimer(outputChatBox, 1000*seconds+1000, 1, text, v, 255, 255, 255)
-        	elseif isTimer(countdownTimers[v]) then
-        		exports.GTWtopbar:dm("A timer is already counting down in this area, please wait!", plr, 255, 0, 0)
-        	end
-    	end
-	else
-		outputChatBox("Correct syntax: /countdown <seconds> <text>", plr, 255, 255, 255)
-	end
-end
-addCommandHandler("countdown", showCountDown)
-
-function countDownTimerCount(owner, timeInSeconds)
-	local i1,i2,i3 = getTimerDetails(countdownTimers[owner])
-    outputChatBox("#66FF00[Countdown] #FFFFFF"..i2, owner, 255, 255, 255, true)
+function reload_weapon(player, command)
+        reloadPedWeapon(player)
 end
 
-function printIp(thePlayer)
-	outputChatBox("IP: " .. getPlayerIP(thePlayer), thePlayer)
+--[[ Apply some key bindings and reset blur level on join ]]--
+function player_join_handler()
+        bindKey(source, "r", "down", reload_weapon, "Reload")
+        setPlayerBlurLevel(source, 0)
 end
-addCommandHandler("myip", printIp)
+addEventHandler("onPlayerJoin", root, player_join_handler)
 
 --[[ Commands to transfer money between players ]]--
 function sendMoneyToPlayer(player, cmd, receiver, amount)
@@ -210,25 +182,27 @@ function displayLoadedRes(res)
 	-- Get current version
 	local version_r = (tonumber(getResourceInfo(res, "version")) or 0)+1
 	for k,v in pairs(getElementsByType("player")) do
-        local pAcc = getPlayerAccount(v)
-        if pAcc and (isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Admin")) or
-        	isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Developer")) or
-        	isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Moderator")) or
-        	isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Supporter"))) then
-        	outputChatBox("Resource "..getResourceName(res).." v.3.0 r-"..version_r.." [#00cc00Started#ffffff]", v, 255, 255, 255, true)
+                local pAcc = getPlayerAccount(v)
+                if pAcc and (isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Admin")) or
+        	       isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Developer")) or
+        	       isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Moderator")) or
+        	       isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Supporter"))) then
+        	       outputChatBox("Resource "..getResourceName(res).." v.3.0 r-"..
+                              version_r.." [#00cc00Started#ffffff]", v, 255, 255, 255, true)
+                end
         end
-    end
 
-    -- Increase GTW version
-    local version = getAccountData(sAcc, "gtw-version") or 0
-    setAccountData(sAcc, "gtw-version", version + 1)
+        -- Increase GTW version (for official development servers only)
+        if server_settings["developmentserver"] then
+                server_settings["revision"] = server_settings["revision"] + 1
+        end
 
-    -- Increase resource version
-    setResourceInfo(res, "version", tostring(version_r) )
+        -- Increase resource version
+        setResourceInfo(res, "version", tostring(version_r) )
 
-    -- Display in server log if load successfull
-    --outputServerLog("[GTW-RPG] "..getResourceName(res).." (v.2.4-beta r-"..(version_r)..") started successfully")
-    setElementData(root, "gtw-version", "GTW-RPG v3.0 r-"..tostring(version + 1).." | www.404rq.com | ")
+        -- Display in server log if load successfull
+        --outputServerLog("[GTW-RPG] "..getResourceName(res).." (v.2.4-beta r-"..(version_r)..") started successfully")
+        setElementData(root, "gtw-version", "GTW-RPG v3.0 r-"..tostring(server_settings["revision"]).." | www.404rq.com | ")
 end
 addEventHandler("onResourceStart", root, displayLoadedRes)
 
@@ -244,8 +218,7 @@ end
 addEventHandler("onResourceStop", root, displayStoppedRes)
 
 function getGTWVersion(plr)
-    local version = getAccountData(sAcc, "gtw-version") or 0
-    outputChatBox("Current GTW version: 3.0 r-"..version, plr, 255, 255, 255)
+        outputChatBox("Current GTW version: 3.0 r-"..server_settings["revision"], plr, 255, 255, 255)
 end
 addCommandHandler("gtwversion", getGTWVersion)
 
@@ -281,6 +254,7 @@ addCommandHandler("setdata", manageGTWData)
 addCommandHandler("getdata", manageGTWData)
 addCommandHandler("listdata", manageGTWData)
 
+--[[ Allow server admins to reset a users password ]]--
 function reset_account(admin, cmd, acc, passwd)
         local acc = getAccount(acc)
         if not acc or not passwd then
