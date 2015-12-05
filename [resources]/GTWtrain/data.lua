@@ -34,6 +34,7 @@ Trains = {
 	engineer		= { },
 	sync_timer		= { },
 	is_leaving		= { },
+	horn_cooldown		= { },
 }
 
 --[[

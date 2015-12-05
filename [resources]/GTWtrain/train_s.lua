@@ -171,6 +171,11 @@ function sync_train_speed(train)
 		return
 	end
 
+	-- Warn nearby players with the horn
+	if plr_dist < 40 then
+		use_horn(train)
+	end
+
 	-- Get the target speed
 	local dist, s_type, dir, t_type, tx,ty,tz, speed = get_next_node(x,y,z)
 	local cx,cy,cz = getElementPosition(train)
@@ -377,18 +382,15 @@ function create_train(plr, cmd, args)
 		setTimer(station_status, Settings.station_stop_time_ms, 1, new_train, false)
 		setTimer(run_normal, Settings.station_stop_time_ms*2, 1, new_train)
 		setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, new_train)
-	else
-		-- Use the horn
-		use_horn(new_train)
-		setTimer(use_horn, 10000, 1, new_train)
 	end
 end
 addCommandHandler("maketrain", create_train)
 
 --[[ Helper function to execute train horn ]]--
 function use_horn(t_engine)
-	if not t_engine or not isElement(t_engine) then return end
+	if not t_engine or not isElement(t_engine) or isTimer(Trains.horn_cooldown[t_engine]) then return end
 	exports.GTWtrainhorn:triggerTrainHorn(t_engine)
+	Trains.horn_cooldown[t_engine] = setTimer(function() end, 10000, 1)
 end
 
 --[[ Gather points indicating where the tracks are (Development only) ]]--
