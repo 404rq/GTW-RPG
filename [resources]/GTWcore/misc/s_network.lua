@@ -17,19 +17,19 @@
 --[[ Freeze a player upon packet loss ]]--
 function disable_lagging_players(status, ticks)
         if status == 0 then
-                if (getElementData(source, "GTWcore.packetLoosCount") or 0) < 5 then
+                if (getElementData(source, "GTWcore.packetLoosCount") or 0) < 3 then
                         outputServerLog("NETWORK: packet loss: "..getPlayerName(source)..", begin: "..ticks.." ticks ago")
                 end
-                outputChatBox("Packet loss detected, you will be frozen until your connection is working again!", source, 200,0,0)
-                setElementFrozen(source, true)
+                --outputChatBox("Packet loss detected, you will be frozen until your connection is working again!", source, 200,0,0)
+                --setElementFrozen(source, true)
                 setElementData(source, "GTWcore.packetLoosCount", (getElementData(source, "GTWcore.packetLoosCount") or 0) + 1)
         elseif status == 1 then
-                if (getElementData(source, "GTWcore.packetLoosCount") or 0) < 5 then
+                if (getElementData(source, "GTWcore.packetLoosCount") or 0) < 3 then
                         outputServerLog("NETWORK: packet loss: "..getPlayerName(source).." ended: "..ticks.." ticks ago")
                 end
 
-                outputChatBox("Packet loss ended, enjoy the game!", source, 0,200,0)
-                setElementFrozen(source, false)
+                --outputChatBox("Packet loss ended, enjoy the game!", source, 0,200,0)
+                --setElementFrozen(source, false)
         end
 end
 addEventHandler("onPlayerNetworkStatus", root, disable_lagging_players)
