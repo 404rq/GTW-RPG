@@ -142,6 +142,7 @@ function save_data(plr)
         setAccountData(acc, "GTWdata.armor", getPedArmor(plr))
 
         -- Weapons, ammo and weapon stats
+        local tmp_slot = getPedWeaponSlot(plr)
         for k=1, 12 do
                 local stat_wep = getPedStat(plr, (k+68))
                 setAccountData(acc, "GTWdata.weapon.stats."..tostring((k+68)), stat_wep)
@@ -153,6 +154,7 @@ function save_data(plr)
                 setAccountData(acc, "GTWdata.weapon."..tostring(k), weapon)
 	   	setAccountData(acc, "GTWdata.ammo."..tostring(k), ammo)
         end
+        setPedWeaponSlot(plr, tmp_slot)
 
         -- Skip these
         --setAccountData(playeraccount, "GTWdata.loc.city", city)
