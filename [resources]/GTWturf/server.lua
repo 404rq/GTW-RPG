@@ -223,7 +223,8 @@ function onTurfEnter(hitElement)
     		elseif getElementData(hitElement, "Group") == "None" and getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
 			exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 		end
-	elseif not getElementData(hitElement, "Group") and getElementType(hitElement) == "player" then
+	elseif not getElementData(hitElement, "Group") and getElementType(hitElement) == "player" and
+		getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
 		exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 	end
 end
