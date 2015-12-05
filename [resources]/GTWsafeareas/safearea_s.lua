@@ -22,7 +22,7 @@ setWeaponProperty(38, "poor", "damage", 2)
 -- Reduce health when falling into cold water
 setTimer(function()
 	for k,v in pairs(getElementsByType("player")) do
-		if isElementInWater(v) then
+		if isElementInWater(v) and not getPedOccupiedVehicle(v) then
 			local health = getElementHealth(v)
 			local new_health = health - math.random(4, 12)
 			local x,y,z = getElementPosition(v)
@@ -39,7 +39,7 @@ setTimer(function()
 			end
 		end
 	end
-end, 3000, 0)
+end, 4000, 0)
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
