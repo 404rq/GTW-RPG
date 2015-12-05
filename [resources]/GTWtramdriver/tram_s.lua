@@ -163,8 +163,8 @@ function calculate_next_station(td_payment)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount(client)
-	local tram_stations = (getAccountData(playeraccount, "acorp_stats_tram_stations") or 0) + 1
-	setAccountData(playeraccount, "acorp_stats_tram_stations", tram_stations)
+	local tram_stations = (getAccountData(playeraccount, "GTWdata_stats_tram_stations") or 0) + 1
+	setAccountData(playeraccount, "GTWdata_stats_tram_stations", tram_stations)
 
 	-- Pay the driver
 	givePlayerMoney(client, fine + math.floor(tram_stations/4))

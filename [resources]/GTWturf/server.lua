@@ -186,8 +186,8 @@ function onTurfEnter(hitElement)
 								givePlayerMoney(mem, c_money)
 								-- Increase stats by 1
 								local playeraccount = getPlayerAccount(mem)
-								local turfs_taken = getAccountData(playeraccount, "acorp_stats_turf_count") or 0
-								setAccountData(playeraccount, "acorp_stats_turf_count", turfs_taken + 1)
+								local turfs_taken = getAccountData(playeraccount, "GTWdata_stats_turf_count") or 0
+								setAccountData(playeraccount, "GTWdata_stats_turf_count", turfs_taken + 1)
 							end
 						end
 						local r,g,b = exports.GTWgroups:getGroupTurfColor(group)

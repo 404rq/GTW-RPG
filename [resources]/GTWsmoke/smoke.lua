@@ -47,8 +47,8 @@ function startSmoking ( thePlayer )
 
     		-- Increase stats by 1
 		local playeraccount = getPlayerAccount(thePlayer)
-		local cigarrs = getAccountData(playeraccount, "acorp_stats_cigarrs_smoked") or 0
-		setAccountData(playeraccount, "acorp_stats_cigarrs_smoked", cigarrs + 1)
+		local cigarrs = getAccountData(playeraccount, "GTWdata_stats_cigarrs_smoked") or 0
+		setAccountData(playeraccount, "GTWdata_stats_cigarrs_smoked", cigarrs + 1)
 
     		-- Create and attach cigarrete
         	local sigarette = createObject(1485, 0,0,0)

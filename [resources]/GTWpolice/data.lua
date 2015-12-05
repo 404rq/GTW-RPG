@@ -23,8 +23,8 @@ function restore_weapons(plr )
 	setElementData(plr, "onWorkDuty", false)
 end
 addCommandHandler("endwork", restore_weapons)
-addEvent("acorp_onEndWork", true)
-addEventHandler("acorp_onEndWork", root, restore_weapons)
+addEvent("GTWdata_onEndWork", true)
+addEventHandler("GTWdata_onEndWork", root, restore_weapons)
 
 -- List of prison cells
 cells = {

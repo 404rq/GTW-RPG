@@ -80,8 +80,8 @@ function calculate_next_stop(tr_payment, load_time)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount( client )
-	local delivery_points = (getAccountData( playeraccount, "acorp_stats_delivery_points" ) or 0) + 1
-	setAccountData( playeraccount, "acorp_stats_delivery_points", delivery_points )
+	local delivery_points = (getAccountData( playeraccount, "GTWdata_stats_delivery_points" ) or 0) + 1
+	setAccountData( playeraccount, "GTWdata_stats_delivery_points", delivery_points )
 
 	-- Pay the driver
 	givePlayerMoney(client, fine + math.floor(delivery_points/4))

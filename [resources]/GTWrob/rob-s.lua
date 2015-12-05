@@ -149,12 +149,12 @@ function payForRob( crim, amount )
 
 			-- Increase stats by 1
 			local playeraccount = getPlayerAccount( crim )
-			local robs = getAccountData( playeraccount, "acorp_stats_rob_count" ) or 0
-			setAccountData( playeraccount, "acorp_stats_rob_count", robs + 1 )
+			local robs = getAccountData( playeraccount, "GTWdata_stats_rob_count" ) or 0
+			setAccountData( playeraccount, "GTWdata_stats_rob_count", robs + 1 )
 
 			-- Wanted points for criminals
-			local wantedPoints = getAccountData( playeraccount, "acorp_stats_wanted_points" ) or 0
-			setAccountData( playeraccount, "acorp_stats_wanted_points", wantedPoints + 40)
+			local wantedPoints = getAccountData( playeraccount, "GTWdata_stats_wanted_points" ) or 0
+			setAccountData( playeraccount, "GTWdata_stats_wanted_points", wantedPoints + 40)
 		end
 	end
 end

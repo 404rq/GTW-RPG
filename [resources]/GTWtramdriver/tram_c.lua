@@ -33,8 +33,8 @@ function end_work( )
 	if isElement(current_blip) then destroyElement(current_blip) end
 end
 addCommandHandler("endwork", end_work)
-addEvent("acorp_onEndWork", true )
-addEventHandler("acorp_onEndWork", root, end_work)
+addEvent("GTWdata_onEndWork", true )
+addEventHandler("GTWdata_onEndWork", root, end_work)
 
 --[[ Create next tram station on current route ]]--
 function create_tram_station(x, y, z)

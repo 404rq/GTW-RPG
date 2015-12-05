@@ -39,7 +39,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 	    if money >= price and getPlayerWantedLevel(client) == 0 and
 	    	getElementInterior(client) == 0 then
 	   	 	if isElement(vehicles[client]) then
-	   	 		triggerEvent("acorp_onDestroyVehilce", client, client)
+	   	 		triggerEvent("GTWdata_onDestroyVehilce", client, client)
 				if vehicles[client] and getVehicleTowedByVehicle(vehicles[client]) then
 		   	 		destroyElement(getVehicleTowedByVehicle(vehicles[client]))
 		   	 	end
@@ -62,7 +62,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			if vehID then
 				--[[if vehID == 592 or vehID == 577 or vehID == 553 then
 					local playeraccount = getPlayerAccount(client)
-					local pilot_progress = tonumber(getAccountData(playeraccount, "acorp_stats_pilot_progress")) or 0
+					local pilot_progress = tonumber(getAccountData(playeraccount, "GTWdata_stats_pilot_progress")) or 0
 					if pilot_progress < 40 then
 						exports.GTWtopbar:dm("Your pilot license doesn't allow large aircraft yet! (Must be above 40)", client, 255, 0, 0)
 						return
@@ -114,8 +114,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   		local carriage = nil
 					local carriage2 = vehicles[client]
 					local playeraccount = getPlayerAccount(client)
-					--[[local train_stops = tonumber(getAccountData(playeraccount, "acorp_stats_train_stops")) or 0
-					local tram_stops = tonumber(getAccountData(playeraccount, "acorp_stats_tram_stops")) or 0]]--
+					--[[local train_stops = tonumber(getAccountData(playeraccount, "GTWdata_stats_train_stops")) or 0
+					local tram_stops = tonumber(getAccountData(playeraccount, "GTWdata_stats_tram_stops")) or 0]]--
 					local numberOfCarriages = tonumber(extra) or 2
 					-- Create cars
 					local engines = 1

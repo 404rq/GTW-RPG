@@ -433,14 +433,14 @@ function Jail(crim, cop, pay_the_cop)
 			-- Increase stats by 1 for cop
 			if cop and isElement(cop) and getElementType(cop) == "player" then
         		local playeraccount = getPlayerAccount(cop)
-				local arrests = getAccountData(playeraccount, "acorp_stats_police_arrests") or 0
-				setAccountData(playeraccount, "acorp_stats_police_arrests", arrests + 1)
+				local arrests = getAccountData(playeraccount, "GTWdata_stats_police_arrests") or 0
+				setAccountData(playeraccount, "GTWdata_stats_police_arrests", arrests + 1)
 			end
 
 			-- Increase criminals times in jail stat for crim
 			local playeraccount2 = getPlayerAccount(crim)
-			local timesInJail = getAccountData(playeraccount2, "acorp_stats_times_in_jail") or 0
-			setAccountData(playeraccount2, "acorp_stats_times_in_jail", timesInJail + 1)
+			local timesInJail = getAccountData(playeraccount2, "GTWdata_stats_times_in_jail") or 0
+			setAccountData(playeraccount2, "GTWdata_stats_times_in_jail", timesInJail + 1)
 
 			-- Jail player
 			local money = 200

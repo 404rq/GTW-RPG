@@ -162,8 +162,8 @@ function calculate_next_stop(bd_payment)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount( client )
-	local bus_stops = (getAccountData( playeraccount, "acorp_stats_bus_stops" ) or 0) + 1
-	setAccountData( playeraccount, "acorp_stats_bus_stops", bus_stops )
+	local bus_stops = (getAccountData( playeraccount, "GTWdata_stats_bus_stops" ) or 0) + 1
+	setAccountData( playeraccount, "GTWdata_stats_bus_stops", bus_stops )
 
 	-- Pay the driver
 	givePlayerMoney(client, fine + math.floor(bus_stops/4))
