@@ -80,6 +80,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   	if vehID == 403 or vehID == 514 or vehID == 515 then
 			   		if vehID == 403 then
 			   			vehID = 435
+                                        elseif vehID == 514 then
+			   			vehID = 584
 			   		else
 			   			local r_n = math.random(1,9)
 			   			if r_n < 5 then
