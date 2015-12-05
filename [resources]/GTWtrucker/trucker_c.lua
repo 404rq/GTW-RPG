@@ -91,7 +91,12 @@ function delivery_point_hit(plr)
 	-- Alright, everything seems fine here, at this moment we know the
 	-- vehicle is a truck thanks to other limitations, don't worry. Time
 	-- to apply the handbrake and pay the driver
-	local load_time = math.random(10, 20)*1000
+	local load_time = math.random(25, 40)*1000
+	-- Adjust load time for drop off
+	local current_stop = getElementData(localPlayer, "GTWtrucker.currentStop") or 1
+	if current_stop > 1 then
+		load_time = (load_time/(#truck_routes[getElementData(localPlayer, "GTWtrucker.currentRoute")] or 1))
+	end
 	toggle_controls(false)
 	setTimer(toggle_controls, load_time, 1, true)
 	setElementData(localPlayer, "GTWtrucker.loadTime", getTickCount()+load_time)
@@ -203,6 +208,14 @@ end
 function display_destination()
 	if not next_stop.x then return end
 
+	-- Manage cargo prefix
+	if not getPedOccupiedVehicle(localPlayer) then return end
+	local prefix = "kg"
+	if getVehicleTowedByVehicle(getPedOccupiedVehicle(localPlayer)) and
+		getElementModel(getVehicleTowedByVehicle(
+		getPedOccupiedVehicle(localPlayer))) == 584 then
+		prefix = "liter"
+	end
 	-- Check that the player is still a truck driver and nothing else
 	if not getPlayerTeam(localPlayer) or getPlayerTeam(localPlayer) ~= getTeamFromName("Civilians") then
 		if getElementData(localPlayer, "Occupation") ~= "Trucker" then
@@ -223,9 +236,9 @@ function display_destination()
 
 	if not getElementData(localPlayer, "GTWtrucker.isLoading") then return end
 	local time_left = convert_number(math.round(getElementData(localPlayer, "GTWtrucker.loadTime") - getTickCount(), 2))
-	dxDrawText("Processing cargo ("..time_left.."kg remaining) please wait!",
+	dxDrawText("Processing cargo ("..time_left..prefix.." remaining) please wait!",
 		(sx/2)-381,sy-53, 0,0, tocolor(0,0,0,255), 0.7, "bankgothic" )
-	dxDrawText("Processing cargo ("..time_left.."kg remaining) please wait!",
+	dxDrawText("Processing cargo ("..time_left..prefix.." remaining) please wait!",
 		(sx/2)-380,sy-52, 0,0, tocolor(255,100,0,255), 0.7, "bankgothic" )
 
 	-- Check if finished
