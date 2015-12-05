@@ -37,8 +37,8 @@ end)
 function make_login()
 	x,y = guiGetScreenSize()
 	window = guiCreateWindow((x-600)/2, (y-450)/2, 600, 450, "RageQuit 404 | GTW-RPG v3.0", false )
-	loginButton = guiCreateButton(230,400,100,40,"Login",false,window)
-	registerButton = guiCreateButton(128,400,100,40,"Register",false,window)
+	loginButton = guiCreateButton(480,400,110,40,"Login",false,window)
+	registerButton = guiCreateButton(368,400,110,40,"Register",false,window)
 	updatesButton = guiCreateButton(10,400,116,40,"What's new",false,window)
 	labelUser = guiCreateLabel(30, 40, 290, 25, "Username:", false, window)
 	labelPwrd = guiCreateLabel(30, 100, 290, 25, "Password:", false, window)
@@ -53,6 +53,16 @@ function make_login()
 	checkBoxContrast = guiCreateCheckBox(360, 100, 290, 20, "Enable contrast shader", false, false, window)
 	checkBoxWater = guiCreateCheckBox(360, 120, 290, 20, "Enable water shader", false, false, window)
 	checkBoxCarPaint = guiCreateCheckBox(360, 140, 290, 20, "Enable car reflection shader", false, false, window)
+	labelInfoRight = guiCreateLabel(360, 180, 290, 170,
+[[Welcome! to sign up, choose account
+name and password then click register.
+To login, enter credentials then click
+login. You may also select shaders to
+make the game look more realistic or
+disable shaders for better FPS.
+
+Regards: RageQuit 404 community
+Website: https://404rq.com]], false, window)
 	guiEditSetMasked(textPwrd, true)
 	guiSetInputEnabled(true)
 
@@ -97,18 +107,26 @@ function make_login()
 		if sh_detail == "enabled" then
 			guiCheckBoxSetSelected(checkBoxDetail, true)
 			exports.shader_detail:toggleShaderDetail(true)
+		else
+			exports.shader_detail:toggleShaderDetail(false)
 		end
 		if sh_contrast == "enabled" then
 			guiCheckBoxSetSelected(checkBoxContrast, true)
 			exports.shader_contrast:toggleShaderContrast(true)
+		else
+			exports.shader_contrast:toggleShaderContrast(false)
 		end
 		if sh_water == "enabled" then
 			guiCheckBoxSetSelected(checkBoxWater, true)
 			exports.shader_water:toggleShaderWater(true)
+		else
+			exports.shader_water:toggleShaderWater(false)
 		end
 		if sh_carpaint == "enabled" then
 			guiCheckBoxSetSelected(checkBoxCarPaint, true)
 			exports.shader_car_paint_reflect:toggleShaderCarPaint(true)
+		else
+			exports.shader_car_paint_reflect:toggleShaderCarPaint(false)
 		end
 	end
 end
