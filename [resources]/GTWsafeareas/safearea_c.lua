@@ -85,4 +85,4 @@ end
 function reset_warning()
 	has_been_warned = nil
 end
-setTimer(protectPrison, 10000, 0)
+setTimer(protectPrison, 30000, 0)
