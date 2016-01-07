@@ -5,8 +5,8 @@
 	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Bugtracker: 		https://forum.404rq.com/bug-reports/
+	Suggestions:		https://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -85,6 +85,11 @@ Website: https://404rq.com]], false, window)
 	exports.GTWgui:setDefaultFont(labelFacc, 10)
 	exports.GTWgui:setDefaultFont(textFacc, 10)
 	exports.GTWgui:setDefaultFont(faccButtonHelp, 10)
+	exports.GTWgui:setDefaultFont(checkBoxDetail, 10)
+	exports.GTWgui:setDefaultFont(checkBoxContrast, 10)
+	exports.GTWgui:setDefaultFont(checkBoxCarPaint, 10)
+	exports.GTWgui:setDefaultFont(checkBoxWater, 10)
+	exports.GTWgui:setDefaultFont(labelInfoRight, 10)
 	showCursor(true)
 
 	-- Load login details from xml
