@@ -27,6 +27,7 @@
         <script src="misc/s_loc.lua" type="server" />
         <script src="misc/s_network.lua" type="server" />
         <script src="misc/s_countdown.lua" type="server" />
+        <script src="misc/s_events.lua" type="server" />
 
         <!-- Core features -->
         <script src="s_core.lua" type="server" />
