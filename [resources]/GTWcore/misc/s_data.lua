@@ -128,6 +128,20 @@ function save_data(plr)
         setAccountData(acc, "GTWdata.wanted", getElementData(plr, "Wanted") or 0)
         setAccountData(acc, "GTWdata.wanted.viol", getElementData(plr, "violent_time" or 0))
 
+        -- Solutions for servers without GTWcivilians
+        if not getTeamFromName("Unemployed") then
+                local new_team = createTeam("Unemployed")
+                setPlayerTeam(plr, new_team)
+
+                -- Add some scoreboard collumns
+                exports.scoreboard:scoreboardAddColumn("Occupation", root, 90)
+        	exports.scoreboard:scoreboardAddColumn("Money", root, 70)
+        	exports.scoreboard:scoreboardAddColumn("Playtime", root, 70)
+
+                -- Create a staff team assuming that doesn't exist
+                createTeam("Staff")
+        end
+
         -- Team, occupation and team colors
         local plr_team = getPlayerTeam(plr) or getTeamFromName("Unemployed")
         local r,g,b = getTeamColor(plr_team)
