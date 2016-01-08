@@ -41,7 +41,6 @@ function load_data(plr)
         -- Load skind or set a random one if not available
         local rnd_skin = math.random(20,46)
         setElementModel(plr, getAccountData(acc, "GTWdata.skin.current") or rnd_skin)
-        setAccountData(acc, "clothes.boughtSkin", getAccountData(acc, "GTWdata.skin.current") or rnd_skin)
 
         -- Load and set team and occupation
         setPlayerTeam(plr, getTeamFromName(getAccountData(acc,
