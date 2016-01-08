@@ -284,6 +284,14 @@ addEventHandler("GTWaccounts.onClientSend", root,
 			setCameraMatrix( client, x,y,z, x2,y2,z2, 2 )
 			fadeCamera(client, true, 1)
 
+			-- Save view coordinates
+			setElementData(client, "GTWaccounts.login.coordinates.x", x)
+			setElementData(client, "GTWaccounts.login.coordinates.y", y)
+			setElementData(client, "GTWaccounts.login.coordinates.z", z)
+			setElementData(client, "GTWaccounts.login.coordinates.x2", x2)
+			setElementData(client, "GTWaccounts.login.coordinates.y2", y2)
+			setElementData(client, "GTWaccounts.login.coordinates.z2", z2)
+
 			-- Ability for clients to see if a player is logged in or not
 			setElementData(client, "isLoggedIn", true)
 		end

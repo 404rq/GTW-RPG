@@ -39,6 +39,7 @@ function make_login()
 	window = guiCreateWindow((x-600)/2, (y-450)/2, 600, 450, "RageQuit 404 | GTW-RPG v3.0", false )
 	loginButton = guiCreateButton(480,400,110,40,"Login",false,window)
 	registerButton = guiCreateButton(368,400,110,40,"Register",false,window)
+	introButton = guiCreateButton(256,400,110,40,"View intro",false,window)
 	updatesButton = guiCreateButton(10,400,116,40,"What's new",false,window)
 	labelUser = guiCreateLabel(30, 40, 290, 25, "Username:", false, window)
 	labelPwrd = guiCreateLabel(30, 100, 290, 25, "Password:", false, window)
@@ -74,6 +75,7 @@ Website: https://404rq.com]], false, window)
 	-- Set GUI font
 	exports.GTWgui:setDefaultFont(loginButton, 10)
 	exports.GTWgui:setDefaultFont(registerButton, 10)
+	exports.GTWgui:setDefaultFont(introButton, 10)
 	exports.GTWgui:setDefaultFont(updatesButton, 10)
 	exports.GTWgui:setDefaultFont(labelUser, 10)
 	exports.GTWgui:setDefaultFont(labelPwrd, 10)
@@ -157,6 +159,10 @@ addEventHandler("onClientGUIClick",root,function()
 	-- On registration
 	elseif source == registerButton then
 		triggerServerEvent("GTWaccounts:onClientAttemptRegistration", localPlayer, guiGetText(textUser), guiGetText(textPwrd), guiGetText(textFacc))
+	-- On view intro start
+	elseif source == introButton then
+		addEventHandler("onClientRender", root, view_gtw_intro)
+		guiSetVisible(window, false)
 	-- On view updates button click (requires GTWupdates)
 	elseif source == updatesButton then
 		exports.GTWupdates:viewUpdateListGUI()
@@ -261,5 +267,7 @@ addEventHandler("onClientResourceStart", resourceRoot, function()
 		setBlurLevel(0)
 		showChat(false)
 		triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
+	else
+		p_loggedIn = true
 	end
 end)

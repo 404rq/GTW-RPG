@@ -16,6 +16,7 @@
 
 <meta>
     <info author="GTWGames" version="38" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
+    <script src="c_intro.lua" type="client" />
     <script src="c_gui.lua" type="client" />
     <script src="s_data.lua" type="server" />
     <script src="s_func.lua" type="server" />
