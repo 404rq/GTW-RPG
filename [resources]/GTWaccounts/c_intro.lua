@@ -68,6 +68,9 @@ function reset_data()
                 showChat(true)
         end
 
+        -- Show radar again
+        showPlayerHudComponent("radar", true)
+
         -- Reset temporary view coordinates
         setElementData(client, "GTWaccounts.login.coordinates.x", nil)
         setElementData(client, "GTWaccounts.login.coordinates.y", nil)
@@ -79,9 +82,9 @@ end
 
 --[[ Update 3D text message and picture ]]--
 function view_gtw_intro( )
-        dxDrawText(settings.message, sx+1,0, 0,50, tocolor(0,0,0,255),
+        dxDrawText(settings.message, sx+1,0, 0,sy-70, tocolor(0,0,0,255),
                 1, "bankgothic", "center", "bottom", false, true)
-        dxDrawText(settings.message, sx,1, 0,50, tocolor(255,100,0,255),
+        dxDrawText(settings.message, sx,0, 0,sy-69, tocolor(255,100,0,255),
                 1, "bankgothic", "center", "bottom", false, true)
 
         -- Update text and screen position
@@ -97,6 +100,9 @@ function view_gtw_intro( )
                 settings.timer.current = 0
                 fadeCamera(true, 2, 0,0,0)
                 playSoundFrontEnd(11)
+                -- Hise radar and chat
+                showPlayerHudComponent("radar", false)
+                showChat(false)
         end
 
         -- Stop if finished
@@ -113,8 +119,6 @@ end
 function start_intro()
         addEventHandler("onClientRender", root, view_gtw_intro)
         guiSetVisible(window, false)
-        showPlayerHudComponent("radar", false)
-        showChat(false)
 end
 addCommandHandler("intro", start_intro)
 
