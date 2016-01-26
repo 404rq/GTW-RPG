@@ -68,8 +68,8 @@ function client_registration_attempt(user, pass, facc)
 	-- Check how many account that has been registred from this PC
 	local serial = getPlayerSerial(client)
 	local accounts = getAccountsBySerial(serial)
-	if #accounts > 1 then
-		return display_status("Two accounts has already been registred on "..
+	if #accounts > 9 then
+		return display_status("Too many accounts has already been registred on "..
 			"\nthis PC! Contact an admin for further assistance.", client, -1)
 	end
 
@@ -93,12 +93,12 @@ function client_registration_attempt(user, pass, facc)
 
 	-- Check if there's a friend provided
 	local friend = getAccount(facc)
-	local acn = addAccount(user, pass)
+	acn = addAccount(user, pass)
 
 	-- Shit, something went wrong, unable to add the account, check the
 	-- servers error log for further information
 	if not acn then
-		display_status("Failed to add account.", client, -1)
+		display_status("Failed to add account. \nThere may already exist an account with another \ncase variation of the name you provided!", client, -1)
 		return
 	end
 
