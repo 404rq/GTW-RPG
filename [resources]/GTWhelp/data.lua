@@ -5,8 +5,8 @@
 	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Bugtracker: 		https://forum.404rq.com/bug-reports/
+	Suggestions:		https://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -18,201 +18,116 @@
 list = {
 	{ "Rules", 0 },
 	{ "English", 1, [[
-********************************************************************
-Rules in English
-********************************************************************
+********************************************************************************
+* Rules in English
+********************************************************************************
 
 #1 Do not spawn kill other players.
-#2 Drive on the right side of the road. Do not block other
-    players, do not crash into other players unless you have
-    a reason to do so, e.g in a police chase or to revenge.
-#3 Do not use any kind of hack or exploit bugs. GTW-RPG is an
-    open source game mode which we claim to be stable and of
-    high quality, it's therefore important to let us know about
-    any bug you may find. Bug reports are rewardable, exploits
-    are punishable.
-#4 Do not advertise, feel free to talk about anything as long
-    you're not advertising it. If you don't get the difference
-    here's an example: Talking: xBox vs PS3... Advertising:
-    buy xBox here...
-#5 Do not obstruct or interrupt role play situations. It's not
-    appropriate to show up with a minigun and kill a group of
-    players standing together chatting for instance, do not use
-    more violence than the situation require.
-#6 Do not spam the chats, repeating nonsense on purpose will lead
-    to a mute, note that this mute are global and applies to many
-    other servers running GTW-RPG resources as well.
-#7 Do NOT try this in game: apply for staff, suggest new features,
-    complaint on other players or staff, ask about stuff you'll
-    find information about in the list to the left. This is not
-    punishable but you may not get the response you expected.
-#8 Do not actively troll, provoke, annoy or insult other players.
-    Instead, solve your conflicts here:
-    Report: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appeal: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#2 Drive on the right side of the road. Do not block other players, do not crash into other players unless you have a reason to do so, e.g in a police chase or to revenge.
+#3 Do not use any kind of hack or exploit bugs. GTW-RPG is an open source game mode which we claim to be stable and of high quality, it's therefore important to let us know about any bug you may find. Bug reports are rewardable, exploits are punishable.
+#4 Do not advertise, feel free to talk about anything as long you're not advertising it. If you don't get the difference here's an example: Talking: xBox vs PS3... Advertising: buy xBox here...
+#5 Do not obstruct or interrupt role play situations. It's not appropriate to show up with a minigun and kill a group of players standing together chatting for instance, do not use more violence than the situation require.
+#6 Do not spam the chats, repeating nonsense on purpose will lead to a mute, note that this mute are global and applies to many other servers running GTW-RPG resources as well.
+#7 Do NOT try this in game: apply for staff, suggest new features, complaint on other players or staff, ask about stuff you'll find information about in the list to the left. This is not punishable but you may not get the response you expected.
+#8 Do not actively troll, provoke, annoy or insult other players. Instead, solve your conflicts here: Report/Appeal: https://forum.404rq.com/complaints-and-reports/
 
 Thank you for complying with our rules.
 
-********************************************************************
-Last edit:	2015-01-28
-********************************************************************]] },
+********************************************************************************
+* Last edit: 2015-01-28
+********************************************************************************]] },
 	{ "Swedish (Svenska)", 1, [[
-********************************************************************
-Rules in Swedish (Svenska)
-********************************************************************
+********************************************************************************
+* Rules in Swedish (Svenska)
+********************************************************************************
 
 #1 Spawn kill är ej tillåtet (gäller framförallt vid sjukhus)
-#2 Håll till höger när du kör, blockera ej andra spelare, krocka
-    inte medveted med andra spelare om du inte har en anledning
-    som exempelvis hämnd eller en biljakt (tjuv och polis).
-#3 Missbruka inte eventuella buggar, GTW-RPG är baserat på öppen
-    källkod och bör vara stabilt, belöning utlovas till den som
-    upptäcker och rapporterar buggar beroende på dess storlek,
-    missbruk av buggar bestraffas.
-#4 Reklam är ej tillåten, vi tillämpar yttrandefrihet så du får
-    självklart prata om precis vad du vill, så länge du inte öppet
-    gör reklam för en produkt exempelvis.
-#5 Avbryt ej rolspel, servern stödjer både role-play och RPG, om
-    en grupp spelare står och sysslar med /me och /do rollspel är
-    det olämpligt att dyka upp med minigun och ha ihjäl dem eller
-    meja ner dem med din bil.
-#6 SPAM är ej tillåten, toleransen här är dock hög men får du en
-    varning bör du lugna dig en aning.
-#7 Administrativa uppgifter delas INTE ut till den som skriker
-    högst, detsamma gäller för serverns utveckling (förslag och
-    dylikt) samt klagomål på andra spelare med mera, allt sånt
-    hanteras i forumet.
-#8 Att aktivt trolla eller provocera är ej heller tillåtet, lös
-    era konflikter här:
-    Klagomål: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Försvar: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#2 Håll till höger när du kör, blockera ej andra spelare, krocka inte medveted med andra spelare om du inte har en anledning som exempelvis hämnd eller en biljakt (tjuv och polis).
+#3 Missbruka inte eventuella buggar, GTW-RPG är baserat på öppen källkod och bör vara stabilt, belöning utlovas till den som upptäcker och rapporterar buggar beroende på dess storlek, missbruk av buggar bestraffas.
+#4 Reklam är ej tillåten, vi tillämpar yttrandefrihet så du får självklart prata om precis vad du vill, så länge du inte öppet gör reklam för en produkt exempelvis.
+#5 Avbryt ej rolspel, servern stödjer både role-play och RPG, om en grupp spelare står och sysslar med /me och /do rollspel är det olämpligt att dyka upp med minigun och ha ihjäl dem eller meja ner dem med din bil.
+#6 SPAM är ej tillåten, toleransen här är dock hög men får du en varning bör du lugna dig en aning.
+#7 Administrativa uppgifter delas INTE ut till den som skriker högst, detsamma gäller för serverns utveckling (förslag och dylikt) samt klagomål på andra spelare med mera, allt sånt hanteras i forumet.
+#8 Att aktivt trolla eller provocera är ej heller tillåtet, lös era konflikter här: https://forum.404rq.com/complaints-and-reports/
 
 Tack för att du respekterar våra regler!
 
 Translated by:
-- Mr.Moose (President of Grand Theft Walrus, Developer, Administrator)
+- Mr.Moose (Developer/Administrator of Grand Theft Walrus)
 
-********************************************************************
-Last edit:	2015-03-07
-********************************************************************]] },
+********************************************************************************
+* Last edit: 2015-03-07
+********************************************************************************]] },
 	{ "Danish (Danska)", 1, [[
-********************************************************************
-Rules in Danish (Danska)
-********************************************************************
+********************************************************************************
+* Rules in Danish (Danska)
+********************************************************************************
 
 #1 Du må ikke gyde dræbe andre spillere. (Gælder omkring hospitaler)
-#2 Kørsel på højre side af vejen. Bloker ikke andre
-    spillere, ikke køre ind i andre spillere, medmindre du har
-    en grund til det, fx i en politi jagt eller til hævn.
-#3 Brug ikke nogen form for hack eller udnytte bugs. GTW-RPG er en
-    open source game mode, som vi hævder at være stabil og
-    høj kvalitet, er det derfor vigtigt at lade os vide om
-    enhver fejl du kan finde. Fejlrapporter er rewardable, exploits
-    er strafbare.
-#4 Du må ikke annoncere, er du velkommen til at tale om noget, så længe
-    du er ikke reklame det. Hvis du ikke får forskellen
-    Her er et eksempel: Talking: Xbox vs PS3 ... Reklame:
-    indkøbe xBox her ...
-#5 Du må ikke hindre eller afbryde rollespil situationer. Det er ikke
-    hensigtsmæssigt at dukke op med en minigun og dræbe en gruppe af
-    spillere står sammen chatter for eksempel, brug ikke
-    mere vold end situationen kræver.
-#6 ikke spam de chats, gentage nonsens med vilje vil føre
-    til en stum, bemærke, at denne mute er globale og gælder for mange
-    andre servere, der kører ressourcer GTW-RPG så godt.
-#7 Du må ikke prøve dette i gmae: ansøge om personale, foreslå nye funktioner,
-    klage på andre spillere eller medarbejdere, spørge om ting, du vil
-    find oplysninger om i listen til venstre. Dette er ikke
-    strafbar, men du kan ikke få det svar du forventede.
-#8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere.
-    I stedet løse dine konflikter her:
-    Betænkning: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appel: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#2 Kørsel på højre side af vejen. Bloker ikke andre spillere, ikke køre ind i andre spillere, medmindre du har en grund til det, fx i en politi jagt eller til hævn.
+#3 Brug ikke nogen form for hack eller udnytte bugs. GTW-RPG er en open source game mode, som vi hævder at være stabil og høj kvalitet, er det derfor vigtigt at lade os vide om enhver fejl du kan finde. Fejlrapporter er rewardable, exploits er strafbare.
+#4 Du må ikke annoncere, er du velkommen til at tale om noget, så længe du er ikke reklame det. Hvis du ikke får forskellen Her er et eksempel: Talking: Xbox vs PS3 ... Reklame: indkøbe xBox her ...
+#5 Du må ikke hindre eller afbryde rollespil situationer. Det er ikke hensigtsmæssigt at dukke op med en minigun og dræbe en gruppe af spillere står sammen chatter for eksempel, brug ikke mere vold end situationen kræver.
+#6 ikke spam de chats, gentage nonsens med vilje vil føre til en stum, bemærke, at denne mute er globale og gælder for mange andre servere, der kører ressourcer GTW-RPG så godt.
+#7 Du må ikke prøve dette i gmae: ansøge om personale, foreslå nye funktioner, klage på andre spillere eller medarbejdere, spørge om ting, du vil find oplysninger om i listen til venstre. Dette er ikke strafbar, men du kan ikke få det svar du forventede.
+#8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere. I stedet løse dine konflikter her: https://forum.404rq.com/complaints-and-reports/
 
 Tak for at overholde vores regler.
 
 Translated by:
 - The.Penguin (Developer & Administrator)
 
-********************************************************************
-Last edit:	2015-03-07
-********************************************************************]] },
+********************************************************************************
+* Last edit: 2015-03-07
+********************************************************************************]] },
 	{ "Dutch (Nederlands)", 1, [[
-********************************************************************
-Rules in Dutch (Nederlands)
-********************************************************************
+********************************************************************************
+* Rules in Dutch (Nederlands)
+********************************************************************************
 
 #1 Geen andere spelers spawnkillen. (Geld rond ziekenhuizen)
-#2 Rijd aan de rechterkant van de weg.
-    Blokkeer geen andere spelers, rijd niet in andere spelers zonder een geldige reden. bv. in een politie achtervolging of wraak.
-#3 Gebruik geen soort van hack of misbruik geen bugs.
-    GTW-RPG is een open source game modus waarbij we zeggen dat hij stabiel en van hoge kwaliteit is, het is daarom belangrijk dat je ons laat weten van een bug die je vind.
-    Bug reports zijn beloonbaar, misbruik is strafbaar.
-#4 Adverteer niet, voel je vrij om over alles te praten zolang je het niet adverteerd.
-    Als je het verschil niet snapt dan is hier een voorbeeld: Praten: Xbox vs PS3... Adverteren: Koop je Xbox hier...
-#5 Onderbreek of belemmer rolspel situaties niet.
-    Het is niet volwassen om met een minigun te komen en een groep van spelers die aan het praten zijn te vermoorden, gebruik niet meer geweld dan dat de situatie nodig heeft.
+#2 Rijd aan de rechterkant van de weg. Blokkeer geen andere spelers, rijd niet in andere spelers zonder een geldige reden. bv. in een politie achtervolging of wraak.
+#3 Gebruik geen soort van hack of misbruik geen bugs. GTW-RPG is een open source game modus waarbij we zeggen dat hij stabiel en van hoge kwaliteit is, het is daarom belangrijk dat je ons laat weten van een bug die je vind. Bug reports zijn beloonbaar, misbruik is strafbaar.
+#4 Adverteer niet, voel je vrij om over alles te praten zolang je het niet adverteerd. Als je het verschil niet snapt dan is hier een voorbeeld: Praten: Xbox vs PS3... Adverteren: Koop je Xbox hier...
+#5 Onderbreek of belemmer rolspel situaties niet. Het is niet volwassen om met een minigun te komen en een groep van spelers die aan het praten zijn te vermoorden, gebruik niet meer geweld dan dat de situatie nodig heeft.
 #6 Spam de chat niet, onzin herhalen met opzet zal leiden tot een mute, denk eraan dat deze mute globaal werkt en dus in alle andere GTW servers werken.
-#7 Probeer dit spel NIET: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden.
-    Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
-#8 Ga niet actief trollen, provoceren, irriteren of spelers uitschelden. Inplaats daarvan, los je problemen hier op:
-    Report: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Aanvraag: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#7 Probeer dit spel NIET: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden. Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
+#8 Ga niet actief trollen, provoceren, irriteren of spelers uitschelden. Inplaats daarvan, los je problemen hier op: https://forum.404rq.com/complaints-and-reports/
 
 Bedankt om mee te werken met ons reglement.
 
 Translated by:
 - WhoopeeTheClown (Global moderator, In game staff)
 
-********************************************************************
-Last edit:	2015-03-07
-********************************************************************]] },
+********************************************************************************
+* Last edit: 2015-03-07
+********************************************************************************]] },
 	{ "Italian (Italiano)", 1, [[
-********************************************************************
-Rules in Italian (Italiano)
-********************************************************************
+********************************************************************************
+* Rules in Italian (Italiano)
+********************************************************************************
 
 #1 Non spawn-killare gli altri giocatori. (Questa regola vale vicino agli ospedali)
-#2 Guida sul lato destro della strada. Non bloccare gli altri
-    giocatori, non schiantarti contro gli altri giocatori a meno che non hai
-    una ragione per farlo, per esempio in un inseguimento o per vendetta.
-#3 Non usare nessun tipo di hack e non abusare dei bug. GTW-RPG è una
-    modalità di gioco open source che affermiamo sia stabile e di
-    alta qualità, quindi è importante notificarci riguardo
-    qualsiasi bug che riesci a trovare. Vieni ricompensato se segnali un bug,
-    ma vieni punito se abusi di un exploit.
-#4 Non pubblicizzare, sii libero di parlare di qualsiasi cosa purché
-    non la pubblicizzi. Se non capisci la differenza, eccoti un
-    esempio: Parlare: xBox vs PS3... Pubblicizzare:
-    compra la xBox qua...
-#5 Non ostruire o interrompere situazioni role play. Non è
-    appropriato presentarsi con una minigun e uccidere un gruppo di
-    giocatori che stanno insieme a parlare per esempio, non usare
-    più violenza di quanto la situazione richiede.
-#6 Non spammare nelle chat, ripetere cose senza senso porterà
-    ad essere mutati,tieni conto che questo mute è globale e viene applicato a molti
-    altri server che usano le risorse di GTW-RPG.
-#7 NON fare questo nel gioco: chiedere per diventare staff, suggerire nuove idee,
-    lamentarsi di altri giocatori o staffer, chiedere cose ovvie allo staff che
-    puoi trovare nella lista alla tua sinistra. Questo non è punibile ma
-    potrai non ottenere la riposta che ti aspettavi.
-#8 Non trollare, provocare, annoiare o insultare gli altri giocatori.
-    Invece, risolvi i tuoi conflitti qua:
-    Segnalazioni: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Appelli: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#2 Guida sul lato destro della strada. Non bloccare gli altri giocatori, non schiantarti contro gli altri giocatori a meno che non hai una ragione per farlo, per esempio in un inseguimento o per vendetta.
+#3 Non usare nessun tipo di hack e non abusare dei bug. GTW-RPG è una modalità di gioco open source che affermiamo sia stabile e di alta qualità, quindi è importante notificarci riguardo qualsiasi bug che riesci a trovare. Vieni ricompensato se segnali un bug, ma vieni punito se abusi di un exploit.
+#4 Non pubblicizzare, sii libero di parlare di qualsiasi cosa purché non la pubblicizzi. Se non capisci la differenza, eccoti un esempio: Parlare: xBox vs PS3... Pubblicizzare: compra la xBox qua...
+#5 Non ostruire o interrompere situazioni role play. Non è appropriato presentarsi con una minigun e uccidere un gruppo di giocatori che stanno insieme a parlare per esempio, non usare più violenza di quanto la situazione richiede.
+#6 Non spammare nelle chat, ripetere cose senza senso porterà ad essere mutati,tieni conto che questo mute è globale e viene applicato a molti altri server che usano le risorse di GTW-RPG.
+#7 NON fare questo nel gioco: chiedere per diventare staff, suggerire nuove idee, lamentarsi di altri giocatori o staffer, chiedere cose ovvie allo staff che puoi trovare nella lista alla tua sinistra. Questo non è punibile ma potrai non ottenere la riposta che ti aspettavi.
+#8 Non trollare, provocare, annoiare o insultare gli altri giocatori. Invece, risolvi i tuoi conflitti qua: https://forum.404rq.com/complaints-and-reports/
 
 Grazie per aver letto le regole.
 
 Translated by:
 - Franckf (Community member)
 
-********************************************************************
-Last edit:	2015-03-07
-********************************************************************]] },
+********************************************************************************
+* Last edit: 2015-03-07
+********************************************************************************]] },
 	{ "Urdu (Urdu)", 1, [[
-********************************************************************
-Rules in Urdu (Urdu)
-********************************************************************
+********************************************************************************
+* Rules in Urdu (Urdu)
+********************************************************************************
 
 #1 Jab player spawn hota hai to use kill mat kareu. (Hospitals ke ird gird)
 #2 Road ki right side pe drive kareu, kisi waja ke bagaar gaari ko doosre players ki gaari pe na mareu. Sirf kareu agar aap ke paas koi acha reason ho jese ke police chase meu ya phir revenge ke liye.
@@ -221,22 +136,20 @@ Rules in Urdu (Urdu)
 #5 Roleplay situations ko interept na kareu. Ye theek nahi hai ke aap aik minigun kisi group ko dekha kar group ko maar deu.
 #6 Do not spam the chats, repeating nonsense on purpose will lead #6 Chat mein spamming na kareu aur nonsense material bhi post na kareu, warna aap mute ho jain gay.
 #7 Game mein ye na kareu: staff ke liye apply, new features ko add karne ki suggestion, dosre players ya staff ki complaint.
-#8 Kisi ko troll, annoy ya insult na kareu. Aap yahan pe jaa sakte hain:
-Report: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-Appeal: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#8 Kisi ko troll, annoy ya insult na kareu. Aap yahan pe jaa sakte hain: https://forum.404rq.com/complaints-and-reports/
 
 Shukriya hamare rules parhane ke liye.
 
 Translated by:
 - ccv (Contributor)
 
-********************************************************************
-Last edit:	2015-03-07
-********************************************************************]] },
+********************************************************************************
+* Last edit:	2015-03-07
+********************************************************************************]] },
 	{ "Egyptian (Masry)", 1, [[
-********************************************************************
-Rules in Egyptian (Masry)
-********************************************************************
+********************************************************************************
+* Rules in Egyptian (Masry)
+********************************************************************************
 #1 Mate2telsh awl lama el la3eeb yes7a, w dah kman fel mostashfa.
 #2 Dayman so2 3ala el yemeen, mate8batsh el nas bel 3ayabeya aw 7aga zay keda. Te2dar te3mel keda 3ashan ta5od ha2ak aw law enta shorta w betegry wara 7aramy.
 #3 Mate3mlsh Hack lel server. Ay bug tela2ee fel server e3melo report 3ala el mawka3 w momken ta5od floos law tele3 begad w etsala7. Ay taree2 3ashan teksab beeha haga zay haraka w ta5od floos deeh hata5od punish feeha.
@@ -244,100 +157,66 @@ Rules in Egyptian (Masry)
 #5 Ew3a tera5em 3ala el nas w homa beye3mlo 7agat akenaha fel ha2eeya aw teegy te2teel magmoo3a men el nas w homa bey3melo haga.
 #6 Ew3a tekteb 7agat keteer fel chat ya3ny te3melaha spam aw tekteb aya haga malhash ay talateen lazma aw teba2 haga mesh kwayesa.
 #7 Ew3a te7awel fel le3ba enak te3mel apply lel staff aw te2ool 3ala fekra lel server aw teshteky 3ala 7ad aw tesa2l haga tela2eeha fel list 3ala el shemal w momken ta5od fe deeh punish.
-#8 Matra5emsh 3ala ay 7ad fel server, aw teshtem 7ad, aw te2ool kelma we7sha fel chat badal keda eshteky 3ala 7ad hena:
-   El shakwa: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Law et3amalak ban w 3yzo yetshal: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#8 Matra5emsh 3ala ay 7ad fel server, aw teshtem 7ad, aw te2ool kelma we7sha fel chat badal keda eshteky 3ala 7ad hena: https://forum.404rq.com/complaints-and-reports/
 
 Shokran 3ashan betrakez fel hagat deeh!
 
 Translated by:
-- Smart (Supporter)
-********************************************************************
-Last edit:	2015-05-27
-********************************************************************]] },
+- Smart (Moderator)
+********************************************************************************
+* Last edit: 2015-05-27
+********************************************************************************]] },
 	{ "Portuguese (Portuguese)", 1, [[
-********************************************************************
-Rules in Portuguese (Portuguese)
-********************************************************************
+********************************************************************************
+* Rules in Portuguese (Portuguese)
+********************************************************************************
 #1 Não faça spawn kill em outros jogadores. (Aplica-se ao redor de hospitais)
-#2 Dirigir sempre no lado direito da estrada. Não bloquear os outros jogadores,
-	não bater em outros jogadores, a menos que você tenha uma razão para
-	fazer isso, por exemplo, em uma perseguição policial ou por vingança.
-#3 Não use qualquer tipo de hack ou exploração de bugs. GTW-RPG é um modo de jogo
-    de código aberto que pretendemos deixar estável e de alta qualidade,
-	Portanto, é importante que você nos informe sobre
-	qualquer bug, que você encontrar. Relatórios de bug são recompensados, explarações
-	são puníveis..
-#4 Não anunciar, sinta-se livre para falar sobre qualquer coisa, contanto
-	que você não anuncie. Se você não entende a diferença
-	aqui está um exemplo: Falando: xBox vs PS3... Publicidade:
-	compre xBox aqui...
-#5 Não obstrua ou interrompa as situações de role play. Não é apropriado aparecer
-	com uma minigun e matar um grupo de jogadores que estão juntos conversando,
-	por exemplo. Não use mais violência do que a situação requer.
-#6 Não faça spam no chat, se repetir propositalmente você sera mutado, note que o mute é
-	global e aplicado em todos os servidores GTW.
-#7 Não tente isso em jogo: pedir para ser staff, sugerir novas funcionalidades,
-    reclamar sobre outros jogadores ou staff, Perguntar sobre coisas que estão no menu à esquerda.
-	Isso não é punível, mas você pode não obter a resposta que você esperava.
-#8 Não seja um troll, não provoque, irrite ou insulte os outros jogadores.
-    Em vez disso, resolve seus conflitos aqui:
-    Reporte: http://forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/
-    Apelação: http://forum.404rq.com/complaints-and-reports/complaints-appeal-your-punishment-356/
+#2 Dirigir sempre no lado direito da estrada. Não bloquear os outros jogadores, não bater em outros jogadores, a menos que você tenha uma razão para fazer isso, por exemplo, em uma perseguição policial ou por vingança.
+#3 Não use qualquer tipo de hack ou exploração de bugs. GTW-RPG é um modo de jogo de código aberto que pretendemos deixar estável e de alta qualidade, Portanto, é importante que você nos informe sobre qualquer bug, que você encontrar. Relatórios de bug são recompensados, explarações são puníveis..
+#4 Não anunciar, sinta-se livre para falar sobre qualquer coisa, contanto que você não anuncie. Se você não entende a diferença aqui está um exemplo: Falando: xBox vs PS3... Publicidade: compre xBox aqui...
+#5 Não obstrua ou interrompa as situações de role play. Não é apropriado aparecer com uma minigun e matar um grupo de jogadores que estão juntos conversando, por exemplo. Não use mais violência do que a situação requer.
+#6 Não faça spam no chat, se repetir propositalmente você sera mutado, note que o mute é global e aplicado em todos os servidores GTW.
+#7 Não tente isso em jogo: pedir para ser staff, sugerir novas funcionalidades, reclamar sobre outros jogadores ou staff, Perguntar sobre coisas que estão no menu à esquerda. Isso não é punível, mas você pode não obter a resposta que você esperava.
+#8 Não seja um troll, não provoque, irrite ou insulte os outros jogadores. Em vez disso, resolve seus conflitos aqui: https://forum.404rq.com/complaints-and-reports/
 
 Obrigado por cumprir com as nossas regras.
 
 Translated by:
 - EHLuC & EHPHUCK (Community members)
-********************************************************************
-Last edit:	2015-05-27
-********************************************************************]] },
+********************************************************************************
+* Last edit: 2015-05-27
+********************************************************************************]] },
 	{ "General", 0 },
 	{ "RageQuit community", 1, [[
-********************************************************************
-RageQuit community
-********************************************************************
+********************************************************************************
+* RageQuit community
+********************************************************************************
 
-Where the game is a true pleasure, we started as a small hobby
-project to give some new life to a bunch of old gaming PC's, thanks
-to the great Linux distribution "Debian" and a overkill network in
-northern Europe RageQuit has been growing over a couple of years and
-is now running multiple Multi Theft Auto and Minecraft servers.
+Where the game is a true pleasure, we started as a small hobby project to give some new life to a bunch of old gaming PC's, thanks to the great Linux distribution "Debian" and a overkill network in northern Europe RageQuit has been growing over a couple of years and is now running multiple Multi Theft Auto and Minecraft servers.
 
-As our main interest always been the development we don't put much
-effort in limitations of the free speech or other bureocratic
-"rules", instead we're trying to make our game mode enjoyable for
-as many players as possible, this includes everything from design
-details to pure performance, we hate FPS lag and bad ping just as
-much as you do.
+As our main interest always been the development we don't put much effort in limitations of the free speech or other bureocratic "rules", instead we're trying to make our game mode enjoyable for as many players as possible, this includes everything from design details to pure performance, we hate FPS lag and bad ping just as much as you do.
 
-We're one of feew communities almost completly built on open source
-software, especially the GTW-RPG project for Multi Theft Auto which
-we are the main contributors to. We also offers total freedom of
-speech and high security on our servers so that you don't have to
-loose any of your valuable game progress or items you worked hard
-for.
+We're one of feew communities almost completly built on open source software, especially the GTW-RPG project for Multi Theft Auto which we are the main contributors to. We also offers total freedom of speech and high security on our servers so that you don't have to loose any of your valuable game progress or items you worked hard for.
 
 Find our more on our websites:
 www.404rq.com
 forum.404rq.com
+wiki.404rq.com
+code.404rq.com
+media.404rq.com
 
-********************************************************************
-Last edit:	2015-09-01
-********************************************************************
+********************************************************************************
+* Last edit: 2015-09-01
+********************************************************************************
 ]] },
 	{ "Accounts", 1, [[
-********************************************************************
-About user accounts
-********************************************************************
+********************************************************************************
+* About user accounts
+********************************************************************************
 
-If you want your progress to be saved you need to register a
-user account, this can be done when you are joining the server
-via a easy to use GUI or by commands. During register you can
-also give a reward to a friend of your who invited you, if
-that person is a player here. Simple enter the account name
-of that player and he'll get rewarded, you can also make money
-yourself by inviting more people to the server.
+How to login or register:
+  * Enter your credentials then press login and your data will be saved and synced
+  * If you don't have any account, choose and enter any credentials then press "register", on success you'll see a green text, press login to login to your new account.
 
 How to change password:
   * Press F8 to open your console, then enter:
@@ -349,360 +228,487 @@ How to change nick name:
 
   nick <new-nick>
 
-Note that these commands are built in and works on any server.
+Note that these commands are built in and works on any Multi Theft Auto server.
 ]]},
 	{ "Staff guidelines", 1, [[
-********************************************************************
-Staff guidelines (only relevant to server staff)
-********************************************************************
+********************************************************************************
+* Staff guidelines (only relevant to server staff)
+********************************************************************************
 
-You can enter the staff mode at any time you would like to do
-your staff duty by using the command /gostaff (or /gostafff
-for female skin). This mode makes you invincible and are
-strictly forbidden to use during game play.
+How do I get into "staff mode":
+  * Use /gostaff(f/m) last f/m is optinal and specifies if you want to use the male or female skin
 
-Staff panel are located at F7 and are used at your own risk,
-we do not make refunds in case it has bugs which makes you
-lose anything when it's used the wrong way or overused.
+Where is the staff panel located:
+  * Use /staff or press P
 
-Abusing the staff panel will lead to a kick without warning,
-with abusing means using it to gain advantages over other
-players or by giving another player free weapons or tools.
+How to spawn a vehicle:
+  * Use /gv to open the rental spawn menu anywhere on the map, all vehicles are free
 
-NOTE: For previous staff, you do not need to apply again,
-just send a PM to MrBrutus in the forum with your account
-name to get added again, this is a security check to prevent
-old staff account names from being exploited.
+How do I warp:
+  * Use /setpos x y z or open the staff panel for warp to options
 
-NOTE2: Use built in features in the first case, vehicles must
-be spawned using /gv, otherwise it's your responibly to clean
-up since vehicles from the staff panel won't be removed
-automatically and may cause lag if overused.
-
-NOTE3: Warp using staff panel may still cause you to loose your
-weapons so use /setpos x y z for safely warps anywhere on the
-map or warp to player. Never warp a player to you, alwasy warp
-to the player if you are gonna warp.
-
-NOTE4: [GTW] Tags are not required, when youre in the staff
-team "Government" you're a staff, otherwise youre a regular player
-with some extra basic advantages.
-
-NOTE5: Vehicles spawned from /gv are only for transportation of
-staff members, the rental cost are free and they are therefore
-strictly forbidden to use while working, exceptions are if youre
-testing a bug or can prove that youre doing it as a staff.
+Do I need to use tags:
+  * Nope, it's completly optional, no matter which mode you're in
 ]]},
 	{ "How to prevent FPS lag", 1, [[
-:: Improve FPS and reduce lag ::
-A collection of commands to increase your FPS and lower your ping
-at a cost of a little bit lower graphics, try and see what's best
-for you.
+********************************************************************************
+* How to prevent FPS lag
+********************************************************************************
 
-/reflect    # Toggle reflection on vehicles
-/detail     # Toggle details shader that makes everything look more elegant.
-/water      # Toggle water shader
+You can toggle the shaders to improve your FPS
 
-You can't change the weather as it's based on location, the weather
-won't make you lag which you can see on your FPS meter at top right
-on your screen, the roads may get slippery when it rains tho and
-acceleration may be slower when you drive.
+Toggle car paint reflection shader:
+  /reflect
+
+Toggle high details shader:
+  /detail
+
+Toggle water shader (if you get FPS drops near lakes or the sea):
+  /water
+
+Toggle high contrast shader:
+  /contrast
+
+You can locally change your weather to increase your FPS too, using the following commands:
+
+/sunny
+/rainy
+/foggy
+
+If none of these options help check our forum for more suggestions:
+https://forum.404rq.com
 ]]},
 	{ "FAQ", 1, [[
-********************************************************************
-Frequently asked questions
-********************************************************************
+********************************************************************************
+* Frequently asked questions
+********************************************************************************
 
-Q: Does GTW has a website?
+Q: Is there any website?
 A: Yes: www.404rq.com
 
-Q: Does GTW has a forum?
+Q: Is there any forum?
 A: Yes: forum.404rq.com
 
 Q: What's our uptime?
-A: 99.7% in our first year, we're a self hosted community without
-   charges and servers at many locations, our game mode is also
-   open source just like the associated data, that means our
-   server will always be available.
-
-Q: What kind of server is this?
-A: This server runs the open source game mode GTW-RPG which is a
-   type of RPG/Real life/Roleplay mix. Players choose by themselves
-   how they want to play their game and how much roleplay or
-   realism they want.
+A: 100%, all RageQuit 404/Grand Theft Walrus servers are hosted in "the cloud" (big datacenters worldwide with 100% uptime guarentee).
 
 Q: How can I become staff?
-A: By writing a small application in our forum at:
-   forum.404rq.com and wait for enough people to vote
-   for you.
+A: Visit: https://forum.404rq.com/staff-applications/
 
 Q: What is GTW Games?
 A: Grand Theft Walrus games is an independent non profit organization
    hosted by A.corp since 2013, read more on our website:
    www.404rq.com.
 
-Q: What does AC and GTW stands for?
-A: GTW - Grand Theft Walrus, our current name
-   AC - Artic community, our previous name.
+Q: What is AC, GTW and RageQuit 404?
+A: AC - Artic community, our previous name. GTW - Grand Theft Walrus, current name of this server, RageQuit 404 is the name of the community
 
 Q: How do I donate?
-A: Visit our forum: www.404rq.com and choose an
-   option to the right, you can choose between PayPal, Bitcoin or
-   Litecoin currently.
+A: See: https://404rq.com/donations/
 
 Q: My question wasn't answered here, what should I do?
-A: Ask your question here:
-   forum.404rq.com/questions-and-concerns/
+A: Ask your question here: https://forum.404rq.com/questions-and-concerns/
 ]]},
 	{ "Vehicles", 0 },
 	{ "Vehicle rental", 1, [[
-The smaller square blips on your radar indicates a place where
-you can rent a vehicle, either for work or casual driving. The
-color shows the difference, white means casual driving and
-anyone will be able to rent a vehicle there, these are often
-located nearby gas stations and busy areas in general like
-hospitals, police departments etc..
+********************************************************************************
+* Vehicle rental
+********************************************************************************
 
-Other colors like yellow, light blue or gray indicates job
-vehicles, that means you must be employed in the required job
-in order to use them, those markers are always located close
-to the job site itself so you can't miss them.
+What is a rental vehicle:
+  * Any vehicle you spawn by walking up to a white or yellow marker located near work places or gas stations, it's a pay per minute vehicle you can use to quickly travel around the map
 
-The rental cost works like a pledge, you pay a relatively
-expensive price to rent the car but don't worry, if the car
-is in good shape when you return it you'll get most of the
-money back. The most expensive vehicles are trains and large
-aircraft which may get as high as 1000$, as long you drive
-carefully it's a cheap price.]] },
-	{ "Vehicle shops", 1, [[
-Of course a better option than crappy rental vehicles is to
-buy your own vehicle, there are plenty of vehicle shops
-areound the map often marked with a car, bike, boat, airplane
-or train icon. All available vehicles can be bought and managed
-in the vehicle GUI which is appears when you press 'F2'
+Where do I get a rental vehicle:
+  * press F11 to toggle the big map, look for tiny white or yellow colored squares and find the marker at that location
 
-Owned vehicles are personal and can be shown/hidden as you wish
-You can have multiple vehicles visible at the same time in case
-you want to let a friend drive one of your vehicles, you don't
-have to worry about blownup vehicles either, they're just broken
-until you pay for a recovery or call a mechanic to fix them which
-is 80% cheaper than recovery.]] },
-	{ "Vehicle commands", 1, [[
-Here's a list of the available commands related to vehicles:
--- Gearbox:
-/drive     # Switch to the 'drive' gear witch saves fuel but makes
-             your car slower
-/sport     # Default vehicle handling, this is a blanaced option
-/race      # Switch to the 'race' gear which consumes a lot of fuel
-             but let's you accelerate really fast, this will have
-             more effect on expensive sports cars used for streat
-             races for example.
+Why can't I spawn a rental vehicle:
+  * If you are wanted for comitting a crime and a law enforcer is nearby you can't spawn
 
-/gearup    # Next gear above current
-/geardown  # Previous gear below current
-/nextgear  # Toggle next gear, goes back to the first gear when the
-             end of the list is reached.
+How do I return my vehicle:
+  * Use /djv or /rrv, vehicles are also removed 5 minutes after an explosion caused by damage or immediately if you leave the server.
+]] },
+	{ "Vehicle shops/personal vehicles", 1, [[
+********************************************************************************
+* Vehicle shops/personal vehicles
+********************************************************************************
 
--- Door control
-/cd\[0-6\] # Close all vehicle doors or an individual door from inside
-/od\[0-6\] # Opens all vehicle doors or an individual door from inside
+What is a personal vehicle:
+  * A vehicle you own by yourself.
 
--- Turn indicators
-/warn      # Toggle hazard lights
-/lleft     # Toogle turn indicator to left
-/lright    # Toggle turn indicator to right
+Why should I buy when I can rent:
+  * A owned vehicle can be spawned anywhere on the map
+  * A owned vehicle can be customized and all your modifications are saved
+  * A owned vehicle's trunk can be used to hide weapons from the law, press F9 to open/close the trunk
+  * Owned vehicles doesn't have any rental charges
+  * You can spawn a unlimed amount of owned vehicles while in a rental vehicle you can only spawn one vehicle at the time
 
--- Misc
-/engine    # Start/stop the vehicle engine
-/lock      # Lock/unlock the doors of your vehicle
-/emlight   # Toggle emergency lights, works on Police vehicles,
-             Firetrucks, and ambulances, a great way to get
-             attention in emergency situations when you need
-             a clear road.
+Where do I find the car shops:
+  * Press F11 to toggle the big map, look for dark grey blips (hard to see) that looks like vehicles (cars/trucks/boats/aircraft/trains)
 
--- Rental vehicles
-/djv
-or
-/rrv       # Returns a rental vehicle
+Which vehicles can I buy:
+  * Nearly all vehicles that is available in game can be bought, including trains
+]] },
+	{ "Vehicle commands/binds", 1, [[
+********************************************************************************
+* Vehicle commands/binds
+********************************************************************************
 
--- Keybinds
-Key: 'C'   # Toggle crusing control
-Key: 'L'   # Toggle headlights
-Key: 'H'   # Horn and will also be able to toggle emergency lights
+Useful keys while driving:
+  * 'C' - Toggle cruising control
+  * 'L' - Toggle vehicle headlights
+  * 'H' - Horn/Toggle vehicle emergency lights (police vehicles/firetrucks and ambulances)
+  * ',' - Turn indicator to left
+  * '.' - Turn indicator to right
+  * '-' - Toggle hazard lights
+
+And the commands to be used while driving:
+
+- Open/close vehicle doors, all or individual
+  * /cd\[0-6\]
+  * /od\[0-6\]
+
+- Turn indicators
+  * /warn
+  * /lleft
+  * /lright
+
+- Misc features
+  * /engine  - Start/stop the vehicle engine
+  * /lock    - Lock/unlock the doors of your vehicle
+  * /emlight - Toggle emergency lights
+
+- Return rental vehicles
+  * /djv - destroy job vehicle
+  * /rrv - return rental vehicle
 ]] },
 	{ "Civilians", 0 },
-	{ "Bus driver", 1, [[********************************************************************
-Bus driver:
-********************************************************************
- You can become a busdriver at Unity station in Los Santos or
- at pier 69 in San Fierro, after taking this job you will gain
- access to the yellow marker nearby which is a vehicle spawner
- in where you can get a bus or a coach as jobvehicle.
+	{ "Bus driver", 1, [[
+********************************************************************************
+* Bus driver:
+********************************************************************************
 
- After entering your bus you'll have to select a route, it's
- recomended to pick one nearby so you don't have to drive too
- long to the first stop, you will be paid every time you hit
- a busstop and money will be removed if your vus are damaged.
+Where do I find this job:
+  * Unity station - Los Santos
+  * Pier 69 - San Fierro
+  * West side storage building - Las Venturas
 
- Other players can call for you by using the command /bus, you
- will then be able to see them marked with a blip on your map.
- Transporting other players is also a great way to make money
- in this job. You may also buy your own bus to use in this job.]] },
-	{ "Farmer", 1, [[********************************************************************
-Farmer:
-********************************************************************
-As a farmer you need to buy a tractor and a combine harvester,
-it's also recomended to buy a house country side (not required
-thougth) to get some land. When you have that stuff ready enter
-your tractor and plant with the command /plant or press the 'N'
-key. Each plant cost you some money and take up to an hour to
-grow.
+What do I need for this job:
+  * A bus or coach, you can rent one near the job location or use your own vehicle
 
-Luckily you don't have to wait all that time, meanwhile
-you can do other stuff, even leave the server if you wish,
-just remember to come back and harvest them with your combine
-harvester within three hours or they will rotten, be aware of
-other farmers as well since they may steal your plants.
+What do I do in this job:
+  * Enter your bus, select the route you wish to drive and follow the instructions on your screen
 
-Farmers can legally kill other farmers if they are a threat,
-you may also work together with other farmers as a team.
-After harvesting a plant, all you gotta do it so step out and
-pick it up, the profit in this job is extremly high so it's
-probably our most well payed job. Also the most risky one.
+When do I get paid:
+  * Every time you hit a bus stop or pick up another player as passenger
 
-You can become a farmer at "the farm", south side of San Fierro
+Advantages:
+  * Largest first, nobody mess with you in the traffic unpunished
+  * Ability to pickup and get to know mnay new friends
+  * A strong vehicle with lot's of fuel for long distance travelling
 ]] },
-	{ "Fisher", 1, [[********************************************************************
-Fisher:
-********************************************************************
-All you need in this job is a boat, your own or travel with a
-rich friend, any boat work and all you gotta do is to be on
-the boat, (not AFK thought). Use the /fishmarket command to
-find out the status of the fish, this indicates how often the
-fish will bite and how much money you might make by fishing.
+	{ "Farmer", 1, [[
+********************************************************************************
+* Farmer:
+********************************************************************************
 
-This job is located in Los santos near the lighthouse and in
-San Fierro on the west side near city hall and the bank.
+Where do I find this job:
+  * The Farm - (south about San Fierro)
+
+What do I need for this job:
+  * A tractor, a combine harvester and money for the seeds. You need to buy these vehicles or borrow them from a friend
+
+What do I do in this job:
+  * Enter the tractor and drive to nearest unoccupied field
+  * Plant your seeds with the 'N' key
+  * Let your seeds grow, (you can do anything you want while waiting, just make sure you're there when it's harvest time).
+  * Harvest your seeds with the combine harvester and pick up the bales
+
+When do I get paid:
+  * Each bale you pick up gives you cash, just make sure nobody else steal them from you
+
+Advantages:
+  * You're a redneck, you can kill anyone getting to cloose to your seeds without getting wanted
+  * A real cash boost for players who have money to invest, without limitations.
 ]] },
-	{ "Iron miner", 1, [[********************************************************************
-Iron miner:
-********************************************************************
-This job is located at the quarry near Las Venturas, get the job,
-find an empty area in the desert, plant some dynamite with your 'n'
-key. Then walk up to the newly created rocks to start mine from them
+	{ "Fisher", 1, [[
+********************************************************************************
+* Fisher:
+********************************************************************************
 
-You can see all minerals at the bottom of your screen and then sell
-them near the quarry when you'r 'pocket' is full.
+Where do I find this job:
+  * The lighthouse west about the beach - Los Santos
+
+What do I need for this job:
+  * A boat of any type. You need to buy your boat or borrow one from your friend
+
+What do I do in this job:
+  * Drive your boat slowly on any water
+  * Cruise if you want and you'll soon start to capture fish
+
+When do I get paid:
+  * Every time you get a fish, (or anything else that might be valuable for that matter)
+
+Advantages:
+  * Not much traffic on the sea, a perfect place to relax with your friends
+  * Possibility to get rich if you're lucky
+	]] },
+	{ "Iron miner", 1, [[
+********************************************************************************
+* Iron miner:
+********************************************************************************
+
+Where do I find this job:
+  * The quarry - Las Venturas
+
+What do I need for this job:
+  * A minimal amount of cash to afford to buy dynamite
+  * A schovel, (buy from the job panel or in a hardware store)
+
+What do I do in this job:
+  * Plant a dynamite using 'N' then run fast as hell
+  * Take cover for the explosion
+  * Go to the messy area and start mining
+  * Sell the minerals you mined at the big white marker near the job location
+
+When do I get paid:
+  * Every time you sell your minerals
+
+Advantages:
+  * Free access to dynamite, imagine all the fun you can do with that ;)
 ]] },
-	{ "Mechanic", 1, [[********************************************************************
-Mechanic:
-********************************************************************
-This job is found near larger workshops whith pay'n'sprays and
-mod shops in all three cities, as a mechanic you'll find and help
-people with their broken or damaged cars or by selling them fuel
-if they ran out of it.
+	{ "Mechanic", 1, [[
+********************************************************************************
+* Mechanic:
+********************************************************************************
 
-To repair a car press X to show the cursor, then click on the
-vehilce you want to repair, a menu will show up, select Repair
-or Refuel, a refule increase the fuel by 10 hits and you're
-getting paid. Note that you won't get paid for reparing or
-refuling your own cars, you'll just get a cheaper price.
+Where do I find this job:
+  * West side mod shop and pay 'n' spray - Los Santos
+  * Just north about the train station and fire department - San Fierro
+  * North/Central between burger shot and LVPD - Las Venturas
 
-This is probably the most appriciated job, people will thank
-you and maybe even tip you if youre doing a good job.]] },
-	{ "Pilot", 1, [[********************************************************************
-Pilot:
-********************************************************************
-You can become a pilot at any of the three major airports in
-San Andreas, as a pilot you'll fly passengers and/or cargo
-between the airports and some other places. You may use your
-own aircraft as well and you can always make some extra cash
-by picking up and transport other players around the map.
+What do I need for this job:
+  * (Optional) a towtruck
 
-Anyone can call for a pilot using the command /pilot, you will
-see those players marked on the map with a green man blip.]] },
-	{ "Taxi", 1, [[********************************************************************
-Taxi:
-********************************************************************
-Does it have to be explained? You'll find this job near the
-airports as well as the pilot job, anyone can call a taxi
-by the command /taxi, your job is to transport them fast
-and professional to the destination they wish to go to.
+What do I do in this job:
+  * Press X to toggle your cursor
+  * Click on a damaged car
+  * Choose if you want to repair or refuel in the menu
+  * Tow broken vehicles to pay'n'spray for a small bonus
 
-There are peds assigned for you in case none of the online
-players want a taxi either so don't worry about being out
-of money or work.]] },
-	{ "Train driver", 1, [[********************************************************************
-Train driver:
-********************************************************************
-GTW Games are known for the trains so don't think you can sit
-back and just press the 'W' button in this job, there are a
-lot of stuff to think of, for instance slowing down near sharp
-turns, railway switches and train stations. A derailment is one
-of the most serious crimes you can commit.
+When do I get paid:
+  * Every repair or refuel (except for your own vehicles) or if another player tip you
 
-Just like in other jobs in the public transportation section
-you'll getting payed for stopping at the train station and by
-picking up passengers or stuff they want to transport like cars
-for instance. The /train command let's then notice you that
-they are waiting for your train.
+Advantages:
+  * You'll never suffer from a broken car in the middle of nowhere
+  * Cheaper repairs and refulings
+  * Big chance of getting tipped by other players
+]] },
+	{ "Pilot", 1, [[
+********************************************************************************
+* Pilot:
+********************************************************************************
 
-Train driver is located at the major train stations in each city.]] },
-	{ "Tram driver", 1, [[********************************************************************
-Tram driver:
-********************************************************************
-See train driver, the main difference are slower top speed, avoid
-collisions with other vehicles and shorter distance betwen the
-stops. This job is located in San Fierro only, just south about
-the china town neighbourhood]] },
-	{ "Trucker", 1, [[********************************************************************
-Trucker:
-********************************************************************
-Transport cargo around San Andreas or inside your current city.
-Deliver fuel to the local gas stations etc. This is a job where
-ranks will make difference, you start at the bottom by driving
-smaller trucks and will then work your way up to the larger trucks
-like Tanker, Roadtrain and Linerunner, at really high ranks you
-will receive missions with two trailers attached at the same time
-and get double payment.
+Where do I find this job:
+  * Los Santos international airport
+  * San Fierro international airport
+  * Las Venturas international airport
 
-This job is found in Ocean docks (Los Santos), west Los Santos
-gasstation and in San Fierro easter basin, the pier near the
-airport. Damaged cargo will reduce your payment so drive carefully
-or loose your money. Except for farmer this is one of the most well
-paid jobs you can find, if you know how to drive a large and heavy
-truck of course.]] },
+What do I need for this job:
+  * An airplane or helicopter owned or rented, aircraft rental markers are found near or in the beginning of start and landing fields
+
+What do I do in this job:
+  * Drive to the assigned pickup point and load passengers/cargo
+  * Fly to the destination airport (if helicopter or small aircraft more locations are available, often harder to land in)
+  * Land safely and get paid
+
+When do I get paid:
+  * As soon you hit the drop off marker and your aircraft isn't too damaged
+
+Advantages:
+  * A quick way to travel around the state
+  * Earns lot's of cash compared to other transporter jobs
+  * Earns a bonus for each player picked up as passenger
+]] },
+	{ "Taxi", 1, [[
+********************************************************************************
+* Taxi driver:
+********************************************************************************
+
+Where do I find this job:
+  * Los Santos international airport
+  * San Fierro international airport
+  * Las Venturas international airport
+
+What do I need for this job:
+  * A taxi or cabby, owned or rented
+
+What do I do in this job:
+  * Cruise around until you find a passenger (player) or pick up any AI passenger
+  * "Deliver" the passenger to requested location and get paid
+
+When do I get paid:
+  * As soon your passenger is successfully delivered, if you drive a player you'll get paid each minute
+
+Advantages:
+  * Earn money by giving other players a ride
+	]] },
+	{ "Train driver", 1, [[
+********************************************************************************
+* Train driver:
+********************************************************************************
+
+Where do I find this job:
+  * Unity station - Los Santos
+  * Cranberry station - San Fierro
+  * Yellow Bell station - Las Venturas
+
+What do I need for this job:
+  * A train (with any amount of cars attached), rented or owned
+
+What do I do in this job:
+  * Drive your train safely around the state
+  * Deliver passengers and cargo from station to station
+  * !Watch the speedlimits (see bottom right of your screen)
+
+When do I get paid:
+  * As soon you hit the dropoff destination, the more attached cars the more money you make, but your train is also getting slower during start/stop the more cars you're pulling
+  * Players gives an extra bonus payment each minute
+
+Advantages:
+  * Your vehicle is imortal and unstoppable
+  * Pickup and drop off cars along the tracks
+	]] },
+	{ "Tram driver", 1, [[
+********************************************************************************
+* Tram driver:
+********************************************************************************
+
+Where do I find this job:
+  * San Fierro, between the hospital and SFPD (central)
+
+What do I need for this job:
+  * A tram (with any amount of cars attached), rented or owned
+
+What do I do in this job:
+  * Drive your tram(s) around the tracks in the streets of San Fierro
+  * Deliver passengers and players around San Fierro
+  * !Watch for other vehicles and players that might be in your way
+  * !Watch the speedlimits (see bottom right of your screen)
+
+When do I get paid:
+  * As soon you hit the dropoff destination, the more attached cars the more money you make, but your train is also getting slower during start/stop the more cars you're pulling
+  * Players gives an extra bonus payment each minute
+
+Advantages:
+  * Your vehicle is (almost) imortal and unstoppable
+  * Pickup and drop off cars along the tracks
+	]] },
+	{ "Trucker", 1, [[
+********************************************************************************
+* Trucker:
+********************************************************************************
+
+Where do I find this job:
+  * The docks - San Fierro
+  * The gas station west of Los Santos
+  * The docks - Los Santos
+
+What do I need for this job:
+  * A truck/van of any type, owned or rented, (semi trucks needs one or more trailers to load the cargo in)
+
+What do I do in this job:
+  * Enter your truck to view the routes
+  * Select the route you want to drive
+  * Deliver cargo around the state or within the city (local deliveries)
+
+When do I get paid:
+  * As soon you hit the dropoff destination, damaged cargo will reduce your payment, drive carefully!
+
+Advantages:
+  * Your vehicle is (almost) imortal and unstoppable
+  * Access to CB radio using: /r <message> (only for truckers) to trace where cops are checking for speeders
+	]] },
 	{ "Government", 0 },
 	{ "Police", 1, [[
-There are plenty of law squads within the
-government, for instance ArmedForces, FBI, SAPD, SWAT and of course
-the regular police officers, traffic officers, detectives etc..
+********************************************************************************
+* Police:
+********************************************************************************
 
-All of these does pretty much the same stuff but some has special
-priviledges, for example traffic offiers has speeding cameras and
-access to stingers and barriers to setup road blocks, they'll also
-have fast cars for high speed car chases. ArmedForces deal with
-the most wanted criminals uing tanks, hunters and hydras, SWAT
-takes care of robberies and SAPD and FBI handles federal crimes.]] },
+Where do I find this job:
+  * LSPD - Los Santos (inside HQ)
+  * SFPD - San Fierro (inside HQ)
+  * LVPD - Las Venturas (inside HQ)
+  * Inside all country side sheriff stations
+
+What do I need for this job:
+  * A nightstick to arrest
+  * A tazer to force suspects to stop
+  * Additional stronger weapons like M4, MP5 and teargas
+  * A fast and bullet resistant car, rented or owned (police vehicles can be spawned for free outside all police departments)
+
+What do I do in this job:
+  * Use /wanted to list all wanted players and their locations
+  * Patrol until you find anythnig suspicious
+  * Check bottom right for an orange text telling you the distance to nearest suspect, (use that information to find the suspect)
+  * When you got a visual on the suspect stop his/her car, (use your sirens and lights to show you're a cop, press 'H' quickly to toggle)
+  * Once you stopped the suspects car arrest him/her by hitting them with your nightstick once
+  * If the suspect runs, shoot them with your tazer (works only on short distance)
+  * If the suspect is violent (i.e opens fire at you) you may perform a so called kill arrest where you shoot to kill the suspect.
+  * Once arrested, bring the suspect to nearest police department, walk inside and down in the basement to find the cell blocks, walk up to a cell of your choice to lock up the suspect and get paid
+
+When do I get paid:
+  * When you kill a violent suspect, (killing non violent suspects or innocent people will make you loose your job)
+  * When you arrested someone and locked that person up in a jail cell
+  * (Unofficial) Bribes, arrested players may try to bribe you, scam is allowed here so be sure what you're doing, i.e require the money first
+
+Advantages:
+  * Access to emergency lights (press 'H' quickly to toggle) in any vehicle
+  * Access to all law enforement vehicles
+  * Ability to arrest law breakers
+  * Ability to get paid instantly for killing a violent player, (consult /wanted and make sure the player you want to kill is marked as red and not orange or any other color)
+]] },
+	{ "Prison guard", 1, [[
+********************************************************************************
+* Prison guard:
+********************************************************************************
+
+Where do I find this job:
+  * See "Police"
+
+What do I need for this job:
+  * See "Police"
+
+What do I do in this job:
+  * Travel to the prison located on the west side of Bayside Marina, (north of San Fierro)
+  * Guard the prisoners either by sitting in a tower with a sniper or by cruising over with a helicopter
+  * Kill anyone trying to escape
+  * Check visitors and let them in/out
+  * Organize activities for the prisoners
+  * Stop riots by throwing teargas or taze the prisoners
+
+When do I get paid:
+  * You're not getting paid in money, only (nearly) free sadism towards the prisoners
+
+Advantages:
+  * Free access to armored helicopters and boats
+  * You're in charge over the prisoners and your job is to force them to obey you
+]] },
 	{ "Police chief", 1, [[
-Police chiefs make sure any player that work in the law enforcement
-follow the law, it's a job with lot's of freedom and great
-responsiblity and that's why we have police chiefs. You must
-prove that you are trusted enough to handle this job, to do
-so, write and post your application here:
+Police chiefs makes sure that players working for the law enforcement respects the laws themselves and has the ability to ban players from taking part of law related activities as a law enforcer, not anyone can be a police chief, you have to submit an application in the forum to grant access, see this link for more details:
 
-http://forum.404rq.com/law-board/police-chief-center-topic/
+https://forum.404rq.com/law-board/police-chief-center-topic/
 
-Commands: (admin):
-/addpc <name>     -- Adds a police chief
-/removepc <name>  -- If you screw it up and needs to be kicked
+To add or remove a new police chief (admins only)
+  * /addpc <nickname>
+  * /removepc <nickname>
 
-Commands: (police chiefs)
-/banfromlaw <name>
-/revokebanfromlaw <name>
+To ban or unban a law enforcer (as police chief)
+  * /banfromlaw <nickname>
+  * /revokebanfromlaw <nickname>
+]] },
+	{ "Police codes", 1, [[
+A list of police codes used in role play situations:
 
-(name means the nick name of the affected player.]] },
-	{ "Police (codes)", 1, [[
 10-4   	Roger that
 10-10  	Off duty
 10-14  	Provide Escort
@@ -721,137 +727,85 @@ Commands: (police chiefs)
 11-79  	Accident- Ambulance Rolling
 11-98  	Officer Requires Help, Emergency]]},
 	{ "How to arrest", 1, [[
-All law units get's a free nightstick, this is used to arrest a
-wanted player, simply hit the suspect once to arrest him. After
-the arrest you'll take him to jail which is inside all police
-departments, all the way to the cellblocks where you walk up to
-the cell to deliver the suspect. ((Yes you can also choose which
-cell)).
+There are two ways:
 
-At the larger police departments there is a light ammu nation
-shop where law units can buy useful equiptment like silenced
-pistol (tazer which will freeze the suspect for a while),
-teargas, M4 and MP5 which are common useful guns in the law
-section as well as body armor and much more.
+A: Kill arrest:
+  * kill a violent player to arrest him/her
 
-If a suspect is obviously violent you can do a kill arrest, by
-that you will simply shoot the suspect in place to get paid.
-The payment is lower than a regular arrest so try avoid this.]] },
+B: Traditional arrest
+  * Hit the suspect with your nightstick once
+  * If he insist in running, shoot him with your tazer to stop him first
+]] },
 	{ "How do I know who's wanted?", 1, [[
-There are many ways, the command /wanted output's a list of wanted
-players names and their current wanted level
+Use the command /wanted to get a list of wanted players
+  * "violent time" is the time remaining in where you can perform a kill arrest
+  * "wanted level" indicates how "hot" a suspect are, the higher wanted level the more payment you get
 
-Another way is regular patrolling, a wanted player will probably
-act suspicious by trying to escape when he see's you or somethnig
-like that, if not you can stop him anyway just to check, to do so,
-simply press X to show the cursor and click on the suspect, a menu
-will open in where you select "Check if wanted", you will then find
-out if the player is wanted or not.
-
-A third way is to check for a text at the bottom of your screen
-saying somethnig about distance, that means a suspect is nearby
-and you'll getting an approximate distance telling you roughly
-where the suspect is hiding. You'll have to look a lot so a
-helicopter is required as well as temwork between law uints.]] },
+What the colors mean:
+  * Names that appears in red are "violent" players, these may be kill arrested
+  * Names that appears in orange are "non violent", you may only perform a traditional arrest on them
+  * Names that appears in yellow are arrested players, you may only protect the law enforcer holding the suspect
+  * Names that appears in green are in prison, (time is seen here as well expressed as seconds left)
+]] },
 	{ "Law chat", 1, [[
-All government units has access to the emergency chat /e <text>,
-keep other law units updated with your current status, call for
-backup etc, this chat is also useful if you need firemen or medics,
-the teamchat will only be visible to other players in the Government
-team.
+Law chat is a multi team chat visible to Government and Emergency service
 
-Be creative, firemen can be useful against riots and medics are
-useful if violent criminals attack you.]] },
+  * Usage: /e <message>
+]] },
 	{ "Server staff", 1, [[
-Server staff is also a part of the goverment team, there are three
-ranks currently, Admin, Super moderator and Moderator, the staff
-duty is mainly about keeping an eye of the game play and help new
-players, anyone can apply to join the staff team here:
-forum.404rq.com/staff-applications/multi-theft-auto-staff-application-guidelines/
+Read more about server staff and the different types of staff on this link:
+https://forum.404rq.com/staff-applications/staff-applications-guidelines/
 
-If a staff is abusing his power we kindly ask you to report him here:
-forum.404rq.com/complaints-and-reports/complaints-rules-and-guidelines-357/]] },
+Report staff or players violating the server rules on this link:
+https://forum.404rq.com/complaints-and-reports/complaints-user-reports-and-guidelines/
+]] },
 	{ "Developers", 1, [[
-Developers is also a part of the government team, GTW Games is based
-on open source which means that anyone are free to contribute, or use
-the code under the GNU v1.3 licence, official developers are people that
-applied to become official.]] },
+Developers are the second highest rank available, listen to developers, respect their orders and requests or face a punishment. Remember, developers are always right. You can become a developer by invitation after contributing to the GTW-RPG project on Github:
+https://github.com/404rq/GTW-RPG
+]] },
 	{ "Criminals", 0 },
-	{ "The basics", 1, [[
-Sooner or later youre life get's fucked up and you'll stand there
-without money, being a criminal is the final option to make money
-quick if you can hide from the law. You can easy become a criminmal
-at any time by either comitting a serious crime or by pressing 'F5'
-and click 'Go Criminal', the command /criminal is another option.]] },
-	{ "Store robberies", 1, [[
-There are around 100 shops around San Andreas which you can rob at
-any time for quick money, any clothes shop, ammu nation, fast food
-restaurant or general store can be robbed by aiming a weapon at the
-face of the salesman behind the desk.
+	{ "How do I become a criminal", 1, [[
+There are three common ways to become a criminal:
+  * By command: /criminal
+  * By GUI: press F5, then go criminal (press F5 again to close the GUI)
+  * By comitting a crime, i.e when your wanted level raise quickly or over a limit
+]] },
+	{ "How do I rob a store", 1, [[
+Enter any store and target a weapon at the cashier, if you intend to use a meele weapon or your fists you have to stand close to the cashier before starting the robbery.
 
-You will then be noticed by a text on your screen telling you how
-much time you must stay to get the money, during this time you can't
-leave the store or getting arrested. If you do the robbery is
-interrupted.
-
-Robberies are mostly depending on the amount of cash in the store,
-a higher wanted level means more cash but it's still hard to know
-how much you can get. One thing is for sure, it's often worth it.]] },
+There are many different stores that can be robbed
+  * 17 Skin shops
+  * 34 Fast food restaurants
+  * 3 Hardware shops
+  * 11 Ammu nation (at your own risk)
+]] },
 	{ "Hijacking missions", 1, [[
-Hijacking vehicles is a relatively well paid mission, at least
-when many other criminals figthing about the same car, the flag
-icon indicates where you can find a hijack car. Simply enter it
-and deliver it to the given destination.]] },
+Look for the flag blip on your map, locate the car in that location and enter it, deliver the car to the dropoff location and get paid. The more criminals fighthing about the car the money money you make]] },
 	{ "Mystery bags", 1, [[
-Mystery bags can contain a random amount of money, armor and
-weapons, as a criminal you can hunt for these bags which are
-marked with a question mark.]] },
+Look for the question mark blip on the map, locate and pick up the bag in that location, it contains a happy surprise for criminals.]] },
 	{ "Turfs", 1, [[
-Turfs is also a pretty good way to earn money, you just need
-to be a member of a gang if you want to turf, if youre not
-you can create a gang by pressing 'F6' enter a name and click
-'Create'.
+Colored areas on the map are turfs, you can capture a turf by entering it as a criminal and member of a gang, (press F6 to join or create one). Once entering the turf it will start flashing if above requirements are fulfilled. You can see the time you have to protect the turf at the bottom of your screen, during that time you can not die or leave the turf, if you do you'll lose it.
 
-Go criminal by using the command /criminal then you'll enter
-any turf to provoke it, after provoking it you must hold it
-and defend it from others that might be interested in it,
-especially the current owner. Turfs will pay out to entire
-gangs with a couple of hours delay and you'll earn some money
-after capturing it as well.
+Turfs gives you money each 10 minute while being online. The more turfs you own the more money you make.
 
-There are turfs spread out over the entire map so try to focus
-on one specific area if possible to make it easier to defend
-them from other gangs.]] },
+Requirements:
+  * Being in the team criminal or gangster
+  * Being a member of a gang
+]] },
 	{ "Gangsters", 1, [[
-Any criminal that get's shot inside a turf becomes a gangster,
-gangsters will not gain wanted level from killing other gangsters
-which is a huge advantage since the law units has an easy time
-arresting people that is practicating in a turf war. Allthought
-you don't want to get killed since you'll lose your weapons.]] },
-	{ "Reduce wanted level", 1, [[
-Your wanted level will start to reduce after you commit a crime
-if there isn't any cops nearby and the crime wasn't too serious.
-Serious crimes makes you violent, you'll see a count down timer
-in your hud telling you for how long you'll be violent, when that
-time reaches zero your wanted level will reduce.
+Players who die in a turf will be moved to the gangster team, it works just the same way as criminal team although criminals and gangsters can not see eachothers blips on the map, thus it's a great opportunity for a stealth attack. Gangsters can any time become a criminal again by command or by pressing F5.
+]] },
+	{ "How to reduce wanted level", 1, [[
+There are two ways to redcue your wanted level:
+  * Staying away from cops, the text showing your wanted level in the hud will be green if reducing and red if increasing, white means that you're violent and the wanted level remains constant until the violent time has counted down successfully
+  * Paying your fines, use /fine to see how much it will cost and follow the instructions on your screen to accept or reject, you can not pay a fine when a law enforcer is nearby.
 
-Stay away from cops and other government units is the best way to
-reduce, you can do so by either buy a house and hide inside or by
-traveling out contry side and hide somewhere where there isn't
-many other players around.
+Already arrested? don't worry there might still be hope:
+  * Offer to bribe the cop who arrested you, this is risky tho and they may scam you, scam is allowed during Bribery
 
-You can also pay a fine by doing /fine or /surrender, this is often
-pretty expensive and you'll may loose all the money you erned from
-the crime, this is also useless when a law unit is nearby.]] },
-	{ "Bribery", 1, [[
-You can bribe corrupt cops at your own risk, note that you may
-getting scammed if you do but theoretically you can bribe.
-
-First talk to the cop who arrested you to see if he's interested,
-if he accept use the /give <player_nick> <amount> command to send
-the money or visit any bank or atm, the cop will then use the
-/release command to release you. You will still be wanted so be
-careful.]] },
+In jail? don't worry there might still be hope:
+  * You can escape from jail, see the "Jail" section for more details
+]] },
 	{ "Jail", 1, [[
 The Jail is located on it's own island built by concre on top of
 smaller rock islands behind the mountains just west about Bayside
