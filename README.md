@@ -41,7 +41,8 @@ _Overview of the police and wanted level system + jail map (GTWpolice, GTWwanted
 ## Contributors
 Mr_Moose<br>
 TheWalrus<br>
-The_Penguin
+The_Penguin<br>
+nokizorque
 
 ## Websites
 Main page: https://www.404rq.com<br>
