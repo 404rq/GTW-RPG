@@ -40,7 +40,7 @@ local policeTeams = {
 }
 
 -- This will only replace bad words listed below
-local enable_bad_word_replacement 	= true
+local enable_bad_word_replacement 	= false
 -- Word censoring, list of words
 local patterns = {
 	-- Bad word, replacement
