@@ -17,7 +17,7 @@
 -- Enable/disable 2D view
 local view_2D = false
 local dummy_object = nil
-local zoom = 50
+local zoom = 30
 
 sx,sy = guiGetScreenSize()
 --[[ Render 2D view if enabled ]]--
