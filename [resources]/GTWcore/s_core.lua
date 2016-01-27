@@ -151,7 +151,7 @@ function infoBar(thePlayer)
 		elseif randNum == 12 then
 			topMessage("(Guide) Mystery bags contains secret advantages for criminals", thePlayer, 255, 255, 255)
 		elseif randNum == 13 then
-			topMessage("(Guide) Visit our forum at: forum.gtw-games.org to discuss anything you want", thePlayer, 255, 255, 255)
+			topMessage("(Guide) Visit our forum at: forum.404rq.com to discuss anything you want", thePlayer, 255, 255, 255)
 		elseif randNum == 14 then
 			topMessage("(Guide) GTW-RPG is an open source project, read more at: github.com/404rq", thePlayer, 255, 255, 255)
 		elseif randNum == 15 then
