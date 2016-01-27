@@ -29,11 +29,18 @@ function update_2d_view()
 end
 
 --[[ Manage zoom ]]--
-function manage_zoom(up_down)
-        if up_down == 1 and zoom < 70 then zoom = zoom + up_down
-        elseif zoom > 10 then zoom = zoom - up_down end
+function zoom_in()
+	if zoom > 5 then zoom = zoom - 1 else
+		exports.GTWtopbar:dm("You cannot zoom in any further", 255,0,0)
+	end
 end
-addEventHandler("onClientMouseWheel", root, manage_zoom)
+function zoom_out()
+	if zoom < 70 then zoom = zoom + 1 else
+		exports.GTWtopbar:dm("You cannot zoom out any further", 255,0,0)
+	end
+end
+bindKey("num_add", "down", zoom_in)
+bindKey("num_sub", "down", zoom_out)
 
 --[[ Toggle 2D view ]]--
 function toggle_2d(plr)
