@@ -36,7 +36,7 @@ function load_data(plr)
         local tagR = getAccountData(acc, "GTWdata.col.r")
         local tagG = getAccountData(acc, "GTWdata.col.g")
         local tagB = getAccountData(acc, "GTWdata.col.b")
-        setPlayerNametagColor(plr, tagR or 255, tagG or 255, tagB or 255)
+        setPlayerNametagColor(plr, tagR or 255, tagG or 255, tagB or 0)
 
         -- Load skind or set a random one if not available
         local rnd_skin = math.random(20,46)
@@ -62,9 +62,10 @@ function load_data(plr)
 
         -- Assuming first login, hand out start money and setup basic defaults
         local play_time = getAccountData(acc, "GTWdata.playtime") or 0
-        if not play_time then
-        	setPlayerMoney(plr, 1337)
+        if play_time == 0 then
+        	setPlayerMoney(plr, 4000)
                 setAccountData(acc, "GTWdata.playtime", 0)
+                setAccountData(acc, "GTWclothes.personal.skin", getAccountData(acc, "GTWdata.skin.current"))
        	end
 
         -- Load weapons and stats
