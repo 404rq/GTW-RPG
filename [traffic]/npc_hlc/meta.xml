@@ -1,0 +1,39 @@
+<meta>
+    <info author="CrystalMV" version="72.1" name="NPC high-level control" description="Higher level control over peds" type="script" />
+    <script src="npc_functions_s.lua" type="server" />
+    <script src="npc_functions.lua" type="server" />
+    <script src="npc_functions.lua" type="client" />
+    <script src="npc_hlc_s.lua" type="server" />
+    <script src="npc_hlc_c.lua" type="client" />
+    <script src="control_npc_s.lua" type="server" />
+    <script src="control_npc_c.lua" type="client" />
+    <script src="valid_tasks_s.lua" type="server" />
+    <script src="tasks_s.lua" type="server" />
+    <script src="tasks_c.lua" type="client" />
+    <script src="actions_s.lua" type="server" />
+    <script src="actions_c.lua" type="client" />
+    <script src="math.lua" type="server" />
+    <script src="math.lua" type="client" />
+    <script src="const.lua" type="server" />
+    <script src="const.lua" type="client" />
+    <export function="enableHLCForNPC" type="server" http="false" />
+    <export function="disableHLCForNPC" type="server" http="false" />
+    <export function="isHLCEnabled" type="server" http="false" />
+    <export function="isHLCEnabled" type="client" http="false" />
+    <export function="setNPCWalkSpeed" type="server" http="false" />
+    <export function="getNPCWalkSpeed" type="server" http="false" />
+    <export function="getNPCWalkSpeed" type="client" http="false" />
+    <export function="setNPCWeaponAccuracy" type="server" http="false" />
+    <export function="getNPCWeaponAccuracy" type="server" http="false" />
+    <export function="getNPCWeaponAccuracy" type="client" http="false" />
+    <export function="setNPCDriveSpeed" type="server" http="false" />
+    <export function="getNPCDriveSpeed" type="server" http="false" />
+    <export function="getNPCDriveSpeed" type="client" http="false" />
+    <export function="addNPCTask" type="server" http="false" />
+    <export function="clearNPCTasks" type="server" http="false" />
+    <export function="setNPCTask" type="server" http="false" />
+    
+    <settings>
+        <setting name="*server_colchecking" value="true" />
+    </settings>
+</meta>

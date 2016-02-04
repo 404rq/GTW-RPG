@@ -1,0 +1,25 @@
+<meta>
+    <info author="CrystalMV" version="71.1" name="NPC traffic" description="Adds NPC traffic to the game" type="script" />
+    <include resource="npc_hlc" />
+    <include resource="server_coldata" />
+    <include resource="npchlc_traffic_denctrl" />
+    
+    <script src="traffic.lua" />
+    <script src="load_paths.lua" />
+    <script src="node_lanes.lua" />
+    <script src="trafficmap.lua" />
+    <script src="generate.lua" />
+    <script src="ai.lua" />
+    <script src="zoffsets.lua" />
+    
+    <script src="bytedata.lua" />
+    
+    <script src="f_density.lua" />
+    
+    <export function="setTrafficDensity" type="server" http="false" />
+    <export function="getTrafficDensity" type="server" http="false" />
+    
+    <settings>
+        <setting name="*check_collisions" value="all" />
+    </settings>
+</meta>
