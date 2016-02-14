@@ -19,7 +19,9 @@ police_data = {
 	is_tazed 		= { },
 	arrested_players 	= { },
 }
-tracker_timers = { }
+tracker_timers 	= { }
+max_jail_time	= 600
+min_jail_time 	= 60
 
 --[[ Pay the cop for arrest ]]--
 function pay_cop(cop, wl, viol_sec)
@@ -373,17 +375,18 @@ addCommandHandler("unjail", admin_jail_release)
 -- Jail a criminal
 function Jail(crim, cop, pay_the_cop)
 	if isElement(crim) and getPlayerTeam(crim) then
-		if --[[getElementData(crim, "Jailed") ~= "Yes" and]] getPlayerWantedLevel(crim) > 0 then
+		local is_jailed = exports.GTWjail:isJailed(crim)
+		if not is_jailed and getPlayerWantedLevel(crim) > 0 then
 			-- Prevent escape
 			local wl = math.floor(tonumber(getElementData(crim, "Wanted") or 0))
 			local viol_sec = math.floor(tonumber(getElementData(crim, "violent_seconds") or 0))
 
 			-- 10 seconds/star min 60 seconds max 20 minutes
 			local jailTime = math.floor(wl*1000*60)
-			if jailTime < 60000 then
-				jailTime = 60000
-			elseif jailTime > 2400000 then
-				jailTime = 2400000
+			if jailTime < min_jail_time then
+				jailTime = min_jail_time
+			elseif jailTime > max_jail_time then
+				jailTime = max_jail_time
 			end
 			fadeCamera(crim, false, 1, 0, 0, 0)
 			setElementFrozen(crim, true)
@@ -689,9 +692,13 @@ end
 
 function quitPlayer(quitType)
 	acc = getPlayerAccount(source)
+	local is_jailed = exports.GTWjail:isJailed(source)
 	if (distanceToCop(source) < 180 and getPlayerWantedLevel(source) > 0 and
-		getPlayerTeam(source)) or getElementData(source, "Jailed") == "Yes" then
-		setAccountData(acc, "acorp.police.isArrested", "YES")
+		getPlayerTeam(source)) and not is_jailed then
+		-- Player should be arrested after relogin
+		setAccountData(acc, "GTWdata.police.jailTimeOffline", true)
+		
+		-- Find and pay nearest police
 		local police = nearestCop(source)
 		local wl = math.floor((tonumber(getElementData(source, "Wanted")) or -1)+1)
 		local viol_sec = math.floor((tonumber(getElementData(source, "violent_seconds")) or -1)+1)
@@ -714,9 +721,16 @@ function quitPlayer(quitType)
 			money = pay_cop(police, wl, viol_sec)
 		end
 		exports.GTWtopbar:dm("You got "..tostring(money).."$ for jailing an evader", police, 0, 255, 0)
+	elseif is_jailed then
+		-- Player should be rejailed after logging in again but noone will get paid
+		setAccountData(acc, "GTWdata.police.jailTimeOffline", true)
 	else
-		setAccountData(acc, "acorp.police.isArrested", "NO")
+		-- Player should not be arrested after relogin
+		setAccountData(acc, "GTWdata.police.jailTimeOffline", false)
 	end
+	
+	-- Clean up old unused data
+	setAccountData(acc, "acorp.police.isArrested", nil)	
 	for w,cop in ipairs(getElementsByType("player")) do
 		if getPlayerTeam(cop) and isLawUnit(cop) then
 			if police_data.arrested_players[cop] == source then
