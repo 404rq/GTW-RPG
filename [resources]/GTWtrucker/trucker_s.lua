@@ -131,8 +131,6 @@ function choose_route(plr, cmd, ID)
 		-- Force selection of new route
 		triggerClientEvent(plr, "GTWtrucker.selectRoute", plr)
 	end
-	-- Let him choose a route to drive
-	triggerClientEvent(plr, "GTWtrucker.selectRoute", plr)
 end
 addCommandHandler("route", choose_route)
 addCommandHandler("routes", choose_route)
