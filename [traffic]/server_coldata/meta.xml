@@ -1,0 +1,15 @@
+<meta>
+    <info author="CrystalMV" version="72" name="Server collision data" description="Simple collision checking for elements on the server side" type="script" />
+    <script src="collisions.lua" />
+    <script src="bbox.lua" />
+    
+    <export function="generateColData" type="server" http="false" />
+    <export function="clearColData" type="server" http="false" />
+    <export function="createModelIntersectionBox" type="server" http="false" />
+    <export function="getElementIntersectionBox" type="server" http="false" />
+    <export function="updateElementColData" type="server" http="false" />
+    <export function="doesModelBoxIntersect" type="server" http="false" />
+    <export function="doModelBoxesIntersect" type="server" http="false" />
+    
+    <export function="getModelBoundingBox" type="server" http="false" />
+</meta>

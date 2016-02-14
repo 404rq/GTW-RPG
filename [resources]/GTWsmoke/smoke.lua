@@ -19,44 +19,44 @@ local cooldowns 	= { }
 local syncTimer 	= { }
 function startSmoking ( thePlayer )
 	if isPedInVehicle(thePlayer) then return end
-    setElementData ( thePlayer, "smoking", not getElementData ( thePlayer, "smoking" ) )
-    if cigarettes[thePlayer] == nil and not isTimer(cooldowns[thePlayer]) then
-    	-- Bink keys to control the smoking
-    	bindKey( thePlayer, "mouse2", "down", "smoke_drag" )
-    	bindKey( thePlayer, "W", "down", "stopsmoke2" )
-    	bindKey( thePlayer, "A", "down", "stopsmoke" )
-    	bindKey( thePlayer, "D", "down", "stopsmoke" )
+    	setElementData ( thePlayer, "smoking", not getElementData ( thePlayer, "smoking" ) )
+    	if cigarettes[thePlayer] == nil and not isTimer(cooldowns[thePlayer]) then
+    		-- Bink keys to control the smoking
+    		bindKey( thePlayer, "mouse2", "down", "smoke_drag" )
+    		bindKey( thePlayer, "W", "down", "stopsmoke2" )
+    		bindKey( thePlayer, "A", "down", "stopsmoke" )
+    		bindKey( thePlayer, "D", "down", "stopsmoke" )
 
-    	-- Info message
-    	exports.GTWtopbar:dm( "Smoking: Right click to smoke, walk forward to stop smoke (W).", thePlayer, 255, 200, 0 )
-    	setTimer( showDelayInfo, 2000, 1, "Smoking: Use /stopsmoke or walk sideways (A or D) to throw your ciggarete away", thePlayer, 255, 200, 0)
+    		-- Info message
+    		exports.GTWtopbar:dm( "Smoking: Right click to smoke, walk forward to stop smoke (W).", thePlayer, 255, 200, 0 )
+    		setTimer( showDelayInfo, 2000, 1, "Smoking: Use /stopsmoke or walk sideways (A or D) to throw your ciggarete away", thePlayer, 255, 200, 0)
 
-    	-- Anim in
-    	setPedAnimation( thePlayer, "SMOKING", "M_smk_in", -1, false, false )
-    	cooldowns[thePlayer] = setTimer( function() end, 3000, 1 )
+    		-- Anim in
+    		setPedAnimation( thePlayer, "SMOKING", "M_smk_in", -1, false, false )
+    		cooldowns[thePlayer] = setTimer( function() end, 3000, 1 )
 
-    	-- Sync interiors and dimension
-    	syncTimer[thePlayer] = setTimer(function()
-    		if thePlayer and cigarettes[thePlayer] then
-    			setElementInterior( cigarettes[thePlayer], getElementInterior(thePlayer))
-    			setElementDimension( cigarettes[thePlayer], getElementDimension(thePlayer))
-    		elseif isTimer(syncTimer[thePlayer]) then
-    			killTimer(syncTimer[thePlayer])
-    		end
-    	end, 1000, 0)
+    		-- Sync interiors and dimension
+    		syncTimer[thePlayer] = setTimer(function()
+    			if thePlayer and cigarettes[thePlayer] then
+    				setElementInterior( cigarettes[thePlayer], getElementInterior(thePlayer))
+    				setElementDimension( cigarettes[thePlayer], getElementDimension(thePlayer))
+    			elseif isTimer(syncTimer[thePlayer]) then
+    				killTimer(syncTimer[thePlayer])
+    			end
+    		end, 1000, 0)
 
-    	-- Increase stats by 1
-		local playeraccount = getPlayerAccount( thePlayer )
-		local cigarrs = getAccountData( playeraccount, "acorp_stats_cigarrs_smoked" ) or 0
-		setAccountData( playeraccount, "acorp_stats_cigarrs_smoked", cigarrs + 1 )
+    		-- Increase stats by 1
+		local playeraccount = getPlayerAccount(thePlayer)
+		local cigarrs = getAccountData(playeraccount, "GTWdata_stats_cigarrs_smoked") or 0
+		setAccountData(playeraccount, "GTWdata_stats_cigarrs_smoked", cigarrs + 1)
 
-    	-- Create and attach cigarrete
-        local sigarette = createObject ( 1485, 0, 0, 0 )
+    		-- Create and attach cigarrete
+        	local sigarette = createObject(1485, 0,0,0)
 		cigarettes[thePlayer] = sigarette
-        exports.bone_attach:attachElementToBone(sigarette,thePlayer,11,0.15,0.1,0.15,0,180,30)
+        	exports.bone_attach:attachElementToBone(sigarette,thePlayer,11,0.15,0.1,0.15,0,180,30)
 	end
 end
-addCommandHandler( "smoke", startSmoking )
+addCommandHandler("smoke", startSmoking )
 
 function showDelayInfo(msgText, thePlayer, r, g, b)
 	exports.GTWtopbar:dm(msgText, thePlayer, r, g, b)

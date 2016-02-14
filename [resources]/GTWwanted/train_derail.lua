@@ -261,10 +261,30 @@ function train_location(plr, cmd, speed)
 end
 addCommandHandler("tloc", train_location)
 
+function train_secure(plr, cmd, state)
+        local is_admin = exports.GTWstaff:isAdmin(plr)
+        if not is_admin then return end
+	local train = getPedOccupiedVehicle(plr)
+        if not train or not isElement(train) or
+                getElementType(train) ~= "vehicle" or
+                getVehicleType(train) ~= "Train" then
+                return
+        end
+        if state == "1" then state = true else state = false end
+        setTrainDerailable(train, not state)
+        -- Apply protection to all trains
+	while getVehicleTowedByVehicle(train) do
+                setTrainDerailable(train, not state)
+		train = getVehicleTowedByVehicle(train)
+	end
+	outputChatBox("Train: is now protected from derailment: "..tostring(state), plr)
+end
+addCommandHandler("protecttrain", train_secure)
+
 function check_derail()
 	for i,plr in pairs(getElementsByType("player")) do
 		local the_train = getPedOccupiedVehicle(plr)
-		if the_train and getVehicleType(the_train) == "Train" then
+		if the_train and getVehicleType(the_train) == "Train" and isTrainDerailable(the_train) then
 			local px,py,pz = getElementPosition(getPedOccupiedVehicle(plr))
 			local n_dist,n_speed,c_speed = 9999,0,0
 			for j,dp in pairs(train_derail_points) do

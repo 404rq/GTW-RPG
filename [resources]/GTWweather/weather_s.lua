@@ -34,10 +34,19 @@ we = {
 function chWeather( )
 	local wid = math.random(#we)
 	setWeatherBlended(we[wid])
-	setWaveHeight(math.random(1,100)*0.02)
+	setWaveHeight(math.random(10,100)*0.002)
 end
 setTimer(chWeather, math.random(130,180)*60*1000, 0)
 setWeather(we[math.random( #we )])
+
+-- Remove speed blur level
+for k,v in pairs(getElementsByType("player")) do
+	setPlayerBlurLevel(v, 0)
+end
+function remove_speed_blur(old_acc, acc)
+    	setPlayerBlurLevel(source, 0)
+end
+addEventHandler("onPlayerLogin", root, remove_speed_blur)
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(

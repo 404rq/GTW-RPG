@@ -68,8 +68,8 @@ function client_registration_attempt(user, pass, facc)
 	-- Check how many account that has been registred from this PC
 	local serial = getPlayerSerial(client)
 	local accounts = getAccountsBySerial(serial)
-	if #accounts > 1 then
-		return display_status("Two accounts has already been registred on "..
+	if #accounts > 9 then
+		return display_status("Too many accounts has already been registred on "..
 			"\nthis PC! Contact an admin for further assistance.", client, -1)
 	end
 
@@ -93,12 +93,12 @@ function client_registration_attempt(user, pass, facc)
 
 	-- Check if there's a friend provided
 	local friend = getAccount(facc)
-	local acn = addAccount(user, pass)
+	acn = addAccount(user, pass)
 
 	-- Shit, something went wrong, unable to add the account, check the
 	-- servers error log for further information
 	if not acn then
-		display_status("Failed to add account.", client, -1)
+		display_status("Failed to add account. \nThere may already exist an account with another \ncase variation of the name you provided!", client, -1)
 		return
 	end
 
@@ -109,7 +109,9 @@ function client_registration_attempt(user, pass, facc)
 	if not friend or acn == friend or getAccountData(acn, "GTWaccounts.invite.acc") or
 		getAccountData(friend, "GTWaccounts.invite.serial") == getPlayerSerial(client) or
 		getAccountData(friend, "GTWaccounts.invite.ip") == getPlayerIP(client) then
-		exports.GTWtopbar:dm("A welcome bonus has already been sent to this player", client, 255, 100, 0)
+		if facc ~= "" then
+			exports.GTWtopbar:dm("A welcome bonus has already been sent to this player", client, 255,100,0)
+		end
 		return
 	end
 
@@ -126,7 +128,7 @@ function client_registration_attempt(user, pass, facc)
 			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(client))
 		end
 	else
-		setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
+		setAccountData(friend, "GTWdata.money", (getAccountData(friend, "GTWdata.money") or 0) + 4000)
 		setAccountData(acn, "GTWaccounts.invite.acc", facc)
 
 		-- Friend has received money from ip and serial ...
@@ -163,7 +165,7 @@ function send_invite_bonus(thePlayer, cmd, facc)
 			setAccountData(friend, "GTWaccounts.invite.serial", getPlayerSerial(thePlayer))
 			setAccountData(friend, "GTWaccounts.invite.ip", getPlayerIP(thePlayer))
 		else
-			setAccountData(friend, "acorp.money", (getAccountData(friend, "acorp.money") or 0) + 4000)
+			setAccountData(friend, "GTWdata.money", (getAccountData(friend, "GTWdata.money") or 0) + 4000)
 			setAccountData(acn, "GTWaccounts.invite.acc", facc)
 
 			-- Friend has received money from ip and serial ...
@@ -208,15 +210,19 @@ end
 
 -- Fade camera and set the player as target on login
 addEventHandler("onPlayerLogin", root,
-	function (_, playeraccount)
+	function (_, acc)
 		fadeCamera(source, true, 5)
 		setCameraTarget(source, source)
 
 		-- Get position
-		local posX = getAccountData(playeraccount, "acorp.loc.x")
-		local posY = getAccountData(playeraccount, "acorp.loc.y")
-		local posZ = getAccountData(playeraccount, "acorp.loc.z")
-		local rotZ = getAccountData(playeraccount, "acorp.loc.rot.z")
+		local posX = getAccountData(acc, "GTWdata.loc.x")
+		local posY = getAccountData(acc, "GTWdata.loc.y")
+		local posZ = getAccountData(acc, "GTWdata.loc.z")
+		local rotZ = getAccountData(acc, "GTWdata.loc.rot.z")
+
+		-- Set a value indicating this is the first spawn to
+	        -- ensure player data is loaded as soon the player spawns
+	        setElementData(source, "GTWdata.isFirstSpawn", true)
 
 		-- Get player location x y z
 	    	if (posX and posY and posZ) then
@@ -224,10 +230,10 @@ addEventHandler("onPlayerLogin", root,
 			setCameraTarget(source, source)
 
 			-- Temporary (from 2015-07-01) restore health and armor
-			local health = getAccountData(playeraccount, "acorp.health")
-			local armor = getAccountData(playeraccount, "acorp.armor")
-	        	setPedArmor(source, armor)
-			setElementHealth(source, health)
+			--local health = getAccountData(playeraccount, "GTWdata.health")
+			--local armor = getAccountData(playeraccount, "GTWdata.armor")
+	        	--setPedArmor(source, armor)
+			--setElementHealth(source, health)
 		else
 			local x,y,z,r = unpack(spawn_loc[math.random(#spawn_loc)])
 			spawnPlayer(source, x, y, z+3, r, skin_id[math.random(#skin_id)], 0, 0, getTeamFromName("Unemployed"))
@@ -280,7 +286,15 @@ addEventHandler("GTWaccounts.onClientSend", root,
 			setCameraMatrix( client, x,y,z, x2,y2,z2, 2 )
 			fadeCamera(client, true, 1)
 
-			-- Ability fopr clients to see if a player is logged in or not
+			-- Save view coordinates
+			setElementData(client, "GTWaccounts.login.coordinates.x", x)
+			setElementData(client, "GTWaccounts.login.coordinates.y", y)
+			setElementData(client, "GTWaccounts.login.coordinates.z", z)
+			setElementData(client, "GTWaccounts.login.coordinates.x2", x2)
+			setElementData(client, "GTWaccounts.login.coordinates.y2", y2)
+			setElementData(client, "GTWaccounts.login.coordinates.z2", z2)
+
+			-- Ability for clients to see if a player is logged in or not
 			setElementData(client, "isLoggedIn", true)
 		end
 	end

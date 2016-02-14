@@ -18,7 +18,7 @@ An issue report must fullify the following requirements:
 * Analysis of potential consequenses and other potential triggers
 
 You may also report bugs in our community forum:
-http://forum.gtw-games.org/bug-reports/
+https://forum.404rq.com/bug-reports/
 
 
 ## Pull request
@@ -27,10 +27,10 @@ is described in below list and used to preview changes before they are added int
 how you do it:
 * Fork the project, click the "Fork" button in the upper right corner.
 * Do the changes you want to your copy of GTW-RPG
-* Make a pull request: https://github.com/GTWCode/GTW-RPG/pulls
+* Make a pull request: https://github.com/404rq/GTW-RPG/pulls
 * Watch (and join) the discussion :+1:
 
-And that's it, contributing shouldn't be harder than that, right.
+And that's it, contributing shouldn't be harder than so, right.
 
 ### Branch organization
 GTW-RPG has two branches currently, master and development. Master is basically for finished and tested code ready to release while development can be used for beta features, testing, and features that isn't fully finished yet but still interesting enough to include.
@@ -47,7 +47,7 @@ More information comes soon, until then we suggest you follow below list of requ
 
 ### Tips for optimization
 * Use local variables as much as possible, local variables are defined by putting `local` in front of their names like: `local is_staff = nil`. Local variables are only accessible within the space they are defined in, if used at the top of a function they will be removed automatically as soon the function is done and reach `end`.
-* Apply event handlers to individual objects or limited groups of objects instead of the root element where possible, a event-handler for root element will trigger on any element that causes the event and call it's function, let's take a bus stop for instance, if the function are supposed to pay the busdriver who stops by why should it care about carsa or players running into the marker who's hitevent is assigned to the function? It's just a waste of system resources.
+* Apply event handlers to individual objects or limited groups of objects instead of the root element where possible, a event-handler for root element will trigger on any element that causes the event and call it's function, let's take a bus stop for instance, if the function are supposed to pay the busdriver who stops by why should it care about cars or players running into the marker who's hitevent is assigned to the function? It's just a waste of system resources.
 * Be careful with timers and the event "onClientRender", anything in that event will be executed up to 60 times/second, (depending on the servers FPS settings). Timers are executed often as well if they are assigned to do so, "onElementStreamIn" is also a dangerous event as it's triggered as soon an onject is loaded. Lest's assume you do some heavy calculations there, then suddently a player enter a nearby town where around 200 objects are loaded at the same time, then the code are executed 200 times which causes the FPS to drop seriously and the player will yell high about "lag".
 * If something isn't needed, then don't implement it. This principle are also useful in security questions.
 * Do not compile! sure compiling has it's advantages. Faster loading and harder to steal the source code from a specific server are a few good reasons. However, this is up to the users of GTW-RPG to decide wether they want to compile or not, in here we do not compile anything. _We don't pack anything as zip archives either unless it's a third party resource_.

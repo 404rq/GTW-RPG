@@ -29,7 +29,10 @@ function validateVisiblity(plr, spectator)
 	if plr and spectator and getPlayerTeam(plr) and getPlayerTeam(spectator) and
 		stealthTeams[getTeamName(getPlayerTeam(plr))] and stealthTeams[getTeamName(getPlayerTeam(spectator))] then
 		-- Memembers of the team staff sees all blips
-		if getPlayerTeam(spectator) == getTeamFromName("Staff") then return true end
+		--local c_acc = getPlayerAccount(spectator)
+		if getPlayerTeam(spectator) == getTeamFromName("Staff") --[[or
+			isObjectInACLGroup("user."..getAccountName(c_acc),
+			aclGetGroup("Admin"))]] then return true end
 		-- They are in different teams and should not see each others
 		if getPlayerTeam(plr) ~= getPlayerTeam(spectator) then return false end
 		-- They are in the same team and should see each others
@@ -56,7 +59,7 @@ function refreshAllBlips(resource)
 		for y, spectator in pairs(getElementsByType("player")) do
 			if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
-			elseif not getElementData(plr,"anon") then
+			elseif not getElementData(plr, "anon") and getElementData(plr, "Occupation") ~= "Prisoner" then
 				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
 			end
 		end

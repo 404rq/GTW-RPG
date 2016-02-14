@@ -18,7 +18,7 @@ wanted_data = {
 	wanted_level 	= { },
 	violent_time	= { },
 	reduce_timers 	= { },
-	fine_charge		= { },
+	fine_charge	= { },
 }
 
 --[[ Load system data ]]--
@@ -184,8 +184,8 @@ function setWl(plr, level, violent_time, reason, add_to, reduce_health)
 
 	-- Wanted points for criminals
 	local pAcc = getPlayerAccount(plr)
-	local wp_stat = getAccountData( pAcc, "acorp_stats_wanted_points" ) or 0
-	setAccountData(pAcc, "acorp_stats_wanted_points", wp_stat+level)
+	local wp_stat = getAccountData( pAcc, "GTWdata_stats_wanted_points" ) or 0
+	setAccountData(pAcc, "GTWdata_stats_wanted_points", wp_stat+level)
 
 	-- Display the reason for the player
 	if reason and reason ~= "" then

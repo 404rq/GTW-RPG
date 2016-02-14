@@ -101,6 +101,26 @@ function on_bus_enter(plr, seat, jacked)
 end
 addEventHandler("onVehicleEnter", root, on_bus_enter)
 
+--[[ A little hack for developers to manually change the route ID ]]--
+function choose_route(plr, cmd)
+	if not getPedOccupiedVehicle(plr) or not bus_vehicles[
+		getElementModel(getPedOccupiedVehicle(plr))] then return end
+	if getElementType(plr) ~= "player" then return end
+	
+	-- Make sure it's a traindriver inside a train requesting this
+	if getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
+		getElementData(plr, "Occupation") == "Bus Driver" and 
+		getPedOccupiedVehicleSeat(plr) == 0 then
+
+		-- Force selection of new route
+		triggerClientEvent(plr, "GTWbusdriver.selectRoute", plr)
+	end
+end
+addCommandHandler("route", choose_route)
+addCommandHandler("routes", choose_route)
+addCommandHandler("routelist", choose_route)
+addCommandHandler("routeslist", choose_route)
+
 --[[ A new route has been selected, load it's data ]]--
 function start_new_route(route)
     	setElementData(client, "GTWbusdriver.currentRoute", route)
@@ -162,8 +182,8 @@ function calculate_next_stop(bd_payment)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount( client )
-	local bus_stops = (getAccountData( playeraccount, "acorp_stats_bus_stops" ) or 0) + 1
-	setAccountData( playeraccount, "acorp_stats_bus_stops", bus_stops )
+	local bus_stops = (getAccountData( playeraccount, "GTWdata_stats_bus_stops" ) or 0) + 1
+	setAccountData( playeraccount, "GTWdata_stats_bus_stops", bus_stops )
 
 	-- Pay the driver
 	givePlayerMoney(client, fine + math.floor(bus_stops/4))

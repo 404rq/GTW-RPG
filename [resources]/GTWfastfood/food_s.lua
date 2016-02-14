@@ -99,7 +99,7 @@ function open_menu(plr, matching_dimension)
 		-- Open the shopping GUI
 		triggerClientEvent(plr, "GTWfastfood.gui.show", root,
 			plr, getElementData(source, "GTWfastfood.restaurantType"))
-	elseif getElementData(hitPlayer, "rob") then
+	elseif getElementData(plr, "rob") then
 		-- Tell the robber he's an idiot for trying to buy food while robbing
 		exports.GTWtopbar:dm("You can't shop while robbing the restaurant ye idiot!", plr, 255, 0, 0)
 	end

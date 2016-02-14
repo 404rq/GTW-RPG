@@ -1,10 +1,4 @@
-local serverIp = "gs.gtw-games.org:81" 
--- Your server IP address (public IP) -> Get from http://whatsmyip.org
-
-local ipv4IP = "192.168.0.91:80" 
--- Open cmd, type "ipconfig" and place the IPv4 address here
-
-local downloadDirectory = "/mta-mods" 
+local downloadDirectory = "/mta-mods/"
 -- This is the file path to the location of the mods -- Don't include the IP and start it with a /"
 -- Example: downloadDirectory = "/vehiclemods" | Now the mods will download from [[ip]]/vehiclemods
 
@@ -14,16 +8,11 @@ end
 
 local data = getElementData(localPlayer, "PlayerIpAddress")
 
-if data and (string.sub(data, 1, 7) == "192.168") then
-	clientToIp = ipv4IP
-else
-	clientToIp = serverIp
-end	
-httpModDirectory = "http://"..clientToIp..downloadDirectory
+httpModDirectory = "http://london.404rq.com"..downloadDirectory
 
-local sx, sy = guiGetScreenSize() 
+local sx, sy = guiGetScreenSize()
 local button = { }
-local window = guiCreateWindow((sx / 2 - 560 / 2),(sy / 2 - 369 / 2), 560, 369, "Grand Theft Walrus # Mods", false)
+local window = guiCreateWindow((sx / 2 - 560 / 2),(sy / 2 - 369 / 2), 560, 369, "RageQuit 404 # mod library", false)
 guiWindowSetSizable(window, false)
 guiSetVisible(window, false)
 local mods = guiCreateGridList(9, 22, 541, 292, false, window)
@@ -119,7 +108,7 @@ addEventHandler("onClientGUIClick", root, function()
 			guiSetEnabled(button['dl'], false)
 			guiSetEnabled(button['del'], false)
 		end
-		
+
 		if(downloadingFiles[t]) then
 			guiSetEnabled(button['dl'], false)
 		end
@@ -168,24 +157,24 @@ function downloadMod(name)
 		end if(fileExists("mods/"..txd)) then
 			fileDelete("mods/"..txd)
 		end
-		
-		downloadingFiles[name] = true 
-		local f = fetchRemote(httpModDirectory.."/"..dff, function(data, err, name, dff, txd )  
+
+		downloadingFiles[name] = true
+		local f = fetchRemote(httpModDirectory.."/"..dff, function(data, err, name, dff, txd )
 			if(err == 0) then
-			
+
 				local f = fileCreate("mods/"..dff)
-				fileWrite(f, data) 
+				fileWrite(f, data)
 				fileClose(f)
-				
+
 				if(moddinglist[name][4]) then
-					fetchRemote(httpModDirectory.."/"..txd, function(data, err, name, name2) 
+					fetchRemote(httpModDirectory.."/"..txd, function(data, err, name, name2)
 						if(err == 0) then
 							local f = fileCreate("mods/"..name)
-							fileWrite(f , data) 
+							fileWrite(f , data)
 							fileClose(f)
-							
+
 							alertMessage(name2.." mod has been downloaded. You can now activate it.", 0, 255, 0)
-							downloadingFiles[name2] = false 
+							downloadingFiles[name2] = false
 							for i=0,guiGridListGetRowCount(mods) do
 								local t = guiGridListGetItemText(mods, i, 1)
 								if(t == name2) then
@@ -201,18 +190,18 @@ function downloadMod(name)
 								end
 							end
 						else
-							alertMessage("Error "..err.." for resource "..getResourceName(getThisResource())..". Please report it to an admin.", 255, 0, 0)
+							alertMessage("Error "..err.." for resource "..getResourceName(getThisResource())..". Please report it at forum.404rq.com", 255, 0, 0)
 							deleteMod(name)
 							downloadingFiles[name] = false
 						end
 					end, "", false, txd, name)
 				else
 					alertMessage(name.." mod has been downloaded. You can now activate it.", 0, 255, 0)
-					downloadingFiles[name] = false 
+					downloadingFiles[name] = false
 					for i=0,guiGridListGetRowCount(mods) do
 						local t = guiGridListGetItemText(mods, i, 1)
 						if(t == name) then
-							guiGridListSetItemText(mods, i, 3, "Yes", false, false)								
+							guiGridListSetItemText(mods, i, 3, "Yes", false, false)
 							local row, col = guiGridListGetSelectedItem(mods)
 							if(row == i) then
 								guiSetText(button['setstat'], "Enable Mod")
@@ -225,7 +214,7 @@ function downloadMod(name)
 					end
 				end
 			else
-				alertMessage("Error "..err.." for resource "..getResourceName(getThisResource())..". Please report it to an admin.", 255, 0, 0)
+				alertMessage("Error "..err.." for resource "..getResourceName(getThisResource())..". Please report it at forum.404rq.com.", 255, 0, 0)
 				deleteMod(name)
 				downloadingFiles[name] = false
 			end
@@ -248,7 +237,7 @@ function deleteMod(name)
 			m2_dl = true
 		end
 	end
-	return m2_dl and m1_dl 
+	return m2_dl and m1_dl
 end
 
 function setModEnabled(t, state, msg)
@@ -299,7 +288,7 @@ function setModEnabled(t, state, msg)
 				--return true
 			end
 		end
-		
+
 		if(enabledMods[t]) then
 			guiSetText(button['setstat'], "Disable Mod")
 			guiGridListSetItemText(mods, row, 2, "Yes", false, false)

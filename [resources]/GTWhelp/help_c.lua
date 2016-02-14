@@ -15,10 +15,10 @@
 ]]--
 
 local x,y = guiGetScreenSize()
-local window = guiCreateWindow((x-850)/2, (y-550)/2, 850, 550, "Grand Theft Walrus - Documentation", false )
-local textBox = guiCreateMemo( 246, 30, 594, 510, "", false, window )
-local gList = guiCreateGridList( 10, 30, 230, 510, false, window )
-exports.GTWgui:setDefaultFont(textBox, 10)
+local window = guiCreateWindow((x-800)/2, (y-600)/2, 800, 600, "Grand Theft Walrus - Documentation", false )
+local textBox = guiCreateMemo( 266, 30, 624, 560, "", false, window )
+local gList = guiCreateGridList( 10, 30, 250, 560, false, window )
+--exports.GTWgui:setDefaultFont(textBox, 10)
 exports.GTWgui:setDefaultFont(gList, 10)
 guiGridListSetSelectionMode(gList,2)
 guiMemoSetReadOnly(textBox, true)

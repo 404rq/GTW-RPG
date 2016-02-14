@@ -127,8 +127,8 @@ function plantSeed( player )
 
         			-- Increase stats by 1/plant
 				local playeraccount = getPlayerAccount( hitElement )
-				local farmer_plants = getAccountData( playeraccount, "acorp_stats_plants_harvested" ) or 0
-				setAccountData( playeraccount, "acorp_stats_plants_harvested", farmer_plants + 1 )
+				local farmer_plants = getAccountData( playeraccount, "GTWdata_stats_plants_harvested" ) or 0
+				setAccountData( playeraccount, "GTWdata_stats_plants_harvested", farmer_plants + 1 )
 
         			-- Status message
 				exports.GTWtopbar:dm( "Farmer: One of your plants has been sold", player, 255, 200, 0 )

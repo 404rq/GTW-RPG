@@ -46,7 +46,7 @@ function turfPayout(query)
 			-- Notice about turf money
 			if money > 0 then
 				givePlayerMoney(player,money)
-				exports.GTWtopbar:dm("You have received: "..tostring(money).."$ from your turfs!", player, 0, 255, 0)
+				exports.GTWtopbar:dm("You have received: "..tostring(math.floor(money)).."$ from your turfs!", player, 0, 255, 0)
 			end
 		end
 	end
@@ -128,9 +128,12 @@ end
 
 -- Whenever a player enter a turf
 function onTurfEnter(hitElement)
-	if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and getElementData(hitElement, "Group") and
-		getElementData(hitElement, "Group") ~= "None" and(getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or
-		getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) and not getElementData(hitElement,"isInTurf") then
+	if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
+		getElementData(hitElement, "Group") and
+		getElementData(hitElement, "Group") ~= "None" and
+		(getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or
+		getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) and
+		not getElementData(hitElement,"isInTurf") then
 		local owner = getElementData(source, "owner")
 		local ownC,enemyC,enemyGC = countPlayersInTurf(source)
 		outputConsole("Own: "..tostring(ownC)..", Enemies: "..tostring(enemyC), hitElement)
@@ -142,6 +145,10 @@ function onTurfEnter(hitElement)
 		setElementData(hitElement, "area", source)
     		if (getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) then
     			setElementData(hitElement,"isInTurf",true)
+			setElementData(hitElement, "GTWturf.posx", getElementData(source,"posx"))
+			setElementData(hitElement, "GTWturf.posy", getElementData(source,"posy"))
+			setElementData(hitElement, "GTWturf.theTurf", source)
+			setElementData(hitElement, "GTWturf.area", area)
 			local group = getElementData(hitElement, "Group")
 			local colCuboid = source
 			local time_to_capture = math.round((tonumber(getElementData(source, "sizex")) or 0) * (tonumber(getElementData(source, "sizey")) or 0) * time_reduce_factor, 3)
@@ -179,15 +186,15 @@ function onTurfEnter(hitElement)
 								givePlayerMoney(mem, c_money)
 								-- Increase stats by 1
 								local playeraccount = getPlayerAccount(mem)
-								local turfs_taken = getAccountData(playeraccount, "acorp_stats_turf_count") or 0
-								setAccountData(playeraccount, "acorp_stats_turf_count", turfs_taken + 1)
+								local turfs_taken = getAccountData(playeraccount, "GTWdata_stats_turf_count") or 0
+								setAccountData(playeraccount, "GTWdata_stats_turf_count", turfs_taken + 1)
 							end
 						end
 						local r,g,b = exports.GTWgroups:getGroupTurfColor(group)
 						if not r or not g or not b then
 							r,g,b = 255,255,255
 						end
-						setRadarAreaColor(area, r, g, b, 130)
+						setRadarAreaColor(area, r, g, b, turf_alpha)
 						setRadarAreaFlashing(area, false)
 						setElementData(theTurf, "currAttacker", nil)
 						dbExec(db, "UPDATE turfs SET owner=?, red=?, green=?, blue=? WHERE X=? AND Y=?", group, r, g, b,
@@ -214,8 +221,11 @@ function onTurfEnter(hitElement)
 				end, 1000,(time_to_capture))
 			end
     		elseif getElementData(hitElement, "Group") == "None" and getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
-			exports.GTWtopbar:dm("Only gang members can capture turfs,(see F6)", hitElement, 255, 0, 0)
+			exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 		end
+	elseif not getElementData(hitElement, "Group") and getElementType(hitElement) == "player" and
+		getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
+		exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 	end
 end
 
@@ -297,7 +307,7 @@ function changeTurfColor(plr, cmd, r, g, b)
 	dbExec(db, "UPDATE turfs SET red=?, green=?, blue=? WHERE owner=?", r, g, b, group)
 	for w,area in ipairs(getElementsByType("radararea")) do
 		if getElementData(area,"owner") and getElementData(area,"owner") == group then
-			setRadarAreaColor(area, r, g, b, 130)
+			setRadarAreaColor(area, r, g, b, turf_alpha)
 		end
 	end
 end
@@ -422,6 +432,27 @@ function killerMessage(weapon, attacker, stat_key)
 		tostring(getPedStat(attacker, stat_key) or 0), attacker, 255, 100, 0)
 end
 
+-- Claim a turf(Admin)
+function claimTurf(player, cmd, sx, sy)
+	local acc = getPlayerAccount(player)
+	if isObjectInACLGroup("user."..getAccountName(acc), aclGetGroup("Admin")) then
+		local group = getElementData(player, "Group")
+		local r,g,b = exports.GTWgroups:getGroupTurfColor(group)
+		if not r or not g or not b then
+			r,g,b = 255,255,255
+		end
+		setRadarAreaColor(getElementData(player, "GTWturf.area"), r, g, b, turf_alpha)
+		setRadarAreaFlashing(getElementData(player, "GTWturf.area"), false)
+		setElementData(getElementData(player, "GTWturf.theTurf"), "currAttacker", nil)
+		setElementData(getElementData(player, "GTWturf.theTurf"), "owner", group)
+		setElementData(getElementData(player, "GTWturf.area"), "owner", group)
+		dbExec(db, "UPDATE turfs SET owner=?, red=?, green=?, blue=? WHERE X=? AND Y=?", group, r, g, b,
+			tonumber(getElementData(player, "GTWturf.posx")), tonumber(getElementData(player, "GTWturf.posy")))
+		exports.GTWtopbar:dm("TURFS: this area was claimed successfully", player, 0, 255, 0)
+	end
+end
+addCommandHandler("claimturf", claimTurf)
+
 -- Adds a new turf(Admin)
 function createTurf(player, cmd, sx, sy)
 	local acc = getPlayerAccount(player)
@@ -442,16 +473,16 @@ function deleteturf(player, cmd)
 	local acc = getPlayerAccount(player)
 	if isObjectInACLGroup("user."..getAccountName(acc), aclGetGroup("Admin")) then
 		local x,y,z = getElementPosition(player)
-		dbExec(db, "DELETE FROM turfs WHERE X>? AND X<? AND Y>? AND Y<?", math.floor(x)-5, math.floor(x)+5, math.floor(y)-5, math.floor(y)+5)
+		dbExec(db, "DELETE FROM turfs WHERE X>? AND X<? AND Y>? AND Y<?", math.floor(x)-15, math.floor(x)+15, math.floor(y)-15, math.floor(y)+15)
 		local counter = 0
-		for w,area in ipairs(getElementsByType("radararea")) do
+		for w,area in pairs(getElementsByType("radararea")) do
 			local ax,ay,az = getElementPosition(area)
 			if ax >(x-5) and ax <(x+5) and ay >(y-5) and ay <(y+5) then
 				destroyElement(area)
 				counter = counter + 1
 			end
 		end
-		for w,colshape in ipairs(getElementsByType("colshape")) do
+		for w,colshape in pairs(getElementsByType("colshape")) do
 			local ax,ay,az = getElementPosition(colshape)
 			if ax >(x-5) and ax <(x+5) and ay >(y-5) and ay <(y+5) and getElementData(colshape, "owner") then
 				destroyElement(colshape)

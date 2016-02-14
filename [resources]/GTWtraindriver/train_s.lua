@@ -102,6 +102,26 @@ function on_train_enter(plr, seat, jacked)
 end
 addEventHandler("onVehicleEnter", root, on_train_enter)
 
+--[[ A little hack for developers to manually change the route ID ]]--
+function choose_route(plr, cmd)
+	if not getPedOccupiedVehicle(plr) or not train_vehicles[
+		getElementModel(getPedOccupiedVehicle(plr))] then return end
+	if getElementType(plr) ~= "player" then return end
+	
+	-- Make sure it's a traindriver inside a train requesting this
+	if getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
+		getElementData(plr, "Occupation") == "Train Driver" and 
+		getPedOccupiedVehicleSeat(plr) == 0 then
+
+		-- Force selection of new route
+		triggerClientEvent(plr, "GTWtraindriver.selectRoute", plr)
+	end
+end
+addCommandHandler("route", choose_route)
+addCommandHandler("routes", choose_route)
+addCommandHandler("routelist", choose_route)
+addCommandHandler("routeslist", choose_route)
+
 --[[ A new route has been selected, load it's data ]]--
 function start_new_route(route)
     	setElementData(client, "GTWtraindriver.currentRoute", route)
@@ -163,8 +183,8 @@ function calculate_next_station(td_payment)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount(client)
-	local train_stations = (getAccountData(playeraccount, "acorp_stats_train_stations") or 0) + 1
-	setAccountData(playeraccount, "acorp_stats_train_stations", train_stations)
+	local train_stations = (getAccountData(playeraccount, "GTWdata_stats_train_stations") or 0) + 1
+	setAccountData(playeraccount, "GTWdata_stats_train_stations", train_stations)
 
 	-- Pay the driver
 	givePlayerMoney(client, fine + math.floor(train_stations/4))

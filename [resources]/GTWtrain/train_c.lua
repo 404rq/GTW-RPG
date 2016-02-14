@@ -22,7 +22,7 @@ end
 --[[ Check when the train streams out and destroys it ]]--
 function check_stream_out(c_train)
     	addEventHandler("onClientElementStreamOut", c_train, stream_out_train)
-	setElementStreamable(c_train, false)
+	--setElementStreamable(c_train, false)
 end
 addEvent("GTWtrain.onStreamOut", true)
 addEventHandler("GTWtrain.onStreamOut", root, check_stream_out)
@@ -42,3 +42,27 @@ function set_train_control_policy(engineer, state)
 end
 addEvent("GTWtrain.setControlState", true)
 addEventHandler("GTWtrain.setControlState", root, set_train_control_policy)
+
+function set_train_track(cmd, new_track)
+	-- Verify MTA version
+	local version = getVersion()
+	if tonumber(version.mta) < 1.6 then
+		exports.GTWtopbar:dm("This feature is not yet supported! please download MTASA v1.6 or later", 255,0,0)
+		return
+	end
+
+	-- Check if the player is driving a train
+	local train = getPedOccupiedVehicle(localPlayer)
+	if not train or getVehicleType(train) ~= "Train" then return end
+	local x,y,z = getElementPosition(train)
+
+	if cmd == "gettrack" then
+		exports.GTWtopbar:dm("Current track is: "..getTrainTrack(train), 255,100,0)
+	elseif new_track then
+		setTrainTrack(train, new_track)
+		setElementPosition(train, x,y,z)
+		exports.GTWtopbar:dm("Current track is: "..getTrainTrack(train), 255,100,0)
+	end
+end
+addCommandHandler("settrack", set_train_track)
+addCommandHandler("gettrack", set_train_track)

@@ -8,7 +8,8 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <!-- Important imports -->
     <resource src="GTWtopbar" startup="1" protected="0" />
     <resource src="GTWgui" startup="1" protected="1" />
-
+    <resource src="GTWcore" startup="1" protected="1" />
+    
     <!-- Misc resource (non GTW-RPG) Must start before any 
         GTW-RPG resource except those above this line-->
     <resource src="admin" startup="1" protected="0"/>
@@ -98,7 +99,7 @@ followed by:
 `aclrequest allow <resource> all`
 This will list requirements for a certain resource and then allow the required functionality to be used. This is a built in function which is executed in the server console.
 
-For the "lazy" developers, here's a precompiled section of required ACL rights to add in your ACL file located at "_mods/deathmatch/ACL.xml_", ideally right after the opening <acl> tag at line 1. This procedure will allow the resources the access they need to work, GTWaccounts needs access to create accounts, GTWupdates needs access to callRemote in order to featch the update list and GTWgui needs the ability to refresh resources using the GUI system to prevent annoying bugs in the GUI causing controls to appear allover the screen when the window is destroyed.
+For the "lazy" developers, here's a precompiled section of required ACL rights to add in your ACL file located at "_mods/deathmatch/ACL.xml_", ideally right after the opening <acl> tag at line 1. This procedure will allow the resources the access they need to work. Resources will however request their own ACL rights once started. GTWaccounts needs access to create accounts, GTWupdates needs access to callRemote in order to fetch the update list and GTWgui needs the ability to refresh resources using the GUI system to prevent annoying bugs in the GUI causing controls to appear allover the screen when the window is destroyed.
 
 ```xml
     <!-- Staff group "supporter" and "developer", you may define your own rights/permissions 
@@ -117,4 +118,6 @@ For the "lazy" developers, here's a precompiled section of required ACL rights t
     </group>
 ```
 
-And that's it folks! now your server should be successfully up and running the GTW-RPG gamemode, if not, don't hesitate to ask for support in our forum located at: http://forum.gtw-games.org/programming-and-software/
+For resources with php files included, (currently GTWupdates), upload the php file to a local web server, then look for the call url within the resource and point it to the php file. Included php files allow any server to fetch data from remote servers, something that mtasa servers can't do on their own.
+
+And that's it folks! now your server should be successfully up and running the GTW-RPG gamemode, if not, don't hesitate to ask for support in our forum located at: https://forum.404rq.com/programming-and-software/

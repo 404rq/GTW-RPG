@@ -155,7 +155,7 @@ function showGUI( hitElement, matchingdimension, jobID )
  		end
 
  		-- Freeze the player
- 		setElementFrozen(hitElement, true)
+ 		setTimer(setElementFrozen, 250, 1, localPlayer, true)
 
  		-- Move to skin selection area
  		g_px,g_py,g_pz = getElementPosition(localPlayer)
@@ -222,7 +222,7 @@ function showGUI( hitElement, matchingdimension, jobID )
 				setElementModel( dummyped, skins[1] )
 				playerSkinID = skins[1]
 			else
-				local currSkinID = tonumber(getElementData(localPlayer, "clothes.boughtSkin")) or 0
+				local currSkinID = tonumber(getElementData(localPlayer, "GTWclothes.personal.skin")) or 0
 				setElementModel( dummyped, currSkinID )
 				playerSkinID = currSkinID
 			end
@@ -237,7 +237,7 @@ function showGUI( hitElement, matchingdimension, jobID )
 				if playerSkinID > -1 then
 					setElementModel( dummyped, playerSkinID )
 				elseif playerSkinID == -1 then
-					local currSkinID = tonumber(getElementData(localPlayer, "clothes.boughtSkin")) or 0
+					local currSkinID = tonumber(getElementData(localPlayer, "GTWclothes.personal.skin")) or 0
 					setElementModel( dummyped, currSkinID )
 				end
 			end

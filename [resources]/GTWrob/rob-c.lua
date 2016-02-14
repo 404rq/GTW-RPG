@@ -15,30 +15,31 @@
 ]]--
 
 -- Player aims at another player or objcet
-cooldown = nil
+cooldown = { }
 info_cooldown = nil
 function targetingActivated ( target )
 	-- Check so the team is criminals, that the criminal
 	-- is aiming and that the location is interior
 	local theTeam = getPlayerTeam ( localPlayer )
-	if not isTimer(cooldown) and not isTimer(info_cooldown) and getControlState("aim_weapon") and
+	if not isTimer(cooldown[target]) and not isTimer(info_cooldown) and getControlState("aim_weapon") and
+		getElementInterior( localPlayer ) > 0 and isElement( target ) and
+		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
+		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
+		getPlayerTeam( localPlayer ) == getTeamFromName( "Gangsters" ) or
+		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) and
+		getElementData(localPlayer, "Occupation") ~= "Prisoner" then
+		-- Cooldown during robbery 5 minutes between each rob/store
+        	triggerServerEvent( "onRob", localPlayer, target )
+        	cooldown[target] = setTimer(function() end, 300000, 1 )
+        	info_cooldown = setTimer(function() end, 30000, 1 )
+    	elseif not isTimer(info_cooldown) and getControlState("aim_weapon") and
 		getElementInterior( localPlayer ) > 0 and isElement( target ) and
 		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Gangsters" ) or
 		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) then
-		-- Cooldown during robbery 5 minutes between each rob
-        triggerServerEvent( "onRob", localPlayer, target )
-        cooldown = setTimer(function() end, 300000, 1 )
-        info_cooldown = setTimer(function() end, 30000, 1 )
-    elseif not isTimer(info_cooldown) and getControlState("aim_weapon") and
-		getElementInterior( localPlayer ) > 0 and isElement( target ) and
-		( getPlayerTeam( localPlayer ) == getTeamFromName( "Criminals" ) or
-		getPlayerTeam( localPlayer ) == getTeamFromName( "Civilians" ) or
-		getPlayerTeam( localPlayer ) == getTeamFromName( "Gangsters" ) or
-		getPlayerTeam( localPlayer ) == getTeamFromName( "Unemployed" )) then
-    	exports.GTWtopbar:dm( "There are to many cops around! Get the hell out of here.", 255, 0, 0 )
-    end
+    		exports.GTWtopbar:dm( "You just robbed this store, try another one!", 255, 0, 0 )
+    	end
 end
 addEventHandler ( "onClientPlayerTarget", root, targetingActivated )
 

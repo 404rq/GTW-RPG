@@ -24,7 +24,8 @@ rocket_launchers = {
 	{"jail", -2979.02,2042.44,22.58},
 	{"jail", -2983.1,2285.03,10},
 	{"jail", -2983.3,2362.6,30},
-	{"jail", -3054.7,2304.12,40},
+	{"jail", -3054.7,2304.1,40},
+        {"jail", -2885.6,2299.8,162},
         {"a51",16,1718,30},
         {"a51",237,1696,30},
         {"a51",354,2028,30},
@@ -50,6 +51,17 @@ function protectPrison()
 					old_dist = dist
 					nx,ny,nz = rl[2],rl[3],rl[4]
 				end
+                                -- Make sure none of the occupants are allowed to be there
+                                if getPedOccupiedVehicle(v) then
+                                        local occupants = getVehicleOccupants(getPedOccupiedVehicle(v))
+                                        for i,occu in pairs(occupants) do
+                                                if getPlayerTeam(occu) and allowed_government_teams[
+                                                        getTeamName(getPlayerTeam(occu))] then
+                                                        -- Theres a law enforcer in this vehicle, don't shoot
+                                                        nx,ny,nz = 0,0,0
+                                                end
+                                        end
+                                end
 			end
 			if has_been_warned and dist < 150 and z > 40 and (not getPlayerTeam(v) or
 				not allowed_government_teams[getTeamName(getPlayerTeam(v))]) and rl[1] == "a51" then
@@ -73,4 +85,4 @@ end
 function reset_warning()
 	has_been_warned = nil
 end
-setTimer(protectPrison, 10000, 0)
+setTimer(protectPrison, 30000, 0)

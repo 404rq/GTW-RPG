@@ -33,8 +33,8 @@ function end_work( )
 	if isElement(current_blip) then destroyElement(current_blip) end
 end
 addCommandHandler("endwork", end_work)
-addEvent("acorp_onEndWork", true )
-addEventHandler("acorp_onEndWork", root, end_work)
+addEvent("GTWdata_onEndWork", true )
+addEventHandler("GTWdata_onEndWork", root, end_work)
 
 --[[ Create next train station on current route ]]--
 function create_train_station(x, y, z)
@@ -150,12 +150,14 @@ addEventHandler("onClientVehicleEnter", root, enter_the_train)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_train_route( )
 	-- Create the selection GUI
-	window = guiCreateWindow((sx-450)/2, (sy-300)/2, 450, 300, "Select train route", false)
-	local close_button = guiCreateButton(330, 260, 110, 36, "Close", false, window)
-	local routes_list = guiCreateGridList(10, 30, 430, 230, false, window)
+	window = guiCreateWindow((sx-600)/2, (sy-350)/2, 600, 350, "Select train route", false)
+	local close_button = guiCreateButton(480, 310, 110, 36, "Close", false, window)
+	local routes_list = guiCreateGridList(10, 30, 580, 276, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.86 )
+	local info_label = guiCreateLabel(10, 318, 460, 20, "* Use max 3 carriages for the local routes or you may not fit!", false, window)
 	exports.GTWgui:setDefaultFont(close_button, 10)
 	exports.GTWgui:setDefaultFont(routes_list, 10)
+	exports.GTWgui:setDefaultFont(info_label, 10)
 	showCursor(true)
 
 	-- List all train routes
@@ -174,6 +176,9 @@ function select_train_route( )
 
 		-- Send the choice to the server for further instructions
 		triggerServerEvent("GTWtraindriver.selectRouteReceive", localPlayer, route)
+		
+		-- Notice about how to change
+		outputChatBox("[Engineer]#BBBBBB Mission assigned, type /routes to change your mission", 255,200,0, true)
 
 		-- Close the GUI
 		close_gui()

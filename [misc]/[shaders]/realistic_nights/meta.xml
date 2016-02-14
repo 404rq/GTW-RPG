@@ -1,0 +1,4 @@
+<meta>
+	<info name="Realistic Day Cycles" description="Realistic Day Cycles" author="Deixell" version="0.1" type="script" />
+	<script src="realistic_nights.lua" type="server" />
+</meta>

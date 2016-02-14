@@ -1,0 +1,39 @@
+<!--
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Bugtracker: 		https://forum.404rq.com/bug-reports/
+	Suggestions:		https://forum.404rq.com/mta-servers-development/
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+-->
+
+<meta>
+        <info author="RageQuit 404" type="script" name="Core system" description="All server core features" version="194" />
+        <!-- Useful utils -->
+        <script src="utils/s_func.lua" type="server" />
+        <script src="utils/s_staff.lua" type="server" />
+        <script src="utils/s_playtime.lua" type="server" />
+	<script src="utils/s_support.lua" type="server" />
+	
+        <!-- Misc features -->
+        <script src="misc/s_data.lua" type="server" />
+        <script src="misc/s_afk.lua" type="server" />
+        <script src="misc/s_loc.lua" type="server" />
+        <script src="misc/s_network.lua" type="server" />
+        <script src="misc/s_countdown.lua" type="server" />
+        <script src="misc/s_events.lua" type="server" />
+	<script src="misc/s_vehicle_realism.lua" type="server" />
+        <script src="misc/c_2dview.lua" type="client" />
+
+        <!-- Core features -->
+        <script src="s_core.lua" type="server" />
+        <script src="c_core.lua" type="client" protected="true" />
+        <script src="accounts.lua" type="server" />
+</meta>

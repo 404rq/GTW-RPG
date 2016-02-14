@@ -34,11 +34,16 @@ radio = {
 	{ "http://lyd.nrk.no/nrk_radio_alltid_nyheter_aac_h.m3u", "[Norway] NRK news", 1 },
 	{ "http://live-icy.gss.dr.dk:8000/A/A21L.mp3.m3u", "[Denmark] DR Mix", 1 },
 	{ "http://live-icy.gss.dr.dk:8000/A/A04L.mp3.m3u", "[Denmark] DR classical", 1 },
+	{ "http://live.motgift.nu:8000/stream", "[Sweden] Motgift Mix/Talk", 1 },
+	
 	{ "", " 181.fm stations", 0 },
 	{ "http://www.181.fm/winamp.pls?station=181-power&style=mp3&description=Power%20181%20(Top%2040)&file=181-power.pls", "Power 181", 1 },
 	{ "http://relay.181.fm:8068", "Old School Rap", 1 },
 	{ "", " Rap and Hiphop", 0 },
-	{ "http://shoutcast.unitedradio.it:1113/listen.pls", "105 Hip hop", 1 },
+	{ "http://188.117.44.132:8000/stream.m3u", "[Finland] Basso radio", 1 },
+	{ "http://mp3-live.dasding.de/dasdingraka02_m.m3u", "[Germany] DasDing Sprechstunde", 1 },
+	{ "http://www.antenne.de/webradio/channels/black-beatz.m3u", "[Germany] Antenne Bayern Black Beatz", 1 },
+
 	{ "http://www.jam.fm/streams/black-n-dance/jamfm.m3u", "Jam FM", 1 },
 	{ "http://91.121.223.159:8000/move.m3u", "Move FM", 1 },
 	{ "http://50.22.212.196:8132", "Underground radio", 1 },

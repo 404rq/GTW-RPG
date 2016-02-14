@@ -252,7 +252,8 @@ function saveVehicle(veh)
 end
 
 --[[ Destroys and saves a vehicle into vehicle database ]]--
-function saveAndRemoveVehicle(veh,removeVeh)
+function saveAndRemoveVehicle(veh, removeVeh)
+        if not veh or not isElement(veh) or getElementType(veh) ~= "vehicle" then return end
 	-- Ensure that the vehicle is owned by a player
 	if vehicle_owners[veh] then
 		-- Get vehicle data
@@ -427,7 +428,10 @@ addEventHandler( "GTWvehicleshop.onVehicleSell", root, sellVehicle )
 function respawnVehicleToStart(veh_id)
 	if getPlayerAccount( client ) and not isGuestAccount( getPlayerAccount( client )) and
 		veh_id and not vehicles[veh_id] and not isElement(vehicles[veh_id]) then
-		if (tonumber(getElementData(client, "violent_seconds")) or 0) < 10 and getElementData(client, "Jailed") ~= "Yes" then
+                local dist_to_cop = exports.GTWpolice:distanceToCop(client)
+                -- Tolerate less than 30 seconds violent time or distance to cop larger than 180m
+		if ((tonumber(getElementData(client, "violent_seconds")) or 0) < 50 or
+                        dist_to_cop > 180) and getElementData(client, "Jailed") ~= "Yes" then
 			local price = 500
 			if price and getPlayerMoney(client) > price then
 				takePlayerMoney( client, price )
@@ -439,8 +443,8 @@ function respawnVehicleToStart(veh_id)
 			end
 		elseif getElementData(client, "Jailed") == "Yes" then
 			exports.GTWtopbar:dm( "You can not recover while you are jailed!", client, 255, 0, 0 )
-		else
-			exports.GTWtopbar:dm( "You are to violent to recover, calm down!", client, 255, 0, 0 )
+		elseif dist_to_cop <= 180 then
+			exports.GTWtopbar:dm( "You are either to violent or a cop is to close!", client, 255, 0, 0 )
 		end
 	elseif vehicles[veh_id] and isElement(vehicles[veh_id]) then
 		exports.GTWtopbar:dm( "You must hide your vehicle before you can recover it!", client, 255, 0, 0 )

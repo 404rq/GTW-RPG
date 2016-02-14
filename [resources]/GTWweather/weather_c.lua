@@ -14,20 +14,23 @@
 ********************************************************************************
 ]]--
 
+-- Set rain
 function set_rainy()
-	setWeather (8)
+	setWeather(8)
 end
 addCommandHandler("rainy", set_rainy)
 addCommandHandler("rain", set_rainy)
 
+-- Set foggy
 function set_foggy()
-   	setWeather (9)
+   	setWeather(9)
 end
 addCommandHandler("foggy", set_foggy)
 addCommandHandler("fog", set_foggy)
 
+-- Set sunny
 function set_sunny()
-	setWeather (0)
+	setWeather(0)
 end
 addCommandHandler("sunny", set_sunny)
 addCommandHandler("sun", set_sunny)

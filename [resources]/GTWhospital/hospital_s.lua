@@ -125,7 +125,6 @@ function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
 	-- Fade in the camera and set it's target
 	fadeCamera(source, true, 6,255,255,255)
 
-
 	-- Make sure the player is not frozen
 	setElementFrozen(source, false)
 	toggle_controls(source, false)

@@ -14,15 +14,24 @@
 ********************************************************************************
 ]]--
 
-local timer = nil
-local messages =  { }
+local timer 		= nil
+local messages 		=  { }
+local last_msg 		= ""
+local display_time_ms 	= 12000
 
 --[[ Display a DX topbar message ]]--
-function dm(text, r,g,b, col)
+function dm(text, r,g,b, col, bell)
 	-- Insert message
 	local tick = getTickCount()
-	table.insert(messages, {text, true, tick + 8000, 170, r,g,b, col })
+	if text == last_msg then return end
+	if bell then playSoundFrontEnd(11) end
+	table.insert(messages, {text, true, tick + display_time_ms, 170, r,g,b, col })
 	outputConsole("[TOPBAR] "..text)
+	last_msg = text
+	setTimer(function() last_msg = "" end, 10000, 1)
+
+	-- Play a message notification sound
+	--playSoundFrontEnd(11)
 end
 addEvent("GTWtopbar.addText", true)
 addEventHandler("GTWtopbar.addText", root, dm)
