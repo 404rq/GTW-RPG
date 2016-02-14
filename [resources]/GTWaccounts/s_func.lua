@@ -109,7 +109,9 @@ function client_registration_attempt(user, pass, facc)
 	if not friend or acn == friend or getAccountData(acn, "GTWaccounts.invite.acc") or
 		getAccountData(friend, "GTWaccounts.invite.serial") == getPlayerSerial(client) or
 		getAccountData(friend, "GTWaccounts.invite.ip") == getPlayerIP(client) then
-		exports.GTWtopbar:dm("A welcome bonus has already been sent to this player", client, 255, 100, 0)
+		if facc ~= "" then
+			exports.GTWtopbar:dm("A welcome bonus has already been sent to this player", client, 255,100,0)
+		end
 		return
 	end
 
