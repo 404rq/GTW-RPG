@@ -229,7 +229,7 @@ function hijackVehicle(plr)
 	for k,v in pairs(getElementsByType("vehicle")) do
 		local b_driver = getVehicleOccupant(v) or v
 		local vx,vy,vz = getElementPosition(b_driver)
-		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 2 and 
+		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 4 and 
 			isElement(v) and getElementType(v) == "vehicle" and
 			getVehicleOccupant(v) and getElementType(getVehicleOccupant(v)) == "ped" then
 			call(npc_hlc, "disableHLCForNPC", getVehicleOccupant(v))
@@ -275,6 +275,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 		local connnum = 1
 		while true do
 			connpos = cdens[connnum]
+			if not connpos then return end
 			if sqpos > connpos then
 				sqpos = sqpos-connpos
 			else
