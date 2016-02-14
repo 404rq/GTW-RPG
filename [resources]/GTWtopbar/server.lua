@@ -15,8 +15,9 @@
 ]]--
 
 --[[ Dispaly a DX topbar message ]]--
-function dm(text, plr, r,g,b, col)
+function dm(text, plr, r,g,b, col, bell)
 	if col == nil then col = false end
+	if bell then playSoundFrontEnd(plr, 11) end
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	triggerClientEvent(plr, "GTWtopbar.addText", root, text, r,g,b, col)
 end
