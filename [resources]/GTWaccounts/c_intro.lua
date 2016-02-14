@@ -55,12 +55,12 @@ function reset_data()
         -- Kill event handler and reset view
         removeEventHandler("onClientRender", root, view_gtw_intro)
         if not isClientLoggedIn() then
-                local x = getElementData(client, "GTWaccounts.login.coordinates.x")
-                local y = getElementData(client, "GTWaccounts.login.coordinates.y")
-                local z = getElementData(client, "GTWaccounts.login.coordinates.z")
-                local x2 = getElementData(client, "GTWaccounts.login.coordinates.x2")
-                local y2 = getElementData(client, "GTWaccounts.login.coordinates.y2")
-                local z2 = getElementData(client, "GTWaccounts.login.coordinates.z2")
+                local x = getElementData(localPlayer, "GTWaccounts.login.coordinates.x")
+                local y = getElementData(localPlayer, "GTWaccounts.login.coordinates.y")
+                local z = getElementData(localPlayer, "GTWaccounts.login.coordinates.z")
+                local x2 = getElementData(localPlayer, "GTWaccounts.login.coordinates.x2")
+                local y2 = getElementData(localPlayer, "GTWaccounts.login.coordinates.y2")
+                local z2 = getElementData(localPlayer, "GTWaccounts.login.coordinates.z2")
                 setCameraMatrix(x,y,z, x2,y2,z2, 0, 80)
                 guiSetVisible(window, true)
         else
@@ -72,12 +72,12 @@ function reset_data()
         showPlayerHudComponent("radar", true)
 
         -- Reset temporary view coordinates
-        setElementData(client, "GTWaccounts.login.coordinates.x", nil)
-        setElementData(client, "GTWaccounts.login.coordinates.y", nil)
-        setElementData(client, "GTWaccounts.login.coordinates.z", nil)
-        setElementData(client, "GTWaccounts.login.coordinates.x2", nil)
-        setElementData(client, "GTWaccounts.login.coordinates.y2", nil)
-        setElementData(client, "GTWaccounts.login.coordinates.z2", nil)
+        setElementData(localPlayer, "GTWaccounts.login.coordinates.x", nil)
+        setElementData(localPlayer, "GTWaccounts.login.coordinates.y", nil)
+        setElementData(localPlayer, "GTWaccounts.login.coordinates.z", nil)
+        setElementData(localPlayer, "GTWaccounts.login.coordinates.x2", nil)
+        setElementData(localPlayer, "GTWaccounts.login.coordinates.y2", nil)
+        setElementData(localPlayer, "GTWaccounts.login.coordinates.z2", nil)
 end
 
 --[[ Update 3D text message and picture ]]--
@@ -129,5 +129,5 @@ function stop_intro()
         showPlayerHudComponent("radar", true)
         unbindKey("space", "down", stop_intro)
 end
-addCommandHandler("stopintro", toggle_intro)
+addCommandHandler("stopintro", stop_intro)
 bindKey("space", "down", stop_intro)
