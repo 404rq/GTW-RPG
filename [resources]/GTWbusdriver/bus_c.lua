@@ -144,9 +144,9 @@ addEventHandler("onClientVehicleEnter", root, enter_the_bus)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_bus_route( )
 	-- Create the selection GUI
-	window = guiCreateWindow((sx-450)/2, (sy-300)/2, 450, 300, "Select bus route", false)
-	local close_button = guiCreateButton(330, 260, 110, 36, "Close", false, window)
-	local routes_list = guiCreateGridList(10, 30, 430, 230, false, window)
+	window = guiCreateWindow((sx-600)/2, (sy-350)/2, 600, 350, "Select bus route", false)
+	local close_button = guiCreateButton(480, 310, 110, 36, "Close", false, window)
+	local routes_list = guiCreateGridList(10, 30, 580, 276, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.86 )
 	exports.GTWgui:setDefaultFont(close_button, 10)
 	exports.GTWgui:setDefaultFont(routes_list, 10)
@@ -169,6 +169,9 @@ function select_bus_route( )
 		-- Send the choice to the server for further instructions
 		triggerServerEvent("GTWbusdriver.selectRouteReceive", localPlayer, route)
 
+		-- Notice about how to change
+		outputChatBox("[Busdriver]#BBBBBB Mission assigned, type /routes to change your mission", 255,200,0, true)
+		
 		-- Close the GUI
 		close_gui()
 	end)
