@@ -122,58 +122,6 @@ function sendMoneyToPlayer(player, cmd, receiver, amount)
 end
 addCommandHandler("give", sendMoneyToPlayer)
 
---[[ Global Help system ]]--
-function infoBar(thePlayer)
-	if isElement(thePlayer) then
-		local randNum = math.random(1,24)
-		if randNum == 1 then
-			topMessage("[Guide] Hit F1 for more info about how to play", thePlayer, 255, 255, 255)
-		elseif randNum == 2 then
-			topMessage("(Guide) Are you looking for music? Press B to open your phone", thePlayer, 255, 255, 255)
-		elseif randNum == 3 then
-			topMessage("(Guide) More games are available at: www.404rq.com/servers/", thePlayer, 255, 255, 255)
-		elseif randNum == 4 then
-			topMessage("(Guide) Improve your stats for more profit in civilian jobs, hit F3 for more info", thePlayer, 255, 255, 255)
-		elseif randNum == 5 then
-			topMessage("(Guide) Hit F5 to manage your occupation or to become a criminal", thePlayer, 255, 255, 255)
-		elseif randNum == 6 then
-			topMessage("(Guide) Need transport? Travel quickly using the orange transport markers", thePlayer, 255, 255, 255)
-		elseif randNum == 7 then
-			topMessage("(Guide) Stay away from law units to reduce your wanted level, or use /fine", thePlayer, 255, 255, 255)
-		elseif randNum == 8 then
-			topMessage("(Guide) Protect your money by put them in the bank", thePlayer, 255, 255, 255)
-		elseif randNum == 9 then
-			topMessage("(Guide) Invest in a business to gain money fast, whenever you can afford it", thePlayer, 255, 255, 255)
-		elseif randNum == 10 then
-			topMessage("(Guide) Hit F6 to create or join a group, gang or clan", thePlayer, 255, 255, 255)
-		elseif randNum == 11 then
-			topMessage("(Guide) Hit F2 to manage your vehicles, if you don't want to rent", thePlayer, 255, 255, 255)
-		elseif randNum == 12 then
-			topMessage("(Guide) Mystery bags contains secret advantages for criminals", thePlayer, 255, 255, 255)
-		elseif randNum == 13 then
-			topMessage("(Guide) Visit our forum at: forum.404rq.com to discuss anything you want", thePlayer, 255, 255, 255)
-		elseif randNum == 14 then
-			topMessage("(Guide) GTW-RPG is an open source project, read more at: github.com/404rq", thePlayer, 255, 255, 255)
-		elseif randNum == 15 then
-			topMessage("(Guide) Act and work realistic to earn more money and stats in civilian jobs", thePlayer, 255, 255, 255)
-		elseif randNum == 16 then
-			topMessage("(Guide) Use /updates to view the latest news", thePlayer, 255, 255, 255)
-		elseif randNum == 17 then
-			topMessage("(Guide) Got a suggestion or found a bug? visit: forum.404rq.com", thePlayer, 255, 255, 255)
-		elseif randNum == 18 then
-			topMessage("(Guide) Report annoying players or staff here: forum.404rq.com", thePlayer, 255, 255, 255)
-		else
-			topMessage("(Guide) Read more about GTW on our webpage: www.404rq.com", thePlayer, 255, 255, 255)
-		end
-	end
-end
-
---[[ Trigger help messages ]]--
-function playerLogin(_, playeraccount)
-	setTimer(infoBar, 310000, 50, source)
-end
-addEventHandler("onPlayerLogin", root, playerLogin)
-
 function topMessage(message, player, r, g, b)
 	exports.GTWtopbar:dm(message, player, r, g, b)
 end

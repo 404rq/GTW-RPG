@@ -40,6 +40,13 @@ function update_display(plr, init_time)
 
         -- Update display time
         setElementData(plr, "Playtime", formatted_time)
+	
+	-- Define neew player
+	if tonumber(hours) or 0 < 12 then
+		setElementData(plr, "GTWcore.isNoob", true)
+	else
+		setElementData(plr, "GTWcore.isNoob", nil)
+	end
 end
 
 --[[ Helper function to launch the play time system ]]--

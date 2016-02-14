@@ -20,7 +20,8 @@
         <script src="utils/s_func.lua" type="server" />
         <script src="utils/s_staff.lua" type="server" />
         <script src="utils/s_playtime.lua" type="server" />
-
+	<script src="utils/s_support.lua" type="server" />
+	
         <!-- Misc features -->
         <script src="misc/s_data.lua" type="server" />
         <script src="misc/s_afk.lua" type="server" />
@@ -28,6 +29,7 @@
         <script src="misc/s_network.lua" type="server" />
         <script src="misc/s_countdown.lua" type="server" />
         <script src="misc/s_events.lua" type="server" />
+	<script src="misc/s_vehicle_realism.lua" type="server" />
         <script src="misc/c_2dview.lua" type="client" />
 
         <!-- Core features -->

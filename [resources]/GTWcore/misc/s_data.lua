@@ -66,7 +66,29 @@ function load_data(plr)
         	setPlayerMoney(plr, 4000)
                 setAccountData(acc, "GTWdata.playtime", 0)
                 setAccountData(acc, "GTWclothes.personal.skin", getAccountData(acc, "GTWdata.skin.current"))
+		
+		-- Give the player their first weapon
+		giveWeapon(plr, 4, 1, false) 
+		giveWeapon(plr, 24, 35, false) 
+		
+		-- Display basic newbie information
+		outputChatBox("[GTWhelp]#EEEEEE Welcome to GTW-RPG! press F1 for help", plr, 255,100,0, true)
+		local px,py,pz = getElementPosition(plr)
+		exports.GTWtopbar:dm("You have just arrived in "..getZoneName(px,py,pz)..", "..
+			getZoneName(px,py,pz, true).." with $4´000 in your pocket", plr, 255,255,255, false, true)
        	end
+	
+	-- 2016-02-11 Bugfix for an issue where work skins became players owned skin, 
+	-- forbidden skins are reset by default
+	local forbidden_skins = {     [265]=true,[266]=true,[267]=true,[274]=true,[275]=true,[276]=true,
+		[278]=true,[279]=true,[280]=true,[281]=true,[282]=true,[283]=true,[284]=true,[285]=true,
+		[286]=true,[287]=true,[288]=true }
+	if forbidden_skins[getElementModel(plr)] and (getPlayerTeam(plr) ~= getTeamFromName("Government") 
+		or getPlayerTeam(plr) ~= getTeamFromName("Emergency service")) then
+		setAccountData(acc, "GTWclothes.personal.skin", 0)
+		exports.GTWtopbar:dm("Notice: Your skin was reset to CJ (ID: 0) due to a previous skin bug", plr, 255,100,0)
+		setElementModel(plr, 0)
+	end
 
         -- Load weapons and stats
         for k=1, 12 do
@@ -83,10 +105,13 @@ function load_data(plr)
        	applyStaffAdvantage(source)
 
         -- Jail player if arrested
-        if getAccountData(acc, "GTWdata.police.isArrested") == "YES" then
+        if getAccountData(acc, "GTWdata.police.jailTimeOffline") then
                 local wl,viol = exports.GTWwanted:getWl(plr)
                 local j_time = math.floor(wl*1000*10)
                 exports.GTWjail:Jail(plr, math.floor(j_time/1000), "LSPD")
+		
+		-- Reset jail order
+		setAccountData(acc, "GTWdata.police.jailTimeOffline", false)
         end
 
         -- Mark first spawn as valid
