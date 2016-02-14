@@ -1,5 +1,5 @@
 --[[
-********************************************************************************
+***********************************************************************
 	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
@@ -11,16 +11,16 @@
 	Version:    		Open source
 	License:    		BSD 2-Clause
 	Status:     		Stable release
-********************************************************************************
+***********************************************************************
 ]]--
 
 --[[ All help related text is in this file ]]--
 list = {
 	{ "Rules", 0 },
 	{ "English", 1, [[
-********************************************************************************
+***********************************************************************
 * Rules in English
-********************************************************************************
+***********************************************************************
 
 #1 Do not spawn kill other players.
 #2 Drive on the right side of the road. Do not block other players, do not crash into other players unless you have a reason to do so, e.g in a police chase or to revenge.
@@ -33,57 +33,33 @@ list = {
 
 Thank you for complying with our rules.
 
-********************************************************************************
+***********************************************************************
 * Last edit: 2015-01-28
-********************************************************************************]] },
-	{ "Swedish (Svenska)", 1, [[
-********************************************************************************
-* Rules in Swedish (Svenska)
-********************************************************************************
+***********************************************************************]] },
+	{ "Russian", 1, [[
+***********************************************************************
+* Rules in Russian
+***********************************************************************
 
-#1 Spawn kill är ej tillåtet (gäller framförallt vid sjukhus)
-#2 Håll till höger när du kör, blockera ej andra spelare, krocka inte medveted med andra spelare om du inte har en anledning som exempelvis hämnd eller en biljakt (tjuv och polis).
-#3 Missbruka inte eventuella buggar, GTW-RPG är baserat på öppen källkod och bör vara stabilt, belöning utlovas till den som upptäcker och rapporterar buggar beroende på dess storlek, missbruk av buggar bestraffas.
-#4 Reklam är ej tillåten, vi tillämpar yttrandefrihet så du får självklart prata om precis vad du vill, så länge du inte öppet gör reklam för en produkt exempelvis.
-#5 Avbryt ej rolspel, servern stödjer både role-play och RPG, om en grupp spelare står och sysslar med /me och /do rollspel är det olämpligt att dyka upp med minigun och ha ihjäl dem eller meja ner dem med din bil.
-#6 SPAM är ej tillåten, toleransen här är dock hög men får du en varning bör du lugna dig en aning.
-#7 Administrativa uppgifter delas INTE ut till den som skriker högst, detsamma gäller för serverns utveckling (förslag och dylikt) samt klagomål på andra spelare med mera, allt sånt hanteras i forumet.
-#8 Att aktivt trolla eller provocera är ej heller tillåtet, lös era konflikter här: https://forum.404rq.com/complaints-and-reports/
+# 1 Не убивать других игроков. (Применяется около больниц)
+# 2 Движение толь по правой стороне дороги. Не перекрывайте дорогу другим игрокам,
+не врезаться в другие игроком, если у вас нет причин для этого.
+#3 Не используйте какие либо трейнеры, читы или баги на сервере GTW-PRG.
+#4 Не рекламируйте что либо. И так же не бойтесь говорить о чем угодно Вот вам пример правильного общения на сервере (Пример разговора: XBox против PS3) (Пример рекламы: Купить XBox можно тут "Ссылка")
+# 5 Не мешайте и не препятствуйте отыгровки РП ситуаций. (Пример: Стоят люди отыгрывают РП ситуацию, прибегает парень достаёт миниган и начинает расстреливать всё что движется)
+# 6 Не спамьте в чат(ы), повторяя одно и тоже по несколько раз.Обратите внимание, что этот за это можно получить мут и это носят глобальный характер и относится ко многим другим серверам, работающие на ресурсах GTW-RPG
+# 7 Не пытайтесь повторить это в игре: подать заявку на администратора , предлогать новые функции, жаловаться на других игроков или администраторов, Это не наказывается но вы не сможете получить на эти вопросы ожидаемый ответ.
+# 8 Не тролль, не провоцируй или не оскорбляй других игроков на сервере.Вместо этого постарайтесь решить свои недопонимания на форуме: https://forum.404rq.com/complaints-and-reports/
 
-Tack för att du respekterar våra regler!
+    Благодарим Вас за соблюдение наших правил.
 
-Translated by:
-- Mr.Moose (Developer/Administrator of Grand Theft Walrus)
-
-********************************************************************************
-* Last edit: 2015-03-07
-********************************************************************************]] },
-	{ "Danish (Danska)", 1, [[
-********************************************************************************
-* Rules in Danish (Danska)
-********************************************************************************
-
-#1 Du må ikke gyde dræbe andre spillere. (Gælder omkring hospitaler)
-#2 Kørsel på højre side af vejen. Bloker ikke andre spillere, ikke køre ind i andre spillere, medmindre du har en grund til det, fx i en politi jagt eller til hævn.
-#3 Brug ikke nogen form for hack eller udnytte bugs. GTW-RPG er en open source game mode, som vi hævder at være stabil og høj kvalitet, er det derfor vigtigt at lade os vide om enhver fejl du kan finde. Fejlrapporter er rewardable, exploits er strafbare.
-#4 Du må ikke annoncere, er du velkommen til at tale om noget, så længe du er ikke reklame det. Hvis du ikke får forskellen Her er et eksempel: Talking: Xbox vs PS3 ... Reklame: indkøbe xBox her ...
-#5 Du må ikke hindre eller afbryde rollespil situationer. Det er ikke hensigtsmæssigt at dukke op med en minigun og dræbe en gruppe af spillere står sammen chatter for eksempel, brug ikke mere vold end situationen kræver.
-#6 ikke spam de chats, gentage nonsens med vilje vil føre til en stum, bemærke, at denne mute er globale og gælder for mange andre servere, der kører ressourcer GTW-RPG så godt.
-#7 Du må ikke prøve dette i gmae: ansøge om personale, foreslå nye funktioner, klage på andre spillere eller medarbejdere, spørge om ting, du vil find oplysninger om i listen til venstre. Dette er ikke strafbar, men du kan ikke få det svar du forventede.
-#8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere. I stedet løse dine konflikter her: https://forum.404rq.com/complaints-and-reports/
-
-Tak for at overholde vores regler.
-
-Translated by:
-- The.Penguin (Developer & Administrator)
-
-********************************************************************************
-* Last edit: 2015-03-07
-********************************************************************************]] },
+***********************************************************************
+* Last edit: 2016-02-10
+***********************************************************************]] },
 	{ "Dutch (Nederlands)", 1, [[
-********************************************************************************
+***********************************************************************
 * Rules in Dutch (Nederlands)
-********************************************************************************
+***********************************************************************
 
 #1 Geen andere spelers spawnkillen. (Geld rond ziekenhuizen)
 #2 Rijd aan de rechterkant van de weg. Blokkeer geen andere spelers, rijd niet in andere spelers zonder een geldige reden. bv. in een politie achtervolging of wraak.
@@ -99,13 +75,13 @@ Bedankt om mee te werken met ons reglement.
 Translated by:
 - WhoopeeTheClown (Global moderator, In game staff)
 
-********************************************************************************
+***********************************************************************
 * Last edit: 2015-03-07
-********************************************************************************]] },
+***********************************************************************]] },
 	{ "Italian (Italiano)", 1, [[
-********************************************************************************
+***********************************************************************
 * Rules in Italian (Italiano)
-********************************************************************************
+***********************************************************************
 
 #1 Non spawn-killare gli altri giocatori. (Questa regola vale vicino agli ospedali)
 #2 Guida sul lato destro della strada. Non bloccare gli altri giocatori, non schiantarti contro gli altri giocatori a meno che non hai una ragione per farlo, per esempio in un inseguimento o per vendetta.
@@ -121,13 +97,57 @@ Grazie per aver letto le regole.
 Translated by:
 - Franckf (Community member)
 
-********************************************************************************
+***********************************************************************
 * Last edit: 2015-03-07
-********************************************************************************]] },
+***********************************************************************]] },
+	{ "Swedish (Svenska)", 1, [[
+***********************************************************************
+* Rules in Swedish (Svenska)
+***********************************************************************
+
+#1 Spawn kill är ej tillåtet (gäller framförallt vid sjukhus)
+#2 Håll till höger när du kör, blockera ej andra spelare, krocka inte medveted med andra spelare om du inte har en anledning som exempelvis hämnd eller en biljakt (tjuv och polis).
+#3 Missbruka inte eventuella buggar, GTW-RPG är baserat på öppen källkod och bör vara stabilt, belöning utlovas till den som upptäcker och rapporterar buggar beroende på dess storlek, missbruk av buggar bestraffas.
+#4 Reklam är ej tillåten, vi tillämpar yttrandefrihet så du får självklart prata om precis vad du vill, så länge du inte öppet gör reklam för en produkt exempelvis.
+#5 Avbryt ej rolspel, servern stödjer både role-play och RPG, om en grupp spelare står och sysslar med /me och /do rollspel är det olämpligt att dyka upp med minigun och ha ihjäl dem eller meja ner dem med din bil.
+#6 SPAM är ej tillåten, toleransen här är dock hög men får du en varning bör du lugna dig en aning.
+#7 Administrativa uppgifter delas INTE ut till den som skriker högst, detsamma gäller för serverns utveckling (förslag och dylikt) samt klagomål på andra spelare med mera, allt sånt hanteras i forumet.
+#8 Att aktivt trolla eller provocera är ej heller tillåtet, lös era konflikter här: https://forum.404rq.com/complaints-and-reports/
+
+Tack för att du respekterar våra regler!
+
+Translated by:
+- Mr.Moose (Developer/Administrator of Grand Theft Walrus)
+
+***********************************************************************
+* Last edit: 2015-03-07
+***********************************************************************]] },
+	{ "Danish (Danska)", 1, [[
+***********************************************************************
+* Rules in Danish (Danska)
+***********************************************************************
+
+#1 Du må ikke gyde dræbe andre spillere. (Gælder omkring hospitaler)
+#2 Kørsel på højre side af vejen. Bloker ikke andre spillere, ikke køre ind i andre spillere, medmindre du har en grund til det, fx i en politi jagt eller til hævn.
+#3 Brug ikke nogen form for hack eller udnytte bugs. GTW-RPG er en open source game mode, som vi hævder at være stabil og høj kvalitet, er det derfor vigtigt at lade os vide om enhver fejl du kan finde. Fejlrapporter er rewardable, exploits er strafbare.
+#4 Du må ikke annoncere, er du velkommen til at tale om noget, så længe du er ikke reklame det. Hvis du ikke får forskellen Her er et eksempel: Talking: Xbox vs PS3 ... Reklame: indkøbe xBox her ...
+#5 Du må ikke hindre eller afbryde rollespil situationer. Det er ikke hensigtsmæssigt at dukke op med en minigun og dræbe en gruppe af spillere står sammen chatter for eksempel, brug ikke mere vold end situationen kræver.
+#6 ikke spam de chats, gentage nonsens med vilje vil føre til en stum, bemærke, at denne mute er globale og gælder for mange andre servere, der kører ressourcer GTW-RPG så godt.
+#7 Du må ikke prøve dette i gmae: ansøge om personale, foreslå nye funktioner, klage på andre spillere eller medarbejdere, spørge om ting, du vil find oplysninger om i listen til venstre. Dette er ikke strafbar, men du kan ikke få det svar du forventede.
+#8 Du må ikke aktivt trold, provokere, irritere eller fornærme andre spillere. I stedet løse dine konflikter her: https://forum.404rq.com/complaints-and-reports/
+
+Tak for at overholde vores regler.
+
+Translated by:
+- The.Penguin (Developer & Administrator)
+
+***********************************************************************
+* Last edit: 2015-03-07
+***********************************************************************]] },
 	{ "Urdu (Urdu)", 1, [[
-********************************************************************************
+***********************************************************************
 * Rules in Urdu (Urdu)
-********************************************************************************
+***********************************************************************
 
 #1 Jab player spawn hota hai to use kill mat kareu. (Hospitals ke ird gird)
 #2 Road ki right side pe drive kareu, kisi waja ke bagaar gaari ko doosre players ki gaari pe na mareu. Sirf kareu agar aap ke paas koi acha reason ho jese ke police chase meu ya phir revenge ke liye.
@@ -143,13 +163,13 @@ Shukriya hamare rules parhane ke liye.
 Translated by:
 - ccv (Contributor)
 
-********************************************************************************
+***********************************************************************
 * Last edit:	2015-03-07
-********************************************************************************]] },
+***********************************************************************]] },
 	{ "Egyptian (Masry)", 1, [[
-********************************************************************************
+***********************************************************************
 * Rules in Egyptian (Masry)
-********************************************************************************
+***********************************************************************
 #1 Mate2telsh awl lama el la3eeb yes7a, w dah kman fel mostashfa.
 #2 Dayman so2 3ala el yemeen, mate8batsh el nas bel 3ayabeya aw 7aga zay keda. Te2dar te3mel keda 3ashan ta5od ha2ak aw law enta shorta w betegry wara 7aramy.
 #3 Mate3mlsh Hack lel server. Ay bug tela2ee fel server e3melo report 3ala el mawka3 w momken ta5od floos law tele3 begad w etsala7. Ay taree2 3ashan teksab beeha haga zay haraka w ta5od floos deeh hata5od punish feeha.
@@ -163,13 +183,13 @@ Shokran 3ashan betrakez fel hagat deeh!
 
 Translated by:
 - Smart (Moderator)
-********************************************************************************
+***********************************************************************
 * Last edit: 2015-05-27
-********************************************************************************]] },
+***********************************************************************]] },
 	{ "Portuguese (Portuguese)", 1, [[
-********************************************************************************
+***********************************************************************
 * Rules in Portuguese (Portuguese)
-********************************************************************************
+***********************************************************************
 #1 Não faça spawn kill em outros jogadores. (Aplica-se ao redor de hospitais)
 #2 Dirigir sempre no lado direito da estrada. Não bloquear os outros jogadores, não bater em outros jogadores, a menos que você tenha uma razão para fazer isso, por exemplo, em uma perseguição policial ou por vingança.
 #3 Não use qualquer tipo de hack ou exploração de bugs. GTW-RPG é um modo de jogo de código aberto que pretendemos deixar estável e de alta qualidade, Portanto, é importante que você nos informe sobre qualquer bug, que você encontrar. Relatórios de bug são recompensados, explarações são puníveis..
@@ -183,14 +203,14 @@ Obrigado por cumprir com as nossas regras.
 
 Translated by:
 - EHLuC & EHPHUCK (Community members)
-********************************************************************************
+***********************************************************************
 * Last edit: 2015-05-27
-********************************************************************************]] },
+***********************************************************************]] },
 	{ "General", 0 },
 	{ "RageQuit community", 1, [[
-********************************************************************************
+***********************************************************************
 * RageQuit community
-********************************************************************************
+***********************************************************************
 
 Where the game is a true pleasure, we started as a small hobby project to give some new life to a bunch of old gaming PC's, thanks to the great Linux distribution "Debian" and a overkill network in northern Europe RageQuit has been growing over a couple of years and is now running multiple Multi Theft Auto and Minecraft servers.
 
@@ -205,14 +225,14 @@ wiki.404rq.com
 code.404rq.com
 media.404rq.com
 
-********************************************************************************
+***********************************************************************
 * Last edit: 2015-09-01
-********************************************************************************
+***********************************************************************
 ]] },
-	{ "Accounts", 1, [[
-********************************************************************************
+	{ "User accounts commands", 1, [[
+***********************************************************************
 * About user accounts
-********************************************************************************
+***********************************************************************
 
 How to login or register:
   * Enter your credentials then press login and your data will be saved and synced
@@ -231,9 +251,9 @@ How to change nick name:
 Note that these commands are built in and works on any Multi Theft Auto server.
 ]]},
 	{ "Staff guidelines", 1, [[
-********************************************************************************
+***********************************************************************
 * Staff guidelines (only relevant to server staff)
-********************************************************************************
+***********************************************************************
 
 How do I get into "staff mode":
   * Use /gostaff(f/m) last f/m is optinal and specifies if you want to use the male or female skin
@@ -251,9 +271,9 @@ Do I need to use tags:
   * Nope, it's completly optional, no matter which mode you're in
 ]]},
 	{ "How to prevent FPS lag", 1, [[
-********************************************************************************
+***********************************************************************
 * How to prevent FPS lag
-********************************************************************************
+***********************************************************************
 
 You can toggle the shaders to improve your FPS
 
@@ -278,42 +298,63 @@ You can locally change your weather to increase your FPS too, using the followin
 If none of these options help check our forum for more suggestions:
 https://forum.404rq.com
 ]]},
-	{ "FAQ", 1, [[
-********************************************************************************
+	{ "How to prevent high latency", 1, [[
+***********************************************************************
+* How to prevent high latency
+***********************************************************************
+
+High latency occurs for two reasons, either the network is overloaded or you're very far away from the server, consider for instance if you're connected to a wireless network with lot's of disturbances (which pretty much all wireless networks has more or less).
+
+To prevent high latency you neet to consider these two things:
+  * If possible, use a cable network rather than a wireless one. That should reduce your latency to max 400 no matter where in the world you're located, (lower values applies to Europe and USA since that's our location).
+  * Avoid downloading files while playing, especially torrent files and similar which tends to overflow local networks, also make sure noone else on the same network aren't downloading anything in the background.
+  
+What happens when the latency is too high?
+We block some features for you temporary, in worst case scenario we kick you. These systems are automatic so don't blame online staff for your own high latency.
+]]},
+	{ "F.A.Q", 1, [[
+***********************************************************************
 * Frequently asked questions
-********************************************************************************
+***********************************************************************
 
-Q: Is there any website?
-A: Yes: www.404rq.com
+Q: How do I change my skin?
+A: Look for a green t-shirt on your radar, enter the shop, walk up to the marker then select a new skin from the GUI
 
-Q: Is there any forum?
-A: Yes: forum.404rq.com
+Q: How do I make money?
+A: Take a job, (walk up into a yellow marker to open the application GUI), do criminal stuff like robbing stores, steal cars, kill bots etc..
 
-Q: What's our uptime?
-A: 100%, all RageQuit 404/Grand Theft Walrus servers are hosted in "the cloud" (big datacenters worldwide with 100% uptime guarentee).
+Q: Where can I find a car?
+A: You can rent a car by entering any white marker close to gas stations, you can also buy a vehicle from markers with a vehicle type name written over it.
 
 Q: How can I become staff?
-A: Visit: https://forum.404rq.com/staff-applications/
+A: Visit: https://forum.404rq.com/staff-applications/ to learn everything you need to know
 
-Q: What is GTW Games?
-A: Grand Theft Walrus games is an independent non profit organization
-   hosted by A.corp since 2013, read more on our website:
-   www.404rq.com.
+Q: Is there any other way?
+A: A few, although none of them works if you annoy other players/staff or lack in braincells
 
-Q: What is AC, GTW and RageQuit 404?
-A: AC - Artic community, our previous name. GTW - Grand Theft Walrus, current name of this server, RageQuit 404 is the name of the community
+Q: Can I become staff by inviting players?
+A: No, but you can earn good money by invitations if you instruct them to enter your account name in the invitation field
+
+Q: Is there any website?
+A: Yes: https://www.404rq.com
+
+Q: Is there any forum?
+A: Yes: https://forum.404rq.com
+
+Q: What's the uptime?
+A: 100%, all RageQuit 404/Grand Theft Walrus servers are hosted in "the cloud" (big datacenters worldwide with 100% uptime guarentee).
 
 Q: How do I donate?
-A: See: https://404rq.com/donations/
+A: Visit: https://404rq.com/donations/
 
 Q: My question wasn't answered here, what should I do?
 A: Ask your question here: https://forum.404rq.com/questions-and-concerns/
 ]]},
 	{ "Vehicles", 0 },
 	{ "Vehicle rental", 1, [[
-********************************************************************************
+***********************************************************************
 * Vehicle rental
-********************************************************************************
+***********************************************************************
 
 What is a rental vehicle:
   * Any vehicle you spawn by walking up to a white or yellow marker located near work places or gas stations, it's a pay per minute vehicle you can use to quickly travel around the map
@@ -328,9 +369,9 @@ How do I return my vehicle:
   * Use /djv or /rrv, vehicles are also removed 5 minutes after an explosion caused by damage or immediately if you leave the server.
 ]] },
 	{ "Vehicle shops/personal vehicles", 1, [[
-********************************************************************************
+***********************************************************************
 * Vehicle shops/personal vehicles
-********************************************************************************
+***********************************************************************
 
 What is a personal vehicle:
   * A vehicle you own by yourself.
@@ -349,9 +390,9 @@ Which vehicles can I buy:
   * Nearly all vehicles that is available in game can be bought, including trains
 ]] },
 	{ "Vehicle commands/binds", 1, [[
-********************************************************************************
+***********************************************************************
 * Vehicle commands/binds
-********************************************************************************
+***********************************************************************
 
 Useful keys while driving:
   * 'C' - Toggle cruising control
@@ -383,9 +424,9 @@ And the commands to be used while driving:
 ]] },
 	{ "Civilians", 0 },
 	{ "Bus driver", 1, [[
-********************************************************************************
+***********************************************************************
 * Bus driver:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * Unity station - Los Santos
@@ -407,9 +448,9 @@ Advantages:
   * A strong vehicle with lot's of fuel for long distance travelling
 ]] },
 	{ "Farmer", 1, [[
-********************************************************************************
+***********************************************************************
 * Farmer:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * The Farm - (south about San Fierro)
@@ -431,9 +472,9 @@ Advantages:
   * A real cash boost for players who have money to invest, without limitations.
 ]] },
 	{ "Fisher", 1, [[
-********************************************************************************
+***********************************************************************
 * Fisher:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * The lighthouse west about the beach - Los Santos
@@ -453,9 +494,9 @@ Advantages:
   * Possibility to get rich if you're lucky
 	]] },
 	{ "Iron miner", 1, [[
-********************************************************************************
+***********************************************************************
 * Iron miner:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * The quarry - Las Venturas
@@ -477,9 +518,9 @@ Advantages:
   * Free access to dynamite, imagine all the fun you can do with that ;)
 ]] },
 	{ "Mechanic", 1, [[
-********************************************************************************
+***********************************************************************
 * Mechanic:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * West side mod shop and pay 'n' spray - Los Santos
@@ -504,9 +545,9 @@ Advantages:
   * Big chance of getting tipped by other players
 ]] },
 	{ "Pilot", 1, [[
-********************************************************************************
+***********************************************************************
 * Pilot:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * Los Santos international airport
@@ -530,9 +571,9 @@ Advantages:
   * Earns a bonus for each player picked up as passenger
 ]] },
 	{ "Taxi", 1, [[
-********************************************************************************
+***********************************************************************
 * Taxi driver:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * Los Santos international airport
@@ -553,9 +594,9 @@ Advantages:
   * Earn money by giving other players a ride
 	]] },
 	{ "Train driver", 1, [[
-********************************************************************************
+***********************************************************************
 * Train driver:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * Unity station - Los Santos
@@ -579,9 +620,9 @@ Advantages:
   * Pickup and drop off cars along the tracks
 	]] },
 	{ "Tram driver", 1, [[
-********************************************************************************
+***********************************************************************
 * Tram driver:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * San Fierro, between the hospital and SFPD (central)
@@ -604,9 +645,9 @@ Advantages:
   * Pickup and drop off cars along the tracks
 	]] },
 	{ "Trucker", 1, [[
-********************************************************************************
+***********************************************************************
 * Trucker:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * The docks - San Fierro
@@ -630,9 +671,9 @@ Advantages:
 	]] },
 	{ "Government", 0 },
 	{ "Police", 1, [[
-********************************************************************************
+***********************************************************************
 * Police:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * LSPD - Los Santos (inside HQ)
@@ -668,9 +709,9 @@ Advantages:
   * Ability to get paid instantly for killing a violent player, (consult /wanted and make sure the player you want to kill is marked as red and not orange or any other color)
 ]] },
 	{ "Prison guard", 1, [[
-********************************************************************************
+***********************************************************************
 * Prison guard:
-********************************************************************************
+***********************************************************************
 
 Where do I find this job:
   * See "Police"
