@@ -34,6 +34,8 @@ radio = {
 	{ "http://lyd.nrk.no/nrk_radio_alltid_nyheter_aac_h.m3u", "[Norway] NRK news", 1 },
 	{ "http://live-icy.gss.dr.dk:8000/A/A21L.mp3.m3u", "[Denmark] DR Mix", 1 },
 	{ "http://live-icy.gss.dr.dk:8000/A/A04L.mp3.m3u", "[Denmark] DR classical", 1 },
+	{ "http://live.motgift.nu:8000/stream", "[Sweden] Motgift Mix/Talk", 1 },
+	
 	{ "", " 181.fm stations", 0 },
 	{ "http://www.181.fm/winamp.pls?station=181-power&style=mp3&description=Power%20181%20(Top%2040)&file=181-power.pls", "Power 181", 1 },
 	{ "http://relay.181.fm:8068", "Old School Rap", 1 },
