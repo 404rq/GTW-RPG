@@ -196,7 +196,6 @@ end
 -- On client attempt login
 addEvent("GTWaccounts:onClientPlayerLogin", true)
 addEventHandler("GTWaccounts:onClientPlayerLogin", root, function(acnt)
-	exports.GTWtopbar:dm("Welcome to Grand Theft Walrus, "..getPlayerName(localPlayer).."!", 255, 255, 255)
 	local f = xmlCreateFile("@data.xml", "account")
 	local user, pass = "", ""
 	if guiCheckBoxGetSelected(checkBoxUser) then
@@ -263,7 +262,8 @@ end
 -- Display login screen to players who isn't currently logged in
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
-		setTimer(make_login, 1000, 1)
+		exports.GTWtopbar:dm("Welcome! please read the instructions before trying to register", client, 0,200,0)
+		setTimer(make_login, 500, 1)
 		setBlurLevel(0)
 		showChat(false)
 		triggerServerEvent("GTWaccounts.onClientSend",localPlayer)
