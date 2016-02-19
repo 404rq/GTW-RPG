@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -24,14 +25,14 @@ function check_for_spam(cmd)
 	if not spam[source] then
 		spam[source] = 1
 	elseif spam[source] == limit then
-		exports.GTWtopbar:dm("Do not spam commands!",source,255,0,0)
+		exports.GTWtopbar:dm(en_US["msg_no_spam"], source, 255,0,0)
 		cancelEvent()
 	else
 		spam[source] = spam[source] + 1
 	end
 
 	-- Uncomment to track commands issued by players
-	--outputServerLog(getPlayerName(source).." issued the server command: '"..cmd.."'")
+	--outputServerLog(getPlayerName(source)..en_US["log_cmd_issuer"]..cmd.."'")
 end
 addEventHandler("onPlayerCommand", root, check_for_spam)
 

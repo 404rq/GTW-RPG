@@ -1,4 +1,4 @@
-<!--
+--[[
 ********************************************************************************
 	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
@@ -13,19 +13,16 @@
 	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
--->
+]]--
 
-<meta>
-	<!-- Resource information -->
-	<info author="404rq" name="GTWantispam" description="Fights command spam" version="0" type="script" />
-	
-	<!-- Language support: must be located at the top, s_lang for server and c_lang for client texts -->
-	<script src="s_lang.lua" type="server"/>
-	<!--<script src="c_lang.lua" type="client"/>-->
-	
-	<!-- Script files -->
-	<script src="server.lua" type="server"/>
-	
-	<!-- Included resources: should be at the end of this file -->
-	<include resource="GTWtopbar" />
-</meta>
+-- English/English
+en_US = {
+	["msg_no_spam"] 	= "Do not spam commands!",
+	["log_cmd_issuer"]	= " issued the server command: '",
+}
+
+-- Swedish/Svenska
+sv_SE = {
+	["msg_no_spam"] 	= "Kommando spam är ej tillåtet!",
+	["log_cmd_issuer"]	= " utförde följande kommando: '",
+}
