@@ -26,3 +26,9 @@ sv_SE = {
 	["msg_no_spam"] 	= "Kommando spam är ej tillåtet!",
 	["log_cmd_issuer"]	= " utförde följande kommando: '",
 }
+
+-- Spanish/Español
+es_ES = {
+	["msg_no_spam"] 	= "No hagas spam de comandos!",
+	["log_cmd_issuer"]	= " ejecutó el siguiente comando: '",
+}
