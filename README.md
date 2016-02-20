@@ -11,7 +11,7 @@ What's the goal of this project:
 
 ## Testing the software
 The latest version of these resources will always run on our servers: (mtasa://lon.404rq.com:22005 for instance). These servers are open 24/7 for anyone who would like to join and try this game mode live as well as contributing by testing and report potential bugs you may find. You can also join the staff team in our community "RageQuit 404" to help out testing this game mode by playing the most recent version of it as soon it's released and give us feedback. Applications and information for that are found here:<br>
-https://forum.404rq.com/staff-applications/
+https://forum.404rq.com/staff-applications
 
 **Important** These servers also contains resources that is not included in GTW-RPG. If you efter face a "missing feature" in your copy then it's a part of our servers rather than the game mode. Features that is not yet implemented will be released in the future, and thus you must not report them as "bugs" or spam our fourm (or any other place for that matter) claiming the game mode is broken.
 
@@ -22,13 +22,13 @@ The most important resources are the core features, basically scripts which many
 Beside the standardized core features, this project also includes a lot of misc features that might not be the first you think of when it comes to RPG but still pretty interesting, GTWtrains is a typical example of that, a system that manage and control AI trains around the map, trains that can be used to travel between the three cities or why not block people during car chases. Smaller features that we consider as "details" such as GTWsmoke which handles some smoking animations etc. Please note that this isn't the full gamemode running at Grand Thest Walrus game servers, in fact, it's the opposite. We are working to extend this gamemode however and more resources will be published as soon they are rewritten to work on other servers than just our own. The reason are for example usage of exports to private resources or dependencies of many large resources, where some of them is badly written currently.
 
 ## Donations
-If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: https://404rq.com or by these Bitcoin respective Litecoin adresses below:
+If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: https://www.404rq.com or by these Bitcoin respective Litecoin adresses below:
 
 BTC: `18UGBAaEPRGL43GJwgmoZty76SvbA6XvSQ`<br>
 LTC: `LQBxYAo7RS4mhHBpbpRHh71wnfNzQGapGd`
 
 For more ways to donate, please visit our donations page where more ways are listed, including paypal, credit card etc.
-https://www.404rq.com/donations/
+https://www.404rq.com/donations
 
 ## Videos
 [![GTW-RPG vehicle system](http://img.youtube.com/vi/IKAHKrxKUbk/0.jpg)](http://www.youtube.com/watch?v=IKAHKrxKUbk)<br>
@@ -48,5 +48,9 @@ nokizorque
 
 ## Websites
 Main page: https://www.404rq.com<br>
-Bug reports (by users): https://forum.404rq.com/bug-reports/<br>
-Development discussions: https://forum.404rq.com/mta-servers-development/
+### Development
+If directly related to GTW-RPG please open an issue report here on Github<br>
+Bug reports: https://forum.404rq.com/bug-reports<br>
+Suggestions: https://forum.404rq.com/mta-servers-development
+### Media
+Picture gallery: https://media.404rq.com
