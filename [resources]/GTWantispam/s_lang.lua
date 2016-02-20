@@ -15,18 +15,23 @@
 ********************************************************************************
 ]]--
 
--- English/English
-en_US = {
-	["msg_no_spam"] 	= "Do not spam commands!",
-	["log_cmd_issuer"]	= " issued the server command: '",
-}
+-- Definition of default language for this resource
+r_lang = exports.GTWcore:getGTWLanguage() or "en_US"
 
--- Swedish/Svenska
-sv_SE = {
-	["msg_no_spam"] 	= "Kommando spam är ej tillåtet!",
-	["log_cmd_issuer"]	= " utförde följande kommando: '",
-}
+-- Language text storage for this resource
+txt = {
+	-- English/English
+	["en_US"] = {
+		["msg_no_spam"] 	= "Do not spam commands!",
+		["log_cmd_issuer"]	= " issued the server command: '",
+	},
 
+	-- Swedish/Svenska
+	["sv_SE"] = {
+		["msg_no_spam"] 	= "Kommando spam är ej tillåtet!",
+		["log_cmd_issuer"]	= " utförde följande kommando: '",
+	},
+}
 -- Spanish/Español
 es_ES = {
 	["msg_no_spam"] 	= "No hagas spam de comandos!",

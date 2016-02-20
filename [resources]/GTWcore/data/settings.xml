@@ -20,7 +20,8 @@
         <option name="peak">0</option>
         <option name="version">3.0</option>
         <option name="revision">11234</option>
-
+	<option name="language">en_US</option>
+	
         <!-- WARNING: by change this value to true you accept any
                 consequence it may cause you, this value should
                 NOT be true in any server. -->

@@ -46,6 +46,11 @@ function load_settings()
         -- Override other settings (optional)
     	setTimer(setGameType, 3600*1000, 0, server_settings["gamemode"])
     	setTimer(setMapName, 3600*1000, 0, server_settings["map"])
+	
+	--[[ Export for other resources to figure out server language ]]--
+	function getGTWLanguage()
+		return server_settings["language"]
+	end
 end
 addEventHandler("onResourceStart", resourceRoot, load_settings)
 

@@ -25,14 +25,14 @@ function check_for_spam(cmd)
 	if not spam[source] then
 		spam[source] = 1
 	elseif spam[source] == limit then
-		exports.GTWtopbar:dm(en_US["msg_no_spam"], source, 255,0,0)
+		exports.GTWtopbar:dm(txt[getElementData(source, "GTWcore.language") or r_lang]["msg_no_spam"], source, 255,0,0)
 		cancelEvent()
 	else
 		spam[source] = spam[source] + 1
 	end
 
 	-- Uncomment to track commands issued by players
-	--outputServerLog(getPlayerName(source)..en_US["log_cmd_issuer"]..cmd.."'")
+	--outputServerLog(getPlayerName(source)..txt[r_lang]["log_cmd_issuer"]..cmd.."'")
 end
 addEventHandler("onPlayerCommand", root, check_for_spam)
 

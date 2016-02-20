@@ -36,4 +36,7 @@
         <script src="s_core.lua" type="server" />
         <script src="c_core.lua" type="client" protected="true" />
         <script src="accounts.lua" type="server" />
+	
+	<!-- Exported functions -->
+	<export function="getGTWLanguage" type="server" />
 </meta>
