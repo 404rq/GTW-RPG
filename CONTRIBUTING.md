@@ -21,6 +21,13 @@ You may also report bugs in our community forum:
 https://forum.404rq.com/bug-reports/
 
 
+## Language support
+Each resource should now have a language file, one for the server and one for the client _(s_lang.lua and c_lang.lua)_.
+Within this files there's simply one big multidimensional table containing all text outputs translated into multiple 
+languages, there's also a resource global definition at the top defining the resource language locally and if possible
+globally by GTWcore. See GTWantispam for a live example of how languages should be implemented.
+
+
 ## Pull request
 This is the method used by non official developers allowing anyone who want to contribute to GTW-RPG, the process
 is described in below list and used to preview changes before they are added into the official game mode. Here's 
@@ -29,6 +36,11 @@ how you do it:
 * Do the changes you want to your copy of GTW-RPG
 * Make a pull request: https://github.com/404rq/GTW-RPG/pulls
 * Watch (and join) the discussion :+1:
+
+We recomend you to also describe your changes with a simple title followed by a more detailed description if needed
+you may also use tags like update: new: misc: and similar. Please write them in lower case followed by a colon, followed 
+by space and then the title, your description provides more freedom of writing though as long as it describes what 
+changes you made and possibly why.
 
 And that's it, contributing shouldn't be harder than so, right.
 
