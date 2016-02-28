@@ -1,0 +1,12 @@
+********************************************************
+* MTA PHP SDK
+*
+* @copyright     Copyright (C) 2010, Multi Theft Auto
+* @author        JackC, eAi, Sebas
+* @link          http://www.mtasa.com
+* @version       0.4
+********************************************************
+
+Changelog 0.4(Little fix):
+
+* Renamed "public function mta()" to "public function __construct()".
