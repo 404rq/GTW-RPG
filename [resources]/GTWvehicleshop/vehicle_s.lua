@@ -114,10 +114,11 @@ addEventHandler( "GTWvehicleshop.onHideVehicles", root, hideMyVehicles )
 --[[ Loads all vehicles for a specific player, requires that the player is logged in ]]--
 function listAllMyVehicles(query)
 	local result = dbPoll( query, 0 )
-	if result then
-		local vehicle_data_to_client = {{ }}
-		local plr = nil
-    	for index, row in ipairs( result ) do
+	if not result then return end
+	
+	local vehicle_data_to_client = {{ }}
+	local plr = nil
+    	for index, row in ipairs(result) do
     		-- Get all relevant data for the vehicle
     		vehicle_data_to_client[index] = { }
     		vehicle_data_to_client[index][1] = tonumber(row["ID"])
@@ -127,13 +128,12 @@ function listAllMyVehicles(query)
     		vehicle_data_to_client[index][5] = tonumber(row["locked"])
     		vehicle_data_to_client[index][6] = tonumber(row["engine"])
     		vehicle_data_to_client[index][7] = row["pos"]
-    		plr = getAccountPlayer( getAccount( row["owner"] ))
+    		plr = getAccountPlayer(getAccount(row["owner"]))
     	end
 
     	-- Send data to client
-    	if plr then
+    	if plr and isElement(plr) and getElementType(plr) then
     		triggerClientEvent( plr, "GTWvehicleshop.onReceivePlayerVehicleData", plr, vehicle_data_to_client )
-		end
 	end
 end
 function listMyVehicles( )
