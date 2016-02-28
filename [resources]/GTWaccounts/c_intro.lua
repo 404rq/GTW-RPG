@@ -120,7 +120,7 @@ end
 function start_intro()
 	settings.is_running = true
         addEventHandler("onClientRender", root, view_gtw_intro)
-        guiSetVisible(window, false)
+        if window then guiSetVisible(window, false) end
 end
 addCommandHandler("intro", start_intro)
 
