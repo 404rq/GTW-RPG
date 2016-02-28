@@ -18,6 +18,7 @@
 settings        = { }
 settings.timer  = { }
 settings.frames = { }
+settings.is_running = nil
 
 -- Setup introduction for new players
 settings.intro = {
@@ -117,6 +118,7 @@ end
 
 --[[ Start the introduction ]]--
 function start_intro()
+	settings.is_running = true
         addEventHandler("onClientRender", root, view_gtw_intro)
         guiSetVisible(window, false)
 end
@@ -124,10 +126,13 @@ addCommandHandler("intro", start_intro)
 
 --[[ Function to stop the intro and reset ]]--
 function stop_intro()
+	if not settings.is_running then return end
         -- Stop the intro
         reset_data()
         showPlayerHudComponent("radar", true)
+	removeEventHandler("onClientRender", root, view_gtw_intro)
         unbindKey("space", "down", stop_intro)
+	settings.is_running = nil
 end
 addCommandHandler("stopintro", stop_intro)
 bindKey("space", "down", stop_intro)
