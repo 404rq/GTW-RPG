@@ -25,12 +25,12 @@ min_jail_time 	= 60
 
 --[[ Pay the cop for arrest ]]--
 function pay_cop(cop, wl, viol_sec)
-	local money = 100
+	local money = 20
 	local payout = (money * wl) + (money * viol_sec/10)
 	if payout < 200 then
 		payout = 200
-	elseif payout > 50000 then
-		payout = 50000
+	elseif payout > 10000 then
+		payout = 10000
 	end
 	if not cop or not wl or not viol_sec or not isElement(cop) or getElementType(cop) ~= "player" then return end
 	givePlayerMoney(cop, payout)
@@ -338,9 +338,10 @@ function admin_jail(admin, cmd, crim, time, ...)
     local suspect = getPlayerFromName(crim)
     if isElement(suspect) then
        	local arg = {...}
-		local reason = table.concat(arg, " ")
+	local reason = table.concat(arg, " ")
        	if time and reason then
-       		exports.GTWjail:Jail(suspect, time, "LSPD", reason, admin)
+		exports.GTWwanted:setWl(suspect, time/60, 10, reason, false, false)
+       		exports.GTWjail:Jail(suspect, time, "LSPD", reason, admin) 
        		exports.GTWtopbar:dm(crim.." was jailed successfully", admin, 0, 255, 0)
        	else
        		exports.GTWtopbar:dm("Warning: no time or reason was specified, the player was not jailed", admin, 255, 0, 0)
@@ -726,7 +727,7 @@ function quitPlayer(quitType)
 		setAccountData(acc, "GTWdata.police.jailTimeOffline", true)
 	else
 		-- Player should not be arrested after relogin
-		setAccountData(acc, "GTWdata.police.jailTimeOffline", false)
+		setAccountData(acc, "GTWdata.police.jailTimeOffline", nil)
 	end
 	
 	-- Clean up old unused data
