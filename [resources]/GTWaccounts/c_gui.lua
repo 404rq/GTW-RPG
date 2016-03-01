@@ -262,7 +262,7 @@ end
 -- Display login screen to players who isn't currently logged in
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
-		exports.GTWtopbar:dm("Welcome! please read the instructions before trying to register", client, 0,200,0)
+		exports.GTWtopbar:dm("Welcome! please read the instructions before trying to register", 0,200,0)
 		setTimer(make_login, 500, 1)
 		setBlurLevel(0)
 		showChat(false)
