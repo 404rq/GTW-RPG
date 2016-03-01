@@ -435,6 +435,8 @@ end
 -- Claim a turf(Admin)
 function claimTurf(player, cmd, sx, sy)
 	local acc = getPlayerAccount(player)
+	if not getElementData(player, "GTWturf.area") then return end
+	if not getElementData(player, "GTWturf.theTurf") then return end
 	if isObjectInACLGroup("user."..getAccountName(acc), aclGetGroup("Admin")) then
 		local group = getElementData(player, "Group")
 		local r,g,b = exports.GTWgroups:getGroupTurfColor(group)
