@@ -37,7 +37,7 @@ local m_location = {
 	{ 50, 1245.8, 	336.9, 	19.40625, 1 },
 	{ 50, -317.4, 	1056.4, 19.59375, 1 },
 	{ 50, -1514.8, 	2527.9, 55.6875, 1 },
-	
+
 	-- Fast food
 	{ 40, 2105, -1808, 14, 2 },
 	{ 40, 2084, 2224, 12, 2 },
@@ -74,7 +74,7 @@ local m_location = {
 	{ 40, -2356, 1008, 51, 2 },
 	{ 40, -2336, -167, 36, 2 },
 	{ 40, -2953, 2335, 8, 2 },
-	
+
 	-- Skin shops
 	{ 30, 453.8671875, -1478.0693359375, 30.813251495361, 3 },
 	{ 30, 461.1572265625, -1499.9794921875, 31.065660476685, 3 },
@@ -93,7 +93,7 @@ local m_location = {
 	{ 30, 2802.33984375, 2430.599609375, 11.0625, 3 },
 	{ 30, 2825.7392578125, 2407.439453125, 11.0625, 3 },
 	{ 30, 2572.0693359375, 1904.8291015625, 11.0234375, 3 },
-	
+
 	{ 50, 1379.771484375, 2632.25, 12.349542617798, 4 },
 	{ 50, 742.5224609375, 1780.7451171875, 7.0691294670105, 4 },
 	{ 50, -38.5625, 1292.8466796875, 19.687103271484, 4 },
@@ -106,7 +106,7 @@ local m_location = {
 	{ 50, 2822.146484375, 94.173828125, 27.358554840088, 4 },
 	{ 50, 2864.75, 1349.0537109375, 12.349542617798, 4 },
 	{ 50, 2781, 1824.125, 12.349542617798, 4 },
-	
+
 	{ 35, -2626, 208, 5, 5 },
 	{ 35, 1368, -1279, 14, 5 },
 	{ 35, 2400, -1981.5, 1, 5 },
@@ -118,7 +118,7 @@ local m_location = {
 	{ 35, 242, -176, 2, 5 },
 	{ 35, 2333, 61, 27, 5 },
 	{ 35, -1508.8896484375, 2610.7998046875, 56, 5 },
-	
+
 	{ 25, 1352, -1758, 14, 6 },
 	{ 25, 1834, -1843, 14, 6 },
 	{ 25, 2888, 2452, 11, 6 },
@@ -128,12 +128,12 @@ local m_location = {
 local s_cooldown = { }
 
 --[[ Display helpful messages to new players ]]--
-setTimer(function() 
+setTimer(function()
 	for k,v in pairs(getElementsByType("player")) do
 		if v and isElement(v) and getElementType(v) == "player" and not isTimer(s_cooldown[v]) then
 			local x,y,z = getElementPosition(v)
 			for l,m in pairs(m_location) do
-				if getDistanceBetweenPoints3D(m[2],m[3],m[4], x,y,z) < m[1] then
+				if getDistanceBetweenPoints3D(m[2],m[3],m[4], x,y,z) < m[1] and getElementData(v, "GTWdata.isNew") then
 					s_cooldown[v] = setTimer(function() end, 20000,1)
 					playSoundFrontEnd(v, 11)
 					local m_first = "#00AA00(Tutorial)#CCCCCC "
@@ -143,7 +143,7 @@ setTimer(function()
 						m_first = ""
 					end
 				end
-			end			
+			end
 		end
 	end
 end, 1000,0)
