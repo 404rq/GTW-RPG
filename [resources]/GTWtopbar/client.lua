@@ -24,6 +24,7 @@ function dm(text, r,g,b, col, bell)
 	-- Insert message
 	local tick = getTickCount()
 	if text == last_msg then return end
+	if not col then col = false end
 	if bell then playSoundFrontEnd(11) end
 	table.insert(messages, {text, true, tick + display_time_ms, 170, r,g,b, col })
 	outputConsole("[TOPBAR] "..text)
