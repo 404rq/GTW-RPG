@@ -202,10 +202,11 @@ function sync_train_speed(train)
 	end
 
 	-- Sync the speed
-	if (diff > Settings.slow_speed and speed > curr_speed and curr_speed >= 0)
+	curr_speed = math.abs(curr_speed)
+	if (diff > Settings.slow_speed and speed > curr_speed)
 		or Trains.is_leaving[train] then
 		set_speed_policy(train, 1)
-	elseif diff > Settings.slow_speed and speed < curr_speed and curr_speed > Settings.slow_speed then
+	elseif diff > Settings.slow_speed and curr_speed > Settings.slow_speed then
 		set_speed_policy(train, 2)
 	else
 		-- The target speed has been reached successfully
@@ -290,9 +291,9 @@ function create_train(plr, cmd, args)
 	setTrainDirection(new_train, direction)
 
 	if direction then
-		setTrainSpeed(new_train, math.abs((speed-10)/160))	-- Clockwise
+		setTrainSpeed(new_train, math.abs((speed/2.1)/160))	-- Clockwise
 	else
-		setTrainSpeed(new_train, -math.abs((speed-10)/160))	-- Counter clockwise
+		setTrainSpeed(new_train, -math.abs((speed/2.1)/160))	-- Counter clockwise
 	end
 	Trains.is_running[new_train] = true
 	Trains.is_leaving[new_train] = false
@@ -303,7 +304,7 @@ function create_train(plr, cmd, args)
 	Trains.blips[new_train][1] = engine_blip
 
 	-- Add an extra engine if freight train
-	local max_cars = 9
+	local max_cars = 4
 	local start_at = 1
 	local t_length = math.random(2, max_cars)
 	local front_car = new_train
@@ -539,7 +540,7 @@ function set_speed_policy(t_engine, state)
 		state = 1
 	end
 
-	triggerClientEvent(root, "GTWtrain.setControlState", resourceRoot, engineer, state)
+	triggerClientEvent(root, "GTWtrain.setControlState", root, engineer, state)
 end
 
 --[[ Round float numbers ]]--
