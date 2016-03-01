@@ -61,7 +61,7 @@ function refreshAllBlips(resource)
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 			elseif not getElementData(plr, "anon") then
 				local alpha = 200
-				if getElementData(plr, "Occupation") ~= "Prisoner" then alpha = 50 end
+				if getElementData(plr, "Occupation") == "Prisoner" then alpha = 20 end
 				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
 			end
 		end
@@ -82,6 +82,7 @@ function updatePlayerBlip(plr)
 	if getPlayerTeam(plr) then
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		playersTeam[plr] = getTeamName(getPlayerTeam(plr))
+		setElementData(plr, "Occupation2", getElementData(plr, "Occupation"))
 	end
 
 	-- Make the blip visible to a specific amount of players
@@ -125,6 +126,7 @@ function updateBlipColor(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	if not getPlayerTeam(plr) then return end
 	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) then return end
+	if getElementData(plr, "Occupation2") == getElementData(plr, "Occupation") then return end
 
 	-- Remove current blips if any
   	playersTeam[plr] = nil
