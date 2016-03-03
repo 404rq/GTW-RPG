@@ -15,12 +15,16 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Job system" description="Handles civilian jobs and their gui" version="58" type="script" />
-    <script src="data.lua" type="shared" />
-    <script src="civ_s.lua" type="server" />
-    <script src="civ_c.lua" type="client" />
-    <script src="exports.lua" type="shared" />
+        <info author="GTWGames" name="Job system" description="Handles civilian jobs and their gui" version="58" type="script" />
+        <script src="data.lua" type="shared" />
+        <script src="civ_s.lua" type="server" />
+        <script src="civ_c.lua" type="client" />
+        <script src="exports.lua" type="shared" />
 
-    <export function="addWorkItem" type="shared" />
-    <export function="addMarker" type="shared" />
+        <!-- Formerly GTWteam -->
+        <script src="team/team_s.lua" type="server" />
+        <script src="team/team_c.lua" type="client" />
+
+        <export function="addWorkItem" type="shared" />
+        <export function="addMarker" type="shared" />
 </meta>
