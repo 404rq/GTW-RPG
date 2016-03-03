@@ -124,7 +124,7 @@ function showGUI( hitElement, matchingdimension, jobID )
  		local ID  = ""
  		if source then ID = getElementData( source, "jobID" ) else
  		ID = jobID end
- 		local team, max_wl, description, skins, skin_names, work_tools = unpack(work_items[ID])
+ 		local team, max_wl, description, skins, skin_names, work_tools, welcome_message = unpack(work_items[ID])
 
  		-- Check group membership
  		if restricted_jobs[ID] then
@@ -305,7 +305,7 @@ function staffWork(cmdName, ID)
 
 	-- Check if a user is in the staff team, if so, allow access
 	local is_staff = exports.GTWstaff:isStaff(localPlayer)
-	if restricted_jobs[ID] and (not is_staff or restricted_jobs[ID] ~= getElementData(localPlayer, "Group")) then
+	if not is_staff or (restricted_jobs[ID] and restricted_jobs[ID] ~= getElementData(localPlayer, "Group")) then
 		exports.GTWtopbar:dm( ID..": Only staff and official groups can use this command!", 255, 100, 0 )
 		return
 	end
@@ -345,17 +345,17 @@ end
 --[[ When the user clicks on the Accept job button ]]--
 function accept_work()
 	-- Trigger server event
-	local ID = getElementData( localPlayer, "jobID" )
+	local ID = getElementData(localPlayer, "jobID")
 	if not playerSkinID then
 		playerSkinID = 0
 	end
 
 	-- Accept job
 	if ID then
-    	triggerServerEvent( "GTWcivilians.accept", localPlayer, ID, playerSkinID )
-    end
+    	           triggerServerEvent("GTWcivilians.accept", localPlayer, ID, playerSkinID)
+        end
 
-    -- Reset camera details
+        -- Reset camera details
  	fadeCamera(false)
  	setTimer(reset_close_gui, 1000, 1)
  	cooldown = setTimer(function() end, 3000, 1)
@@ -367,6 +367,10 @@ function accept_work()
  	guiSetVisible( work_window, false )
  	guiSetInputEnabled( false )
  	showCursor( false )
+
+        -- Display job info message in chat box
+        local team, max_wl, description, skins, skin_names, work_tools, welcome_message = unpack(work_items[ID])
+        outputChatBox("["..ID.."]#BBBBBB "..welcome_message, 255,200,0, true)
 end
 
 --[[ When the user clicks on the Close button ]]--
