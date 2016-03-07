@@ -46,7 +46,7 @@ function load_settings()
         -- Override other settings (optional)
     	setTimer(setGameType, 3600*1000, 0, server_settings["gamemode"])
     	setTimer(setMapName, 3600*1000, 0, server_settings["map"])
-	
+
 	--[[ Export for other resources to figure out server language ]]--
 	function getGTWLanguage()
 		return server_settings["language"]
@@ -164,7 +164,7 @@ function displayStoppedRes(res)
         local pAcc = getPlayerAccount(v)
         if pAcc and (isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Admin")) or
         	isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Developer"))) then
-        	outputChatBox("Resource " .. getResourceName(res) .. " [#cc0000Stopped#ffffff]", v, 255, 255, 255, true)
+        	outputChatBox("Resource " .. (getResourceName(res) or "unknown") .. " [#cc0000Stopped#ffffff]", v, 255, 255, 255, true)
         end
     end
 end
