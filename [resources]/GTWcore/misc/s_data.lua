@@ -166,7 +166,7 @@ function save_data(plr)
 
         -- Solutions for servers without GTWcivilians
         if not getTeamFromName("Unemployed") then
-                local new_team = createTeam("Unemployed")
+                local new_team = createTeam("Unemployed", 255,255,0)
                 setPlayerTeam(plr, new_team)
 
                 -- Add some scoreboard collumns
@@ -175,7 +175,9 @@ function save_data(plr)
         	exports.scoreboard:scoreboardAddColumn("Playtime", root, 70)
 
                 -- Create a staff team assuming that doesn't exist
-                createTeam("Staff")
+                if not getTeamFromName("Staff") then
+                        createTeam("Staff", 255,255,255)
+                end
         end
 
         -- Team, occupation and team colors
