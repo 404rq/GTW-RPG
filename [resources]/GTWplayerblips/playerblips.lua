@@ -90,7 +90,9 @@ function updatePlayerBlip(plr)
 		if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 		elseif not getElementData(plr,"anon") then
-			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
+			local alpha = 200
+			if getElementData(plr, "Occupation") == "Prisoner" then alpha = 20 end
+			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
 		end
 	end
 	if not isTimer(colorUpdater[plr]) then
@@ -125,8 +127,8 @@ function updateBlipColor(plr)
 	-- Check if team exist and has changed
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	if not getPlayerTeam(plr) then return end
-	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) then return end
-	if getElementData(plr, "Occupation2") == getElementData(plr, "Occupation") then return end
+	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) and
+		getElementData(plr, "Occupation2") == getElementData(plr, "Occupation") then return end
 
 	-- Remove current blips if any
   	playersTeam[plr] = nil
