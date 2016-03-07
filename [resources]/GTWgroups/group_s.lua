@@ -144,7 +144,6 @@ dbQuery(load_client_group, db, "SELECT * FROM groupmember")
 function groupMemberLogin()
 	if (groups_data[account(source)]) then
 		gang_data[source] = groups_data[account(source)][1]
-		outputChatBox(groups_data[account(source)][1],plr)
 		setElementData(source, "Group", groups_data[account(source)][1])
 	end
 end
