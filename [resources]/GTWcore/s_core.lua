@@ -51,6 +51,13 @@ function load_settings()
 	function getGTWLanguage()
 		return server_settings["language"]
 	end
+
+        --[[ Exports for MySQL credentials ]]--
+        function getMySQLHost() return server_settings["MySQLhost"] end
+        function getMySQLDatabase() return server_settings["MySQLdatabase"] end
+        function getMySQLUser() return server_settings["MySQLuser"] end
+        function getMySQLPass() return server_settings["MySQLpass"] end
+        function getMySQLPort() return server_settings["MySQLport"] end
 end
 addEventHandler("onResourceStart", resourceRoot, load_settings)
 
