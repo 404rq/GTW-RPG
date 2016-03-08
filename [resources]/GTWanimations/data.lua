@@ -29,6 +29,15 @@ cmd_anim_map = {
 	["lean"] 		= { "smoking", "m_smklean_loop" },
 	["sit"] 		= { "ped", "seat_idle" },
 	["cower"] 		= { "ped", "cower" },
+	["handcower"] 		= { "ped", "handscower" },
+	["gum"] 		= { "ped", "gum_eat" },
+	["getup"] 		= { "ped", "getup" },
+	["getupfront"] 		= { "ped", "getup_front" },
+	["chat"] 		= { "ped", "IDLE_chat" },
+	["taxiwink"] 		= { "ped", "IDLE_taxi" },
+	["turn180"] 		= { "ped", "turn_180" },
+	["urp"] 		= { "ped", "facurp" },
+	["gumchew"] 		= { "ped", "facgum" },
 }
 
 -- All available animations

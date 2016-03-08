@@ -308,7 +308,7 @@ High latency occurs for two reasons, either the network is overloaded or you're 
 To prevent high latency you neet to consider these two things:
   * If possible, use a cable network rather than a wireless one. That should reduce your latency to max 400 no matter where in the world you're located, (lower values applies to Europe and USA since that's our location).
   * Avoid downloading files while playing, especially torrent files and similar which tends to overflow local networks, also make sure noone else on the same network aren't downloading anything in the background.
-  
+
 What happens when the latency is too high?
 We block some features for you temporary, in worst case scenario we kick you. These systems are automatic so don't blame online staff for your own high latency.
 ]]},
@@ -414,9 +414,12 @@ And the commands to be used while driving:
   * /lright
 
 - Misc features
-  * /engine  - Start/stop the vehicle engine
-  * /lock    - Lock/unlock the doors of your vehicle
-  * /emlight - Toggle emergency lights
+  * /engine        - Start/stop the vehicle engine
+  * /lock          - Lock/unlock the doors of your vehicle
+  * /emlight       - Toggle emergency lights
+  * /topspeed      - Show current top speed in KM/h
+  * /plate <text>  - Change license plate text
+  * /drop          - Exit a helicopter with a rope
 
 - Return rental vehicles
   * /djv - destroy job vehicle
@@ -901,11 +904,17 @@ have them here.]] },
 	{ "Command list", 1, [[
 :: Animations ::
 Key 'F10'   -- Opens a GUI with all available animations
+/chat       -- Face expressions to chat
 /cpr        -- Do CPR on another player
 /deal1      -- If you want to look like a drugdealer
 /deal2
 /deal3
 /fatidle    -- Look like a fat person
+/getup      -- Rise from the ground
+/getupfront -- Rise forward from the ground
+/gum        -- Take a gum
+/gumchew    -- Chew a gum
+/handcower  -- Take cower using your hands
 /handsup    -- Handsup to follow the orders from a
                law officer and prevent getting shot
 /lean       -- Lean towards a wall or a car
@@ -913,7 +922,10 @@ Key 'F10'   -- Opens a GUI with all available animations
 /mourn      -- Look sad (if someone dies maybe)
 /sit        -- Sit down on anything you want to sit on
 /smoke      -- Smoke a cigarette
+/taxiwink   -- Wink in a taxi
 /tired      -- Look tired
+/turn180    -- Turn around
+/urp        -- Open ye mouth
 /wave       -- Wave to another player
 * All animations can be interupted by walking forward at any time
 
