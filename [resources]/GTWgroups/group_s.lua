@@ -26,8 +26,15 @@ cache_data = {}
 log = false
 show_debug_info = false
 
--- Database connection
-db = dbConnect("sqlite", "/groups.db")
+-- Database connection setup, MySQL or fallback SQLite
+local mysql_host = export.GTWcore:getMySQLHost() or nil
+local mysql_database = export.GTWcore:getMySQLDatabase() or nil
+local mysql_user = export.GTWcore:getMySQLUser() or nil
+local mysql_pass = export.GTWcore:getMySQLPass() or nil
+local mysql_port = export.GTWcore:getMySQLPort() or nil
+db = dbConnect("mysql", "dbname="..mysql_database..";host="..mysql_host..":"..mysql_port, mysql_user, mysql_pass, "autoreconnect=1")
+if not db then db = dbConnect("sqlite", "/groups.db") end
+
 dbExec(db, "CREATE TABLE IF NOT EXISTS groupmember (account TEXT, groupName TEXT, rank TEXT, warningLvl TEXT, joined TEXT, lastTime TEXT)")
 dbExec(db, "CREATE TABLE IF NOT EXISTS groups (name TEXT, leader TEXT, message TEXT, chatcolor TEXT, notecolor TEXT, date TEXT, turfcolor TEXT)")
 dbExec(db, "CREATE TABLE IF NOT EXISTS groupRanks (groupName TEXT, name TEXT, permissions TEXT)")
