@@ -20,10 +20,10 @@ txt_cache = ""
 -- On receive updates
 function result_send(text)
 	-- Verify that the player is still online
-	--if not plr then
-	--	outputServerLog("ERROR: GTWupdates: unable to fetch update list ("..plr_name)
-	--	return
-	--end
+	if not text then
+		outputServerLog("ERROR: GTWupdates: unable to fetch update list")
+		return
+	end
 
 	-- Format from wiki to MTA text field
 	text = string.gsub(text, "'''", "")

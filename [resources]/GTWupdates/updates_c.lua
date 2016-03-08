@@ -38,20 +38,21 @@ function download_updates()
 	-- Request updates list from RageQuit network (unavailable)
 	old_text = guiGetText(txt_memo)
 	if old_text == "" then
-		guiSetText(txt_memo, "Connecting to 404rq.com/updates/ for latest updates, please wait...")
+		guiSetText(txt_memo, "Connecting to www.404rq.com/updates/ for latest updates, please wait...")
 	end
 	triggerServerEvent("GTWupdates.request", localPlayer)
 end
 setTimer(download_updates, 5*60*1000, 0)
+download_updates()
 
 function server_response(message)
     	-- Report changes to online players
     	if old_text ~= message and guiGetVisible(window) then
 		guiSetText(txt_memo, message)
-		exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/", 180, 180, 180 )
+		exports.GTWtopbar:dm("Updates downloaded from: www.404rq.com/updates/", 180, 180, 180 )
     	elseif old_text ~= message then
 		guiSetText(txt_memo, message)
-		exports.GTWtopbar:dm("Updates downloaded from: 404rq.com/updates/! "..
+		exports.GTWtopbar:dm("Updates downloaded from: www.404rq.com/updates/! "..
 			"Use /updates to see what's new", 180, 180, 180)
     	end
 end
