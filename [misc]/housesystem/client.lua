@@ -17,7 +17,7 @@ addEvent("onClientHouseSystemInfoMenueOpen", true)
 gAcc = {}
 local gMe = getLocalPlayer()
 function getUserAccount()
-	triggerServerEvent ( "onGetAccount", gMe ) 
+	triggerServerEvent ( "onGetAccount", gMe )
 end
 function updateAcc( acc )
     gAcc[gMe] = acc
@@ -137,15 +137,6 @@ addEventHandler("onClientHouseSystemMenueUpdate", resourceRoot, function(string,
 	end
 end)
 
--- BLIPS --
-function addBlips( x, y )
-    local blip = exports.customblips:createCustomBlip( x, y, 16, 16, "house.png", 100 ) 
-	exports.customblips:setCustomBlipRadarScale( blip, 1.6 )
-	return blip
-end
-addEvent( "onBlipsCreate", true )
-addEventHandler( "onBlipsCreate", resourceRoot, addBlips )
-
 -- INFO MENUE --
 addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z, price, locked, rentable, rentalprice, id, doingrent, isrentedin, canadd)
 	getUserAccount()
@@ -160,12 +151,12 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	guiSetInputMode("no_binds_when_editing")
 
 	-- Make the variables --
-	
+
 	local lockedstate = "no"
 	if(tonumber(locked) == 1) then lockedstate = "yes" end
 	local rentstate = "no"
 	if(tonumber(rentable) == 1) then rentstate = "yes" end
-	
+
 	local X, Y, Width, Height = getMiddleGuiPosition(270,251)
 	Fenster3[1] = guiCreateWindow(X, Y, Width, Height,"Houseinformation",false)
 	Label3[1] = guiCreateLabel(12,43,253,15,"House ID: "..id,false,Fenster3[1])
@@ -199,22 +190,22 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	Knopf3[2] = guiCreateButton(137,175,124,32,"Rent house",false,Fenster3[1])
 	Knopf3[3] = guiCreateButton(9,210,124,32,"Close",false,Fenster3[1])
 	Knopf3[4] = guiCreateButton(137,209,124,32,"Enter",false,Fenster3[1])
-	
+
 	--------------
 	-- SETTINGS --
 	--------------
-	
+
 	-- ENTER BUTTON --
 	if not (owner) then
 		if(isrentedin == true) then
-		
+
 		else
 			if(tonumber(locked) == 1) then
 				guiSetEnabled(Knopf3[4], false)
 			end
 		end
 	end
-	
+
 	-- RENT HOUSE BUTTON --
 	if(gAcc[gMe] == owner) then
 		guiSetEnabled(Knopf3[2], false)
@@ -227,7 +218,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 			guiSetText(Knopf3[2], "Unrent house")
 		end
 	end
-	
+
 	-- BUYHOUSE BUTTON --
 	if(owner ~= "no-one") then
 		guiSetEnabled(Knopf3[1], false)
@@ -237,9 +228,9 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 		end
 	end
 	-- EVENT HANDLERS --
-	
+
 	-- RENT --
-	
+
 	addEventHandler("onClientGUIClick", Knopf3[2], function()
 		local text = guiGetText(Knopf3[2])
 		Guivar3 = 0
@@ -251,7 +242,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 			triggerServerEvent("onHouseSystemInfoRent", gMe, id, false)
 		end
 	end, false)
-	
+
 	-- BUY HOUSE --
 	addEventHandler("onClientGUIClick", Knopf3[1], function()
 		local text = guiGetText(Knopf3[1])
@@ -264,7 +255,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 			triggerServerEvent("onHouseSystemInfoBuy", gMe, id, false)
 		end
 	end, false)
-	
+
 	-- ENTER --
 	addEventHandler("onClientGUIClick", Knopf3[4], function()
 		Guivar3 = 0
@@ -272,7 +263,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 		destroyElement(Fenster3[1])
 		triggerServerEvent("onHouseSystemInfoEnter", gMe, id)
 	end, false)
-	
+
 	-- CANCEL --
 	addEventHandler("onClientGUIClick", Knopf3[3], function()
 		Guivar3 = 0
@@ -285,13 +276,13 @@ end)
 addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, money, weap1, weap2, weap3, id, rentable, rent, tenands)
 	getUserAccount()
 	if(locked == nil) then
-		
+
 	else
 		if(Guivar2 == 1) then return end
 		Guivar2 = 1
 		guiSetInputMode("no_binds_when_editing")
 		showCursor(true)
-		
+
 		local X, Y, Width, Height = getMiddleGuiPosition(752,218)
 		Fenster2[1] = guiCreateWindow(X, Y, Width, Height, "Housemenue",false)
 		Label2[1] = guiCreateLabel(149,23,81,14,"Weapons",false,Fenster2[1])
@@ -376,19 +367,19 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 		end
 		-- RENTALPRICE
 		guiSetText(Label2[15], "Rentalprice: $"..rent)
-		
+
 		-- LOCKED --
 		locked = tonumber(locked)
 		if(locked == 1) then
 			guiSetText(Knopf2[6], "Unlock house")
 		end
-		
+
 		-- MONEY --
 		guiSetText(Label2[3], "Current Money:\n"..money.."$")
-		
-		
+
+
 		-- WEAPONS --
-	
+
 		if(tonumber(weap1) == nil) then
 			local weapon, ammo = gettok(weap1, 1, ","), gettok(weap1, 2, ",")
 			if(weapon) and (ammo) then
@@ -408,9 +399,9 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 			end
 		end
 		-- EVENT HANDLERS --
-		
+
 		-- REMOVE TENANDS --
-		
+
 		addEventHandler("onClientGUIClick", Knopf2[8], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
 			local user = guiGridListGetItemText(Grid2[1], guiGridListGetSelectedItem(Grid2[1]), 1)
@@ -418,7 +409,7 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 			if(guiCheckBoxGetSelected(Checkbox2[1]) == false) then exports.GTWtopbar:dm("You must be sure!", 255, 0, 0) return end
 			triggerServerEvent("onHouseSystemTenandRemove", gMe, id, user)
 		end, false)
-		
+
 		-- SET RENTALPRICE --
 		addEventHandler("onClientGUIClick", Knopf2[7], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
@@ -427,18 +418,18 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 			value = math.floor(value)
 			triggerServerEvent("onHouseSystemRentalprice", gMe, id, value)
 		end, false)
-		
+
 		-- SET RENTABLE --
 		addEventHandler("onClientGUIClick", Knopf2[9], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
 			triggerServerEvent("onHouseSystemRentableSwitch", gMe, id)
 		end, false)
-		
+
 		-- WEAPON DEPOSIT --
 		addEventHandler("onClientGUIClick", Knopf2[4], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
 			local radio = {}
-			for i = 1, #Radio2, 1 do 
+			for i = 1, #Radio2, 1 do
 				radio[i] = guiRadioButtonGetSelected(Radio2[i])
 			end
 			if(radio[1] == true) then
@@ -449,12 +440,12 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 				triggerServerEvent("onHouseSystemWeaponDeposit", gMe, id, 3)
 			end
 		end, false)
-		
+
 		-- WEAPON WITHDRAW--
 		addEventHandler("onClientGUIClick", Knopf2[5], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
 			local radio = {}
-			for i = 1, #Radio2, 1 do 
+			for i = 1, #Radio2, 1 do
 				radio[i] = guiRadioButtonGetSelected(Radio2[i])
 			end
 			if(radio[1] == true) then
@@ -475,7 +466,7 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 			value = math.floor(value)
 			triggerServerEvent("onHouseSystemHouseWithdraw", gMe, id, value)
 		end, false)
-		
+
 		-- MONEY DEPOSIT --
 		addEventHandler("onClientGUIClick", Knopf2[1], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
@@ -486,13 +477,13 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 			value = math.floor(value)
 			triggerServerEvent("onHouseSystemHouseDeposit", gMe, id, value)
 		end, false)
-		
+
 		-- LOCK HOUSE --
 		addEventHandler("onClientGUIClick", Knopf2[6], function()
 			if(owner == false) then exports.GTWtopbar:dm("You are not the owner of this house!", 255, 0, 0) return end
 			triggerServerEvent("onHouseSystemHouseLock", gMe, id)
 		end, false)
-		
+
 		-- CANCEL --
 		addEventHandler("onClientGUIClick", Knopf2[3], function()
 			Guivar2 = 0
@@ -509,9 +500,9 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 	if(Guivar == 1) then return end
 	Guivar = 1
 	guiSetInputMode("no_binds_when_editing")
-	
+
 	showCursor(true)
-	
+
 	local X, Y, Width, Height = getMiddleGuiPosition(787,269) -- I'm too lazy :D
 	Fenster[1] = guiCreateWindow(X, Y, Width, Height, "House creation[House System by Noneatme]",false)
 	Label[1] = guiCreateLabel(495,24,107,17,"Interior preview:",false,Fenster[1])
@@ -524,7 +515,7 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 	Edit[2] = guiCreateEdit(196,84,33,27,"",false,Fenster[1]) -- Y INT
 	Edit[3] = guiCreateEdit(234,84,33,27,"",false,Fenster[1]) -- Z INT
 	Knopf[1] = guiCreateButton(156,116,112,32,"Set ----->",false,Fenster[1])
-	Edit[4] = guiCreateEdit(17,177,80,27,"",false,Fenster[1]) -- PRICE 
+	Edit[4] = guiCreateEdit(17,177,80,27,"",false,Fenster[1]) -- PRICE
 	Label[4] = guiCreateLabel(103,183,19,22,"$",false,Fenster[1])
 	guiSetFont(Label[4],"default-bold-small")
 	Knopf[2] = guiCreateButton(13,221,112,32,"Cancel",false,Fenster[1])
@@ -547,14 +538,14 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 	guiGridListAddColumn(Grid[1],"ID",0.2)
 
 	guiGridListAddColumn(Grid[1],"Description",1)
-	
+
 	Edit[8] = guiCreateEdit(272,84,33,27,"",false,Fenster[1]) -- INT INT
 	Bild[1] = guiCreateStaticImage(486,51,290,204,"data/images/choose.jpg",false,Fenster[1])
 	Label[9] = guiCreateLabel(164,22,107,17,"Interior:",false,Fenster[1])
 	guiSetFont(Label[9],"default-bold-small")
 	Label[10] = guiCreateLabel(159,25,124,15,"___________________",false,Fenster[1])
 	guiLabelSetColor(Label[10],0,255,0)
-	
+
 	-- FILL THE LIST --
 	for i = 1, #houseInteriors, 1 do
 		local row = guiGridListAddRow(Grid[1])
@@ -577,7 +568,7 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 	---------------------------
 	-- BUTTON EVENT HANDLERS --
 	---------------------------
-	
+
 	-- CREATE HOUSE BUTTON --
 	addEventHandler("onClientGUIClick", Knopf[3], function()
 		local x, y, z, intx, inty, intz, int, price = guiGetText(Edit[5]), guiGetText(Edit[6]), guiGetText(Edit[7]), guiGetText(Edit[1]), guiGetText(Edit[2]), guiGetText(Edit[3]), guiGetText(Edit[8]), guiGetText(Edit[4])
@@ -586,7 +577,7 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 		if(price < 0) or (price > 10000000) then exports.GTWtopbar:dm("Bad Price!", 255, 0, 0) return end
 		triggerServerEvent("onHouseSystemHouseCreate", gMe, x, y, z, int, intx, inty, intz, price)
 	end, false)
-	
+
 	-- INTERIOR BUTTON --
 	addEventHandler("onClientGUIClick", Knopf[1], function()
 		local id = tonumber(guiGridListGetItemText(Grid[1], guiGridListGetSelectedItem(Grid[1]), 1))
@@ -598,7 +589,7 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 		guiSetText(Edit[3], z)
 		guiSetText(Edit[8], int)
 	end, false)
-	
+
 	-- MY POSITION BUTTON --
 	addEventHandler("onClientGUIClick", Knopf[4], function()
 		local x, y, z = getElementPosition(gMe)
@@ -606,7 +597,7 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 		guiSetText(Edit[6], y)
 		guiSetText(Edit[7], z)
 	end, false)
-	
+
 	-- CANCEL BUTTON --
 	addEventHandler("onClientGUIClick", Knopf[2], function()
 		Guivar = 0
@@ -701,11 +692,11 @@ end)]]--
 function getMiddleGuiPosition(lol, lol2)
 
 	local sWidth, sHeight = guiGetScreenSize()
- 
+
     local Width,Height = lol, lol2
     local X = (sWidth/2) - (Width/2)
     local Y = (sHeight/2) - (Height/2)
-	
+
 	return X, Y, Width, Height
 end
 

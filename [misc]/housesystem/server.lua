@@ -12,9 +12,9 @@
 -- CONNECTION HANDLER --
 ------------------------
 
-dbpTime = 500 -- How many Miliseconds will use the dbPoll function for waiting for a result
+dbpTime = 3000 -- How many Miliseconds will use the dbPoll function for waiting for a result
 max_player_houses = 50 -- Define the buyable houses per player
-sellhouse_value = 80 -- The ammount in percent that you get back if you sell a house
+sellhouse_value = 0.8 -- The ammount in percent that you get back if you sell a house
 open_key = "z" -- Define the key for the infomenue and the housepanel
 exit_key = "n"
 
@@ -160,7 +160,7 @@ end)
 
 -- /createhouse --
 
-addCommandHandler("createhouse", function(thePlayer)
+function create_house(thePlayer)
 	local accName = getAccountName ( getPlayerAccount ( thePlayer ))
 	if isObjectInACLGroup ("user."..accName, aclGetGroup ( "Admin" )) then
 		if(getElementInterior(thePlayer) ~= 0) then
@@ -175,7 +175,9 @@ addCommandHandler("createhouse", function(thePlayer)
 	else
 		exports.GTWtopbar:dm("You are not an admin!", thePlayer, 255, 0, 0)
 	end
-end)
+end
+addCommandHandler("createhouse", create_house)
+addCommandHandler("mkhouse", create_house)
 
 -- /in --
 
@@ -243,13 +245,22 @@ addCommandHandler("buyhouse", function(thePlayer)
 				end
 				local money = getPlayerMoney(thePlayer)
 				local price = tonumber(houseData[id]["PRICE"])
-				if(money < price) then exports.GTWtopbar:dm("You don't have enough money! You need "..(price-money).."$ more!", thePlayer, 255, 0, 0) return end
+				if (money < price) then exports.GTWtopbar:dm("You don't have enough money! You need "..(price-money).."$ more!", thePlayer, 255, 0, 0) return end
 				setHouseData(id, "OWNER", getAccountName( getPlayerAccount (thePlayer)))
-				givePlayerMoney(thePlayer, -math.floor(price/100*sellhouse_value))
+				takePlayerMoney(thePlayer, math.floor(price))
 				exports.GTWtopbar:dm("Congratulations! You bought the house!", thePlayer, 0, 255, 0)
-				if isElement(houseData[id]["BLIP"]) then
-					destroyElement(houseData[id]["BLIP"])
-				end
+
+                                -- Cleanup
+                                if isElement(houseData[id]["BLIP"]) then destroyElement(houseData[id]["BLIP"]) end
+                                if isElement(houseData[id]["PICKUP"]) then destroyElement(houseData[id]["PICKUP"]) end
+
+                                -- HOUSE PICKUP --
+                                houseData[id]["PICKUP"] = createPickup(houseData[id]["X"],
+                                        houseData[id]["Y"], houseData[id]["Z"]-0.5, 3, 1272, 500)
+
+                                -- HOUSE BLIP --
+                                houseData[id]["BLIP"] = createBlip(houseData[id]["X"], houseData[id]["Y"],
+                                                houseData[id]["Z"], 31, 1, 0,0,0, 255, 5, 9999, thePlayer)
 			end
 		end
 	end
@@ -273,14 +284,19 @@ addCommandHandler("sellhouse", function(thePlayer)
 				for i = 1, 5, 1 do
 					setHouseData(id, "RENT"..i, "no-one")
 				end
-				local seller_profit = math.random(700,1100)
-				givePlayerMoney(thePlayer, math.floor(price/100*sellhouse_value) - seller_profit)
-				exports.GTWtopbar:dm("You sucessfull sold this house and got $"..tostring(math.floor(price/100*sellhouse_value) - seller_profit).." back!", thePlayer, 0, 255, 0)
-				if isElement( houseData[id]["BLIP"] ) then
-					destroyElement( houseData[id]["BLIP"] )
-				end
-				local x,y,z = getElementPosition(houseData[id]["PICKUP"])
-				--houseData[id]["BLIP"] = createBlip( x,y,z, 31, 1, 0,0,0, 255, 5, 180 )
+				givePlayerMoney(thePlayer, math.floor(price*sellhouse_value))
+				exports.GTWtopbar:dm("You sucessfull sold this house and got $"..tostring(math.floor(price*sellhouse_value)).." back!", thePlayer, 0, 255, 0)
+
+                                -- Cleanup
+                                if isElement(houseData[id]["BLIP"]) then destroyElement(houseData[id]["BLIP"]) end
+                                if isElement(houseData[id]["PICKUP"]) then destroyElement(houseData[id]["PICKUP"]) end
+
+                                -- HOUSE PICKUP --
+                                houseData[id]["PICKUP"] = createPickup(houseData[id]["X"],
+                                        houseData[id]["Y"], houseData[id]["Z"]-0.5, 3, 1273, 500)
+
+                                -- HOUSE BLIP --
+                                houseData[id]["BLIP"] = nil
 			end
 		end
 	end
@@ -334,7 +350,7 @@ end)
 --------------------
 
 function togglePlayerInfomenue(thePlayer, key, state, id)
-	if(id) then
+	if id then
 		local locked = houseData[id]["LOCKED"]
 		local rentable = houseData[id]["RENTABLE"]
 		local rentalprice = houseData[id]["RENTALPRICE"]
@@ -342,15 +358,15 @@ function togglePlayerInfomenue(thePlayer, key, state, id)
 		local price = houseData[id]["PRICE"]
 		local x, y, z = getElementPosition(house[id])
 		local house = getPlayerRentedHouse(thePlayer)
-		if(house ~= false) then house = true end
+		if house ~= false then house = true end
 		local isrentedin = isPlayerRentedHouse(thePlayer, id)
 		triggerClientEvent(thePlayer, "onClientHouseSystemInfoMenueOpen", thePlayer, owner, x, y, z, price, locked, rentable, rentalprice, id, house, isrentedin)
 	end
 end
 
 function togglePlayerHousemenue(thePlayer, key, state, id)
-	if(id) then
-		if(getElementInterior(thePlayer) ~= 0) then
+	if id then
+		if getElementInterior(thePlayer) > 0 then
 			local locked = houseData[id]["LOCKED"]
 			local money = houseData[id]["MONEY"]
 			local weap1 = houseData[id]["WEAPONS"][1]
@@ -376,16 +392,15 @@ end
 -------------------------------
 
 -- BUILDHOUSE FUNCTION --
-
 local function buildHouse(id, x, y, z, interior, intx, inty, intz, money, weapons, locked, price, owner, rentable, rentalprice, rent1, rent2, rent3, rent4, rent5)
 	if(id) and (x) and(y) and (z) and (interior) and (intx) and (inty) and (intz) and (money) and (weapons) then
 		houseid = id
-		house[id] = createColSphere(x, y, z, 1.5) -- This is the house, hell yeah
+		house[id] = createColSphere(x, y, z, 3) -- This is the house, hell yeah
 		houseData[id] = {}
 		local house = house[id] -- I'm too lazy...
 		setElementData(house, "house", true) -- Just for client code only
 
-		local houseIntPickup = createPickup(intx, inty, intz, 3, 1318, 100)
+		local houseIntPickup = createPickup(intx, inty, intz, 3, 1318, 500)
 		setElementInterior(houseIntPickup, interior)
 		setElementDimension(houseIntPickup, id)
 
@@ -405,7 +420,8 @@ local function buildHouse(id, x, y, z, interior, intx, inty, intz, money, weapon
 			if(getElementType(hitElement) == "player") then
 				setElementData(hitElement, "house:lastvisit", id)
 				bindKey(hitElement, open_key, "down", togglePlayerInfomenue, id)
-				exports.GTWtopbar:dm("Press "..open_key.." to open the information-gui for this house.", hitElement, 255, 200, 0)
+				exports.GTWtopbar:dm("Press "..open_key.." to open the information-gui for this house.",
+                                        hitElement, 255, 200, 0)
 			end
 		end)
 
@@ -418,7 +434,6 @@ local function buildHouse(id, x, y, z, interior, intx, inty, intz, money, weapon
 		end)
 
 		-- OUT --
-
 		addEventHandler("onColShapeHit", houseInt[id], function(hitElement, dim)
 			if(dim == true) then
 				if(getElementType(hitElement) == "player") then
@@ -463,17 +478,18 @@ local function buildHouse(id, x, y, z, interior, intx, inty, intz, money, weapon
 		houseData[id]["RENT3"] = rent3
 		houseData[id]["RENT4"] = rent4
 		houseData[id]["RENT5"] = rent5
+
 		-- HOUSE PICKUP --
-		--local houseblip
-		local housePickup = createPickup(x, y, z-0.5, 3, 1273, 100)
-		--houseblip = createBlip( x,y,z, 31, 1, 0,0,0, 255, 5, 180 )
+                if owner == "no-one" then
+		        houseData[id]["PICKUP"] = createPickup(x, y, z-0.5, 3, 1273, 500)
+                else
+                        houseData[id]["PICKUP"] = createPickup(x, y, z-0.5, 3, 1272, 500)
+                end
 
-		-- CREATE HOUSE BLIPS --
-		--
-
-		-- SET THE DATA --
-		houseData[id]["PICKUP"] = housePickup
-		--houseData[id]["BLIP"] = houseblip
+                -- HOUSE BLIP --
+                if getAccount(owner) and getAccountPlayer(getAccount(owner)) then
+                        houseData[id]["BLIP"] = createBlip( x,y,z, 31, 1, 0,0,0, 255, 5, 9999, getAccountPlayer(getAccount(owner)))
+                end
 
 		setElementData(house, "PRICE", price)
 		setElementData(house, "OWNER", owner)
@@ -501,8 +517,20 @@ local function buildHouse(id, x, y, z, interior, intx, inty, intz, money, weapon
 	end
 end
 
--- TAKE PLAYER RENT --
+-- ON PLAYER Login, create blips to houses owned by this player
+addEventHandler("onPlayerLogin", root,
+function(_, acc)
+        local owner = getAccountName(acc)
+        for k,house in pairs(houseData) do
+                if house["OWNER"] == owner then
+                        house["BLIP"] = createBlip(house["X"], house["Y"],
+                                house["Z"], 31, 1, 0,0,0, 255, 5, 9999, source)
+                end
+        end
+end)
 
+
+-- TAKE PLAYER RENT --
 local function takePlayerRent()
 	for index, player in pairs(getElementsByType("player")) do
 		if(getPlayerRentedHouse(player) ~= false) then
@@ -675,8 +703,8 @@ end)
 -- CREATE HOUSE --
 
 addEventHandler("onHouseSystemHouseCreate", getRootElement(), function(x, y, z, int, intx, inty, intz, price)
-	local query = dbQuery(handler, "INSERT INTO houses (X, Y, Z, INTERIOR, INTX, INTY, INTZ, MONEY, WEAP1, WEAP2, WEAP3, LOCKED, PRICE, OWNER, RENTABLE, RENTALPRICE, RENT1, RENT2, RENT3, RENT4, RENT5) values ('"..
-		x.."', '"..y.."', '"..z.."', '"..int.."', '"..intx.."', '"..inty.."', '"..intz.."', '0', '0', '0', '0', '0', '"..price.."', 'no-one', '0', '0', 'no-one', 'no-one', 'no-one', 'no-one', 'no-one');")
+	local query = dbQuery(handler, "INSERT INTO houses (ID, X, Y, Z, INTERIOR, INTX, INTY, INTZ, MONEY, WEAP1, WEAP2, WEAP3, LOCKED, PRICE, OWNER, RENTABLE, RENTALPRICE, RENT1, RENT2, RENT3, RENT4, RENT5) values ('"..
+		(houseid+1).."', '"..x.."', '"..y.."', '"..z.."', '"..int.."', '"..intx.."', '"..inty.."', '"..intz.."', '0', '0', '0', '0', '0', '"..price.."', 'no-one', '0', '0', 'no-one', 'no-one', 'no-one', 'no-one', 'no-one');")
 	local result, numrows = dbPoll(query, dbpTime)
 	if(result) then
 		local newid = houseid+1
