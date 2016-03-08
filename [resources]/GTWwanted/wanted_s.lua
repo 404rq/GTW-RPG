@@ -248,7 +248,7 @@ function crime_damage(attacker, attackerweapon, bodypart, loss)
 	if is_law_unit(attacker) and (wl > 0 or getElementType(source) == "ped" or is_jailed) then return end
 	setWl(attacker, round((loss/150), 2), 5)
 end
-addEventHandler( "onPlayerDamage", root, crime_damage )
+addEventHandler("onPlayerDamage", root, crime_damage)
 
 --[[ Crime of killing other players ]]--
 function crime_death(totalAmmo, killer, killerWeapon, bodypart, stealth)
