@@ -408,7 +408,7 @@ function connect_carriages(plr)
 	local train = getPedOccupiedVehicle(plr)
 	if not train or not isElement(train) or getElementType(train) ~=
 		"vehicle" or getVehicleType(train) ~= "Train" then
-		exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
+		--exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
 		return
 	end
 
@@ -448,7 +448,7 @@ function disconnect_carriages(plr)
 	local train = getPedOccupiedVehicle(plr)
 	if not train or not isElement(train) or getElementType(train) ~=
 		"vehicle" or getVehicleType(train) ~= "Train" then
-		exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
+		--exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
 		return
 	end
 
