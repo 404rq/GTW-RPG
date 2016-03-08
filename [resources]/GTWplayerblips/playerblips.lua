@@ -61,7 +61,10 @@ function refreshAllBlips(resource)
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 			elseif not getElementData(plr, "anon") then
 				local alpha = 200
-				if getElementData(plr, "Occupation") == "Prisoner" then alpha = 20 end
+				local plr_team = getPlayerTeam(plr) or ""
+				if getElementData(plr, "Occupation") == "Prisoner" or
+					(plr_team == getTeamFromName("Government") and
+					getElementData(spectator, "Occupation") == "Prisoner") then alpha = 10 end
 				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
 			end
 		end
@@ -91,7 +94,10 @@ function updatePlayerBlip(plr)
 			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 		elseif not getElementData(plr,"anon") then
 			local alpha = 200
-			if getElementData(plr, "Occupation") == "Prisoner" then alpha = 20 end
+			local plr_team = getPlayerTeam(plr) or ""
+			if getElementData(plr, "Occupation") == "Prisoner" or
+				(plr_team == getTeamFromName("Government") and
+				getElementData(spectator, "Occupation") == "Prisoner") then alpha = 10 end
 			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
 		end
 	end
