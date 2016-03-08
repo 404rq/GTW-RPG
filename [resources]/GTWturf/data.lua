@@ -18,8 +18,15 @@ members_in_turf 		= {{ }}						-- Counts the amount of players in each group in 
 capturing 			= { }						-- Boolean to check whenever someone is trying to capture a specific turf
 cooldown 			= { }						-- Cooldown timer to prevent spam kills for stats farming
 time_syncer 			= { }						-- Timers to update the client status text with information about how much time is left to capture a turf
-db 				= dbConnect("sqlite", "/turfs.db")		-- Database connection (SQLLite), mysql is supported as well, see syntax for dbConnect here:
-										-- https://wiki.multitheftauto.com/wiki/DbConnect
+
+-- Database connection setup, MySQL or fallback SQLite
+local mysql_host    	= exports.GTWcore:getMySQLHost() or nil
+local mysql_database 	= exports.GTWcore:getMySQLDatabase() or nil
+local mysql_user    	= exports.GTWcore:getMySQLUser() or nil
+local mysql_pass    	= exports.GTWcore:getMySQLPass() or nil
+db = dbConnect("mysql", "dbname="..mysql_database..";host="..mysql_host, mysql_user, mysql_pass, "autoreconnect=1")
+if not db then db = dbConnect("sqlite", "/turfs.db") end
+
 payout_time_interval		= 600						-- Time interval between payments for owned turfs (seconds).
 lowest_amount_to_display 	= 50						-- Specify the lowest amount of money which is worth to notice the players about during payouts.
 
