@@ -14,8 +14,14 @@
 ********************************************************************************
 ]]--
 
--- Global data
-veh_data = dbConnect("sqlite", "veh.db")
+-- Database connection setup, MySQL or fallback SQLite
+local mysql_host        = exports.GTWcore:getMySQLHost() or nil
+local mysql_database    = exports.GTWcore:getMySQLDatabase() or nil
+local mysql_user        = exports.GTWcore:getMySQLUser() or nil
+local mysql_pass        = exports.GTWcore:getMySQLPass() or nil
+veh_data = dbConnect("mysql", "dbname="..mysql_database..";host="..mysql_host, mysql_user, mysql_pass, "autoreconnect=1")
+if not veh_data then veh_data = dbConnect("sqlite", "veh.db") end
+
 inventory_markers_veh = {}
 inventory_markers = {}
 vehicle_owners = {}
@@ -115,7 +121,7 @@ addEventHandler( "GTWvehicleshop.onHideVehicles", root, hideMyVehicles )
 function listAllMyVehicles(query)
 	local result = dbPoll( query, 0 )
 	if not result then return end
-	
+
 	local vehicle_data_to_client = {{ }}
 	local plr = nil
     	for index, row in ipairs(result) do
@@ -188,7 +194,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 		if isFirstSpawn then
 			warpPedIntoVehicle( getAccountPlayer( getAccount( owner )), veh )
 		end
-		veh_blips[veh] = createBlipAttachedTo( veh, 3, 1, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
+		veh_blips[veh] = createBlipAttachedTo(veh, 0, 2, 100, 100, 100, 200, 10, 9999, getAccountPlayer( getAccount( owner )))
 		setElementRotation( veh, rx, ry, rz )
 		vehicle_owners[veh] = owner
 		veh_id_num[veh] = ID
