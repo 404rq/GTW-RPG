@@ -1,0 +1,5 @@
+===========================
++ Add missing interiors - DONE
++ Reduce CPU Usage - DONE
++ Add GUI-Window on pickup enter - DONE
++ Add rentfix if there is allready a tenand in it - DONE

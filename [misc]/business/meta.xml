@@ -1,0 +1,23 @@
+<meta>
+    <info author="JR10" name="Business System" version="92.2" type="script" />
+    
+    <script src="server/main.lua" type="server" />
+    <script src="server/updatecheck.lua" type="server" />
+    <script src="client/main.lua" type="client" />
+    <script src="client/dxoutput.lua" type="client" />
+    
+    <file src="files/images/business.png" />
+    <file src="files/images/tick.png" />
+    <file src="files/images/wrong.png" />
+    <file src="files/sounds/cash.mp3" />
+    
+    <settings>
+        <setting name="business.infoMessagesType" value="dx" accept="dx, chatbox" description="The type if info messages (dx - dxDrawText is used to output info messages) (chatbox - outputChatBox is used)" />
+        <setting name="business.markerColor" value="[[0, 153, 0, 255]]" accept="RGBA Color Format" description="The color of the business marker RGBA Format" />
+        <setting name="business.informPlayerForPayout" value="[false]" accept="true , false" description="Wether to inform the player for the payout, or not" />
+        <setting name="business.key" value="N" description="The key used to open the business" />
+        <setting name="business.blip" value="[]" description="The blip to show on business or leave it empty for no blip." />
+        <setting name="business.ownedBusinesses" value="[7] " description="Maximum number of businesses a player can own, or leave it empty for infinate." />
+        <setting name="business.showBusinessInfoOnMarker" value="[true]" description="Wether to show the business info on the marker, or not." />
+    </settings>
+</meta>
