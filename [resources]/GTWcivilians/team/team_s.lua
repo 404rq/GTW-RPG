@@ -24,8 +24,8 @@ function setMoney( )
     	setElementData( source, "Money", "$" .. money )
 
     	-- Message
-    	exports.GTWtopbar:dm( getPlayerName(source).." has logged in", getRootElement(), 255, 150, 0 )
     	for k,v in pairs(getElementsByType("player")) do
+		exports.GTWtopbar:dm( getPlayerName(source).." has logged in", v, 255, 150, 0 )
 	    	playSoundFrontEnd(v, 11)
     	end
 end
@@ -33,8 +33,8 @@ addEventHandler( "onPlayerLogin", getRootElement(), setMoney )
 
 function showJoinMessage( )
     	-- Message
-    	exports.GTWtopbar:dm( getPlayerName(source).." has joined the game", getRootElement(), 255, 150, 0 )
     	for k,v in pairs(getElementsByType("player")) do
+		exports.GTWtopbar:dm( getPlayerName(source).." has joined the game", v, 255, 150, 0 )
     		playSoundFrontEnd(source, 11)
 	end
 end
