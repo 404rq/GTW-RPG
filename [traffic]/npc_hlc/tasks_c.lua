@@ -96,8 +96,7 @@ function performTask.driveAlongLine(npc,task)
 	if not isPedInVehicle(npc) then return false end
 	local x1,y1,z1,x2,y2,z2 = task[2],task[3],task[4],task[5],task[6],task[7]
 	local off,enddist = task[8],task[9]
-	local x,y,z = 0,0,0
-	if getPedOccupiedVehicle(npc) then x,y,z = getElementPosition(getPedOccupiedVehicle(npc)) end
+	local x,y,z = getElementPosition(getPedOccupiedVehicle(npc))
 	local pos = getPercentageInLine(x,y,x1,y1,x2,y2)
 	local len = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
 	if pos >= 1-enddist/len then return true end
@@ -110,7 +109,6 @@ function performTask.driveAroundBend(npc,task)
 	local x1,y1,z1 = task[4],task[5],task[6]
 	local x2,y2,z2 = task[7],task[8],task[9]
 	local off,enddist = task[10],task[11]
-	if not getPedOccupiedVehicle(npc) then return end
 	local x,y,z = getElementPosition(getPedOccupiedVehicle(npc))
 	local len = getDistanceBetweenPoints2D(x1,y1,x2,y2)*math.pi*0.5
 	local angle = getAngleInBend(x,y,x0,y0,x1,y1,x2,y2)+enddist/len

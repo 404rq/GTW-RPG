@@ -1,4 +1,3 @@
-traffic_density = {}
 function setTrafficDensity(trtype,density)
 	density = tonumber(density)
 	if density then
@@ -23,3 +22,4 @@ end
 function getTrafficDensity(trtype)
 	return trtype and traffic_density[trtype] or false
 end
+

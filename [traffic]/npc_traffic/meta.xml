@@ -1,8 +1,7 @@
 <meta>
-    <info author="CrystalMV" version="71.1" name="NPC traffic" description="Adds NPC traffic to the game" type="script" />
+    <info author="CrystalMV" version="2.1" name="NPC traffic" description="Adds NPC traffic to the game" type="script" />
     <include resource="npc_hlc" />
     <include resource="server_coldata" />
-    <include resource="npchlc_traffic_denctrl" />
     
     <script src="traffic.lua" />
     <script src="load_paths.lua" />

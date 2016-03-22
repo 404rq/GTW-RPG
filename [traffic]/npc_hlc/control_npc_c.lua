@@ -1,14 +1,14 @@
 UPDATE_COUNT = 16
-UPDATE_INTERVAL_MS = 500
+UPDATE_INTERVAL_MS = 200
 
 function initNPCControl()
-	addEventHandler("onClientPreRender", root, cycleNPCs)
+	addEventHandler("onClientPreRender",root,cycleNPCs)
 end
 
 function cycleNPCs()
 	local streamed_npcs = {}
-	for pednum,ped in pairs(getElementsByType("ped", root, true)) do
-		if getElementData(ped, "npc_hlc") then
+	for pednum,ped in ipairs(getElementsByType("ped",root,true)) do
+		if getElementData(ped,"npc_hlc") then
 			streamed_npcs[ped] = true
 		end
 	end
@@ -46,3 +46,4 @@ function setNPCTaskToNext(npc)
 		true
 	)
 end
+

@@ -22,7 +22,7 @@ function keepLoadingTraffic()
 		return
 	end
 	coroutine.resume(traffic_initialization)
-	setTimer(keepLoadingTraffic, 100, 1)
+	setTimer(keepLoadingTraffic,50,1)
 end
 
 function checkThreadYieldTime()
@@ -32,3 +32,4 @@ function checkThreadYieldTime()
 		last_yield = this_time
 	end
 end
+

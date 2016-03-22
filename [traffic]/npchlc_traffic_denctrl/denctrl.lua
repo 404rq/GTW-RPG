@@ -18,7 +18,7 @@ end
 addCommandHandler("density",changeDensity)
 
 function setTDensity()
-	exports.npc_traffic:setTrafficDensity(0.04)
+	exports.npc_traffic:setTrafficDensity(0.02)
 	exports.npc_traffic:setTrafficDensity("peds", 0.06)
 	exports.npc_traffic:setTrafficDensity("boats", 0.04)
 	exports.npc_traffic:setTrafficDensity("planes", 0.04)
