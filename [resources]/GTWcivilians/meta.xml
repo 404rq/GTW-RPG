@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,15 +16,19 @@
 -->
 
 <meta>
-        <info author="GTWGames" name="Job system" description="Handles civilian jobs and their gui" version="58" type="script" />
-        <script src="data.lua" type="shared" />
+        <info author="GTWGames" name="GTWcivilians" description="Management system for all types of works" version="58" type="script" />
+        <script src="misc/data.lua" type="shared" />
         <script src="civ_s.lua" type="server" />
         <script src="civ_c.lua" type="client" />
-        <script src="exports.lua" type="shared" />
+        <script src="misc/exports.lua" type="shared" />
 
-        <!-- Formerly GTWteam -->
+	<!-- Formerly GTWranks: List and get ranks based on stats levels -->
+        <script src="ranks/ranks_s.lua" type="server" />
+        <script src="ranks/ranks_c.lua" type="client" />
+	
+        <!-- Formerly GTWteam: Manage misc data regarding stats and team data -->
         <script src="team/team_s.lua" type="server" />
-        <script src="team/team_c.lua" type="client" />
+        <script src="team/team_c.lua" type="client" />	
 
         <export function="addWorkItem" type="shared" />
         <export function="addMarker" type="shared" />

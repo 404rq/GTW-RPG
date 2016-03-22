@@ -59,13 +59,13 @@ addEventHandler ( "onReceivePlayerRank", localPlayer, receiveRankEventHandler )
 function refreshRank()
 	if not guiGetVisible(window) then return end
 	if isTimer(refreshTimer) then killTimer(refreshTimer) end
-	exports.GTWranks:getPlayerRank(getElementData(localPlayer,"Occupation"))
+	get_player_rank(getElementData(localPlayer,"Occupation"))
 end
 
 function showWorkGUI( )
 	guiSetVisible(window, not guiGetVisible(window))
 	showCursor(not isCursorShowing())
-	exports.GTWranks:getPlayerRank(getElementData(localPlayer,"Occupation"))
+	get_player_rank(getElementData(localPlayer,"Occupation"))
 end
 addCommandHandler( "managework", showWorkGUI )
 bindKey( "F5", "down", "managework" )

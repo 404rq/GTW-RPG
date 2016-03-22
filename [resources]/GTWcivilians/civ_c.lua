@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -370,7 +371,7 @@ function accept_work()
 
         -- Display job info message in chat box
         local team, max_wl, description, skins, skin_names, work_tools, welcome_message = unpack(work_items[ID])
-        outputChatBox("["..ID.."]#BBBBBB "..welcome_message, 255,200,0, true)
+        outputChatBox("["..ID.."]#FFFFFF "..welcome_message, 180,180,180, true)
 end
 
 --[[ When the user clicks on the Close button ]]--
