@@ -280,7 +280,7 @@ Weapons:
 	{{6, 1, 60, "Shovel"}, {24, 35, 500, "Desert eagle"}},
 	--[[Message for new players when applying for the job]]
 	"Welcome to the iron miner job!, press N to deploy dynamite, take cover and then mine by walking up to the rocks"},
-	["Police Officer"]={ "Government", 0, [[
+	["Police officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -302,7 +302,7 @@ Weapons:
 	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
 	--[[Message for new players when applying for the job]]
 	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
-	["SAPD Officer"]={ "Government", 0, [[
+	["SAPD officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -346,7 +346,7 @@ Weapons:
 	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
 	--[[Message for new players when applying for the job]]
 	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
-	["SWAT Officer"]={ "Government", 0, [[
+	["SWAT officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -368,7 +368,7 @@ Weapons:
 	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
 	--[[Message for new players when applying for the job]]
 	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
-	["Armed Forces"]={ "Government", 0, [[
+	["Armed forces"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -395,9 +395,9 @@ Weapons:
 -- Restrict jobs to specific groups
 restricted_jobs = {
 	["FBI agent"]="FBI",
-	["SWAT Officer"]="SWAT",
-	["SAPD Officer"]="SAPD",
-	["Armed Forces"]="ArmedForces"
+	["SWAT officer"]="SWAT",
+	["SAPD officer"]="SAPD",
+	["Armed forces"]="ArmedForces"
 }
 
 markers = { }
