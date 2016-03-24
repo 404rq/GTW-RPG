@@ -36,6 +36,12 @@ setTimer(function()
 		[601]=true,
 		[428]=true
 	}
+	
+	local breakable_vehicles = {
+		["Automobile"]=true,
+		["Bike"]=true,
+		["Quad"]=true
+	}
 
 	-- Get a random victim player
 	local plr = getRandomPlayer()
@@ -43,9 +49,7 @@ setTimer(function()
 
 	-- Make sure the player is driving faster
 	local veh = getPedOccupiedVehicle(plr)
-	if not getVehicleType(getElementModel(veh)) == "Automobile" and
-		not getVehicleType(getElementModel(veh)) == "Bike" and 
-		not getVehicleType(getElementModel(veh)) == "Trailer" then return end
+	if not veh or not breakable_vehicles[getVehicleType(veh)] then return end
 
 	-- Get a random wheel
 	local rnd_wheel = math.random(1,4)
