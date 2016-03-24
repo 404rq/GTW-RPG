@@ -38,9 +38,9 @@ ammo 		= { }
 function Jail(crim, time, police_dept, reason, admin)
 	if not crim or not isElement(crim) or getElementType(crim) ~= "player" then return end
 	if not police_dept then outputServerLog("GTW-RPG: (Wanted) Please specify a police department") end
-	if tonumber(time) and math.floor(tonumber(time)) > 0 then time = tonumber(time) else
+	if tonumber(time) and math.floor(tonumber(time)) >= 10 then time = tonumber(time) else
 		outputServerLog("GTW-RPG: (Wanted) no time specified")
-		time = 60
+		time = 10
 	end
 	if jail_data.is_jailed[crim] then
 		exports.GTWtopbar:dm(getPlayerName(crim).." is already in jail!", crim, 255, 150, 0)
