@@ -256,7 +256,7 @@ Note that these commands are built in and works on any Multi Theft Auto server.
 ***********************************************************************
 
 How do I get into "staff mode":
-  * Use /gostaff(f/m) last f/m is optinal and specifies if you want to use the male or female skin
+  * Use /gostaff(f/m) last f/m is optional and specifies if you want to use the male or female skin
 
 Where is the staff panel located:
   * Use /staff or press P
