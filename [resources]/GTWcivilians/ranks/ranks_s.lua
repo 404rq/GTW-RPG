@@ -48,7 +48,7 @@ function get_player_rank(player, occupation)
 		statValue = "GTWdata_stats_police_arrests"
 	elseif occupation == "FBI officer" then
 		statValue = "GTWdata_stats_police_arrests"
-	elseif occupation == "ArmedForces" then
+	elseif occupation == "Armed forces" then
 		statValue = "GTWdata_stats_police_arrests"
 	elseif occupation == "Fireman" then
 		statValue = "GTWdata_stats_fireman_fires"
@@ -107,7 +107,7 @@ level_list = {
 	["SAPD officer"]={ 0, 5, 10, 20, 40, 80, 160, 320, 640, 1280, 2480 },
 	["FBI officer"]={ 0, 5, 10, 20, 40, 80, 160, 320, 640, 1280, 2480 },
 	["SWAT officer"]={ 0, 5, 10, 20, 40, 80, 160, 320, 640, 1280, 2480 },
-	["ArmedForces"]={ 0, 5, 10, 20, 40, 80, 160, 320, 640, 1280, 2480 },
+	["Armed forces"]={ 0, 5, 10, 20, 40, 80, 160, 320, 640, 1280, 2480 },
 }
 
 -- List of ranks corrensponding to levels above
@@ -132,5 +132,5 @@ rank_list = {
 	["SAPD officer"]={ "Office assistant", "Office worker", "Trial officer", "Patrolling officer", "Radio car unit", "Traffic officer", "Highway patrol", "Alpha unit", "Special tactics team", "God of law" },
 	["FBI officer"]={ "Office assistant", "Office worker", "Trial officer", "Patrolling officer", "Radio car unit", "Traffic officer", "Highway patrol", "Alpha unit", "Special tactics team", "God of law" },
 	["SWAT officer"]={ "Office assistant", "Office worker", "Trial officer", "Patrolling officer", "Radio car unit", "Traffic officer", "Highway patrol", "Alpha unit", "Special tactics team", "God of law" },
-	["ArmedForces"]={ "Office assistant", "Office worker", "Trial officer", "Patrolling officer", "Radio car unit", "Traffic officer", "Highway patrol", "Alpha unit", "Special tactics team", "God of law" },
+	["Armed forces"]={ "Office assistant", "Office worker", "Trial officer", "Patrolling officer", "Radio car unit", "Traffic officer", "Highway patrol", "Alpha unit", "Special tactics team", "God of law" },
 }
