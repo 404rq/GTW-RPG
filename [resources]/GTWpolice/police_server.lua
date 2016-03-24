@@ -331,7 +331,7 @@ function admin_jail(admin, cmd, crim, time, ...)
     	return
     end
     if not crim then
-    	outputChatBox("Jail command: /jail <nickname> <time in minutes> <reason>", admin, 200, 0, 0)
+    	outputChatBox("Jail command: /jail <nickname> <time in seconds (minimum 10)> <reason>", admin, 200, 0, 0)
     	return
     end
     local suspect = getPlayerFromName(crim)
