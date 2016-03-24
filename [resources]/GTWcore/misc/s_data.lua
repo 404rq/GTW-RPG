@@ -68,6 +68,7 @@ function load_data(plr)
         if play_time == 0 then
         	setPlayerMoney(plr, 4000)
                 setAccountData(acc, "GTWdata.playtime", 0)
+                setAccountData(acc, "GTWdata.skin.current", rnd_skin)
                 setAccountData(acc, "GTWclothes.personal.skin", getAccountData(acc, "GTWdata.skin.current"))
 
 		-- Give the player their first weapon
