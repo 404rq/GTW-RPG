@@ -1,6 +1,0 @@
-<script>
-	<info author="Anubhav" version="0.0.1" name="GTWadvertise" description="Advertise to trade.etc" />
-
-	<script src="settings.lua" />
-	<script src="server.lua" />
-</script>
