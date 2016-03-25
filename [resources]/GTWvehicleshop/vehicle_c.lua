@@ -14,463 +14,264 @@
 ********************************************************************************
 ]]--
 
---[[ Create global vehicle data storage for clients ]]--
-currentVehID = nil
-veh_data_list = {{ }}
-row,col = nil,nil
+--{ x, y, z, dim, int, vehicleX, vehicleY, vehicleZ, vRotZ ,camX, camY, camZ, shopType }
+shops_Coords = {
+	-- LS ghetto (Lowriders & Muscle cars)
+	{ 2130.1999511719, -1149.9000244141, 23.10000038147, 0, 0, 2121.6000976563, -1157, 24.10000038147, 0, 2116.6999511719, -1156.4000244141, 24.6, 7 },
 
---[[ Create vehicle management GUI ]]--
-x,y = guiGetScreenSize()
-window = guiCreateWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle manager", false)
-btn_show = guiCreateButton(10, 350, 90, 30, "Show", false, window)
-btn_hide = guiCreateButton(100, 350, 90, 30, "Hide", false, window)
-btn_lock = guiCreateButton(200, 350, 90, 30, "Lock", false, window)
-btn_engine = guiCreateButton(290, 350, 90, 30, "Engine", false, window)
-btn_recover = guiCreateButton(380, 350, 90, 30, "Recover", false, window)
-btn_sell = guiCreateButton(470, 350, 90, 30, "Sell", false, window)
-guiSetVisible( window, false )
+	-- SF Wang autos (Suvs & Wagons)
+	{ -1979.275390625, 240.814453125, 34.17187, 0, 0, -1987.9033203125, 249.564453125, 37.303623199463, 314, -1980.6455078125, 261.7392578125, 39.171875, 9 },
 
---[[ Create the vehicle grid list ]]--
-vehicle_list = guiCreateGridList( 10, 23, 580, 325, false, window )
-col1 = guiGridListAddColumn( vehicle_list, "Name", 0.25 )
-col2 = guiGridListAddColumn( vehicle_list, "Health", 0.1 )
-col3 = guiGridListAddColumn( vehicle_list, "Fuel", 0.1 )
-col4 = guiGridListAddColumn( vehicle_list, "Locked", 0.1 )
-col5 = guiGridListAddColumn( vehicle_list, "Engine", 0.1 )
-col6 = guiGridListAddColumn( vehicle_list, "Location", 0.3 )
-guiGridListSetSelectionMode( vehicle_list, 0 )
-guiGridListSetSortingEnabled(vehicle_list, false)
+	-- LV gas down town station (Lowriders & Muscle cars)
+	{ 1671.5, 2189.1999511719, 9.6999998092651, 0, 0, 1669.5, 2193, 10.800000190735, 180, 1670.3000488281, 2189.6, 11.4, 7 },
 
---[[ Apply GTWgui style ]]--
-exports.GTWgui:setDefaultFont(btn_show, 10)
-exports.GTWgui:setDefaultFont(btn_hide, 10)
-exports.GTWgui:setDefaultFont(btn_lock, 10)
-exports.GTWgui:setDefaultFont(btn_engine, 10)
-exports.GTWgui:setDefaultFont(btn_recover, 10)
-exports.GTWgui:setDefaultFont(btn_sell, 10)
-exports.GTWgui:setDefaultFont(vehicle_list, 10)
+	-- LS, SF, LV (Bikes & Motorcycles)
+	{ 2410.9150390625, -1390.8447265625, 23.31728935241, 0, 0, 2403.42578125, -1378.7783203125, 23.243619918823, 108.3131103515, 2385.05078125, -1389.0576171875, 28.8828125, 4 },
+	{ -2222.7275390625, 288.10546875, 34.3203125, 0, 0, -2218.65625, 292.9560546875, 36.1171875, 0,  -2224.5205078125, 305.6826171875, 41, 4 },
+	{ 1620.166015625, 2186.5546875, 9.8203125, 0, 0, 1629.005859375, 2195.88671875, 10.8203125, 184.53192138672, 1640.82421875, 2182.125, 16.8203125, 4 },
 
---[[ Create vehicle trunk GUI ]]--
-window_trunk = guiCreateWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle inventory", false)
-btn_withdraw = guiCreateButton(275, 73, 50, 40, "<", false, window_trunk)
-btn_deposit = guiCreateButton(275, 115, 50, 40, ">", false, window_trunk)
-btn_withdraw_all = guiCreateButton(275, 163, 50, 40, "<<", false, window_trunk)
-btn_deposit_all = guiCreateButton(275, 205, 50, 40, ">>", false, window_trunk)
-btn_close = guiCreateButton(500, 350, 90, 30, "Close", false, window_trunk)
-guiSetVisible( window_trunk, false )
+	-- LS docks, The Farm (Trucks & Vans)
+	{ 2301.40625, -2333.0087890625, 12.546875, 0, 0, 2279.49609375, -2331.875, 14.046875, 313.70565795898, 2283.9375, -2312.5087890625, 20.541325569153, 6 },
+	{ -1061.2890625, -1250.5947265625, 128.21875, 0, 0, -1063.1083984375, -1224.7548828125, 130.21875, 270.47927856445, -1046.2861328125, -1240.22265625, 140.53253173828, 6 },
 
---[[ Create the trunk grid list ]]--
-label_vehicle = guiCreateLabel( 10, 23, 250, 20, "Vehicle trunk", false, window_trunk )
-label_player = guiCreateLabel( 302, 23, 250, 20, "Your pocket", false, window_trunk )
-inventory_list = guiCreateGridList( 10, 43, 263, 305, false, window_trunk )
-player_items_list = guiCreateGridList( 327, 43, 263, 305, false, window_trunk )
-col7 = guiGridListAddColumn( inventory_list, "Item", 0.61 )
-col8 = guiGridListAddColumn( inventory_list, "Amount", 0.31 )
-col9 = guiGridListAddColumn( player_items_list, "Item", 0.61 )
-col10 = guiGridListAddColumn( player_items_list, "Amount", 0.31 )
-guiGridListSetSelectionMode( inventory_list, 0 )
-guiGridListSetSelectionMode( player_items_list, 0 )
+	-- LS, SF, LV (Airplanes)
+	{ 2052.4560546875, -2542.4169921875, 12.54687, 0, 0, 2079.732421875, -2542.501953125, 17.546875, 0, 2058.15234375, -2515.724609375, 20.54687, 3 },
+	{ -1366.8486328125, -246.33984375, 13.148437, 0, 0, -1336.396484375, -221.6015625, 17.1484375, 315,  -1334.17578125, -182.90234375, 20, 3 },
+	{ 1549.1767578125, 1738.0966796875, 9.8203125, 0, 0, 1527.3544921875, 1785.4052734375, 10.8203125, 180,  1512.5234375, 1712.833984375, 20, 3 },
 
---[[ Apply GTWgui style (inventory GUI )]]--
-exports.GTWgui:setDefaultFont(label_vehicle, 10)
-exports.GTWgui:setDefaultFont(label_player, 10)
-exports.GTWgui:setDefaultFont(inventory_list, 10)
-exports.GTWgui:setDefaultFont(player_items_list, 10)
-exports.GTWgui:setDefaultFont(btn_withdraw, 16)
-exports.GTWgui:setDefaultFont(btn_deposit, 16)
-exports.GTWgui:setDefaultFont(btn_withdraw_all, 16)
-exports.GTWgui:setDefaultFont(btn_deposit_all, 16)
+	-- SF sport cars shop (street racers)
+	{ -1649.1796875, 1206.5732421875, 12.671875, 0, 0, -1641.357421875, 1216.326171875, 7.0390625, 229.69764709473, -1618.8994140625, 1210.328125, 11.039062, 8 },
+
+	-- LS rodeo parking lot (2 door compact) (4 door luxury)
+	{ 552.59375, -1260.904296875, 16.2421875, 0, 0, 560.9287109375, -1277.9091796875, 18.2421875, 12.884399414063, 543.1982421875, -1270.82421875, 21.248237609863, 1 },
+	{ 549.59375, -1264.904296875, 16.2421875, 0, 0, 565.9287109375, -1277.9091796875, 18.7421875, 12.884399414063, 543.1982421875, -1270.82421875, 21.248237609863, 2 },
+
+	-- LS, SF, LV docks (Boats)
+	{ 2725.5244140625, -2576.998046875, 2, 0, 0, 2742.0693359375, -2584.68359375, 1.55000001192093, 265.19476318359, 2758.974609375, -2581.08203125, 7.210937, 5 },
+	{ -2975.859375, 503.7783203125, 1.4296875, 0, 0, -2984.7666015625, 503.33203125, 1.55000001192093, 358.05264282227, -2976.998046875, 492.1591796875, 7.42737579345, 5 },
+	{ 2298.39453125, 525.5869140625, 0.794376373291, 0, 0, 2295.42578125, 517.0576171875, 1.2, 90, 2287.1796875, 528.7451171875, 10.1161499023438, 5 },
+
+	-- SF docks (Trains)
+	{ -1602.005859375, 54.0888671875, 2.5546875, 0, 0, -1600.578125, 72.8974609375, 3.5546875, 138.54797363281, -1619.44921875, 69.1064453125, 8, 10 },
+}
+
+ GUI_Widget = {}
+ shopNames = {
+	[1] = "Compact sport cars",
+	[2] = "Luxury cars",
+	[3] = "Aircraft",
+	[4] = "Bikes & motorcycles",
+	[5] = "Boats",
+	[6] = "Trucks & Vans",
+	[7] = "Muscle cars",
+	[8] = "Street racers",
+	[9] = "Suvs & Wagons",
+	[10] = "Railroad",
+ }
+ vehicleBlips = {
+	[1] = "car-shop",
+	[2] = "car-shop",
+	[3] = "plane-shop",
+	[4] = "bike-shop",
+	[5] = "boat-shop",
+	[6] = "truck-shop",
+	[7] = "car-shop",
+	[8] = "car-shop",
+	[9] = "car-shop",
+	[10] = "train-shop"
+}
+
+dataShop = {}
+local gW, gH = guiGetScreenSize()
+
+dummieCar = createVehicle(602, 0, 0, 0)
+setElementFrozen(dummieCar, false)
+setVehicleDamageProof(dummieCar, true)
+setVehicleColor(dummieCar, 200, 200, 200, 200, 200, 200)
+
+btn_buy = guiCreateButton(0.74, 0.86, 0.21, 0.06, "Buy", true)
+guiSetProperty(btn_buy, "NormalTextColour", "FFAAAAAA")
+vehicle_list_shop = guiCreateGridList(0.01, 0.81, 0.25, 0.18, true)
+btn_close = guiCreateButton(0.98, 0.805, 0.02, 0.02, "X", true)
+guiSetProperty(btn_close, "NormalTextColour", "FFAAAAAA")
+lbl_name = guiCreateLabel(0.36, 0.81, 0.32, 0.08, "--", true)
+guiSetFont(lbl_name, "clear-normal")
+guiLabelSetHorizontalAlign(lbl_name, "center", false)
+guiLabelSetVerticalAlign(lbl_name, "center")
+lbl_price = guiCreateLabel(0.43, 0.91, 0.18, 0.04, "$0.00", true)
+guiLabelSetHorizontalAlign(lbl_price, "center", false)
+guiLabelSetVerticalAlign(lbl_price, "center")
+
+-- Apply new GUI style
+exports.GTWgui:setDefaultFont(btn_buy, 16)
 exports.GTWgui:setDefaultFont(btn_close, 10)
+exports.GTWgui:setDefaultFont(lbl_name, 14)
+exports.GTWgui:setDefaultFont(lbl_price, 20)
+exports.GTWgui:setDefaultFont(vehicle_list_shop, 10)
 
---[[ Create a function to handle toggling of vehicle GUI ]]--
-function toggleGUI( source )
-	-- Show the vehicle GUI
-	if not guiGetVisible( window ) then
-		showCursor( true )
-		guiSetVisible( window, true )
-		guiSetInputEnabled( true )
-		triggerServerEvent( "GTWvehicleshop.onListVehicles", localPlayer )
-	else
-		showCursor( false )
-		guiSetVisible( window, false )
-		guiSetInputEnabled( false )
-	end
+function renderShopFurning()
+	dxDrawRectangle(0, gH * 0.8, gW, gH * 0.2, tocolor(0, 0, 0, 150), false)
 end
-addCommandHandler( "vehicles", toggleGUI )
-bindKey( "F2", "down", "vehicles" )
+guiSetVisible(vehicle_list_shop, false)
+guiSetVisible(btn_close, false)
+guiSetVisible(btn_buy, false)
+guiSetVisible(lbl_name, false)
+guiSetVisible(lbl_price, false)
 
---[[ Create a function to handle toggling of vehicle inventory GUI ]]--
-function toggleInventoryGUI( plr )
-	-- Show the vehicle inventory GUI
-	if not guiGetVisible( window_trunk ) and isElement(getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk")) then
-		local browsing_player = getElementData(getElementData(
-			localPlayer, "GTWvehicleshop.the_near_veh_trunk"),
-			"GTWvehicleshop.the_near_player_trunk")
-		if getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk") and
-			browsing_player and browsing_player == localPlayer then
-			showCursor( true )
-			guiSetVisible( window_trunk, true )
-			guiSetInputEnabled( true )
-			loadWeaponsToList()
-		else
-			if not browsing_player then return end
-			exports.GTWtopbar:dm(getPlayerName(browsing_player).." is currently browsing this trunk, please wait!", 255, 0, 0)
-		end
-	else
-		showCursor( false )
-		guiSetVisible( window_trunk, false )
-		guiSetInputEnabled( false )
-		if isElement(getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk")) then
-			triggerServerEvent( "GTWvehicleshop.onCloseInventory", localPlayer )
-		end
+--[[ Reload shop items list ]]--
+function reloadShopItems(shopType)
+	if not shopType then return end
+	guiGridListClear(vehicle_list_shop)
+	for cC = 1, guiGridListGetColumnCount(vehicle_list_shop) do
+		guiGridListRemoveColumn(vehicle_list_shop, 1)
 	end
-end
-addCommandHandler( "inventory", toggleInventoryGUI )
-bindKey( "F9", "down", "inventory" )
+	if type(shopType) ~= "number" then return end
+	local column = guiGridListAddColumn(vehicle_list_shop, shopNames[shopType], 0.75)
 
-function loadWeaponsToList()
-	if col7 and col8 and col9 and col10 then
-		local weapons = getPedWeapons(localPlayer)
-		guiGridListClear( player_items_list )
-		guiGridListClear( inventory_list )
-		for i,wep in pairs(getPedWeapons(localPlayer)) do
-			local row = guiGridListAddRow( player_items_list )
-			local slot = getSlotFromWeapon(wep)
-			if getPedTotalAmmo(localPlayer,slot) > 0 then
-				guiGridListSetItemText( player_items_list, row, col9, getWeaponNameFromID(wep), false, false )
-				guiGridListSetItemText( player_items_list, row, col10, getPedTotalAmmo(localPlayer,slot), false, false )
-			end
-		end
-
-		-- Load weapons from vehicle inventory
-		local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
-		if veh_id then triggerServerEvent( "GTWvehicleshop.onOpenInventory", localPlayer, veh_id ) end
-	end
-end
-
-function receiveVehicleData(data_table)
-	if col1 and col2 and col3 and col4 and col5 and col6 then
-		-- Clear and refresh
-		guiGridListClear( vehicle_list )
-		veh_data_list = data_table
-
-		-- Load vehicles to list
-		for id, veh in pairs(data_table) do
-			local row = guiGridListAddRow( vehicle_list )
-			guiGridListSetItemText( vehicle_list, row, col1, getVehicleNameFromModel(data_table[id][2]), false, false )
-			if currentVehID == tonumber(data_table[id][1]) then
-				guiGridListSetItemColor( vehicle_list, row, col1, 100, 100, 255 )
-			end
-			guiGridListSetItemText( vehicle_list, row, col2, data_table[id][3], false, false )
-			if data_table[id][3] > 70 then
-				guiGridListSetItemColor( vehicle_list, row, col2, 0, 255, 0 )
-			elseif data_table[id][3] > 30 then
-				guiGridListSetItemColor( vehicle_list, row, col2, 255, 200, 0 )
-			else
-				guiGridListSetItemColor( vehicle_list, row, col2, 255, 0, 0 )
-			end
-			guiGridListSetItemText( vehicle_list, row, col3, data_table[id][4], false, false )
-			if data_table[id][4] > 80 then
-				guiGridListSetItemColor( vehicle_list, row, col3, 0, 255, 0 )
-			elseif data_table[id][4] > 20 then
-				guiGridListSetItemColor( vehicle_list, row, col3, 255, 200, 0 )
-			else
-				guiGridListSetItemColor( vehicle_list, row, col3, 255, 0, 0 )
-			end
-			local locked = "Open"
-			if data_table[id][5] == 1 then
-				locked = "Yes"
-			end
-			guiGridListSetItemText( vehicle_list, row, col4, locked, false, false )
-			if data_table[id][5] == 1 then
-				guiGridListSetItemColor( vehicle_list, row, col4, 0, 255, 0 )
-			else
-				guiGridListSetItemColor( vehicle_list, row, col4, 255, 200, 0 )
-			end
-			local engine = "Off"
-			if data_table[id][6] == 1 then
-				engine = "On"
-			end
-			guiGridListSetItemText( vehicle_list, row, col5, engine, false, false )
-			if data_table[id][6] == 1 then
-				guiGridListSetItemColor( vehicle_list, row, col5, 0, 255, 0 )
-			else
-				guiGridListSetItemColor( vehicle_list, row, col5, 255, 0, 0 )
-			end
-			local x,y,z, rx,ry,rz = unpack( fromJSON( data_table[id][7] ))
-			local location = getZoneName(x,y,z)
-			local city = getZoneName(x,y,z,true)
-			guiGridListSetItemText( vehicle_list, row, col6, location.." ("..city..")", false, false )
-			local px,py,pz = getElementPosition(localPlayer)
-			local dist = getDistanceBetweenPoints3D( x,y,z, px,py,pz )
-			if dist < 180 then
-				guiGridListSetItemColor( vehicle_list, row, col6, 0, 255, 0 )
-			else
-				guiGridListSetItemColor( vehicle_list, row, col6, 255, 200, 0 )
+	-- List available vehicles
+	for _, data in ipairs(car_data[shopType]) do
+		if (getVehicleNameFromModel(data[1]) ~= "") then
+			if (data[3] ~= "" ) then
+				local row = guiGridListAddRow(vehicle_list_shop)
+				guiGridListSetItemText(vehicle_list_shop, row, column, getVehicleNameFromModel(data[1]), false, false)
+				guiGridListSetItemData(vehicle_list_shop, row, column, data[3])
 			end
 		end
 	end
+
+	-- Get name from dummie car
+	local vehName = guiGridListGetItemText(vehicle_list_shop, 1, 1)
+	setElementModel(dummieCar, getVehicleModelFromName(vehName))
+
+	-- Select first item
+	guiGridListSetSelectedItem(vehicle_list_shop, 0, column)
 end
-addEvent( "GTWvehicleshop.onReceivePlayerVehicleData", true )
-addEventHandler( "GTWvehicleshop.onReceivePlayerVehicleData", root, receiveVehicleData )
 
-function receiveInventoryItems(item)
-	if col7 and col8 then
-		-- Clear and refresh
-		guiGridListClear( inventory_list )
-
-		-- Load vehicles to list
-		local data_table = fromJSON(item)
-		for k, v in pairs(data_table) do
-			local row = guiGridListAddRow( inventory_list )
-			guiGridListSetItemText( inventory_list, row, col7, k, false, false )
-			guiGridListSetItemText( inventory_list, row, col8, v, false, false )
+--[[ Toggle shop window ]]--
+function toggleVehiclesShop(open, x, y, z, cx, cy, cz, rz, int, dim)
+	if open then
+		if x and y and z and cx and cy and cz then
+			toggleAllControls(false, true, false)
+			showCursor(true)
+			guiSetVisible(vehicle_list_shop, true)
+			guiSetVisible(btn_close, true)
+			guiSetVisible(btn_buy, true)
+			guiSetVisible(lbl_name, true)
+			guiSetVisible(lbl_price, true)
+			addEventHandler("onClientRender", root, renderShopFurning)
+			setElementPosition(dummieCar, x, y, z)
+			setCameraMatrix(cx, cy, cz, x, y, z)
+			setElementRotation(dummieCar, 0, 0, tonumber(rz) or 0)
+			if int then
+				setElementInterior(dummieCar, int)
+			end
+			if dim then
+				setElementDimension(dummieCar, dim)
+			end
 		end
+	elseif not open then
+		guiSetVisible(vehicle_list_shop, false)
+		guiSetVisible(btn_close, false)
+		guiSetVisible(btn_buy, false)
+		guiSetVisible(lbl_name, false)
+		guiSetVisible(lbl_price, false)
+		removeEventHandler("onClientRender", getRootElement(), renderShopFurning)
+		setCameraTarget(localPlayer)
+		toggleAllControls(true, true, true)
+		showCursor(false)
+		setElementPosition(dummieCar, 0, 0, 0)
+		setElementInterior(dummieCar, 0)
+		setElementDimension(dummieCar, 0)
+		setElementAlpha(dummieCar, 0.0)
+		setElementCollisionsEnabled(dummieCar, false)
 	end
 end
-addEvent( "GTWvehicleshop.onReceiveInventoryItems", true )
-addEventHandler( "GTWvehicleshop.onReceiveInventoryItems", root, receiveInventoryItems )
 
---[[ Toggle vehicle visibility on click ]]--
-addEventHandler("onClientGUIClick",vehicle_list,
+--[[ GUI elements click ]]--
+addEventHandler("onClientGUIClick", vehicle_list_shop,
 function()
-	row,col = guiGridListGetSelectedItem( vehicle_list )
-	if row and col and veh_data_list[row+1] then
-		currentVehID = veh_data_list[row+1][1]
-		for w=0, #veh_data_list do
-			guiGridListSetItemColor( vehicle_list, w, col1, 255, 255, 255 )
-		end
-		guiGridListSetItemColor( vehicle_list, row, col1, 100, 100, 255 )
-		guiGridListSetSelectedItem( vehicle_list, 0, 0)
+	local row, column = guiGridListGetSelectedItem(vehicle_list_shop)
+	if row == -1 or column == -1 then return end
+	local vehName = guiGridListGetItemText(source, row, column)
+	if getVehicleModelFromName(vehName) then
+		dataShop[1] = guiGridListGetItemText(source, row, column)
+		dataShop[2] = tostring(guiGridListGetItemData(vehicle_list_shop, row, column))
+		guiSetText(lbl_name, dataShop[1])
+		guiSetText(lbl_price, "$"..dataShop[2]*priceMultiplier)
+		setElementModel(dummieCar, getVehicleModelFromName(vehName))
 	end
 end)
-
---[[ Close the inventory GUI ]]--
-addEventHandler("onClientGUIClick",btn_close,
+addEventHandler("onClientGUIClick", btn_buy,
 function()
-	toggleInventoryGUI(localPlayer)
-end)
-
---[[ Options in the button menu ]]--
-addEventHandler( "onClientGUIClick", root,
-function ( )
-	--if not currentVehID then exports.GTWtopbar:dm("Please select a vehicle from the list!", 255, 0, 0) return end
-	if source == btn_show and currentVehID then
-		triggerServerEvent( "GTWvehicleshop.onShowVehicles", localPlayer, currentVehID )
-	end
-	if source == btn_hide and currentVehID then
-		triggerServerEvent( "GTWvehicleshop.onHideVehicles", localPlayer, currentVehID )
-	end
-	if source == btn_lock and currentVehID then
-		-- Update vehiclelist and lock status
-		if guiGridListGetItemText( vehicle_list, row, col4 ) == "Yes" then
-			triggerServerEvent( "GTWvehicleshop.onLockVehicle", localPlayer, currentVehID, 0 )
-			guiGridListSetItemText( vehicle_list, row, col4, "Open", false, false )
-			guiGridListSetItemColor( vehicle_list, row, col4, 255, 200, 0 )
+	local row, column = guiGridListGetSelectedItem(vehicle_list_shop)
+	if row == -1 or column == -1 then return end
+	local vehName = guiGridListGetItemText(vehicle_list_shop, row, column)
+	if getVehicleModelFromName(vehName) then
+		if guiGridListGetItemData(vehicle_list_shop, row, column)*priceMultiplier <= getPlayerMoney() then
+			local x, y, z = getElementPosition(dummieCar)
+			local rx, ry, rz = getElementRotation(dummieCar)
+			local dim = getElementDimension(dummieCar)
+			local int = getElementInterior(dummieCar)
+			triggerServerEvent("GTWvehicleshop.onPlayerVehicleBuyRequest", localPlayer, getVehicleModelFromName(vehName),
+				guiGridListGetItemData(vehicle_list_shop, row, column) * 1000, x, y, z, rx, ry, rz, dim, int)
+			toggleVehiclesShop(false)
 		else
-			triggerServerEvent( "GTWvehicleshop.onLockVehicle", localPlayer, currentVehID, 1 )
-			guiGridListSetItemText( vehicle_list, row, col4, "Yes", false, false )
-			guiGridListSetItemColor( vehicle_list, row, col4, 0, 255, 0 )
+			exports.GTWtopbar:dm("You can't afford this vehicle, you little twat!", 255, 0, 0)
 		end
 	end
-	if source == btn_engine and currentVehID then
-		-- Update vehiclelist and engine status
-		if guiGridListGetItemText( vehicle_list, row, col5 ) == "On" then
-			triggerServerEvent( "GTWvehicleshop.onVehicleEngineToggle", localPlayer, currentVehID, 0 )
-			guiGridListSetItemText( vehicle_list, row, col5, "Off", false, false )
-			guiGridListSetItemColor( vehicle_list, row, col5, 255, 0, 0 )
-		else
-			triggerServerEvent( "GTWvehicleshop.onVehicleEngineToggle", localPlayer, currentVehID, 1 )
-			guiGridListSetItemText( vehicle_list, row, col5, "On", false, false )
-			guiGridListSetItemColor( vehicle_list, row, col5, 0, 255, 0 )
-		end
-	end
-	if source == btn_recover and currentVehID then
-		triggerServerEvent( "GTWvehicleshop.onVehicleRespawn", localPlayer, currentVehID )
-	end
-	if source == btn_sell and currentVehID then
-		triggerServerEvent( "GTWvehicleshop.onVehicleSell", localPlayer, currentVehID, veh_data_list[row+1][2] )
-		guiGridListRemoveRow( vehicle_list, row )
-		currentVehID = nil
-	end
-	-- Vehicle inventory
-	if source == btn_withdraw then
-        vehicle_shop_withdraw()
-    end
-	if source == btn_deposit then
-		vehicle_shop_deposit()
-	end
-	if source == btn_withdraw_all then
-        vehicle_shop_withdraw(true)
-    end
-	if source == btn_deposit_all then
-		vehicle_shop_deposit(true)
-	end
+end)
+addEventHandler("onClientGUIClick", btn_close,
+function()
+	toggleVehiclesShop(false)
 end)
 
---[[ Withdraw weapon from inventory ]]--
-function vehicle_shop_withdraw(withdraw_all)
-	if not withdraw_all then withdraw_all = false end
-	local row_pil, col_pil = guiGridListGetSelectedItem( player_items_list )
-	local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
-
-	-- Validate operation
-	if row_pil == -1 or col_pil == -1 or not veh_id then return end
-
-	-- Get current values
-	local object = guiGridListGetItemText( player_items_list, row_pil, col9 )
-	local pocket = guiGridListGetItemText( player_items_list, row_pil, col10 )
-
-	-- Get current data
-	local slot = getSlotFromWeapon( getWeaponIDFromName( object ))
-	local ammo = getPedAmmoInClip(localPlayer, slot)
-	if withdraw_all then
-		ammo = tonumber(guiGridListGetItemText(player_items_list, row_pil, col10))
-	end
-	local is_empty = false
-
-	-- Justify values
-	if ammo > tonumber(guiGridListGetItemText(player_items_list, row_pil, col10)) then
-		ammo = tonumber(guiGridListGetItemText(player_items_list, row_pil, col10))
-	end
-
-	-- Send to database
-	triggerServerEvent( "GTWvehicleshop.onVehicleWeaponWithdraw", localPlayer, veh_id, object, ammo)
-
-	-- Manage lists add new item
-	local ex_row = isElementInList(inventory_list, object, col7)
-	if not ex_row then
-		local tmp_row = guiGridListAddRow( inventory_list )
-        guiGridListSetItemText( inventory_list, tmp_row, col7, object, false, false )
-        guiGridListSetItemText( inventory_list, tmp_row, col8, ammo, false, false )
-    else
-       	guiGridListSetItemText( inventory_list, ex_row, col8, tonumber(guiGridListGetItemText(inventory_list, ex_row, col8)) + ammo, false, false )
-    end
-    guiGridListSetItemText( player_items_list, row_pil, col10, tonumber(guiGridListGetItemText(player_items_list, row_pil, col10)) - ammo, false, false )
-
-    -- Remove if empty
-    if guiGridListGetItemText(player_items_list, row_pil, col10) == "0" then
-      	guiGridListRemoveRow( player_items_list, row_pil )
-     	is_empty = true
-    end
-
-    -- Reload data
-    --loadWeaponsToList()
-
-    -- Clear selection if empty, otherwise reselect
-    if not is_empty then
-     	guiGridListSetSelectedItem(player_items_list, row_pil, col_pil)
-     	guiGridListSetSelectedItem(inventory_list, -1, -1)
-    else
-      	guiGridListSetSelectedItem(player_items_list, -1, -1)
-      	guiGridListSetSelectedItem(inventory_list, -1, -1)
-    end
-
-    -- Restore GUI style !Important if using GTWgui
-    setTimer(resetGTWguistyle, 1000, 1)
+--[[ Shop creation ]]--
+vehicleShops = {}
+for k, i in ipairs(shops_Coords) do
+	local x, y, z, dim, int, vehicleX, vehicleY, vehicleZ, rotZ, camX, camY, camZ, shopType = unpack(i)
+	local aMarker = createMarker(x, y, z, "cylinder", 1.6, 200, 200, 200, 50)
+	setElementDimension(aMarker, dim)
+	setElementInterior(aMarker, int)
+	vehicleShops[aMarker] = {shopType, vehicleX, vehicleY, vehicleZ, camX, camY, camZ, rotZ}
+	--createBlip(vehicleX, vehicleY, vehicleZ, vehicleBlips[shopType], 1, 0, 0, 0, 255, 0, 180)
+	--exports["radblips"]:createCustomBlipAt(vehicleX, vehicleY, vehicleBlips[shopType])
+	local blip = exports.customblips:createCustomBlip(x, y, 16, 16, "icon/"..tostring(vehicleBlips[shopType])..".png", 100)
+	exports.customblips:setCustomBlipRadarScale(blip, 1.6)
 end
 
---[[ Deposit weapon from inventory ]]--
-function vehicle_shop_deposit(deposit_all)
-	if not deposit_all then deposit_all = false end
-	local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
-	local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
-
-	-- Validate operation
-	if row_il == -1 or col_il == -1 or not veh_id then return end
-
-	-- Get current values
-	local object = guiGridListGetItemText( inventory_list, row_il, col7 )
-	local trunk = guiGridListGetItemText( inventory_list, row_il, col8 )
-
-	-- Get current data
-	local ammo = getWeaponProperty(object, "std", "maximum_clip_ammo")
-	if deposit_all then
-		ammo = tonumber(guiGridListGetItemText(inventory_list, row_il, col8))
-	end
-	local is_empty = false
-
-	-- Justify values
-	if ammo > tonumber(guiGridListGetItemText(inventory_list, row_il, col8)) then
-		ammo = tonumber(guiGridListGetItemText(inventory_list, row_il, col8))
-	end
-
-	-- Send to database
-	triggerServerEvent( "GTWvehicleshop.onVehicleWeaponDeposit", localPlayer, veh_id, object, ammo)
-
-	-- Manage lists add new item
-	local ex_row = isElementInList(player_items_list, object, col9)
-	if not ex_row then
-		local tmp_row = guiGridListAddRow( player_items_list )
-      	guiGridListSetItemText( player_items_list, tmp_row, col9, object, false, false )
-      	guiGridListSetItemText( player_items_list, tmp_row, col10, ammo, false, false )
-    else
-     	guiGridListSetItemText( player_items_list, ex_row, col10, tonumber(guiGridListGetItemText(player_items_list, ex_row, col10)) + ammo, false, false )
-    end
-    guiGridListSetItemText( inventory_list, row_il, col8, tonumber(guiGridListGetItemText(inventory_list, row_il, col8)) - ammo, false, false )
-
-    -- Remove if empty
-    if guiGridListGetItemText(inventory_list, row_il, col8) == "0" then
-      	guiGridListRemoveRow( inventory_list, row_il )
-      	is_empty = true
-    end
-
-    -- Reload data
-    --loadWeaponsToList()
-
-    -- Clear selection if empty, otherwise reselect
-    if not is_empty then
-      	guiGridListSetSelectedItem(player_items_list, -1, -1)
-     	guiGridListSetSelectedItem(inventory_list, row_il, col_il)
-    else
-      	guiGridListSetSelectedItem(player_items_list, -1, -1)
-     	guiGridListSetSelectedItem(inventory_list, -1, -1)
-    end
-
-    -- Restore GUI style !Important if using GTWgui
-    setTimer(resetGTWguistyle, 1000, 1)
-
-	--[[local row_il, col_il = guiGridListGetSelectedItem( inventory_list )
-	local veh_id = getElementData( getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk"), "isOwnedVehicle")
-	if row_il == -1 or col_il == -1 or not veh_id then return end
-	triggerServerEvent( "GTWonVehicleWeaponDeposit", localPlayer, veh_id,
-		guiGridListGetItemText( inventory_list, row_il, col7 ), guiGridListGetItemText( inventory_list, row_il, col8 ))
-	local tmp_row = guiGridListAddRow( player_items_list )
-    guiGridListSetItemText( player_items_list, tmp_row, col9, guiGridListGetItemText( inventory_list, row_il, col7 ), false, false )
-    guiGridListSetItemText( player_items_list, tmp_row, col10, guiGridListGetItemText( inventory_list, row_il, col8 ), false, false )
-    guiGridListRemoveRow( inventory_list, row_il )
-    -- Clear selection
-    guiGridListSetSelectedItem(player_items_list, -1, -1)
-    guiGridListSetSelectedItem(inventory_list, -1, -1)]]--
-end
-
-function resetGTWguistyle()
-	-- Apply GUI style again !Important if using GTWgui
-    exports.GTWgui:setDefaultFont(inventory_list, 10)
-	exports.GTWgui:setDefaultFont(player_items_list, 10)
-end
-
---[[ Find element in list ]]--
-function isElementInList(g_list, text, col)
-	local items_count = guiGridListGetRowCount(g_list)
-	for r=0, items_count do
-		--outputChatBox("R: "..r..", C: "..col.." "..guiGridListGetItemText(g_list, r, col).." = "..text)
-		if guiGridListGetItemText(g_list, r, col) == text then return r end
-	end
-	return false
-end
-
-function getPedWeapons(ped)
-	local playerWeapons = {}
-	if ped and isElement(ped) and getElementType(ped) == "ped" or getElementType(ped) == "player" then
-		for i=2,9 do
-			local wep = getPedWeapon(ped,i)
-			if wep and wep ~= 0 then
-				table.insert(playerWeapons,wep)
+--[[ Draw label info ]]--
+addEventHandler("onClientRender", getRootElement(),
+function()
+	for k, i in pairs(vehicleShops) do
+		local x, y, z = getElementPosition(k)
+		local px, py, pz = getElementPosition(localPlayer)
+		if getDistanceBetweenPoints3D(x, y, z + 0.4, px, py, pz) < 18 then
+			local dx, dy = getScreenFromWorldPosition(x, y, z + 1.4)
+			if dx and dy then
+				local text = shopNames[(i[1])]
+				dxDrawText(text, dx -(#text * 2), dy - 3, dx +(#text * 2), dy + 2 , tocolor(250, 250, 250, 250), 1, "bankgothic", "center", "center")
 			end
 		end
-	else
-		return false
 	end
-	return playerWeapons
-end
+end)
+
+--[[ Hit vehicle marker ]]--
+addEventHandler("onClientMarkerHit", getRootElement(),
+function(thePlayer, matchDim)
+	if vehicleShops[source] then
+		if matchDim then
+			if not isPedInVehicle(thePlayer) then
+				local x, y, z = getElementPosition(localPlayer)
+				local mx, my, mz = getElementPosition(source)
+				if getDistanceBetweenPoints3D(x, y, z, mx, my, mz) < 2 then
+					local dim, int = getElementDimension(source), getElementInterior(source)
+					toggleVehiclesShop(true, vehicleShops[source][2], vehicleShops[source][3], vehicleShops[source][4], vehicleShops[source][5],
+						vehicleShops[source][6], vehicleShops[source][7], vehicleShops[source][8], dim, int)
+					reloadShopItems(tonumber(vehicleShops[source][1]))
+					setElementAlpha(dummieCar, 255)
+					setElementCollisionsEnabled(dummieCar, true)
+				end
+			end
+		end
+	end
+end)
