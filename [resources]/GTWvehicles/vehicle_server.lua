@@ -203,6 +203,9 @@ addEventHandler("GTWvehicles.colorvehicle", root, set_vehicle_color)
 function destroy_vehicle(plr, force_delete)
 	if not force_delete then force_delete = false end
 	if vehicles[plr] and isElement(vehicles[plr]) and (not getVehicleOccupant(vehicles[plr]) or force_delete) then
+		if getPedOccupiedVehicle(plr) then
+			exports.GTWtopbar:dm("Exit your vehicle before removing it!", plr, 255, 0, 0)
+		end
 		if getVehicleTowedByVehicle(vehicles[plr]) then
    	 		destroyElement(getVehicleTowedByVehicle(vehicles[plr]))
    	 	end
@@ -218,8 +221,6 @@ function destroy_vehicle(plr, force_delete)
 		end
 		takePlayerMoney(plr, paymentsCounter[plr] or 0)
 		exports.GTWtopbar:dm("Rental cost was: "..tostring(paymentsCounter[plr] or 0).."$", plr, 0, 255, 0)
-	elseif getPedOccupiedVehicle(plr) then
-		exports.GTWtopbar:dm("Exit your vehicle before removing it!", plr, 255, 0, 0)
 	else
 		exports.GTWtopbar:dm("You don't have a vehicle to destroy!", plr, 255, 0, 0)
 	end
