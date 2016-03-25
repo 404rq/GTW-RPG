@@ -51,4 +51,4 @@ end
 
 --[[ Start checking if a player is on the ground ]]--
 is_player_on_the_ground()
-setTimer(is_player_on_the_ground, 500, 0)
+setTimer(is_player_on_the_ground, 3000, 0)

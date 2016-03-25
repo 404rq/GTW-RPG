@@ -255,7 +255,7 @@ bindKey(main_window_key, "down", openWindowAndSend)
 function show_group_list()
 	guiSetVisible(listWindow, true)
 	guiBringToFront(listWindow)
-	triggerServerEvent("GTWgroups.addGroupList", root)
+	triggerServerEvent("GTWgroups.addGroupListServer", root)
 end
 function add_group_list(group, count)
 	gTable = group
@@ -276,7 +276,7 @@ function search_group_list()
 	guiGridListClear(groupListGrid)
 	local text = guiGetText(source)
 	if (not text or text == "") then
-		triggerServerEvent("GTWgroups.addGroupList", root)
+		triggerServerEvent("GTWgroups.addGroupListServer", root)
 		return
 	end
 	for ind, data in pairs(gTable) do

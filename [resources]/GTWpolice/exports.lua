@@ -62,8 +62,9 @@ function distanceToCrim(player)
 			not isLawUnit(crim) then
 			cx,cy,cz = getElementPosition(crim)
 			px,py,pz = getElementPosition(player)
+			local is_jailed = exports.GTWjail:isJailed(crim)
 			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and
-				getElementData(crim, "Jailed") ~= "Yes" and
+				not is_jailed and
 				not police_data.is_arrested[crim] then
 				dist = getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz)
 			end
@@ -84,8 +85,9 @@ function directionToCrim(player)
 		if getPlayerWantedLevel(crim) > 0 and crim ~= player then
 			cx,cy,cz = getElementPosition(crim)
 			px,py,pz = getElementPosition(player)
+			local is_jailed = exports.GTWjail:isJailed(crim)
 			if getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz) < dist and
-				getElementData(crim, "Jailed") ~= "Yes" and
+				not is_jailed and
 				not police_data.is_arrested[crim] then
 				dist = getDistanceBetweenPoints3D(cx, cy, cz, px, py, pz)
 				if py > cy-1 then

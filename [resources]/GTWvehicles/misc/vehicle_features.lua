@@ -140,15 +140,10 @@ function start_vehicle(plr, seat, jacked)
 	    		setVehicleEngineState(trailers[plr], true)
 	    	end
 			setVehicleOverrideLights(source, 2)
-			gearTimers[source] = setTimer(gearBox, 100, 0, source, plr)
-			if not getElementData(source, "gearType") then
-				setElementData(source, "gearType", "Sport")
-			end
 			if getVehicleType(source) == "Automobile" then
 				setVehicleHandling(source, "maxVelocity", nil, false)
 				local result = getVehicleHandling(source)
 				currVehTopSpeed[source] = tonumber(result["maxVelocity"])
-				setTimer(showGearProfile, 95, 1, plr, source)
 			end
 		end
 

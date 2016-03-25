@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -76,3 +77,12 @@ addCommandHandler("lean", start_anim)
 addCommandHandler("cpr", start_anim)
 addCommandHandler("sit", start_anim)
 addCommandHandler("cower", start_anim)
+addCommandHandler("handcower", start_anim)
+addCommandHandler("gum", start_anim)
+addCommandHandler("getup", start_anim)
+addCommandHandler("getupfront", start_anim)
+addCommandHandler("chat", start_anim)
+addCommandHandler("taxiwink", start_anim)
+addCommandHandler("turn180", start_anim)
+addCommandHandler("urp", start_anim)
+addCommandHandler("gumchew", start_anim)

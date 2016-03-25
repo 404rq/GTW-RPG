@@ -46,6 +46,18 @@ function load_settings()
         -- Override other settings (optional)
     	setTimer(setGameType, 3600*1000, 0, server_settings["gamemode"])
     	setTimer(setMapName, 3600*1000, 0, server_settings["map"])
+
+	--[[ Export for other resources to figure out server language ]]--
+	function getGTWLanguage()
+		return server_settings["language"]
+	end
+
+        --[[ Exports for MySQL credentials ]]--
+        function getMySQLHost() return server_settings["MySQLhost"] end
+        function getMySQLDatabase() return server_settings["MySQLdatabase"] end
+        function getMySQLUser() return server_settings["MySQLuser"] end
+        function getMySQLPass() return server_settings["MySQLpass"] end
+        function getMySQLPort() return server_settings["MySQLport"] end
 end
 addEventHandler("onResourceStart", resourceRoot, load_settings)
 
@@ -159,7 +171,7 @@ function displayStoppedRes(res)
         local pAcc = getPlayerAccount(v)
         if pAcc and (isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Admin")) or
         	isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Developer"))) then
-        	outputChatBox("Resource " .. getResourceName(res) .. " [#cc0000Stopped#ffffff]", v, 255, 255, 255, true)
+        	outputChatBox("Resource " .. (getResourceName(res) or "unknown") .. " [#cc0000Stopped#ffffff]", v, 255, 255, 255, true)
         end
     end
 end

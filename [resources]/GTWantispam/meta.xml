@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,8 +16,16 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWantispam" description="Fights command spam" version="0" type="script" />
-    <script src="server.lua" type="server"/>
-
-    <include resource="GTWtopbar" />
+	<!-- Resource information -->
+	<info author="404rq" name="GTWantispam" description="Fights command spam" version="0" type="script" />
+	
+	<!-- Language support: must be located at the top, s_lang for server and c_lang for client texts -->
+	<script src="s_lang.lua" type="server"/>
+	<!--<script src="c_lang.lua" type="client"/>-->
+	
+	<!-- Script files -->
+	<script src="server.lua" type="server"/>
+	
+	<!-- Included resources: should be at the end of this file -->
+	<include resource="GTWtopbar" />
 </meta>

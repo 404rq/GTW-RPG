@@ -18,9 +18,9 @@
     <info author="GTWGames" version="25" type="script" />
     <script src="c_gui.lua" type="client" protected="true"/>
     <script src="group_c.lua" type="client" protected="true"/>
+    <script src="s_exports.lua" type="server" />
     <script src="group_s.lua" type="server" />
     <script src="s_colors.lua" type="server" />
-    <script src="s_exports.lua" type="server" />
 
     <export function="removeRank" type="server" />
     <export function="isRank" type="server" />

@@ -1,0 +1,44 @@
+<meta>
+    <!-- INFO -->
+    <info author="Noneatme" version="58" type="misc" description="A MySQL Based housesystem" />
+    
+    <!-- SERVER SIDE SCRIPTS -->
+    <script src="server.lua" type="server" />
+    
+    <!-- CLIENT SIDE SCIRPTS -->
+    <script src="client.lua" type="client" />
+    
+    <!-- DOWNLOAD FILES -->
+    
+    <file src="data/images/1.jpg" />
+    <file src="data/images/2.jpg" />
+    <file src="data/images/3.jpg" />
+    <file src="data/images/4.jpg" />
+    <file src="data/images/5.jpg" />
+    <file src="data/images/6.jpg" />
+    <file src="data/images/7.jpg" />
+    <file src="data/images/8.jpg" />
+    <file src="data/images/9.jpg" />
+    <file src="data/images/10.jpg" />
+    <file src="data/images/11.jpg" />
+    <file src="data/images/12.jpg" />
+    <file src="data/images/13.jpg" />
+    <file src="data/images/14.jpg" />
+    <file src="data/images/15.jpg" />
+    <file src="data/images/16.jpg" />
+    <file src="data/images/17.jpg" />
+    <file src="data/images/18.jpg" />
+    <file src="data/images/19.jpg" />
+    <file src="data/images/20.jpg" />
+    <file src="data/images/21.jpg" />
+    <file src="data/images/22.jpg" />
+    <file src="data/images/23.jpg" />
+    <file src="data/images/24.jpg" />
+    <file src="data/images/25.jpg" />
+    <file src="data/images/26.jpg" />
+    <file src="data/images/27.jpg" />
+    <file src="data/images/28.jpg" />
+    <file src="data/images/29.jpg" />
+    <file src="data/images/choose.jpg" />
+    <file src="house.png" type="client" />
+</meta>

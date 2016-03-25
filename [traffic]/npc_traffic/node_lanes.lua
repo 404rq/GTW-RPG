@@ -81,15 +81,12 @@ function getNodeLanePos(nodeid,side,lane)
 	if lane == 0 then return x,y,z end
 	local rx,ry = node_rx[nodeid],node_ry[nodeid]
 	local ll,rl = node_lanes.left[nodeid],node_lanes.right[nodeid]
-	if not ll then ll = 0 end
-	if not rl then rl = 0 end
 	lane = math.min(lane,side == "left" and ll or rl)*2-1
 	local lanepos = -(rl-ll)+(side == "left" and -lane or lane)
 	return x+rx*lanepos,y+ry*lanepos,z
 end
 
 function areDirectionsMatching(n,n1,n2)
-	if not node_x[n1] or not node_y[n1] or not node_x[n2] or not node_y[n2] then return false end
 	local rx,ry = node_rx[n],node_ry[n]
 	local cx,cy = node_x[n2]-node_x[n1],node_y[n2]-node_y[n1]
 	local nfx,nfy = -ry,rx

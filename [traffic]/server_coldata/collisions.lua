@@ -1,4 +1,4 @@
-COLSQUARE_SIZE = 6
+COLSQUARE_SIZE = 4
 colsquares = {}
 element_x,element_y = {},{}
 element_box = {}
@@ -33,7 +33,7 @@ function generateColData(startelement)
 		startelement = root
 	end
 	if not isElement(startelement) then
-		outputDebugString("Invalid element argument",2)
+		--outputDebugString("Invalid element argument",2)
 		return false
 	end
 
@@ -99,27 +99,27 @@ end
 
 function createModelIntersectionBox(model,x,y,z,r)
 	if not bs_r[model] then
-		outputDebugString("Invalid model argument",2)
+		--outputDebugString("Invalid model argument",2)
 		return false
 	end
 	x = tonumber(x)
 	if not x then
-		outputDebugString("Invalid x coordinate argument",2)
+		--outputDebugString("Invalid x coordinate argument",2)
 		return false
 	end
 	y = tonumber(y)
 	if not y then
-		outputDebugString("Invalid y coordinate argument",2)
+		--outputDebugString("Invalid y coordinate argument",2)
 		return false
 	end
 	z = tonumber(z)
 	if not z then
-		outputDebugString("Invalid z coordinate argument",2)
+		--outputDebugString("Invalid z coordinate argument",2)
 		return false
 	end
 	r = tonumber(r)
 	if not r then
-		outputDebugString("Invalid rotation argument",2)
+		--outputDebugString("Invalid rotation argument",2)
 		return false
 	end
 
@@ -140,7 +140,7 @@ end
 
 function getElementIntersectionBox(element)
 	if not isElement(element) then
-		outputDebugString("Invalid element argument",2)
+		--outputDebugString("Invalid element argument",2)
 		return false
 	end
 
@@ -148,7 +148,7 @@ function getElementIntersectionBox(element)
 	if box_model[box] then return box end
 	local model = getElementModel(element)
 	if not model or not bs_r[model] then
-		outputDebugString("Invalid element model",2)
+		--outputDebugString("Invalid element model",2)
 		return false
 	end
 
@@ -209,16 +209,16 @@ end
 
 function doesModelBoxIntersect(box1,dim,boxexcl)
 	if not box1 or not box_model[box1] then
-		outputDebugString("Invalid box argument",2)
+		--outputDebugString("Invalid box argument",2)
 		return false
 	end
 	dim = tonumber(dim)
 	if not dim then
-		outputDebugString("Invalid dimension argument",2)
+		--outputDebugString("Invalid dimension argument",2)
 		return false
 	end
 	if boxexcl and not box_model[boxexcl] then
-		outputDebugString("Invalid ignored box argument",2)
+		--outputDebugString("Invalid ignored box argument",2)
 		return false
 	end
 
@@ -248,11 +248,11 @@ end
 
 function doModelBoxesIntersect(b1,b2)
 	if not b1 or not box_model[b1] then
-		outputDebugString("Invalid box1 argument",2)
+		--outputDebugString("Invalid box1 argument",2)
 		return false
 	end
 	if not b2 or not box_model[b2] then
-		outputDebugString("Invalid box2 argument",2)
+		--outputDebugString("Invalid box2 argument",2)
 		return false
 	end
 
@@ -306,3 +306,4 @@ function doLinesIntersect(x1_1,y1_1,x2_1,y2_1,x1_2,y1_2,x2_2,y2_2)
 	local my = ry1-(ry2-ry1)*rx1/(rx2-rx1)
 	return my >= 0 and my <= 1
 end
+

@@ -105,7 +105,6 @@ end
 
 function makeNPCDriveToPos(npc,x,y,z)
 	local car = getPedOccupiedVehicle(npc)
-	if not car then return end
 	local m = getElementMatrix(car)
 	x,y,z = x-m[4][1],y-m[4][2],z-m[4][3]
 	local rx,ry,rz =
@@ -142,9 +141,8 @@ function makeNPCDriveToPos(npc,x,y,z)
 	setPedControlState(npc,"brake_reverse",vry > speed*1.1)
 end
 
-function makeNPCDriveAlongLine(npc,x1,y1,z1,x2,y2,z2,off)	
+function makeNPCDriveAlongLine(npc,x1,y1,z1,x2,y2,z2,off)
 	local car = getPedOccupiedVehicle(npc)
-	if not car then return end
 	local x,y,z = getElementPosition(car)
 	local p2 = getPercentageInLine(x,y,x1,y1,x2,y2)
 	local len = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)

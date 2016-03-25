@@ -15,21 +15,21 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="Staff check" description="A secure way to check ACL rights" version="17" />
-    <script src="staff_s.lua" type="server" />
-    <script src="staff_c.lua" type="client" protected="true" />
+        <info author="GTWGames" type="script" name="Staff check" description="A secure way to check ACL rights" version="17" />
+        <script src="staff_c.lua" type="client" protected="true" />
+        <script src="staff_s.lua" type="server" />
 
-    <!-- Returns true if any ACL group is assigned -->
-    <export function="isStaff" type="server" />
-    <export function="isStaff" type="client" />
+        <!-- Returns true if any ACL group is assigned -->
+        <export function="isStaff" type="client" />
+        <export function="isStaff" type="server" />
 
-    <!-- Returns true if specific ACL group is assigned -->
-    <export function="isAdmin" type="server" />
-    <export function="isDeveloper" type="server" />
-    <export function="isModerator" type="server" />
-    <export function="isSupporter" type="server" />
-    <export function="isAdmin" type="client" />
-    <export function="isDeveloper" type="client" />
-    <export function="isModerator" type="client" />
-    <export function="isSupporter" type="client" />
+        <!-- Returns true if specific ACL group is assigned -->
+        <export function="isAdmin" type="server" />
+        <export function="isDeveloper" type="server" />
+        <export function="isModerator" type="server" />
+        <export function="isSupporter" type="server" />
+        <export function="isAdmin" type="client" />
+        <export function="isDeveloper" type="client" />
+        <export function="isModerator" type="client" />
+        <export function="isSupporter" type="client" />
 </meta>

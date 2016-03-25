@@ -30,7 +30,7 @@ addCommandHandler("drop", drop_player)
 -- ********************************************************************
 
 --[[ Gear box stuff, TODO: rewrite from scratch in different resource ]]--
-function showGearProfile(player,veh)
+--[[function showGearProfile(player,veh)
 	if getPlayerTeam(player) and getPlayerTeam(player) == getTeamFromName("Unemployed") and math.random(1,20) == 10 then
 		exports.GTWtopbar:dm("Gear box: profile is: "..getElementData(veh, "gearType")..
 			", use /drive, /sport or /race to change", player, 255, 200, 0)
@@ -219,7 +219,7 @@ function nextGear(thePlayer, command)
     	drive(thePlayer, "drive")
     end
 end
-addCommandHandler("nextgear", nextGear)
+addCommandHandler("nextgear", nextGear)]]--
 
 function topSpeed(thePlayer, command)
 	local veh = getPedOccupiedVehicle(thePlayer)

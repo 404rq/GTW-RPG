@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -262,7 +263,7 @@ end
 -- Display login screen to players who isn't currently logged in
 addEventHandler("onClientResourceStart", resourceRoot, function()
 	if not getElementData(localPlayer, "isLoggedIn") then
-		exports.GTWtopbar:dm("Welcome! please read the instructions before trying to register", client, 0,200,0)
+		exports.GTWtopbar:dm("Welcome! please read the instructions before trying to register", 0,200,0)
 		setTimer(make_login, 500, 1)
 		setBlurLevel(0)
 		showChat(false)

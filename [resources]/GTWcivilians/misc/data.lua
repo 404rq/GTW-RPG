@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -43,7 +44,9 @@ Weapons:
 	]], { -1, 60, 171, 172, 194, 253, 255 },
 	{ "default", "Chinese casual dressed man", "White well dressed man", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Black man with uniform", "White man with mustache" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {24, 35, 500, "Desert eagle"}}},
+	{{5, 1, 40, "Baseball bat"}, {24, 35, 500, "Desert eagle"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the bus driver job!, get a bus or coach to start your work"},
 	["Train Driver"]={ "Civilians", 0, [[
 Drive your train around the tracks, slow down
 to below 5km/h to stop at the station and get
@@ -69,7 +72,9 @@ Weapons:
 	]], { -1, 60, 171, 172, 194, 253, 255 },
 	{ "default", "Chinese casual dressed man", "White well dressed man", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Black man with uniform", "White man with mustache" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {24, 21, 300, "Desert eagle"}}},
+	{{5, 1, 40, "Baseball bat"}, {24, 21, 300, "Desert eagle"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the train driver job!, get a streak or freight to start your work"},
 	["Taxi Driver"]={ "Civilians", 2, [[
 In this job you need a taxi, cabbie or limousine.
 Get it from a nearby spawner or use your own
@@ -87,7 +92,9 @@ Weapons:
 	]], { -1, 9, 14, 41, 44, 60, 72 },
 	{ "default", "Casual African girl", "Casual african man", "Casual latino girl", "Casual latino man", "Chinese casual dressed man", "White casual dressed man" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {22, 68, 200, "Pistol"}}},
+	{{5, 1, 40, "Baseball bat"}, {22, 68, 200, "Pistol"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the taxi driver job!, get a taxi or cabbie to start your work"},
 	["Trucker"]={ "Civilians", 1, [[
 Rent or use your own truck or semi truck, in this
 job you will deliver cargo around San Andreas.
@@ -105,7 +112,9 @@ Weapons:
 	]], { -1, 31, 112, 133, 172, 194, 198, 202 },
 	{ "default", "White country girl", "Russian trucker", "Trucker with red hat", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Trucker girl", "Beer trucker" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {24, 14, 200, "Desert eagle"}}},
+	{{5, 1, 40, "Baseball bat"}, {24, 14, 200, "Desert eagle"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the trucker job!, get a truck to start your work"},
 	["Pilot"]={ "Civilians", 0, [[
 Rent or use your own airplane or helicopter, in
 this job you will fly passengers or cargo around
@@ -122,7 +131,9 @@ Weapons:
 	]], { -1, 61, 71 },
 	{ "default", "Pilot (official)", "Security guard" },
 	--[[WeaponID, amount, price, name]]
-	{{3, 1, 0, "Nightstick"}, {22, 51, 200, "Pistol"}}},
+	{{3, 1, 0, "Nightstick"}, {22, 51, 200, "Pistol"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the pilot job!, get a plane or helicopter to start your work"},
 	["Mechanic"]={ "Civilians", 4, [[
 Respond to calls and repair players broken
 vehicles or refuel vehicles that has been
@@ -139,7 +150,9 @@ Weapons:
 	]], { 50, 268, 305, 309 },
 	{ "Mechanic (official)", "Dwaine", "Jethro", "Janitor" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {30, 30, 700, "AK-47"}}},
+	{{5, 1, 40, "Baseball bat"}, {30, 30, 700, "AK-47"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the mechanic job!, press X and click on a damaged vehicle to fix or refuel"},
 	["Fisher"]={ "Civilians", 5, [[
 You need to own a boat to perform this job, get
 a boat, take the job then start fishing, easy
@@ -159,7 +172,9 @@ Weapons:
 	]], { -1 },
 	{ "default" },
 	--[[WeaponID, amount, price, name]]
-	{{2, 1, 60, "Golf club"}, {25, 20, 1400, "Shotgun"}}},
+	{{2, 1, 60, "Golf club"}, {25, 20, 1400, "Shotgun"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the fisher job!, enter a boat and wait to start catching fish"},
 	["Farmer"]={ "Civilians", 5, [[
 You need a tractor and a harvester to do this job
 either your own or barrow one from your friend.
@@ -186,7 +201,9 @@ Weapons:
 	]], { -1, 157, 158, 159, 160, 161, 162 },
 	{ "default", "Hillbilly girl", "Farmer man", "Hillbilly boy", "Farmer man (old)", "Farmer (official)", "Hillbilly (probably inbred)" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {24, 49, 700, "Desert eagle"}, {33, 30, 3200, "Country rifle"}}},
+	{{5, 1, 40, "Baseball bat"}, {24, 49, 700, "Desert eagle"}, {33, 30, 3200, "Country rifle"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the farmer job!, get a tractor and press N to buy and plant seeds"},
 	["Tram Driver"]={ "Civilians", 1, [[
 Drive your tram around the tracks in San Fierro,
 slow down to below 5km/h to stop at the station
@@ -207,7 +224,9 @@ Weapons:
 	]], { -1, 60, 171, 172, 194, 253, 255 },
 	{ "default", "Chinese casual dressed man", "White well dressed man", "White well dressed girl (blonde)", "White well dressed girl (brunette)", "Black man with uniform", "White man with mustache" },
 	--[[WeaponID, amount, price, name]]
-	{{5, 1, 40, "Baseball bat"}, {24, 28, 400, "Desert eagle"}}},
+	{{5, 1, 40, "Baseball bat"}, {24, 28, 400, "Desert eagle"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the tram driver job!, get a tram to start your work"},
 	["Fireman"]={ "Emergency service", 0, [[
 Wait for a fire to start, (whenever a vehicle
 explode) then go these as fast as you can to put
@@ -224,7 +243,9 @@ Weapons:
 	]], { 277, 278, 279 },
 	{ "LSFD worker", "LVFD worker", "SFFD worker" },
 	--[[WeaponID, amount, price, name]]
-	{{42, 5000, 300, "Fire extinguesher"}}},
+	{{42, 5000, 300, "Fire extinguesher"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the fireman job!, look for any reported vehicle fire then go to that location"},
 	["Paramedic"]={ "Emergency service", 0, [[
 Find hurted players and heal them with your spray
 can, you can also let them enter your ambulance to
@@ -238,7 +259,9 @@ Weapons:
 	]], { 274, 275, 276 },
 	{ "Black doctor", "Latino doctor", "White doctor" },
 	--[[WeaponID, amount, price, name]]
-	{{41, 500, 200, "Healing spray"}}},
+	{{41, 500, 200, "Healing spray"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the paramedic job!, heal players with your spray or take them to the hospital in your ambulance"},
 	["Iron miner"]={ "Civilians", 3, [[
 Go down to the quarry outside Las Venturas and dig
 for minerals, rocks containing minerasl are seen by
@@ -254,8 +277,10 @@ Weapons:
 	]], { -1, 27, 153, 260 },
 	{ "default", "White iron miner", "The foreman", "Black iron miner" },
 	--[[WeaponID, amount, price, name]]
-	{{6, 1, 60, "Shovel"}, {24, 35, 500, "Desert eagle"}}},
-	["Police Officer"]={ "Government", 0, [[
+	{{6, 1, 60, "Shovel"}, {24, 35, 500, "Desert eagle"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to the iron miner job!, press N to deploy dynamite, take cover and then mine by walking up to the rocks"},
+	["Police officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -274,8 +299,10 @@ Weapons:
 	]], { 280, 281, 282, 283, 288, 284 },
 	{ "Los Santos police", "San Fierro police", "Las Venturas police", "Highway patrol (Bone county)", "Highway patrol (Red county)", "Traffic officer" },
 	--[[WeaponID, amount, price, name]]
-	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}},
-	["SAPD Officer"]={ "Government", 0, [[
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
+	["SAPD officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -294,7 +321,9 @@ Weapons:
 	]], { 283, 288 },
 	{ "Highway patrol (Bone county)", "Highway patrol (Red county)" },
 	--[[WeaponID, amount, price, name]]
-	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}},
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
 	["FBI agent"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
@@ -314,8 +343,10 @@ Weapons:
 	]], { 165, 166, 286, 295 },
 	{ "Agent Jay", "Agent Kay", "FBI officer", "Mike" },
 	--[[WeaponID, amount, price, name]]
-	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}},
-	["SWAT Officer"]={ "Government", 0, [[
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
+	["SWAT officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -334,8 +365,10 @@ Weapons:
 	]], { 285 },
 	{ "SWAT officer" },
 	--[[WeaponID, amount, price, name]]
-	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}},
-	["Armed Forces"]={ "Government", 0, [[
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to police job!, Hit wanted players with your nightstick to arrest"},
+	["Armed forces"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
@@ -354,15 +387,17 @@ Weapons:
 	]], { 287 },
 	{ "Soldier" },
 	--[[WeaponID, amount, price, name]]
-	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}}}
+	{{3, 1, 0, "Nightstick"}, {23, 150, 200, "Tazer"}, {29, 30, 400, "MP5 (driveby)"}, {31, 50, 650, "M4 (heavy)"}, {17, 1, 100, "Teargas"}, {46, 1, 300, "Parachute"}},
+	--[[Message for new players when applying for the job]]
+	"Welcome to police job!, Hit wanted players with your nightstick to arrest"}
 }
 
 -- Restrict jobs to specific groups
 restricted_jobs = {
 	["FBI agent"]="FBI",
-	["SWAT Officer"]="SWAT",
-	["SAPD Officer"]="SAPD",
-	["Armed Forces"]="ArmedForces"
+	["SWAT officer"]="SWAT",
+	["SAPD officer"]="SAPD",
+	["Armed forces"]="ArmedForces"
 }
 
 markers = { }

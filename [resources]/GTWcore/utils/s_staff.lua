@@ -67,7 +67,6 @@ function jetpack(thePlayer)
 end
 addCommandHandler("jetpack", jetpack)
 
-
 function goStaff(source, command)
     local accName = getAccountName(getPlayerAccount(source))
     if (isObjectInACLGroup("user."..accName, aclGetGroup("Admin")) or

@@ -16,8 +16,8 @@
 
 --[[ List of rights ]]--
 local acl_table = {
-	is_staff 		= { },
-	is_admin 		= { },
+	is_staff 	= { },
+	is_admin 	= { },
 	is_developer 	= { },
 	is_moderator 	= { },
 	is_supporter 	= { },
@@ -48,16 +48,20 @@ function install_user_acls(plr, pAcc)
 	end
 
 	-- Pass the the data to the client
-	setTimer(triggerClientEvent, 5000, 1, plr, "GTWstaff.sendToClient", plr, acl_table.is_staff[plr],
-		acl_table.is_admin[plr], acl_table.is_developer[plr],
-		acl_table.is_moderator[plr], acl_table.is_supporter[plr])
+	setTimer(triggerClientEvent, 3000, 1, plr, "GTWstaff.sendToClient", plr, acl_table.is_staff,
+		acl_table.is_admin, acl_table.is_developer,
+		acl_table.is_moderator, acl_table.is_supporter)
 end
 function assign_rights(_, pAcc)
-	install_user_acls(source, pAcc)
+	for k,v in pairs(getElementsByType("player")) do
+		local pAcc = getPlayerAccount(v)
+
+		if pAcc and v and isElement(v) then install_user_acls(v, pAcc) end
+	end
 end
 addEventHandler("onPlayerLogin", root, assign_rights)
 function assign_rights_to_all( )
-	for k,v in ipairs(getElementsByType("player")) do
+	for k,v in pairs(getElementsByType("player")) do
 		local pAcc = getPlayerAccount(v)
 		if pAcc then install_user_acls(v, pAcc) end
 	end

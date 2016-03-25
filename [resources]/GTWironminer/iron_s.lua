@@ -17,7 +17,7 @@
 iron_objects 		= {{ }}
 iron_markers 		= {{ }}
 associated_rocks 	= { }
-bomb_price 			= 1200
+bomb_price 		= 1200
 bomb_cooldown 		= { }
 
 function calculate_profit(plr)
@@ -61,14 +61,13 @@ function plant_bomb(plr)
 		return
 	end
 	if bomb_cooldown[plr] and isTimer(bomb_cooldown[plr]) then
-		exports.GTWtopbar:dm("Ironminer: Please allow up to 5 minutes before you plant the next bomb!", plr, 255, 0, 0)
+		exports.GTWtopbar:dm("Ironminer: Please allow up to 1 minute before you plant the next bomb!", plr, 255, 0, 0)
 		return
 	end
 
-	-- Check if inside a vehicle
+	-- Check if inside a vehicle, then it's terrorism due to the "car bomb"
 	if getPedOccupiedVehicle(plr) then
-		exports.GTWtopbar:dm("Ironminer: Dynamite is not for car bombs!", plr, 255, 0, 0)
-		return
+		exports.GTWwanted:setWl(plr, 6, 900, "You comitted the crime of terrorism!", true, false)
 	end
 
 	-- Notice
@@ -83,7 +82,7 @@ function plant_bomb(plr)
 	setTimer(create_miner, 11000, 1, plr, x,y,z-0.8)
 
 	-- Apply a bomb cooldown
-	bomb_cooldown[plr] = setTimer(function() end, 300*1000, 1)
+	bomb_cooldown[plr] = setTimer(function() end, 60*1000, 1)
 end
 addCommandHandler("plantbomb", plant_bomb)
 
@@ -93,7 +92,7 @@ for w,pl in pairs(getElementsByType("player")) do
 end
 addEventHandler("onPlayerLogin", root,
 function()
-    bindKey( source, "n", "down", "plantbomb" )
+    	bindKey( source, "n", "down", "plantbomb" )
 end)
 
 function clean_up_and_install(plr)
@@ -145,11 +144,12 @@ function start_digging(hitElement, matchingDimension)
 
 	-- Start and stop mining animation
 	local x,y,z = getElementPosition(hitElement)
+	toggleControl(hitElement, "forwards", false)
 	setElementData(hitElement, "isMining", true)
-    setPedAnimation(hitElement, "SWORD", "sword_4", -1, true, true, false)
-    setCameraMatrix(hitElement, x,y,z+8, x,y,z, 5)
-    setTimer(give_iron, 7000, 1, hitElement, source)
-    setPedWeaponSlot(hitElement, 1)
+    	setPedAnimation(hitElement, "SWORD", "sword_4", -1, true, true, false)
+    	setCameraMatrix(hitElement, x,y,z+8, x,y,z, 5)
+    	setTimer(give_iron, 7000, 1, hitElement, source)
+    	setPedWeaponSlot(hitElement, 1)
 end
 
 function sell_iron(hitElement, matchingDimension)
@@ -163,34 +163,35 @@ function sell_iron(hitElement, matchingDimension)
 
 	-- Clear iron
 	setElementData(hitElement, "GTWironminer.platinum", 0)
-    setElementData(hitElement, "GTWironminer.gold", 0)
-    setElementData(hitElement, "GTWironminer.silver", 0)
-    setElementData(hitElement, "GTWironminer.iron", 0)
-    setElementData(hitElement, "GTWironminer.cupper", 0)
-    setElementData(hitElement, "GTWironminer.profit", 0)
+    	setElementData(hitElement, "GTWironminer.gold", 0)
+    	setElementData(hitElement, "GTWironminer.silver", 0)
+    	setElementData(hitElement, "GTWironminer.iron", 0)
+    	setElementData(hitElement, "GTWironminer.cupper", 0)
+    	setElementData(hitElement, "GTWironminer.profit", 0)
 end
 
 function give_iron(plr, marker)
 	-- Destroy rock and it's hidden marker
 	if isElement(associated_rocks[marker]) then destroyElement(associated_rocks[marker]) end
-    if isElement(marker) then destroyElement(marker) end
+	if isElement(marker) then destroyElement(marker) end
 
-    -- Stop the animation
-    setPedAnimation(plr, nil,nil)
-    setCameraTarget(plr, plr)
+	-- Stop the animation
+	setPedAnimation(plr, nil,nil)
+	setCameraTarget(plr, plr)
+	toggleControl(plr, "forwards", true)
 
-    -- Reset mining data
-    setElementData(plr, "isMining", nil)
+	-- Reset mining data
+	setElementData(plr, "isMining", nil)
 
-    -- Update the info
-    setElementData(plr, "GTWironminer.platinum", (getElementData(plr, "GTWironminer.platinum") or 0)+math.floor(math.random(1,50)/47))
-    setElementData(plr, "GTWironminer.gold", (getElementData(plr, "GTWironminer.gold") or 0)+math.floor(math.random(1,40)/36))
-    setElementData(plr, "GTWironminer.silver", (getElementData(plr, "GTWironminer.silver") or 0)+math.floor(math.random(1,40)/33))
-    setElementData(plr, "GTWironminer.iron", (getElementData(plr, "GTWironminer.iron") or 0)+math.floor(math.random(1,30)/10))
-    setElementData(plr, "GTWironminer.cupper", (getElementData(plr, "GTWironminer.cupper") or 0)+math.floor(math.random(1,30)/7))
+	-- Update the info
+	setElementData(plr, "GTWironminer.platinum", (getElementData(plr, "GTWironminer.platinum") or 0)+math.floor(math.random(1,50)/47))
+	setElementData(plr, "GTWironminer.gold", (getElementData(plr, "GTWironminer.gold") or 0)+math.floor(math.random(1,40)/36))
+	setElementData(plr, "GTWironminer.silver", (getElementData(plr, "GTWironminer.silver") or 0)+math.floor(math.random(1,40)/33))
+	setElementData(plr, "GTWironminer.iron", (getElementData(plr, "GTWironminer.iron") or 0)+math.floor(math.random(1,30)/10))
+	setElementData(plr, "GTWironminer.cupper", (getElementData(plr, "GTWironminer.cupper") or 0)+math.floor(math.random(1,30)/7))
 
-    -- Set iron value
-    setElementData(plr, "GTWironminer.profit", calculate_profit(plr))
+	-- Set iron value
+	setElementData(plr, "GTWironminer.profit", calculate_profit(plr))
 end
 
 addCommandHandler("gtwinfo", function(plr, cmd)

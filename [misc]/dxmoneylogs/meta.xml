@@ -1,4 +1,5 @@
 <meta>
-    <info author="xXMADEXx" name="DX Money Log" type="script" version="29" />
-    <script src="client.lua" type="client" />
+	<info author="xXMADEXx" name="DX Money Log" type="script" version="29" />
+	<script src="client.lua" type="client" />
+	<script src="server.lua" type="server" />
 </meta>

@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -29,6 +30,15 @@ cmd_anim_map = {
 	["lean"] 		= { "smoking", "m_smklean_loop" },
 	["sit"] 		= { "ped", "seat_idle" },
 	["cower"] 		= { "ped", "cower" },
+	["handcower"] 		= { "ped", "handscower" },
+	["gum"] 		= { "ped", "gum_eat" },
+	["getup"] 		= { "ped", "getup" },
+	["getupfront"] 		= { "ped", "getup_front" },
+	["chat"] 		= { "ped", "IDLE_chat" },
+	["taxiwink"] 		= { "ped", "IDLE_taxi" },
+	["turn180"] 		= { "ped", "turn_180" },
+	["urp"] 		= { "ped", "facurp" },
+	["gumchew"] 		= { "ped", "facgum" },
 }
 
 -- All available animations

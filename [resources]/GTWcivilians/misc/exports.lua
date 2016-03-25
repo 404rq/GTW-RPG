@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -49,6 +50,7 @@ table.insert(markers, { "Mechanic", 0, 0, -1916.5166015625, 253.9453125, 41.0468
 table.insert(markers, { "Fisher", 0, 0, -2947.4228515625, 503.61328125, 2.4296875, "civilian" })
 table.insert(markers, { "Fisher", 0, 0, 159.3837890625, -1879.3955078125, 3.7734375, "civilian" })
 table.insert(markers, { "Farmer", 0, 0, -1059.3037109375, -1205.517578125, 129.21875, "civilian" })
+table.insert(markers, { "Farmer", 0, 0, -702.3828125, 945.595703125, 12.373688697815, "civilian" })
 table.insert(markers, { "Tram Driver", 0, 0, -2238.806640625, 548.2177734375, 35.171875, "civilian" })
 table.insert(markers, { "Fireman", 0, 0, 1745.7177734375, -1459.4775390625, 13.520838737488, "emergency" })
 table.insert(markers, { "Fireman", 0, 0, 1745, 2080, 9.8, "emergency" })

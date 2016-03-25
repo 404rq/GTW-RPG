@@ -59,8 +59,13 @@ function refreshAllBlips(resource)
 		for y, spectator in pairs(getElementsByType("player")) do
 			if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
-			elseif not getElementData(plr, "anon") and getElementData(plr, "Occupation") ~= "Prisoner" then
-				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
+			elseif not getElementData(plr, "anon") then
+				local alpha = 200
+				local plr_team = getPlayerTeam(plr) or ""
+				if getElementData(plr, "Occupation") == "Prisoner" or
+					(plr_team == getTeamFromName("Government") and
+					getElementData(spectator, "Occupation") == "Prisoner") then alpha = 10 end
+				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
 			end
 		end
 		colorUpdater[plr] = setTimer(updateBlipColor, 500, 0, plr)
@@ -80,6 +85,7 @@ function updatePlayerBlip(plr)
 	if getPlayerTeam(plr) then
 		r,g,b = getTeamColor(getPlayerTeam(plr))
 		playersTeam[plr] = getTeamName(getPlayerTeam(plr))
+		setElementData(plr, "Occupation2", getElementData(plr, "Occupation"))
 	end
 
 	-- Make the blip visible to a specific amount of players
@@ -87,7 +93,12 @@ function updatePlayerBlip(plr)
 		if validateVisiblity(plr, spectator) and not getElementData(plr,"anon") then
 			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 		elseif not getElementData(plr,"anon") then
-			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, 200, 99, 180, spectator)
+			local alpha = 200
+			local plr_team = getPlayerTeam(plr) or ""
+			if getElementData(plr, "Occupation") == "Prisoner" or
+				(plr_team == getTeamFromName("Government") and
+				getElementData(spectator, "Occupation") == "Prisoner") then alpha = 10 end
+			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
 		end
 	end
 	if not isTimer(colorUpdater[plr]) then
@@ -122,7 +133,8 @@ function updateBlipColor(plr)
 	-- Check if team exist and has changed
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return end
 	if not getPlayerTeam(plr) then return end
-	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) then return end
+	if playersTeam[plr] == getTeamName(getPlayerTeam(plr)) and
+		getElementData(plr, "Occupation2") == getElementData(plr, "Occupation") then return end
 
 	-- Remove current blips if any
   	playersTeam[plr] = nil

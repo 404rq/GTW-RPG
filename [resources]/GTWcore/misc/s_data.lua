@@ -48,6 +48,9 @@ function load_data(plr)
         setElementData(plr, "Occupation", getAccountData(acc,
                 "GTWdata.team.occupation.sub") or "")
 
+        -- Load current group
+        setElementData(plr, "Group", getAccountData(acc, "GTWdata.group") or "")
+
         -- Load wanted level and violent time
         exports.GTWwanted:setWl(plr, (tonumber(getAccountData(acc,
                 "GTWdata.wanted")) or 0), (tonumber(getAccountData(acc,
@@ -65,26 +68,32 @@ function load_data(plr)
         if play_time == 0 then
         	setPlayerMoney(plr, 4000)
                 setAccountData(acc, "GTWdata.playtime", 0)
+                setAccountData(acc, "GTWdata.skin.current", rnd_skin)
                 setAccountData(acc, "GTWclothes.personal.skin", getAccountData(acc, "GTWdata.skin.current"))
-		
+
 		-- Give the player their first weapon
-		giveWeapon(plr, 4, 1, false) 
-		giveWeapon(plr, 24, 35, false) 
-		
+		giveWeapon(plr, 4, 1, false)
+		giveWeapon(plr, 24, 35, false)
+
 		-- Display basic newbie information
 		outputChatBox("[GTWhelp]#EEEEEE Welcome to GTW-RPG! press F1 for help", plr, 255,100,0, true)
 		local px,py,pz = getElementPosition(plr)
 		exports.GTWtopbar:dm("You have just arrived in "..getZoneName(px,py,pz)..", "..
 			getZoneName(px,py,pz, true).." with $4´000 in your pocket", plr, 255,255,255, false, true)
        	end
-	
-	-- 2016-02-11 Bugfix for an issue where work skins became players owned skin, 
+
+        -- Enable help if playtime is less than 12 hour only
+        if play_time < 12*3600*1000 then
+                setElementData(plr, "GTWdata.isNew", true)
+        end
+
+	-- 2016-02-11 Bugfix for an issue where work skins became players owned skin,
 	-- forbidden skins are reset by default
 	local forbidden_skins = {     [265]=true,[266]=true,[267]=true,[274]=true,[275]=true,[276]=true,
 		[278]=true,[279]=true,[280]=true,[281]=true,[282]=true,[283]=true,[284]=true,[285]=true,
 		[286]=true,[287]=true,[288]=true }
-	if forbidden_skins[getElementModel(plr)] and (getPlayerTeam(plr) ~= getTeamFromName("Government") 
-		or getPlayerTeam(plr) ~= getTeamFromName("Emergency service")) then
+	if forbidden_skins[getElementModel(plr)] and getPlayerTeam(plr) ~= getTeamFromName("Government")
+		and getPlayerTeam(plr) ~= getTeamFromName("Emergency service") then
 		setAccountData(acc, "GTWclothes.personal.skin", 0)
 		exports.GTWtopbar:dm("Notice: Your skin was reset to CJ (ID: 0) due to a previous skin bug", plr, 255,100,0)
 		setElementModel(plr, 0)
@@ -102,20 +111,22 @@ function load_data(plr)
         end
 
         -- Apply jetpack and other advantages if staff
-       	applyStaffAdvantage(source)
+       	applyStaffAdvantage(plr)
 
         -- Jail player if arrested
         if getAccountData(acc, "GTWdata.police.jailTimeOffline") then
-                local wl,viol = exports.GTWwanted:getWl(plr)
-                local j_time = math.floor(wl*1000*10)
-                exports.GTWjail:Jail(plr, math.floor(j_time/1000), "LSPD")
-		
+                local wl = tonumber(getAccountData(acc, "GTWdata.wanted")) or 0
+                if wl > 0 then
+                        local j_time = math.floor(wl*60)
+		        exports.GTWjail:Jail(plr, j_time, "LSPD")
+                end
+
 		-- Reset jail order
-		setAccountData(acc, "GTWdata.police.jailTimeOffline", false)
+		setAccountData(acc, "GTWdata.police.jailTimeOffline", nil)
         end
 
         -- Mark first spawn as valid
-        setElementData(source, "GTWdata.isFirstSpawn", nil)
+        setElementData(plr, "GTWdata.isFirstSpawn", nil)
 end
 
 --[[ Save player data ]]--
@@ -150,12 +161,13 @@ function save_data(plr)
         setAccountData(acc, "GTWdata.skin.current", getElementModel(plr) or 0)
 
         -- Save wanted level and violent time
-        setAccountData(acc, "GTWdata.wanted", getElementData(plr, "Wanted") or 0)
-        setAccountData(acc, "GTWdata.wanted.viol", getElementData(plr, "violent_time" or 0))
+        local wl,viol = exports.GTWwanted:getWl(plr)
+        setAccountData(acc, "GTWdata.wanted", wl or 0)
+        setAccountData(acc, "GTWdata.wanted.viol", viol or 0)
 
         -- Solutions for servers without GTWcivilians
         if not getTeamFromName("Unemployed") then
-                local new_team = createTeam("Unemployed")
+                local new_team = createTeam("Unemployed", 255,255,0)
                 setPlayerTeam(plr, new_team)
 
                 -- Add some scoreboard collumns
@@ -164,7 +176,9 @@ function save_data(plr)
         	exports.scoreboard:scoreboardAddColumn("Playtime", root, 70)
 
                 -- Create a staff team assuming that doesn't exist
-                createTeam("Staff")
+                if not getTeamFromName("Staff") then
+                        createTeam("Staff", 255,255,255)
+                end
         end
 
         -- Team, occupation and team colors

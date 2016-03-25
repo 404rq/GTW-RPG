@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -16,6 +17,15 @@
 
 <meta>
     <info author="GTWGames" version="38" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
+    <!-- Shaders -->
+    <include resource="shader_detail" />
+    <include resource="shader_car_paint_reflect" />
+    <include resource="shader_contrast" />
+    <include resource="shader_water" />
+    <include resource="GTWgui" />
+    <include resource="GTWupdates" />
+    <include resource="GTWtopbar" />
+    
     <script src="c_intro.lua" type="client" />
     <script src="c_gui.lua" type="client" />
     <script src="s_data.lua" type="server" />
@@ -25,10 +35,6 @@
     <export function="isClientLoggedIn" type="client" />
     <export function="getPlayerId" type="client" />
     <export function="getPlayerId" type="server" />
-
-    <include resource="GTWgui" />
-    <include resource="GTWupdates" />
-    <include resource="GTWtopbar" />
 
     <aclrequest>
 	 <right name="function.addAccount" access="true" />

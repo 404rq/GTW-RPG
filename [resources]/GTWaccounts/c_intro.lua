@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -18,6 +19,7 @@
 settings        = { }
 settings.timer  = { }
 settings.frames = { }
+settings.is_running = nil
 
 -- Setup introduction for new players
 settings.intro = {
@@ -117,17 +119,21 @@ end
 
 --[[ Start the introduction ]]--
 function start_intro()
+	settings.is_running = true
         addEventHandler("onClientRender", root, view_gtw_intro)
-        guiSetVisible(window, false)
+        if window then guiSetVisible(window, false) end
 end
 addCommandHandler("intro", start_intro)
 
 --[[ Function to stop the intro and reset ]]--
 function stop_intro()
+	if not settings.is_running then return end
         -- Stop the intro
         reset_data()
         showPlayerHudComponent("radar", true)
+	removeEventHandler("onClientRender", root, view_gtw_intro)
         unbindKey("space", "down", stop_intro)
+	settings.is_running = nil
 end
 addCommandHandler("stopintro", stop_intro)
 bindKey("space", "down", stop_intro)

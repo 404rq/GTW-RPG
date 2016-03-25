@@ -5,8 +5,8 @@
 	Developers:   		Mr_Moose
 
 	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Bugtracker: 		https://forum.404rq.com/bug-reports/
+	Suggestions:		https://forum.404rq.com/mta-servers-development/
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -20,10 +20,10 @@ txt_cache = ""
 -- On receive updates
 function result_send(text)
 	-- Verify that the player is still online
-	--if not plr then
-	--	outputServerLog("ERROR: GTWupdates: unable to fetch update list ("..plr_name)
-	--	return
-	--end
+	if not text then
+		outputServerLog("ERROR: GTWupdates: unable to fetch update list")
+		return
+	end
 
 	-- Format from wiki to MTA text field
 	text = string.gsub(text, "'''", "")

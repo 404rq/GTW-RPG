@@ -87,6 +87,10 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="GTWjailmap" startup="1" protected="1" />
     <resource src="GTWsapdbase" startup="1" protected="1" />
     <resource src="GTWswatbase" startup="1" protected="1" />
+    
+    <!-- Traffic and bots -->
+    <resource src="slothbot" startup="1" protected="1" />
+    <resource src="npc_traffic" startup="1" protected="1" />
 ```
 
 Important! do not alter the order, some resorces depends on other resources and must 

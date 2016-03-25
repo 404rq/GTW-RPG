@@ -26,8 +26,14 @@ cache_data = {}
 log = false
 show_debug_info = false
 
--- Database connection
-db = dbConnect("sqlite", "/groups.db")
+-- Database connection setup, MySQL or fallback SQLite
+local mysql_host    	= exports.GTWcore:getMySQLHost() or nil
+local mysql_database 	= exports.GTWcore:getMySQLDatabase() or nil
+local mysql_user    	= exports.GTWcore:getMySQLUser() or nil
+local mysql_pass    	= exports.GTWcore:getMySQLPass() or nil
+db = dbConnect("mysql", "dbname="..mysql_database..";host="..mysql_host, mysql_user, mysql_pass, "autoreconnect=1")
+if not db then db = dbConnect("sqlite", "/groups.db") end
+
 dbExec(db, "CREATE TABLE IF NOT EXISTS groupmember (account TEXT, groupName TEXT, rank TEXT, warningLvl TEXT, joined TEXT, lastTime TEXT)")
 dbExec(db, "CREATE TABLE IF NOT EXISTS groups (name TEXT, leader TEXT, message TEXT, chatcolor TEXT, notecolor TEXT, date TEXT, turfcolor TEXT)")
 dbExec(db, "CREATE TABLE IF NOT EXISTS groupRanks (groupName TEXT, name TEXT, permissions TEXT)")
@@ -91,7 +97,7 @@ end
 
 --[[ Load group ranks ]]--
 function load_ranks(query)
-	local the_table = dbPoll(query, 0)
+	local the_table = dbPoll(query, -1)
 	if (the_table) then
 		for ind, data in pairs(the_table) do
 			if (not cache_data[data.groupName]) then cache_data[data.groupName] = {} end
@@ -109,7 +115,7 @@ dbQuery(load_ranks, db, "SELECT * FROM groupRanks")
 
 --[[ Load all the group related data into tables ]]--
 function load_group_data(query)
-	local g_table = dbPoll(query, 0)
+	local g_table = dbPoll(query, -1)
 	if (not g_table) then return end
 	for ind, data in ipairs(g_table) do
 		groups_table[data.name] = {data.leader, data.message, data.chatcolor, data.notecolor, data.date, data.turfcolor}
@@ -119,18 +125,23 @@ dbQuery(load_group_data, db, "SELECT * FROM groups")
 
 --[[ Load group data by accounts ]]--
 function load_client_group(query)
-	local g_table = dbPoll(query, 0)
+	local g_table = dbPoll(query, -1)
 	if (not g_table) then return end
 	for ind, data in ipairs(g_table) do
-		if not getAccount(data.account) then return end
-		local player = getAccountPlayer(getAccount(data.account))
-		users[data.groupName] = {}
-		table.insert(users[data.groupName], data.account)
-		if (player) then
-			setElementData(player, "Group", data.groupName)
-			gang_data[player] = data.groupName
+		if getAccount(data.account) then
+			local player = getAccountPlayer(getAccount(data.account))
+			users[data.groupName] = {}
+			table.insert(users[data.groupName], data.account)
+			if (player) then
+				setElementData(player, "Group", data.groupName)
+				gang_data[player] = data.groupName
+			end
+			groups_data[data.account] = {data.groupName, data.rank, data.warningLvl, data.joined, data.lastTime or 0}
+		else
+			-- Remove group if no members
+			dbExec(db, "DELETE FROM groupRanks WHERE groupName=?", tostring(group))
+			dbExec(db, "DELETE FROM groups WHERE name=?", tostring(group))
 		end
-		groups_data[data.account] = {data.groupName, data.rank, data.warningLvl, data.joined, data.lastTime or 0}
 	end
 end
 dbQuery(load_client_group, db, "SELECT * FROM groupmember")
@@ -305,13 +316,15 @@ function get_list_of_groups()
 			end
 		end
 		if count[ind] == 0 then
+			-- Cleanup old groups without members
 			dbExec(db, "DELETE FROM groups WHERE name=?", tostring(ind))
+			dbExec(db, "DELETE FROM groupRanks WHERE groupName=?", tostring(ind))
 		end
 	end
 	triggerClientEvent(client, "GTWgroups.addGroupList", client, groups_table, count)
 end
-addEvent("GTWgroups.addGroupList", true)
-addEventHandler("GTWgroups.addGroupList", root, get_list_of_groups)
+addEvent("GTWgroups.addGroupListServer", true)
+addEventHandler("GTWgroups.addGroupListServer", root, get_list_of_groups)
 
 --[[ Issue a warning to account ]]--
 function warn_account(account, lvl, reason)

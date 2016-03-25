@@ -9,10 +9,12 @@ addEventHandler ( "onClientRender", root, function ( )
 		local diff = 0
 		if ( pM > playerMoney ) then
 			diff = pM - playerMoney
-			table.insert ( messages, { diff, true, tick + 5000, 180 } )
+			table.insert(messages, {diff, true, tick + 5000, 180 } )
+			triggerServerEvent("dxmoneylogs.logPayment", root, "BANK: "..getPlayerName(localPlayer)..", received: $"..convertNumber(diff))
 		else
 			diff = playerMoney - pM
-			table.insert ( messages, { diff, false, tick + 5000, 180 } )
+			table.insert(messages, {diff, false, tick + 5000, 180 } )
+			triggerServerEvent("dxmoneylogs.logPayment", root, "BANK: "..getPlayerName(localPlayer)..", paid: $"..convertNumber(diff))
 		end
 		playerMoney = pM
 		setElementData(localPlayer, "Money", "$"..convertNumber(playerMoney))
