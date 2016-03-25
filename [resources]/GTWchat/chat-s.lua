@@ -108,7 +108,7 @@ end
 addEventHandler("onPlayerJoin", root, bindLocalChat)
 
 --[[ Check if a player should hear another player in local ]]--
-function isPlayerInRangeOfPoint(player,x,y,z,range)
+function is_player_in_range(player,x,y,z,range)
    local px,py,pz = getElementPosition(player)
    return((x-px)^2+(y-py)^2+(z-pz)^2)^0.5<=range
 end
@@ -209,12 +209,12 @@ function useLocalChat(plr, cmd, ...)
 	-- (2014-11-19) Count local players
 	local sumOfLocal = 0
 	for n,v in pairs(getElementsByType("player")) do
-	   	if isPlayerInRangeOfPoint(v, px,py,pz, chat_range) then
+	   	if is_player_in_range(v, px,py,pz, chat_range) then
 	   		sumOfLocal = sumOfLocal + 1
 	  	end
 	end
 	for n,v in pairs(getElementsByType("player")) do
-	   	if isPlayerInRangeOfPoint(v, px,py,pz, chat_range) then
+	   	if is_player_in_range(v, px,py,pz, chat_range) then
 	   		local occupation = ""
 	   		local is_police_chief = exports.GTWpolicechief:isPoliceChief(plr)
 	   		if is_police_chief and getPlayerTeam(plr) and policeTeams[getTeamName(getPlayerTeam(plr))] then
