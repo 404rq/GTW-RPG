@@ -204,7 +204,7 @@ function destroy_vehicle(plr, force_delete)
 	if not force_delete then force_delete = false end
 	if vehicles[plr] and isElement(vehicles[plr]) and (not getVehicleOccupant(vehicles[plr]) or force_delete) then
 		if getPedOccupiedVehicle(plr) then
-			exports.GTWtopbar:dm("Exit your vehicle before removing it!", plr, 255, 0, 0)
+			return exports.GTWtopbar:dm("Exit your vehicle before removing it!", plr, 255, 0, 0)
 		end
 		if getVehicleTowedByVehicle(vehicles[plr]) then
    	 		destroyElement(getVehicleTowedByVehicle(vehicles[plr]))
