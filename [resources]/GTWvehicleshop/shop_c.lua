@@ -130,9 +130,13 @@ function reloadShopItems(shopType)
 
 	-- List available vehicles
 	for _, data in ipairs(car_data[shopType]) do
-		local row = guiGridListAddRow(vehicle_list_shop)
-		guiGridListSetItemText(vehicle_list_shop, row, column, getVehicleNameFromModel(data[1]), false, false)
-		guiGridListSetItemData(vehicle_list_shop, row, column, data[3])
+		if (getVehicleNameFromModel(data[1]) ~= "") then
+			if (data[3] ~= "" ) then
+				local row = guiGridListAddRow(vehicle_list_shop)
+				guiGridListSetItemText(vehicle_list_shop, row, column, getVehicleNameFromModel(data[1]), false, false)
+				guiGridListSetItemData(vehicle_list_shop, row, column, data[3])
+			end
+		end
 	end
 
 	-- Get name from dummie car
