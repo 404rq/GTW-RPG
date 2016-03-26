@@ -4,7 +4,7 @@ GTW-RPG is balanced by consequences for those who doesn't play "realistic", exam
 
 ## Project goals
 What's the goal of this project:
-* High amount of useful features, especially misc features to ensure there's always somethnig to do and avoid players being bored
+* High amount of useful features, especially misc features to ensure there's always something to do and avoid players being bored
 * Extremly low performance specifications, the game mode must run just as fine on a 15 years old laptop (as server) as it does on the top of the line servers, (note that we don't want to limit functionality, some features are allowed to use more CPU time, but as long it can be more efficient it must be optimized).
 * High quality, official releases should not contain semi-finished features or trash code (and if possible exclude all known bugs).
 * Independency, you should not be forced to use the entire gamemode just because you're looking for a single feature, individual resources may be used as well and we try to document all resources in their readme files with available exports and if needed, required dependencies, (a common dependency are for instance GTWtopbar which is required from almost all included resources).
