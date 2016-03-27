@@ -91,7 +91,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   			end
 			   		end
 			   		trailers[client] = createVehicle(vehID, x, y, z, 0, 0, rot)
-                                        triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client])
+                                        --triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client])
                                         --attachTrailerToVehicle(vehicles[client], trailers[client])
                                         setElementData(vehicles[client], "GTWvehicles.isTrailerTowingVehile", true)
                                         setElementData(vehicles[client], "GTWvehicles.attachedTrailer", trailers[client])
@@ -100,7 +100,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   		attachElements(trailers[client], vehicles[client], 0, -8)
                                         setElementSyncer(trailers[client], client)
 			   		setTimer(detachElements, 50, 1, trailers[client])
-			   		setTimer(attachTrailerToVehicle, 200, 1, vehicles[client], trailers[client])
+			   		setTimer(attachTrailerToVehicle, 100, 1, vehicles[client], trailers[client])
 			   	end
 
 			   	-- Train cars

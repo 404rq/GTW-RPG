@@ -399,39 +399,6 @@ addEventHandler("onClientElementStreamIn", getRootElement( ),
     end
 );
 
---[[function attach_on_stream_in(tower, trailer)
-        local x,y,z = getElementPosition(tower)
-        local rx,ry,rz = getElementPosition(tower)
-        x2 = x + 8 * math.cos(math.rad(rz))
-        y2 = y + 8 * math.sin(math.rad(rz))
-        setElementPosition(trailer, x2,y2,z)
-        setElementRotation(trailer, rx,ry,rz)
-        createBlip(x,y,z, 0, 1, 255,0,0, 255, 2, 99999)
-        createBlip(x2,y2,z, 0, 1, 0,255,0, 255, 2, 99999)
-
-        --attachElements(trailer, source, 0, -8)
-        setTimer(detachElements, 50, 1, trailer)
-        setTimer(attachTrailerToVehicle, 200, 1, tower, trailer)
-
-        outputConsole("Trailer: "..tostring(trailer)..", streamed in: ("..x.." "..y..") ("..x2.." "..y2..")")
-        outputConsole("Truck: "..tostring(tower)..", streamed in")
-end
-
-local streaming_timer = nil
-addEventHandler("onClientElementStreamIn", getRootElement( ),
-    function ( )
-        if not getElementData(source, "GTWvehicles.isTrailerTowingVehile") then return end
-        local trailer = getElementData(source, "GTWvehicles.attachedTrailer")
-        streaming_timer = setTimer(function(trailer2, source2)
-                if isElementStreamedIn(trailer2) then
-                        attach_on_stream_in(source2, trailer2)
-                        if isTimer(streaming_timer) then
-                                killTimer(streaming_timer)
-                        end
-                end
-        end, 1000, 0, trailer, source)
-    end
-);]]--
 addEventHandler( "onClientElementStreamOut", getRootElement( ),
     function ( )
             if getElementData(source, "GTWvehicles.isTrailerTowingVehile") then
