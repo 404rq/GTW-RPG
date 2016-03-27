@@ -89,7 +89,7 @@ function go_criminal(source, command)
 		setPlayerNametagColor(source, r, g, b)
 
 		-- Return your bought skin or CJ skin(0) if none, replace with 0
-		local skinID = exports.GTWclothes:getBoughtSkin(source) or getElementModel(source) or 0
+		local skinID = exports.GTWclothes:getBoughtSkin(source) or 0
 		setElementModel(source, skinID)
 		setElementData(source, "admin", false)
 		exports.GTWtopbar:dm("You are now a criminal!", source, 0, 255, 0)
@@ -114,7 +114,7 @@ function end_work(source, command)
 	setElementData(source, "admin", false)
 
 	-- Return your bought skin or CJ skin(0) if none, replace with 0
-	local skinID = exports.GTWclothes:getBoughtSkin(source) or getElementModel(source) or 0
+	local skinID = exports.GTWclothes:getBoughtSkin(source) or 0
 	exports.GTWtopbar:dm("End work: successfully!", source, 255, 200, 0)
 	setElementModel(source, skinID)
 end
@@ -133,7 +133,7 @@ function endWorkButton()
 	setElementData(client, "admin", false)
 
 	-- Return your bought skin or CJ skin(0) if none, replace with 0
-	local skinID = exports.GTWclothes:getBoughtSkin(client) or getElementModel(client) or 0
+	local skinID = exports.GTWclothes:getBoughtSkin(client) or 0
 	exports.GTWtopbar:dm("End work: successfully!", client, 255, 200, 0)
 	setElementModel(client, skinID)
 end
