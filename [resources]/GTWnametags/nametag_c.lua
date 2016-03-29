@@ -38,8 +38,10 @@ function update_nametags()
 					-- Staff tag
 					local is_staff = exports.GTWstaff:isStaff(v)
 					if is_staff then
-						dxDrawText("[404rq]", sx1,sy1,sx1,sy1,tocolor(0,0,0,255), 0.4, "bankgothic", "center","top",false,false,false)
-						dxDrawText("[404rq]", sx1+2,sy1+2,sx1,sy1,tocolor(255,255,255,255), 0.4, "bankgothic", "center","top",false,false,false)
+						if sx1 and sy1 and sx1 and sy1 then
+							dxDrawText("[404rq]", sx1,sy1,sx1,sy1,tocolor(0,0,0,255), 0.4, "bankgothic", "center","top",false,false,false)
+							dxDrawText("[404rq]", sx1+2,sy1+2,sx1,sy1,tocolor(255,255,255,255), 0.4, "bankgothic", "center","top",false,false,false)
+						end
 					end
 				end
 			end
