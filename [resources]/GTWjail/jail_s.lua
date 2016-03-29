@@ -80,16 +80,18 @@ function Jail(crim, time, police_dept, reason, admin)
 	local rand_x = math.random(1,10)
 	local rand_y = math.random(1,10)
 	local own_skin = exports.GTWclothes:getBoughtSkin(crim) or getElementModel(crim) or 0
-	setTimer(spawnPlayer, 1100, 1, crim, -2965+((-5)+rand_x), 2305+((-5)+rand_y), 8, 180, own_skin, 0, 0, getTeamFromName("Criminals"))
-	fadeCamera(crim, false)
-	setTimer(fadeCamera, 1500, 1, crim, true)
+	spawnPlayer(crim, -2965+((-5)+rand_x), 2305+((-5)+rand_y), 8, 180, own_skin, 0, 0, getTeamFromName("Criminals"))
+	setElementFrozen(crim, true)
+	fadeCamera(crim, false, 0.2)
+	setTimer(fadeCamera, 2800, 1, crim, true, 0.2)
+	setTimer(setElementFrozen, 3000, 1, crim, false)
 
 	-- Restore weapons
 	if weapons[crim] then
 		for k,wep in ipairs(weapons[crim]) do
 		   	if weapons[crim][k] and ammo[crim][k] then
 		   		if ammo[crim][k] > 5000 then ammo[crim][k] = 5000 end
-		   		setTimer(giveWeapon, 1500, 1, crim, weapons[crim][k], ammo[crim][k], false)
+		   		giveWeapon(crim, weapons[crim][k], ammo[crim][k], false)
 		   	end
 		end
 	end
