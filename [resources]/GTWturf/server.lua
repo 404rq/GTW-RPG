@@ -106,10 +106,10 @@ function countPlayersInTurf(turf)
 		local px,py,pz = getElementPosition(gangmember)
 		if not getElementData(turf,"sizex") or not getElementData(turf,"sizey") or not
 			getElementData(turf,"posx") or not getElementData(turf,"posy") then return end
-		local posX = getElementData(turf,"posx")
-		local posY = getElementData(turf,"posy")
-		local sizeX = getElementData(turf,"sizex")
-		local sizeY = getElementData(turf,"sizey")
+		local posX = tonumber(getElementData(turf,"posx")) or 0
+		local posY = tonumber(getElementData(turf,"posy")) or 0
+		local sizeX = tonumber(getElementData(turf,"sizex")) or 0
+		local sizeY = tonumber(getElementData(turf,"sizey")) or 0
 		local lastEnemyGroupName = ""
 		if getElementData(gangmember,"Group") and getElementData(gangmember,"Group") == owner
 			and px > posX and px < (posX + sizeX) and py > posY and py < (posY + sizeY) then
