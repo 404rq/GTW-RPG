@@ -292,7 +292,7 @@ if wantedlevel == 0 then
 		-- Draw vehicle speed
 		dxDrawRectangle(sWidth-310, sHeight-140, 300, 28, tocolor(20, 20, 20, 190), false)
 		dxDrawRectangle(sWidth-310, sHeight-140, kmh, 28, tocolor(0, 100, 0, 190), false)
-		dxDrawText(tostring(math.floor(kmh)).."/"..tostring(max_speed).." km/h | "..tostring(math.floor(mph)).."/"..tostring(max_speed).." mp/h ", 
+		dxDrawText(tostring(math.floor(kmh)).."/"..tostring(max_speed).." km/h | "..tostring(math.floor(mph)).."/"..tostring(math.ceil(max_speed*0.621371)).." mp/h ", 
 			sWidth-280, sHeight-134, 190, 16, tocolor(255,255,255, 220),
 			0.5, "bankgothic", "left", "top", false, false, false)
 		
