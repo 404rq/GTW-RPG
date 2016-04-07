@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -322,6 +323,16 @@ function isJailed(crim)
 	if jail_data.is_jailed[crim] then return true
 	else return false end
 end
+
+--[[ Save remaining jailtime in milleseconds when leaving ]]--
+function save_remaining_time()
+	if not isTimer(jail_data.release_timers[source]) then return end
+	local time_left_ms,i2,i3 = getTimerDetails(jail_data.release_timers[source])
+	local acc = getPlayerAccount(source)
+	if not acc then return end
+	setAccountData(acc, "GTWjail.timeLeftInMS", time_left_ms)
+end
+addEventHandler("onPlayerQuit", root, save_remaining_time)
 
 function set_control_states(crim, n_state)
 	--toggleControl(crim, "fire", n_state)

@@ -114,10 +114,11 @@ function load_data(plr)
        	applyStaffAdvantage(plr)
 
         -- Jail player if arrested
-        if getAccountData(acc, "GTWdata.police.jailTimeOffline") then
+        if getAccountData(acc, "GTWdata.police.jailTimeOffline") and tonumber(getAccountData(acc, "GTWjail.timeLeftInMS") or 0) > 0 then
                 local wl = tonumber(getAccountData(acc, "GTWdata.wanted")) or 0
                 if wl > 0 then
-                        local j_time = math.floor(wl*60)
+                        --local j_time = math.floor(wl*60)
+			local j_time = math.floor(tonumber(getAccountData(acc, "GTWjail.timeLeftInMS"))/(1000))
 		        exports.GTWjail:Jail(plr, j_time, "LSPD")
                 end
 

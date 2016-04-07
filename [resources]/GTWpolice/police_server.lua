@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -51,59 +52,59 @@ function arrest_or_taze(attacker, attackerweapon)
 		isLawUnit(attacker) and getElementData(source, "Jailed") ~= "Yes" and
 		not police_data.arrested_players[attacker] and not police_data.is_arrested[crim] then
 
-        -- Setting the control data
-        if isTimer(prisonerSyncTimers[source]) then
-        	killTimer(prisonerSyncTimers[source])
-        	setElementCollisionsEnabled(source, true)
-        end
-        prisonerSyncTimers[source] = setTimer(syncArrest, 500, 0, source, attacker)
-        setElementCollisionsEnabled(source, false)
-        exports.GTWtopbar:dm("You have been arrested by: "..getPlayerName(attacker).."!", source, 255, 0, 0)
-        exports.GTWtopbar:dm("You have arrested: "..getPlayerName(source)..", take him to nearest police department", attacker, 0, 255, 0)
+		-- Setting the control data
+		if isTimer(prisonerSyncTimers[source]) then
+			killTimer(prisonerSyncTimers[source])
+			setElementCollisionsEnabled(source, true)
+		end
+		prisonerSyncTimers[source] = setTimer(syncArrest, 500, 0, source, attacker)
+		setElementCollisionsEnabled(source, false)
+		exports.GTWtopbar:dm("You have been arrested by: "..getPlayerName(attacker).."!", source, 255, 0, 0)
+		exports.GTWtopbar:dm("You have arrested: "..getPlayerName(source)..", take him to nearest police department", attacker, 0, 255, 0)
 
-        -- Arrested players: indexed by cops, holding suspects
-        police_data.arrested_players[attacker] = source
-        police_data.is_arrested[source] = true
-        setElementData(source, "arrested", true)
-        police_data.is_tazed[source] = nil
-        setElementFrozen(source, false)
+		-- Arrested players: indexed by cops, holding suspects
+		police_data.arrested_players[attacker] = source
+		police_data.is_arrested[source] = true
+		setElementData(source, "arrested", true)
+		police_data.is_tazed[source] = nil
+		setElementFrozen(source, false)
 
-        -- Arrest suspect
+		-- Arrest suspect
 	set_control_states(source, false)
 
-        -- Add jail markers
+		-- Add jail markers
 	for k=1, #cells do
-	    	if not marker[k] then
-	    		marker[k] = {}
-	    	end
-	    	if isElement(marker[k][source]) then
-        		destroyElement(marker[k][source])
-        	end
+			if not marker[k] then
+				marker[k] = {}
+			end
+			if isElement(marker[k][source]) then
+				destroyElement(marker[k][source])
+			end
 
-        	-- Add delivery markers
-    		marker[k][source] = createMarker(cells[k][4], cells[k][5], cells[k][6]-1, "cylinder", 3.8, 0, 0, 255, 70, attacker)
+			-- Add delivery markers
+			marker[k][source] = createMarker(cells[k][4], cells[k][5], cells[k][6]-1, "cylinder", 3.8, 0, 0, 255, 70, attacker)
 
-	    	-- Set data for marker
-	    	setElementInterior(marker[k][source], cells[k][2])
-	    	setElementDimension(marker[k][source], cells[k][3])
-    			setElementData(marker[k][source], "cell", k)
-    			setElementData(marker[k][source], "release", cells[k][8])
-	    	addEventHandler("onMarkerHit", marker[k][source], deliverSuspect)
+			-- Set data for marker
+			setElementInterior(marker[k][source], cells[k][2])
+			setElementDimension(marker[k][source], cells[k][3])
+				setElementData(marker[k][source], "cell", k)
+				setElementData(marker[k][source], "release", cells[k][8])
+			addEventHandler("onMarkerHit", marker[k][source], deliverSuspect)
 	end
 	for j=1, #blips do
-	    	if not blipList[j] then
-	    		blipList[j] = {}
-	    	end
-	    	if isElement(blipList[j][source]) then
-	    		destroyElement(blipList[j][source])
-	    	end
-	    	blipList[j][source] = createBlip(blips[j][1], blips[j][2], blips[j][3], 30, 2, 0, 0, 0, 255, 5, 1500, attacker)
+			if not blipList[j] then
+				blipList[j] = {}
+			end
+			if isElement(blipList[j][source]) then
+				destroyElement(blipList[j][source])
+			end
+			blipList[j][source] = createBlip(blips[j][1], blips[j][2], blips[j][3], 30, 2, 0, 0, 0, 255, 5, 1500, attacker)
 	end
 
 	local weapon = { 0,0,0,0,0,0,0,0,0,0,0,0 }
 	local ammo = { 0,0,0,0,0,0,0,0,0,0,0,0 }
 
-		-- Weapons save
+	-- Weapons save
 	for k,wep in ipairs(weapon) do
 		weapon[k] = getPedWeapon(source, k)
 		setPedWeaponSlot(source, getSlotFromWeapon(weapon[k]))
@@ -112,6 +113,7 @@ function arrest_or_taze(attacker, attackerweapon)
 	local ccx,ccy,ccz = getElementPosition(source)
 	local rrx,rry,rrz = getElementRotation(source)
 	spawnPlayer(source, ccx, ccy, ccz, rrz, getElementModel(source), getElementInterior(attacker), getElementDimension(attacker), getPlayerTeam(source))
+	
 	-- Weapons restore
 	for k,wep in ipairs(weapon) do
 	   	if weapon[k] and ammo[k] then
@@ -130,7 +132,7 @@ function arrest_or_taze(attacker, attackerweapon)
 			exports.GTWtopbar:dm("You have been shot by a tazer, press the jump if you wanna try to escape", source, 255, 0, 0)
 			exports.GTWtopbar:dm("Suspect has been tazed, get him before he escape!", attacker, 0, 255, 0)
 			fadeCamera(source, false, 5, 255, 255, 255)
-        		police_data.is_tazed[source] = true
+				police_data.is_tazed[source] = true
 			toggleControl(source, "jump", false)
 			setTimer(taze1, 1000, 1, source)
 			setTimer(taze2, 10000, 1, source)
@@ -197,7 +199,7 @@ function taze3(crim)
 end
 function taze4(crim)
 	if isElement(crim) and police_data.is_tazed[crim] then
-        police_data.is_tazed[crim] = nil
+		police_data.is_tazed[crim] = nil
 		toggleControl(crim, "jump", true)
 		setElementFrozen(crim, false)
 		setPedAnimation(crim, nil, nil)
@@ -211,22 +213,22 @@ function syncArrest(crim, cop)
 		local rx,ry,rz = getElementRotation(crim)
 		local ax,ay,az = getElementPosition(cop)
 		setElementFrozen(crim, false)
-        police_data.is_tazed[crim] = nil
+		police_data.is_tazed[crim] = nil
 
 		-- Calculate rotation
 		if getElementInterior(cop) == getElementInterior(crim) then
 			local X = math.abs(sx-ax)
 			local Y = math.abs(sy-ay)
 			local rot = math.deg(math.atan2(Y,X));
-			if(sx >= ax) and(ay > sy) then      -- north-east
-		        rot = 90 - rot
-		    elseif(sx <= ax) and(ay > sy) then  -- north-west
-		        rot = 270 + rot
-		    elseif(sx >= ax) and(ay <= sy) then -- south-east
-		        rot = 90 + rot
-		    elseif(sx < ax) and(ay <= sy) then  -- south-west
-		        rot = 270 - rot
-		    end
+			if(sx >= ax) and(ay > sy) then	  -- north-east
+				rot = 90 - rot
+			elseif(sx <= ax) and(ay > sy) then  -- north-west
+				rot = 270 + rot
+			elseif(sx >= ax) and(ay <= sy) then -- south-east
+				rot = 90 + rot
+			elseif(sx < ax) and(ay <= sy) then  -- south-west
+				rot = 270 - rot
+			end
 			setElementRotation(crim, rx,ry,rot)
 		end
 
@@ -295,15 +297,15 @@ function syncArrest(crim, cop)
 			end
 
 			-- Remove jail markers
-		    for k=1, #marker do
-		      	if marker[k] and isElement(marker[k][crim]) then
-		    		destroyElement(marker[k][crim])
-		    	end
+			for k=1, #marker do
+			  	if marker[k] and isElement(marker[k][crim]) then
+					destroyElement(marker[k][crim])
+				end
 			end
 			for j=1, #blips	do
 				if blipList[j] and isElement(blipList[j][crim]) then
-		    		destroyElement(blipList[j][crim])
-		    	end
+					destroyElement(blipList[j][crim])
+				end
 			end
 
 			if isTimer(prisonerSyncTimers[crim]) then
@@ -325,50 +327,50 @@ end
 
 -- Admin jail function
 function admin_jail(admin, cmd, crim, time, ...)
-    local is_staff = exports.GTWstaff:isStaff(admin)
-    if not is_staff then
-    	outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
-    	return
-    end
-    if not crim then
-    	outputChatBox("Jail command: /jail <nickname> <time in seconds (minimum 10)> <reason>", admin, 200, 0, 0)
-    	return
-    end
-    local suspect = getPlayerFromName(crim)
-    if isElement(suspect) then
-       	local arg = {...}
+	local is_staff = exports.GTWstaff:isStaff(admin)
+	if not is_staff then
+		outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
+	return
+	end
+	if not crim then
+		outputChatBox("Jail command: /jail <nickname> <time in seconds (minimum 10)> <reason>", admin, 200, 0, 0)
+		return
+	end
+	local suspect = getPlayerFromName(crim)
+	if isElement(suspect) then
+	   	local arg = {...}
 	local reason = table.concat(arg, " ")
-       	if time and reason then
+	   	if time and reason then
 		exports.GTWwanted:setWl(suspect, tonumber(time)/60, 10, reason, false, false)
-       		exports.GTWjail:Jail(suspect, tonumber(time), "LSPD", reason, admin)
-       		exports.GTWtopbar:dm(crim.." was jailed successfully", admin, 0, 255, 0)
-       	else
-       		exports.GTWtopbar:dm("Warning: no time or reason was specified, the player was not jailed", admin, 255, 0, 0)
-       	end
-    else
-       	exports.GTWtopbar:dm("Warning: no suspect found with that name ("..crim..")", admin, 255, 0, 0)
-    end
+	   		exports.GTWjail:Jail(suspect, tonumber(time), "LSPD", reason, admin)
+	   		exports.GTWtopbar:dm(crim.." was jailed successfully", admin, 0, 255, 0)
+	   	else
+	   		exports.GTWtopbar:dm("Warning: no time or reason was specified, the player was not jailed", admin, 255, 0, 0)
+	   	end
+	else
+	   	exports.GTWtopbar:dm("Warning: no suspect found with that name ("..crim..")", admin, 255, 0, 0)
+	end
 end
 addCommandHandler("jail", admin_jail)
 
 -- Admin unjail function
 function admin_jail_release(admin, cmd, crim)
-    local is_staff = exports.GTWstaff:isStaff(admin)
-    if not is_staff then
-    	outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
-    	return
-    end
-    if not crim then
-    	outputChatBox("Unjail command: /unjail <nickname>", admin, 200, 0, 0)
-    	return
-    end
-    local suspect = getPlayerFromName(crim)
-    if suspect and isElement(suspect) then
-       	exports.GTWjail:Unjail(suspect, "LSPD", "", admin)
-       	exports.GTWtopbar:dm(crim.." was released successfully", admin, 0, 255, 0)
-    else
-       	exports.GTWtopbar:dm("Warning: no suspect found with that name ("..crim..")", admin, 255, 0, 0)
-    end
+	local is_staff = exports.GTWstaff:isStaff(admin)
+	if not is_staff then
+		outputChatBox("You are not allowed to use this command!", admin, 200, 0, 0)
+		return
+	end
+	if not crim then
+		outputChatBox("Unjail command: /unjail <nickname>", admin, 200, 0, 0)
+		return
+	end
+	local suspect = getPlayerFromName(crim)
+	if suspect and isElement(suspect) then
+	   	exports.GTWjail:Unjail(suspect, "LSPD", "", admin)
+	   	exports.GTWtopbar:dm(crim.." was released successfully", admin, 0, 255, 0)
+	else
+	   	exports.GTWtopbar:dm("Warning: no suspect found with that name ("..crim..")", admin, 255, 0, 0)
+	end
 end
 addCommandHandler("unjail", admin_jail_release)
 
@@ -417,17 +419,17 @@ function Jail(crim, cop, pay_the_cop)
 
 	-- Remove jail markers
 	for k=1, #marker do
-	       	if marker[k] then
-		      	if isElement(marker[k][crim]) then
-		    		destroyElement(marker[k][crim])
-		    	end
+		   	if marker[k] then
+			  	if isElement(marker[k][crim]) then
+					destroyElement(marker[k][crim])
+				end
 		end
 	end
 	for j=1, #blips	do
 		if blipList[j] then
 			if isElement(blipList[j][crim]) then
-		    		destroyElement(blipList[j][crim])
-		    	end
+					destroyElement(blipList[j][crim])
+				end
 		end
 	end
 
@@ -515,17 +517,17 @@ function enterLawVehicle(plr, seat, jacked)
 		maxSeats = maxSeats+1
 		local comp = 0
 		for s,occupant in pairs(getVehicleOccupants(source)) do
-	        if isElement(occupant) and getElementType(occupant) == "player" then
-	            comp = comp + 1
-	        end
-	    end
-	    local free = (maxSeats - comp)
-	    if police_data.is_arrested[plr] and seat == 0 then
-	    		exports.GTWtopbar:dm("You are arrested and can't drive!", plr, 255, 0, 0)
-	    		cancelEvent()
-	    elseif police_data.arrested_players[plr] then
-	    	if free >= 1 then
-	    		local p = police_data.arrested_players[plr]
+			if isElement(occupant) and getElementType(occupant) == "player" then
+				comp = comp + 1
+			end
+		end
+		local free = (maxSeats - comp)
+		if police_data.is_arrested[plr] and seat == 0 then
+				exports.GTWtopbar:dm("You are arrested and can't drive!", plr, 255, 0, 0)
+				cancelEvent()
+		elseif police_data.arrested_players[plr] then
+			if free >= 1 then
+				local p = police_data.arrested_players[plr]
 				if isElement(p) then
 					if isTimer(prisonerSyncTimers[p]) then
 						killTimer(prisonerSyncTimers[p])
@@ -543,7 +545,7 @@ function enterLawVehicle(plr, seat, jacked)
 				end
 			else
 				exports.GTWtopbar:dm("This vehicle doesn't have enough free seats!", plr, 255, 0, 0)
-	    		cancelEvent()
+				cancelEvent()
 			end
 		end
 		if ((source and(policeVehicles[getElementModel(source)] or
@@ -551,7 +553,7 @@ function enterLawVehicle(plr, seat, jacked)
 			and getPlayerTeam(plr) and not isLawUnit(plr)
 			and seat and seat == 0) then
 		end
-    end
+	end
 end
 addEventHandler("onVehicleEnter", root, enterLawVehicle)
 
@@ -562,17 +564,17 @@ function startEnterVehicle(plr, seat, jacked)
 		maxSeats = maxSeats+1
 		local comp = 0
 		for s,occupant in pairs(getVehicleOccupants(source)) do
-	        if isElement(occupant) and getElementType(occupant) == "player" then
-	            comp = comp + 1
-	        end
-	    end
-	    local free = (maxSeats - comp)
-	    if police_data.is_arrested[plr] and(seat == 0) then
-	    	exports.GTWtopbar:dm("You are arrested and can't drive!", plr, 255, 0, 0)
-	    	cancelEvent()
-	    elseif police_data.arrested_players[plr] then
-	    	if free >= 1 then
-	    		local p = police_data.arrested_players[plr]
+			if isElement(occupant) and getElementType(occupant) == "player" then
+				comp = comp + 1
+			end
+		end
+		local free = (maxSeats - comp)
+		if police_data.is_arrested[plr] and(seat == 0) then
+			exports.GTWtopbar:dm("You are arrested and can't drive!", plr, 255, 0, 0)
+			cancelEvent()
+		elseif police_data.arrested_players[plr] then
+			if free >= 1 then
+				local p = police_data.arrested_players[plr]
 				if isElement(p) then
 					--detachElements(p)
 					if isTimer(prisonerSyncTimers[p]) then
@@ -591,10 +593,10 @@ function startEnterVehicle(plr, seat, jacked)
 				end
 			else
 				exports.GTWtopbar:dm("This vehicle doesn't have enough free seats!", plr, 255, 0, 0)
-	    		cancelEvent()
+				cancelEvent()
 			end
 		end
-    end
+	end
 end
 addEventHandler("onVehicleStartEnter", root, startEnterVehicle)
 
@@ -624,15 +626,15 @@ function arrestOnExitDelay(source, cop, seat, jacked)
 			end
    			--attachElements(prisoner, cop, -0.5, 0 )
    			if isTimer(prisonerSyncTimers[prisoner]) then
-        		killTimer(prisonerSyncTimers[prisoner])
-        	end
+				killTimer(prisonerSyncTimers[prisoner])
+			end
 			prisonerSyncTimers[prisoner] = setTimer(syncArrest, 500, 0, prisoner, cop)
 			setElementCollisionsEnabled(prisoner, false)
    		end
    		local speedx, speedy, speedz = getElementVelocity(source)
 		local actualspeed =(speedx^2 + speedy^2 + speedz^2)^(0.5)
 		local kmh = actualspeed * 180
-    end
+	end
 end
 
 -- Reattach suspect after cop exit
@@ -671,15 +673,15 @@ function releaseCrim(cop, cmd)
 	end
 
 	-- Remove jail markers
-    for k=1, #marker do
-	    if marker[k] and isElement(marker[k][crim]) and isElement(crim) then
-    		destroyElement(marker[k][crim])
-    	end
+	for k=1, #marker do
+		if marker[k] and isElement(marker[k][crim]) and isElement(crim) then
+			destroyElement(marker[k][crim])
+		end
 	end
 	for j=1, #blips	do
 		if blipList[j] and isElement(blipList[j][crim]) and isElement(crim) then
-    		destroyElement(blipList[j][crim])
-    	end
+			destroyElement(blipList[j][crim])
+		end
 	end
 end
 addCommandHandler("release", releaseCrim)
@@ -705,13 +707,13 @@ function quitPlayer(quitType)
 		-- Remove jail markers
 	   	for k=1, #marker do
 		   	if marker[k] and isElement(marker[k][source]) then
-		    	destroyElement(marker[k][source])
+				destroyElement(marker[k][source])
 		   	end
 		end
 		for j=1, #blips	do
 			if blipList[j] and isElement(blipList[j][source]) then
-		    	destroyElement(blipList[j][source])
-		    end
+				destroyElement(blipList[j][source])
+			end
 		end
 
 		-- Take some of the money as a bribe
@@ -746,8 +748,8 @@ addEventHandler("onPlayerQuit", root, quitPlayer)
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
-        getThisResource(), "author")..", v-"..getResourceInfo(
-        getThisResource(), "version")..", is represented", plr)
+		getThisResource(), "author")..", v-"..getResourceInfo(
+		getThisResource(), "version")..", is represented", plr)
 end)
 
 --[[ Validate if a player is a law unit or not ]]--
