@@ -138,6 +138,3 @@ addEventHandler("onClientResourceStart",getResourceRootElement(getThisResource()
 addEvent("GTWchat.returnSettings", true)
 addEventHandler("GTWchat.returnSettings",getRootElement(), saveSettings)
 addCommandHandler("chatbubbles", toggleBubblesOnOff)
-
--- Protect client files 2014-04-26
-fileDelete("chat-c.lua")
