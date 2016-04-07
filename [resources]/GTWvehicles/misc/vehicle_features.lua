@@ -200,16 +200,18 @@ function limit_the_speed(plr, command, amount)
 		if currVehTopSpeed[veh] then
 			exports.GTWtopbar:dm("Vehicle top speed is now: "..tostring(currVehTopSpeed[veh]).."km/h", plr, 255, 100, 0)
 		else
-			exports.GTWtopbar:dm("Vehicle top speed has been resetted", plr, 255, 100, 0)
+			exports.GTWtopbar:dm("Vehicle top speed has been reset", plr, 255, 100, 0)
 		end
 	else
-		if currVehTopSpeed[veh] and currVehTopSpeed[veh] < amount then amount = currVehTopSpeed[veh] end
+		local is_staff = exports.GTWstaff:isStaff(plr)
+		if currVehTopSpeed[veh] and currVehTopSpeed[veh] < amount and not is_staff then amount = currVehTopSpeed[veh] end
 		setVehicleHandling(veh, "maxVelocity", amount, false)
 		exports.GTWtopbar:dm("Vehicle top speed is now: "..tostring(amount).."km/h", plr, 255, 100, 0)
         end
 end
 addCommandHandler("limitspeed", limit_the_speed)
 addCommandHandler("speedlimit", limit_the_speed)
+addCommandHandler("lims", limit_the_speed)
 
 --[[ Helper function for the display_message ]]--
 function display_message(message, plr, r, g, b)
