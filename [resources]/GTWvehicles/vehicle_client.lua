@@ -207,15 +207,7 @@ function make_vehlist(is_staff, filter)
     	if filter then filter = string.lower(filter) end
     	for i, vehicle in pairs(allVehList) do
     		if filter and string.find(string.lower(vehicle), filter) then
-	        	local row = guiGridListAddRow(veh_grid)
-	        	guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
-	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
-
-                        -- Add extra Information
+                        -- Vehicles with trailers
                         local veh_extra_data = veh_extra_plr
                         if veh_extra_data[vehicle] then
                                 local is_admin = exports.GTWstaff:isAdmin(localPlayer) or false
@@ -229,17 +221,18 @@ function make_vehlist(is_staff, filter)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
                                 end
+			-- Vehicles without trailers
+			else
+				local row = guiGridListAddRow(veh_grid)
+				guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
+				guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
+				guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
+				guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
                         end
 	        elseif not filter then
-	        	local row = guiGridListAddRow(veh_grid)
-	        	guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
-	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
-
-                        -- Add extra Information
+                        -- Vehicles with trailers
                         if veh_extra[vehicle] then
                                 for k,v in ipairs(veh_extra[vehicle]) do
                                         local row2 = guiGridListAddRow(veh_grid)
@@ -250,6 +243,15 @@ function make_vehlist(is_staff, filter)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
                                 end
+			-- Vehicles without trailers
+			else
+				local row = guiGridListAddRow(veh_grid)
+				guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
+				guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
+				guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
+				guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
                         end
 	        end
 	    end
