@@ -58,7 +58,7 @@ setTimer(function()
 	local kmh = actualspeed * 180
 
 	-- Get the chance of occurance
-	local rnd_chance = math.random(1,20000)
+	local rnd_chance = math.random(1,200000)
 	if rnd_chance > kmh or kmh < 70 or em_vehs[getElementModel(veh)] then return end
 
 	-- Flatten the tire
