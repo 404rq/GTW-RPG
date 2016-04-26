@@ -354,9 +354,9 @@ function trigger_server_spawn()
 	local vehID = getVehicleModelFromName(vehName)
         local price = 0
         local extra = guiGridListGetItemText(veh_grid, row, 3) or 0
-	local is_staff = exports.GTWstaff:isStaff(localPlayer)
-	if not is_staff then price = spawn_prices[typeOfMarker][(row+1)] end
-	triggerServerEvent("GTWvehicles.spawnvehicle",root, vehID, rotation, price, extra, tmp_sx,tmp_sy,tmp_sz)
+	--if not is_staff then price = spawn_prices[typeOfMarker][(row+1)] end
+	if spawn_prices[typeOfMarker] and spawn_prices[typeOfMarker][(row+1)] then price = spawn_prices[typeOfMarker][(row+1)] end
+	triggerServerEvent("GTWvehicles.spawnvehicle", root, vehID, rotation, price, extra, tmp_sx,tmp_sy,tmp_sz)
 	triggerServerEvent("GTWvehicles.colorvehicle",root, typeOfMarker)
 	triggerEvent("GTWvehicles.closeWindow", localPlayer)
 end
@@ -368,9 +368,9 @@ function marker_leave(leaveElement)
 	end
 end
 function close_the_window()
-    guiSetVisible(window, false)
-    showCursor(false)
-    guiSetInputEnabled(false)
+	guiSetVisible(window, false)
+	showCursor(false)
+	guiSetInputEnabled(false)
 end
 addEvent("GTWvehicles.closeWindow", true)
 addEventHandler("GTWvehicles.closeWindow", root, close_the_window)

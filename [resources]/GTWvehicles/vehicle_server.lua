@@ -294,17 +294,17 @@ function cleanUpEnd(source)
 	if isElement(trailers[source]) and getElementData(trailers[source], "GTWvehicles.second_trailer") then
 		destroyElement(getElementData(trailers[source], "GTWvehicles.second_trailer"))
 	end
-	if getElementData(vehicles[source], "GTWvehicles.second_tower") then
-		destroyElement(getElementData(vehicles[source], "GTWvehicles.second_tower"))
-	end
-	if isElement(source) then
-		destroyElement(source)
+	if isElement(source) and getElementData(source, "GTWvehicles.second_tower") then
+		destroyElement(getElementData(source, "GTWvehicles.second_tower"))
 	end
 	if isElement(trailers[source]) then
    	 	destroyElement(trailers[source])
    	end
    	if isElement(peds[source]) then
 		destroyElement(peds[source])
+	end
+	if isElement(source) then
+		destroyElement(source)
 	end
 end
 
