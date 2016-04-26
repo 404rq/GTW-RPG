@@ -120,21 +120,21 @@ Website: https://404rq.com]], false, window)
 		end
 		if sh_contrast == "enabled" then
 			guiCheckBoxSetSelected(checkBoxContrast, true)
-			exports.shader_contrast:toggleShaderContrast(true)
+			--exports.shader_contrast:toggleShaderContrast(true)
 		else
-			exports.shader_contrast:toggleShaderContrast(false)
+			--exports.shader_contrast:toggleShaderContrast(false)
 		end
 		if sh_water == "enabled" then
 			guiCheckBoxSetSelected(checkBoxWater, true)
-			exports.shader_water:toggleShaderWater(true)
+			--exports.shader_water:toggleShaderWater(true)
 		else
-			exports.shader_water:toggleShaderWater(false)
+			--exports.shader_water:toggleShaderWater(false)
 		end
 		if sh_carpaint == "enabled" then
 			guiCheckBoxSetSelected(checkBoxCarPaint, true)
-			exports.shader_car_paint_reflect:toggleShaderCarPaint(true)
+			--exports.shader_car_paint_reflect:toggleShaderCarPaint(true)
 		else
-			exports.shader_car_paint_reflect:toggleShaderCarPaint(false)
+			--exports.shader_car_paint_reflect:toggleShaderCarPaint(false)
 		end
 	end
 end
@@ -175,11 +175,11 @@ addEventHandler("onClientGUIClick",root,function()
 	elseif source == checkBoxDetail then
 		exports.shader_detail:toggleShaderDetailCMD()
 	elseif source == checkBoxContrast then
-		exports.shader_contrast:toggleShaderContrastCMD()
+		--exports.shader_contrast:toggleShaderContrastCMD()
 	elseif source == checkBoxWater then
-		exports.shader_water:toggleShaderWaterCMD()
+		--exports.shader_water:toggleShaderWaterCMD()
 	elseif source == checkBoxCarPaint then
-		exports.shader_car_paint_reflect:toggleShaderCarPaintCMD()
+		--exports.shader_car_paint_reflect:toggleShaderCarPaintCMD()
 	end
 end)
 

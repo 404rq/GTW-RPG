@@ -19,9 +19,6 @@
     <info author="GTWGames" version="38" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
     <!-- Shaders -->
     <include resource="shader_detail" />
-    <include resource="shader_car_paint_reflect" />
-    <include resource="shader_contrast" />
-    <include resource="shader_water" />
     <include resource="GTWgui" />
     <include resource="GTWupdates" />
     <include resource="GTWtopbar" />
