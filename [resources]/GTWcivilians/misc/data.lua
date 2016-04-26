@@ -280,7 +280,7 @@ Weapons:
 	{{6, 1, 60, "Shovel"}, {24, 35, 500, "Desert eagle"}},
 	--[[Message for new players when applying for the job]]
 	"Welcome to the iron miner job!, press N to deploy dynamite, take cover and then mine by walking up to the rocks"},
-	["Police Officer"]={ "Government", 0, [[
+	["Police officer"]={ "Government", 0, [[
 Type /wanted to find out who's wanted, then hunt the
 wanted people down and arrest them, the higher wanted
 level the more payment, alive suspects are worth more
