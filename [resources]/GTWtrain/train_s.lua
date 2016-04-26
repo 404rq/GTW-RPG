@@ -534,13 +534,32 @@ function set_speed_policy(t_engine, state)
 	if not engineer or not isElement(engineer) or getElementType(engineer) ~= "ped" then return end
 
 	-- Inverse if negative speed
-	if getTrainSpeed(t_engine) < 0 and state == 1 then
+	if getTrainDirection(t_engine) and getTrainSpeed(t_engine) < 0 and state == 1 then
 		state = 2
-	elseif getTrainSpeed(t_engine) < 0 and state == 2 then
+	elseif not getTrainDirection(t_engine) and getTrainSpeed(t_engine) > 0 and state == 1 then
+		state = 2
+	elseif getTrainDirection(t_engine) and getTrainSpeed(t_engine) < 0 and state == 2 then
+		state = 1
+	elseif not getTrainDirection(t_engine) and getTrainSpeed(t_engine) > 0 and state == 2 then
 		state = 1
 	end
+	
+	-- Set train speed
+	if state == 1 then
+		if getTrainDirection(t_engine) then
+			setTrainSpeed(t_engine, math.abs(getTrainSpeed(t_engine))+(0.4/160))
+		else
+			setTrainSpeed(t_engine, -math.abs(getTrainSpeed(t_engine))+(0.4/160))
+		end
+	elseif state == 2 then
+		if getTrainDirection(t_engine) then
+			setTrainSpeed(t_engine, math.abs(getTrainSpeed(t_engine))-(1.1/160))
+		else
+			setTrainSpeed(t_engine, -math.abs(getTrainSpeed(t_engine))-(1.1/160))
+		end
+	end
 
-	triggerClientEvent(root, "GTWtrain.setControlState", root, engineer, state)
+	--triggerClientEvent(root, "GTWtrain.setControlState", root, engineer, state)
 end
 
 --[[ Round float numbers ]]--
