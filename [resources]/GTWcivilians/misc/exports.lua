@@ -63,16 +63,17 @@ table.insert(markers, { "Iron miner", 0, 0, 825.583984375, 858.4228515625, 12.20
 table.insert(markers, { "Trucker", 0, 0, 1057.3662109375, 1940.8779296875, 10.8203125, "civilians" })
 
 -- BETA Police job
-table.insert(markers, { "Police Officer", 6, 1, 250, 68, 1003.6, "government" })
-table.insert(markers, { "Police Officer", 3, 0, 234, 159, 1003, "government" })
-table.insert(markers, { "Police Officer", 10, 0, 246, 118, 1003, "government" })
+table.insert(markers, { "Police officer", 6, 1, 250, 68, 1003.6, "government" })
+table.insert(markers, { "Police officer", 3, 0, 234, 159, 1003, "government" })
+table.insert(markers, { "Police officer", 10, 0, 246, 118, 1003, "government" })
 
 -- Country side police jobs
-table.insert(markers, { "Police Officer", 5, 0, 326, 307, 999, "government" })
-table.insert(markers, { "Police Officer", 5, 1, 326, 307, 999, "government" })
-table.insert(markers, { "Police Officer", 5, 2, 326, 307, 999, "government" })
-table.insert(markers, { "Police Officer", 5, 3, 326, 307, 999, "government" })
-table.insert(markers, { "Police Officer", 5, 4, 326, 307, 999, "government" })
-table.insert(markers, { "Police Officer", 5, 5, 326, 307, 999, "government" })
+table.insert(markers, { "Police officer", 5, 0, 326, 307, 999, "government" })
+table.insert(markers, { "Police officer", 5, 1, 326, 307, 999, "government" })
+table.insert(markers, { "Police officer", 5, 2, 326, 307, 999, "government" })
+table.insert(markers, { "Police officer", 5, 3, 326, 307, 999, "government" })
+table.insert(markers, { "Police officer", 5, 4, 326, 307, 999, "government" })
+table.insert(markers, { "Police officer", 5, 5, 326, 307, 999, "government" })
 
-table.insert(markers, { "SAPD Officer", 6, 2, 250, 68, 1003.6, "government" })
+-- SAPD job (in base)
+table.insert(markers, { "SAPD officer", 6, 2, 250, 68, 1003.6, "government" })
