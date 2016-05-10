@@ -239,7 +239,7 @@ function destroy_vehicle(plr, force_delete)
 		if getElementData(vehicles[plr], "GTWvehicles.second_tower") then
 			destroyElement(getElementData(vehicles[plr], "GTWvehicles.second_tower"))
 		end
-		if getPedOccupiedVehicle(plr) then
+		if getPedOccupiedVehicle(plr) and force_delete ~= true then
 			return exports.GTWtopbar:dm("Exit your vehicle before removing it!", plr, 255, 0, 0)
 		end
 		if getVehicleTowedByVehicle(vehicles[plr]) then
@@ -248,9 +248,11 @@ function destroy_vehicle(plr, force_delete)
    	 	if isElement(trailers[plr]) then
    	 		destroyElement(trailers[plr])
    	 	end
+		if isElement(vehicles[plr]) then
+			destroyElement(vehicles[plr])
+		end
    	 	triggerEvent("GTWvehicles.onDestroyVehilce", plr, plr)
-
-		destroyElement(vehicles[plr])
+		
 		setElementData(plr, "currVeh", 0)
 		if isTimer(paymentsHolder[plr]) then
 			killTimer(paymentsHolder[plr])
@@ -261,12 +263,12 @@ function destroy_vehicle(plr, force_delete)
 		exports.GTWtopbar:dm("You don't have a vehicle to destroy!", plr, 255, 0, 0)
 	end
 end
-function onPlayerQuit() destroy_vehicle(source, true) end
-function onPlayerLogout(playeraccount, _) destroy_vehicle(source, true) end
+function player_quit() destroy_vehicle(source, true) end
+function player_logout(playeraccount, _) destroy_vehicle(source, true) end
 addCommandHandler("djv", destroy_vehicle)
 addCommandHandler("rrv", destroy_vehicle)
-addEventHandler("onPlayerQuit", root, onPlayerQuit)
-addEventHandler("onPlayerLogout", root, onPlayerLogout)
+addEventHandler("onPlayerQuit", root, player_quit)
+addEventHandler("onPlayerLogout", root, player_logout)
 
 function removeTimer(thePlayer, seat, jacked)
 	if isTimer(gearTimers[source]) then
