@@ -17,8 +17,8 @@
 
 <meta>
     <info author="GTWGames" name="GTWchat" description="Local chat, chat bubbles and mute system for MTA SA" version="26" type="script"/>
-    <script src="chat-s.lua" type="server"/>
-    <script src="chat-c.lua" type="client"/>
+    <script src="chat_s.lua" type="server"/>
+    <script src="chat_c.lua" type="client"/>
 
     <include resource="GTWtopbar" />
     <include resource="GTWpolicechief" />

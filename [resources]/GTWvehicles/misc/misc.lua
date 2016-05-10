@@ -223,7 +223,7 @@ addCommandHandler("nextgear", nextGear)]]--
 
 function topSpeed(thePlayer, command)
 	local veh = getPedOccupiedVehicle(thePlayer)
-	if veh then
+	if veh and currVehTopSpeed[veh] then
 		outputChatBox("Current top speed: "..currVehTopSpeed[veh], thePlayer, 255, 200, 0)
 	end
 end

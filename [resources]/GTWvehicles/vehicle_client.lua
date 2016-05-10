@@ -207,15 +207,7 @@ function make_vehlist(is_staff, filter)
     	if filter then filter = string.lower(filter) end
     	for i, vehicle in pairs(allVehList) do
     		if filter and string.find(string.lower(vehicle), filter) then
-	        	local row = guiGridListAddRow(veh_grid)
-	        	guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
-	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
-
-                        -- Add extra Information
+                        -- Vehicles with trailers
                         local veh_extra_data = veh_extra_plr
                         if veh_extra_data[vehicle] then
                                 local is_admin = exports.GTWstaff:isAdmin(localPlayer) or false
@@ -229,17 +221,18 @@ function make_vehlist(is_staff, filter)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
                                 end
+			-- Vehicles without trailers
+			else
+				local row = guiGridListAddRow(veh_grid)
+				guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
+				guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
+				guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
+				guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
                         end
 	        elseif not filter then
-	        	local row = guiGridListAddRow(veh_grid)
-	        	guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
-	        	guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
-	        	guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
-	        	guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
-
-                        -- Add extra Information
+                        -- Vehicles with trailers
                         if veh_extra[vehicle] then
                                 for k,v in ipairs(veh_extra[vehicle]) do
                                         local row2 = guiGridListAddRow(veh_grid)
@@ -250,6 +243,15 @@ function make_vehlist(is_staff, filter)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_details, 0, 200, 0)
                 	        	guiGridListSetItemColor(veh_grid, row2, col_price, 0, 200, 0)
                                 end
+			-- Vehicles without trailers
+			else
+				local row = guiGridListAddRow(veh_grid)
+				guiGridListSetItemText(veh_grid, row, col_name, vehicle, false, false)
+				guiGridListSetItemText(veh_grid, row, col_details, "", false, false)
+				guiGridListSetItemText(veh_grid, row, col_price, "Free", false, false)
+				guiGridListSetItemColor(veh_grid, row, col_name, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_details, 0, 200, 0)
+				guiGridListSetItemColor(veh_grid, row, col_price, 0, 200, 0)
                         end
 	        end
 	    end
@@ -352,9 +354,9 @@ function trigger_server_spawn()
 	local vehID = getVehicleModelFromName(vehName)
         local price = 0
         local extra = guiGridListGetItemText(veh_grid, row, 3) or 0
-	local is_staff = exports.GTWstaff:isStaff(localPlayer)
-	if not is_staff then price = spawn_prices[typeOfMarker][(row+1)] end
-	triggerServerEvent("GTWvehicles.spawnvehicle",root, vehID, rotation, price, extra, tmp_sx,tmp_sy,tmp_sz)
+	--if not is_staff then price = spawn_prices[typeOfMarker][(row+1)] end
+	if spawn_prices[typeOfMarker] and spawn_prices[typeOfMarker][(row+1)] then price = spawn_prices[typeOfMarker][(row+1)] end
+	triggerServerEvent("GTWvehicles.spawnvehicle", root, vehID, rotation, price, extra, tmp_sx,tmp_sy,tmp_sz)
 	triggerServerEvent("GTWvehicles.colorvehicle",root, typeOfMarker)
 	triggerEvent("GTWvehicles.closeWindow", localPlayer)
 end
@@ -366,9 +368,9 @@ function marker_leave(leaveElement)
 	end
 end
 function close_the_window()
-    guiSetVisible(window, false)
-    showCursor(false)
-    guiSetInputEnabled(false)
+	guiSetVisible(window, false)
+	showCursor(false)
+	guiSetInputEnabled(false)
 end
 addEvent("GTWvehicles.closeWindow", true)
 addEventHandler("GTWvehicles.closeWindow", root, close_the_window)
@@ -399,39 +401,6 @@ addEventHandler("onClientElementStreamIn", getRootElement( ),
     end
 );
 
---[[function attach_on_stream_in(tower, trailer)
-        local x,y,z = getElementPosition(tower)
-        local rx,ry,rz = getElementPosition(tower)
-        x2 = x + 8 * math.cos(math.rad(rz))
-        y2 = y + 8 * math.sin(math.rad(rz))
-        setElementPosition(trailer, x2,y2,z)
-        setElementRotation(trailer, rx,ry,rz)
-        createBlip(x,y,z, 0, 1, 255,0,0, 255, 2, 99999)
-        createBlip(x2,y2,z, 0, 1, 0,255,0, 255, 2, 99999)
-
-        --attachElements(trailer, source, 0, -8)
-        setTimer(detachElements, 50, 1, trailer)
-        setTimer(attachTrailerToVehicle, 200, 1, tower, trailer)
-
-        outputConsole("Trailer: "..tostring(trailer)..", streamed in: ("..x.." "..y..") ("..x2.." "..y2..")")
-        outputConsole("Truck: "..tostring(tower)..", streamed in")
-end
-
-local streaming_timer = nil
-addEventHandler("onClientElementStreamIn", getRootElement( ),
-    function ( )
-        if not getElementData(source, "GTWvehicles.isTrailerTowingVehile") then return end
-        local trailer = getElementData(source, "GTWvehicles.attachedTrailer")
-        streaming_timer = setTimer(function(trailer2, source2)
-                if isElementStreamedIn(trailer2) then
-                        attach_on_stream_in(source2, trailer2)
-                        if isTimer(streaming_timer) then
-                                killTimer(streaming_timer)
-                        end
-                end
-        end, 1000, 0, trailer, source)
-    end
-);]]--
 addEventHandler( "onClientElementStreamOut", getRootElement( ),
     function ( )
             if getElementData(source, "GTWvehicles.isTrailerTowingVehile") then

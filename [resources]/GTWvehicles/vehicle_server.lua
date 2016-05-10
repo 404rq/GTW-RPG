@@ -40,6 +40,13 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 	    	getElementInterior(client) == 0 then
 	   	 	if isElement(vehicles[client]) then
 	   	 		triggerEvent("GTWdata_onDestroyVehilce", client, client)
+				-- Clean up second trailers for semi trucks
+				if isElement(trailers[client]) and getElementData(trailers[client], "GTWvehicles.second_trailer") then
+					destroyElement(getElementData(trailers[client], "GTWvehicles.second_trailer"))
+				end
+				if getElementData(vehicles[client], "GTWvehicles.second_tower") then
+					destroyElement(getElementData(vehicles[client], "GTWvehicles.second_tower"))
+				end
 				if vehicles[client] and getVehicleTowedByVehicle(vehicles[client]) then
 		   	 		destroyElement(getVehicleTowedByVehicle(vehicles[client]))
 		   	 	end
@@ -78,7 +85,11 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 
 			   	-- Semi truck trailers
 			   	if vehID == 403 or vehID == 514 or vehID == 515 then
-			   		if vehID == 403 then
+					if extra == "Fuel" then vehID = 584 end
+					if extra == "Trailer 1" then vehID = 435 end
+					if extra == "Trailer 2" then vehID = 450 end
+					if extra == "Trailer 3" then vehID = 591 end
+			   		--[[if vehID == 403 then 
 			   			vehID = 435
                                         elseif vehID == 514 then
 			   			vehID = 584
@@ -89,18 +100,36 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   			else
 			   				vehID = 584
 			   			end
-			   		end
+			   		end]]--
 			   		trailers[client] = createVehicle(vehID, x, y, z, 0, 0, rot)
-                                        triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client])
+                                        --triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client])
                                         --attachTrailerToVehicle(vehicles[client], trailers[client])
                                         setElementData(vehicles[client], "GTWvehicles.isTrailerTowingVehile", true)
                                         setElementData(vehicles[client], "GTWvehicles.attachedTrailer", trailers[client])
                                         setElementData(trailers[client], "GTWvehicles.isTrailer", true)
                                         setElementData(trailers[client], "GTWvehicles.towingVehicle", vehicles[client])
-			   		attachElements(trailers[client], vehicles[client], 0, -8)
+			   		attachElements(trailers[client], vehicles[client], 0, -10)
                                         setElementSyncer(trailers[client], client)
 			   		setTimer(detachElements, 50, 1, trailers[client])
-			   		setTimer(attachTrailerToVehicle, 200, 1, vehicles[client], trailers[client])
+			   		setTimer(attachTrailerToVehicle, 100, 1, vehicles[client], trailers[client])
+					
+					-- Dual trailers if supported
+					if vehID == 591 then
+						local second_trailer = createVehicle(435, x, y, z, 0, 0, rot)
+						local second_tower = createVehicle(515, x, y, z, 0, 0, rot)
+						attachElements(second_tower, trailers[client], 0, 0, 0.5)
+						setElementCollisionsEnabled(second_tower, false)
+						setElementAlpha(second_tower, 0)
+						
+						attachElements(second_trailer, second_tower, 0, -10)
+						setElementSyncer(second_trailer, client)
+						setTimer(detachElements, 50, 1, second_trailer)
+						setTimer(attachTrailerToVehicle, 100, 1, second_tower, second_trailer)
+						
+						-- Save element pointers for deletion
+						setElementData(vehicles[client], "GTWvehicles.second_tower", second_tower)
+						setElementData(trailers[client], "GTWvehicles.second_trailer", second_trailer)
+					end
 			   	end
 
 			   	-- Train cars
@@ -161,14 +190,14 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					setElementData(client,"numberOfCars",numberOfCarriages)
 					setTimer(display_message, 350, 1, "Train set up: "..engines.." engines and: "..numberOfCarriages.." cars", client, 0, 255, 0)
 			   	end
-			    setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
-			    setElementData(vehicles[client], "owner", getAccountName(getPlayerAccount(client)))
-			    setElementData(client, "currVeh", getElementModel(vehicles[client]))
-			    warpPedIntoVehicle(client, vehicles[client])
+				setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
+				setElementData(vehicles[client], "owner", getAccountName(getPlayerAccount(client)))
+				setElementData(client, "currVeh", getElementModel(vehicles[client]))
+				warpPedIntoVehicle(client, vehicles[client])
 				-- Start the rental price counter
 				paymentsCounter[client] = price
-			    paymentsHolder[client] = setTimer(pay_vehicle_rent, 60000, 0, client, price)
-			    exports.GTWtopbar:dm("You will pay: "..price.."$/minute to use this vehicle", client, 255, 200, 0)
+				paymentsHolder[client] = setTimer(pay_vehicle_rent, 60000, 0, client, price)
+				exports.GTWtopbar:dm("You will pay: "..price.."$/minute to use this vehicle", client, 255, 200, 0)
 			end
 		elseif getElementInterior(client) > 0 then
 			exports.GTWtopbar:dm("Vehicles can not be used inside!", client, 255, 0, 0)
@@ -203,7 +232,14 @@ addEventHandler("GTWvehicles.colorvehicle", root, set_vehicle_color)
 function destroy_vehicle(plr, force_delete)
 	if not force_delete then force_delete = false end
 	if vehicles[plr] and isElement(vehicles[plr]) and (not getVehicleOccupant(vehicles[plr]) or force_delete) then
-		if getPedOccupiedVehicle(plr) then
+		-- Clean up second trailers for semi trucks
+		if isElement(trailers[plr]) and getElementData(trailers[plr], "GTWvehicles.second_trailer") then
+			destroyElement(getElementData(trailers[plr], "GTWvehicles.second_trailer"))
+		end
+		if getElementData(vehicles[plr], "GTWvehicles.second_tower") then
+			destroyElement(getElementData(vehicles[plr], "GTWvehicles.second_tower"))
+		end
+		if getPedOccupiedVehicle(plr) and force_delete ~= true then
 			return exports.GTWtopbar:dm("Exit your vehicle before removing it!", plr, 255, 0, 0)
 		end
 		if getVehicleTowedByVehicle(vehicles[plr]) then
@@ -212,9 +248,11 @@ function destroy_vehicle(plr, force_delete)
    	 	if isElement(trailers[plr]) then
    	 		destroyElement(trailers[plr])
    	 	end
+		if isElement(vehicles[plr]) then
+			destroyElement(vehicles[plr])
+		end
    	 	triggerEvent("GTWvehicles.onDestroyVehilce", plr, plr)
-
-		destroyElement(vehicles[plr])
+		
 		setElementData(plr, "currVeh", 0)
 		if isTimer(paymentsHolder[plr]) then
 			killTimer(paymentsHolder[plr])
@@ -225,12 +263,12 @@ function destroy_vehicle(plr, force_delete)
 		exports.GTWtopbar:dm("You don't have a vehicle to destroy!", plr, 255, 0, 0)
 	end
 end
-function onPlayerQuit() destroy_vehicle(source, true) end
-function onPlayerLogout(playeraccount, _) destroy_vehicle(source, true) end
+function player_quit() destroy_vehicle(source, true) end
+function player_logout(playeraccount, _) destroy_vehicle(source, true) end
 addCommandHandler("djv", destroy_vehicle)
 addCommandHandler("rrv", destroy_vehicle)
-addEventHandler("onPlayerQuit", root, onPlayerQuit)
-addEventHandler("onPlayerLogout", root, onPlayerLogout)
+addEventHandler("onPlayerQuit", root, player_quit)
+addEventHandler("onPlayerLogout", root, player_logout)
 
 function removeTimer(thePlayer, seat, jacked)
 	if isTimer(gearTimers[source]) then
@@ -254,14 +292,21 @@ function respawnCar(veh)
 	end
 end
 function cleanUpEnd(source)
-	if isElement(source) then
-		destroyElement(source)
+	-- Clean up second trailers for semi trucks
+	if isElement(trailers[source]) and getElementData(trailers[source], "GTWvehicles.second_trailer") then
+		destroyElement(getElementData(trailers[source], "GTWvehicles.second_trailer"))
+	end
+	if isElement(source) and getElementData(source, "GTWvehicles.second_tower") then
+		destroyElement(getElementData(source, "GTWvehicles.second_tower"))
 	end
 	if isElement(trailers[source]) then
    	 	destroyElement(trailers[source])
    	end
    	if isElement(peds[source]) then
 		destroyElement(peds[source])
+	end
+	if isElement(source) then
+		destroyElement(source)
 	end
 end
 

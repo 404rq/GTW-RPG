@@ -262,20 +262,68 @@ if wantedlevel == 0 then
 					showWlText()
 		end
 	end
+	
+	--[[ The Vehicle hud part ]]--
+	if getPedOccupiedVehicle(localPlayer) then
+		-- Fetch the vehicle data
+		local veh = getPedOccupiedVehicle(localPlayer)
+		local veh_health = getElementHealth(veh)
+		local veh_fuel = getElementData(veh, "vehicleFuel") or 0
+		local max_speed = getVehicleHandling(veh)["maxVelocity"] or 200
+		local speedx, speedy, speedz = getElementVelocity(veh)
+		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5)
+		local kmh = actualspeed * 180
+		local mph = actualspeed * 111.847
+		local veh_locked = isVehicleLocked(veh)
+		local veh_engine = getVehicleEngineState(veh)
+		
+		-- Draw locked and engine state
+		if veh_locked then
+			dxDrawRectangle(sWidth-310, sHeight-170, 149, 28, tocolor(20, 20, 20, 190), false)
+			dxDrawText("Locked", sWidth-300, sHeight-164, 190, 16, tocolor(255,255,255, 220),
+				0.5, "bankgothic", "left", "top", false, false, false)
+		end
+		if not veh_engine then
+			dxDrawRectangle(sWidth-159, sHeight-170, 149, 28, tocolor(20, 20, 20, 190), false)
+			dxDrawText("Engine: off", sWidth-149, sHeight-164, 190, 16, tocolor(255,255,255, 220),
+				0.5, "bankgothic", "left", "top", false, false, false)
+		end
+		
+		-- Draw vehicle speed
+		dxDrawRectangle(sWidth-310, sHeight-140, 300, 28, tocolor(20, 20, 20, 190), false)
+		dxDrawRectangle(sWidth-310, sHeight-140, kmh, 28, tocolor(0, 100, 0, 190), false)
+		dxDrawText(tostring(math.floor(kmh)).."/"..tostring(max_speed).." km/h | "..tostring(math.floor(mph)).."/"..tostring(math.ceil(max_speed*0.621371)).." mp/h ", 
+			sWidth-280, sHeight-134, 190, 16, tocolor(255,255,255, 220),
+			0.5, "bankgothic", "left", "top", false, false, false)
+		
+		-- Draw vehicle fuel
+		dxDrawRectangle(sWidth-310, sHeight-110, 300, 28, tocolor(20, 20, 20, 190), false)
+		dxDrawRectangle(sWidth-310, sHeight-110, math.floor(veh_fuel*3), 28, tocolor(0, 100, 0, 190), false)
+		dxDrawText("Fuel: "..math.floor(veh_fuel).."%", 
+			sWidth-280, sHeight-104, 190, 16, tocolor(255,255,255, 220),
+			0.5, "bankgothic", "left", "top", false, false, false)
+		
+		-- Draw vehicle health
+		dxDrawRectangle(sWidth-310, sHeight-80, 300, 28, tocolor(20, 20, 20, 190), false)
+		dxDrawRectangle(sWidth-310, sHeight-80, math.floor((veh_health*3)/10), 28, tocolor(0, 100, 0, 190), false)
+		dxDrawText("Health: "..math.floor(veh_health/10).."%", 
+			sWidth-280, sHeight-74, 190, 16, tocolor(255,255,255, 220),
+			0.5, "bankgothic", "left", "top", false, false, false)
+	end
 end -- End of the DX Drawing function
 
 
 -------- HUD toogle command functions.
 
 function hudChanger()
-    addEventHandler("onClientRender", getRootElement(), DXdraw)
-    showPlayerHudComponent("armour", false)
-    showPlayerHudComponent("health", false)
-    showPlayerHudComponent("money", false)
-    showPlayerHudComponent("clock", false)
-    showPlayerHudComponent("weapon", false)
-    showPlayerHudComponent("ammo", false)
-    showPlayerHudComponent("money", false)
+	addEventHandler("onClientRender", getRootElement(), DXdraw)
+	showPlayerHudComponent("armour", false)
+	showPlayerHudComponent("health", false)
+	showPlayerHudComponent("money", false)
+	showPlayerHudComponent("clock", false)
+	showPlayerHudComponent("weapon", false)
+	showPlayerHudComponent("ammo", false)
+	showPlayerHudComponent("money", false)
 	showPlayerHudComponent("wanted", false)
 	showPlayerHudComponent("breath", false)
 end

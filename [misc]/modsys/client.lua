@@ -8,7 +8,7 @@ end
 
 local data = getElementData(localPlayer, "PlayerIpAddress")
 
-httpModDirectory = "http://london.404rq.com"..downloadDirectory
+httpModDirectory = "http://eu1.stackimg.com"..downloadDirectory
 
 local sx, sy = guiGetScreenSize()
 local button = { }

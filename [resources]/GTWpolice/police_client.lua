@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,8 +16,8 @@
 ]]--
 
 function forceEnter( )
-    setControlState ( localPlayer, "enter_passenger", true )
-    -- setTimer( setControlState, 500, 1, localPlayer, "enter_passenger", false )
+	setControlState ( localPlayer, "enter_passenger", true )
+	-- setTimer( setControlState, 500, 1, localPlayer, "enter_passenger", false )
 end
 addEvent( "onForceEnter", true )
 addEventHandler( "onForceEnter", getRootElement(), forceEnter )

@@ -18,15 +18,13 @@
 h_list_freight = {
 	"x_gp_horn1",
 	"x_gp_horn1_alt",
-	"gp_horn1"
 }
 h_list_streak = {
-	"k31_horn1",
-	"2k_hornl",
-	"7k_hornl"
+	"x_gp_horn1",
+	"x_gp_horn1_alt",
 }
 h_list_tram = {
-	"k31_horn1"
+	"2k_hornh"
 }
 
 -- Toggle the horn sound

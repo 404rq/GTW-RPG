@@ -15,7 +15,7 @@
 ]]--
 
 -- Update list cache
-txt_cache = ""
+txt_cache = "Downloading"
 
 -- On receive updates
 function result_send(text)

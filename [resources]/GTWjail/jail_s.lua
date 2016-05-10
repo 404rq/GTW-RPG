@@ -4,9 +4,10 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -80,16 +81,18 @@ function Jail(crim, time, police_dept, reason, admin)
 	local rand_x = math.random(1,10)
 	local rand_y = math.random(1,10)
 	local own_skin = exports.GTWclothes:getBoughtSkin(crim) or getElementModel(crim) or 0
-	setTimer(spawnPlayer, 1100, 1, crim, -2965+((-5)+rand_x), 2305+((-5)+rand_y), 8, 180, own_skin, 0, 0, getTeamFromName("Criminals"))
-	fadeCamera(crim, false)
-	setTimer(fadeCamera, 1500, 1, crim, true)
+	spawnPlayer(crim, -2965+((-5)+rand_x), 2305+((-5)+rand_y), 8, 180, own_skin, 0, 0, getTeamFromName("Criminals"))
+	setElementFrozen(crim, true)
+	fadeCamera(crim, false, 0.2)
+	setTimer(fadeCamera, 2800, 1, crim, true, 0.2)
+	setTimer(setElementFrozen, 3000, 1, crim, false)
 
 	-- Restore weapons
 	if weapons[crim] then
 		for k,wep in ipairs(weapons[crim]) do
 		   	if weapons[crim][k] and ammo[crim][k] then
 		   		if ammo[crim][k] > 5000 then ammo[crim][k] = 5000 end
-		   		setTimer(giveWeapon, 1500, 1, crim, weapons[crim][k], ammo[crim][k], false)
+		   		giveWeapon(crim, weapons[crim][k], ammo[crim][k], false)
 		   	end
 		end
 	end
@@ -320,6 +323,18 @@ function isJailed(crim)
 	if jail_data.is_jailed[crim] then return true
 	else return false end
 end
+
+--[[ Save remaining jailtime in milleseconds when leaving ]]--
+function save_remaining_time()
+	if not isTimer(jail_data.release_timers[source]) then return end
+	local time_left_ms,i2,i3 = getTimerDetails(jail_data.release_timers[source])
+	local acc = getPlayerAccount(source)
+	if not acc then return end
+	local dist_to_cop = exports.GTWpolice:distanceToCop(source) or 9999
+	if dist_to_cop > 180 then return end
+	setAccountData(acc, "GTWjail.timeLeftInMS", time_left_ms)
+end
+addEventHandler("onPlayerQuit", root, save_remaining_time)
 
 function set_control_states(crim, n_state)
 	--toggleControl(crim, "fire", n_state)

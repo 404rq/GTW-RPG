@@ -128,8 +128,9 @@ function showGUI( hitElement, matchingdimension, jobID )
  		local team, max_wl, description, skins, skin_names, work_tools, welcome_message = unpack(work_items[ID])
 
  		-- Check group membership
+		local is_staff = exports.GTWstaff:isStaff(localPlayer)
  		if restricted_jobs[ID] then
- 			if restricted_jobs[ID] ~= getElementData(localPlayer, "Group") and getPlayerTeam(localPlayer) ~= getTeamFromName("Staff") then
+ 			if restricted_jobs[ID] ~= getElementData(localPlayer, "Group") and not is_staff then
  				exports.GTWtopbar:dm( ID..": This job is restricted to: "..restricted_jobs[ID], 255, 100, 0 )
  				return
  			end
@@ -292,21 +293,21 @@ function staffWork(cmdName, ID)
 	 	elseif cmdName == "goironminer" then
 	 		ID = "Iron miner"
 	 	elseif cmdName == "golaw" then
-	 		ID = "Police Officer"
+	 		ID = "Police officer"
 	 	elseif cmdName == "sapd" then
-	 		ID = "SAPD Officer"
+	 		ID = "SAPD officer"
                 elseif cmdName == "swat" then
-	 		ID = "SWAT Officer"
+	 		ID = "SWAT officer"
                 elseif cmdName == "fbi" then
 	 		ID = "FBI agent"
 	 	elseif cmdName == "army" then
-	 		ID = "Armed Forces"
+	 		ID = "Armed forces"
 		end
 	end
 
 	-- Check if a user is in the staff team, if so, allow access
 	local is_staff = exports.GTWstaff:isStaff(localPlayer)
-	if not is_staff or (restricted_jobs[ID] and restricted_jobs[ID] ~= getElementData(localPlayer, "Group")) then
+	if not is_staff and restricted_jobs[ID] and restricted_jobs[ID] ~= getElementData(localPlayer, "Group") then
 		exports.GTWtopbar:dm( ID..": Only staff and official groups can use this command!", 255, 100, 0 )
 		return
 	end

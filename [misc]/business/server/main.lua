@@ -30,10 +30,12 @@ function dbCreateBusinessesCallback(queryHandle)
 	if sql and #sql > 0 then
 		for index, sqlRow in ipairs(sql) do
 			local pos = split(sqlRow["bPos"], ",")
-			local bMarker = createMarker(pos[1], pos[2], pos[3], "cylinder", 1.5, 150, 150, 150, 80)
-			--createPickup(pos[1], pos[2], pos[3]+1, 3, 1272, 100)
+			local bMarker = createMarker(pos[1], pos[2], pos[3], "cylinder", 1.5, 150, 150, 150, 0)
+			local bPickup = createPickup(pos[1], pos[2], pos[3]+1, 3, 1274, 100)
 			setElementInterior(bMarker, pos[4])
 			setElementDimension(bMarker, pos[5])
+			setElementInterior(bPickup, pos[4])
+			setElementDimension(bPickup, pos[5])
 			if sqlRow["bOwner"] == "For Sale" then
 				--local bBlip = createBlipAttachedTo(bMarker, 52, 1, 0, 0, 0, 255, 0, 180)
 				--setElementInterior(bBlip, pos[4])
@@ -127,10 +129,13 @@ function dbCreateBusinessCallback(queryHandle, posX, posY, posZ, interior, dimen
 
 		dbExec(database, "INSERT INTO business(bID,bName,bOwner,bCost,bPos,bPayout,bPayoutTime,bPayoutOTime,bPayoutUnit,bPayoutCurTime,bBank) VALUES(?,?,?,?,?,?,?,?,?,?,?)", id, name, "For Sale", cost, posX..","..posY..","..posZ..","..interior..","..dimension, payout, payoutTime * unit, payoutTime, payoutUnit, payoutTime * unit, 0)
 
-		local bMarker = createMarker(posX, posY, posZ, "cylinder", 1.5, 0, 150, 0, 40)
+		local bMarker = createMarker(posX, posY, posZ, "cylinder", 1.5, 150, 150, 150, 0)
+		local bPickup = createPickup(pos[1], pos[2], pos[3]+1, 3, 1274, 100)
 		setElementInterior(bMarker, interior)
 		setElementDimension(bMarker, dimension)
-
+		setElementInterior(bPickup, interior)
+		setElementDimension(bPickup, dimension)
+		
 		--local bBlip = createBlipAttachedTo(bMarker, 52, 1, 0, 0, 0, 255, 0, 180)
 		--setElementInterior(bBlip, interior)
 		--setElementDimension(bBlip, dimension)

@@ -53,6 +53,13 @@ function toggleLights( veh )
 					setVehicleLightState( veh2, 2, 1 )
 					setVehicleLightState( veh2, 3, 1 )
 				end
+				if getElementData(veh2, "GTWvehicles.second_trailer") then
+					local veh3 = getElementData(veh2, "GTWvehicles.second_trailer")
+					setVehicleLightState( veh3, 0, 1 )
+					setVehicleLightState( veh3, 1, 1 )
+					setVehicleLightState( veh3, 2, 1 )
+					setVehicleLightState( veh3, 3, 1 )
+				end
 			end
 			toggler[veh] = 0
 		else
@@ -69,6 +76,13 @@ function toggleLights( veh )
 						setVehicleLightState( veh2, 2, 1 )
 						setVehicleLightState( veh2, 3, 0 )
 					end
+					if getElementData(veh2, "GTWvehicles.second_trailer") then
+						local veh3 = getElementData(veh2, "GTWvehicles.second_trailer")
+						setVehicleLightState( veh3, 0, 0 )
+						setVehicleLightState( veh3, 1, 1 )
+						setVehicleLightState( veh3, 2, 1 )
+						setVehicleLightState( veh3, 3, 0 )
+					end
 				end
 			elseif dtype[veh] == "lright" then
 				setVehicleLightState( veh, 0, 1 )
@@ -83,6 +97,13 @@ function toggleLights( veh )
 						setVehicleLightState( veh2, 2, 0 )
 						setVehicleLightState( veh2, 3, 1 )
 					end
+					if getElementData(veh2, "GTWvehicles.second_trailer") then
+						local veh3 = getElementData(veh2, "GTWvehicles.second_trailer")
+						setVehicleLightState( veh3, 0, 1 )
+						setVehicleLightState( veh3, 1, 0 )
+						setVehicleLightState( veh3, 2, 0 )
+						setVehicleLightState( veh3, 3, 1 )
+					end
 				end
 			elseif dtype[veh] == "warn" then
 				setVehicleLightState( veh, 0, 0 )
@@ -96,6 +117,13 @@ function toggleLights( veh )
 						setVehicleLightState( veh2, 1, 0 )
 						setVehicleLightState( veh2, 2, 0 )
 						setVehicleLightState( veh2, 3, 0 )
+					end
+					if getElementData(veh2, "GTWvehicles.second_trailer") then
+						local veh3 = getElementData(veh2, "GTWvehicles.second_trailer")
+						setVehicleLightState( veh3, 0, 0 )
+						setVehicleLightState( veh3, 1, 0 )
+						setVehicleLightState( veh3, 2, 0 )
+						setVehicleLightState( veh3, 3, 0 )
 					end
 				end
 			end
