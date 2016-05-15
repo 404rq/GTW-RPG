@@ -122,6 +122,8 @@ For the "lazy" developers, here's a precompiled section of required ACL rights t
     </group>
 ```
 
+MySQL: you can enable MySQL by entering your MySQL database credentials in [resources]/GTWcore/data/settings.xml. If those fields are blank SQLite will be used instead. For MySQL you need to execute the file db.sql to install the database tables.
+
 For resources with php files included, (currently GTWupdates), upload the php file to a local web server, then look for the call url within the resource and point it to the php file. Included php files allow any server to fetch data from remote servers, something that mtasa servers can't do on their own.
 
 And that's it folks! now your server should be successfully up and running the GTW-RPG gamemode, if not, don't hesitate to ask for support in our forum located at: https://forum.404rq.com/programming-and-software/
