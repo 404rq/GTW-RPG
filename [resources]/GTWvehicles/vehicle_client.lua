@@ -264,7 +264,7 @@ end
 function spawn_the_vehicle()
 	local is_staff = exports.GTWstaff:isStaff(localPlayer)
 	if is_staff and not getPedOccupiedVehicle(localPlayer) then
-		if ( getTeamName( getPlayerTeam( localPlayer ) ) ~= "Staff ) then
+		if getTeamName( getPlayerTeam( localPlayer ) ) ~= "Staff" then
 			exports.GTWtopbar:dm( "You are not on duty!", 255, 0, 0 )
 			return
 		end
