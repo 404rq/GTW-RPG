@@ -717,3 +717,5 @@ for i,v in ipairs({
     setElementDoubleSided(obj, true)
     setObjectBreakable(obj, false)
 end
+
+removeWorldModel(16094, 10000, 200, 1800, 22, 0)
