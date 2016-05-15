@@ -1,0 +1,68 @@
+validVehicleModels = {
+    landstal = 400, bravura = 401, buffalo = 402, linerun = 403, peren = 404, sentinel = 405, dumper = 406, firetruk = 407, trash = 408, stretch = 409,
+    manana = 410, infernus = 411, voodoo = 412, pony = 413, mule = 414, cheetah = 415, ambulan = 416, leviathn = 417, moonbeam = 418, esperant = 419,
+    taxi = 420, washing = 421, bobcat = 422, mrwhoop = 423, bfinject = 424, hunter = 425, premier = 426, enforcer = 427, securica = 428, banshee = 429,
+    predator = 430, bus = 431, rhino = 432, barracks = 433, hotknife = 434, artict1 = 435, previon = 436, coach = 437, cabbie = 438, stallion = 439,
+    rumpo = 440, rcbandit = 441, romero = 442, packer = 443, monster = 444, admiral = 445, squalo = 446, seaspar = 447, pizzaboy = 448, tram = 449,
+    artict2 = 450, turismo = 451, speeder = 452, reefer = 453, tropic = 454, flatbed = 455, yankee = 456, golfcart = 457, solair = 458, topfun = 459,
+    seaplane = 460, bike = 461, faggio = 462, freeway = 463, rcbaron = 464, rcraider = 465, glendale = 466, oceanic = 467, dirtbike = 468, sparrow = 469,
+    patriot = 470, quadbike = 471, coastgrd = 472, dinghy = 473, hermes = 474, sabre = 475, rustler = 476, zr350 = 477, walton = 478, regina = 479,
+    comet = 480, bmx = 481, burrito = 482, camper = 483, marquis = 484, baggage = 485, dozer = 486, maverick = 487, coastmav = 488, rancher = 489,
+    fbiranch = 490, virgo = 491, greenwoo = 492, cupboat = 493, hotring = 494, sandking = 495, blistac = 496, polmav = 497, boxville = 498, benson = 499,
+    mesa = 500, rcgoblin = 501, hotrina = 502, hotrinb = 503, bloodra = 504, rnchlure = 505, supergt = 506, elegant = 507, journey = 508, chopperb = 509,
+    mtb = 510, beagle = 511, cropdust = 512, stunt = 513, petrol = 514, rdtrain = 515, nebula = 516, majestic = 517, buccanee = 518, shamal = 519,
+    hydra = 520, fcr900 = 521, nrg500 = 522, hpv1000 = 523, cement = 524, towtruck = 525, fortune = 526, cadrona = 527, fbitruck = 528, willard = 529,
+    forklift = 530, tractor = 531, combine = 532, feltzer = 533, remingtn = 534, slamvan = 535, blade = 536, freight = 537, streak = 538, vortex = 539,
+    vincent = 540, bullet = 541, clover = 542, sadler = 543, firela = 544, hustler = 545, intruder = 546, primo = 547, cargobob = 548, tampa = 549,
+    sunrise = 550, merit = 551, utility = 552, nevada = 553, yosemite = 554, windsor = 555, mtruck_a = 556, mtruck_b = 557, uranus = 558, jester = 559,
+    sultan = 560, stratum = 561, elegy = 562, raindanc = 563, rctiger = 564, flash = 565, tahoma = 566, savanna = 567, bandito = 568, freiflat = 569,
+    cstreak = 570, kart = 571, mower = 572, dune = 573, sweeper = 574, broadway = 575, tornado = 576, at400 = 577, dft30 = 578, huntley = 579,
+    stafford = 580, bf400 = 581, newsvan = 582, tug = 583, petrotr = 584, emperor = 585, wayfarer = 586, euros = 587, hotdog = 588, club = 589,
+    freibox = 590, artict3 = 591, androm = 592, dodo = 593, rccam = 594, launch = 595, police_la = 596, police_sf = 597, police_vg = 598, polranger = 599,
+    picador = 600, swatvan = 601, alpha = 602, phoenix = 603, glenshit = 604, sadlshit = 605, bagboxa = 606, bagboxb = 607, stairs = 608, boxburg = 609,
+    farm_tr1 = 610, util_tr1 = 611
+}
+
+validWeaponModels = {
+    gun_dildo1 = 321, gun_dildo2 = 322, gun_vibe1 = 323, gun_vibe2 = 324, flowera = 325,
+    gun_cane = 326, gun_boxwee = 327, gun_boxbig = 328, cellphone = 330, brassknuckle = 331,
+    golfclub = 333, nitestick = 334, knifecur = 335, bat = 336, shovel = 337, 
+    poolcue = 338, katana = 339, skateboard = 340, chnsaw = 341, grenade = 342,
+    teargas = 343, molotov = 344, missile = 345, colt45 = 346, silenced = 347,
+    desert_eagle = 348, chromegun = 349, sawnoff = 350, shotgspa = 351, micro_uzi = 352,
+    mp5lng = 353, flare = 354, ak47 = 355, m4 = 356, cuntgun = 357,
+    sniper = 358, rocketla = 359, heatseek = 360, flame = 361, minigun = 362,
+    satchel = 363, bomb = 364, spraycan = 365, fire_ex = 366, camera = 367,
+    nvgoggles = 368, irgoggles = 369, jetpack = 370, gun_para = 371, tec9 = 371, armour = 373
+}
+
+
+validPedModels = {
+    bfori = 9, bfost = 10, vbfycrp = 11, bfyri = 12, bfyst = 13, bmori = 14, bmost = 15, bmyap = 16, bmybu = 17, bmybe = 18,
+    bmydj = 19, bmyri = 20, bmycr = 21, bmyst = 22, wmybmx = 23, wbdyg1 = 24, wbdyg2 = 25, wmybp = 26, wmycon = 27, bmydrug = 28,
+    wmydrug = 29, hmydrug = 30, dwfolc = 31, dwmolc1 = 32, dwmolc2 = 33, dwmylc1 = 34, hmogar = 35, wmygol1 = 36, wmygol2 = 37, hfori = 38,
+    hfost = 39, hfyri = 40, hfyst = 41, hmori = 43, hmost = 44, hmybe = 45, hmyri = 46, hmycr = 47, hmyst = 48, omokung = 49,
+    wmymech = 50, bmymoun = 51, wmymoun = 52, ofori = 53, ofost = 54, ofyri = 55, ofyst = 56, omori = 57, omost = 58, omyri = 59,
+    omyst = 60, wmyplt = 61, wmopj = 62, bfypro = 63, hfypro = 64, bmypol1 = 66, bmypol2 = 67, wmoprea = 68, sbfyst = 69, wmosci = 70,
+    wmysgrd = 71, swmyhp1 = 72, swmyhp2 = 73, swfopro = 75, wfystew = 76, swmotr1 = 77, wmotr1 = 78, bmotr1 = 79, vbmybox = 80, vwmybox = 81,
+    vhmyelv = 82, vbmyelv = 83, vimyelv = 84, vwfypro = 85, vwfyst1 = 87, wfori = 88, wfost = 89, wfyjg = 90, wfyri = 91, wfyro = 92,
+    wfyst = 93, wmori = 94, wmost = 95, wmyjg = 96, wmylg = 97, wmyri = 98, wmyro = 99, wmycr = 100, wmyst = 101, ballas1 = 102,
+    ballas2 = 103, ballas3 = 104, fam1 = 105, fam2 = 106, fam3 = 107, lsv1 = 108, lsv2 = 109, lsv3 = 110, maffa = 111, maffb = 112,
+    mafboss = 113, vla1 = 114, vla2 = 115, vla3 = 116, triada = 117, triadb = 118, triboss = 120, dnb1 = 121, dnb2 = 122, dnb3 = 123,
+    vmaff1 = 124, vmaff2 = 125, vmaff3 = 126, vmaff4 = 127, dnmylc = 128, dnfolc1 = 129, dnfolc2 = 130, dnfylc = 131, dnmolc1 = 132, dnmolc2 = 133,
+    sbmotr2 = 134, swmotr2 = 135, sbmytr3 = 136, swmotr3 = 137, wfybe = 138, bfybe = 139, hfybe = 140, sofybu = 141, sbmyst = 142, sbmycr = 143,
+    bmycg = 144, wfycrk = 145, hmycm = 146, wmybu = 147, bfybu = 148, wfybu = 150, dwfylc1 = 151, wfypro = 152, wmyconb = 153, wmybe = 154,
+    wmypizz = 155, bmobar = 156, cwfyhb = 157, cwmofr = 158, cwmohb1 = 159, cwmohb2 = 160, cwmyfr = 161, cwmyhb1 = 162, bmyboun = 163, wmyboun = 164,
+    wmomib = 165, bmymib = 166, wmybell = 167, bmochil = 168, sofyri = 169, somyst = 170, vwmybjd = 171, vwfycrp = 172, sfr1 = 173, sfr2 = 174,
+    sfr3 = 175, bmybar = 176, wmybar = 177, wfysex = 178, wmyammo = 179, bmytatt = 180, vwmycr = 181, vbmocd = 182, vbmycr = 183, vhmycr = 184,
+    sbmyri = 185, somyri = 186, somybu = 187, swmyst = 188, wmyva = 189, copgrl3 = 190, gungrl3 = 191, mecgrl3 = 192, nurgrl3 = 193, crogrl3 = 194,
+    gangrl3 = 195, cwfofr = 196, cwfohb = 197, cwfyfr1 = 198, cwfyfr2 = 199, cwmyhb2 = 200, dwfylc2 = 201, dwmylc2 = 202, omykara = 203, wmykara = 204,
+    wfyburg = 205, vwmycd = 206, vhfypro = 207, omonood = 209, omoboat = 210, wfyclot = 211, vwmotr1 = 212, vwmotr2 = 213, vwfywai = 214, sbfori = 215,
+    swfyri = 216, wmyclot = 217, sbfost = 218, sbfyri = 219, sbmocd = 220, sbmori = 221, sbmost = 222, shmycr = 223, sofori = 224, sofost = 225,
+    sofyst = 226, somobu = 227, somori = 228, somost = 229, swmotr5 = 230, swfori = 231, swfost = 232, swfyst = 233, swmocd = 234, swmori = 235,
+    swmost = 236, shfypro = 237, sbfypro = 238, swmotr4 = 239, swmyri = 240, smyst = 241, smyst2 = 242, sfypro = 243, vbfyst2 = 244, vbfypro = 245,
+    vhfyst3 = 246, bikera = 247, bikerb = 248, bmypimp = 249, swmycr = 250, wfylg = 251, wmyva2 = 252, bmosec = 253, bikdrug = 254, wmych = 255,
+    sbfystr = 256, swfystr = 257, heck1 = 258, heck2 = 259, bmycon = 260, wmycd1 = 261, bmocd = 262, vwfywa2 = 263, wmoice = 264, laemt1 = 274,
+    lvemt1 = 275, sfemt1 = 276, lafd1 = 277, lvfd1 = 278, sffd1 = 279, lapd1 = 280, sfpd1 = 281, lvpd1 = 282, csher = 283, lapdm1 = 284,
+    swat = 285, fbi = 286, army = 287, dsher = 288
+}

@@ -1,0 +1,12 @@
+<meta>
+    <info type="script" description="Automatically load any mod you want!" author="Remi-X" version="1" name="ModLoader" />
+    <script src="loader_s.lua" type="server" />
+    <script src="deleter_s.lua" type="server" />
+    <script src="handling.lua" type="server" />
+    <script src="data.lua" type="server" />
+    <script src="replacer_c.lua" type="client" />
+    <file src="vehicles/picador.txd"></file>
+    <file src="vehicles/picador.dff"></file>
+    <file src="skins/wmyclot.txd"></file>
+    <file src="skins/wmyclot.dff"></file>
+</meta>
