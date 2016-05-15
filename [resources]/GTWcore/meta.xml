@@ -30,6 +30,7 @@
         <script src="misc/s_countdown.lua" type="server" />
         <script src="misc/s_events.lua" type="server" />
 	<script src="misc/s_vehicle_realism.lua" type="server" />
+	<script src="misc/s_spawnbase.lua" type="server" />
         <script src="misc/c_2dview.lua" type="client" />
 
         <!-- Core features -->
