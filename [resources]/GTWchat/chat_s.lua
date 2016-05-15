@@ -197,7 +197,7 @@ function useLocalChat(plr, cmd, ...)
 	local nick = getPlayerName(plr)
 	local r,g,b = 255,255,0
 	local chat_str = "(LOCAL)"
-	if cmd == "r" then chat_str = "(*CB* radio)" end
+	if cmd == "r" then chat_str = "(*CB* radio)" msg = msg..", over" end
 	if not getElementData(plr, "anon") then
 	    displayChatBubble(chat_str..": "..firstToUpper(msg), 0, plr)
 	end
