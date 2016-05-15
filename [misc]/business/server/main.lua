@@ -130,7 +130,7 @@ function dbCreateBusinessCallback(queryHandle, posX, posY, posZ, interior, dimen
 		dbExec(database, "INSERT INTO business(bID,bName,bOwner,bCost,bPos,bPayout,bPayoutTime,bPayoutOTime,bPayoutUnit,bPayoutCurTime,bBank) VALUES(?,?,?,?,?,?,?,?,?,?,?)", id, name, "For Sale", cost, posX..","..posY..","..posZ..","..interior..","..dimension, payout, payoutTime * unit, payoutTime, payoutUnit, payoutTime * unit, 0)
 
 		local bMarker = createMarker(posX, posY, posZ, "cylinder", 1.5, 150, 150, 150, 0)
-		local bPickup = createPickup(pos[1], pos[2], pos[3]+1, 3, 1274, 100)
+		local bPickup = createPickup(posX, posY, posZ+1, 3, 1274, 100)
 		setElementInterior(bMarker, interior)
 		setElementDimension(bMarker, dimension)
 		setElementInterior(bPickup, interior)
@@ -186,13 +186,15 @@ addEventHandler("onResourceStop", resourceRoot,
 	function()
 		for index, bMarker in ipairs(getElementsByType("marker", resourceRoot)) do
 			local bData = getElementData(bMarker, "bData")
-			local id, name, owner, cost, payout, payoutTime, payoutOTime, payoutUnit, bank, timer = unpack(bData)
-			if isTimer(timer) then
-				local left = getTimerDetails(timer)
-				if left >= 50 then
-					dbExec(database, "UPDATE business SET bPayoutCurTime = ? WHERE bID = ?", left, id)
-				else
-					dbExec(database, "UPDATE business SET bPayoutCurTime = ? WHERE bID = ?", payoutTime, id)
+			if bData then 
+				local id,name,owner,cost,payout,payoutTime,payoutOTime,payoutUnit,bank,timer = unpack(bData)
+				if isTimer(timer) then
+					local left = getTimerDetails(timer)
+					if left >= 50 then
+						dbExec(database, "UPDATE business SET bPayoutCurTime = ? WHERE bID = ?", left, id)
+					else
+						dbExec(database, "UPDATE business SET bPayoutCurTime = ? WHERE bID = ?", payoutTime, id)
+					end
 				end
 			end
 		end
