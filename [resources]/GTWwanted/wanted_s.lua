@@ -243,6 +243,7 @@ end
 --[[ Crime of damage other players ]]--
 function crime_damage(attacker, attackerweapon, bodypart, loss)
 	if not attacker or not isElement(attacker) or getElementType(attacker) ~= "player" or attacker == source then return end
+	if getElementData(source, "GTWoutlaws.vBot") then return end
 	local wl,viol = getWl(source)
 	local is_jailed = exports.GTWjail:isJailed(source)
 	if is_law_unit(attacker) and (wl > 0 or getElementType(source) == "ped" or is_jailed) then return end
@@ -253,6 +254,7 @@ addEventHandler("onPlayerDamage", root, crime_damage)
 --[[ Crime of killing other players ]]--
 function crime_death(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if not killer or not isElement(killer) or getElementType(killer) ~= "player" or killer == source then return end
+	if getElementData(source, "GTWoutlaws.vBot") then return end
 	local wl,viol = getWl(source)
 	local is_jailed = exports.GTWjail:isJailed(source)
 

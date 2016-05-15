@@ -90,6 +90,7 @@ function crime_fire_weapon(weapon, ammo, ammoInClip, hitX, hitY, hitZ, hitElemen
      		fire_cooldown = setTimer(function() end, 7000, 1)
     	elseif weapon ~= 41 and weapon ~= 42 and weapon ~= 43 and isElement(hitElement) and (getElementType(hitElement) == "player" or
 		getElementType(hitElement) == "ped") then
+		if getElementData(hitElement, "GTWoutlaws.vBot") then return end
     		setWl(0.5, 10, "You comitted the crime of violence and threat")
     		fire_cooldown = setTimer(function() end, 7000, 1)
     	elseif weapon ~= 41 and not (weapon == 42 and isPedOnFire(hitElement)) and weapon ~= 43 and getElementInterior(localPlayer) > 0 then
@@ -101,6 +102,7 @@ addEventHandler("onClientPlayerWeaponFire", root, crime_fire_weapon)
 
 -- Getting wanted for running over pedastrians
 function crime_damage_peds(attacker, weapon, bodypart, loss)
+	if getElementData(source, "GTWoutlaws.vBot") then return end
 	if isTimer(damage_cooldown) or attacker ~= localPlayer or is_law_unit(attacker) then return end
 	setWl(loss/100, 5, "You comitted the crime of violence and threat")
     	damage_cooldown = setTimer(function() end, 1000, 1)
@@ -109,6 +111,7 @@ addEventHandler("onClientPedDamage", root, crime_damage_peds)
 
 function crime_target_weapon(target)
 	if isTimer(target_cooldown) then return end
+	if target and getElementData(target, "GTWoutlaws.vBot") then return end
 	if not target or target == localPlayer or source ~= localPlayer then return end
 	if target and isElement(target) and ((
 		getElementType(target) == "player" and getWl(target) > 0) or (
