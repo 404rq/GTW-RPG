@@ -16,20 +16,20 @@
 -->
 
 <meta>
-        <info author="GTWGames" name="GTWcivilians" description="Management system for all types of works" version="58" type="script" />
-        <script src="misc/data.lua" type="shared" />
-        <script src="civ_s.lua" type="server" />
-        <script src="civ_c.lua" type="client" />
-        <script src="misc/exports.lua" type="shared" />
-
-	<!-- Formerly GTWranks: List and get ranks based on stats levels -->
-        <script src="ranks/ranks_s.lua" type="server" />
-        <script src="ranks/ranks_c.lua" type="client" />
-	
-        <!-- Formerly GTWteam: Manage misc data regarding stats and team data -->
-        <script src="team/team_s.lua" type="server" />
-        <script src="team/team_c.lua" type="client" />	
-
-        <export function="addWorkItem" type="shared" />
-        <export function="addMarker" type="shared" />
+    <info author="GTWGames" name="GTWcivilians" description="Management system for all types of works" version="66" type="script" />
+    <script src="misc/data.lua" type="shared" />
+    <script src="civ_s.lua" type="server" />
+    <script src="civ_c.lua" type="client" />
+    <script src="misc/exports.lua" type="shared" />
+    
+    <!-- Formerly GTWranks: List and get ranks based on stats levels -->
+    <script src="ranks/ranks_s.lua" type="server" />
+    <script src="ranks/ranks_c.lua" type="client" />
+    
+    <!-- Formerly GTWteam: Manage misc data regarding stats and team data -->
+    <script src="team/team_s.lua" type="server" />
+    <script src="team/team_c.lua" type="client" />
+    
+    <export function="addWorkItem" type="shared" />
+    <export function="addMarker" type="shared" />
 </meta>

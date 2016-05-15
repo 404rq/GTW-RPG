@@ -37,7 +37,7 @@ addEventHandler("onPlayerJoin", root, notice_join)
 function set_player_pos(source, commandName, posX, posY, posZ, interior, dimension)
 	local accName = getAccountName(getPlayerAccount(source))
 	if isObjectInACLGroup("user."..accName, aclGetGroup("Admin")) or
-		isObjectInACLGroup("user."..accName, aclGetGroup("SuperModerator")) or
+		isObjectInACLGroup("user."..accName, aclGetGroup("Supporter")) or
 		isObjectInACLGroup("user."..accName, aclGetGroup("Moderator")) then
 
 		-- Default data
