@@ -1,0 +1,28 @@
+<!--
+********************************************************************************
+	Project owner:		RageQuit community
+	Project name: 		GTW-RPG
+	Developers:   		Mr_Moose
+
+	Source code:		https://github.com/GTWCode/GTW-RPG
+	Bugtracker: 		https://forum.404rq.com/bug-reports
+	Suggestions:		https://forum.404rq.com/mta-servers-development
+	Donations:		https://www.404rq.com/donations
+
+	Version:    		Open source
+	License:    		BSD 2-Clause
+	Status:     		Stable release
+********************************************************************************
+-->
+
+<meta>
+	<!-- Resource information -->
+	<info author="404rq" name="GTWoutlaws" description="Spawn killable bots using slothbot" version="0" type="script" />
+	
+	<!-- Script files -->
+	<script src="spawn_s.lua" type="server"/>
+	
+	<!-- Included resources: should be at the end of this file -->
+	<include resource="GTWtopbar" />
+	<include resource="slothbot" />
+</meta>
