@@ -16,13 +16,15 @@
 
 -- Available sounds
 h_list_freight = {
+	"x_gp_horn1",
 	"x_gp_horn1_alt",
 }
 h_list_streak = {
-	"x_d9_horn1",
+	"x_gp_horn1",
+	"x_gp_horn1_alt",
 }
 h_list_tram = {
-	"k31_horn1"
+	"2k_hornh"
 }
 
 -- Bink keys to control the horn

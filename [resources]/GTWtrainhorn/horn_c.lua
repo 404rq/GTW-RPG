@@ -29,7 +29,7 @@ h_list_tram = {
 
 -- Toggle the horn sound
 sound = {}
-function toggleTrainHorn(theTrain)
+function toggle_train_horn(theTrain)
 	local theTrain2 = nil
 	local horn_signal = getElementData(theTrain, "horn")
 	if not horn_signal and getElementModel(theTrain) == 537 then
@@ -51,7 +51,7 @@ function toggleTrainHorn(theTrain)
 			getElementModel(theTrain) == 449 or getVehicleOccupant(theTrain)) then
 			x,y,z = getElementPosition(theTrain)
 			sound[k] = playSound3D(horn_signal, x, y, z, false )
-			setSoundVolume(sound[k], 0.25)
+			setSoundVolume(sound[k], 0.5)
 			attachElements(sound[k], theTrain)
 			setSoundMaxDistance( sound[k], 400 )
 		end
@@ -63,5 +63,5 @@ function toggleTrainHorn(theTrain)
 		theTrain = theTrain2
 	end
 end
-addEvent( "GTWtrainhorn.toggle", true )
-addEventHandler( "GTWtrainhorn.toggle", root, toggleTrainHorn )
+addEvent("GTWtrainhorn.toggle", true)
+addEventHandler("GTWtrainhorn.toggle", root, toggle_train_horn)
