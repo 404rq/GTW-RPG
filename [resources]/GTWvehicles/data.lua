@@ -57,20 +57,20 @@ veh_medic = {
 -- *****************************************************************************
 -- Extra options (train cars attached, truck trailers etc)
 veh_extra = {
-	["Freight"] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30},
-	["Streak"] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30},
+	["Freight"] = {1,2,3,4,5,6,7,8,9},
+	["Streak"] = {1,2,3,4,5,6,7,8},
 	["Tram"] = {1,2,3},
-	["Tanker"] = {"Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Roadtrain"] = {"Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Linerunner"] = {"Trailer 1", "Trailer 2", "Trailer 3"},
+	["Tanker"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
+	["Roadtrain"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
+	["Linerunner"] = {"", "Trailer 1", "Trailer 2", "Trailer 3"},
 }
 veh_extra_plr = {
-	["Freight"] = {1,2,3,4,5,6,7,8},
-	["Streak"] = {1,2,3,4,5,6,7},
-	["Tram"] = {1,2,3},
-	["Tanker"] = {"Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Roadtrain"] = {"Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Linerunner"] = {"Trailer 1", "Trailer 2", "Trailer 3"},
+	["Freight"] = {1,2,3,4,5,6},
+	["Streak"] = {1,2,3,4,5},
+	["Tram"] = {1,2},
+	["Tanker"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
+	["Roadtrain"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
+	["Linerunner"] = {"", "Trailer 1", "Trailer 2", "Trailer 3"},
 }
 -- *****************************************************************************
 
