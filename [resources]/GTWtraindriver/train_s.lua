@@ -16,6 +16,7 @@
 
 -- Globally accessible tables
 local train_payment_timers 	= { }
+local td_payment = 50
 
 --[[ Find and return the ID of nearest station ]]--
 function find_nearest_station(plr, route)
@@ -187,7 +188,7 @@ function calculate_next_station(td_payment)
 	setAccountData(playeraccount, "GTWdata_stats_train_stations", train_stations)
 
 	-- Pay the driver
-	givePlayerMoney(client, fine + math.floor(train_stations/4))
+	givePlayerMoney(client, (fine + math.floor(train_stations/2)) * (1 + math.floor(getElementData(client, "GTWvehicles.numberOfCars")/10 or 1)))
 
 	-- Notify about the payment reduce if the train is damaged
 	if math.floor(td_payment - fine) > 1 then
