@@ -171,20 +171,17 @@ function sync_train_speed(train)
 		return
 	end
 
-	-- Warn nearby players with the horn
-	if plr_dist < 40 then
-		use_horn(train)
-	end
-
 	-- Get the target speed
 	local dist, s_type, dir, t_type, tx,ty,tz, speed = get_next_node(x,y,z)
-	local cx,cy,cz = getElementPosition(train)
+	local cx,cy,cz = getElementPosition(getElementData(train, "GTWtrain.centerCar") or train)
 	local center_dist = nearest_station(cx,cy,cz)
 	local curr_speed = getTrainSpeed(train)*160
 
 	-- If next point is a station and we're not leaving it then force the train to stop
 	if center_dist < 10 and not Trains.is_leaving[train] then
-		speed = 3
+		speed = 2
+	elseif center_dist < 20 and not Trains.is_leaving[train] then
+		speed = 5
 	elseif center_dist < 40 and not Trains.is_leaving[train] then
 		speed = 10
 	elseif center_dist < 80 and not Trains.is_leaving[train] then
@@ -229,6 +226,11 @@ function sync_train_speed(train)
 		-- Is this really the end of the track? Well then we stop until cleanup
 		if not Trains.is_leaving[train] and (dist < 1.5 or center_dist < 1.5) and s_type == 2 then
 			station_status(train, true)
+			if math.floor(tx) == -1945 then
+				setTrainDirection(train, false)
+			elseif math.floor(tx) == 2755 then
+				setTrainDirection(train, true)
+			end
 			setTrainSpeed(train, 0)
 			if Settings.debug_level > 0 then
 				outputServerLog("Stopped at end")
@@ -258,7 +260,7 @@ function create_train(plr, cmd, args)
 
 	-- Create the engine
 	local engine_ID = 537
-	if math.random(1,11) > 6 then
+	if math.random(1,11) > 5 then
 		engine_ID = 538
 	end
 
@@ -291,9 +293,9 @@ function create_train(plr, cmd, args)
 	setTrainDirection(new_train, direction)
 
 	if direction then
-		setTrainSpeed(new_train, math.abs((speed/2.1)/160))	-- Clockwise
+		setTrainSpeed(new_train, math.abs(speed/160))	-- Clockwise
 	else
-		setTrainSpeed(new_train, -math.abs((speed/2.1)/160))	-- Counter clockwise
+		setTrainSpeed(new_train, -math.abs(speed/160))	-- Counter clockwise
 	end
 	Trains.is_running[new_train] = true
 	Trains.is_leaving[new_train] = false
@@ -306,7 +308,7 @@ function create_train(plr, cmd, args)
 	-- Add an extra engine if freight train
 	local max_cars = 4
 	local start_at = 1
-	local t_length = math.random(2, max_cars)
+	local t_length = math.random(1, max_cars)
 	local front_car = new_train
 	if t_length > 3 and  engine_ID ~= 449 then
 		local tmp_ID = 537
@@ -339,16 +341,22 @@ function create_train(plr, cmd, args)
 	if engine_ID == 449 then
 		t_length = math.random(1, 2)
 	end
+	local center_counter = 1
 	for index=start_at, t_length do
 		-- Generate a train type
 		local car_ID = 569
-		if engine_ID == 537 and math.random(1,11) > 8 then
+		if engine_ID == 537 and math.random(1,10) > 8 then
 			car_ID = 590
 		elseif engine_ID == 538 then
 			car_ID = 570
 		elseif engine_ID == 449 then
 			car_ID = 449
 		end
+		
+		-- Extra engine
+		if engine_ID == 537 and index == 1 and math.random(1,10) > 0 then
+			car_ID = 537
+		end	
 
 		-- Calculate position relative to front car
 		local rx,ry,rz = getElementRotation(front_car)
@@ -359,6 +367,11 @@ function create_train(plr, cmd, args)
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
 		--local blip = createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
 		setTrainDerailable(car, false)
+		
+		-- Center of train
+		if math.ceil(t_length/2) == center_counter then
+			setElementData(new_train, "GTWtrain.centerCar", car)
+		end
 
 		-- Attach car to the train
 		attachTrailerToVehicle(front_car, car)
@@ -369,6 +382,12 @@ function create_train(plr, cmd, args)
 
 		-- Update front_car (the car in front of the next one)
 		front_car = car
+		center_counter = center_counter + 1
+		
+		-- Rotate second engine
+		--if isElement(car) and getElementType(car) == "vehicle" and car_ID == 537 then
+		--	setTimer(setTrainDirection, 1000, 1, car, not getTrainDirection(new_train))
+		--end
 	end
 
 	-- Activate speed syncer
@@ -384,6 +403,14 @@ function create_train(plr, cmd, args)
 		setTimer(run_normal, Settings.station_stop_time_ms*2, 1, new_train)
 		setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, new_train)
 	end
+	
+	-- Setup the warning horn
+	local horn_marker = createMarker(x,y,z, "cylinder", 6, 0,0,0, 0)
+	setElementData(new_train, "GTWtrain.hornMarker", horn_marker)
+	attachElements(horn_marker, new_train, 0,50,-2)
+	addEventHandler("onMarkerHit", horn_marker, function() 
+		use_horn(new_train)
+	end)
 end
 addCommandHandler("maketrain", create_train)
 
@@ -474,6 +501,11 @@ addCommandHandler("detachtrain", disconnect_carriages)
 function destroy_train(d_train)
 	if not d_train or not isElement(d_train) then return end
 
+	-- Destroy horn marker
+	if isElement(getElementData(d_train, "GTWtrain.hornMarker")) then
+		destroyElement(getElementData(d_train, "GTWtrain.hornMarker"))
+	end
+	
 	-- Check so that there's no nearby players
 	local tx,ty,tz = getElementPosition(d_train)
 	for k,v in pairs(getElementsByType("player")) do
@@ -534,7 +566,7 @@ function set_speed_policy(t_engine, state)
 	if not engineer or not isElement(engineer) or getElementType(engineer) ~= "ped" then return end
 
 	-- Inverse if negative speed
-	if getTrainDirection(t_engine) and getTrainSpeed(t_engine) < 0 and state == 1 then
+	--[[if getTrainDirection(t_engine) and getTrainSpeed(t_engine) < 0 and state == 1 then
 		state = 2
 	elseif not getTrainDirection(t_engine) and getTrainSpeed(t_engine) > 0 and state == 1 then
 		state = 2
@@ -542,20 +574,20 @@ function set_speed_policy(t_engine, state)
 		state = 1
 	elseif not getTrainDirection(t_engine) and getTrainSpeed(t_engine) > 0 and state == 2 then
 		state = 1
-	end
+	end]]--
 	
 	-- Set train speed
 	if state == 1 then
 		if getTrainDirection(t_engine) then
-			setTrainSpeed(t_engine, math.abs(getTrainSpeed(t_engine))+(0.4/160))
+			setTrainSpeed(t_engine, getTrainSpeed(t_engine)+(0.2/160))
 		else
-			setTrainSpeed(t_engine, -math.abs(getTrainSpeed(t_engine))+(0.4/160))
+			setTrainSpeed(t_engine, -(getTrainSpeed(t_engine)+(0.2/160)))
 		end
 	elseif state == 2 then
 		if getTrainDirection(t_engine) then
-			setTrainSpeed(t_engine, math.abs(getTrainSpeed(t_engine))-(1.1/160))
+			setTrainSpeed(t_engine, getTrainSpeed(t_engine)-(1/160))
 		else
-			setTrainSpeed(t_engine, -math.abs(getTrainSpeed(t_engine))-(1.1/160))
+			setTrainSpeed(t_engine, -(getTrainSpeed(t_engine)-(1/160)))
 		end
 	end
 
@@ -574,7 +606,14 @@ end
 setTimer(function()
 	local plr = getRandomPlayer( )
 	create_train(plr)
-end, 30*1000, 0)
+end, 5*1000, 0)
+
+--[[ Debug for train speed ]]--
+addCommandHandler("tspeed", function(plr, cmd)
+	if getPedOccupiedVehicle(plr) and getVehicleType(getPedOccupiedVehicle(plr)) == "Train" then
+		outputChatBox("Trainspeed: "..getTrainSpeed(getPedOccupiedVehicle(plr)), plr)
+	end
+end)
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
