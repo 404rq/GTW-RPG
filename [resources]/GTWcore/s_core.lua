@@ -87,7 +87,7 @@ addEventHandler("GTWcore.onPeakTrigger", root, send_peak_bonus)
 
 --[[ Display current peak ]]--
 function show_current_peak(plr)
-        exports.GTWtopbar:dm("Current peak are: "..server_settings["peak"].." players online", plr, 255, 100, 0)
+        exports.GTWtopbar:dm("Current peak is: "..server_settings["peak"].." players online", plr, 255, 100, 0)
 end
 addCommandHandler("peak", show_current_peak)
 
