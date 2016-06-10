@@ -9,9 +9,10 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="GTWtopbar" startup="1" protected="0" />
     <resource src="GTWgui" startup="1" protected="1" />
     <resource src="GTWcore" startup="1" protected="1" />
-    
+
     <!-- Misc resource (non GTW-RPG) Must start before any 
         GTW-RPG resource except those above this line-->
+    <resource src="customblips" startup="1" protected="0"/>
     <resource src="admin" startup="1" protected="0"/>
     <resource src="bone_attach" startup="1" protected="0"/>
     <resource src="fastrope" startup="1" protected="0"/>
@@ -28,7 +29,7 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="shader_detail" startup="1" protected="0"/>
     <resource src="shader_water" startup="1" protected="0"/>
     <resource src="webadmin" startup="1" protected="0"/>
-	
+
     <!-- Misc resource (non GTW-RPG & modified) -->
     <resource src="alternate_hud" startup="1" protected="0" />
     <resource src="cruisespeed" startup="1" protected="0" />
@@ -87,7 +88,7 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="GTWjailmap" startup="1" protected="1" />
     <resource src="GTWsapdbase" startup="1" protected="1" />
     <resource src="GTWswatbase" startup="1" protected="1" />
-    
+
     <!-- Traffic and bots -->
     <resource src="slothbot" startup="1" protected="1" />
     <resource src="npc_traffic" startup="1" protected="1" />
