@@ -23,7 +23,7 @@ function load_list(res)
 	restart_list = getElementData(root, "GTWgui.refreshList")
 
 	--[[ Restart all resources using this GUI system ]]--
-	for k, v in pairs(restartList) do
+	for k, v in pairs(restart_list) do
 		if getResourceFromName(k) then
 			restartResource(getResourceFromName(k))
 			outputServerLog("GTWgui: refreshed: '"..k.."'")
