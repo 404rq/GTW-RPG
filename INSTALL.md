@@ -26,10 +26,12 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="resourcemanager" startup="1" protected="1"/>
     <resource src="shader_car_paint_reflect" startup="1" protected="0"/>
     <resource src="shader_detail" startup="1" protected="0"/>
+    <resource src="shader_contrast" startup="1" protected="0"/>
     <resource src="shader_water" startup="1" protected="0"/>
     <resource src="webadmin" startup="1" protected="0"/>
 	
     <!-- Misc resource (non GTW-RPG & modified) -->
+    <resource src="customblips" startup="1" protected="0"/>
     <resource src="alternate_hud" startup="1" protected="0" />
     <resource src="cruisespeed" startup="1" protected="0" />
     <resource src="dxmoneylogs" startup="1" protected="0" />
