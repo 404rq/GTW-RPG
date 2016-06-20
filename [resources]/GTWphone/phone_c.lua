@@ -74,7 +74,7 @@ radio = {
 	{ "", " Rock", 0 },
 	{ "http://www.skyrock.fm/stream.php/yourplayer_64.pls", "Skyrock", 1 },
 	{ "http://stream-ice.mtgradio.com:8080/stat_bandit.m3u", "[Sweden] Bandit rock", 1 },
-	{ "http://195.55.74.212/cope/rockfm.mp3?GKID=b803794ee76d11e4b84e00163ea2c744&fspref=aHR0cDovL3BsYXllci5yb2NrZm0uZm0v", "[Spanish] RockFM", 1 },
+	{ "http://195.55.74.212/cope/rockfm.mp3?GKID=b803794ee76d11e4b84e00163ea2c744&fspref=aHR0cDovL3BsYXllci5yb2NrZm0uZm0v", "[Spain] RockFM", 1 },
 	{ "", " Jazz", 0 },
 	{ "http://lyd.nrk.no/nrk_radio_jazz_aac_h.m3u", "[Norway] NRK Jazz", 1 },
 	{ "http://sj128.hnux.com/listen.pls", "Smooth Jazz", 1 },
