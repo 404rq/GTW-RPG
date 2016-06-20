@@ -62,15 +62,16 @@ radio = {
 	{ "", " 181.fm stations", 0 },
 	{ "http://www.181.fm/winamp.pls?station=181-power&style=mp3&description=Power%20181%20(Top%2040)&file=181-power.pls", "Power 181", 1 },
 	{ "http://relay.181.fm:8068", "Old School Rap", 1 },
+	
 	{ "", " Rap and Hiphop", 0 },
 	{ "http://188.117.44.132:8000/stream.m3u", "[Finland] Basso radio", 1 },
 	{ "http://mp3-live.dasding.de/dasdingraka02_m.m3u", "[Germany] DasDing Sprechstunde", 1 },
 	{ "http://www.antenne.de/webradio/channels/black-beatz.m3u", "[Germany] Antenne Bayern Black Beatz", 1 },
-
 	{ "http://91.121.223.159:8000/move.m3u", "Move FM", 1 },
 	{ "http://50.22.212.196:8132", "Underground radio", 1 },
 	{ "http://broadcast.infomaniak.ch/onlyrai-high.mp3.m3u", "Urban hit", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_p3_national_rap_show_aac_h.m3u", "[Norway] Rap/Hiphop", 1 },
+	
 	{ "", " Rock", 0 },
 	{ "http://www.skyrock.fm/stream.php/yourplayer_64.pls", "Skyrock", 1 },
 	{ "http://stream-ice.mtgradio.com:8080/stat_bandit.m3u", "[Sweden] Bandit rock", 1 },
@@ -83,12 +84,15 @@ radio = {
 	{ "http://mp3channels.webradio.antenne.de/alternative", "[Germany] ROCK ANTENNE - Alternative", 1 },
 	{ "http://mp3channels.webradio.antenne.de/young-stars", "[Germany] ROCK ANTENNE - Young Stars", 1 },
 	{ "http://mp3channels.webradio.antenne.de/rockantennelocal01", "[Germany] ROCK ANTENNE - Erding Freising Ebersberg", 1 },
+	
 	{ "", " Jazz", 0 },
 	{ "http://lyd.nrk.no/nrk_radio_jazz_aac_h.m3u", "[Norway] NRK Jazz", 1 },
 	{ "http://sj128.hnux.com/listen.pls", "Smooth Jazz", 1 },
+	
 	{ "", " Techno", 0 },
 	{ "http://tunein.t4e.dj/hard/dsl/mp3", "Techno4ever Hard stream", 1 },
 	{ "http://tunein.t4e.dj/club/dsl/mp3", "Techno4ever Clup stream", 1 },
+	
 	{ "", " Mixed stations", 0 },
 	{ "http://stream.nightcoreradio.com:9040/main_stream.m3u", "Nightcore radio", 1 },
 	{ "http://www.radiogold.de/listen.pls", "Radio Gold (Germany)", 1 },
