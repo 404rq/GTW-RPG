@@ -56,6 +56,7 @@ function repair_veh(veh, repairTime)
 
 	-- Reset after repair
 	setTimer(fixVehicle, math.floor(repairTime), 1, veh)
+	setTimer(setElementHealth( veh, ( getElementHealth(veh) * 4 ) + 50 ), math.floor(repairTime), 1, veh)
 	setTimer(showCursor, math.floor(repairTime), 1, client, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, client, false)
@@ -116,6 +117,7 @@ function staff_repair(veh)
 	outPutTopbarMessage("Vehicle was sucsessfully repaired!", client, 0, 255, 0)
 	setElementData(veh, "vehicleFuel", 100)
 	fixVehicle(veh)
+	setElementHealth( veh, getElementHealth(veh) * 4 )
 	local x,y,z = getElementPosition(client)
 	outputServerLog("ADMIN: "..getPlayerName(client).." has repaired and refuled a vehicle at: ["..math.floor(x)..","..math.floor(y)..","..math.floor(z).."]")
 end
