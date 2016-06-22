@@ -56,7 +56,7 @@ function repair_veh(veh, repairTime)
 
 	-- Reset after repair
 	setTimer(fixVehicle, math.floor(repairTime), 1, veh)
-	setTimer(setElementHealth( veh, ( getElementHealth(veh) * 4 ) + 50 ), math.floor(repairTime), 1, veh)
+	setTimer(setElementHealth( veh, getElementHealth(veh) * 4 ), math.floor(repairTime) + 50, 1, veh)
 	setTimer(showCursor, math.floor(repairTime), 1, client, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, client, false)

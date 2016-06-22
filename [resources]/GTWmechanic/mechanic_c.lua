@@ -79,7 +79,7 @@ function repair_destroy()
 	if not isElement(element) or not guiGetEnabled(btn_repair) or not source == btn_repair then return end
 	if getElementData(localPlayer, "Occupation") == "Mechanic" then
 		if getElementHealth(element) < 4000 then
-			local repairTime = (4000-getElementHealth(element))*30
+			local repairTime = ( (4000-getElementHealth(element))*30 ) / 4
 			if repairTime < 5000 then
 				repairTime = 5000
 			end
