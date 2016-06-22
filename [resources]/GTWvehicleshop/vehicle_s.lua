@@ -214,7 +214,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 		setVehiclePaintjob( veh, tonumber( paint ))
 		setVehicleLocked( veh, locked )
 		setElementData( veh, "vehicleFuel", tonumber(fuel))
-		local health = tonumber(health*40)
+		local health = tonumber(health*20)
 		if health < 300 then health = 300 end
 		setElementHealth( veh, health )
 		setElementData( veh, "owner", owner )
@@ -268,7 +268,7 @@ function saveAndRemoveVehicle(veh, removeVeh)
 		local rx,ry,rz = getElementRotation( veh )
 		local fuel = getElementData( veh, "vehicleFuel" )
 		local paint = getVehiclePaintjob( veh )
-		local health = tostring(math.floor(tonumber(getElementHealth( veh ))/40))
+		local health = tostring(math.floor(tonumber(getElementHealth( veh ))/20))
 		local locked = 0
 		if isVehicleLocked( veh ) then
 			locked = 1

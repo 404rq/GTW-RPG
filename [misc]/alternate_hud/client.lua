@@ -267,7 +267,7 @@ if wantedlevel == 0 then
 	if getPedOccupiedVehicle(localPlayer) then
 		-- Fetch the vehicle data
 		local veh = getPedOccupiedVehicle(localPlayer)
-		local veh_health = ( getElementHealth(veh) ) / 4
+		local veh_health = ( getElementHealth(veh) ) / 2
 		local veh_fuel = getElementData(veh, "vehicleFuel") or 0
 		local max_speed = getVehicleHandling(veh)["maxVelocity"] or 200
 		local speedx, speedy, speedz = getElementVelocity(veh)

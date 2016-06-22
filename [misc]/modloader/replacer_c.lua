@@ -63,7 +63,7 @@ function replaceVehicleCollisions ( replacedVehicles )
         posY = posY + ( math.cos ( rotZ ) * 10 )
         
         local vehicle = createVehicle ( models[num][2], posX, posY, posZ )
-		setElementHealth ( vehicle, ( getElementHealth(vehicle) ) * 4 )
+		setElementHealth ( vehicle, ( getElementHealth(vehicle) ) * 2 )
         setElementCollisionsEnabled ( vehicle, false )
         setVehicleDamageProof ( vehicle, true )
         setElementAlpha ( vehicle, 0 )
