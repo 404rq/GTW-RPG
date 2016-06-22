@@ -68,6 +68,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 						if extra == "Trailer 3" then vehID = 591 end
 						trailers[client] = { }
 						trailers[client][1] = createVehicle(vehID, x, y, z, 0, 0, rot)
+						setElementHealth ( trailers[client][1], ( getElementHealth(trailers[client][1]) ) * 4 )
 						--triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client])
 						--attachTrailerToVehicle(vehicles[client], trailers[client])
 						setElementData(vehicles[client], "GTWvehicles.isTrailerTowingVehile", true)
@@ -83,6 +84,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 						if vehID == 591 then
 							local second_trailer = createVehicle(435, x, y, z, 0, 0, rot)
 							local second_tower = createVehicle(515, x, y, z, 0, 0, rot)
+							setElementHealth ( second_trailer, ( getElementHealth(second_trailer) ) * 4 )
+							setElementHealth ( second_tower, ( getElementHealth(second_tower) ) * 4 )
 							attachElements(second_tower, trailers[client][1], 0, 0, 0.5)
 							setElementCollisionsEnabled(second_tower, false)
 							setElementAlpha(second_tower, 0)
@@ -119,7 +122,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					local engines = 1
 					if numberOfCarriages > 3 and (getElementModel(vehicles[client]) == 538 or getElementModel(vehicles[client]) == 537) then
 						carriage = createVehicle(getElementModel(vehicles[client]), x, y, z, 0, 0, rot)
-                                                triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
+						setElementHealth ( carriage, ( getElementHealth(carriage) ) * 4 )
+						triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
 						attachTrailerToVehicle(carriage2, carriage)
 						carriage2 = carriage
 						numberOfCarriages = numberOfCarriages - 1
@@ -130,6 +134,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					-- Add train carriages
 					for c=1, numberOfCarriages do
 						carriage = createVehicle(vehID, x, y, z, 0, 0, rot)
+						setElementHealth ( carriage, ( getElementHealth(carriage) ) * 4 )
 						if vehID == 569 then
 							local container_array = {3566, 3568, 3569}
 							local container = createObject(container_array[math.random(#container_array)], x,y,z, 0,0,0, true)
