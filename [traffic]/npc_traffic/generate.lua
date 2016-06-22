@@ -355,6 +355,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 		elseif create and trtype == "cars" then
 			local zoff = z_offset[model]/math.cos(math.rad(rx))
 			local car = createVehicle(model,x,y,z+zoff,rx,0,rz)
+			setElementHealth ( car, ( getElementHealth(car) ) * 4 )
 			setVehicleFuelTankExplodable(car, true)
 			--setTimer(destroyAINPCVehicle, 120000, 1, car)
 			setElementData(car, "npc", true)

@@ -55,6 +55,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 		    		x,y,z = spawnx,spawny,spawnz
 		    	end
 			   	vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot)
+				setElementHealth ( vehicles[client], ( getElementHealth(vehicles[client]) ) * 4 )
 			   	setVehicleHandling(vehicles[client], "headLight ", "big")
 			   	setVehicleHandling(vehicles[client], "tailLight", "big")
 				
