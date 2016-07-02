@@ -270,6 +270,7 @@ function create_train(plr, cmd, args)
 	end
 
 	local new_train = createVehicle(engine_ID, tx,ty,tz, 0,0,0, "")
+	setElementHealth ( new_train, ( getElementHealth(new_train) ) * 2 )
 	local engine_blip = createBlipAttachedTo(new_train, 0, 1, 200, 200, 200, 200, 0, 180)
 	setElementSyncer(new_train, plr)
 	setTrainDerailable(new_train, false)
@@ -321,6 +322,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a second engine
 		local engine2 = createVehicle(tmp_ID, tx,ty,tz, 0,0,0, "")
+		setElementHealth ( engine2, ( getElementHealth(engine2) ) * 2 )
 		--local engine2_blip = createBlipAttachedTo(engine2, 0, 1, 200, 200, 200, 200, 0, 180)
 		setTrainDerailable(engine2, false)
 
@@ -365,6 +367,7 @@ function create_train(plr, cmd, args)
 
 		-- Create a random car
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
+		setElementHealth ( car, ( getElementHealth(car) ) * 2 )
 		--local blip = createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
 		setTrainDerailable(car, false)
 		

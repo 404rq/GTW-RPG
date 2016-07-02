@@ -17,6 +17,12 @@
 local default_money = 428  	-- Global definition based on what mechanics earn IRL/year
 							-- divided by 12 and then 31 as in days multiplied by 4
 
+--[[ Repair vehicle with 2000% health ]]--
+function big_repair(veh)
+	fixVehicle(veh)
+	setElementHealth( veh, getElementHealth(veh) * 2 )
+end			
+							
 --[[ Pay for repair and refuel ]]--
 function pay_repair(mech, owner)
 	local pacc = getPlayerAccount(mech)
@@ -55,7 +61,7 @@ function repair_veh(veh, repairTime)
 	if owner then outPutTopbarMessage("Your vehicle is repaired...", owner, 0, 255, 0) end
 
 	-- Reset after repair
-	setTimer(fixVehicle, math.floor(repairTime), 1, veh)
+	setTimer(big_repair, math.floor(repairTime), 1, veh)
 	setTimer(showCursor, math.floor(repairTime), 1, client, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, client, false)
@@ -115,7 +121,7 @@ function staff_repair(veh)
 	if not veh or not isElement(veh) then return end
 	outPutTopbarMessage("Vehicle was sucsessfully repaired!", client, 0, 255, 0)
 	setElementData(veh, "vehicleFuel", 100)
-	fixVehicle(veh)
+	big_repair(veh)
 	local x,y,z = getElementPosition(client)
 	outputServerLog("ADMIN: "..getPlayerName(client).." has repaired and refuled a vehicle at: ["..math.floor(x)..","..math.floor(y)..","..math.floor(z).."]")
 end
