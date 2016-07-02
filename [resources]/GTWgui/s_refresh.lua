@@ -21,9 +21,13 @@ restart_list = { }
 function load_list(res)
 	--[[ Load dynamic list of resources to refresh ]]--
 	restart_list = getElementData(root, "GTWgui.refreshList")
-
+	--[[ Don't do anything if the table doesn't exist (mainly onResourceStart)]]
+	if not resource_list then 
+		setTimer( load_list, 2500, 1 )
+		return 
+	end
 	--[[ Restart all resources using this GUI system ]]--
-	for k, v in pairs(restartList) do
+	for k, v in pairs(restart_list) do
 		if getResourceFromName(k) then
 			restartResource(getResourceFromName(k))
 			outputServerLog("GTWgui: refreshed: '"..k.."'")
