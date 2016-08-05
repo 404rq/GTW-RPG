@@ -21,7 +21,7 @@ local messages = {
 	[2]={ "Fastfood restaurants let you regain health or rob for quick cash" },
 	[3]={ "You can change your skin in the skin shop or rob it for quick cash" },
 	[4]={ "This is a train station, trains will stop here for you to enter or exit" },
-	[5]={ "Ammu nation, buy your weapons and ammuniotion here, rob at ye own risk" },
+	[5]={ "Ammu nation, buy your weapons and ammo here, rob at ye own risk" },
 	[6]={ "Hardware shop, get your meele weapons here, rob at ye own risk" },
 }
 
