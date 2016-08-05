@@ -58,6 +58,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 				setElementHealth ( vehicles[client], ( getElementHealth(vehicles[client]) ) * 2 )
 			   	setVehicleHandling(vehicles[client], "headLight ", "big")
 			   	setVehicleHandling(vehicles[client], "tailLight", "big")
+			   	warpPedIntoVehicle( client, vehicles[client] )
 				
 			   	-- Semi truck trailers
 			   	if vehID == 403 or vehID == 514 or vehID == 515 then
