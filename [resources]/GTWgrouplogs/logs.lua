@@ -21,8 +21,20 @@ local mysql_host    	= exports.GTWcore:getMySQLHost() or nil
 local mysql_database 	= exports.GTWcore:getMySQLDatabase() or nil
 local mysql_user    	= exports.GTWcore:getMySQLUser() or nil
 local mysql_pass    	= exports.GTWcore:getMySQLPass() or nil
-local db = dbConnect("mysql", "dbname="..mysql_database..";host="..mysql_host, mysql_user, mysql_pass, "autoreconnect=1")
-if not db then db = dbConnect("sqlite", "logs.db") end
+local mysql_type        = "mysql"
+
+if mysql_host == nil or mysql_host == "" then
+	mysql_type = "sqlite"
+else
+	mysql_type = "mysql"
+	 
+end
+
+if mysql_type == 'sqlite' then 
+	db = dbConnect("sqlite", "logs.db") 
+else
+	db = dbConnect("mysql", "dbname="..mysql_database..";host="..mysql_host, mysql_user, mysql_pass, "autoreconnect=1")
+end
 
 dbExec(db, "CREATE TABLE IF NOT EXISTS groupLog (name TEXT, log TEXT, date TEXT)")
 dbExec(db, "CREATE TABLE IF NOT EXISTS lastNick (account TEXT, nick TEXT)")
