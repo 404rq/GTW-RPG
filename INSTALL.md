@@ -124,6 +124,20 @@ For the "lazy" developers, here's a precompiled section of required ACL rights t
     </group>
 ```
 
+Also in the admin group, you need to add GTWcore as a object like this:
+
+```
+    <group name="Admin">
+        <acl name="Moderator"></acl>
+        <acl name="SuperModerator"></acl>
+        <acl name="Admin"></acl>
+        <acl name="RPC"></acl>
+        <object name="user.YOUR_ACCOUNT_NAME"></object>
+        <object name="resource.GTWcore"></object>
+        <object name="resource.admin"></object>
+        <object name="resource.webadmin"></object>
+    </group>
+```
 MySQL: you can enable MySQL by entering your MySQL database credentials in [resources]/GTWcore/data/settings.xml. If those fields are blank SQLite will be used instead. For MySQL you need to execute the file db.sql to install the database tables.
 
 For resources with php files included, (currently GTWupdates), upload the php file to a local web server, then look for the call url within the resource and point it to the php file. Included php files allow any server to fetch data from remote servers, something that mtasa servers can't do on their own.
