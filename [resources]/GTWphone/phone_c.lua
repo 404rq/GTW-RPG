@@ -46,7 +46,6 @@ radio = {
 	{ "http://www.m2radio.fr/pls/m2hit.m3u", "M2 HIT", 1 },
 	{ "http://www.listenlive.eu/nrj_fr.m3u", "NRJ Paris", 1 },
 	{ "http://www.listenlive.eu/nrj_hits.m3u", "NRJ Hits Paris", 1 },
-	{ "http://www.listenlive.eu/energyberlin.m3u", "Energy Berlin", 1 },
 	{ "http://www.hit104.com/listen.pls", "HIT104", 1 },
 	{ "http://31.14.40.241:6184/listen.pls", "FM104 Ireland", 1 },
 	{ "http://stream.europeanhitradio.com:8000/ehr64.m3u", "European Hit Radio", 1 },
@@ -68,7 +67,6 @@ radio = {
 	{ "http://mp3-live.dasding.de/dasdingraka02_m.m3u", "[Germany] DasDing Sprechstunde", 1 },
 	{ "http://www.antenne.de/webradio/channels/black-beatz.m3u", "[Germany] Antenne Bayern Black Beatz", 1 },
 	{ "http://91.121.223.159:8000/move.m3u", "Move FM", 1 },
-	{ "http://50.22.212.196:8132", "Underground radio", 1 },
 	{ "http://broadcast.infomaniak.ch/onlyrai-high.mp3.m3u", "Urban hit", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_p3_national_rap_show_aac_h.m3u", "[Norway] Rap/Hiphop", 1 },
 	
@@ -94,7 +92,6 @@ radio = {
 	{ "http://tunein.t4e.dj/club/dsl/mp3", "Techno4ever Clup stream", 1 },
 	
 	{ "", " Mixed stations", 0 },
-	{ "http://stream.nightcoreradio.com:9040/main_stream.m3u", "Nightcore radio", 1 },
 	{ "http://www.radiogold.de/listen.pls", "Radio Gold (Germany)", 1 },
 	{ "http://217.151.151.91/live4.m3u", "Radio regenbogen (Germany)", 1 },
 }
