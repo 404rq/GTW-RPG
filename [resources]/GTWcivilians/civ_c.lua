@@ -267,6 +267,10 @@ end
 function staffWork(cmdName, ID)
 	-- Configuration
 	-- Setup by name
+	if isPedDead( localPlayer ) then
+		return 
+	end
+	
 	if cmdName ~= "gowork"  then
 		if cmdName == "gobusdriver" then
 	 		ID = "Bus Driver"
