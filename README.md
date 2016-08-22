@@ -2,6 +2,9 @@
 This is a free, advanced and open Real life/RPG game mode and core for the game modification Multi Theft Auto (Modification to Grand Theft Auto San Andreas). It's inspired by the most famous RPG servers in functionality, game logic and features but without limitations for the players. It's also optimized to run well on older hardware without reducing functionality or graphical design. 
 GTW-RPG is balanced by consequences for those who doesn't play "realistic", examples on that would for example be reduced payments in civilian jobs if the vehicle is damaged as well as an over sensitive wanted level system. The main goal with this project is realism, like a combination between Roleplay and Action based roleplay (ARPG or RPG if you prefer those terms instead). As the project is open, anyone may contribute, read more about that in our contributing file. 
 
+## Live demo
+A live demo server running the game mode is available here: mtasa://104.238.188.170:22004, powered by RageQuit 404 community (404rq)
+
 ## Project goals
 What's the goal of this project:
 * High amount of useful features, especially misc features to ensure there's always something to do and avoid players being bored
@@ -10,7 +13,7 @@ What's the goal of this project:
 * Independency, you should not be forced to use the entire gamemode just because you're looking for a single feature, individual resources may be used as well and we try to document all resources in their readme files with available exports and if needed, required dependencies, (a common dependency are for instance GTWtopbar which is required from almost all included resources).
 
 ## Testing the software
-The latest version of these resources will always run on our servers: (mtasa://lon.404rq.com:22005 for instance). These servers are open 24/7 for anyone who would like to join and try this game mode live as well as contributing by testing and report potential bugs you may find. You can also join the staff team in our community "RageQuit 404" to help out testing this game mode by playing the most recent version of it as soon it's released and give us feedback. Applications and information for that are found here:<br>
+The latest version of these resources will always run on our servers: (mtasa://104.238.188.170:22004 for instance). These servers are open 24/7 for anyone who would like to join and try this game mode live as well as contributing by testing and report potential bugs you may find. You can also join the staff team in our community "RageQuit 404" to help out testing this game mode by playing the most recent version of it as soon it's released and give us feedback. Applications and information for that are found here:<br>
 https://forum.404rq.com/staff-applications
 
 **Important** These servers also contains resources that is not included in GTW-RPG. If you efter face a "missing feature" in your copy then it's a part of our servers rather than the game mode. Features that is not yet implemented will be released in the future, and thus you must not report them as "bugs" or spam our fourm (or any other place for that matter) claiming the game mode is broken.
