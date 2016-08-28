@@ -220,7 +220,7 @@ function sync_train_speed(train)
 			-- Make the train continue it's ride after given time
 			setTimer(station_status, Settings.station_stop_time_ms, 1, train, false)
 			setTimer(run_normal, Settings.station_stop_time_ms*2, 1, train)
-			setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, train)
+			--setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, train)
 		end
 
 		-- Is this really the end of the track? Well then we stop until cleanup
@@ -401,7 +401,7 @@ function create_train(plr, cmd, args)
 		-- Make the train continue it's ride after given time
 		setTimer(station_status, Settings.station_stop_time_ms, 1, new_train, false)
 		setTimer(run_normal, Settings.station_stop_time_ms*2, 1, new_train)
-		setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, new_train)
+		--setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, new_train)
 	end
 	
 	-- Setup the warning horn
