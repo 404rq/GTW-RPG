@@ -1,4 +1,4 @@
-SQUARE_SIZE = 200
+SQUARE_SIZE = 25
 
 function initTrafficMap()
 	square_id = {}
