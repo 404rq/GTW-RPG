@@ -338,6 +338,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 			local walking_styles = {54,55,56,54,55,56,54,55,56,54,55,56,54,55,56,54,55,56,54,55,56,118,119,121,123,124,125,127,129,130,135,138}
 			setPedWalkingStyle(ped, walking_styles[math.random(#walking_styles)])
 			setElementDimension(ped,dim)
+			createBlipAttachedTo(ped, 0, 1, 200, 200, 200, 200, 0, 180 )
 			element_timers[ped] = {}
 			addEventHandler("onElementDestroy",ped,removePedFromListOnDestroy,false)
 			addEventHandler("onPedWasted",ped,removeDeadPed,false)
@@ -355,7 +356,6 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 		elseif create and trtype == "cars" then
 			local zoff = z_offset[model]/math.cos(math.rad(rx))
 			local car = createVehicle(model,x,y,z+zoff,rx,0,rz)
-			setElementHealth ( car, ( getElementHealth(car) ) * 2 )
 			setVehicleFuelTankExplodable(car, true)
 			--setTimer(destroyAINPCVehicle, 120000, 1, car)
 			setElementData(car, "npc", true)
@@ -368,6 +368,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 			if colcheck then call(server_coldata,"updateElementColData",car) end
 
 			local ped1 = createPed(skins[math.random(skincount)],x,y,z+1)
+			createBlipAttachedTo(ped1, 0, 1, 200, 200, 200, 200, 0, 180 )
 			warpPedIntoVehicle(ped1,car)
 			setElementDimension(ped1,dim)
 			element_timers[ped1] = {}
