@@ -51,6 +51,8 @@ radio = {
 	{ "http://stream.europeanhitradio.com:8000/ehr64.m3u", "European Hit Radio", 1 },
 	
 	{ "", " Local radio", 0 },
+	{ "http://194.16.21.227/mix_gbg_se_mp3.m3u", "[Sweden] Mix megapol", 1 },
+	{ "http://194.16.21.227/nrj_se_mp3.m3u", "[Sweden] NRJ Sweden", 1 },
 	{ "http://stream-ice.mtgradio.com:8080/stat_rix_fm.m3u", "[Sweden] Rix FM", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_klassisk_aac_h.m3u", "[Norway] NRK classical", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_alltid_nyheter_aac_h.m3u", "[Norway] NRK news", 1 },
