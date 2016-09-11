@@ -168,7 +168,6 @@ function businessPayout(bMarker)
 	local id, name, owner, cost, payout, payoutTime, payoutOTime, payoutUnit, bank, timer = unpack(bData)
 	if owner ~= "For Sale" then
 		bank = bank + payout
-		if bank > 10000 then bank = 10000 end
 		dbExec(database, "UPDATE business SET bBank = ? WHERE bID = ?", bank, id)
 		if settings["business.informPlayerForPayout"] then
 			local account = getAccount(owner)
