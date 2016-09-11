@@ -74,12 +74,12 @@ function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, wo
 end
 addEventHandler("onClientClick", root, openVehicleMenu)
 
---[[ Repair or destroy?, that's the question ]]--
+--[[ Repair or destroy a vehicle based on occupation (admin or mechanic) ]]--
 function repair_destroy()
 	if not isElement(element) or not guiGetEnabled(btn_repair) or not source == btn_repair then return end
 	if getElementData(localPlayer, "Occupation") == "Mechanic" then
-		if getElementHealth(element) < 2000 then
-			local repairTime = ( (2000-getElementHealth(element))*30 ) / 2
+		if getElementHealth(element) < 1000 then
+			local repairTime = (1000-getElementHealth(element))*30
 			if repairTime < 5000 then
 				repairTime = 5000
 			end
