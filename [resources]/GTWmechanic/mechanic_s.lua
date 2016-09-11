@@ -14,13 +14,13 @@
 ********************************************************************************
 ]]--
 
-local default_money = 428  	-- Global definition based on what mechanics earn IRL/year
-							-- divided by 12 and then 31 as in days multiplied by 4
+local default_money = 428  		-- Global definition based on what mechanics earn IRL/year
+					-- divided by 12 and then 31 as in days multiplied by 4
 
---[[ Repair vehicle with 2000% health ]]--
+--[[ Repair vehicle with 100% health ]]--
 function big_repair(veh)
 	fixVehicle(veh)
-	setElementHealth( veh, getElementHealth(veh) * 2 )
+	setElementHealth(veh, getElementHealth(veh))
 end			
 							
 --[[ Pay for repair and refuel ]]--
