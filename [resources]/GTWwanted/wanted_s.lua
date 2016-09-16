@@ -205,6 +205,16 @@ function setWl(plr, level, violent_time, reason, add_to, reduce_health)
 	update_graphical(plr)
 end
 
+--[[ Allow staff to set wanted level ]]--
+function admin_wanted_level(admin, cmd, plr, wl)
+	plr = getPlayerFromName(plr)
+	if not plr or not isElement(plr) or getElementType(plr) ~= "player" or not wl then return end
+	local is_staff = exports.GTWstaff.isStaff(admin)
+	if not is_staff then return end
+	setWl(plr, wl, 0, "APB set by police chief", true, false)
+end
+addCommandHandler("setwl", admin_wanted_level)
+
 function setServerWantedLevel(wl, violent_time, reason, require_nearby_cop, reduce_health)
 	-- A value indicating if the crime require a cop to be nearby
 	if require_nearby_cop then
