@@ -209,7 +209,7 @@ end
 function admin_wanted_level(admin, cmd, plr, wl)
 	plr = getPlayerFromName(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" or not wl then return end
-	local is_staff = exports.GTWstaff.isStaff(admin)
+	local is_staff = exports.GTWstaff:isStaff(admin)
 	if not is_staff then return end
 	setWl(plr, wl, 0, "APB set by police chief", true, false)
 end
