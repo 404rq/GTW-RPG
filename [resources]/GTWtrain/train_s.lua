@@ -397,7 +397,7 @@ function create_train(plr, cmd, args)
 	triggerClientEvent(plr, "GTWtrain.onStreamOut", plr, new_train)
 	
 	-- Applying a cooldown to prevent trains from blasting their horn upon spawn
-	Trains.horn_cooldown[t_engine] = setTimer(function() end, 5000, 1)
+	Trains.horn_cooldown[new_train] = setTimer(function() end, 5000, 1)
 
 	-- Find out if the train is spawning in a station
 	if math.floor(speed) == 0 then
