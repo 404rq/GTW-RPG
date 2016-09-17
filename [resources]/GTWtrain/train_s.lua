@@ -395,6 +395,9 @@ function create_train(plr, cmd, args)
 
 	-- Adds a client event handler that destroys the train when it streams out.
 	triggerClientEvent(plr, "GTWtrain.onStreamOut", plr, new_train)
+	
+	-- Applying a cooldown to prevent trains from blasting their horn upon spawn
+	Trains.horn_cooldown[t_engine] = setTimer(function() end, 5000, 1)
 
 	-- Find out if the train is spawning in a station
 	if math.floor(speed) == 0 then
