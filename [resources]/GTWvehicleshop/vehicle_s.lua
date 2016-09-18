@@ -161,6 +161,7 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 		local isFirstSpawn = false
 		if x == 0 and y == 0 and z == 0 then
 			x,y,z = getElementPosition( getAccountPlayer( getAccount( owner )))
+			rx,ry,rz = getElementRotation( getAccountPlayer( getAccount( owner )))
 			z = z + 3
 			isFirstSpawn = true
 		end
