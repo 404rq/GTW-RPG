@@ -58,4 +58,6 @@ If directly related to GTW-RPG please open an issue report here on Github<br>
 Bug reports: https://forum.404rq.com/bug-reports<br>
 Suggestions: https://forum.404rq.com/mta-servers-development
 ### Media
-Picture gallery: https://media.404rq.com
+Picture gallery: https://www.99img.xyz
+### Credits
+Proudly hosted by: https://www.99stack.com
