@@ -62,7 +62,7 @@ function reward_law_unit(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if not killer or getElementType(killer) ~= "player" or not getPlayerTeam(killer) or getPlayerTeam(killer) ~= getTeamFromName("Government") then return end
 	
 	-- Get bot team
-	local is_bot = exports.slothbot:isPedbot(source)
+	local is_bot = exports.slothbot:isPedBot(source)
 	if not is_bot then return end
 	local b_team = exports.slothbot:getBotTeam(source)
 	if not getElementData(source, "GTWoutlaws.vBot") or b_team == "Government" then return end
