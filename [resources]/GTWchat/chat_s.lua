@@ -197,7 +197,13 @@ function useLocalChat(plr, cmd, ...)
 	local nick = getPlayerName(plr)
 	local r,g,b = 255,255,0
 	local chat_str = "(LOCAL)"
-	if cmd == "r" then chat_str = "(*CB* radio)" msg = msg..", over" end
+	if cmd == "r" and getPedOccupiedVehicle(plr) then 
+		chat_str = "(*CB* radio)" 
+		msg = msg..", over" 
+		chat_range = 800
+	elseif cmd == "r" and not getPedOccupiedVehicle(plr) then 
+		 dm(plr, "CB chat can only be used while in a vehicle", 200,0,0, false)
+	end
 	if not getElementData(plr, "anon") then
 	    displayChatBubble(chat_str..": "..firstToUpper(msg), 0, plr)
 	end
