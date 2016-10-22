@@ -191,6 +191,7 @@ addEventHandler("onIRCMessage", root, IRCMessageReceive)
 
 --[[ Local chat ]]--
 function useLocalChat(plr, cmd, ...)
+	local l_chat_range = chat_range
 	local msg = table.concat({...}, " ")
 	if not validateChatInput(plr, "local", msg) then return end
   	local px,py,pz = getElementPosition(plr)
@@ -200,12 +201,13 @@ function useLocalChat(plr, cmd, ...)
 	if cmd == "r" and getPedOccupiedVehicle(plr) then 
 		chat_str = "(*CB* radio)" 
 		msg = msg..", over" 
-		chat_range = 800
+		l_chat_range = 800
 	elseif cmd == "r" and not getPedOccupiedVehicle(plr) then 
-		 dm(plr, "CB chat can only be used while in a vehicle", 200,0,0, false)
+		dm(plr, "CB chat can only be used while in a vehicle", 200,0,0, false)
+		return
 	end
 	if not getElementData(plr, "anon") then
-	    displayChatBubble(chat_str..": "..firstToUpper(msg), 0, plr)
+	    	displayChatBubble(chat_str..": "..firstToUpper(msg), 0, plr)
 	end
   	if getPlayerTeam(plr) then
 		if getTeamColor(getPlayerTeam(plr)) then
@@ -215,12 +217,12 @@ function useLocalChat(plr, cmd, ...)
 	-- (2014-11-19) Count local players
 	local sumOfLocal = 0
 	for n,v in pairs(getElementsByType("player")) do
-	   	if is_player_in_range(v, px,py,pz, chat_range) then
+	   	if is_player_in_range(v, px,py,pz, l_chat_range) then
 	   		sumOfLocal = sumOfLocal + 1
 	  	end
 	end
 	for n,v in pairs(getElementsByType("player")) do
-	   	if is_player_in_range(v, px,py,pz, chat_range) then
+	   	if is_player_in_range(v, px,py,pz, l_chat_range) then
 	   		local occupation = ""
 	   		local is_police_chief = exports.GTWpolicechief:isPoliceChief(plr)
 	   		if is_police_chief and getPlayerTeam(plr) and policeTeams[getTeamName(getPlayerTeam(plr))] then
