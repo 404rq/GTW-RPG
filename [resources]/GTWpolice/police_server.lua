@@ -21,8 +21,8 @@ police_data = {
 	arrested_players 	= { },
 }
 tracker_timers 	= { }
-max_jail_time	= 600
-min_jail_time 	= 60
+max_jail_time	= 1800
+min_jail_time 	= 30
 
 --[[ Pay the cop for arrest ]]--
 function pay_cop(cop, wl, viol_sec)
