@@ -101,7 +101,10 @@ moddinglist = {
 	["Jaguar E Type"] = { "vehicle-mods/windsor.dff", "vehicle-mods/windsor.txd", 555, true, false, "Vehicle" },
 	["yosemite"] = { "vehicle-mods/yosemite.dff", "vehicle-mods/yosemite.txd",554 , true, false, "Vehicle" },
 	["Infernus With Paintjob"] = { "vehicle-mods/zr350.dff", "vehicle-mods/zr350.txd", 477, true, false, "Vehicle" },
-	
+	["Trailer Artict"] = { "vehicle-mods/artict2.dff", "vehicle-mods/artict2.txd", 435, true, false, "Vehicle" },
+	["Trailer Petrol"] = { "vehicle-mods/petrotr.dff", "vehicle-mods/petrotr.txd", 584, true, false, "Vehicle" },
+	["Trailer Timber"] = { "vehicle-mods/artict1.dff", "vehicle-mods/artict1.txd", 450, true, false, "Vehicle" },
+	["Trailer Freezer"] = { "vehicle-mods/artict3.dff", "vehicle-mods/artict3.txd", 591, true, false, "Vehicle" },
 	
 	--["Weapon mods"] = { "", "", 0, false, true },
 	["CA 94 Heat seeking misile"] = { "weapon-mods/heatseek.dff", "weapon-mods/heatseek.txd", 360, true, false, "Weapon" },
