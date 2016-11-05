@@ -45,9 +45,9 @@ function updateDensity()
 	elseif h < 21 then multiplier = 1
 	elseif h < 22 then multiplier = 0.8 end
 	
-	exports.npc_traffic:setTrafficDensity(0.02*multiplier)
-	exports.npc_traffic:setTrafficDensity("peds", 0.06*multiplier)
-	exports.npc_traffic:setTrafficDensity("boats", 0.04*multiplier)
-	exports.npc_traffic:setTrafficDensity("planes", 0.04*multiplier)
+	exports.npc_traffic:setTrafficDensity(0.01*multiplier)
+	exports.npc_traffic:setTrafficDensity("peds", 0.03*multiplier)
+	exports.npc_traffic:setTrafficDensity("boats", 0.02*multiplier)
+	exports.npc_traffic:setTrafficDensity("planes", 0.02*multiplier)
 end
 setTimer(updateDensity, 5000, 0)
