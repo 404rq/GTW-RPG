@@ -229,7 +229,7 @@ function showCursor(bool)
 end
 
 function outputMessage(message, r, g, b)
-	triggerServerEvent("server:outputMessage", localPlayer, message, r, g, b)
+	exports.GTWtopbar:dm(message, r, g, b)
 end
 
 function build_cbcGUI()
