@@ -105,6 +105,9 @@ moddinglist = {
 	["Trailer Petrol"] = { "vehicle-mods/petrotr.dff", "vehicle-mods/petrotr.txd", 584, true, false, "Vehicle" },
 	["Trailer Timber"] = { "vehicle-mods/artict1.dff", "vehicle-mods/artict1.txd", 450, true, false, "Vehicle" },
 	["Trailer Freezer"] = { "vehicle-mods/artict3.dff", "vehicle-mods/artict3.txd", 591, true, false, "Vehicle" },
+	["Linerunner GTA V"] = { "vehicle-mods/linerunner.dff", "vehicle-mods/linerunner.txd", 403, true, false, "Vehicle" },
+	["Roadtrain Australia"] = { "vehicle-mods/rdtrain.dff", "vehicle-mods/rdtrain.txd", 515, true, false, "Vehicle" },
+	["Tanker with lights"] = { "vehicle-mods/tanker.dff", "vehicle-mods/tanker.txd", 514, true, false, "Vehicle" },
 	
 	--["Weapon mods"] = { "", "", 0, false, true },
 	["CA 94 Heat seeking misile"] = { "weapon-mods/heatseek.dff", "weapon-mods/heatseek.txd", 360, true, false, "Weapon" },
