@@ -1,4 +1,4 @@
-local downloadDirectory = "/mta-mods/"
+local downloadDirectory = "/mta-mods"
 -- This is the file path to the location of the mods -- Don't include the IP and start it with a /"
 -- Example: downloadDirectory = "/vehiclemods" | Now the mods will download from [[ip]]/vehiclemods
 
