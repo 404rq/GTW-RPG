@@ -61,11 +61,15 @@ function refreshAllBlips(resource)
 				createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 			elseif not getElementData(plr, "anon") then
 				local alpha = 200
+				local vdist = 180
 				local plr_team = getPlayerTeam(plr) or ""
 				if getElementData(plr, "Occupation") == "Prisoner" or
 					(plr_team == getTeamFromName("Government") and
-					getElementData(spectator, "Occupation") == "Prisoner") then alpha = 10 end
-				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
+					getElementData(spectator, "Occupation") == "Prisoner") then 
+					alpha = 50
+					vdist = 60
+				end
+				createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, vdist, spectator)
 			end
 		end
 		colorUpdater[plr] = setTimer(updateBlipColor, 500, 0, plr)
@@ -94,11 +98,15 @@ function updatePlayerBlip(plr)
 			createBlipAttachedTo(plr, 0, 2, r, g, b, 255, 99, 99999.0, spectator)
 		elseif not getElementData(plr,"anon") then
 			local alpha = 200
+			local vdist = 180
 			local plr_team = getPlayerTeam(plr) or ""
 			if getElementData(plr, "Occupation") == "Prisoner" or
 				(plr_team == getTeamFromName("Government") and
-				getElementData(spectator, "Occupation") == "Prisoner") then alpha = 10 end
-			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, 180, spectator)
+				getElementData(spectator, "Occupation") == "Prisoner") then 
+				alpha = 50 
+				vdist = 60
+			end
+			createBlipAttachedTo(plr, 0, 1, 200, 200, 200, alpha, 99, vdist, spectator)
 		end
 	end
 	if not isTimer(colorUpdater[plr]) then
