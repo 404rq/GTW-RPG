@@ -390,62 +390,7 @@
 <interiorReturn	refid="STRIP2"	posX="1212.02"	posY="-25.86"	posZ="1000.09"	rotation="198.385"	interior="3"	dimension="0"	/>
 <interiorEntry	id="STRIP2 (2)"	posX="2543.15"	posY="1025.16"	posZ="9.82133"	rotation="-180"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="STRIP2 (2)"	posX="1212.02"	posY="-25.86"	posZ="1000.09"	rotation="-3780.01"	interior="3"	dimension="1"	/>
-<interiorEntry	id="SVCUNT"	posX="-369.456"	posY="1169.14"	posZ="19.3978"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="230"	interior="6"	dimension="0"	/>
-<interiorEntry	id="SVCUNT (2)"	posX="794.884"	posY="-506.702"	posZ="17.1238"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (2)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="180"	interior="6"	dimension="1"	/>
-<interiorEntry	id="SVCUNT (3)"	posX="2236.53"	posY="167.997"	posZ="27.196"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (3)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="180"	interior="6"	dimension="2"	/>
-<interiorEntry	id="SVCUNT (4)"	posX="206.802"	posY="-112.542"	posZ="3.98153"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (4)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="-350.903"	interior="6"	dimension="3"	/>
-<interiorEntry	id="SVCUNT (5)"	posX="-1533.1"	posY="2656.65"	posZ="55.275"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (5)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="180"	interior="6"	dimension="4"	/>
-<interiorEntry	id="SVCUNT (6)"	posX="-1051.47"	posY="1549.76"	posZ="32.496"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (6)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="300"	interior="6"	dimension="5"	/>
-<interiorEntry	id="SVCUNT (7)"	posX="-2075.91"	posY="-2312.55"	posZ="30.1313"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (7)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="50"	interior="6"	dimension="6"	/>
-<interiorEntry	id="SVCUNT (8)"	posX="-1438.72"	posY="-1544.58"	posZ="100.713"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVCUNT (8)"	posX="2333.11"	posY="-1077.1"	posZ="1048.04"	rotation="0"	interior="6"	dimension="7"	/>
-<interiorEntry	id="SVHOT1"	posX="-2425.94"	posY="337.87"	posZ="35.997"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVHOT1"	posX="2233.8"	posY="-1115.36"	posZ="1049.91"	rotation="-118"	interior="5"	dimension="0"	/>
-<interiorEntry	id="SVLAMD"	posX="1684.74"	posY="-2099"	posZ="12.8507"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLAMD"	posX="2365.3"	posY="-1134.92"	posZ="1049.91"	rotation="-180"	interior="8"	dimension="1"	/>
-<interiorEntry	id="SVLAMD (2)"	posX="315.684"	posY="-1769.81"	posZ="3.62877"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLAMD (2)"	posX="2365.3"	posY="-1134.92"	posZ="1049.91"	rotation="180"	interior="8"	dimension="2"	/>
-<interiorEntry	id="SVLAMD (3)"	posX="893.617"	posY="-1636.3"	posZ="13.9872"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLAMD (3)"	posX="2365.3"	posY="-1134.92"	posZ="1049.91"	rotation="-180"	interior="8"	dimension="3"	/>
-<interiorEntry	id="SVLAMD (4)"	posX="2449.17"	posY="689.839"	posZ="10.471"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLAMD (4)"	posX="2365.3"	posY="-1134.92"	posZ="1049.91"	rotation="450"	interior="8"	dimension="4"	/>
-<interiorEntry	id="SVLAMD (5)"	posX="1408.05"	posY="1897.08"	posZ="10.5873"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLAMD (5)"	posX="2365.3"	posY="-1134.92"	posZ="1049.91"	rotation="450"	interior="8"	dimension="5"	/>
-<interiorEntry	id="SVLAMD (6)"	posX="929.122"	posY="2006.43"	posZ="10.4781"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLAMD (6)"	posX="2365.3"	posY="-1134.92"	posZ="1049.91"	rotation="450"	interior="8"	dimension="6"	/>
-<interiorEntry	id="SVLASM"	posX="2111.23"	posY="-1279.71"	posZ="24.9546"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLASM"	posX="2282.91"	posY="-1140.29"	posZ="1049.91"	rotation="180"	interior="11"	dimension="0"	/>
-<interiorEntry	id="SVLASM (2)"	posX="2483.38"	posY="-1996.19"	posZ="12.8507"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVLASM (2)"	posX="2282.91"	posY="-1140.29"	posZ="1049.91"	rotation="-180"	interior="11"	dimension="1"	/>
-<interiorEntry	id="SVSFBG (2)"	posX="-2099.68"	posY="897.485"	posZ="75.9661"	rotation="90"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVSFBG (2)"	posX="2196.79"	posY="-1204.35"	posZ="1048.05"	rotation="4374.68"	interior="6"	dimension="1"	/>
-<interiorEntry	id="SVSFBG (3)"	posX="-2027.73"	posY="-40.5488"	posZ="37.8263"	rotation="90"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVSFBG (3)"	posX="2196.79"	posY="-1204.35"	posZ="1048.05"	rotation="4139.7"	interior="6"	dimension="2"	/>
-<interiorEntry	id="SVSFMD"	posX="-2454.44"	posY="-135.879"	posZ="25.2223"	rotation="90"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVSFMD"	posX="2270.39"	posY="-1210.45"	posZ="1046.57"	rotation="90"	interior="10"	dimension="0"	/>
-<interiorEntry	id="SVSFSM"	posX="-2213.54"	posY="720.845"	posZ="48.4262"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVSFSM"	posX="2308.79"	posY="-1212.88"	posZ="1048.03"	rotation="36"	interior="6"	dimension="0"	/>
-<interiorEntry	id="SVSFSM (2)"	posX="-2700.32"	posY="820.308"	posZ="48.999"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVSFSM (2)"	posX="2308.79"	posY="-1212.88"	posZ="1048.03"	rotation="-180"	interior="6"	dimension="1"	/>
-<interiorEntry	id="SVSFSM (3)"	posX="2818.75"	posY="2140.56"	posZ="13.7132"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVSFSM (3)"	posX="2308.79"	posY="-1212.88"	posZ="1048.03"	rotation="360"	interior="6"	dimension="2"	/>
-<interiorEntry	id="SVVGHO1"	posX="2238.99"	posY="1285.05"	posZ="9.82528"	rotation="90"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVVGHO1"	posX="2217.54"	posY="-1076.29"	posZ="1049.52"	rotation="-3870.01"	interior="1"	dimension="0"	/>
-<interiorEntry	id="SVVGHO1 (2)"	posX="2226.03"	posY="1837.92"	posZ="9.964"	rotation="90"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVVGHO1 (2)"	posX="2217.54"	posY="-1076.29"	posZ="1049.52"	rotation="90"	interior="1"	dimension="1"	/>
-<interiorEntry	id="SVVGHO2"	posX="1965.11"	posY="1622.54"	posZ="11.879"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVVGHO2"	posX="2237.59"	posY="-1080.87"	posZ="1048.07"	rotation="270"	interior="2"	dimension="0"	/>
-<interiorEntry	id="SVVGHO2 (2)"	posX="2374.55"	posY="2167.88"	posZ="9.8472"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVVGHO2 (2)"	posX="2237.59"	posY="-1080.87"	posZ="1048.07"	rotation="125"	interior="2"	dimension="1"	/>
-<interiorEntry	id="SVVGMD"	posX="1274.28"	posY="2522.47"	posZ="9.99299"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="SVVGMD"	posX="2317.82"	posY="-1026.75"	posZ="1049.21"	rotation="270"	interior="9"	dimension="0"	/>
+
 <interiorEntry	id="TATinterior2"	posX="-2491.98"	posY="-38.9587"	posZ="24.817"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="TATinterior2"	posX="-204.44"	posY="-9.17"	posZ="1001.3"	rotation="90"	interior="17"	dimension="0"	/>
 <interiorEntry	id="TATinterior3"	posX="2094.7"	posY="2122.13"	posZ="9.82222"	rotation="0"	dimension="0"	interior="0"	/>
