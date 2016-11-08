@@ -32,8 +32,7 @@ local bot_spawners = {
 	{-79, -1551, 3, {1,4,5,22,41}, 5, 1800, {"guarding"}, {108,109,110}, 8, {"Criminals", 200,0,0}},
 	{2215, -1261, 24, {1,4,5,22,41}, 2, 1800, {"guarding"}, {102,103,104}, 3, {"Criminals", 200,0,0}},
 	{2121, -1261, 24, {1,4,5,22,41}, 2, 1800, {"guarding"}, {102,103,104}, 3, {"Criminals", 200,0,0}},
-	{2491, -1668, 14, {1,4,5,22,41}, 30, 1800, {"guarding"}, {105,106,107}, 10, {"Criminals", 200,0,0}},
-	 
+	{2491, -1668, 14, {1,4,5,22,41}, 30, 1800, {"guarding"}, {105,106,107}, 10, {"Criminals", 200,0,0}}, 
 }
 local bots_count = { }
 
@@ -76,8 +75,6 @@ function reward_law_unit(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	-- Generate a reward
 	local reward = math.random(100, 700)
 	
-	
-	
 	-- Pay the cop for the kill
 	if getPlayerTeam(killer) and getElementData(source, "GTWoutlaws.botTeam") and 
 		getElementData(source, "GTWoutlaws.botTeam") ~= getTeamName(getPlayerTeam(killer)) then
@@ -86,7 +83,8 @@ function reward_law_unit(totalAmmo, killer, killerWeapon, bodypart, stealth)
 		givePlayerMoney(killer, reward)
 	else
 		-- Warn about killing your own team
-		exports.GTWtopbar:dm("Stopp killing your own team!", killer, 255, 0, 0 )
+		exports.GTWtopbar:dm("Stopp killing your own team! you lost $"..reward.." for hospital treatment", killer, 255, 0, 0 )
+		takePlayerMoney(killer, reward)
 	end
 end
 addEventHandler("onPedWasted", root, reward_law_unit)
