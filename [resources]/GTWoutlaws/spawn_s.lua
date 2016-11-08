@@ -73,11 +73,14 @@ function reward_law_unit(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	local arrests = getAccountData(playeraccount, "GTWdata_stats_police_arrests") or 0
 	setAccountData(playeraccount, "GTWdata_stats_police_arrests", arrests + 1)
 	
+	-- Generate a reward
+	local reward = math.random(100, 700)
+	
 	-- Message to the law unit
-	exports.GTWtopbar:dm("You kill arrested an outlaw", killer, 255, 100, 0 )
+	exports.GTWtopbar:dm("You kill arrested an outlaw and got rewarded $"..reward, killer, 255, 100, 0 )
 	
 	-- Pay the cop for the kill
-	givePlayerMoney(killer, 500)
+	givePlayerMoney(killer, reward)
 end
 addEventHandler("onPedWasted", root, reward_law_unit)
 
