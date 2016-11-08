@@ -18,34 +18,32 @@ local setInteriorMarkerZ = {
 	end
 }
 
--- addEventHandler("onClientElementStreamIn",getRootElement(),
-	-- function()
-		-- if getElementType ( source ) == "marker" then
-			-- local parent = getElementParent ( source ) 
-			-- local parentType = getElementType(parent)
-			-- if parentType == "interiorEntry" or parentType == "interiorReturn" then
-				-- interiorAnims[source] = Animation.createAndPlay(
-		-- source,
- 		-- { from = 0, to = 2*math.pi, time = 2000, repeats = 0, transform = math.sin, fn = setInteriorMarkerZ[parentType] }
--- )
-			-- end
-		-- end
-	-- end
--- )
+addEventHandler("onClientElementStreamIn",getRootElement(),
+	function()
+		if getElementType ( source ) == "marker" then
+			local parent = getElementParent ( source ) 
+			local parentType = getElementType(parent)
+			if parentType == "interiorEntry" or parentType == "interiorReturn" then
+				interiorAnims[source] = Animation.createAndPlay(source, { from = 0, to = 2*math.pi, 
+				time = 2000, repeats = 0, transform = math.sin, fn = setInteriorMarkerZ[parentType] })
+			end
+		end
+	end
+)
 
--- addEventHandler("onClientElementStreamOut",getRootElement(),
-	-- function()
-		-- if getElementType ( source ) == "marker" then
-			-- local parent = getElementParent ( source ) 
-			-- local parentType = getElementType(parent)
-			-- if parentType == "interiorEntry" or parentType == "interiorReturn" then
-				-- if (interiorAnims[source] ) then
-					-- interiorAnims[source]:remove()
-				-- end
-			-- end
-		-- end
-	-- end
--- )
+addEventHandler("onClientElementStreamOut",getRootElement(),
+	function()
+		if getElementType ( source ) == "marker" then
+			local parent = getElementParent ( source ) 
+			local parentType = getElementType(parent)
+			if parentType == "interiorEntry" or parentType == "interiorReturn" then
+				if (interiorAnims[source] ) then
+					interiorAnims[source]:remove()
+				end
+			end
+		end
+	end
+)
 
 ----Main
 local interiors = {}
@@ -177,6 +175,10 @@ addEventHandler ( "doWarpPlayerToInterior",localPlayer,
 		resource = getResourceFromName(resource)
 		local oppositeType = opposite[getElementType(interior)]
 		local targetInterior = interiors[resource][id][oppositeType]
+		local px,py,pz = getElementPosition(localPlayer)
+		setElementData(localPlayer, "interiors.px", px)
+		setElementData(localPlayer, "interiors.py", py)
+		setElementData(localPlayer, "interiors.pz", pz)
 		
 		local x = getElementData ( targetInterior, "posX" )
 		local y = getElementData ( targetInterior, "posY" )
