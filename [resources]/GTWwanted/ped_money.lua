@@ -67,7 +67,11 @@ function givePickupMoney(plr)
 	removeEventHandler("onPickupHit", source, givePickupMoney)
 	destroyElement(source)
    	givePlayerMoney(plr, profit[plr])
+	
+	-- Calculate wanted level
+	local wanted_level = (profit[plr]/10000)
+	if wanted_level < 0.6 then wanted_level = 0.6 end
 
    	-- Get wanted for stealing money
-   	setWl(plr, round(0.6, 2), 10, "You committed the crime of robbery")
+   	setWl(plr, round(wanted_level, 2), 10, "You committed the crime of robbery")
 end
