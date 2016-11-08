@@ -23,12 +23,26 @@ function killedPed(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	-- Do not drop money for law units
 	if killer and getElementType(killer) == "player" and getPlayerTeam(killer) and getPlayerTeam(killer) == getTeamFromName("Government") then return end
 
+	-- Get profitability multiplier
+	local probability_of_richness = math.random(1,1000)
+	if probability_of_richness < 900 then
+		probability_of_richness = 1
+	elseif probability_of_richness < 975 then
+		probability_of_richness = 3
+	elseif probability_of_richness < 999 then
+		probability_of_richness = 10
+	else
+		probability_of_richness = 100
+	end
+	
 	-- Create a money pickup at the position of the dead bot
 	local x,y,z = getElementPosition(source)
-	profit[killer] = math.random(10,500)
+	profit[killer] = math.random(5,200)*probability_of_richness -- Max profit: $20´000
 	
 	-- Increase payment if the dead bot was an outlaw
-	if getElementData(source, "GTWoutlaws.vBot") then profit[killer] = math.random(500,5000) end
+	if getElementData(source, "GTWoutlaws.vBot") then 
+		profit[killer] = math.random(50,500)*probability_of_richness -- Max profit: $50´000
+	end
 	
 	-- Make the pickup and make sure it's removed after 2 minutes if not picked up
 	local pickup = createPickup(x, y, z, 3, 1212, 120000, profit[killer])
