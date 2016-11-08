@@ -57,6 +57,13 @@ function get_nearest_hospital(plr)
 		-- Get the distance for each point
 		local px,py,pz=getElementPosition(plr)
         	local dist = getDistanceBetweenPoints2D(px,py,v[1],v[2])
+		
+		-- Use cached coordinates if player is inside interior
+		if getElementDimension(plr) ~= 0 or getElementInterior(plr) ~= 0 then
+			if getElementData(plr, "interiors.px") then px = getElementData(plr, "interiors.px") end
+			if getElementData(plr, "interiors.py") then py = getElementData(plr, "interiors.py") end
+			if getElementData(plr, "interiors.pz") then pz = getElementData(plr, "interiors.pz") end
+		end
 
 		-- Update coordinates if distance is smaller
 		if dist < min then
