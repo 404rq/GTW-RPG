@@ -25,7 +25,7 @@ addEventHandler("onClientElementStreamIn",getRootElement(),
 			local parentType = getElementType(parent)
 			if parentType == "interiorEntry" or parentType == "interiorReturn" then
 				interiorAnims[source] = Animation.createAndPlay(source, { from = 0, to = 2*math.pi, 
-				time = 2000, repeats = 0, transform = math.sin, fn = setInteriorMarkerZ[parentType] })
+				time = 4000, repeats = 0, transform = math.sin, fn = setInteriorMarkerZ[parentType] })
 			end
 		end
 	end
@@ -179,6 +179,7 @@ addEventHandler ( "doWarpPlayerToInterior",localPlayer,
 		setElementData(localPlayer, "interiors.px", px)
 		setElementData(localPlayer, "interiors.py", py)
 		setElementData(localPlayer, "interiors.pz", pz)
+		outputConsole("Interiors: Entered at: x: "..px..", y: "..py..", z: "..pz)
 		
 		local x = getElementData ( targetInterior, "posX" )
 		local y = getElementData ( targetInterior, "posY" )
