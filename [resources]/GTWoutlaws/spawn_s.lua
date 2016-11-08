@@ -29,10 +29,10 @@ local bot_spawners = {
 	{-3099, 2251, 8, {31}, 0, 600, {"guarding"}, {288}, 1, {"Government", 110,110,110}},
 	{-2938, 2119, 8, {31}, 2, 600, {"guarding"}, {288}, 2, {"Government", 110,110,110}},
 	{-2979, 2393, 4, {31}, 2, 600, {"guarding"}, {288}, 2, {"Government", 110,110,110}},
-	{-79, -1551, 3, {1,4,5,22,41}, 5, 1800, {"waiting", "guarding"}, {108,109,110}, 8, {"Criminals", 200,0,0}},
-	{2215, -1261, 24, {1,4,5,22,41}, 2, 1800, {"waiting", "guarding"}, {102,103,104}, 3, {"Criminals", 200,0,0}},
-	{2121, -1261, 24, {1,4,5,22,41}, 2, 1800, {"waiting", "guarding"}, {102,103,104}, 3, {"Criminals", 200,0,0}},
-	{2491, -1668, 14, {1,4,5,22,41}, 30, 1800, {"waiting", "guarding"}, {105,106,107}, 10, {"Criminals", 200,0,0}},
+	{-79, -1551, 3, {1,4,5,22,41}, 5, 1800, {"guarding"}, {108,109,110}, 8, {"Criminals", 200,0,0}},
+	{2215, -1261, 24, {1,4,5,22,41}, 2, 1800, {"guarding"}, {102,103,104}, 3, {"Criminals", 200,0,0}},
+	{2121, -1261, 24, {1,4,5,22,41}, 2, 1800, {"guarding"}, {102,103,104}, 3, {"Criminals", 200,0,0}},
+	{2491, -1668, 14, {1,4,5,22,41}, 30, 1800, {"guarding"}, {105,106,107}, 10, {"Criminals", 200,0,0}},
 	 
 }
 local bots_count = { }
@@ -76,11 +76,18 @@ function reward_law_unit(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	-- Generate a reward
 	local reward = math.random(100, 700)
 	
-	-- Message to the law unit
-	exports.GTWtopbar:dm("You kill arrested an outlaw and got rewarded $"..reward, killer, 255, 100, 0 )
+	
 	
 	-- Pay the cop for the kill
-	givePlayerMoney(killer, reward)
+	if getPlayerTeam(killer) and getElementData(source, "GTWoutlaws.botTeam") and 
+		getElementData(source, "GTWoutlaws.botTeam") ~= getTeamName(getPlayerTeam(killer)) then
+		-- Message and reward to the law unit
+		exports.GTWtopbar:dm("You kill arrested an outlaw and got rewarded $"..reward, killer, 255, 100, 0 )
+		givePlayerMoney(killer, reward)
+	else
+		-- Warn about killing your own team
+		exports.GTWtopbar:dm("Stopp killing your own team!", killer, 255, 0, 0 )
+	end
 end
 addEventHandler("onPedWasted", root, reward_law_unit)
 
@@ -98,6 +105,7 @@ setTimer(function()
 				if bots_count[j] < 0 then bots_count[j] = 0 end
 				bots_count[j] = bots_count[j] + 1
 				setElementData(new_bot, "GTWoutlaws.vBot", j)
+				setElementData(new_bot, "GTWoutlaws.botTeam", bot[10][1])
 				local bot_blip = createBlipAttachedTo(new_bot, 0, 1, bot[10][2],bot[10][3],bot[10][4], 255, 99, 180)
 				setElementData(new_bot, "GTWoutlaws.vBot.blip", bot_blip)
 				setTimer(safe_destroy, bot[6]*1000, 1, new_bot)
