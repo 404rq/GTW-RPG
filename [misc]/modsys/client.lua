@@ -305,7 +305,7 @@ end
 function refreshModList()
 	guiGridListClear(mods)
 	table.sort(moddinglist)
-	for i, v in ipairs(moddinglist) do
+	for i, v in pairs(moddinglist) do
 		local row = guiGridListAddRow(mods)
 		if v[5] == true then
 			guiGridListSetItemText(mods, row, 1, tostring(i), true, false)
