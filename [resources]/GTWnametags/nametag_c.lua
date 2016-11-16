@@ -25,7 +25,7 @@ function update_nametags()
 			local visibleto = getDistanceBetweenPoints3D(x1,y1,z1,x2,y2,z2)
 			if visibleto < 10 and getElementData(localPlayer, "isLoggedIn") then
 				local sx,sy = getScreenFromWorldPosition(x2,y2,z2+0.3)
-				local sx1,sy1 = getScreenFromWorldPosition(x2,y2,z2+0.4)
+				local sx1,sy1 = getScreenFromWorldPosition(x2,y2,z2+0.45)
 				if sx and sy and not getElementData(v, "anon") and getElementInterior(v) == getElementInterior(localPlayer) and
 					getElementDimension(v) == getElementDimension(localPlayer) then
 					--local nWidth = string.len(getPlayerName(v)) or 20
