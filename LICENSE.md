@@ -1,4 +1,4 @@
-Copyright (c) 2012-2016, 404rq (RageQuit community)
+Copyright (c) 2012-2017, 404rq (or individual authors)
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
