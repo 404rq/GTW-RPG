@@ -48,7 +48,7 @@ end)
 function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
     if not clickedElement then return end
     local dist = getDistanceBetweenPoints3D(worldX, worldY, worldZ, getElementPosition(localPlayer)) or 0
-    if getElementType(clickedElement) == "vehicle" and (not getPedOccupiedVehicle(localPlayer) or
+    if getElementType(clickedElement) == "vehicle" and not guiGetVisible(window) and (not getPedOccupiedVehicle(localPlayer) or
         getPedOccupiedVehicle(localPlayer) ~= clickedElement) and
         ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and
         getElementData(localPlayer, "Occupation") == "Mechanic") or
@@ -68,8 +68,10 @@ function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, wo
         	guiSetVisible(btn_staff_repair, false)
         end
         element = clickedElement
-        showCursor(true)
-        guiSetVisible(window, true)
+	if not isTimer(cooldown) then
+		showCursor(true)
+		guiSetVisible(window, true)
+	end
     end
 end
 addEventHandler("onClientClick", root, openVehicleMenu)
@@ -100,6 +102,7 @@ function repair_destroy()
 	else
 		triggerServerEvent("GTWmechanic.destroy", getRootElement(), element)
 	end
+	cooldown = setTimer(function() end, 10000, 1)
 	guiSetVisible(window, false)
 	showCursor(false)
 end
@@ -137,6 +140,7 @@ function refuel_information()
 		if is_locked then is_locked = "true" else is_locked = "false" end
 		outputChatBox("INFO: owner="..owner..", fuel="..fuel..", health="..health..", islocked="..is_locked, 255, 255, 255)
 	end
+	cooldown = setTimer(function() end, 10000, 1)
 	guiSetVisible(window, false)
 	showCursor(false)
 end
