@@ -1,8 +1,8 @@
-To install GTW-RPG resources and start them together with your server, add below lines to 
-your servers configuration file. It's located at: "mods/deathmatch/mtaserver.conf" in
+To install the GTW-RPG resources and start them together with your server, add below lines to 
+your server configuration file. It's located at: "_mods/deathmatch/mtaserver.conf_" in
 your servers root folder.
 
-_Uncomment or overwrite current resources in "mtaserver.conf" if you install this on a new server, also temporary move files away from "mods/deathmatch/resources/" to prevent duplicates._
+_Uncomment or overwrite current resources in "mtaserver.conf", in case you install this on a new server. Also, do not forget to temporary move the current files away from "mods/deathmatch/resources/" first to avoid incompatible duplicates._
 
 ```xml
     <!-- Important imports -->
@@ -95,17 +95,32 @@ _Uncomment or overwrite current resources in "mtaserver.conf" if you install thi
     <resource src="npc_traffic" startup="1" protected="1" />
 ```
 
-Important! do not alter the order, some resorces depends on other resources and must 
-therefore be started in certain order. Errors may occur otherwise. When possible, we
-use alphabethical order (ascending) to make it easy to find certain resources.
+Important! do not alter the order, some of these resorces depends each other and must 
+therefore be started in this order. Errors may occur otherwise. Use alphabethical order 
+(ascending) when adding new resources to this list
 
-Note! Some resources need certain ACL rights to work, ACL rights are found in the file _ACL.xml_ located in _mods/deathmatch/_ from your server binaries directory. The easiest way to find and enable these requirements are:
+Note! Some resources need certain ACL rights to work, ACL rights are found in the file 
+_ACL.xml_ located in _mods/deathmatch/_ from your server binaries directory. The easiest 
+way to find and enable these requirements are:
+
 `aclrequest list <resource> all`
-followed by:
-`aclrequest allow <resource> all`
-This will list requirements for a certain resource and then allow the required functionality to be used. This is a built in function which is executed in the server console.
 
-For the "lazy" developers, here's a precompiled section of required ACL rights to add in your ACL file located at "_mods/deathmatch/ACL.xml_", ideally right after the opening <acl> tag at line 1. This procedure will allow the resources the access they need to work. Resources will however request their own ACL rights once started. GTWaccounts needs access to create accounts, GTWupdates needs access to callRemote in order to fetch the update list and GTWgui needs the ability to refresh resources using the GUI system to prevent annoying bugs in the GUI causing controls to appear allover the screen when the window is destroyed.
+followed by:
+
+`aclrequest allow <resource> all`
+
+This will list requirements for a certain resource and then allow the required functionality 
+to be used. This is a built in function that can be executed in your server console.
+
+For the "lazy" developers, here's a precompiled section of required ACL rights to add in your 
+ACL file located at "_mods/deathmatch/ACL.xml_", ideally right after the opening <acl> tag at 
+line 1. This procedure will allow the resources the access they need to work. Resources will 
+however request their own ACL rights once started. 
+
+GTWaccounts needs access to create accounts, GTWupdates needs access to callRemote in order to 
+fetch the update list and GTWgui needs the ability to refresh resources using the GUI system 
+to prevent annoying bugs in the GUI causing controls to appear allover the screen when the 
+window is destroyed.
 
 ```xml
     <!-- Staff group "supporter" and "developer", you may define your own rights/permissions 
@@ -124,7 +139,7 @@ For the "lazy" developers, here's a precompiled section of required ACL rights t
     </group>
 ```
 
-Also in the admin group, you need to add GTWcore as a object like this:
+Also in the admin group, you need to add GTWcore as an object like this:
 
 ```
     <group name="Admin">
@@ -138,8 +153,8 @@ Also in the admin group, you need to add GTWcore as a object like this:
         <object name="resource.webadmin"></object>
     </group>
 ```
-MySQL: you can enable MySQL by entering your MySQL database credentials in [resources]/GTWcore/data/settings.xml. If those fields are blank SQLite will be used instead. For MySQL you need to execute the file db.sql to install the database tables.
+MySQL: you can enable MySQL by entering your MySQL database credentials in [resources]/GTWcore/data/settings.xml. If those fields are blank SQLite will be used instead. For MySQL you need to execute the file db.sql to install the database tables on your MySQL server
 
 For resources with php files included, (currently GTWupdates), upload the php file to a local web server, then look for the call url within the resource and point it to the php file. Included php files allow any server to fetch data from remote servers, something that mtasa servers can't do on their own.
 
-And that's it folks! now your server should be successfully up and running the GTW-RPG gamemode, if not, don't hesitate to ask for support in our forum located at: https://forum.404rq.com/programming-and-software/
+And that's it folks! now your server should be successfully up and running with the GTW-RPG resources, if not, don't hesitate to ask for support in our forum's development section located at: https://discuss.404rq.com/t/development
