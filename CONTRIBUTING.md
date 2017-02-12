@@ -18,7 +18,7 @@ An issue report must fullify the following requirements:
 * Analysis of potential consequenses and other potential triggers
 
 You may also report bugs in our community forum:
-https://forum.404rq.com/bug-reports/
+https://discuss.404rq.com/t/issues
 
 
 ## Language support
