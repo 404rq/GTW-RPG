@@ -23,18 +23,18 @@ list = {
 ***********************************************************************
 
 #1 Do not spawn kill other players.
-#2 Drive on the right side of the road. Do not block other players, do not crash into other players unless you have a reason to do so, e.g in a police chase or to revenge.
+#2 Drive on the right side of the road. Do not block other players, do not crash into other players unless you have a reason to do so, e.g in a police chase or to get revenge.
 #3 Do not use any kind of hack or exploit bugs. GTW-RPG is an open source game mode which we claim to be stable and of high quality, it's therefore important to let us know about any bug you may find. Bug reports are rewardable, exploits are punishable.
 #4 Do not advertise, feel free to talk about anything as long you're not advertising it. If you don't get the difference here's an example: Talking: xBox vs PS3... Advertising: buy xBox here...
 #5 Do not obstruct or interrupt role play situations. It's not appropriate to show up with a minigun and kill a group of players standing together chatting for instance, do not use more violence than the situation require.
-#6 Do not spam the chats, repeating nonsense on purpose will lead to a mute, note that this mute are global and applies to many other servers running GTW-RPG resources as well.
-#7 Do NOT try this in game: apply for staff, suggest new features, complaint on other players or staff, ask about stuff you'll find information about in the list to the left. This is not punishable but you may not get the response you expected.
-#8 Do not actively troll, provoke, annoy or insult other players. Instead, solve your conflicts here: Report/Appeal: https://forum.404rq.com/complaints-and-reports/
+#6 Do not spam the chats, repeating nonsense on purpose will lead to a mute, note that this mute is global and applies to many other servers running GTW-RPG resources as well.
+#7 Do NOT try this in game: apply for staff, suggest new features, complain on other players or staff, ask about stuff you'll find information about in the list to the left. This is not punishable but you may not get the response you expected.
+#8 Do not actively troll, provoke, annoy or insult other players. Instead, solve your conflicts here: Report/Appeal: https://discuss.404rq.com/d/3-complaints-guidelines
 
 Thank you for complying with our rules.
 
 ***********************************************************************
-* Last edit: 2015-01-28
+* Last edit: 2017-02-27
 ***********************************************************************]] },
 	{ "Russian", 1, [[
 ***********************************************************************
@@ -61,22 +61,22 @@ Thank you for complying with our rules.
 * Rules in Dutch (Nederlands)
 ***********************************************************************
 
-#1 Geen andere spelers spawnkillen. (Geld rond ziekenhuizen)
+#1 Geen andere spelers spawnkillen. (Geldt rond ziekenhuizen)
 #2 Rijd aan de rechterkant van de weg. Blokkeer geen andere spelers, rijd niet in andere spelers zonder een geldige reden. bv. in een politie achtervolging of wraak.
 #3 Gebruik geen soort van hack of misbruik geen bugs. GTW-RPG is een open source game modus waarbij we zeggen dat hij stabiel en van hoge kwaliteit is, het is daarom belangrijk dat je ons laat weten van een bug die je vind. Bug reports zijn beloonbaar, misbruik is strafbaar.
 #4 Adverteer niet, voel je vrij om over alles te praten zolang je het niet adverteerd. Als je het verschil niet snapt dan is hier een voorbeeld: Praten: Xbox vs PS3... Adverteren: Koop je Xbox hier...
 #5 Onderbreek of belemmer rolspel situaties niet. Het is niet volwassen om met een minigun te komen en een groep van spelers die aan het praten zijn te vermoorden, gebruik niet meer geweld dan dat de situatie nodig heeft.
 #6 Spam de chat niet, onzin herhalen met opzet zal leiden tot een mute, denk eraan dat deze mute globaal werkt en dus in alle andere GTW servers werken.
-#7 Probeer dit spel NIET: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden. Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
+#7 Probeer dit NIET in het spel: soliciteren voor personeel, nieuwe kenmerken aanvragen, klagen over de andere spelers of personeel, iets vragen dat je in de lijst links van dit kan vinden. Dit is niet strafbaar maar het kan zijn dat je je verwachtte antwoord niet krijgt.
 #8 Ga niet actief trollen, provoceren, irriteren of spelers uitschelden. Inplaats daarvan, los je problemen hier op: https://forum.404rq.com/complaints-and-reports/
 
 Bedankt om mee te werken met ons reglement.
 
 Translated by:
-- WhoopeeTheClown (Global moderator, In game staff)
+- ownbyurs11 (Global moderator, In game staff)
 
 ***********************************************************************
-* Last edit: 2015-03-07
+* Last edit: 2017-02-27
 ***********************************************************************]] },
 	{ "Italian (Italiano)", 1, [[
 ***********************************************************************
@@ -212,21 +212,21 @@ Translated by:
 * RageQuit community
 ***********************************************************************
 
-Where the game is a true pleasure, we started as a small hobby project to give some new life to a bunch of old gaming PC's, thanks to the great Linux distribution "Debian" and a overkill network in northern Europe RageQuit has been growing over a couple of years and is now running multiple Multi Theft Auto and Minecraft servers.
+Where the game is a true pleasure, we started as a small hobby project to give some new life to a bunch of old gaming PC's, thanks to the great Linux distribution "Debian" and an overkill network in northern Europe RageQuit has been growing over a couple of years and is now running multiple Multi Theft Auto and Minecraft servers.
 
-As our main interest always been the development we don't put much effort in limitations of the free speech or other bureocratic "rules", instead we're trying to make our game mode enjoyable for as many players as possible, this includes everything from design details to pure performance, we hate FPS lag and bad ping just as much as you do.
+As our main interest always has been the development we don't put much effort in limitations of the free speech or other bureocratic "rules", instead we're trying to make our game mode enjoyable for as many players as possible, this includes everything from design details to pure performance, we hate FPS lag and bad ping just as much as you do.
 
-We're one of feew communities almost completly built on open source software, especially the GTW-RPG project for Multi Theft Auto which we are the main contributors to. We also offers total freedom of speech and high security on our servers so that you don't have to loose any of your valuable game progress or items you worked hard for.
+We're one of few communities almost completly built on open source software, especially the GTW-RPG project for Multi Theft Auto which we are the main contributors to. We also offers total freedom of speech and high security on our servers so that you don't have to lose any of your valuable game progress or items you have worked hard for.
 
-Find our more on our websites:
+Find out more on our websites:
 www.404rq.com
-forum.404rq.com
+discuss.404rq.com/
 wiki.404rq.com
 code.404rq.com
 media.404rq.com
 
 ***********************************************************************
-* Last edit: 2015-09-01
+* Last edit: 2017-02-27
 ***********************************************************************
 ]] },
 	{ "User accounts commands", 1, [[
@@ -236,7 +236,7 @@ media.404rq.com
 
 How to login or register:
   * Enter your credentials then press login and your data will be saved and synced
-  * If you don't have any account, choose and enter any credentials then press "register", on success you'll see a green text, press login to login to your new account.
+  * If you don't have an account, choose and enter any credentials then press "register", on success you'll see a green text, press login to login to your new account.
 
 How to change password:
   * Press F8 to open your console, then enter:
@@ -348,7 +348,7 @@ Q: How do I donate?
 A: Visit: https://404rq.com/donations/
 
 Q: My question wasn't answered here, what should I do?
-A: Ask your question here: https://forum.404rq.com/questions-and-concerns/
+A: Ask your question here: https://discuss.404rq.com/d/4-questions-guidelines
 ]]},
 	{ "Vehicles", 0 },
 	{ "Vehicle rental", 1, [[
