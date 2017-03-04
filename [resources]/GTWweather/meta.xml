@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWweather" description="Controls the weather in SA, game mod for MTA SA" type="script" version="4"></info>
+    <info author="GTWGames" name="GTWweather" description="Controls the weather in SA, game mod for MTA SA" type="script" version="54"></info>
     <script src="weather_s.lua" type="server"></script>
     <script src="weather_c.lua" type="client"></script>
 </meta>

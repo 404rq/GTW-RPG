@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -104,7 +104,7 @@ function robStore( target )
 	if getElementType( target ) == "ped" and ((robTimer[target] and not isTimer(robTimer[target][client])) or not robTimer[target]) then
 		-- Robbery in progress
 		setElementData( client, "rob", true )
-		local money = math.random( 2450, 2500 )
+		local money = math.random(100, 20000)
 		local robtime = math.random(30000, 90000)
 
 		-- Allow count down timer
@@ -113,12 +113,12 @@ function robStore( target )
 		setTimer( CounterTime, 1000, (math.floor(robtime)/1000), client )
 
 		-- When the robbery is finished
-	    setTimer( payForRob, robtime, 1, client, money )
-	    setTimer( robStatus, robtime, 1, client, target )
-	    cancelTimers[client] = setTimer( cancelRob, (math.floor(robtime)/100), 100, client, target )
+	    	setTimer( payForRob, robtime, 1, client, money )
+	    	setTimer( robStatus, robtime, 1, client, target )
+	    	cancelTimers[client] = setTimer( cancelRob, (math.floor(robtime)/100), 100, client, target )
 
-	    -- Set the wanted level 4 stars and 15 minutes violent
-		exports.GTWwanted:setWl(client, 4, 500, "You committed the crime of robbery")
+	    	-- Set the wanted level 4 stars and 15 minutes violent
+		exports.GTWwanted:setWl(client, money/1000, 600, "You committed the crime of robbery")
 		setPedAnimation( target, "shop", "shp_rob_givecash", -1, false, false, false )
 
 		-- Send alarm call to all the cops
@@ -155,12 +155,12 @@ function payForRob( crim, amount )
 
 			-- Increase stats by 1
 			local playeraccount = getPlayerAccount( crim )
-			local robs = getAccountData( playeraccount, "GTWdata_stats_rob_count" ) or 0
-			setAccountData( playeraccount, "GTWdata_stats_rob_count", robs + 1 )
+			local robs = exports.GTWcore:get_account_data( playeraccount, "GTWdata.stats.rob_count" ) or 0
+			exports.GTWcore:set_account_data( playeraccount, "GTWdata.stats.rob_count", robs + 1 )
 
 			-- Wanted points for criminals
-			local wantedPoints = getAccountData( playeraccount, "GTWdata_stats_wanted_points" ) or 0
-			setAccountData( playeraccount, "GTWdata_stats_wanted_points", wantedPoints + 40)
+			local wantedPoints = exports.GTWcore:get_account_data( playeraccount, "GTWdata.stats.wanted_points" ) or 0
+			exports.GTWcore:set_account_data( playeraccount, "GTWdata.stats.wanted_points", wantedPoints + 40)
 		end
 	end
 end

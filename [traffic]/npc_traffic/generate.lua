@@ -229,7 +229,7 @@ function hijackVehicle(plr)
 	for k,v in pairs(getElementsByType("vehicle")) do
 		local b_driver = getVehicleOccupant(v) or v
 		local vx,vy,vz = getElementPosition(b_driver)
-		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 4 and 
+		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 4 and
 			isElement(v) and getElementType(v) == "vehicle" and
 			getVehicleOccupant(v) and getElementType(getVehicleOccupant(v)) == "ped" then
 			call(npc_hlc, "disableHLCForNPC", getVehicleOccupant(v))
@@ -239,7 +239,7 @@ function hijackVehicle(plr)
 			local angry_blip = createBlipAttachedTo(angry_bot, 0, 1, 200, 200, 200, 200, 0, 180 )
 			setTimer(clean_up_angry_bots, 300*1000, 1, angry_bot, angry_blip)
 			exports.GTWwanted:setWl(plr, 0.3, 10, "You committed the crime of grand theft auto")
-			destroyElement(getVehicleOccupant(v)) 
+			destroyElement(getVehicleOccupant(v))
 		end
 	end
 end
@@ -357,6 +357,16 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 			local zoff = z_offset[model]/math.cos(math.rad(rx))
 			local car = createVehicle(model,x,y,z+zoff,rx,0,rz)
 			setVehicleFuelTankExplodable(car, true)
+
+			-- Reduce vehicle top speed and acceleration
+	                if getVehicleType(car) == "Automobile" then
+	                        local result = getVehicleHandling(car)
+	                        setVehicleHandling(car, "engineAcceleration", tonumber(result["engineAcceleration"])/2.8, false)
+	                        setVehicleHandling(car, "engineInertia", tonumber(result["engineInertia"])*2.8, false)
+	                        setVehicleHandling(car, "brakeDeceleration", tonumber(result["brakeDeceleration"])/2.8, false)
+	                        setVehicleHandling(car, "brakeBias", tonumber(result["brakeBias"])/2.8, false)
+	                end
+
 			--setTimer(destroyAINPCVehicle, 120000, 1, car)
 			setElementData(car, "npc", true)
 			setElementDimension(car,dim)

@@ -98,8 +98,8 @@ function go_criminal(source, command)
 	end
 end
 addCommandHandler("criminal", go_criminal)
-addEvent("acorp_gocrim", true)
-addEventHandler("acorp_gocrim", root, go_criminal)
+addEvent("GTWcivilians_gocrim", true)
+addEventHandler("GTWcivilians_gocrim", root, go_criminal)
 
 --[[ End current job (go to unemployed team) ]]--
 function end_work(source, command)
@@ -137,8 +137,8 @@ function endWorkButton()
 	exports.GTWtopbar:dm("End work: successfully!", client, 255, 200, 0)
 	setElementModel(client, skinID)
 end
-addEvent("acorp_onEndWork", true)
-addEventHandler("acorp_onEndWork", root, endWorkButton)
+addEvent("GTWcivilians_onEndWork", true)
+addEventHandler("GTWcivilians_onEndWork", root, endWorkButton)
 
 --[[ Commit suicide ]]--
 function commit_suicide(source, command)

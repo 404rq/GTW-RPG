@@ -59,8 +59,8 @@ end
 
 addCommandHandler("business",
 	function(plr)
-		local acc = getPlayerAccount(plr)
-		if isObjectInACLGroup("user."..getAccountName(acc), aclGetGroup("Admin")) then
+		local is_admin = exports.GTWstaff:isAdmin(plr)
+		if is_admin then
 			triggerClientEvent(plr, "client:showCreateBusinessGUI", plr)
 		else
 			exports.GTWtopbar:dm("Business: You don't have access to this command.", plr, 255, 0, 0)
@@ -135,7 +135,7 @@ function dbCreateBusinessCallback(queryHandle, posX, posY, posZ, interior, dimen
 		setElementDimension(bMarker, dimension)
 		setElementInterior(bPickup, interior)
 		setElementDimension(bPickup, dimension)
-		
+
 		--local bBlip = createBlipAttachedTo(bMarker, 52, 1, 0, 0, 0, 255, 0, 180)
 		--setElementInterior(bBlip, interior)
 		--setElementDimension(bBlip, dimension)
@@ -185,7 +185,7 @@ addEventHandler("onResourceStop", resourceRoot,
 	function()
 		for index, bMarker in ipairs(getElementsByType("marker", resourceRoot)) do
 			local bData = getElementData(bMarker, "bData")
-			if bData then 
+			if bData then
 				local id,name,owner,cost,payout,payoutTime,payoutOTime,payoutUnit,bank,timer = unpack(bData)
 				if isTimer(timer) then
 					local left = getTimerDetails(timer)

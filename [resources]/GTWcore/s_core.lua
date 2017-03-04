@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -16,6 +16,7 @@
 
 -- Table to store server core settings during runtime
 server_settings = { }
+core_db = nil
 
 --[[ Load server configuration settings from xml ]]--
 function load_settings()
@@ -43,12 +44,8 @@ function load_settings()
         setGameType(server_settings["gamemode"])
         setMapName(server_settings["map"])
 
-        -- Override other settings (optional)
-    	setTimer(setGameType, 3600*1000, 0, server_settings["gamemode"])
-    	setTimer(setMapName, 3600*1000, 0, server_settings["map"])
-
 	--[[ Export for other resources to figure out server language ]]--
-	function getGTWLanguage()
+	function getLanguage()
 		return server_settings["language"]
 	end
 
@@ -58,6 +55,12 @@ function load_settings()
         function getMySQLUser() return server_settings["MySQLuser"] end
         function getMySQLPass() return server_settings["MySQLpass"] end
         function getMySQLPort() return server_settings["MySQLport"] end
+
+        -- Connect to database
+        core_db = dbConnect("mysql", "dbname="..server_settings[
+                "MySQLdatabase"]..";host="..server_settings["MySQLhost"],
+                server_settings["MySQLuser"], server_settings["MySQLpass"],
+                "autoreconnect=1")
 end
 addEventHandler("onResourceStart", resourceRoot, load_settings)
 
@@ -111,28 +114,38 @@ end
 addEventHandler("onPlayerJoin", root, player_join_handler)
 
 --[[ Commands to transfer money between players ]]--
-function sendMoneyToPlayer(player, cmd, receiver, amount)
+local money_cooldown = { }
+function send_player_money(plr, cmd, receiver, amount)
 	local money = tonumber(amount) or 0
-	if receiver and money and money > 0 and getPlayerMoney(player) >= money and getPlayerTeam(player) then
+        if isTimer(money_cooldown[plr]) then
+                exports.GTWtopbar:dm("Please allow up to 1 minute between each transfer", plr, 255, 0, 0)
+                return
+        end
+	if receiver and money and money > 0 and money < 1000 and getPlayerMoney(plr) >= money and getPlayerTeam(plr) then
 		local playerReceiver = getPlayerFromName(receiver)
 		if playerReceiver then
-			takePlayerMoney(player, money)
+			takePlayerMoney(plr, money)
 			givePlayerMoney(playerReceiver, money)
-			exports.GTWtopbar:dm(money.."$ sent to "..receiver, player, 0, 255, 0)
-			exports.GTWtopbar:dm(money.."$ received from: "..getPlayerName(player), playerReceiver, 0, 255, 0)
-			outputServerLog("[BANK] $"..money.." sent to: "..receiver..", from: "..getPlayerName(player).." ("..getTeamName(getPlayerTeam(player))..")")
+			exports.GTWtopbar:dm(money.."$ sent to "..receiver.." (all transactions over $500 are logged)", player, 0, 255, 0)
+			exports.GTWtopbar:dm(money.."$ received from: "..getPlayerName(plr), playerReceiver, 0, 255, 0)
+                        if money > 500 then
+			        outputServerLog("[BANK] $"..money.." sent to: "..receiver..", from: "..getPlayerName(plr).." ("..getTeamName(getPlayerTeam(plr))..")")
+                        end
 		else
-			exports.GTWtopbar:dm("Player does not exist", player, 255, 0, 0)
+			exports.GTWtopbar:dm("Player does not exist", plr, 255, 0, 0)
 		end
 	elseif money < 0 then
-		exports.GTWtopbar:dm("Negative amounts are not allowed", player, 255, 0, 0)
-	elseif not getPlayerTeam(player) then
-		exports.GTWtopbar:dm("You must be in a team in order to send money, please reconnect if youre not!", player, 255, 0, 0)
+		exports.GTWtopbar:dm("Negative amounts are not allowed", plr, 255, 0, 0)
+        elseif money > 1000 then
+                exports.GTWtopbar:dm("Amounts over $1000 is not allowed", plr, 255, 0, 0)
+	elseif not getPlayerTeam(plr) then
+		exports.GTWtopbar:dm("You must be in a team in order to send money, please reconnect if youre not!", plr, 255, 0, 0)
 	else
-		exports.GTWtopbar:dm("Correct syntax: /give <player-nick> <amount>", player, 255, 255, 255)
+		outputChatBox("Correct syntax: /give <player_nick> <amount>", plr, 180, 180, 180)
 	end
+        money_cooldown[plr] = setTimer(function() end, 60*1000, 1)
 end
-addCommandHandler("give", sendMoneyToPlayer)
+addCommandHandler("give", send_player_money)
 
 function topMessage(message, player, r, g, b)
 	exports.GTWtopbar:dm(message, player, r, g, b)
@@ -147,7 +160,7 @@ function displayLoadedRes(res)
         	       isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Developer")) or
         	       isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Moderator")) or
         	       isObjectInACLGroup("user."..getAccountName(pAcc), aclGetGroup("Supporter"))) then
-        	       outputChatBox("Resource "..getResourceName(res).." v.3.0 r-"..
+        	       outputChatBox("Resource "..getResourceName(res).." v4.0-beta r-"..
                               version_r.." [#00cc00Started#ffffff]", v, 255, 255, 255, true)
                 end
         end
@@ -162,7 +175,7 @@ function displayLoadedRes(res)
 
         -- Display in server log if load successfull
         --outputServerLog("[GTW-RPG] "..getResourceName(res).." (v.2.4-beta r-"..(version_r)..") started successfully")
-        setElementData(root, "gtw-version", "GTW-RPG v3.0 r-"..tostring(server_settings["revision"]).." | www.404rq.com | ")
+        setElementData(root, "gtw-version", "GTW-RPG v4.0 r-"..tostring(server_settings["revision"]).." | www.404rq.com | ")
 end
 addEventHandler("onResourceStart", root, displayLoadedRes)
 
@@ -191,10 +204,10 @@ function manageGTWData(plr, cmd, acc, key, value)
         local pAcc = getAccount(acc)
         if not acc or not pAcc or not isObjectInACLGroup("user."..getAccountName(aAcc), aclGetGroup("Admin")) then return end
         if cmd == "getdata" and key then
- 	        local val = getAccountData(pAcc, key) or ""
+ 	        local val = get_account_data(pAcc, key) or ""
  	        outputChatBox("KEY: "..key..", has VALUE: "..val, plr, 200,200,200)
         elseif cmd == "setdata" and key and value then
-	        setAccountData(pAcc, key, value)
+	        exports.GTWcore:set_account_data(pAcc, key, value)
 	        outputChatBox("KEY: "..key..", was updated to: "..value..", successfully!", plr, 200,200,200)
         elseif cmd == "listdata" then
                 local data = getAllAccountData(pAcc)

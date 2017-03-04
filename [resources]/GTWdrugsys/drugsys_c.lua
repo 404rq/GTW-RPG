@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Price
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -19,8 +19,8 @@ sec = {{{{{{},{},{},{}}}}}}
 local sx, sy = guiGetScreenSize()
 guiSetInputMode("no_binds_when_editing")
 
-DrugUseWindow = guiCreateWindow(sx/2-(300/2), sy/2-(310/2), 300, 310, "Drug Panel", false)
-guiWindowSetSizable(DrugUseWindow, false)
+DrugUseWindow = exports.GTWgui:createWindow(sx/2-(300/2), sy/2-(310/2), 300, 310, "Drug Panel", false)
+exports.GTWgui:windowSetSizeable(DrugUseWindow, false)
 guiSetAlpha(DrugUseWindow, 0.98)
 guiSetVisible(DrugUseWindow, false)
 
@@ -65,17 +65,17 @@ function()
 		return
 	end
 	guiSetVisible(DrugUseWindow, not guiGetVisible(DrugUseWindow))
-	showCursor(guiGetVisible(DrugUseWindow))
-	guiSetText(WeedLabel, getElementData(localPlayer, "Weed") or 0)
-	guiSetText(GodLabel, getElementData(localPlayer, "God") or 0)
-	guiSetText(SpeedLabel, getElementData(localPlayer, "Speed") or 0)
-	guiSetText(LSDLabel, getElementData(localPlayer, "LSD") or 0)
-	guiSetText(SteroidsLabel, getElementData(localPlayer, "Steroids") or 0)
-	guiSetText(HeroinLabel, getElementData(localPlayer, "Heroin") or 0)
+	exports.GTWgui:showGUICursor(guiGetVisible(DrugUseWindow))
+	guiSetText(WeedLabel, getElementData(localPlayer, "GTWdrugs.weed") or 0)
+	guiSetText(GodLabel, getElementData(localPlayer, "GTWdrugs.god") or 0)
+	guiSetText(SpeedLabel, getElementData(localPlayer, "GTWdrugs.speed") or 0)
+	guiSetText(LSDLabel, getElementData(localPlayer, "GTWdrugs.lsd") or 0)
+	guiSetText(SteroidsLabel, getElementData(localPlayer, "GTWdrugs.steroids") or 0)
+	guiSetText(HeroinLabel, getElementData(localPlayer, "GTWdrugs.heroin") or 0)
 end)
 
-DrugBuyWindow = guiCreateWindow(sx/2-(550/2), sy/2-(310/2), 600, 310, "Drugs by Price for GTW-RPG", false)
-guiWindowSetSizable(DrugBuyWindow, false)
+DrugBuyWindow = exports.GTWgui:createWindow(sx/2-(550/2), sy/2-(310/2), 600, 310, "Drugs by Price for GTW-RPG", false)
+exports.GTWgui:windowSetSizeable(DrugBuyWindow, false)
 guiSetVisible(DrugBuyWindow, false)
 guiSetAlpha(DrugBuyWindow, 0.98)
 
@@ -139,7 +139,7 @@ function showBuyDrug()
 	guiSetText(SteroidsBuyEdit, "0")
 	guiSetText(HeroinBuyEdit, "0")
 	guiSetVisible(DrugBuyWindow, true)
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 	if drugDealer then
 		guiSetText(DrugBuyWindow, "Buying drugs from "..getPlayerName(drugDealer))
 	else
@@ -151,17 +151,17 @@ addEventHandler("onClientGUIChanged", guiRoot,
 function()
 	if drugDealer then
 		if getElementData(drugDealer, "DurgsDealer") then
-			MaxWeed = (getElementData(drugDealer, "Weed") or 0) + (getElementData(localPlayer, "Weed") or 0)
-			MaxGod = (getElementData(drugDealer, "God") or 0) + (getElementData(localPlayer, "God") or 0)
-			MaxSpeed = (getElementData(drugDealer, "Speed") or 0) + (getElementData(localPlayer, "Speed") or 0)
-			MaxLSD = (getElementData(drugDealer, "LSD") or 0) + (getElementData(localPlayer, "LSD") or 0)
-			MaxSteroids = (getElementData(drugDealer, "Steroids") or 0) + (getElementData(localPlayer, "Steroids") or 0)
-			MaxHeroin = (getElementData(drugDealer, "Heroin") or 0) + (getElementData(localPlayer, "Heroin") or 0)
+			MaxWeed = (getElementData(drugDealer, "GTWdrugs.weed") or 0) + (getElementData(localPlayer, "GTWdrugs.weed") or 0)
+			MaxGod = (getElementData(drugDealer, "GTWdrugs.god") or 0) + (getElementData(localPlayer, "GTWdrugs.god") or 0)
+			MaxSpeed = (getElementData(drugDealer, "GTWdrugs.speed") or 0) + (getElementData(localPlayer, "GTWdrugs.speed") or 0)
+			MaxLSD = (getElementData(drugDealer, "GTWdrugs.lsd") or 0) + (getElementData(localPlayer, "GTWdrugs.lsd") or 0)
+			MaxSteroids = (getElementData(drugDealer, "GTWdrugs.steroids") or 0) + (getElementData(localPlayer, "GTWdrugs.steroids") or 0)
+			MaxHeroin = (getElementData(drugDealer, "GTWdrugs.heroin") or 0) + (getElementData(localPlayer, "GTWdrugs.heroin") or 0)
 		else
 			exports.GTWtopbar:dm("This player does not sell drugs anymore!", 255, 0, 0)
 			drugDealer = nil
 			guiSetVisible(DrugBuyWindow, false)
-			showCursor(false)
+			exports.GTWgui:showGUICursor(false)
 		end
 	else
 		MaxWeed = 10000
@@ -174,7 +174,7 @@ function()
 	local Text = guiGetText(source)
 	local Text = tonumber(Text)
 	if source == WeedBuyEdit then
-		local Amount = getElementData(localPlayer, "Weed") or 0
+		local Amount = getElementData(localPlayer, "GTWdrugs.weed") or 0
 		if not Text then
 			guiSetText(source, "0")
 		elseif Text+Amount > MaxWeed then
@@ -182,7 +182,7 @@ function()
 		end
 		WeedCost = tonumber(guiGetText(source)) * tonumber(string.sub(guiGetText(WeedPriceLabel), 2))
 	elseif source == GodBuyEdit then
-		local Amount = getElementData(localPlayer, "God") or 0
+		local Amount = getElementData(localPlayer, "GTWdrugs.god") or 0
 		if not Text then
 			guiSetText(source, "0")
 		elseif Text+Amount > MaxGod then
@@ -190,7 +190,7 @@ function()
 		end
 		GodCost = tonumber(guiGetText(source)) * tonumber(string.sub(guiGetText(GodPriceLabel), 2))
 	elseif source == SpeedBuyEdit then
-		local Amount = getElementData(localPlayer, "Speed") or 0
+		local Amount = getElementData(localPlayer, "GTWdrugs.speed") or 0
 		if not Text then
 			guiSetText(source, "0")
 		elseif Text+Amount > MaxSpeed then
@@ -198,7 +198,7 @@ function()
 		end
 		SpeedCost = tonumber(guiGetText(source)) * tonumber(string.sub(guiGetText(SpeedPriceLabel), 2))
 	elseif source == LSDBuyEdit then
-		local Amount = getElementData(localPlayer, "LSD") or 0
+		local Amount = getElementData(localPlayer, "GTWdrugs.lsd") or 0
 		if not Text then
 			guiSetText(source, "0")
 		elseif Text+Amount > MaxLSD then
@@ -206,7 +206,7 @@ function()
 		end
 		LSDCost = tonumber(guiGetText(source)) * tonumber(string.sub(guiGetText(LSDPriceLabel), 2))
 	elseif source == SteroidsBuyEdit then
-		local Amount = getElementData(localPlayer, "Steroids") or 0
+		local Amount = getElementData(localPlayer, "GTWdrugs.steroids") or 0
 		if not Text then
 			guiSetText(source, "0")
 		elseif Text+Amount > MaxSteroids then
@@ -214,7 +214,7 @@ function()
 		end
 		SteroidsCost = tonumber(guiGetText(source)) * tonumber(string.sub(guiGetText(SteroidsPriceLabel), 2))
 	elseif source == HeroinBuyEdit then
-		local Amount = getElementData(localPlayer, "Heroin") or 0
+		local Amount = getElementData(localPlayer, "GTWdrugs.heroin") or 0
 		if not Text then
 			guiSetText(source, "0")
 		elseif Text+Amount > MaxHeroin then
@@ -239,12 +239,12 @@ function()
 		if Cost > 0 then
 			if drugDealer then
 				if getElementData(drugDealer, "DurgsDealer") then
-					MaxWeed = getElementData(drugDealer, "Weed") or 0
-					MaxGod = getElementData(drugDealer, "God") or 0
-					MaxSpeed = getElementData(drugDealer, "Speed") or 0
-					MaxLSD = getElementData(drugDealer, "LSD") or 0
-					MaxSteroids = getElementData(drugDealer, "Steroids") or 0
-					MaxHeroin = getElementData(drugDealer, "Heroin") or 0
+					MaxWeed = getElementData(drugDealer, "GTWdrugs.weed") or 0
+					MaxGod = getElementData(drugDealer, "GTWdrugs.god") or 0
+					MaxSpeed = getElementData(drugDealer, "GTWdrugs.speed") or 0
+					MaxLSD = getElementData(drugDealer, "GTWdrugs.lsd") or 0
+					MaxSteroids = getElementData(drugDealer, "GTWdrugs.steroids") or 0
+					MaxHeroin = getElementData(drugDealer, "GTWdrugs.heroin") or 0
 					if MaxWeed >= WeedAmount and MaxGod >= GodAmount and MaxSpeed >= SpeedAmount and MaxLSD >= LSDAmount and MaxSteroids >= SteroidsAmount and MaxHeroin >= HeroinAmount then
 						triggerServerEvent("BuyDrugs", localPlayer, Cost, WeedAmount, GodAmount, SpeedAmount, LSDAmount, SteroidsAmount, HeroinAmount, drugDealer)
 					else
@@ -254,7 +254,7 @@ function()
 					exports.GTWtopbar:dm("This player does not sell drugs anymore!", 255, 0, 0)
 					drugDealer = nil
 					guiSetVisible(DrugBuyWindow, false)
-					showCursor(false)
+					exports.GTWgui:showGUICursor(false)
 				end
 			else
 				if MaxWeed >= WeedAmount and MaxGod >= GodAmount and MaxSpeed >= SpeedAmount and MaxLSD >= LSDAmount and MaxSteroids >= SteroidsAmount and MaxHeroin >= HeroinAmount then
@@ -272,12 +272,12 @@ function()
 		exports.GTWwanted:setWl(0.25, 0, "You committed the crime of buying drugs", true, false)
 	elseif source == CloseBuyDrugPanel then
 		guiSetVisible(DrugBuyWindow, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		drugDealer = nil
 	elseif source == UseDrug then
 		if guiRadioButtonGetSelected(WeedRadioButton) then
-			if (getElementData(localPlayer, "Weed") or 0) > 0 then
-				setElementData(localPlayer, "Weed", (getElementData(localPlayer, "Weed") or 0) - 1)
+			if (getElementData(localPlayer, "GTWdrugs.weed") or 0) > 0 then
+				setElementData(localPlayer, "GTWdrugs.weed", (getElementData(localPlayer, "GTWdrugs.weed") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Weed drug!", 255, 0, 255)
 				setGravity(0.005)
 				if not isTimer(WeedTimer) then
@@ -291,23 +291,23 @@ function()
 				exports.GTWtopbar:dm("You don't have any Weed drug!", 255, 0, 0)
 			end
 		elseif guiRadioButtonGetSelected(GodRadioButton) then
-			if (getElementData(localPlayer, "God") or 0) > 0 then
-				setElementData(localPlayer, "God", (getElementData(localPlayer, "God") or 0) - 1)
+			if (getElementData(localPlayer, "GTWdrugs.god") or 0) > 0 then
+				setElementData(localPlayer, "GTWdrugs.god", (getElementData(localPlayer, "GTWdrugs.god") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the God drug!", 255, 0, 255)
-				triggerServerEvent("takeDrug", localPlayer, "God", 1000)
+				triggerServerEvent("takeDrug", localPlayer, "GTWdrugs.god", 1000)
 				if not isTimer(GodTimer) then
-					GodTimer = setTimer(function() triggerServerEvent("takeDrug", localPlayer, "God", 569) exports.GTWtopbar:dm("God: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
+					GodTimer = setTimer(function() triggerServerEvent("takeDrug", localPlayer, "GTWdrugs.god", 569) exports.GTWtopbar:dm("God: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
 				else
 					local remaining = getTimerDetails(GodTimer)
 					killTimer(GodTimer)
-					GodTimer = setTimer(function() triggerServerEvent("takeDrug", localPlayer, "God", 569) exports.GTWtopbar:dm("God: This drug does not have any effect anymore.", 255, 255, 0) end, 60000+remaining, 1)
+					GodTimer = setTimer(function() triggerServerEvent("takeDrug", localPlayer, "GTWdrugs.god", 569) exports.GTWtopbar:dm("God: This drug does not have any effect anymore.", 255, 255, 0) end, 60000+remaining, 1)
 				end
 			else
 				exports.GTWtopbar:dm("You don't have any God drug!", 255, 0, 0)
 			end
 		elseif guiRadioButtonGetSelected(SpeedRadioButton) then
-			if (getElementData(localPlayer, "Speed") or 0) > 0 then
-				setElementData(localPlayer, "Speed", (getElementData(localPlayer, "Speed") or 0) - 1)
+			if (getElementData(localPlayer, "GTWdrugs.speed") or 0) > 0 then
+				setElementData(localPlayer, "GTWdrugs.speed", (getElementData(localPlayer, "GTWdrugs.speed") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Speed drug!", 255, 0, 255)
 				setGameSpeed(1.4)
 				if not isTimer(SpeedTimer) then
@@ -321,8 +321,8 @@ function()
 				exports.GTWtopbar:dm("You don't have any Speed drug!", 255, 0, 0)
 			end
 		elseif guiRadioButtonGetSelected(LSDRadioButton) then
-			if (getElementData(localPlayer, "LSD") or 0) > 0 then
-				setElementData(localPlayer, "LSD", (getElementData(localPlayer, "LSD") or 0) - 1)
+			if (getElementData(localPlayer, "GTWdrugs.lsd") or 0) > 0 then
+				setElementData(localPlayer, "GTWdrugs.lsd", (getElementData(localPlayer, "GTWdrugs.lsd") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the LSD drug!", 255, 0, 255)
 				setHeatHaze(65, 50, 80, 80, 20, 80, 20, 1500, true)
 				setSkyGradient(255, 255, 255, 0,  200, 0)
@@ -337,8 +337,8 @@ function()
 				exports.GTWtopbar:dm("You don't have any LSD drug!", 255, 0, 0)
 			end
 		elseif guiRadioButtonGetSelected(SteroidsRadioButton) then
-			if (getElementData(localPlayer, "Steroids") or 0) > 0 then
-				setElementData(localPlayer, "Steroids", (getElementData(localPlayer, "Steroids") or 0) - 1)
+			if (getElementData(localPlayer, "GTWdrugs.steroids") or 0) > 0 then
+				setElementData(localPlayer, "GTWdrugs.steroids", (getElementData(localPlayer, "GTWdrugs.steroids") or 0) - 1)
 				exports.GTWtopbar:dm("You have injected the Steroids drug!", 255, 0, 255)
 				if not isTimer(SteroidsHealthTimer) then
 					SteroidsHealthTimer = setTimer(function() setElementHealth(localPlayer, getElementHealth(localPlayer) + 2) end, 8000, 0)
@@ -354,8 +354,8 @@ function()
 				exports.GTWtopbar:dm("You don't have any Steroids drug!", 255, 0, 0)
 			end
 		elseif guiRadioButtonGetSelected(HeroinRadioButton) then
-			if (getElementData(localPlayer, "Heroin") or 0) > 0 then
-				setElementData(localPlayer, "Heroin", (getElementData(localPlayer, "Heroin") or 0) - 1)
+			if (getElementData(localPlayer, "GTWdrugs.heroin") or 0) > 0 then
+				setElementData(localPlayer, "GTWdrugs.heroin", (getElementData(localPlayer, "GTWdrugs.heroin") or 0) - 1)
 				if not isTimer(HeroinTimer) then
 					addEventHandler("onClientPlayerDamage", localPlayer, hardToDie)
 					HeroinTimer = setTimer(function() removeEventHandler("onClientPlayerDamage", localPlayer, hardToDie) exports.GTWtopbar:dm("Heroin: This drug does not have any effect anymore.", 255, 255, 0) end, 60000, 1)
@@ -374,7 +374,7 @@ function()
 		exports.GTWwanted:setWl(0.8, 30, "You committed the crime of using drugs in public", true, false)
 	elseif source == CloseUseDrugPanel then
 		guiSetVisible(DrugUseWindow, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 	end
 end)
 
@@ -412,7 +412,7 @@ function(player)
 	if player == localPlayer then
 		if source == OpenDrugShopMarker or getElementData(source, "sellDrugMarker") then
 			guiSetVisible(DrugBuyWindow, false)
-			showCursor(false)
+			exports.GTWgui:showGUICursor(false)
 			drugDealer = nil
 		end
 	end
@@ -443,7 +443,7 @@ function(thePlayer, seat)
 		end
 		if isTimer(GodTimer) then
 			killTimer(GodTimer)
-			triggerServerEvent("takeDrug", localPlayer, "God", 0)
+			triggerServerEvent("takeDrug", localPlayer, "GTWdrugs.god", 0)
 		end
 		if isTimer(SpeedTimer) then
 			killTimer(SpeedTimer)

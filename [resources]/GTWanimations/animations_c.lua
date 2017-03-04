@@ -18,7 +18,7 @@
 --[[ Initialize the GUI ]]--
 local resX, resY = guiGetScreenSize()
 function create_gui()
-	win_anim = guiCreateWindow(resX-400, resY/2-250, 400, 500, "Animations", false)
+	win_anim = exports.GTWgui:createWindow(resX-400, resY/2-250, 400, 500, "Animations", false)
 	guiSetVisible(win_anim, false)
 	category_list = guiCreateGridList(10, 33, 187, 400, false, win_anim)
 	anim_list = guiCreateGridList(203,33,187,400,false,win_anim)
@@ -43,17 +43,17 @@ addEventHandler("onClientResourceStart", resourceRoot, create_gui)
 --[[ Close the window ]]--
 function window_close()
 	guiSetVisible(win_anim, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ Toggle window visibility ]]--
 function window_toggle()
 	if not guiGetVisible(win_anim) then
 		guiSetVisible(win_anim, true)
-		showCursor(true)
+		exports.GTWgui:showGUICursor(true)
 	else
 		guiSetVisible(win_anim, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 	end
 end
 bindKey("F10", "down", window_toggle)

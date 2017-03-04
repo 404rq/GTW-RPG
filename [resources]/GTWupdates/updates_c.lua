@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -16,7 +16,7 @@
 
 -- Create the updates window
 local x,y = guiGetScreenSize()
-local window = guiCreateWindow((x-800)/2, (y-600)/2, 800, 600, "RageQuit 404 - MTA servers updates", false )
+local window = exports.GTWgui:createWindow((x-800)/2, (y-600)/2, 800, 600, "RageQuit 404 - MTA servers updates", false )
 local txt_memo = guiCreateMemo(10, 30, 780, 526, "", false, window)
 local old_text = ""
 
@@ -30,7 +30,7 @@ local closeButton = guiCreateButton(10,560,780,30, "Close window", false, window
 exports.GTWgui:setDefaultFont(closeButton, 10)
 addEventHandler("onClientGUIClick",closeButton,function()
 	guiSetVisible(window, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end)
 
 -- Refresh and toggle updates list
@@ -61,7 +61,7 @@ addEventHandler("GTWupdates.respond", root, server_response)
 
 function toggle_gui()
 	guiSetVisible(window, not guiGetVisible(window))
-	showCursor(not isCursorShowing())
+	exports.GTWgui:showGUICursor(not isCursorShowing())
 	download_updates()
 end
 addCommandHandler("updates", toggle_gui)

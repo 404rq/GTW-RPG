@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Price
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="Price" description="Drug system by Price, contibution to the GTW-RPG project" type="script" version="5" />
+    <info author="Price" description="Drug system by Price, contibution to the GTW-RPG project" type="script" version="59" />
     <script src="drugsys_s.lua" type="server" />
     <script src="drugsys_c.lua" type="client" />
 </meta>

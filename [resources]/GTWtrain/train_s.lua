@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -352,11 +352,11 @@ function create_train(plr, cmd, args)
 		elseif engine_ID == 449 then
 			car_ID = 449
 		end
-		
+
 		-- Extra engine
 		if engine_ID == 537 and index == 1 and math.random(1,10) > 0 then
 			car_ID = 537
-		end	
+		end
 
 		-- Calculate position relative to front car
 		local rx,ry,rz = getElementRotation(front_car)
@@ -367,7 +367,7 @@ function create_train(plr, cmd, args)
 		local car = createVehicle(car_ID, tx,ty,tz, 0,0,0, "")
 		--local blip = createBlipAttachedTo(car, 0, 1, 200, 200, 200, 200, 0, 180)
 		setTrainDerailable(car, false)
-		
+
 		-- Center of train
 		if math.ceil(t_length/2) == center_counter then
 			setElementData(new_train, "GTWtrain.centerCar", car)
@@ -383,7 +383,7 @@ function create_train(plr, cmd, args)
 		-- Update front_car (the car in front of the next one)
 		front_car = car
 		center_counter = center_counter + 1
-		
+
 		-- Rotate second engine
 		--if isElement(car) and getElementType(car) == "vehicle" and car_ID == 537 then
 		--	setTimer(setTrainDirection, 1000, 1, car, not getTrainDirection(new_train))
@@ -395,7 +395,7 @@ function create_train(plr, cmd, args)
 
 	-- Adds a client event handler that destroys the train when it streams out.
 	triggerClientEvent(plr, "GTWtrain.onStreamOut", plr, new_train)
-	
+
 	-- Applying a cooldown to prevent trains from blasting their horn upon spawn
 	Trains.horn_cooldown[new_train] = setTimer(function() end, 5000, 1)
 
@@ -406,12 +406,12 @@ function create_train(plr, cmd, args)
 		setTimer(run_normal, Settings.station_stop_time_ms*2, 1, new_train)
 		--setTimer(use_horn, Settings.station_stop_time_ms-1000, 1, new_train)
 	end
-	
+
 	-- Setup the warning horn
 	local horn_marker = createMarker(x,y,z, "cylinder", 6, 0,0,0, 0)
 	setElementData(new_train, "GTWtrain.hornMarker", horn_marker)
 	attachElements(horn_marker, new_train, 0,50,-2)
-	addEventHandler("onMarkerHit", horn_marker, function() 
+	addEventHandler("onMarkerHit", horn_marker, function()
 		use_horn(new_train)
 	end)
 end
@@ -438,7 +438,7 @@ function connect_carriages(plr)
 	local train = getPedOccupiedVehicle(plr)
 	if not train or not isElement(train) or getElementType(train) ~=
 		"vehicle" or getVehicleType(train) ~= "Train" then
-		--exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
+		exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
 		return
 	end
 
@@ -478,7 +478,7 @@ function disconnect_carriages(plr)
 	local train = getPedOccupiedVehicle(plr)
 	if not train or not isElement(train) or getElementType(train) ~=
 		"vehicle" or getVehicleType(train) ~= "Train" then
-		--exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
+		exports.GTWtopbar:dm("You're not in a train!", plr, 255, 0, 0)
 		return
 	end
 
@@ -508,7 +508,7 @@ function destroy_train(d_train)
 	if isElement(getElementData(d_train, "GTWtrain.hornMarker")) then
 		destroyElement(getElementData(d_train, "GTWtrain.hornMarker"))
 	end
-	
+
 	-- Check so that there's no nearby players
 	local tx,ty,tz = getElementPosition(d_train)
 	for k,v in pairs(getElementsByType("player")) do
@@ -578,19 +578,23 @@ function set_speed_policy(t_engine, state)
 	elseif not getTrainDirection(t_engine) and getTrainSpeed(t_engine) > 0 and state == 2 then
 		state = 1
 	end]]--
-	
+
 	-- Set train speed
 	if state == 1 then
+		local new_speed = getTrainSpeed(t_engine)+(0.2/160)
+		if math.abs(new_speed) > Settings.max_speed then new_speed = Settings.max_speed end
 		if getTrainDirection(t_engine) then
-			setTrainSpeed(t_engine, getTrainSpeed(t_engine)+(0.2/160))
+			setTrainSpeed(t_engine, new_speed)
 		else
-			setTrainSpeed(t_engine, -(getTrainSpeed(t_engine)+(0.2/160)))
+			setTrainSpeed(t_engine, -new_speed)
 		end
 	elseif state == 2 then
+		local new_speed = getTrainSpeed(t_engine)-(1/160)
+		if math.abs(new_speed) > Settings.max_speed then new_speed = Settings.max_speed end
 		if getTrainDirection(t_engine) then
-			setTrainSpeed(t_engine, getTrainSpeed(t_engine)-(1/160))
+			setTrainSpeed(t_engine, new_speed)
 		else
-			setTrainSpeed(t_engine, -(getTrainSpeed(t_engine)-(1/160)))
+			setTrainSpeed(t_engine, -new_speed)
 		end
 	end
 

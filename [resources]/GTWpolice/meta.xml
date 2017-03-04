@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,20 +15,20 @@
 -->
 
 <meta>
-        <info author="GTWGames" name="Police system" version="108" type="script" />
-        <include resource="GTWjail" />
-        <include resource="GTWwanted" />
-
-        <script src="data.lua" type="shared" protected="true" />
-        <script src="police_client.lua" type="client" protected="true" />
-        <script src="police_server.lua" type="server" />
-        <script src="misc.lua" type="server" />
-        <script src="exports.lua" type="server" />
-        <script src="blips.lua" type="server" />
-
-        <export function="distanceToCop" type="server" />
-        <export function="nearestCop" type="server" />
-        <export function="isArrested" type="server" />
-        <export function="isLawUnit" type="server" />
-        <export function="isLawUnit" type="client" />
+    <info author="GTWGames" name="Police system" version="164" type="script" />
+    <include resource="GTWjail" />
+    <include resource="GTWwanted" />
+    
+    <script src="data.lua" type="shared" protected="true" />
+    <script src="police_client.lua" type="client" protected="true" />
+    <script src="police_server.lua" type="server" />
+    <script src="misc.lua" type="server" />
+    <script src="exports.lua" type="server" />
+    <script src="blips.lua" type="server" />
+    
+    <export function="distanceToCop" type="server" />
+    <export function="nearestCop" type="server" />
+    <export function="isArrested" type="server" />
+    <export function="isLawUnit" type="server" />
+    <export function="isLawUnit" type="client" />
 </meta>

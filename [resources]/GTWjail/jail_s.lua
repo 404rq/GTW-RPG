@@ -332,7 +332,7 @@ function save_remaining_time()
 	if not acc then return end
 	local dist_to_cop = exports.GTWpolice:distanceToCop(source) or 9999
 	if dist_to_cop > 180 then return end
-	setAccountData(acc, "GTWjail.timeLeftInMS", time_left_ms)
+	exports.GTWcore:set_account_data(acc, "GTWjail.timeLeftInMS", time_left_ms)
 end
 addEventHandler("onPlayerQuit", root, save_remaining_time)
 

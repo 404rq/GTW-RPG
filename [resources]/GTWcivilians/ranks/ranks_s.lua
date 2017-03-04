@@ -21,43 +21,43 @@ function get_player_rank(player, occupation)
 	if not acc then return end
 	local statValue = ""
 	if occupation == "Train Driver" then
-		statValue = "GTWdata_stats_train_stops"
+		statValue = "GTWdata.stats.train_stops"
 	elseif occupation == "Tram Driver" then
-		statValue = "GTWdata_stats_tram_stops"
+		statValue = "GTWdata.stats.tram_stops"
 	elseif occupation == "Bus Driver" then
-		statValue = "GTWdata_stats_bus_stops"
+		statValue = "GTWdata.stats.bus_stops"
 	elseif occupation == "Taxi Driver" then
-		statValue = "GTWdata_stats_taxi_stops"
+		statValue = "GTWdata.stats.taxi_stops"
 	elseif occupation == "Pilot" then
-		statValue = "GTWdata_stats_pilot_progress"
+		statValue = "GTWdata.stats.pilot_progress"
 	elseif occupation == "Criminal" then
-		statValue = "GTWdata_stats_wanted_points"
+		statValue = "GTWdata.stats.wanted_points"
 	elseif occupation == "Gangster" then
-		statValue = "GTWdata_stats_turf_count"
+		statValue = "GTWdata.stats.turf_count"
 	elseif occupation == "Farmer" then
-		statValue = "GTWdata_stats_plants_harvested"
+		statValue = "GTWdata.stats.plants_harvested"
 	elseif occupation == "Trucker" then
-		statValue = "GTWdata_stats_trucker_deliveries"
+		statValue = "GTWdata.stats.trucker_deliveries"
 	elseif occupation == "Mechanic" then
-		statValue = "GTWdata_stats_repaired_cars"
+		statValue = "GTWdata.stats.repaired_cars"
 	elseif occupation == "Police officer" then
-		statValue = "GTWdata_stats_police_arrests"
+		statValue = "GTWdata.stats.police_arrests"
 	elseif occupation == "SAPD officer" then
-		statValue = "GTWdata_stats_police_arrests"
+		statValue = "GTWdata.stats.police_arrests"
 	elseif occupation == "SWAT officer" then
-		statValue = "GTWdata_stats_police_arrests"
+		statValue = "GTWdata.stats.police_arrests"
 	elseif occupation == "FBI officer" then
-		statValue = "GTWdata_stats_police_arrests"
+		statValue = "GTWdata.stats.police_arrests"
 	elseif occupation == "Armed forces" then
-		statValue = "GTWdata_stats_police_arrests"
+		statValue = "GTWdata.stats.police_arrests"
 	elseif occupation == "Fireman" then
-		statValue = "GTWdata_stats_fireman_fires"
+		statValue = "GTWdata.stats.fireman_fires"
 	elseif occupation == "Paramedic" then
-		statValue = "GTWdata_stats_medic_heals"
+		statValue = "GTWdata.stats.medic_heals"
 	end
 	local rank,nextRank,statNumReq,statNum,statLevel = "","",0,0,0
 	if statValue then
-		statNum = tonumber(getAccountData(acc, statValue) or 0)
+		statNum = tonumber(exports.GTWcore:get_account_data(acc, statValue) or 0)
 		if level_list[occupation] then
 			for w=1, #level_list[occupation] do
 				if statNum >= level_list[occupation][w] then

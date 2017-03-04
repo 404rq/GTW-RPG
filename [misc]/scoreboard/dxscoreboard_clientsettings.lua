@@ -484,9 +484,9 @@ end
 
 function createScoreboardSettingsWindow( posX, posY )
 	if not windowSettings then
-		windowSettings = guiCreateWindow( posX, posY, 323, 350, "Scoreboard settings", false )
+		windowSettings = exports.GTWgui:createWindow( posX, posY, 323, 350, "Scoreboard settings", false )
 		guiSetText( windowSettings, "Scoreboard settings" )
-		guiWindowSetSizable( windowSettings, false )
+		exports.GTWgui:windowSetSizeable( windowSettings, false )
 		
 		labelUseAnimation = guiCreateLabel( 10, 26, 64, 15, "Use animation:", false, windowSettings )
 		guiSetFont( labelUseAnimation, "default-small" )
@@ -659,7 +659,7 @@ function destroyScoreboardSettingsWindow()
 	removeEventHandler( "onClientRender", getRootElement(), drawSettingsWindowColors )
 	destroyElement( windowSettings )
 	if not getKeyState( "mouse2" ) then
-		showCursor( false )
+		exports.GTWgui:showGUICursor( false )
 	end
 	colorPicker.closeSelect()
 	windowSettings = nil

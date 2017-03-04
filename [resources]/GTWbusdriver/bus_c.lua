@@ -56,7 +56,7 @@ function create_bus_stop(x, y, z)
 	-- Calculate the payment for next busstop
 	local px,py,pz = getElementPosition(localPlayer)
 	local dist = getDistanceBetweenPoints3D(x,y,z, px,py,pz)
-	next_payment = dist*0.6
+	next_payment = dist*0.3
 	if next_payment < 30 then next_payment = 30 end
 	if next_payment > 400 then next_payment = 400 end
 end
@@ -145,13 +145,13 @@ addEventHandler("onClientVehicleEnter", root, enter_the_bus)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_bus_route( )
 	-- Create the selection GUI
-	window = guiCreateWindow((sx-600)/2, (sy-350)/2, 600, 350, "Select bus route", false)
+	window = exports.GTWgui:createWindow((sx-600)/2, (sy-350)/2, 600, 350, "Select bus route", false)
 	local close_button = guiCreateButton(480, 310, 110, 36, "Close", false, window)
 	local routes_list = guiCreateGridList(10, 30, 580, 276, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.86 )
 	exports.GTWgui:setDefaultFont(close_button, 10)
 	exports.GTWgui:setDefaultFont(routes_list, 10)
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 
 	-- List all bus routes
 	for k,v in pairs(bus_routes) do
@@ -172,7 +172,7 @@ function select_bus_route( )
 
 		-- Notice about how to change
 		outputChatBox("[Busdriver]#BBBBBB Mission assigned, type /routes to change your mission", 255,200,0, true)
-		
+
 		-- Close the GUI
 		close_gui()
 	end)
@@ -184,7 +184,7 @@ addEventHandler( "GTWbusdriver.selectRoute", root, select_bus_route)
 function close_gui()
 	if isElement(window) then destroyElement(window) end
 	if isElement(routes_list) then destroyElement(routes_list) end
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ DX text to display the location of next busstop ]]

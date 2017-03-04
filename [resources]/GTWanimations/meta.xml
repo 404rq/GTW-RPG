@@ -16,11 +16,11 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="41" name="Animations" decription="Animations system with gui" type="script" />
+    <info author="GTWGames" version="91" name="Animations" decription="Animations system with gui" type="script" />
     <script src="data.lua" type="shared" />
     <script src="animations_c.lua" type="client" />
     <script src="animations_s.lua" type="server" />
-
+    
     <include resource="GTWtopbar" />
     <include resource="GTWpolice" />
 </meta>

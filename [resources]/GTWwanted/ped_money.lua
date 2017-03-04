@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -34,16 +34,16 @@ function killedPed(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	else
 		probability_of_richness = 100
 	end
-	
+
 	-- Create a money pickup at the position of the dead bot
 	local x,y,z = getElementPosition(source)
-	profit[killer] = math.random(5,200)*probability_of_richness -- Max profit: $20´000
-	
+	profit[killer] = math.random(1,40)*probability_of_richness -- Max profit: $4´000
+
 	-- Increase payment if the dead bot was an outlaw
-	if getElementData(source, "GTWoutlaws.vBot") then 
-		profit[killer] = math.random(50,500)*probability_of_richness -- Max profit: $50´000
+	if getElementData(source, "GTWoutlaws.vBot") then
+		profit[killer] = math.random(1,100)*probability_of_richness -- Max profit: $10´000
 	end
-	
+
 	-- Make the pickup and make sure it's removed after 2 minutes if not picked up
 	local pickup = createPickup(x, y, z, 3, 1212, 120000, profit[killer])
 	if pickup then
@@ -67,7 +67,7 @@ function givePickupMoney(plr)
 	removeEventHandler("onPickupHit", source, givePickupMoney)
 	destroyElement(source)
    	givePlayerMoney(plr, profit[plr])
-	
+
 	-- Calculate wanted level
 	local wanted_level = (profit[plr]/10000)
 	if wanted_level < 0.6 then wanted_level = 0.6 end

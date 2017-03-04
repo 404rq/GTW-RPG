@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -89,10 +89,10 @@ setElementFrozen(dummieCar, false)
 setVehicleDamageProof(dummieCar, true)
 setVehicleColor(dummieCar, 200, 200, 200, 200, 200, 200)
 
-btn_buy = guiCreateButton(0.74, 0.86, 0.21, 0.06, "Buy", true)
+btn_buy = guiCreateButton(0.74, 0.82, 0.21, 0.06, "Buy", true)
 guiSetProperty(btn_buy, "NormalTextColour", "FFAAAAAA")
 vehicle_list_shop = guiCreateGridList(0.01, 0.81, 0.25, 0.18, true)
-btn_close = guiCreateButton(0.98, 0.805, 0.02, 0.02, "X", true)
+btn_close = guiCreateButton(0.74, 0.89, 0.21, 0.06, "Exit", true)
 guiSetProperty(btn_close, "NormalTextColour", "FFAAAAAA")
 lbl_name = guiCreateLabel(0.36, 0.81, 0.32, 0.08, "--", true)
 guiSetFont(lbl_name, "clear-normal")
@@ -104,8 +104,8 @@ guiLabelSetVerticalAlign(lbl_price, "center")
 
 -- Apply new GUI style
 exports.GTWgui:setDefaultFont(btn_buy, 16)
-exports.GTWgui:setDefaultFont(btn_close, 10)
-exports.GTWgui:setDefaultFont(lbl_name, 14)
+exports.GTWgui:setDefaultFont(btn_close, 16)
+exports.GTWgui:setDefaultFont(lbl_name, 18)
 exports.GTWgui:setDefaultFont(lbl_price, 20)
 exports.GTWgui:setDefaultFont(vehicle_list_shop, 10)
 
@@ -152,7 +152,7 @@ function toggleVehiclesShop(open, x, y, z, cx, cy, cz, rz, int, dim)
 	if open then
 		if x and y and z and cx and cy and cz then
 			toggleAllControls(false, true, false)
-			showCursor(true)
+			exports.GTWgui:showGUICursor(true)
 			guiSetVisible(vehicle_list_shop, true)
 			guiSetVisible(btn_close, true)
 			guiSetVisible(btn_buy, true)
@@ -178,7 +178,7 @@ function toggleVehiclesShop(open, x, y, z, cx, cy, cz, rz, int, dim)
 		removeEventHandler("onClientRender", getRootElement(), renderShopFurning)
 		setCameraTarget(localPlayer)
 		toggleAllControls(true, true, true)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		setElementPosition(dummieCar, 0, 0, 0)
 		setElementInterior(dummieCar, 0)
 		setElementDimension(dummieCar, 0)
@@ -214,7 +214,6 @@ function()
 			local int = getElementInterior(dummieCar)
 			triggerServerEvent("GTWvehicleshop.onPlayerVehicleBuyRequest", localPlayer, getVehicleModelFromName(vehName),
 				guiGridListGetItemData(vehicle_list_shop, row, column) * 1000, x, y, z, rx, ry, rz, dim, int)
-			toggleVehiclesShop(false)
 		else
 			exports.GTWtopbar:dm("You can't afford this vehicle, you little twat!", 255, 0, 0)
 		end

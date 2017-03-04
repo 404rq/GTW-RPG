@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,6 +15,7 @@
 ]]--
 
 for i,v in ipairs({
+    {3095,2522.3999,-1273.19995,32.9,0,270,359.75,1,0,0, true},
     {1280,1240,-1291,12.8,0,0,270,1,0,0, false},
     {1280,1224,-1291,12.9,0,0,270,1,0,0, false},
     {1280,1232,-1291,12.9,0,0,270,1,0,0, false},

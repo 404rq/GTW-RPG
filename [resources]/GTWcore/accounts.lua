@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -34,7 +34,7 @@ end
 addEventHandler("onPlayerQuit", root, player_quit)
 
 --[[ On first spawn, load all data ]]--
-function player_Spawn(posX, posY, posZ, spawnRotation, theTeam, theSkin, theInterior, theDimension)
+function player_spawn(posX, posY, posZ, spawnRotation, theTeam, theSkin, theInterior, theDimension)
         -- Check if this is the first spawn
         if not getElementData(source, "GTWdata.isFirstSpawn") then return end
 
@@ -47,8 +47,8 @@ function player_Spawn(posX, posY, posZ, spawnRotation, theTeam, theSkin, theInte
         -- Start saving timer, save every minute
         save_timers[source] = setTimer(save_data, 60*1000, 0, source)
 end
--- add the player_Spawn function as a handler for onPlayerSpawn
-addEventHandler("onPlayerSpawn", root, player_Spawn)
+-- add the player_spawn function as a handler for onPlayerSpawn
+addEventHandler("onPlayerSpawn", root, player_spawn)
 
 -- Start saving timer, save every minute for all players
 for k,v in pairs(getElementsByType("player")) do

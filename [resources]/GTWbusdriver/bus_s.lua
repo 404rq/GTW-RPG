@@ -107,10 +107,10 @@ function choose_route(plr, cmd)
 	if not getPedOccupiedVehicle(plr) or not bus_vehicles[
 		getElementModel(getPedOccupiedVehicle(plr))] then return end
 	if getElementType(plr) ~= "player" then return end
-	
+
 	-- Make sure it's a traindriver inside a train requesting this
 	if getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
-		getElementData(plr, "Occupation") == "Bus Driver" and 
+		getElementData(plr, "Occupation") == "Bus Driver" and
 		getPedOccupiedVehicleSeat(plr) == 0 then
 
 		-- Force selection of new route
@@ -147,11 +147,11 @@ function pay_for_the_ride(driver, passenger, first)
 	if getVehicleOccupant(veh, 0) == driver and getElementData(driver, "Occupation") == "Bus Driver" then
 		-- First payment are more expensive
 		if first then
-			takePlayerMoney( passenger, 25 )
-			givePlayerMoney( driver, 25 )
+			takePlayerMoney(passenger, 10)
+			givePlayerMoney(driver, 10)
 		else
-			takePlayerMoney( passenger, 5 )
-			givePlayerMoney( driver, 5 )
+			takePlayerMoney(passenger, 5)
+			givePlayerMoney(driver, 5)
 		end
 	else
 		-- Throw the passenger out if he can't pay for the ride any more
@@ -183,8 +183,8 @@ function calculate_next_stop(bd_payment)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount( client )
-	local bus_stops = (getAccountData( playeraccount, "GTWdata_stats_bus_stops" ) or 0) + 1
-	setAccountData( playeraccount, "GTWdata_stats_bus_stops", bus_stops )
+	local bus_stops = (exports.GTWcore:get_account_data( playeraccount, "GTWdata.stats.bus_stops" ) or 0) + 1
+	exports.GTWcore:set_account_data( playeraccount, "GTWdata.stats.bus_stops", bus_stops )
 
 	-- Pay the driver
 	givePlayerMoney(client, fine + math.floor(bus_stops/4))

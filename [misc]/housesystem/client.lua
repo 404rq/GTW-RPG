@@ -142,12 +142,12 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	getUserAccount()
 	if(Guivar3 == 1) then
 		destroyElement(Fenster3[1])
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		Guivar3 = 0
 		return
 	end
 	Guivar3 = 1
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 	guiSetInputMode("no_binds_when_editing")
 
 	-- Make the variables --
@@ -158,7 +158,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	if(tonumber(rentable) == 1) then rentstate = "yes" end
 
 	local X, Y, Width, Height = getMiddleGuiPosition(270,251)
-	Fenster3[1] = guiCreateWindow(X, Y, Width, Height,"Houseinformation",false)
+	Fenster3[1] = exports.GTWgui:createWindow(X, Y, Width, Height,"Houseinformation",false)
 	Label3[1] = guiCreateLabel(12,43,253,15,"House ID: "..id,false,Fenster3[1])
 	guiLabelSetHorizontalAlign(Label3[1],"center",false)
 	guiSetFont(Label3[1],"default-bold-small")
@@ -234,7 +234,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	addEventHandler("onClientGUIClick", Knopf3[2], function()
 		local text = guiGetText(Knopf3[2])
 		Guivar3 = 0
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		destroyElement(Fenster3[1])
 		if(text == "Rent house") then
 			triggerServerEvent("onHouseSystemInfoRent", gMe, id, true)
@@ -247,7 +247,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	addEventHandler("onClientGUIClick", Knopf3[1], function()
 		local text = guiGetText(Knopf3[1])
 		Guivar3 = 0
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		destroyElement(Fenster3[1])
 		if (text == "Buy house") then
 			triggerServerEvent("onHouseSystemInfoBuy", gMe, id, true)
@@ -259,7 +259,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	-- ENTER --
 	addEventHandler("onClientGUIClick", Knopf3[4], function()
 		Guivar3 = 0
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		destroyElement(Fenster3[1])
 		triggerServerEvent("onHouseSystemInfoEnter", gMe, id)
 	end, false)
@@ -267,7 +267,7 @@ addEventHandler("onClientHouseSystemInfoMenueOpen", gMe, function(owner, x, y, z
 	-- CANCEL --
 	addEventHandler("onClientGUIClick", Knopf3[3], function()
 		Guivar3 = 0
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		destroyElement(Fenster3[1])
 	end, false)
 end)
@@ -281,10 +281,10 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 		if(Guivar2 == 1) then return end
 		Guivar2 = 1
 		guiSetInputMode("no_binds_when_editing")
-		showCursor(true)
+		exports.GTWgui:showGUICursor(true)
 
 		local X, Y, Width, Height = getMiddleGuiPosition(752,218)
-		Fenster2[1] = guiCreateWindow(X, Y, Width, Height, "Housemenue",false)
+		Fenster2[1] = exports.GTWgui:createWindow(X, Y, Width, Height, "Housemenue",false)
 		Label2[1] = guiCreateLabel(149,23,81,14,"Weapons",false,Fenster2[1])
 		guiSetFont(Label2[1],"default-bold-small")
 		Label2[2] = guiCreateLabel(144,24,92,14,"__________",false,Fenster2[1])
@@ -487,7 +487,7 @@ addEventHandler("onClientHouseSystemMenueOpen", gMe, function(owner, locked, mon
 		-- CANCEL --
 		addEventHandler("onClientGUIClick", Knopf2[3], function()
 			Guivar2 = 0
-			showCursor(false)
+			exports.GTWgui:showGUICursor(false)
 			destroyElement(Fenster2[1])
 		end, false)
 	end
@@ -501,10 +501,10 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 	Guivar = 1
 	guiSetInputMode("no_binds_when_editing")
 
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 
 	local X, Y, Width, Height = getMiddleGuiPosition(787,269) -- I'm too lazy :D
-	Fenster[1] = guiCreateWindow(X, Y, Width, Height, "House creation[House System by Noneatme]",false)
+	Fenster[1] = exports.GTWgui:createWindow(X, Y, Width, Height, "House creation[House System by Noneatme]",false)
 	Label[1] = guiCreateLabel(495,24,107,17,"Interior preview:",false,Fenster[1])
 	guiSetFont(Label[1],"default-bold-small")
 	Label[2] = guiCreateLabel(490,27,124,15,"___________________",false,Fenster[1])
@@ -601,7 +601,7 @@ addEventHandler("onClientHouseSystemGUIStart", gMe, function()
 	-- CANCEL BUTTON --
 	addEventHandler("onClientGUIClick", Knopf[2], function()
 		Guivar = 0
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		destroyElement(Fenster[1])
 	end, false)
 end)

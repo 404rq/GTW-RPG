@@ -1,5 +1,5 @@
 <meta>
-    <info author="Dennis/UniOn" version="32" type="script" name="vehicle modshop" />
+    <info author="Dennis/UniOn" version="60" type="script" name="vehicle modshop" />
     
     <!-- The modshop files by Dennis aka UniOn -->
     <script src="GUI/client.luac" type="client" />

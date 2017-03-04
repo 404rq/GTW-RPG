@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -22,9 +22,9 @@ function load_list(res)
 	--[[ Load dynamic list of resources to refresh ]]--
 	restart_list = getElementData(root, "GTWgui.refreshList")
 	--[[ Don't do anything if the table doesn't exist (mainly onResourceStart)]]
-	if not resource_list then 
+	if not resource_list then
 		setTimer( load_list, 2500, 1 )
-		return 
+		return
 	end
 	--[[ Restart all resources using this GUI system ]]--
 	for k, v in pairs(restart_list) do
@@ -50,14 +50,18 @@ addEventHandler("onResourceStop", resourceRoot, save_list)
   	Use: exports, triggerEvent or triggerServerEvent
 	(client) to add a resource ]]--
 function addToRefreshList(res_str)
-	restartList[res_str]=true
+	restart_list[res_str]=true
 end
 addEvent("GTWgui.addToRefreshList", true)
-addEventHandler("GTWgui.addToRefreshList", resourceRoot, addToRefreshList)
+addEventHandler("GTWgui.addToRefreshList", root, addToRefreshList)
 
-addCommandHandler("gtwinfo", function(plr, cmd)
+addCommandHandler("gtwguiinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
         getThisResource(), "author")..", v-"..getResourceInfo(
         getThisResource(), "version")..", is represented", plr)
+
+	for k,v in ipairs(restart_list) do
+		outputChatBox(k.." "..v)
+	end
 end)

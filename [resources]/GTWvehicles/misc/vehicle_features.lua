@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -140,11 +140,6 @@ function start_vehicle(plr, seat, jacked)
 	    		setVehicleEngineState(trailers[plr], true)
 	    	end
 			setVehicleOverrideLights(source, 2)
-			if getVehicleType(source) == "Automobile" then
-				setVehicleHandling(source, "maxVelocity", nil, false)
-				local result = getVehicleHandling(source)
-				currVehTopSpeed[source] = tonumber(result["maxVelocity"])
-			end
 		end
 
                 -- Check if we should lock the vehicle again

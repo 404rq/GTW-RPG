@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,12 +15,12 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWwanted" version="68" type="script" />
+    <info author="GTWGames" name="GTWwanted" version="188" type="script" />
     <script src="wanted_s.lua" type="server" />
     <script src="wanted_c.lua" type="client" />
     <script src="ped_money.lua" type="server" />
     <script src="train_derail.lua" type="server" />
-
+    
     <export function="setWl" type="server" />
     <export function="setWl" type="client" />
     <export function="getWl" type="server" />

@@ -89,8 +89,12 @@
 <interiorReturn	refid="CSDESGN (2)"	posX="227.29"	posY="-7.43"	posZ="1001.26"	rotation="92"	interior="5"	dimension="1"	/>
 <interiorEntry	id="CSDESGN (3)"	posX="2802.34"	posY="2430.6"	posZ="10.061"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="CSDESGN (3)"	posX="227.29"	posY="-7.43"	posZ="1001.26"	rotation="125"	interior="5"	dimension="2"	/>
-<interiorEntry	id="CSEXL"	posX="453.868"	posY="-1478.07"	posZ="29.9609"	rotation="0"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="CSEXL"	posX="204.33"	posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="0"	/>
+
+<interiorEntry	id="CSEXL"	posX="453.868"	   posY="-1478.07"	posZ="29.9609"	rotation="0"	dimension="0"	interior="0"	/>
+<interiorReturn	refid="CSEXL"	posX="204.33"	   posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="0"	/>
+<interiorEntry	id="BSDS01"	posX="-2491.868"   posY="2363.07"	posZ="9.3609"	rotation="90"	dimension="0"	interior="0"	/>
+<interiorReturn	refid="BSDS01"	posX="204.33"	   posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="0"	/>
+
 <interiorEntry	id="CSSPRT"	posX="499.637"	posY="-1360.4"	posZ="15.4261"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="CSSPRT"	posX="207.06"	posY="-139.81"	posZ="1002.52"	rotation="-45"	interior="3"	dimension="0"	/>
 <interiorEntry	id="CSSPRT (2)"	posX="2825.74"	posY="2407.44"	posZ="10.061"	rotation="0"	dimension="0"	interior="0"	/>
@@ -434,4 +438,3 @@
 <interiorEntry	id="X711S2"	posX="1000.33"	posY="-919.924"	posZ="41.2368"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="X711S2"	posX="-27.31"	posY="-31.38"	posZ="1002.55"	rotation="97"	interior="4"	dimension="0"	/>
 </map>
-

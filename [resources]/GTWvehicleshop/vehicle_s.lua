@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -166,6 +166,23 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			isFirstSpawn = true
 		end
 		local veh = createVehicle( tonumber( model ), x,y,z )
+
+                -- Reduce vehicle top speed and acceleration
+                local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
+                local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+                if getVehicleType(veh) == "Automobile" then
+                        local result = getVehicleHandling(veh)
+                        setVehicleHandling(veh, "engineAcceleration", tonumber(result["engineAcceleration"])/2, false)
+                        setVehicleHandling(veh, "engineInertia", tonumber(result["engineInertia"])*2, false)
+                        setVehicleHandling(veh, "brakeDeceleration", tonumber(result["brakeDeceleration"])/2, false)
+                        setVehicleHandling(veh, "brakeBias", tonumber(result["brakeBias"])/2, false)
+
+                        --Reduce max speed on bicycles and faggio
+                        if bicycle_list[vehID] then
+                                setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
+                        end
+                end
+
 		if supported_cars[getElementModel(veh)] then
 			local dist = supported_cars[getElementModel(veh)]
 			inventory_markers[veh] = createMarker(0, 0, -100, "cylinder", 3, 0, 0, 0, 0 )
@@ -239,11 +256,6 @@ function saveVehicleData( thePlayer, seat, jacked )
 		end
    		veh_save_timers[thePlayer] = setTimer(saveVehicle, 5000, 0, source )
    	end
-   	-- Show the price
-	--[[if is_demo_ex[source] then
-		outputChatBox( "Use /buyveh to purchase this "..getVehicleName(source).." for: $"..car_data[getElementModel(source)][2], thePlayer, 255, 200, 0)
-		exports.GTWtopbar:dm( "Use /buyveh to purchase this "..getVehicleName(source).." for: $"..car_data[getElementModel(source)][2], thePlayer, 255, 200, 0)
-	end]]--
 end
 addEventHandler( "onVehicleEnter", getRootElement(), saveVehicleData )
 function vehicleExit( thePlayer, seat, jacked )
@@ -439,7 +451,7 @@ function respawnVehicleToStart(veh_id)
                 -- Tolerate less than 30 seconds violent time or distance to cop larger than 180m
 		if ((tonumber(getElementData(client, "violent_seconds")) or 0) < 50 or
                         dist_to_cop > 180) and getElementData(client, "Jailed") ~= "Yes" then
-			local price = 500
+			local price = 100
 			if price and getPlayerMoney(client) > price then
 				takePlayerMoney( client, price )
 				-- Save to database

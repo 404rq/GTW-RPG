@@ -16,13 +16,13 @@
 -->
 
 <meta>
-	<!-- Resource information -->
-	<info author="404rq" name="GTWoutlaws" description="Spawn killable bots using slothbot" version="0" type="script" />
-	
-	<!-- Script files -->
-	<script src="spawn_s.lua" type="server"/>
-	
-	<!-- Included resources: should be at the end of this file -->
-	<include resource="GTWtopbar" />
-	<include resource="slothbot" />
+    <!-- Resource information -->
+    <info author="404rq" name="GTWoutlaws" description="Spawn killable bots using slothbot" version="17" type="script" />
+    
+    <!-- Script files -->
+    <script src="spawn_s.lua" type="server" />
+    
+    <!-- Included resources: should be at the end of this file -->
+    <include resource="GTWtopbar" />
+    <include resource="slothbot" />
 </meta>

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -17,11 +17,12 @@
 --[[ Resource settings, all settings goes here ]]--
 Settings = {
 	max_distance_to_spawn 	= 2000,          -- Nearest distance to other trains
+	max_speed		= 0.6,		 -- Global max speed for trains
 	update_sync_time	= 100,           -- Time between each sync update
 	slow_speed		= 3,             -- Definition of slow speed
 	station_stop_time_ms	= 11000,         -- Time to stop at stations
-        max_track_distance      = 180,           -- How far away from the tracks can a player be before a train is created
-        min_track_distance      = 90,            -- How close to the tracks can nay player be before a train is spawned
+        max_track_distance      = 300,           -- How far away from the tracks can a player be before a train is created
+        min_track_distance      = 180,            -- How close to the tracks can nay player be before a train is spawned
 	debug_level		= 0,             -- How many debug messages should display in server console
 }
 

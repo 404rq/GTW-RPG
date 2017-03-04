@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -150,13 +150,13 @@ addEventHandler("onClientVehicleEnter", root, enter_the_tram)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_tram_route( )
 	-- Create the selection GUI
-	window = guiCreateWindow((sx-450)/2, (sy-300)/2, 450, 300, "Select tram route", false)
+	window = exports.GTWgui:createWindow((sx-450)/2, (sy-300)/2, 450, 300, "Select tram route", false)
 	local close_button = guiCreateButton(330, 260, 110, 36, "Close", false, window)
 	local routes_list = guiCreateGridList(10, 30, 430, 230, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.86 )
 	exports.GTWgui:setDefaultFont(close_button, 10)
 	exports.GTWgui:setDefaultFont(routes_list, 10)
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 
 	-- List all tram routes
 	for k,v in pairs(tram_routes) do
@@ -186,7 +186,7 @@ addEventHandler( "GTWtramdriver.selectRoute", root, select_tram_route)
 function close_gui()
 	if isElement(window) then destroyElement(window) end
 	if isElement(routes_list) then destroyElement(routes_list) end
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ DX text to display the location of next tramstation ]]

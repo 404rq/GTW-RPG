@@ -4,7 +4,7 @@
 	Project name:		GTW-RPG
 	Developers:			GTWCode
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
+	Source code:		https://github.com/404rq/GTW-RPG/
 	Bugtracker:			http://forum.albonius.com/bug-reports/
 	Suggestions:		http://forum.albonius.com/mta-servers-development/
 
@@ -15,6 +15,6 @@
 -->
 
 <meta>
-	<info type="script" name="GTWcoremap" author="GTWCode" version="38" description="Core map for Grand Theft Walrus"></info>
-	<script src="core_map.lua" type="client"></script> 
+    <info type="script" name="GTWcoremap" author="GTWCode" version="88" description="Core map for Grand Theft Walrus"></info>
+    <script src="core_map.lua" type="client"></script>
 </meta>

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -17,7 +17,7 @@
 iron_objects 		= {{ }}
 iron_markers 		= {{ }}
 associated_rocks 	= { }
-bomb_price 		= 1200
+bomb_price 		= 200
 bomb_cooldown 		= { }
 
 function calculate_profit(plr)
@@ -52,6 +52,11 @@ function plant_bomb(plr)
 	end
 
 	-- Check some more stuff
+	local x,y,z = getElementPosition(plr)
+	if getDistanceBetweenPoints3D(x,y,z, 607,867,-40) > 150 then
+		exports.GTWtopbar:dm("Ironminer: You are to far away from the quarry to plant a bomb!", plr, 255, 0, 0)
+		return
+	end
 	if iron_objects[plr] and iron_objects[plr][k] then
 		exports.GTWtopbar:dm("Ironminer: You are already mining!", plr, 255, 0, 0)
 		return
@@ -75,7 +80,6 @@ function plant_bomb(plr)
 	exports.GTWtopbar:dm("Ironminer: The bomb has been planted (10s), take cover, bomb price: $"..bomb_price, plr, 255, 100, 0)
 
 	-- Prepare explosion
-	local x,y,z = getElementPosition(plr)
 	setTimer(createExplosion, 10000, 1, x,y,z, 0, plr)
 
 	-- Create a bunch of rocks to mine from

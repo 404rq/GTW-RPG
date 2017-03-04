@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -35,7 +35,7 @@ function turfPayout(query)
     			if not turfs_counter[row["owner"]] then
     				turfs_counter[row["owner"]] = 0
     			end
-            		turfs_counter[row["owner"]] = turfs_counter[row["owner"]] + ((row["sizeX"] * row["sizeY"])/1000)
+            		turfs_counter[row["owner"]] = turfs_counter[row["owner"]] + ((row["sizeX"] * row["sizeY"])/200)
     		end
 	end
 	for w,player in pairs(getElementsByType("player")) do
@@ -186,8 +186,8 @@ function onTurfEnter(hitElement)
 								givePlayerMoney(mem, c_money)
 								-- Increase stats by 1
 								local playeraccount = getPlayerAccount(mem)
-								local turfs_taken = getAccountData(playeraccount, "GTWdata_stats_turf_count") or 0
-								setAccountData(playeraccount, "GTWdata_stats_turf_count", turfs_taken + 1)
+								local turfs_taken = exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.turf_count") or 0
+								exports.GTWcore:set_account_data(playeraccount, "GTWdata.stats.turf_count", turfs_taken + 1)
 							end
 						end
 						local r,g,b = exports.GTWgroups:getGroupTurfColor(group)
@@ -220,10 +220,10 @@ function onTurfEnter(hitElement)
 					end
 				end, 1000,(time_to_capture))
 			end
-    		elseif getElementData(hitElement, "Group") == "None" and getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
+    		elseif getElementData(hitElement, "Group") == "None" and getPlayerTeam(hitElement) == getTeamFromName(team_criminals) and not getPedOccupiedVehicle(hitElement) then
 			exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 		end
-	elseif not getElementData(hitElement, "Group") and getElementType(hitElement) == "player" and
+	elseif not getElementData(hitElement, "Group") and getElementType(hitElement) == "player" and not getPedOccupiedVehicle(hitElement) and
 		getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
 		exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 	end
@@ -319,7 +319,7 @@ function addTurf(x,y,z,sizeX,sizeY,red,green,blue,owner)
 		owner = "None"
 	end
 	local colCuboid = createColCuboid(x, y, z-30, sizeX, sizeY, z+30)
-	local radArea = createRadarArea(x, y, sizeX, sizeY, red, green, blue, 135)
+	local radArea = createRadarArea(x, y, sizeX, sizeY, red, green, blue, 80)
 	addEventHandler("onColShapeHit", colCuboid, onTurfEnter)
 	addEventHandler("onColShapeLeave", colCuboid, onTurfLeave)
 	setElementData(colCuboid, "owner", owner)

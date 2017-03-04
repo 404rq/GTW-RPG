@@ -2,18 +2,19 @@
 ********************************************************************************
 	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
-	Developers:   		(Pro)Hunter
+	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
 	Status:     		Stable release
 ********************************************************************************
 -->
+
 <meta>
-    <info type="map" version="12.2" author="(Pro)Hunter"></info>
-    <script src="blue.lua" type="client"></script>
+    <info type="map" version="61"></info>
+    <map src="fbi_base.map" dimension="0"></map>
 </meta>

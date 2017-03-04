@@ -15,23 +15,24 @@
 ********************************************************************************
 ]]--
 
+local ad_price = 200;
 function send_advertise(plr, cmd, ...)
-	if (isGuestAccount( getplrAccount( plr ) ) ) then
+	if (isGuestAccount(getPlayerAccount(plr))) then
 		return
 	end
-	local m = getplrMoney( plr )
-	if (m < 500) then
-		local money = tostring(500 - m)
-		return outputChatBox("#FFFF00[ADVERT-SYSTEM] #FFFFFFYou need $"..money.." more.", plr, 255, 0, 0, true)
+	local m = getPlayerMoney(plr)
+	if (m < ad_price) then
+		local money = tostring(ad_price - m)
+		return exports.GTWtopbar:dm("You need $"..money.." more", plr, 255,0,0, true)
 	end
 	local msg = table.concat({ ... }, " ")
 	if msg == "" then
-		return outputChatBox("#FFFF00[ADVERT-SYSTEM] #FFFFFFYou did not type a msg.", plr, 255, 0, 0, true)
+		return exports.GTWtopbar:dm("You did not type a msg", plr, 255,0,0, true)
 	end
-	takeplrMoney( plr, settings[ 'Money Required for advertisement' ] )
-	outputChatBox("#FFFF00[ADVERT-SYSTEM] #FFFFFF500$ was deducted for the advert!", plr, 255, 0, 0, true)
-	outputChatBox("#FFFF00[ADVERT-SYSTEM] "..getplrName( plr )..": #FFFFFF"..msg, root, 255, 0, 0, true)
+	takePlayerMoney(plr, ad_price)
+	exports.GTWtopbar:dm("$"..ad_price.." was deducted for the advert", plr, 255,100,0, true)
+	outputChatBox("#FFFF00[AD] "..getPlayerName(plr)..": #FFFFFF"..msg, root, 255,0,0, true)
 end
-addcmdHandler("ad", send_advertise)
-addcmdHandler("advertise", send_advertise)
-addcmdHandler("advert", send_advertise)
+addCommandHandler("ad", send_advertise)
+addCommandHandler("advertise", send_advertise)
+addCommandHandler("advert", send_advertise)

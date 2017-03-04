@@ -80,11 +80,11 @@ function buy_the_skin(model)
 	if getPlayerMoney(client) >= 50 then
 		takePlayerMoney(client, 50)
 		exports.GTWtopbar:dm("You have succesfully bought a new skin!", client, 0, 255, 0)
-		setAccountData(getPlayerAccount(client), "GTWclothes.personal.skin", model)
+		exports.GTWcore:set_account_data(getPlayerAccount(client), "GTWclothes.personal.skin", model)
 		setElementData(client, "GTWclothes.personal.skin", model)
 		-- Save skin to account if user is logged in
 		if getPlayerAccount(client) then
-			setAccountData(getPlayerAccount(client), "GTWclothes.personal.skin", model)
+			exports.GTWcore:set_account_data(getPlayerAccount(client), "GTWclothes.personal.skin", model)
 		end
 		setElementModel(client, model)
 	else
@@ -104,7 +104,7 @@ end)
 --[[ Exported function to get the current skin ]]--
 function getBoughtSkin(plr)
 	if not isElement(plr) then return nil end
-	return tonumber(getAccountData(getPlayerAccount(plr), "GTWclothes.personal.skin")) or getElementModel(plr) or 0
+	return tonumber(exports.GTWcore:get_account_data(getPlayerAccount(plr), "GTWclothes.personal.skin")) or getElementModel(plr) or 0
 end
 
 --[[ Save the skin as element data ]]--

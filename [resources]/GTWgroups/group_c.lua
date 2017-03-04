@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Sebbe (smart), Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -232,17 +232,17 @@ addEventHandler("GTWgroups.confirmDelete", root, confirmDelete)
 --[[ Close main window and hide cursor ]]--
 function closeWindow()
 	guiSetVisible(window, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ Toggle main window ]]--
 function openWindowAndSend()
 	if (guiGetVisible(window)) then
 		guiSetVisible(window, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		guiSetInputEnabled( false )
 	else
-		showCursor(true)
+		exports.GTWgui:showGUICursor(true)
 		guiSetVisible(window, true)
 		guiSetInputEnabled( true )
 		triggerServerEvent("GTWgroups.viewWindow", root)

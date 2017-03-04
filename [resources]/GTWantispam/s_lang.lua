@@ -16,7 +16,7 @@
 ]]--
 
 -- Definition of default language for this resource
-r_lang = exports.GTWcore:getGTWLanguage() or "en_US"
+r_lang = exports.GTWcore:getLanguage() or "en_US"
 
 -- Language text storage for this resource
 txt = {

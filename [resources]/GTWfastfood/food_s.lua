@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -38,7 +38,7 @@ function initialize_restaurants( )
 
 	-- Setup invincible peds and force them to respawn each 8 hours
 	respawn_all_peds()
-	setTimer(respawn_all_peds, 60*60*8*1000, 0)
+	setTimer(respawn_all_peds, 60*60*1000, 0)
 end
 addEventHandler("onResourceStart", resourceRoot, initialize_restaurants)
 
@@ -143,7 +143,7 @@ function buy_food(money, health)
 
 	-- Pay the restaurant owner if any
 	if plr_salesman and plr_salesman ~= client then
-		givePlayerMoney(plr_salesman, money*2)
+		givePlayerMoney(plr_salesman, money)
 		exports.GTWtopbar:dm("Fastfood: You sold food to: "..getPlayerName(client), plr_salesman, 0, 255, 0)
 	end
 

@@ -1,0 +1,18 @@
+<map edf:definitions="editor_main">
+    <object id="object (csrsfence02_lvs) (1)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="617.40002" posY="-1518.5" posZ="18.3" rotX="0" rotY="0" rotZ="270"></object>
+    <object id="object (csrsfence02_lvs) (2)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="617.40002" posY="-1500" posZ="18.3" rotX="0" rotY="0" rotZ="270.5"></object>
+    <object id="object (csrsfence02_lvs) (3)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="613.59998" posY="-1491.3" posZ="15.5" rotX="0" rotY="0" rotZ="316.75"></object>
+    <object id="object (aw_streettree2) (1)" breakable="true" interior="0" alpha="255" model="738" doublesided="true" scale="1" dimension="0" posX="611.90002" posY="-1494.1" posZ="13.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (aw_streettree2) (2)" breakable="true" interior="0" alpha="255" model="738" doublesided="true" scale="1" dimension="0" posX="602.59998" posY="-1494.1" posZ="13.8" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (lamppost1) (1)" breakable="true" interior="0" alpha="255" model="1297" doublesided="true" scale="1" dimension="0" posX="616.70001" posY="-1513.3" posZ="17.4" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (lamppost1) (2)" breakable="true" interior="0" alpha="255" model="1297" doublesided="true" scale="1" dimension="0" posX="616.70001" posY="-1505.1" posZ="17.4" rotX="0" rotY="0" rotZ="0"></object>
+    <object id="object (csrsfence02_lvs) (4)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="612.29999" posY="-1524.2" posZ="18.3" rotX="0" rotY="0" rotZ="185.5"></object>
+    <object id="object (csrsfence02_lvs) (5)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="613.59961" posY="-1491.2998" posZ="18.3" rotX="0" rotY="0" rotZ="316.747"></object>
+    <object id="object (csrsfence02_lvs) (6)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="617.40039" posY="-1500" posZ="15.5" rotX="0" rotY="0" rotZ="270.5"></object>
+    <object id="object (csrsfence02_lvs) (7)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="617.40039" posY="-1518.5" posZ="15.5" rotX="0" rotY="0" rotZ="270"></object>
+    <object id="object (csrsfence02_lvs) (8)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="612.2998" posY="-1524.2002" posZ="15.5" rotX="0" rotY="0" rotZ="185.499"></object>
+    <object id="object (csrsfence02_lvs) (9)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="583.40002" posY="-1491.1" posZ="15.9" rotX="0" rotY="0" rotZ="269.247"></object>
+    <object id="object (csrsfence02_lvs) (10)" breakable="true" interior="0" alpha="255" model="8674" doublesided="true" scale="1" dimension="0" posX="583.40039" posY="-1491.0996" posZ="18.7" rotX="0" rotY="0" rotZ="269.242"></object>
+    <object id="object (parkbench1) (1)" breakable="true" interior="0" alpha="255" model="1280" doublesided="true" scale="1" dimension="0" posX="605.90002" posY="-1489.2" posZ="14.3" rotX="0" rotY="0" rotZ="89"></object>
+    <object id="object (parkbench1) (2)" breakable="true" interior="0" alpha="255" model="1280" doublesided="true" scale="1" dimension="0" posX="601.59998" posY="-1489.2" posZ="14.3" rotX="0" rotY="0" rotZ="91.495"></object>
+</map>

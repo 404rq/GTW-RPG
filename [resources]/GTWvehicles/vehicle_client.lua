@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -46,7 +46,7 @@ addEventHandler("onClientResourceStart", resourceRoot, client_load_markers)
 
 --[[ Initialize the spawner GUI ]]--
 gx,gy = guiGetScreenSize()
-window = guiCreateWindow(((gx-500)/2),((gy-400)/2),500,400,"Rental vehicles",false)
+window = exports.GTWgui:createWindow(((gx-500)/2),((gy-400)/2),500,400,"Rental vehicles",false)
 txt_search = guiCreateEdit(10, 32, 480, 30, "", false, window)
 guiEditSetCaretIndex(txt_search, 1)
 veh_grid = guiCreateGridList(10, 64, 480, 294, false, window)
@@ -275,7 +275,7 @@ function spawn_the_vehicle()
 		make_vehlist(true)
 	    if(window ~= nil) then
 	        guiSetVisible(window, true)
-	        showCursor(true)
+	        exports.GTWgui:showGUICursor(true)
 	        guiSetInputEnabled(true)
 	        guiSetText(txt_search, "")
 	        guiBringToFront(txt_search)
@@ -311,7 +311,7 @@ function marker_hit(hitElement)
 	        make_vehlist(false)
 	        if(window ~= nil) then
 	            guiSetVisible(window, true)
-	            showCursor(true)
+	            exports.GTWgui:showGUICursor(true)
 	            guiSetInputEnabled(true)
 	            guiSetText(txt_search, "")
 	            guiBringToFront(txt_search)
@@ -374,7 +374,7 @@ function marker_leave(leaveElement)
 end
 function close_the_window()
 	guiSetVisible(window, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 	guiSetInputEnabled(false)
 end
 addEvent("GTWvehicles.closeWindow", true)

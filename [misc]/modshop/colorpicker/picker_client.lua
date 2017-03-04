@@ -40,7 +40,7 @@ function colorPicker.create(id, start, title)
   cp.gui.width = 416
   cp.gui.height = 304
   cp.gui.snaptreshold = 0.02
-  cp.gui.window = guiCreateWindow((sw-cp.gui.width)/2, (sh-cp.gui.height)/2, cp.gui.width, cp.gui.height, tostring(title or "COLORPICKER"), false)
+  cp.gui.window = exports.GTWgui:createWindow((sw-cp.gui.width)/2, (sh-cp.gui.height)/2, cp.gui.width, cp.gui.height, tostring(title or "COLORPICKER"), false)
   cp.gui.svmap = guiCreateStaticImage(16, 32, 256, 256, "colorpicker/blank.png", false, cp.gui.window)
   cp.gui.hbar = guiCreateStaticImage(288, 32, 32, 256, "colorpicker/blank.png", false, cp.gui.window)
   cp.gui.blank = guiCreateStaticImage(336, 32, 64, 64, "colorpicker/blank.png", false, cp.gui.window)
@@ -52,7 +52,7 @@ function colorPicker.create(id, start, title)
   cp.gui.editb = guiCreateLabel(338, 211, 64, 20, "B: 0", false, cp.gui.window)
   cp.gui.okb = guiCreateButton(336, 235, 64, 24, "OK", false, cp.gui.window)
   cp.gui.closeb = guiCreateButton(336, 265, 64, 24, "Cancel", false, cp.gui.window)
-  guiWindowSetSizable(cp.gui.window, false)	
+  exports.GTWgui:windowSetSizeable(cp.gui.window, false)	
 
   cp.handlers = {}
   cp.handlers.mouseDown = function() cp:mouseDown() end

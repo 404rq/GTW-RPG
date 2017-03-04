@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,13 +15,14 @@
 -->
 
 <meta>
-	<info author="GTWGames" version="0" name="GTWhelp" description="Documentation GUI with help pages" type="script" />
-	<script src="data.lua" type="client" />
-	<script src="help_c.lua" type="client" />
-
-	<script src="info_c.lua" type="client" />
-	<script src="info_s.lua" type="server" />
-
-	<export function="hpm" type="client"/>
-	<export function="hpm" type="server"/>
+    <info author="GTWGames" version="61" name="GTWhelp" description="Documentation GUI with help pages" type="script" />
+    <script src="data.lua" type="client" />
+    <script src="help_c.lua" type="client" />
+    <script src="cmd_list.lua" type="client" />
+    
+    <script src="info_c.lua" type="client" />
+    <script src="info_s.lua" type="server" />
+    
+    <export function="hpm" type="client" />
+    <export function="hpm" type="server" />
 </meta>

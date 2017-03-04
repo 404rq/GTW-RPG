@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,16 +15,16 @@
 -->
 
 <meta>
-	<info author="GTWGames" version="0" name="GTWvehicleshop" description="Vehicle shops around the map for any type of vehicle" type="script" />
-	<script src="veh_data.lua" type="shared" />
-	<script src="vehicle_s.lua" type="server" />
-	<script src="vehicle_c.lua" type="client" />
-	<script src="shop_c.lua" type="client" />
-
-	<file src="icon/bike-shop.png" type="client" />
-	<file src="icon/boat-shop.png" type="client" />
-	<file src="icon/car-shop.png" type="client" />
-	<file src="icon/plane-shop.png" type="client" />
-	<file src="icon/train-shop.png" type="client" />
-	<file src="icon/truck-shop.png" type="client" />
+    <info author="GTWGames" version="65" name="GTWvehicleshop" description="Vehicle shops around the map for any type of vehicle" type="script" />
+    <script src="veh_data.lua" type="shared" />
+    <script src="vehicle_s.lua" type="server" />
+    <script src="vehicle_c.lua" type="client" />
+    <script src="shop_c.lua" type="client" />
+    
+    <file src="icon/bike-shop.png" type="client" />
+    <file src="icon/boat-shop.png" type="client" />
+    <file src="icon/car-shop.png" type="client" />
+    <file src="icon/plane-shop.png" type="client" />
+    <file src="icon/train-shop.png" type="client" />
+    <file src="icon/truck-shop.png" type="client" />
 </meta>

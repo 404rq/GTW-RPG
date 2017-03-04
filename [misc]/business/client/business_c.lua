@@ -13,121 +13,121 @@ local action
 local settings = {}
 
 function build_cbGUI()
-	
+
 	local gui = {}
-	
+
 	local screenWidth, screenHeight = guiGetScreenSize()
 	local windowWidth, windowHeight = 511, 461
 	local left = screenWidth/2 - windowWidth/2
 	local top = screenHeight/2 - windowHeight/2
-	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Create Business", false)
-	guiWindowSetSizable(gui["_root"], false)
-	guiWindowSetMovable(gui["_root"], false)
+	gui["_root"] = exports.GTWgui:createWindow(left, top, windowWidth, windowHeight, "Create Business", false)
+	exports.GTWgui:windowSetSizeable(gui["_root"], false)
+	exports.GTWgui:windowSetMoveable(gui["_root"], false)
 	guiSetVisible(gui["_root"], false)
 	guiSetAlpha(gui["_root"], 1)
-	
+
 	gui["cbPoszL"] = guiCreateLabel(270, 75, 101, 20, "Position Z", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbPoszL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbPoszL"], "center")
 	guiLabelSetColor(gui["cbPoszL"], 0, 100, 255)
-	
+
 	gui["cbPosxL"] = guiCreateLabel(10, 75, 101, 20, "Position X", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbPosxL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbPosxL"], "center")
 	guiLabelSetColor(gui["cbPosxL"], 0, 100, 255)
-	
+
 	gui["cbPosyL"] = guiCreateLabel(140, 75, 101, 20, "Position Y", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbPosyL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbPosyL"], "center")
 	guiLabelSetColor(gui["cbPosyL"], 0, 100, 255)
-	
+
 	gui["cbIntdimL"] = guiCreateLabel(400, 75, 101, 20, "Interior, Dim", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbIntdimL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbIntdimL"], "center")
 	guiLabelSetColor(gui["cbIntdimL"], 0, 100, 255)
-	
+
 	gui["cbIntdimE"] = guiCreateEdit(400, 105, 101, 21, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbIntdimE"], 32767)
 	guiEditSetReadOnly(gui["cbIntdimE"], true)
-	
+
 	gui["cbInfoL"] = guiCreateLabel(0, 25, 511, 51, "Pickup The Coordinates And Enter The Data To Create The Business.", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbInfoL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbInfoL"], "center")
 	guiLabelSetColor(gui["cbInfoL"], 0, 173, 0)
-	
+
 	gui["cbPosxE"] = guiCreateEdit(10, 105, 101, 21, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbPosxE"], 32767)
 	guiEditSetReadOnly(gui["cbPosxE"], true)
-	
+
 	gui["cbPosyE"] = guiCreateEdit(140, 105, 101, 21, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbPosyE"], 32767)
 	guiEditSetReadOnly(gui["cbPosyE"], true)
-	
+
 	gui["cbPoszE"] = guiCreateEdit(270, 105, 101, 21, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbPoszE"], 32767)
 	guiEditSetReadOnly(gui["cbPoszE"], true)
-	
+
 	gui["cbPickcB"] = guiCreateButton(60, 145, 391, 41, "Pickup Coordinates", false, gui["_root"])
 	if on_cbPickcB_clicked then
 		addEventHandler("onClientGUIClick", gui["cbPickcB"], on_cbPickcB_clicked, false)
 	end
-	
+
 	gui["cbNameL"] = guiCreateLabel(0, 225, 141, 31, "Business Name:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbNameL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbNameL"], "center")
 	guiLabelSetColor(gui["cbNameL"], 255, 0, 0)
-	
+
 	gui["cbCostL"] = guiCreateLabel(0, 265, 141, 31, "Business Cost:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbCostL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbCostL"], "center")
 	guiLabelSetColor(gui["cbCostL"], 255, 0, 0)
-	
+
 	gui["cbPayoutL"] = guiCreateLabel(0, 305, 141, 31, "Business Payout:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbPayoutL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbPayoutL"], "center")
 	guiLabelSetColor(gui["cbPayoutL"], 255, 0, 0)
-	
+
 	gui["cbPayouttL"] = guiCreateLabel(0, 345, 141, 31, "Business Payout Time:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbPayouttL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbPayouttL"], "center")
 	guiLabelSetColor(gui["cbPayouttL"], 255, 0, 0)
-	
+
 	gui["cbNameE"] = guiCreateEdit(160, 225, 281, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbNameE"], 32767)
-	
+
 	gui["cbCostE"] = guiCreateEdit(160, 265, 281, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbCostE"], 32767)
-	
+
 	gui["cbPayoutE"] = guiCreateEdit(160, 305, 281, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbPayoutE"], 32767)
-	
+
 	gui["cbPayouttE"] = guiCreateEdit(160, 345, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbPayouttE"], 32767)
-	
+
 	gui["cbPayoutuCB"] = guiCreateComboBox(360, 345, 141, 96,"Unit", false, gui["_root"])
-	
+
 	guiComboBoxAddItem(gui["cbPayoutuCB"], "Seconds")
 	guiComboBoxAddItem(gui["cbPayoutuCB"], "Minutes")
 	guiComboBoxAddItem(gui["cbPayoutuCB"], "Hours")
 	guiComboBoxAddItem(gui["cbPayoutuCB"], "Days")
-	
+
 	guiComboBoxSetSelected(gui["cbPayoutuCB"], 1)
-	
+
 	gui["cbClearB"] = guiCreateButton(0, 415, 121, 31, "Clear", false, gui["_root"])
 	if on_cbClearB_clicked then
 		addEventHandler("onClientGUIClick", gui["cbClearB"], on_cbClearB_clicked, false)
 	end
-	
+
 	gui["cbCancelB"] = guiCreateButton(390, 415, 121, 31, "Cancel", false, gui["_root"])
 	if on_cbCancelB_clicked then
 		addEventHandler("onClientGUIClick", gui["cbCancelB"], on_cbCancelB_clicked, false)
 	end
-	
+
 	gui["cbCreateB"] = guiCreateButton(145, 415, 231, 31, "Create Business", false, gui["_root"])
 	if on_cbCreateB_clicked then
 		addEventHandler("onClientGUIClick", gui["cbCreateB"], on_cbCreateB_clicked, false)
 	end
-	
+
 	return gui, windowWidth, windowHeight
 end
 
@@ -164,7 +164,7 @@ function on_cbCancelB_clicked(button, state, absoluteX, absoluteY)
 		return
 	end
 	guiSetVisible(cbGUI["_root"], false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 	guiSetInputMode("allow_binds")
 end
 
@@ -205,22 +205,22 @@ addEvent("client:showCreateBusinessGUI", true)
 addEventHandler("client:showCreateBusinessGUI", root,
 	function()
 		guiSetVisible(cbGUI["_root"], true)
-		showCursor(true)
+		exports.GTWgui:showGUICursor(true)
 		guiSetInputMode("no_binds_when_editing")
 	end
 )
 
-_showCursor = showCursor
-function showCursor(bool)
+_exports.GTWgui:showGUICursor = exports.GTWgui:showGUICursor
+function exports.GTWgui:showGUICursor(bool)
 	if bool then
-		_showCursor(true)
+		_exports.GTWgui:showGUICursor(true)
 	else
-		_showCursor(false)
+		_exports.GTWgui:showGUICursor(false)
 		setTimer(
 			function()
 				for index, window in ipairs(getElementsByType("gui-window", resourceRoot)) do
 					if guiGetVisible(window) then
-						_showCursor(true)
+						_exports.GTWgui:showGUICursor(true)
 					end
 				end
 			end
@@ -233,79 +233,79 @@ function outputMessage(message, r, g, b)
 end
 
 function build_cbcGUI()
-	
+
 	local gui = {}
-	
+
 	local screenWidth, screenHeight = guiGetScreenSize()
 	local windowWidth, windowHeight = 369, 378
 	local left = screenWidth/2 - windowWidth/2
 	local top = screenHeight/2 - windowHeight/2
-	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Create Business Check", false)
-	guiWindowSetSizable(gui["_root"], false)
-	guiWindowSetMovable(gui["_root"], false)
+	gui["_root"] = exports.GTWgui:createWindow(left, top, windowWidth, windowHeight, "Create Business Check", false)
+	exports.GTWgui:windowSetSizeable(gui["_root"], false)
+	exports.GTWgui:windowSetMoveable(gui["_root"], false)
 	guiSetVisible(gui["_root"], false)
 	guiSetProperty(gui["_root"], "AlwaysOnTop", "true")
 	guiSetAlpha(gui["_root"], 1)
-	
+
 	gui["cbcInfoL"] = guiCreateLabel(0, 15, 371, 41, "Are you sure you want to create the business with these data?", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcInfoL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcInfoL"], "center")
 	guiLabelSetColor(gui["cbcInfoL"], 0, 173, 0)
-	
+
 	gui["cbcNameL"] = guiCreateLabel(10, 65, 100, 30, "Business Name:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcNameL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcNameL"], "center")
 	guiLabelSetColor(gui["cbcNameL"], 255, 0, 0)
-	
+
 	gui["cbcPosL"] = guiCreateLabel(10, 105, 100, 30, "Business Position:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcPosL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcPosL"], "center")
 	guiLabelSetColor(gui["cbcPosL"], 255, 0, 0)
-	
+
 	gui["cbcLocL"] = guiCreateLabel(10, 145, 100, 30, "Business Location:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcLocL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcLocL"], "center")
 	guiLabelSetColor(gui["cbcLocL"], 255, 0, 0)
-	
+
 	gui["cbcCostL"] = guiCreateLabel(10, 185, 100, 30, "Business Cost:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcCostL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcCostL"], "center")
 	guiLabelSetColor(gui["cbcCostL"], 255, 0, 0)
-	
+
 	gui["cbcPayoutL"] = guiCreateLabel(10, 225, 100, 31, "Business Payout:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcPayoutL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcPayoutL"], "center")
 	guiLabelSetColor(gui["cbcPayoutL"], 255, 0, 0)
-	
+
 	gui["cbcPayouttL"] = guiCreateLabel(0, 265, 140, 30, "Business Payout Time:", false, gui["_root"])
 	guiLabelSetHorizontalAlign(gui["cbcPayouttL"], "center", false)
 	guiLabelSetVerticalAlign(gui["cbcPayouttL"], "center")
 	guiLabelSetColor(gui["cbcPayouttL"], 255, 0, 0)
-	
+
 	gui["cbcNameE"] = guiCreateEdit(150, 65, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbcNameE"], 32767)
 	guiEditSetReadOnly(gui["cbcNameE"], true)
-	
+
 	gui["cbcPosE"] = guiCreateEdit(150, 105, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbcPosE"], 32767)
 	guiEditSetReadOnly(gui["cbcPosE"], true)
-	
+
 	gui["cbcLocE"] = guiCreateEdit(150, 145, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbcLocE"], 32767)
 	guiEditSetReadOnly(gui["cbcLocE"], true)
-	
+
 	gui["cbcCostE"] = guiCreateEdit(150, 185, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbcCostE"], 32767)
 	guiEditSetReadOnly(gui["cbcCostE"], true)
-	
+
 	gui["cbcPayoutE"] = guiCreateEdit(150, 225, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbcPayoutE"], 32767)
 	guiEditSetReadOnly(gui["cbcPayoutE"], true)
-	
+
 	gui["cbcPayouttE"] = guiCreateEdit(150, 265, 191, 31, "", false, gui["_root"])
 	guiEditSetMaxLength(gui["cbcPayouttE"], 32767)
 	guiEditSetReadOnly(gui["cbcPayouttE"], true)
-	
+
 	gui["cbcAcceptI"] = guiCreateStaticImage(60, 315, 81, 51, "files/images/tick.png", false, gui["_root"])
 	gui["cbcCancelI"] = guiCreateStaticImage(220, 315, 81, 51, "files/images/wrong.png", false, gui["_root"])
 	addEventHandler("onClientMouseEnter", gui["cbcAcceptI"], on_cbcAcceptI_entered, false)
@@ -314,7 +314,7 @@ function build_cbcGUI()
 	addEventHandler("onClientMouseLeave", gui["cbcCancelI"], on_cbcCancelI_left, false)
 	addEventHandler("onClientGUIClick", gui["cbcAcceptI"], on_cbcAcceptI_clicked, false)
 	addEventHandler("onClientGUIClick", gui["cbcCancelI"], on_cbcCancelI_clicked, false)
-	
+
 	return gui, windowWidth, windowHeight
 end
 
@@ -338,7 +338,7 @@ function on_cbcAcceptI_clicked(button, state)
 	if(button ~= "left") or(state ~= "up") then
 		return
 	end
-	
+
 	guiSetVisible(cbcGUI["_root"], false)
 	local left, top = sX / 2 - 500 / 2, sY / 2 - 50 / 2
 	local cbProgressP = guiCreateProgressBar(left, top, 500, 50, false)
@@ -349,7 +349,7 @@ function on_cbcAcceptI_clicked(button, state)
 		local progress = tonumber(("%.f") : format(tostring(guiProgressBarGetProgress(cbProgressP) + 4)))
 		guiProgressBarSetProgress(cbProgressP, progress)
 		guiSetText(cbProgressL, "Creating Business "..tostring(progress).."%")
-		
+
 		if progress < 30 then
 			guiLabelSetColor(cbProgressL, 170, 0, 0)
 		elseif progress < 70 and progress > 30 then
@@ -363,7 +363,7 @@ function on_cbcAcceptI_clicked(button, state)
 			destroyElement(cbProgressL)
 			guiSetVisible(cbGUI["_root"], false)
 			guiSetInputMode("allow_binds")
-			showCursor(false)
+			exports.GTWgui:showGUICursor(false)
 			on_cbClearB_clicked("left", "up")
 			local posX, posY, posZ, interior, dimension = gettok(guiGetText(cbcGUI["cbcPosE"]), 1, ","), gettok(guiGetText(cbcGUI["cbcPosE"]), 2, ","), gettok(guiGetText(cbcGUI["cbcPosE"]), 3, ","), gettok(guiGetText(cbcGUI["cbcPosE"]), 4, ","), gettok(guiGetText(cbcGUI["cbcPosE"]), 5, ",")
 			local name = guiGetText(cbcGUI["cbcNameE"])
@@ -386,7 +386,7 @@ end
 
 addEventHandler("onClientMouseEnter", root, function() cursorOverGUI = true end)
 addEventHandler('onClientMouseLeave', root, function() cursorOverGUI = false end)
- 
+
 addEventHandler("onClientRender", root,
 	function()
 		if not isCursorShowing() then return end
@@ -407,24 +407,24 @@ bindKey("mouse2", "up",
 		if isCursorShowing() then
 			if cursorOverGUI then return end
 			guiSetAlpha(cbGUI["_root"], 0.1)
-			_showCursor(false)
+			_exports.GTWgui:showGUICursor(false)
 			guiSetInputMode("allow_binds")
 		else
 			guiSetAlpha(cbGUI["_root"], 1)
-			_showCursor(true)
+			_exports.GTWgui:showGUICursor(true)
 			guiSetInputMode("no_binds_when_editing")
 		end
 	end
 )
 
-function convertNumber(number)  
-	local formatted = number  
-	while true do      
-		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')    
-		if ( k==0 ) then      
-			break   
-		end  
-	end  
+function convertNumber(number)
+	local formatted = number
+	while true do
+		formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+		if ( k==0 ) then
+			break
+		end
+	end
 	return formatted
 end
 
@@ -467,9 +467,9 @@ addEventHandler("client:showInstructions", root,
 
 function showInstructions()
 	if settings["business.key"] then
-		dxDrawText("Press",(sX / 1440) * 550,(sY / 900) * 450,(sX / 1440) * 100,(sY / 900) * 100, tocolor(255, 255, 255, 255),(sX / 1440) * 2.0)
-		dxDrawText(settings["business.key"]:upper(),(sX / 1440) * 615,(sY / 900) * 450,(sX / 1440) * 100,(sY / 900) * 100, tocolor(255, 0, 0, 255),(sX / 1440) * 2.0)
-		dxDrawText(" To Open The Business",(sX / 1440) * 630,(sY / 900) * 450,(sX / 1440) * 100,(sY / 900) * 100, tocolor(255, 255, 255, 255),(sX / 1440) * 2.0)
+		dxDrawText("Press",(sX / 1440) * 520,(sY / 900) * 450,(sX / 1440) * 100,(sY / 900) * 100, tocolor(200,200,200,200),(sX / 1440) * 0.8, "bankgothic")
+		dxDrawText(settings["business.key"]:upper(),(sX / 1440) * 615,(sY / 900) * 450,(sX / 1440) * 100,(sY / 900) * 100, tocolor(0,200,0,200),(sX / 1440) * 0.8, "bankgothic")
+		dxDrawText(" to open the business",(sX / 1440) * 640,(sY / 900) * 450,(sX / 1440) * 100,(sY / 900) * 100, tocolor(200,200,200,200),(sX / 1440) * 0.8, "bankgothic")
 	end
 end
 
@@ -481,128 +481,120 @@ addEventHandler("client:hideInstructions", root,
 )
 
 function build_bGUI()
-	
+
 	local gui = {}
 	gui._placeHolders = {}
-	
+
 	local screenWidth, screenHeight = guiGetScreenSize()
-	local windowWidth, windowHeight = 524, 398
+	local windowWidth, windowHeight = 600, 400
 	local left = screenWidth/2 - windowWidth/2
 	local top = screenHeight/2 - windowHeight/2
-	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "", false)
-	guiWindowSetSizable(gui["_root"], false)
-	guiWindowSetMovable(gui["_root"], false)
-	guiSetAlpha(gui["_root"], 1)
+	gui["_root"] = exports.GTWgui:createWindow(left, top, windowWidth, windowHeight, "Manage business", false)
 	guiSetVisible(gui["_root"], false)
-	
-	gui["bBusinessL"] = guiCreateStaticImage(220, 25, 101, 80, "files/images/business.png", false, gui["_root"])
-	
-	gui["bTP"] = guiCreateTabPanel(10, 125, 511, 231, false, gui["_root"])
-	
+
+	gui["bTP"] = guiCreateTabPanel(10, 30, 580, 328, false, gui["_root"])
+
 	gui["bInfoT"] = guiCreateTab("Information", gui["bTP"])
-	
+
 	gui["bIDL"] = guiCreateLabel(10, 20, 81, 16, "ID: #", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bIDL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bIDL"], "center")
-	
-	gui["bNameL"] = guiCreateLabel(10, 70, 241, 16, "Name:", false, gui["bInfoT"])
+
+	gui["bNameL"] = guiCreateLabel(10, 45, 241, 16, "Name:", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bNameL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bNameL"], "center")
-	
-	gui["bOwnerL"] = guiCreateLabel(10, 120, 231, 16, "Owner: ", false, gui["bInfoT"])
+
+	gui["bOwnerL"] = guiCreateLabel(10, 70, 231, 16, "Owner: ", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bOwnerL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bOwnerL"], "center")
-	
-	gui["bCostL"] = guiCreateLabel(10, 170, 191, 16, "Cost: ", false, gui["bInfoT"])
+
+	gui["bCostL"] = guiCreateLabel(10, 95, 191, 16, "Cost: ", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bCostL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bCostL"], "center")
-	
-	gui["bPayoutL"] = guiCreateLabel(290, 20, 211, 16, "Payout: ", false, gui["bInfoT"])
+
+	gui["bPayoutL"] = guiCreateLabel(10, 120, 211, 16, "Payout: ", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bPayoutL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bPayoutL"], "center")
-	
-	gui["bPayouttL"] = guiCreateLabel(290, 70, 211, 16, "Payout Time:", false, gui["bInfoT"])
+
+	gui["bPayouttL"] = guiCreateLabel(10, 145, 211, 16, "Payout Time:", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bPayouttL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bPayouttL"], "center")
-	
-	gui["bLocL"] = guiCreateLabel(290, 120, 211, 16, "Location:", false, gui["bInfoT"])
+
+	gui["bLocL"] = guiCreateLabel(10, 170, 211, 16, "Location:", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bLocL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bLocL"], "center")
-	
-	gui["bBankL"] = guiCreateLabel(290, 170, 211, 16, "Bank:", false, gui["bInfoT"])
+
+	gui["bBankL"] = guiCreateLabel(10, 195, 211, 16, "Bank:", false, gui["bInfoT"])
 	guiLabelSetHorizontalAlign(gui["bBankL"], "left", false)
 	guiLabelSetVerticalAlign(gui["bBankL"], "center")
-	
-	gui["bactionsT"] = guiCreateTab("Actions", gui["bTP"])
-	
-	gui["bBuyB"] = guiCreateButton(10, 10, 101, 31, "Buy", false, gui["bactionsT"])
+
+	gui["bBuyB"] = guiCreateButton(450, 10, 120, 48, "Buy", false, gui["bInfoT"])
 	if on_bBuyB_clicked then
 		addEventHandler("onClientGUIClick", gui["bBuyB"], on_bBuyB_clicked, false)
 	end
-	
-	gui["bSellB"] = guiCreateButton(10, 60, 101, 31, "Sell", false, gui["bactionsT"])
+
+	gui["bSellB"] = guiCreateButton(450, 60, 120, 48, "Sell", false, gui["bInfoT"])
 	if on_bSellB_clicked then
 		addEventHandler("onClientGUIClick", gui["bSellB"], on_bSellB_clicked, false)
 	end
-	
-	gui["bDepositB"] = guiCreateButton(10, 110, 101, 31, "Deposit", false, gui["bactionsT"])
+
+	gui["bDepositB"] = guiCreateButton(450, 110, 120, 48, "Deposit", false, gui["bInfoT"])
 	if on_bDepositB_clicked then
 		addEventHandler("onClientGUIClick", gui["bDepositB"], on_bDepositB_clicked, false)
 	end
-	
-	gui["bWithdrawB"] = guiCreateButton(10, 160, 101, 31, "Withdraw", false, gui["bactionsT"])
+
+	gui["bWithdrawB"] = guiCreateButton(450, 160, 120, 48, "Withdraw", false, gui["bInfoT"])
 	if on_bWithdrawB_clicked then
 		addEventHandler("onClientGUIClick", gui["bWithdrawB"], on_bWithdrawB_clicked, false)
 	end
-	
+
+	gui["bactionsT"] = guiCreateTab("Admin", gui["bTP"])
+	local is_admin = exports.GTWstaff:isAdmin(localPlayer)
+	if not is_admin then guiSetVisible(gui["bactionsT"], false) end
+
 	gui["bNameB"] = guiCreateButton(390, 10, 101, 31, "Set Name", false, gui["bactionsT"])
 	if on_bNameB_clicked then
 		addEventHandler("onClientGUIClick", gui["bNameB"], on_bNameB_clicked, false)
 	end
-	
+
 	gui["bOwnerB"] = guiCreateButton(390, 60, 101, 31, "Set Owner", false, gui["bactionsT"])
 	if on_bOwnerB_clicked then
 		addEventHandler("onClientGUIClick", gui["bOwnerB"], on_bOwnerB_clicked, false)
 	end
-	
+
 	gui["bCostB"] = guiCreateButton(390, 110, 101, 31, "Set Cost", false, gui["bactionsT"])
 	if on_bCostB_clicked then
 		addEventHandler("onClientGUIClick", gui["bCostB"], on_bCostB_clicked, false)
 	end
-	
+
 	gui["bBankB"] = guiCreateButton(390, 160, 101, 31, "Set Bank", false, gui["bactionsT"])
 	if on_bBankB_clicked then
 		addEventHandler("onClientGUIClick", gui["bBankB"], on_bBankB_clicked, false)
 	end
-	
+
 	gui["bactionE"] = guiCreateEdit(130, 50, 241, 31, "", false, gui["bactionsT"])
 	guiEditSetMaxLength(gui["bactionE"], 32767)
-	
+
 	gui["bactionL"] = guiCreateLabel(130, 10, 241, 21, "Action:", false, gui["bactionsT"])
 	guiLabelSetHorizontalAlign(gui["bactionL"], "center", false)
 	guiLabelSetVerticalAlign(gui["bactionL"], "center")
 	guiLabelSetColor(gui["bactionL"], 255, 0, 0)
-	
+
 	gui["bAcceptB"] = guiCreateButton(130, 100, 241, 41, "Accept", false, gui["bactionsT"])
 	if on_bAcceptB_clicked then
 		addEventHandler("onClientGUIClick", gui["bAcceptB"], on_bAcceptB_clicked, false)
 	end
-	
+
 	gui["bDestroyB"] = guiCreateButton(130, 155, 241, 41, "Destroy", false, gui["bactionsT"])
 	if on_bDestroyB_clicked then
 		addEventHandler("onClientGUIClick", gui["bDestroyB"], on_bDestroyB_clicked, false)
 	end
-	
-	gui["AboutL"] = guiCreateLabel(10, 365, 511, 31, "Made By JR10", false, gui["_root"])
-	guiLabelSetHorizontalAlign(gui["AboutL"], "center", false)
-	guiLabelSetVerticalAlign(gui["AboutL"], "center")
-	guiLabelSetColor(gui["AboutL"], 255, 170, 0)
-	
-	gui["bXB"] = guiCreateButton(480, 25, 31, 31, "X", false, gui["_root"])
+
+	gui["bXB"] = guiCreateButton(390, 360, 200, 30, "Close", false, gui["_root"])
 	if on_bXB_clicked then
 		addEventHandler("onClientGUIClick", gui["bXB"], on_bXB_clicked, false)
 	end
-	
+
 	return gui, windowWidth, windowHeight
 end
 
@@ -723,7 +715,7 @@ function on_bXB_clicked(button, state, absoluteX, absoluteY)
 		return
 	end
 	guiSetVisible(bGUI["_root"], false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 	guiSetInputMode("allow_binds")
 	setElementFrozen(localPlayer, false)
 end
@@ -754,7 +746,7 @@ addEventHandler("client:showBusinessGUI", root,
 		guiSetText(bGUI["bPayouttL"], "Payout Time: "..payoutOTime.." "..payoutUnit)
 		guiSetText(bGUI["bLocL"], "Location: "..getZoneName(posX, posY, posZ, false).."("..getZoneName(posX, posY, posZ, true)..")")
 		guiSetText(bGUI["bBankL"], "Bank: $"..bank)
-		
+
 		if isAdmin and isOwner then
 			guiSetEnabled(bGUI["bactionsT"], true)
 			guiSetEnabled(bGUI["bSellB"], true)
@@ -819,39 +811,34 @@ addEventHandler("client:showBusinessGUI", root,
 			guiSetEnabled(bGUI["bWithdrawB"], false)
 			guiSetEnabled(bGUI["bBuyB"], true)
 		end
-		
+
 		guiSetVisible(bGUI["_root"], true)
-		showCursor(true)
+		exports.GTWgui:showGUICursor(true)
 		guiSetInputMode("no_binds_when_editing")
 	end
 )
 
 function build_bacGUI()
-	
+
 	local gui = {}
 	gui._placeHolders = {}
-	
+
 	local screenWidth, screenHeight = guiGetScreenSize()
 	local windowWidth, windowHeight = 332, 193
 	local left = screenWidth/2 - windowWidth/2
 	local top = screenHeight/2 - windowHeight/2
-	gui["_root"] = guiCreateWindow(left, top, windowWidth, windowHeight, "Buy Business", false)
-	guiWindowSetSizable(gui["_root"], false)
-	guiWindowSetMovable(gui["_root"], false)
+	gui["_root"] = exports.GTWgui:createWindow(left, top, windowWidth, windowHeight, "Buy Business", false)
 	guiSetProperty(gui["_root"], "AlwaysOnTop", "true")
 	guiSetAlpha(gui["_root"], 1)
 	guiSetVisible(gui["_root"], false)
-	
-	gui["bacInfoL"] = guiCreateLabel(0, 15, 331, 51, "Are you sure you want to Buy This Business", false, gui["_root"])
-	guiLabelSetHorizontalAlign(gui["bacInfoL"], "center", false)
-	guiLabelSetVerticalAlign(gui["bacInfoL"], "center")
-	guiLabelSetColor(gui["bacInfoL"], 0, 255, 255)
-	
+
+	gui["bacInfoL"] = guiCreateLabel(20, 30, 331, 51, "Are you sure you want to Buy This Business", false, gui["_root"])
+
 	gui["bacAcceptI"] = guiCreateStaticImage(50, 125, 71, 51, "files/images/tick.png", false, gui["_root"])
 	if on_bacAcceptI_clicked then
 		addEventHandler("onClientGUIClick", gui["bacAcceptI"], on_bacAcceptI_clicked, false)
 	end
-	
+
 	gui["bacCancelI"] = guiCreateStaticImage(220, 125, 71, 51, "files/images/wrong.png", false, gui["_root"])
 	if on_bacCancelI_clicked then
 		addEventHandler("onClientGUIClick", gui["bacCancelI"], on_bacCancelI_clicked, false)
@@ -860,7 +847,7 @@ function build_bacGUI()
 	addEventHandler("onClientMouseEnter", gui["bacCancelI"], on_bacCancelI_entered, false)
 	addEventHandler("onClientMouseLeave", gui["bacAcceptI"], on_bacAcceptI_left, false)
 	addEventHandler("onClientMouseLeave", gui["bacCancelI"], on_bacCancelI_left, false)
-	
+
 	return gui, windowWidth, windowHeight
 end
 
@@ -901,7 +888,7 @@ addEventHandler("client:onAction", root,
 	function(close, playCash)
 		if close then
 			guiSetVisible(bGUI["_root"], false)
-			showCursor(false)
+			exports.GTWgui:showGUICursor(false)
 		end
 		if playCash then
 			playSound("files/sounds/cash.mp3", false)

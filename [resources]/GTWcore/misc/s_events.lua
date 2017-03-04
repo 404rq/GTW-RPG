@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -24,10 +24,10 @@ setTimer(function()
                         local x,y,z = getElementPosition(v)
                         if (getElementData(v, "GTWcore.event.px") or 0) ~= x and
                                 (getElementData(v, "GTWcore.event.py") or 0) ~= y then
-                                        givePlayerMoney(v, 1000)
+                                        givePlayerMoney(v, 100)
                                         setElementData(v, "GTWcore.event.px", x)
                                         setElementData(v, "GTWcore.event.py", y)
-                                        exports.GTWtopbar:dm("EVENT: You have received $1000 "..
+                                        exports.GTWtopbar:dm("EVENT: You have received $100 "..
                                         "for being online today!", v,255,255,255)
                         end
                 end

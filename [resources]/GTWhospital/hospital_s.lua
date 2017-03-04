@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -34,7 +34,7 @@ hs_table = {  -- x	y	z			rot	view x			view y			view z
 }
 
 -- Cost of the healthcare
-hs_charge 			= 500
+hs_charge 			= 100
 hs_respawn_time 		= 10	-- Check GTWjail respawn times if you decide to change this value!
 hs_spawn_protection_time 	= 20
 
@@ -56,14 +56,14 @@ function get_nearest_hospital(plr)
 	for k,v in ipairs(hs_table) do
 		-- Get the distance for each point
 		local px,py,pz=getElementPosition(plr)
-		
+
 		-- Use cached coordinates if player is inside interior
 		if getElementDimension(plr) ~= 0 or getElementInterior(plr) ~= 0 then
 			if getElementData(plr, "interiors.px") then px = getElementData(plr, "interiors.px") end
 			if getElementData(plr, "interiors.py") then py = getElementData(plr, "interiors.py") end
 			if getElementData(plr, "interiors.pz") then pz = getElementData(plr, "interiors.pz") end
 		end
-		
+
 		-- Meassure distance to nearest hospital
 		local dist = getDistanceBetweenPoints2D(px,py,v[1],v[2])
 
@@ -105,7 +105,7 @@ function toggle_controls(plr, n_state)
 end
 
 --[[ Respawn after death "onPlayerSpawn" ]]--
-function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
+function player_spawn(x,y,z, r, team_name, skin_id, int,dim)
 	-- Check if a player is picked up by an ambulance
 	if not awaiting_spawn[source] then return end
 
@@ -148,7 +148,7 @@ function player_Spawn(x,y,z, r, team_name, skin_id, int,dim)
 	-- Infom the player about his respawn
 	exports.GTWtopbar:dm("Hospital: You have been healed at "..getZoneName(x,y,z)..", for a cost of $"..hs_charge, source, 255, 100, 0)
 end
-addEventHandler("onPlayerSpawn", root, player_Spawn)
+addEventHandler("onPlayerSpawn", root, player_spawn)
 
 --[[ Helper function for spawn triggers and style ]]--
 function finish_spawn(plr)
@@ -210,19 +210,19 @@ end
 --[[ Dump weapons into users database on quit ]]--
 function dump_weapons()
 	-- Get player account
-    local acc = getPlayerAccount(source)
+    	local acc = getPlayerAccount(source)
 
-    -- Reset ambulance data
+    	-- Reset ambulance data
 	awaiting_spawn[source] = nil
 
-    -- Check if there is any weapons in memory
-    if not weapon_list[source] then return end
+    	-- Check if there is any weapons in memory
+    	if not weapon_list[source] then return end
 
-    -- Save the weapons and ammo stored in memory
-    for k,w in ipairs(weapon_list[source]) do
-	    if weapon_list[source][k] and ammo_list[source][k] then
-	   		setAccountData(acc, "acorp.weapon."..tostring(k), weapon_list[source][k])
-	   		setAccountData(acc, "acorp.ammo."..tostring(k), ammo_list[source][k])
+    	-- Save the weapons and ammo stored in memory
+    	for k,w in ipairs(weapon_list[source]) do
+	    	if weapon_list[source][k] and ammo_list[source][k] then
+	   		exports.GTWcore:set_account_data(acc, "GTWdata.weapon."..tostring(k), weapon_list[source][k])
+	   		exports.GTWcore:set_account_data(acc, "GTWdata.ammo."..tostring(k), ammo_list[source][k])
 	   	end
 	end
 end

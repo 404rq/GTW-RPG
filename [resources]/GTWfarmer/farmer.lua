@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -19,7 +19,7 @@
 plants_age 		= { }
 player_plants 		= { }
 plants_pos		= {{{ }}}
-seed_moey 		= 300
+seed_moey 		= 90
 
 -- Finds the nearest plant
 function find_nearest(player)
@@ -123,12 +123,12 @@ function plantSeed( player )
         		elseif hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
         			not getPedOccupiedVehicle(hitElement) and getElementModel(plant) == 1454 then
         			-- Pay for the bale
-        			givePlayerMoney(hitElement,math.random(900,1100))
+        			givePlayerMoney(hitElement,math.random(150,300))
 
         			-- Increase stats by 1/plant
 				local playeraccount = getPlayerAccount( hitElement )
-				local farmer_plants = getAccountData( playeraccount, "GTWdata_stats_plants_harvested" ) or 0
-				setAccountData( playeraccount, "GTWdata_stats_plants_harvested", farmer_plants + 1 )
+				local farmer_plants = exports.GTWcore:get_account_data( playeraccount, "GTWdata.stats.plants_harvested" ) or 0
+				exports.GTWcore:set_account_data( playeraccount, "GTWdata.stats.plants_harvested", farmer_plants + 1 )
 
         			-- Status message
 				exports.GTWtopbar:dm( "Farmer: One of your plants has been sold", player, 255, 200, 0 )
