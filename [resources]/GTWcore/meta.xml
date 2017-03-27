@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="RageQuit 404" type="script" name="Core system" description="All server core features" version="292" />
+    <info author="RageQuit 404" type="script" name="Core system" description="All server core features" version="299" />
     <!-- Useful utils -->
     <script src="utils/s_func.lua" type="server" />
     <script src="utils/s_staff.lua" type="server" />
