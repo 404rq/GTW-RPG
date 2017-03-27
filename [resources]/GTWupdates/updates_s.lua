@@ -40,7 +40,7 @@ end
 
 -- Call a local php file (get.php) to fetch update list from remote servers
 function onUpdateRequest( )
-	callRemote("http://127.0.0.1/mta-mods/get.php", result_send)
+	fetchRemote( "https://404rq.com/update-list/mtasa.txt", result_send )
 end
 addEvent("GTWupdates.request", true)
 addEventHandler("GTWupdates.request", root, onUpdateRequest)
