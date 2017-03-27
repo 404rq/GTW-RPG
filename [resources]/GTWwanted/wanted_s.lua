@@ -231,9 +231,13 @@ addEvent("GTWwanted.serverSetWl", true)
 addEventHandler("GTWwanted.serverSetWl", root, setServerWantedLevel)
 
 function client_kill_ped(ped, killer, body_part)
-	if not ped or isPedDead(ped) then return end
+	if not ped or not isElement(ped) or isPedDead(ped) or getPedOccupiedVehicle(ped) then return end
+	if not killer or not isElement(killer) or not getPedOccupiedVehicle(killer) or getPedOccupiedVehicleSeat(killer) > 0 then return end
+	local px,py,pz = getElementPosition(ped)
+	local kx,ky,kz = getElementPosition(killer)
+	if getDistanceBetweenPoints3D(px,py,pz, kx,ky,kz) > 10 then return end
 	killPed(ped, killer, 255, body_part, false)
-	setWl(killer, 1, 60, "You committed the crime of murder")
+	setWl(killer, 0.4, 60, "You committed the crime of murder")
 end
 addEvent("GTWwanted.serverKillPed", true)
 addEventHandler("GTWwanted.serverKillPed", root, client_kill_ped)
