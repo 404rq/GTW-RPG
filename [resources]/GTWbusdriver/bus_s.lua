@@ -94,10 +94,14 @@ function on_bus_enter(plr, seat, jacked)
 	-- Whoever entered the bus is a busdriver
 	if getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
 		getElementData(plr, "Occupation") == "Bus Driver" and
-		seat == 0 and bus_vehicles[getElementModel(source )] then
+		seat == 0 and not getElementData(plr, "GTWbusdriver.currentRoute") then
 
 		-- Let him choose a route to drive
 		triggerClientEvent(plr, "GTWbusdriver.selectRoute", plr)
+	elseif getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
+		getElementData(plr, "Occupation") == "Bus Driver" and
+		seat == 0 and getElementData(plr, "GTWbusdriver.currentRoute") then
+		start_new_route(getElementData(plr, "GTWbusdriver.currentRoute"), plr)
 	end
 end
 addEventHandler("onVehicleEnter", root, on_bus_enter)
@@ -123,7 +127,8 @@ addCommandHandler("routelist", choose_route)
 addCommandHandler("routeslist", choose_route)
 
 --[[ A new route has been selected, load it's data ]]--
-function start_new_route(route)
+function start_new_route(route, plr)
+	if not client then client = plr end
     	setElementData(client, "GTWbusdriver.currentRoute", route)
 	if not getElementData(client, "GTWbusdriver.currentStop") then
 		local first_stop = find_nearest_stop(client, route)

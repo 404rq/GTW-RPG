@@ -171,7 +171,7 @@ function select_bus_route( )
 		triggerServerEvent("GTWbusdriver.selectRouteReceive", localPlayer, route)
 
 		-- Notice about how to change
-		outputChatBox("[Busdriver]#BBBBBB Mission assigned, type /routes to change your mission", 255,200,0, true)
+		outputChatBox("[Busdriver]#FFFFFF Mission assigned, type /routes to change your mission", 200,200,200, true)
 
 		-- Close the GUI
 		close_gui()
