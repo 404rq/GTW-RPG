@@ -58,4 +58,11 @@ end
 function showGUICursor(show, toggle_controls)
     	showCursor(show, toggle_controls)
 end
-bindKey("x", "down", showGUICursor, "Toggle cursor")
+function toggle_cursor()
+	if not isCursorShowing() then
+    		showCursor(true, true)
+	else
+		showCursor(false, false)
+	end
+end
+bindKey("x", "down", toggle_cursor, "Toggle cursor")

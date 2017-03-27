@@ -20,7 +20,7 @@ restart_list = { }
 --[[ Load list from HDD and apply GUI ]]--
 function load_list(res)
 	--[[ Load dynamic list of resources to refresh ]]--
-	restart_list = getElementData(root, "GTWgui.refreshList")
+	restart_list = getElementData(root, "GTWgui.refresh_list") or { }
 	--[[ Don't do anything if the table doesn't exist (mainly onResourceStart)]]
 	if not resource_list then
 		setTimer( load_list, 2500, 1 )
@@ -42,7 +42,7 @@ addEventHandler("onResourceStart", resourceRoot, load_list)
 
 --[[ Save refresh array in HDD ]]--
 function save_list(res)
-	setElementData(root, "GTWgui.refreshList", restart_list)
+	setElementData(root, "GTWgui.refresh_list", restart_list)
 end
 addEventHandler("onResourceStop", resourceRoot, save_list)
 
@@ -55,13 +55,14 @@ end
 addEvent("GTWgui.addToRefreshList", true)
 addEventHandler("GTWgui.addToRefreshList", root, addToRefreshList)
 
-addCommandHandler("gtwguiinfo", function(plr, cmd)
+--[[ Toggle the cursor (globally) ]]--
+function showGUICursor(show, toggle_controls)
+    	showCursor(show, toggle_controls)
+end
+
+addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
         getThisResource(), "author")..", v-"..getResourceInfo(
         getThisResource(), "version")..", is represented", plr)
-
-	for k,v in ipairs(restart_list) do
-		outputChatBox(k.." "..v)
-	end
 end)

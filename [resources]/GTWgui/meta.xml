@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="GTWgui" description="Manage walrus GUI elements and custom fonts" version="8" />
+    <info author="GTWGames" type="script" name="GTWgui" description="Manage walrus GUI elements and custom fonts" version="29" />
     <script src="c_window.lua" type="client" />
     <script src="s_refresh.lua" type="server" />
 
@@ -25,6 +25,7 @@
     <export function="createWindow" type="client" />
     <export function="setDefaultFont" type="client" />
     <export function="showGUICursor" type="client" />
+    <export function="showGUICursor" type="server" />
     <export function="windowSetMoveable" type="client" />
     <export function="windowSetSizeable" type="client" />
     <export function="addToRefreshList" type="server" />
