@@ -15,15 +15,16 @@
 ]]--
 
 -- Global settings
-vehicles 	= { }
-spawn_prices	= { }
-trailers 	= { }
-peds 		= { }
-syncTimers 	= { }
-gearTimers 	= { }
-currVehTopSpeed = { }
-paymentsHolder 	= { }
-paymentsCounter = { }
+vehicles 		= { }
+spawn_prices		= { }
+trailers 		= { }
+peds 			= { }
+syncTimers 		= { }
+trailerSyncTimers 	= { }
+gearTimers 		= { }
+currVehTopSpeed 	= { }
+paymentsHolder 		= { }
+paymentsCounter 	= { }
 
 -- Define police vehlices (cars and helicopters including army, swat, sapd and fbi)
 veh_police = {

@@ -72,9 +72,12 @@ function toggle_engine(plr, command)
                         toggleControl(plr, "accelerate", true)
                         toggleControl(plr, "brake_reverse", true)
 	        end
-                setVehicleOverrideLights(veh, 0)
-                setVehicleEngineState(veh, true)
+		setVehicleOverrideLights(veh, 2)
+                setTimer(setVehicleOverrideLights, 1000, 1, veh, 0)
+                setTimer(setVehicleEngineState, 400, 1, veh, true)
                 exports.GTWtopbar:dm("Engine: Turned on successfully", plr, 255, 100, 0)
+	elseif tonumber(getElementData(veh, "vehicleFuel")) <= 0 then
+		exports.GTWtopbar:dm("Engine: failed to start, you're out of fuel", plr, 200, 0, 0)
 	end
 end
 addCommandHandler("engine", toggle_engine)

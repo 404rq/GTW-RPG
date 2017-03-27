@@ -231,7 +231,7 @@ addCommandHandler("topspeed", topSpeed)
 
 function setPlateText(thePlayer, cmd, ...)
 	local arg = table.concat({...}, " ")
-	if getPedOccupiedVehicle(thePlayer) then
+	if getPedOccupiedVehicle(thePlayer) and getPedOccupiedVehicleSeat(thePlayer) == 0 then
 		setVehiclePlateText(getPedOccupiedVehicle(thePlayer), arg)
 	end
 end

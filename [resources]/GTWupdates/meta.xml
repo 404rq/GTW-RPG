@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWupdates" description="Show updates to online players" version="54" type="script" />
+    <info author="GTWGames" name="GTWupdates" description="Show updates to online players" version="61" type="script" />
     <script src="updates_c.lua" type="client"></script>
     <script src="updates_s.lua" type="server"></script>
     
