@@ -16,9 +16,9 @@
 
 --[[ Initialize group system GUI elements ]]--
 function makeGUI()
-	window = exports.GTWgui:createWindow(0, 0, 770, 550, "Grand Theft Walrus - groups", false)
+	sx,sy = guiGetScreenSize()
+	window = exports.GTWgui:createWindow((sx-770)/2, (sy-550)/2, 770, 550, "Grand Theft Walrus - groups", false)
 	exports.GTWgui:windowSetSizeable(window, false)
-	guiSetAlpha(window, 1.00)
 	guiSetVisible(window, false)
 
 	mainPanel = guiCreateTabPanel(6, 23, 758, 520, false, window)
