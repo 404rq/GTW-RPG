@@ -269,6 +269,7 @@ if wantedlevel == 0 then
 		local veh = getPedOccupiedVehicle(localPlayer)
 		local veh_health = getElementHealth(veh)
 		local veh_fuel = getElementData(veh, "vehicleFuel") or 0
+		local veh_max_fuel = getElementData(veh, "vehicleMaxFuel") or getVehicleHandlingProperty(veh, "mass")/20 or 100
 		local max_speed = getVehicleHandling(veh)["maxVelocity"] or 200
 		local speedx, speedy, speedz = getElementVelocity(veh)
 		local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5)
@@ -298,15 +299,15 @@ if wantedlevel == 0 then
 		
 		-- Draw vehicle fuel
 		dxDrawRectangle(sWidth-310, sHeight-110, 300, 28, tocolor(20, 20, 20, 190), false)
-		dxDrawRectangle(sWidth-310, sHeight-110, math.floor(veh_fuel*3), 28, tocolor(0, 100, 0, 190), false)
-		dxDrawText("Fuel: "..math.floor(veh_fuel).."%", 
+		dxDrawRectangle(sWidth-310, sHeight-110, math.floor(veh_fuel*(300/veh_max_fuel)), 28, tocolor(0, 100, 0, 190), false)
+		dxDrawText("Fuel: "..math.round(veh_fuel, 2).." of "..math.round(veh_max_fuel, 2).." litre", 
 			sWidth-280, sHeight-104, 190, 16, tocolor(255,255,255, 220),
 			0.5, "bankgothic", "left", "top", false, false, false)
 		
 		-- Draw vehicle health
 		dxDrawRectangle(sWidth-310, sHeight-80, 300, 28, tocolor(20, 20, 20, 190), false)
 		dxDrawRectangle(sWidth-310, sHeight-80, math.floor((veh_health*3)/10), 28, tocolor(0, 100, 0, 190), false)
-		dxDrawText("Health: "..math.floor(veh_health/10).."%", 
+		dxDrawText("Health: "..math.round(veh_health/10, 2).."%", 
 			sWidth-280, sHeight-74, 190, 16, tocolor(255,255,255, 220),
 			0.5, "bankgothic", "left", "top", false, false, false)
 	end
@@ -380,4 +381,24 @@ function convertNumber ( number )
 		end
 	end
 	return formatted
+end
+
+function math.round(number, decimals, method)
+	decimals = decimals or 0
+	local factor = 10 ^ decimals
+	if (method == "ceil" or method == "floor") then return math[method](number * factor) / factor
+	else return tonumber(("%."..decimals.."f"):format(number)) end
+end
+
+function getVehicleHandlingProperty ( element, property )
+    if isElement ( element ) and getElementType ( element ) == "vehicle" and type ( property ) == "string" then
+        local handlingTable = getVehicleHandling ( element ) 
+        local value = handlingTable[property] 
+ 
+        if value then 
+            return value 
+        end
+    end
+ 
+    return false
 end
