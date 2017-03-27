@@ -64,10 +64,11 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
                                 local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
                                 if getVehicleType(vehicles[client]) == "Automobile" or bike_list[vehID] then
                                         local result = getVehicleHandling(vehicles[client])
-                                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/2.4, false)
-                                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*2.4, false)
-                                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/2.4, false)
-                                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/2.4, false)
+                                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/2, false)
+                                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*1.8, false)
+                                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/4, false)
+                                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/2, false)
+                                        setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*2, false)
 
                                         --Reduce max speed on bicycles and faggio
                                         if bicycle_list[vehID] then
@@ -96,6 +97,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 						setElementSyncer(trailers[client][1], client)
 						setTimer(detachElements, 50, 1, trailers[client][1])
 						setTimer(attachTrailerToVehicle, 100, 1, vehicles[client], trailers[client][1])
+						triggerClientEvent(root, "GTWvehicles.onStreamOut", root, vehicles[client])
+						triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client][1])
 
 						-- Dual trailers if supported
 						if vehID == 591 then
@@ -111,11 +114,34 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 							setElementSyncer(second_trailer, client)
 							setTimer(detachElements, 50, 1, second_trailer)
 							setTimer(attachTrailerToVehicle, 100, 1, second_tower, second_trailer)
+							setTimer(attachTrailerToVehicle, 1000, 1, second_tower, second_trailer)
 
 							-- Save element pointers for deletion
 							setElementData(vehicles[client], "GTWvehicles.second_tower", second_tower)
 							setElementData(trailers[client][1], "GTWvehicles.second_trailer", second_trailer)
+							triggerClientEvent(root, "GTWvehicles.onStreamOut", root, second_trailer)
 						end
+
+						-- Trailer sync function
+						trailerSyncTimers[client] = setTimer(function(client)
+							-- Sync first truck trailer if there is any
+							if vehicles and vehicles[client] and isElement(vehicles[client]) and isElement(getElementData(vehicles[client], "GTWvehicles.attachedTrailer")) then
+								local tx,ty,tz = getElementPosition(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
+								local trx,try,trz = getElementRotation(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
+								setElementData(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"), "GTWvehicles.trailer.location",
+									toJSON({tx,ty,tz, trx,try,trz}))
+							else
+								killTimer(trailerSyncTimers[client])
+							end
+							-- Sync first truck trailer if there is any
+							if trailers and trailers[client] and trailers[client][1] and isElement(trailers[client][1]) and isElement(getElementData(trailers[client][1],
+								"GTWvehicles.second_trailer")) then
+								local tx,ty,tz = getElementPosition(getElementData(trailers[client][1], "GTWvehicles.second_trailer"))
+								local trx,try,trz = getElementRotation(getElementData(trailers[client][1], "GTWvehicles.second_trailer"))
+								setElementData(getElementData(trailers[client][1], "GTWvehicles.second_trailer"), "GTWvehicles.trailer.location",
+									toJSON({tx,ty,tz, trx,try,trz}))
+							end
+						end, 250, 0, client)
 					end
 			   	end
 
@@ -168,7 +194,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					setElementData(client, "GTWvehicles.numberOfCars", numberOfCarriages)
 					setTimer(display_message, 350, 1, "Train set up: "..engines.." engines and: "..numberOfCarriages.." cars", client, 0, 255, 0)
 			   	end
-				setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
+				--setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
 				setElementData(vehicles[client], "owner", getAccountName(getPlayerAccount(client)))
 				setElementData(client, "currVeh", getElementModel(vehicles[client]))
 				warpPedIntoVehicle(client, vehicles[client])
