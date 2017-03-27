@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info type="map" version="60"></info>
+    <info type="map" version="74"></info>
     <script src="sapd_base.lua" type="client"></script>
 </meta>

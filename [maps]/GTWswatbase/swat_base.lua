@@ -215,6 +215,7 @@ for i,v in ipairs({
     {3437,151.5,434.89999,17.4,0,0,0,1,0,0, true},
 }) do
     local obj = createObject(v[1], v[2], v[3], v[4], v[5], v[6], v[7])
+    createBlipAttachedTo(obj, 0, 1, 0,0,0, 20, 0, 180)
     setObjectScale(obj, v[8])
     setElementDimension(obj, v[9])
     setElementInterior(obj, v[10])
