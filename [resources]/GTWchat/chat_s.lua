@@ -201,7 +201,7 @@ function useLocalChat(plr, cmd, ...)
 	if cmd == "r" and getPedOccupiedVehicle(plr) then
 		chat_str = "(*CB* radio)"
 		msg = msg..", over"
-		l_chat_range = 2500
+		l_chat_range = 2000
 	elseif cmd == "r" and not getPedOccupiedVehicle(plr) then
 		dm(plr, "CB chat can only be used while in a vehicle", 200,0,0, false)
 		return
