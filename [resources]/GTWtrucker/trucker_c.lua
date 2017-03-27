@@ -81,9 +81,9 @@ function delivery_point_hit(plr)
 	local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5)
 	local kmh = actualspeed * 180
 
-	-- Did this player drive faster than 30km/h? if so then we tell him he's
+	-- Did this player drive faster than 20km/h? if so then we tell him he's
 	-- an idiot who drove to fast.
-	if kmh > 40 then
+	if kmh > 20 then
 		exports.GTWtopbar:dm( "You are driving too fast!", 255, 0, 0 )
 		return
 	end
@@ -106,7 +106,7 @@ function delivery_point_hit(plr)
 	triggerServerEvent("GTWtrucker.payTrucker", resourceRoot, next_payment, load_time)
 
 	-- Alright, the driver has been paid, let's clean up some shit and give
-	-- him a new truck stop shall we?
+	-- him a new route shall we?
 	removeEventHandler("onClientMarkerHit", current_delivery_point, delivery_point_hit)
 	if isElement(current_delivery_point) then destroyElement(current_delivery_point) end
 	if isElement(current_blip) then destroyElement(current_blip) end
@@ -171,6 +171,7 @@ function select_truck_route( )
 	exports.GTWgui:showGUICursor(true)
 
 	-- List all truck routes
+	table.sort(truck_routes)
 	for k,v in pairs(truck_routes) do
 		local tmp_row = guiGridListAddRow(routes_list)
 		guiGridListSetItemText(routes_list, tmp_row, tmp_col, k, false, false )
@@ -188,7 +189,7 @@ function select_truck_route( )
 		triggerServerEvent("GTWtrucker.selectRouteReceive", localPlayer, route)
 
 		-- Notice about how to change
-		outputChatBox("[Trucker]#BBBBBB Mission assigned, type /routes to change your mission", 255,200,0, true)
+		outputChatBox("[Trucker]#FFFFFF Mission assigned, type /routes to change your mission", 200,200,200, true)
 
 		-- Close the GUI
 		close_gui()
@@ -214,7 +215,7 @@ function display_destination()
 	if getVehicleTowedByVehicle(getPedOccupiedVehicle(localPlayer)) and
 		getElementModel(getVehicleTowedByVehicle(
 		getPedOccupiedVehicle(localPlayer))) == 584 then
-		prefix = "liter"
+		prefix = "litre"
 	end
 	-- Check that the player is still a truck driver and nothing else
 	if not getPlayerTeam(localPlayer) or getPlayerTeam(localPlayer) ~= getTeamFromName("Civilians") then
@@ -236,9 +237,9 @@ function display_destination()
 
 	if not getElementData(localPlayer, "GTWtrucker.isLoading") then return end
 	local time_left = convert_number(math.round(getElementData(localPlayer, "GTWtrucker.loadTime") - getTickCount(), 2))
-	dxDrawText("Processing cargo ("..time_left..prefix.." remaining) please wait!",
+	dxDrawText("Processing cargo ("..time_left.." "..prefix.." remaining) please wait!",
 		(sx/2)-381,sy-53, 0,0, tocolor(0,0,0,255), 0.7, "bankgothic" )
-	dxDrawText("Processing cargo ("..time_left..prefix.." remaining) please wait!",
+	dxDrawText("Processing cargo ("..time_left.." "..prefix.." remaining) please wait!",
 		(sx/2)-380,sy-52, 0,0, tocolor(255,100,0,255), 0.7, "bankgothic" )
 
 	-- Check if finished

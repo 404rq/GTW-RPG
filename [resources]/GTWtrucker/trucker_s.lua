@@ -47,17 +47,21 @@ function on_truck_enter(plr, seat, jacked)
 	-- Whoever entered the truck is a truckdriver
 	if getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
 		getElementData(plr, "Occupation") == "Trucker" and
-		seat == 0 and truck_vehicles[getElementModel(source )] and
-		not getElementData(plr, "GTWtrucker.currentRoute") then
+		seat == 0 and not getElementData(plr, "GTWtrucker.currentRoute") then
 
 		-- Let him choose a route to drive
 		triggerClientEvent(plr, "GTWtrucker.selectRoute", plr)
+	elseif getPlayerTeam(plr) and getPlayerTeam(plr) == getTeamFromName("Civilians") and
+		getElementData(plr, "Occupation") == "Trucker" and
+		seat == 0 and getElementData(plr, "GTWtrucker.currentRoute") then
+		start_new_route(getElementData(plr, "GTWtrucker.currentRoute"), plr)
 	end
 end
 addEventHandler("onVehicleEnter", root, on_truck_enter)
 
 --[[ A new route has been selected, load it's data ]]--
-function start_new_route(route)
+function start_new_route(route, plr)
+	if not client then client = plr end
     	setElementData(client, "GTWtrucker.currentRoute", route)
 	if not getElementData(client, "GTWtrucker.currentStop") then
 		create_new_delivery_point(client, 1)
@@ -126,7 +130,7 @@ function choose_route(plr, cmd, ID)
 	if getPlayerTeam(plr) and getPedOccupiedVehicle(plr) and
 		getPlayerTeam(plr) == getTeamFromName("Civilians") and
 		getElementData(plr, "Occupation") == "Trucker" and
-		seat == 0 and truck_vehicles[getElementModel(getPedOccupiedVehicle(plr))] then
+		getPedOccupiedVehicleSeat(plr) == 0 and truck_vehicles[getElementModel(getPedOccupiedVehicle(plr))] then
 
 		-- Force selection of new route
 		triggerClientEvent(plr, "GTWtrucker.selectRoute", plr)
