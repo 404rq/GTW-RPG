@@ -16,7 +16,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="GTW clothes" descriptions="Handle shops where you can buy skins" version="94" />
+    <info author="GTWGames" type="script" name="GTW clothes" descriptions="Handle shops where you can buy skins" version="106" />
     <script src="data_s.lua" type="server" />
     <script src="clothes_c.lua" type="client" />
     <script src="clothes_s.lua" type="server" />
