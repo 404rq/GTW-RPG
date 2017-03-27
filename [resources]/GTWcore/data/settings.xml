@@ -15,7 +15,7 @@
 -->
 
 <settings>
-    <option name="gamemode">GTW-RPG v4.0-beta</option> 
+    <option name="gamemode">GTW-RPG v4.0-beta</option>
     <option name="map">GTWcore</option>
     <option name="peak">0</option>
     <option name="version">4.0-beta</option>
