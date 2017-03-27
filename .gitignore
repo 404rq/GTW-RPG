@@ -3,4 +3,4 @@ CLONE_FILES.bat
 *.db
 *.csv
 *.jpg
-[resources]/GTWcore/data/settings.xml
+*settings.xml
