@@ -72,7 +72,7 @@ end
 function print_nearest_station(plr, cmd)
 	local px,py,pz = getElementPosition(plr)
 	local dist = nearest_station(px,py,pz)
-	exports.GTWtopbar:dm("Nearest train station: "..dist.." at: "..
+	exports.GTWtopbar:dm("Nearest train station is: "..math.round(dist,2).."m away, at: "..
 		getZoneName(px,py,pz).." in "..
 		getZoneName(px,py,pz, true), plr, 255, 100, 0)
 end
@@ -92,14 +92,14 @@ function get_spawn_point(ix,iy,iz)
 		for l,plr in pairs(getElementsByType("player")) do
 			local px,py,pz = getElementPosition(plr)
 			local plr_dist = getDistanceBetweenPoints3D(tx,ty,tz, px,py,pz)
-			if dist > plr_dist and dist > Settings.min_track_distance and dist < Settings.max_track_distance then
+			if dist > plr_dist and plr_dist > Settings.min_track_distance and plr_dist < Settings.max_track_distance then
 				-- There are players to close to the spawn, reject later
 				dist = plr_dist
 			end
 		end
 
 		-- Update if the spawnpoint is more than 100m away from any player
-		if c_dist > dist then
+		if c_dist > dist and dist > Settings.min_track_distance and dist < Settings.max_track_distance then
 			c_dist, station_type, train_dir, train_type, rx,ry,rz, r_speed = dist, s_type, t_dir, t_type, tx,ty,tz, t_speed
 		end
 	end
