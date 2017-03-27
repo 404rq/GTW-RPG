@@ -1,6 +1,3 @@
-# Files to ignore...
-
-# Settings is auto saved from the code and contains sensitive MySQL login details, thus it's ignored
 [resources]/GTWcore/data/settings.xml
 CLONE_FILES.bat
 *.db

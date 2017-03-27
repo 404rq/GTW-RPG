@@ -27,8 +27,8 @@ Beside the standardized core features, this project also includes a lot of misc 
 ## Donations
 If you like this project we kindly accept your donations as motivation to keep it up in the future. Donations can be sent via paypal on our website: https://www.404rq.com or by these Bitcoin respective Litecoin adresses below:
 
-BTC: `1LegCyv77MCfvdSZuAnXRaH98PErL88ZUh`<br>
-LTC: `LXGEphcPxYDUugRV9pA5QCMpbXNmQkmM7M`
+BTC: `12Qjxy4vxuSENMrJLcrnmGKVgnKR4ncSUu`<br>
+LTC: `LQBxYAo7RS4mhHBpbpRHh71wnfNzQGapGd`
 
 For more ways to donate, please visit our donations page where more ways are listed, including paypal, credit card etc.
 https://www.404rq.com/donations
