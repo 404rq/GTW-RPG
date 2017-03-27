@@ -376,7 +376,7 @@ function accept_work()
 
         -- Display job info message in chat box
         local team, max_wl, description, skins, skin_names, work_tools, welcome_message = unpack(work_items[ID])
-        outputChatBox("["..ID.."]#FFFFFF "..welcome_message, 180,180,180, true)
+        outputChatBox("["..ID.."]#FFFFFF "..welcome_message, 200,200,200, true)
 end
 
 --[[ When the user clicks on the Close button ]]--
