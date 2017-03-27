@@ -89,11 +89,15 @@
 <interiorReturn	refid="CSDESGN (2)"	posX="227.29"	posY="-7.43"	posZ="1001.26"	rotation="92"	interior="5"	dimension="1"	/>
 <interiorEntry	id="CSDESGN (3)"	posX="2802.34"	posY="2430.6"	posZ="10.061"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="CSDESGN (3)"	posX="227.29"	posY="-7.43"	posZ="1001.26"	rotation="125"	interior="5"	dimension="2"	/>
+<interiorEntry	id="victim_sf_west"	posX="-2551.34"	posY="552.6"	posZ="13.6"	rotation="0"	dimension="0"	interior="0"	/>
+<interiorReturn	refid="victim_sf_west"	posX="227.29"	posY="-7.43"	posZ="1001.26"	rotation="125"	interior="5"	dimension="3"	/>
 
 <interiorEntry	id="CSEXL"	posX="453.868"	   posY="-1478.07"	posZ="29.9609"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="CSEXL"	posX="204.33"	   posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="0"	/>
 <interiorEntry	id="BSDS01"	posX="-2491.868"   posY="2363.07"	posZ="9.3609"	rotation="90"	dimension="0"	interior="0"	/>
-<interiorReturn	refid="BSDS01"	posX="204.33"	   posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="0"	/>
+<interiorReturn	refid="BSDS01"	posX="204.33"	   posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="1"	/>
+<interiorEntry	id="didier_sachs_sf_west"	posX="-2586.868"   posY="552.07"	posZ="13.6609"	rotation="0"	dimension="0"	interior="0"	/>
+<interiorReturn	refid="didier_sachs_sf_west"	posX="204.33"	   posY="-168.7"	posZ="999.58"	rotation="129"	interior="14"	dimension="2"	/>
 
 <interiorEntry	id="CSSPRT"	posX="499.637"	posY="-1360.4"	posZ="15.4261"	rotation="0"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="CSSPRT"	posX="207.06"	posY="-139.81"	posZ="1002.52"	rotation="-45"	interior="3"	dimension="0"	/>
@@ -298,6 +302,8 @@
 <interiorReturn	refid="LVPD_Helipad"	posX="2296.7"	posY="2451.4"	posZ="9.8"		rotation="90"	interior="0"	dimension="0"	/>
 <interiorEntry	id="LVPD_Garage_enterance"		posX="2296.6"	posY="2468.5" 	posZ="9.8"		rotation="90"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="LVPD_Garage_enterance"	posX="207.8"	posY="142.3"	posZ="1002"		rotation="270"	interior="3"	dimension="0"	/>
+<interiorEntry	id="FBI_Helipad"	posX="613.66"	posY="-1522.71" posZ="14.10"	rotation="0"	dimension="0"	interior="0"	/>
+<interiorReturn	refid="FBI_Helipad"	posX="608.38"	posY="-1540.35"	posZ="29.89"	rotation="0"	interior="0"	dimension="0"	/>
 
 <interiorEntry	id="JAIL_Dock"		posX="-2971.1"	posY="2218.8" 	posZ="6.2"		rotation="90"	dimension="0"	interior="0"	/>
 <interiorReturn	refid="JAIL_Dock"	posX="-2978.3"	posY="2217.6"	posZ="0.9"		rotation="90"	interior="0"	dimension="0"	/>
