@@ -17,7 +17,7 @@
 
 <meta>
     <!-- Resource information -->
-    <info author="404rq" name="GTWoutlaws" description="Spawn killable bots using slothbot" version="17" type="script" />
+    <info author="404rq" name="GTWoutlaws" description="Spawn killable bots using slothbot" version="24" type="script" />
     
     <!-- Script files -->
     <script src="spawn_s.lua" type="server" />

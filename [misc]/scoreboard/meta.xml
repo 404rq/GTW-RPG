@@ -1,5 +1,5 @@
 <meta>
-    <info author="To[X]ic" type="script" name="Scoreboard" description="DirectX scoreboard resource" addon="race" showInResourceBrowser="true" version="62" />
+    <info author="To[X]ic" type="script" name="Scoreboard" description="DirectX scoreboard resource" addon="race" showInResourceBrowser="true" version="69" />
     
     <file src="ITCKRIST.ttf" />
     <script src="dxscoreboard_exports.lua" type="server" />

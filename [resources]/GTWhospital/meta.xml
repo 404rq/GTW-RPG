@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Hospital respawn" description="respawn at nearest hospital when you die" version="98" type="script" />
+    <info author="GTWGames" name="Hospital respawn" description="respawn at nearest hospital when you die" version="105" type="script" />
     <script src="hospital_s.lua" type="server" />
     <script src="hospital_c.lua" type="client" />
     <export function="spawn" type="server" />

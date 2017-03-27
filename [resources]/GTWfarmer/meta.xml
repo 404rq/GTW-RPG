@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWfarmer" version="51" description="A realistic farmer job" type="script" />
+    <info author="GTWGames" name="GTWfarmer" version="58" description="A realistic farmer job" type="script" />
     <script src="farmer.lua" type="server" />
 </meta>

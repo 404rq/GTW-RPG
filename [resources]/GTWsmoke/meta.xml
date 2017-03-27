@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWsmoke" version="50" type="script" description="Realistic smoke animations in MTA SA" />
+    <info author="GTWGames" name="GTWsmoke" version="57" type="script" description="Realistic smoke animations in MTA SA" />
     <script src="smoke.lua" type="server" />
 </meta>

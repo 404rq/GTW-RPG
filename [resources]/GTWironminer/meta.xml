@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Iron miner job" version="99" description="A realistic iron miner job" type="script" />
+    <info author="GTWGames" name="Iron miner job" version="106" description="A realistic iron miner job" type="script" />
     <script src="iron_s.lua" type="server" />
     <script src="iron_c.lua" type="client" />
 </meta>

@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" version="73" description="Mafia wars San Andreas" name="GTW Turfs system" />
+    <info author="GTWGames" type="script" version="81" description="Mafia wars San Andreas" name="GTW Turfs system" />
     <script src="data.lua" type="server" />
     <script src="turf_s.lua" type="server" />
     <script src="turf_c.lua" type="client" />

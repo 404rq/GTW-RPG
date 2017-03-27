@@ -17,7 +17,7 @@
 
 <meta>
     <!-- Resource information -->
-    <info author="404rq" name="GTWantispam" description="Fights command spam" version="48" type="script" />
+    <info author="404rq" name="GTWantispam" description="Fights command spam" version="55" type="script" />
     
     <!-- Language support: must be located at the top, s_lang for server and c_lang for client texts -->
     <script src="s_lang.lua" type="server" />

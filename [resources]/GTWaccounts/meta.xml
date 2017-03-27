@@ -16,7 +16,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="91" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
+    <info author="GTWGames" version="98" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
     <!-- Shaders -->
     <include resource="shader_detail" />
     <include resource="GTWgui" />

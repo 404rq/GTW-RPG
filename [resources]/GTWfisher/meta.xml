@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWfisher" version="49" type="script" />
+    <info author="GTWGames" name="GTWfisher" version="56" type="script" />
     <script src="fisher.lua" type="server" />
 </meta>

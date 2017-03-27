@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="Staff check" description="A secure way to check ACL rights" version="66" />
+    <info author="GTWGames" type="script" name="Staff check" description="A secure way to check ACL rights" version="74" />
     <script src="staff_c.lua" type="client" protected="true" />
     <script src="staff_s.lua" type="server" />
     

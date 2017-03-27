@@ -1,5 +1,5 @@
 <meta>
-    <info author="Talidan" description="Interiors script" edf:definition="interiors.edf" type="script" version="87" />
+    <info author="Talidan" description="Interiors script" edf:definition="interiors.edf" type="script" version="100" />
     <script src="interiorexp.lua" type="server" />
     <script src="interiors_client.lua" type="client" />
     <script src="client_anim.lua" type="client" />

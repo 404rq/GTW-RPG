@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWphone" type="script" description="Adds a phone where the user can select radio stations, send SMS, or call services" version="52"></info>
+    <info author="GTWGames" name="GTWphone" type="script" description="Adds a phone where the user can select radio stations, send SMS, or call services" version="59"></info>
     <script src="phone_s.lua" type="server"></script>
     <script src="phone_c.lua" type="client" protected="true"></script>
     
