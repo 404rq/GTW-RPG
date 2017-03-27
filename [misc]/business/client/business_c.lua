@@ -210,24 +210,6 @@ addEventHandler("client:showCreateBusinessGUI", root,
 	end
 )
 
-_exports.GTWgui:showGUICursor = exports.GTWgui:showGUICursor
-function exports.GTWgui:showGUICursor(bool)
-	if bool then
-		_exports.GTWgui:showGUICursor(true)
-	else
-		_exports.GTWgui:showGUICursor(false)
-		setTimer(
-			function()
-				for index, window in ipairs(getElementsByType("gui-window", resourceRoot)) do
-					if guiGetVisible(window) then
-						_exports.GTWgui:showGUICursor(true)
-					end
-				end
-			end
-		, 300, 1)
-	end
-end
-
 function outputMessage(message, r, g, b)
 	exports.GTWtopbar:dm(message, r, g, b)
 end
@@ -407,11 +389,11 @@ bindKey("mouse2", "up",
 		if isCursorShowing() then
 			if cursorOverGUI then return end
 			guiSetAlpha(cbGUI["_root"], 0.1)
-			_exports.GTWgui:showGUICursor(false)
+			exports.GTWgui:showGUICursor(false)
 			guiSetInputMode("allow_binds")
 		else
 			guiSetAlpha(cbGUI["_root"], 1)
-			_exports.GTWgui:showGUICursor(true)
+			exports.GTWgui:showGUICursor(true)
 			guiSetInputMode("no_binds_when_editing")
 		end
 	end

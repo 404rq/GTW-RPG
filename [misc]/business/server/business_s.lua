@@ -36,6 +36,7 @@ function dbCreateBusinessesCallback(queryHandle)
 			setElementDimension(bMarker, pos[5])
 			setElementInterior(bPickup, pos[4])
 			setElementDimension(bPickup, pos[5])
+			--outputChatBox("Create marker: "..pos[1].." "..pos[2].." "..pos[3].." "..pos[4].." "..pos[5])
 			if sqlRow["bOwner"] == "For Sale" then
 				--local bBlip = createBlipAttachedTo(bMarker, 52, 1, 0, 0, 0, 255, 0, 180)
 				--setElementInterior(bBlip, pos[4])
@@ -122,8 +123,10 @@ function dbCreateBusinessCallback(queryHandle, posX, posY, posZ, interior, dimen
 		interior = tonumber(interior)
 		dimension = tonumber(dimension)
 		cost = tonumber(cost)
-		payout = tonumber(payout)
-		payoutTime = tonumber(payoutTime)
+		--payout = tonumber(payout)
+		--payoutTime = tonumber(payoutTime)
+		payout = cost/730
+		payoutTime = 1
 
 		posZ = posZ - 1
 
@@ -214,17 +217,16 @@ addEventHandler("onPlayerJoin", root,
 	end
 )
 
-function onPlayerAttemptToOpenBusiness(player)
+function onPlayerAttemptToOpenBusiness(plr)
 	for index, bMarker in ipairs(getElementsByType("marker", resourceRoot)) do
-		if isElementWithinMarker(player, bMarker) then
+		if isElementWithinMarker(plr, bMarker) then
 			local bData = getElementData(bMarker, "bData")
 			local dim,int = getElementDimension(bMarker),getElementInterior(bMarker)
-			local pdim,pint = getElementDimension(player),getElementInterior(player)
+			local pdim,pint = getElementDimension(plr),getElementInterior(plr)
 			local id, name, owner, cost, payout, payoutTime, payoutOTime, payoutUnit, bank, timer = unpack(bData)
 			if dim == pdim and int == pint then
-				triggerClientEvent(player, "client:showBusinessGUI", player, bMarker, getAccountName(getPlayerAccount(player)) == owner, hasObjectPermissionTo(player, "function.banPlayer"))
+				triggerClientEvent(plr, "client:showBusinessGUI", plr, bMarker, getAccountName(getPlayerAccount(plr)) == owner, hasObjectPermissionTo(plr, "function.banPlayer"))
 			end
-			break
 		end
 	end
 end
