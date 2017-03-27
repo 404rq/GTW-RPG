@@ -1,5 +1,5 @@
 <meta>
-    <info author="CrystalMV" version="59" name="Server collision data" description="Simple collision checking for elements on the server side" type="script" />
+    <info author="CrystalMV" version="76" name="Server collision data" description="Simple collision checking for elements on the server side" type="script" />
     <script src="collisions.lua" />
     <script src="bbox.lua" />
     

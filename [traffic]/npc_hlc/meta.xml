@@ -1,5 +1,5 @@
 <meta>
-    <info author="CrystalMV" version="57.1" name="NPC high-level control" description="Higher level control over peds" type="script" />
+    <info author="CrystalMV" version="71.1" name="NPC high-level control" description="Higher level control over peds" type="script" />
     <script src="npc_functions_s.lua" type="server" />
     <script src="npc_functions.lua" type="server" />
     <script src="npc_functions.lua" type="client" />
