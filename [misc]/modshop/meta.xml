@@ -1,21 +1,29 @@
 <meta>
-    <info author="Dennis/UniOn" version="60" type="script" name="vehicle modshop" />
+    <info author="50p" version="12.5" name="Mod Shop" type="script" />
     
-    <!-- The modshop files by Dennis aka UniOn -->
-    <script src="GUI/client.luac" type="client" />
-    <script src="client.lua" type="client" />
-    <script src="server.lua" type="server" />
+    <script src="server.lua" />
+    <script src="vehicle.funcs.server.lua" />
+    <script src="load.items.server.lua" />
+    <script src="gui.lua" type="client" />
+    <script src="shopping.cart.lua" type="client" />
+    <script src="vehicle.funcs.lua" type="client" />
+    <script src="streamer.lua" type="client" />
     
-    <!-- Colorpicker by Aiboforcen (Version 1.0.4) -->
-    <script src="colorpicker/picker_client.lua" type="client" />
-    <file src="colorpicker/cursor.png" />
-    <file src="colorpicker/h.png" />
-    <file src="colorpicker/sv.png" />
-    <file src="colorpicker/blank.png" />
+    <config src="help.xml" type="client" />
     
-    <!-- Exports -->
-    <export function="getUpgradeName" type="client" />
-    <export function="getUpgradePrice" type="client" />
-    <export function="isVehicleModding" type="server" />
-    <export function="isPlayerModding" type="server" />
+    <file src="modshops.xml" />
+    <file src="moditems.xml" />
+    <file src="colorselect.png" />
+    <file src="color1.png" />
+    <file src="color2.png" />
+    <file src="vehiclecolors.png" />
+    <file src="cart.png" />
+    <map src="garages.map" />
+    
+    <export function="getItemPrice" />
+    <export function="getItemName" />
+    <export function="getItemIDFromName" />
+    <export function="getVehicleModShop" />
+    <export function="isVehicleInModShop" />
+    <export function="getVehicleTuner" />
 </meta>
