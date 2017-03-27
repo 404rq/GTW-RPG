@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="GTWrob" descriptions="Allow criminals to rob stores to earn money" version="52" />
+    <info author="GTWGames" type="script" name="GTWrob" descriptions="Allow criminals to rob stores to earn money" version="67" />
     <script src="rob_c.lua" type="client" />
     <script src="rob_s.lua" type="server" />
 </meta>
