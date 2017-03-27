@@ -1,6 +1,6 @@
 # These fiels will be ignored
-[resources]/GTWcore/data/settings.xml
 CLONE_FILES.bat
 *.db
 *.csv
 *.jpg
+[resources]/GTWcore/data/settings.xml
