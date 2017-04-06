@@ -57,18 +57,17 @@ function load_settings()
         function getMySQLPort() return server_settings["MySQLport"] end
 
         -- Connect to database
-        core_db = dbConnect("mysql", "dbname="..server_settings[
-                "MySQLdatabase"]..";host="..server_settings["MySQLhost"],
-                server_settings["MySQLuser"], server_settings["MySQLpass"],
-                "autoreconnect=1")
+	local conn_str = "dbname="..server_settings["MySQLdatabase"]..";host="..server_settings["MySQLhost"]
+        core_db = dbConnect("mysql", conn_str, server_settings["MySQLuser"], server_settings["MySQLpass"], "autoreconnect=1")
+	outputServerLog("Connecting to DB: "..conn_str)
 end
 addEventHandler("onResourceStart", resourceRoot, load_settings)
 
---[[ Save server configuration settings to xml ]]--
+--[[ Save server configuration settings to xml ]]-- 
 function save_settings()
         local data_file = xmlLoadFile("data/settings.xml")
         local options = xmlNodeGetChildren(data_file)
-        for i,node in ipairs(options) do
+        for i,node in pairs(options) do
                 local name = xmlNodeGetAttribute(node, "name")
                 xmlNodeSetValue(node, server_settings[name])
         end
@@ -93,6 +92,15 @@ function show_current_peak(plr)
         exports.GTWtopbar:dm("Current peak is: "..server_settings["peak"].." players online", plr, 255, 100, 0)
 end
 addCommandHandler("peak", show_current_peak)
+
+--[[ Set player language ]]--
+function set_player_language(plr, cmd, lang)
+	setElementData(plr, "GTWcore.language", lang)
+        exports.GTWtopbar:dm("Your language is now: "..lang, plr, 0, 200, 0)
+end
+addCommandHandler("lang", set_player_language)
+addCommandHandler("setlang", set_player_language)
+addCommandHandler("setlanguage", set_player_language)
 
 --[[ Sync with local client time ]]--
 setMinuteDuration(1000)
