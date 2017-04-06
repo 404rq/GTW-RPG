@@ -19,7 +19,7 @@
 r_lang = exports.GTWcore:getLanguage() or "en_US"
 
 -- Language text storage for this resource
-txt = {
+lang_txt = {
 	-- English/English
 	["en_US"] = {
 		["msg_no_spam"] 	= "Do not spam commands!",
@@ -31,9 +31,10 @@ txt = {
 		["msg_no_spam"] 	= "Kommando spam är ej tillåtet!",
 		["log_cmd_issuer"]	= " utförde följande kommando: '",
 	},
-}
--- Spanish/Español
-es_ES = {
-	["msg_no_spam"] 	= "No hagas spam de comandos!",
-	["log_cmd_issuer"]	= " ejecutó el siguiente comando: '",
+	
+	-- Spanish/Español
+	["es_ES"] = {
+		["msg_no_spam"] 	= "No hagas spam de comandos!",
+		["log_cmd_issuer"]	= " ejecutó el siguiente comando: '",
+	},
 }

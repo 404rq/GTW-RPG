@@ -19,9 +19,8 @@
     <!-- Resource information -->
     <info author="404rq" name="GTWantispam" description="Fights command spam" version="55" type="script" />
     
-    <!-- Language support: must be located at the top, s_lang for server and c_lang for client texts -->
-    <script src="s_lang.lua" type="server" />
-    <!--<script src="c_lang.lua" type="client"/>-->
+    <!-- Language support: must be located at the top -->
+    <script src="lang.lua" type="shared" />
     
     <!-- Script files -->
     <script src="server.lua" type="server" />
