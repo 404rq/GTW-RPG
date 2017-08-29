@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Police system" version="172" type="script" />
+    <info author="GTWGames" name="Police system" version="175" type="script" />
     <include resource="GTWjail" />
     <include resource="GTWwanted" />
     

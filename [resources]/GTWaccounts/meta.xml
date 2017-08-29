@@ -16,7 +16,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="98" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
+    <info author="GTWGames" version="99" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
     
     <!-- Language support: must be located at the top -->
     <script src="lang.lua" type="shared" />

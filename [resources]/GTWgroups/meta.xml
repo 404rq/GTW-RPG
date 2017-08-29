@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="87" type="script" />
+    <info author="GTWGames" version="90" type="script" />
     <script src="c_gui.lua" type="client" protected="true" />
     <script src="group_c.lua" type="client" protected="true" />
     <script src="s_exports.lua" type="server" />

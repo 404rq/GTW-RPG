@@ -16,7 +16,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="100" name="Animations" decription="Animations system with gui" type="script" />
+    <info author="GTWGames" version="103" name="Animations" decription="Animations system with gui" type="script" />
     <script src="data.lua" type="shared" />
     <script src="animations_c.lua" type="client" />
     <script src="animations_s.lua" type="server" />

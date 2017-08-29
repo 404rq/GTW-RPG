@@ -15,22 +15,22 @@
 -->
 
 <settings>
-        <option name="gamemode">GTW-RPG v4.0-beta</option>
-        <option name="map">GTWcore</option>
-        <option name="peak">0</option>
-        <option name="version">4.0-beta</option>
-        <option name="revision">11234</option>
-	<option name="language">en_US</option>
-
-        <!-- MySQL database credentials, (SQLite will be used if unset) -->
-        <option name="MySQLhost"></option>
-	<option name="MySQLdatabase"></option>
-        <option name="MySQLuser"></option>
-        <option name="MySQLpass"></option>
-        <option name="MySQLport"></option>
-
-        <!-- WARNING: by change this value to true you accept any
+    <option name="gamemode">GTW-RPG v4.0-beta</option>
+    <option name="map">GTWcore</option>
+    <option name="peak">1</option>
+    <option name="version">4.0-beta</option>
+    <option name="revision">11463</option>
+    <option name="language">en_US</option>
+    
+    <!-- MySQL database credentials, (SQLite will be used if unset) -->
+    <option name="MySQLhost">127.0.0.1</option>
+    <option name="MySQLdatabase">gtw_v4</option>
+    <option name="MySQLuser">gtw_v4</option>
+    <option name="MySQLpass">gaju5ssK3LRZ7wkA</option>
+    <option name="MySQLport">3306</option>
+    
+    <!-- WARNING: by change this value to true you accept any
                 consequence it may cause you, this value should
                 NOT be true in any server. -->
-        <option name="developmentserver">false</option>
+    <option name="developmentserver">false</option>
 </settings>

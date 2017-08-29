@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info type="script" name="GTWcoremap" author="GTWCode" version="101" description="Core map for Grand Theft Walrus"></info>
+    <info type="script" name="GTWcoremap" author="GTWCode" version="104" description="Core map for Grand Theft Walrus"></info>
     <script src="core_map.lua" type="client"></script>
 </meta>

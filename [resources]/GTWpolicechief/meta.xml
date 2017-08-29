@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Police chief system" version="68" type="script" />
+    <info author="GTWGames" name="Police chief system" version="71" type="script" />
     <script src="head_officer.lua" type="server" />
     
     <export function="isPoliceChief" type="server" />

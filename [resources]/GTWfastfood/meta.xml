@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWfastfood" description="Pizza, burger and chicken fast food resturants in SA" version="62" type="script" />
+    <info author="GTWGames" name="GTWfastfood" description="Pizza, burger and chicken fast food resturants in SA" version="65" type="script" />
     <script src="data.lua" type="shared" />
     <script src="food_s.lua" type="server" />
     <script src="food_c.lua" type="client" />

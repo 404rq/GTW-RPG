@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="70" name="GTWhelp" description="Documentation GUI with help pages" type="script" />
+    <info author="GTWGames" version="73" name="GTWhelp" description="Documentation GUI with help pages" type="script" />
     <script src="data.lua" type="client" />
     <script src="help_c.lua" type="client" />
     <script src="cmd_list.lua" type="client" />

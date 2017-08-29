@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWmechanic" description="Repair and refuel vehicles and get payed" version="70" type="script" />
+    <info author="GTWGames" name="GTWmechanic" description="Repair and refuel vehicles and get payed" version="73" type="script" />
     <script src="mechanic_s.lua" type="server" />
     <script src="mechanic_c.lua" type="client" />
 </meta>

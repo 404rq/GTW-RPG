@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info type="map" name="GTWfbibase" author="404rq" version="75" description="Grand Theft Walrus FBI base"></info>
+    <info type="map" name="GTWfbibase" author="404rq" version="78" description="Grand Theft Walrus FBI base"></info>
     <script src="fbi_base.lua" type="client"></script>
 </meta>

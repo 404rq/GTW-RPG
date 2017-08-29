@@ -1,5 +1,5 @@
 <meta>
-    <info author="CrystalMV" version="150" name="NPC traffic density controller" description="A simple example showing how to use traffic density functions" type="script" />
+    <info author="CrystalMV" version="153" name="NPC traffic density controller" description="A simple example showing how to use traffic density functions" type="script" />
     
     <script src="denctrl.lua" />
 </meta>
