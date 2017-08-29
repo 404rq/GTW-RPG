@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,12 +15,15 @@
 ]]--
 
 blips_table = {
-	{1551,-1676,16}, 	-- LSPD
-    {-1606,715,8}, 		-- SFPD
-    {2340,2457,14},		-- LVPD
-    {-214,979,19},		-- FCPD
-    {-1392,2635,55},	-- EQPD
-    {-2241,2293,5},		-- BMPD
+	{1551, 	-1676,	16}, 	-- LSPD
+    	{-1606,	715,	8}, 	-- SFPD
+    	{2340,	2457,	14},	-- LVPD
+    	{-214,	979,	19},	-- FCPD
+    	{-1392,	2635,	55},	-- EQPD
+    	{-2241,	2293,	5},	-- BMPD
+	{607,	-1466, 	15},	-- FBI base
+	{3192, 	-1986, 	12},	-- SAPD base
+	{-2161, -2387, 	31},	-- APPD
 }
 
 -- Create blips to show nearest police department always

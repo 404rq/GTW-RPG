@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -50,18 +50,30 @@ end
 
 --[[ Crimes related to crashing and damaging vehicles ]]--
 function crime_vehicle_collision(collider, force, bodyPart, x, y, z, nx, ny, nz)
-	if isTimer(cooldown) then return end
-	local wl = force * getVehicleHandling(source).collisionDamageMultiplier * 0.001
+	if (cooldown or 0) > getTickCount()-3000 then return end
+	local wl = force * getVehicleHandling(source).collisionDamageMultiplier * 0.0001
+	local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+	if source and isElement(source) and bike_list[getElementModel(source)] then force = force/20 wl = wl*20 end
+
+	-- Kill the ped if the force is too big
+	if collider and isElement(collider) and getElementType(collider) == "ped" and collider ~= localPlayer and force/getVehicleHandling(source).collisionDamageMultiplier > 20 then
+		if not isPedDead(collider) then triggerServerEvent("GTWwanted.serverKillPed", localPlayer, collider, localPlayer, bodyPart) end
+		--setWl(0.5, 60, "You comitted the crime of murder", false, false)
+	elseif collider and isElement(collider) and getElementType(collider) == "player" and collider ~= localPlayer and force/getVehicleHandling(source).collisionDamageMultiplier > 40 then
+		if not isPedDead(collider) then triggerServerEvent("GTWwanted.serverKillPed", localPlayer, collider, localPlayer, bodyPart) end
+		--setWl(1, 120, "You comitted the crime of murder", false, false)
+	end
+
 	local viol = 0
-	if wl > 0.5 then viol = 20 end
-	if wl < 0.02 then return end
+	if wl > 0.1 then viol = 30 end
+	if wl < 0.05 then return end
 	if source ~= getPedOccupiedVehicle(localPlayer) then return end
 	if viol == 0 then
 		setWl(wl, viol, "You comitted the crime of bad driving", true, true)
 	else
 		setWl(wl, viol, "You comitted the crime of bad driving", false, true)
 	end
-	cooldown = setTimer(function() end, 5000, 1)
+	cooldown = getTickCount()
 end
 addEventHandler("onClientVehicleCollision", root, crime_vehicle_collision)
 

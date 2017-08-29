@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -47,8 +47,8 @@ function startSmoking ( thePlayer )
 
     		-- Increase stats by 1
 		local playeraccount = getPlayerAccount(thePlayer)
-		local cigarrs = getAccountData(playeraccount, "GTWdata_stats_cigarrs_smoked") or 0
-		setAccountData(playeraccount, "GTWdata_stats_cigarrs_smoked", cigarrs + 1)
+		local cigarrs = exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.cigarrs_smoked") or 0
+		exports.GTWcore:set_account_data(playeraccount, "GTWdata.stats.cigarrs_smoked", cigarrs + 1)
 
     		-- Create and attach cigarrete
         	local sigarette = createObject(1485, 0,0,0)

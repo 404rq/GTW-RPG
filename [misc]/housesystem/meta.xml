@@ -1,6 +1,6 @@
 <meta>
     <!-- INFO -->
-    <info author="Noneatme" version="58" type="misc" description="A MySQL Based housesystem" />
+    <info author="Noneatme" version="126" type="misc" description="A MySQL Based housesystem" />
     
     <!-- SERVER SIDE SCRIPTS -->
     <script src="server.lua" type="server" />

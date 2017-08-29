@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,34 +15,40 @@
 -->
 
 <meta>
-        <info author="RageQuit 404" type="script" name="Core system" description="All server core features" version="194" />
-        <!-- Useful utils -->
-        <script src="utils/s_func.lua" type="server" />
-        <script src="utils/s_staff.lua" type="server" />
-        <script src="utils/s_playtime.lua" type="server" />
-	<script src="utils/s_support.lua" type="server" />
-
-        <!-- Misc features -->
-        <script src="misc/s_data.lua" type="server" />
-        <script src="misc/s_afk.lua" type="server" />
-        <script src="misc/s_loc.lua" type="server" />
-        <script src="misc/s_network.lua" type="server" />
-        <script src="misc/s_countdown.lua" type="server" />
-        <script src="misc/s_events.lua" type="server" />
-	<script src="misc/s_vehicle_realism.lua" type="server" />
-	<script src="misc/s_spawnbase.lua" type="server" />
-        <script src="misc/c_2dview.lua" type="client" />
-
-        <!-- Core features -->
-        <script src="s_core.lua" type="server" />
-        <script src="c_core.lua" type="client" protected="true" />
-        <script src="accounts.lua" type="server" />
-
-	<!-- Exported functions -->
-	<export function="getGTWLanguage" type="server" />
-        <export function="getMySQLHost" type="server" />
-        <export function="getMySQLDatabase" type="server" />
-        <export function="getMySQLUser" type="server" />
-        <export function="getMySQLPass" type="server" />
-        <export function="getMySQLPort" type="server" />
+    <info author="RageQuit 404" type="script" name="Core system" description="All server core features" version="327" />
+    <!-- Useful utils -->
+    <script src="utils/s_func.lua" type="server" />
+    <script src="utils/s_staff.lua" type="server" />
+    <script src="utils/s_playtime.lua" type="server" />
+    <script src="utils/s_support.lua" type="server" />
+    <script src="utils/c_func.lua" type="client" protected="true" />
+    
+    <!-- Misc features -->
+    <script src="misc/s_data.lua" type="server" />
+    <script src="misc/s_afk.lua" type="server" />
+    <script src="misc/s_advert.lua" type="server" />
+    <script src="misc/s_loc.lua" type="server" />
+    <script src="misc/s_network.lua" type="server" />
+    <script src="misc/s_countdown.lua" type="server" />
+    <script src="misc/s_events.lua" type="server" />
+    <script src="misc/s_vehicle_realism.lua" type="server" />
+    <script src="misc/s_spawnbase.lua" type="server" />
+    <script src="misc/c_2dview.lua" type="client" />
+    
+    <!-- Core features -->
+    <script src="s_core.lua" type="server" />
+    <script src="c_core.lua" type="client" protected="true" />
+    <script src="accounts.lua" type="server" />
+    <script src="mysql.lua" type="server" />
+    
+    <!-- Exported functions -->
+    <export function="set_account_data" type="server" />
+    <export function="get_account_data" type="server" />
+    
+    <export function="getLanguage" type="server" />
+    <export function="getMySQLHost" type="server" />
+    <export function="getMySQLDatabase" type="server" />
+    <export function="getMySQLUser" type="server" />
+    <export function="getMySQLPass" type="server" />
+    <export function="getMySQLPort" type="server" />
 </meta>

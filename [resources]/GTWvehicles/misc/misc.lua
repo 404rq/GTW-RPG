@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -231,7 +231,7 @@ addCommandHandler("topspeed", topSpeed)
 
 function setPlateText(thePlayer, cmd, ...)
 	local arg = table.concat({...}, " ")
-	if getPedOccupiedVehicle(thePlayer) then
+	if getPedOccupiedVehicle(thePlayer) and getPedOccupiedVehicleSeat(thePlayer) == 0 then
 		setVehiclePlateText(getPedOccupiedVehicle(thePlayer), arg)
 	end
 end

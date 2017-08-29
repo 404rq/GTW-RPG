@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,19 +15,22 @@
 -->
 
 <meta>
-	<info author="GTWGames" type="script" name="GTWgui" description="Manage walrus GUI elements and custom fonts" version="0" />
-	<script src="c_window.lua" type="client" />
-	<script src="s_refresh.lua" type="server" />
+    <info author="GTWGames" type="script" name="GTWgui" description="Manage walrus GUI elements and custom fonts" version="29" />
+    <script src="c_window.lua" type="client" />
+    <script src="s_refresh.lua" type="server" />
 
-	<file src="img/back.png" download="true"/>
-	<file src="fonts/roboto.ttf" download="true"/>
+    <file src="img/back.png" download="true" />
+    <file src="fonts/roboto.ttf" download="true" />
 
-	<export function="createWindow" type="client"/>
-	<export function="setDefaultFont" type="client"/>
-	<export function="toggleCursor" type="client"/>
-	<export function="addToRefreshList" type="server"/>
-	
-	<aclrequest>
-    	 	<right name="function.restartResource" access="true" />
-        </aclrequest>
+    <export function="createWindow" type="client" />
+    <export function="setDefaultFont" type="client" />
+    <export function="showGUICursor" type="client" />
+    <export function="showGUICursor" type="server" />
+    <export function="windowSetMoveable" type="client" />
+    <export function="windowSetSizeable" type="client" />
+    <export function="addToRefreshList" type="server" />
+
+    <aclrequest>
+        <right name="function.restartResource" access="true" />
+    </aclrequest>
 </meta>

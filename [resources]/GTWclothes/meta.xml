@@ -16,10 +16,10 @@
 -->
 
 <meta>
-    <info author="GTWGames" type="script" name="GTW clothes" descriptions="Handle shops where you can buy skins" version="42" />
+    <info author="GTWGames" type="script" name="GTW clothes" descriptions="Handle shops where you can buy skins" version="109" />
     <script src="data_s.lua" type="server" />
     <script src="clothes_c.lua" type="client" />
     <script src="clothes_s.lua" type="server" />
-
+    
     <export function="getBoughtSkin" type="server" />
 </meta>

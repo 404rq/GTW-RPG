@@ -17,7 +17,7 @@
 
 local refreshTimer = nil
 x,y = guiGetScreenSize()
-window = guiCreateWindow((x-400)/2, (y-300)/2, 400, 300, "Manage job", false )
+window = exports.GTWgui:createWindow((x-400)/2, (y-300)/2, 400, 300, "Manage job", false )
 closeButton = guiCreateButton(280,260,110,36,"Close",false,window)
 endWorkButton = guiCreateButton(10,260,110,36,"End work",false,window)
 crimWorkButton = guiCreateButton(124,260,110,36,"Criminal",false,window)
@@ -32,14 +32,14 @@ guiSetVisible(window,false)
 addEventHandler("onClientGUIClick",root,function()
 	if source == closeButton then
 		guiSetVisible(window, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 	elseif source == endWorkButton then
 		if getPlayerWantedLevel() > 0 then exports.GTWtopbar:dm("You can't end your work due to your wanted level!", 255, 0, 0) return end
-		triggerServerEvent( "acorp_onEndWork", localPlayer, localPlayer )
-		triggerEvent( "acorp_onEndWork", localPlayer, localPlayer )
+		triggerServerEvent( "GTWcivilians_onEndWork", localPlayer, localPlayer )
+		triggerEvent( "GTWcivilians_onEndWork", localPlayer, localPlayer )
 		refreshTimer = setTimer(refreshRank, 500, 20)
 	elseif source == crimWorkButton then
-		triggerServerEvent( "acorp_gocrim", localPlayer, localPlayer )
+		triggerServerEvent( "GTWcivilians_gocrim", localPlayer, localPlayer )
 		refreshTimer = setTimer(refreshRank, 500, 20)
 	end
 end)
@@ -64,7 +64,7 @@ end
 
 function showWorkGUI( )
 	guiSetVisible(window, not guiGetVisible(window))
-	showCursor(not isCursorShowing())
+	exports.GTWgui:showGUICursor(not isCursorShowing())
 	get_player_rank(getElementData(localPlayer,"Occupation"))
 end
 addCommandHandler( "managework", showWorkGUI )

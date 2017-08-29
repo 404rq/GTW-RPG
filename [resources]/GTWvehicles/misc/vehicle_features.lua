@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -72,9 +72,12 @@ function toggle_engine(plr, command)
                         toggleControl(plr, "accelerate", true)
                         toggleControl(plr, "brake_reverse", true)
 	        end
-                setVehicleOverrideLights(veh, 0)
-                setVehicleEngineState(veh, true)
+		setVehicleOverrideLights(veh, 2)
+                setTimer(setVehicleOverrideLights, 1000, 1, veh, 0)
+                setTimer(setVehicleEngineState, 400, 1, veh, true)
                 exports.GTWtopbar:dm("Engine: Turned on successfully", plr, 255, 100, 0)
+	elseif tonumber(getElementData(veh, "vehicleFuel")) <= 0 then
+		exports.GTWtopbar:dm("Engine: failed to start, you're out of fuel", plr, 200, 0, 0)
 	end
 end
 addCommandHandler("engine", toggle_engine)
@@ -140,11 +143,6 @@ function start_vehicle(plr, seat, jacked)
 	    		setVehicleEngineState(trailers[plr], true)
 	    	end
 			setVehicleOverrideLights(source, 2)
-			if getVehicleType(source) == "Automobile" then
-				setVehicleHandling(source, "maxVelocity", nil, false)
-				local result = getVehicleHandling(source)
-				currVehTopSpeed[source] = tonumber(result["maxVelocity"])
-			end
 		end
 
                 -- Check if we should lock the vehicle again

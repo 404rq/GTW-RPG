@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -24,20 +24,21 @@ we = {
 	[6]=6,
 	[7]=7,
 	[8]=8,
-	[9]=10,
-	[10]=12,
-	[11]=16,
-	[12]=17,
-	[13]=18
+	[9]=9,
+	[10]=10,
+	[11]=12,
+	[12]=16,
+	[13]=17,
+	[14]=18
 }
 
 -- Update the weather
-function chWeather( )
+function change_weather( )
 	local wid = math.random(#we)
 	setWeatherBlended(we[wid])
 	setWaveHeight(math.random(10,100)*0.002)
 end
-setTimer(chWeather, math.random(130,180)*60*1000, 0)
+setTimer(change_weather, math.random(15,30)*60*1000, 0)
 setWeather(we[math.random( #we )])
 
 -- Remove speed blur level

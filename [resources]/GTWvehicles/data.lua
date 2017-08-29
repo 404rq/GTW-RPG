@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,15 +15,16 @@
 ]]--
 
 -- Global settings
-vehicles 	= { }
-spawn_prices	= { }
-trailers 	= { }
-peds 		= { }
-syncTimers 	= { }
-gearTimers 	= { }
-currVehTopSpeed = { }
-paymentsHolder 	= { }
-paymentsCounter = { }
+vehicles 		= { }
+spawn_prices		= { }
+trailers 		= { }
+peds 			= { }
+syncTimers 		= { }
+trailerSyncTimers 	= { }
+gearTimers 		= { }
+currVehTopSpeed 	= { }
+paymentsHolder 		= { }
+paymentsCounter 	= { }
 
 -- Define police vehlices (cars and helicopters including army, swat, sapd and fbi)
 veh_police = {

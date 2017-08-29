@@ -34,7 +34,7 @@ addEventHandler("onClientResourceStart", resourceRoot,
 function()
 	-- Adding the gui
    	local guiX,guiY = guiGetScreenSize()
-        work_window = guiCreateWindow(0, (guiY-350)/2, 372, 350, "Civilians", false)
+        work_window = exports.GTWgui:createWindow(0, (guiY-350)/2, 372, 350, "Civilians", false)
 	guiSetVisible(work_window, false)
 
 	-- Tab panel
@@ -260,7 +260,7 @@ function showGUI( hitElement, matchingdimension, jobID )
  		-- Showing the gui
  		setTimer(guiSetVisible, 1000, 1, work_window, true)
  		setTimer(guiSetInputEnabled, 1000, 1, true)
- 		setTimer(showCursor, 1000, 1, true)
+ 		exports.GTWgui:showGUICursor(true)
  	end
 end
 
@@ -268,9 +268,9 @@ function staffWork(cmdName, ID)
 	-- Configuration
 	-- Setup by name
 	if isPedDead( localPlayer ) then
-		return 
+		return
 	end
-	
+
 	if cmdName ~= "gowork"  then
 		if cmdName == "gobusdriver" then
 	 		ID = "Bus Driver"
@@ -372,11 +372,11 @@ function accept_work()
 	-- Closing the gui
  	guiSetVisible( work_window, false )
  	guiSetInputEnabled( false )
- 	showCursor( false )
+ 	exports.GTWgui:showGUICursor( false )
 
         -- Display job info message in chat box
         local team, max_wl, description, skins, skin_names, work_tools, welcome_message = unpack(work_items[ID])
-        outputChatBox("["..ID.."]#FFFFFF "..welcome_message, 180,180,180, true)
+        outputChatBox("["..ID.."]#FFFFFF "..welcome_message, 200,200,200, true)
 end
 
 --[[ When the user clicks on the Close button ]]--
@@ -384,7 +384,7 @@ function close_guibutton()
 	-- Closing the gui
  	guiSetVisible( work_window, false )
  	guiSetInputEnabled( false )
- 	showCursor( false )
+ 	exports.GTWgui:showGUICursor( false )
 
  	-- Unfreeze player
  	setTimer(setElementFrozen, 2000, 1, localPlayer, false)

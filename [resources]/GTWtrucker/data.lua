@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -32,7 +32,7 @@ truck_vehicles = {
 
 -- List over all truck routes
 -- Suggest your own routes at:
--- https://forum.404rq.com/mta-servers-development/
+-- https://discuss.404rq.com/t/development
 truck_routes = {
         -- Name of route to display in list
 	["[Las Venturas fuel] Refill gas stations in Las Venturas city"] = {

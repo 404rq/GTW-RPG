@@ -12,8 +12,8 @@ httpModDirectory = "http://104.238.188.170"..downloadDirectory
 
 local sx, sy = guiGetScreenSize()
 local button = { }
-local window = guiCreateWindow((sx / 2 - 560 / 2),(sy / 2 - 369 / 2), 560, 369, "RageQuit 404 # mod library", false)
-guiWindowSetSizable(window, false)
+local window = exports.GTWgui:createWindow((sx / 2 - 560 / 2),(sy / 2 - 369 / 2), 560, 369, "RageQuit 404 # mod library", false)
+exports.GTWgui:windowSetSizeable(window, false)
 guiSetVisible(window, false)
 local mods = guiCreateGridList(9, 22, 541, 292, false, window)
 guiGridListSetSortingEnabled(mods, false)
@@ -35,7 +35,7 @@ local downloadingFiles = { }
 function openGUI()
 	local x = not guiGetVisible(window)
 	guiSetVisible(window, x)
-	showCursor(x)
+	exports.GTWgui:showGUICursor(x)
 	refreshModList()
 end
 addCommandHandler("mods", openGUI)

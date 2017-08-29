@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,211 +15,226 @@
 ]]--
 
 --[[ Multiplier value ]]--
-priceMultiplier = 0.7
+priceMultiplier = 1
 
 --[[ List of vehicles, ids, names and their prices ]]--
 car_data = { }
 car_data[1] = {
 	-- Category, price
 	-- Compact two-door cars
-	{ 602, "compact", 125300 },
-	{ 496, "compact", 109800 },
-	{ 401, "compact", 119800 },
-	{ 518, "compact", 105300 },
-	{ 527, "compact", 94500 },
-	{ 589, "compact", 132800 },
-	{ 419, "compact", 105500 },
-	{ 533, "compact", 164200 },
-	{ 526, "compact", 123200 },
-	{ 474, "compact", 119800 },
-	{ 545, "compact", 112800 },
-	{ 517, "compact", 98600 },
-	{ 410, "compact", 88200 },
-	{ 600, "compact", 108600 },
-	{ 436, "compact", 89300 },
-	{ 580, "compact", 189800 },
-	{ 439, "compact", 156600 },
-	{ 549, "compact", 124400 },
-	{ 491, "compact", 118600 },
+	{ 602, "compact", 25000 },
+	{ 496, "compact", 19000 },
+	{ 401, "compact", 20000 },
+	{ 518, "compact", 22000 },
+	{ 527, "compact", 23000 },
+	{ 589, "compact", 32000 },
+	{ 419, "compact", 29000 },
+	{ 587, "compact", 36000 },
+	{ 533, "compact", 24000 },
+	{ 526, "compact", 22000 },
+	{ 474, "compact", 23000 },
+	{ 545, "compact", 34000 },
+	{ 517, "compact", 20000 },
+	{ 410, "compact", 18000 },
+	{ 600, "compact", 19000 },
+	{ 436, "compact", 21000 },
+	{ 439, "compact", 26000 },
+	{ 549, "compact", 16000 },
+	{ 491, "compact", 22000 },
 }
 
 car_data[2] = {
 	-- Category, price
 	-- 4 door and luxury cars
-	{ 445, "regular", 85300 },
-	{ 507, "regular", 99800 },
-	{ 585, "regular", 79800 },
-	{ 587, "regular", 105300 },
-	{ 466, "regular", 44500 },
-	{ 492, "regular", 52800 },
-	{ 546, "regular", 85500 },
-	{ 551, "regular", 94200 },
-	{ 516, "regular", 93200 },
-	{ 467, "regular", 49800 },
-	{ 426, "regular", 72800 },
-	{ 547, "regular", 68600 },
-	{ 405, "regular", 88200 },
-	{ 409, "regular", 398600 },
-	{ 550, "regular", 89300 },
-	{ 566, "regular", 89800 },
-	{ 540, "regular", 76600 },
-	{ 421, "regular", 54400 },
-	{ 529, "regular", 58600 },
+	{ 445, "regular", 30000 },
+	{ 604, "regular", 9000 },
+	{ 507, "regular", 33000 },
+	{ 585, "regular", 35000 },
+	{ 466, "regular", 28000 },
+	{ 492, "regular", 33000 },
+	{ 546, "regular", 31000 },
+	{ 551, "regular", 39000 },
+	{ 516, "regular", 36000 },
+	{ 467, "regular", 34000 },
+	{ 426, "regular", 37000 },
+	{ 547, "regular", 30000 },
+	{ 405, "regular", 29000 },
+	{ 580, "regular", 75000 },
+	{ 409, "regular", 115000 },
+	{ 550, "regular", 40000 },
+	{ 566, "regular", 38000 },
+	{ 540, "regular", 37000 },
+	{ 421, "regular", 42000 },
+	{ 529, "regular", 34000 },
 }
 
 car_data[3] = {
 	-- Aircraft
-	{ 592, "aircraft", 1122000 },
-	{ 577, "aircraft", 1122000 },
-	{ 511, "aircraft", 322000 },
-	{ 548, "aircraft", 282000 },
-	{ 512, "aircraft", 433000 },
-	{ 593, "aircraft", 498000 },
-	{ 417, "aircraft", 311000 },
-	{ 487, "aircraft", 382000 },
-	{ 553, "aircraft", 652000 },
-	{ 488, "aircraft", 338000 },
-	{ 563, "aircraft", 411300 },
-	{ 519, "aircraft", 788200 },
-	{ 469, "aircraft", 422000 },
-	{ 513, "aircraft", 344000 },
+	{ 592, "aircraft", 1800000 },
+	{ 577, "aircraft", 2000000 },
+	{ 511, "aircraft", 230000 },
+	{ 512, "aircraft", 180000 },
+	{ 593, "aircraft", 240000 },
+	{ 520, "aircraft", 1400000 },
+	{ 553, "aircraft", 1100000 },
+	{ 476, "aircraft", 900000 },
+	{ 519, "aircraft", 800000 },
+	{ 460, "aircraft", 450000 },
+	{ 513, "aircraft", 380000 },
 }
 
 car_data[4] = {
 	-- Bikes and bicycles
-	{ 581, "bike", 32000 },
-	{ 509, "bike", 800 },
-	{ 481, "bike", 1100 },
-	{ 462, "bike", 2760 },
-	{ 521, "bike", 26600 },
-	{ 463, "bike", 28700 },
-	{ 510, "bike", 990 },
-	{ 522, "bike", 103200 },
-	{ 461, "bike", 66300 },
-	{ 448, "bike", 4400 },
-	{ 468, "bike", 43300 },
-	{ 586, "bike", 31220 },
+	{ 581, "bike", 9000 },
+	{ 509, "bike", 100 },
+	{ 481, "bike", 200 },
+	{ 462, "bike", 800 },
+	{ 521, "bike", 8000 },
+	{ 463, "bike", 7000 },
+	{ 510, "bike", 150 },
+	{ 522, "bike", 11000 },
+	{ 461, "bike", 7500 },
+	{ 448, "bike", 1100 },
+	{ 468, "bike", 4000 },
+	{ 586, "bike", 3000 },
 }
 
 car_data[5] = {
 	-- Watercraft
-	{ 472, "watercraft", 53220 },
-	{ 473, "watercraft", 17320 },
-	{ 493, "watercraft", 322600 },
-	{ 595, "watercraft", 110320 },
-	{ 484, "watercraft", 298300 },
-	{ 453, "watercraft", 98300 },
-	{ 452, "watercraft", 162320 },
-	{ 446, "watercraft", 42320 },
-	{ 454, "watercraft", 87500 },
+	{ 472, "watercraft", 80000 },
+	{ 473, "watercraft", 5000 },
+	{ 493, "watercraft", 800000 },
+	{ 595, "watercraft", 200000 },
+	{ 484, "watercraft", 600000 },
+	{ 430, "watercraft", 110000 },
+	{ 453, "watercraft", 90000 },
+	{ 452, "watercraft", 200000 },
+	{ 446, "watercraft", 700000 },
+	{ 454, "watercraft", 200000 },
 }
 
 car_data[6] = {
-	-- Trucks and vans
-	{ 431, "trucks", 298800 },
-	{ 437, "trucks", 339500 },
-	{ 403, "trucks", 298800 },
-	{ 414, "trucks", 199500 },
-	{ 423, "trucks", 378800 },
-	{ 443, "trucks", 328800 },
-	{ 444, "trucks", 345500 },
-	{ 455, "trucks", 448800 },
-	{ 456, "trucks", 198800 },
-	{ 486, "trucks", 324500 },
-	{ 498, "trucks", 175500 },
-	{ 499, "trucks", 165500 },
-	{ 514, "trucks", 348800 },
-	{ 515, "trucks", 338800 },
-	{ 524, "trucks", 348800 },
-	{ 531, "trucks", 227400 },
-	{ 532, "trucks", 363300 },
-	{ 573, "trucks", 438800 },
-	{ 578, "trucks", 378800 },
-	{ 588, "trucks", 387700 },
+	-- Civilian & worker vehicles
+	{ 485, "trucks", 60000 },
+	{ 431, "trucks", 110000 },
+	{ 438, "trucks", 25000 },
+	{ 437, "trucks", 140000 },
+	{ 574, "trucks", 18000 },
+	{ 420, "trucks", 24000 },
+	{ 525, "trucks", 80000 },
+	{ 408, "trucks", 120000 },
+	{ 552, "trucks", 45000 },
+
+	-- Trucks & big rigs
+	{ 524, "trucks", 130000 },
+	{ 532, "trucks", 110000 },
+	{ 578, "trucks", 90000 },
+	{ 486, "trucks", 280000 },
+	{ 573, "trucks", 180000 },
+	{ 455, "trucks", 130000 },
+	{ 588, "trucks", 80000 },
+	{ 403, "trucks", 115000 },
+	{ 423, "trucks", 90000 },
+	{ 443, "trucks", 150000 },
+	{ 515, "trucks", 120000 },
+	{ 514, "trucks", 120000 },
+	{ 531, "trucks", 40000 },
 
 	-- Vans
-	{ 413, "vans", 44200 },
-	{ 418, "vans", 52300 },
-	{ 422, "vans", 48300 },
-	{ 440, "vans", 50700 },
-	{ 478, "vans", 65300 },
-	{ 482, "vans", 54300 },
-	{ 530, "vans", 27800 },
-	{ 543, "vans", 64400 },
-	{ 554, "vans", 46300 },
-	{ 572, "vans", 87300 },
-	{ 582, "vans", 94300 },
-	{ 583, "vans", 34300 },
+	{ 499, "vans", 70000 },
+	{ 609, "vans", 60000 },
+	{ 498, "vans", 60000 },
+	{ 414, "vans", 65000 },
+	{ 456, "vans", 75000 },
+
+	{ 459, "vans", 50000 },
+	{ 422, "vans", 35000 },
+	{ 482, "vans", 48000 },
+	{ 605, "vans", 8000 },
+
+	{ 530, "vans", 40000 },
+	{ 418, "vans", 28000 },
+	{ 572, "vans", 7000 },
+	{ 582, "vans", 75000 },
+	{ 413, "vans", 56000 },
+	{ 440, "vans", 48000 },
+	{ 543, "vans", 27000 },
+	{ 583, "vans", 16000 },
+	{ 478, "vans", 12000 },
+	{ 554, "vans", 29000 },
 
 	-- Trailers
-	{ 606, "trailer", 8200 },
-	{ 607, "trailer", 6300 },
-	{ 608, "trailer", 7500 },
-	{ 610, "trailer", 4300 },
-	{ 611, "trailer", 6500 },
-	{ 584, "trailer", 53200 },
-	{ 435, "trailer", 53400 },
-	{ 450, "trailer", 52100 },
-	{ 591, "trailer", 48900 },
+	{ 606, "trailer", 5000 },
+	{ 607, "trailer", 5000 },
+	{ 608, "trailer", 6000 },
+	{ 610, "trailer", 3000 },
+	{ 611, "trailer", 5000 },
+	{ 584, "trailer", 100000 },
+	{ 435, "trailer", 90000 },
+	{ 450, "trailer", 90000 },
+	{ 591, "trailer", 80000 },
 }
+
+-- CHANGED FROM HERE
 
 car_data[7] = {
 	-- Muscle Cars
-	{ 402, "muscle", 122300 },
-	{ 542, "muscle", 122300 },
-	{ 603, "muscle", 122300 },
-	{ 475, "muscle", 122300 },
+	{ 402, "muscle", 62000 },
+	{ 542, "muscle", 59000 },
+	{ 603, "muscle", 68000 },
+	{ 475, "muscle", 57000 },
 
 	-- Lowriders
-	{ 412, "lowrider", 78800 },
-	{ 534, "lowrider", 77600 },
-	{ 535, "lowrider", 73200 },
-	{ 536, "lowrider", 69700 },
-	{ 567, "lowrider", 66500 },
-	{ 575, "lowrider", 82300 },
-	{ 576, "lowrider", 74400 },
+	{ 536, "lowrider", 23000 },
+	{ 575, "lowrider", 24000 },
+	{ 534, "lowrider", 22000 },
+	{ 567, "lowrider", 21000 },
+	{ 535, "lowrider", 26000 },
+	{ 576, "lowrider", 25000 },
+	{ 412, "lowrider", 20000 },
 }
 
 car_data[8] = {
 	-- Category, price
 	-- Street Racers
-	{ 411, "sport", 198300 },
-	{ 415, "sport", 144300 },
-	{ 429, "sport", 167300 },
-	{ 434, "sport", 114300 },
-	{ 451, "sport", 96300 },
-	{ 477, "sport", 104300 },
-	{ 494, "sport", 122300 },
-	{ 502, "sport", 122500 },
-	{ 503, "sport", 122400 },
-	{ 506, "sport", 101100 },
-	{ 541, "sport", 124300 },
-	{ 555, "sport", 99600 },
-	{ 558, "sport", 98900 },
-	{ 559, "sport", 109900 },
-	{ 560, "sport", 166300 },
-	{ 561, "sport", 133400 },
-	{ 562, "sport", 97700 },
-	{ 565, "sport", 98800 },
+	{ 429, "sport", 42000 },
+	{ 541, "sport", 46000 },
+	{ 415, "sport", 49000 },
+	{ 480, "sport", 44000 },
+	{ 562, "sport", 39000 },
+	{ 565, "sport", 40000 },
+	{ 434, "sport", 32000 },
+	{ 492, "sport", 80000 },
+	{ 502, "sport", 80000 },
+	{ 503, "sport", 78000 },
+	{ 411, "sport", 60000 },
+	{ 559, "sport", 43000 },
+	{ 561, "sport", 38000 },
+	{ 560, "sport", 37000 },
+	{ 506, "sport", 33000 },
+	{ 451, "sport", 31000 },
+	{ 555, "sport", 23000 },
+	{ 477, "sport", 34000 },
 }
 
 car_data[9] = {
 	-- Category, price
 	-- SUVs and Wagons
-	{ 579, "suvs", 178300 },
-	{ 400, "suvs", 114300 },
-	{ 404, "suvs", 117300 },
-	{ 489, "suvs", 114300 },
-	{ 479, "suvs", 126300 },
-	{ 442, "suvs", 134300 },
-	{ 458, "suvs", 122300 },
+	{ 579, "suvs", 28000 },
+	{ 400, "suvs", 29000 },
+	{ 404, "suvs", 24000 },
+	{ 489, "suvs", 23000 },
+	{ 505, "suvs", 23000 },
+	{ 479, "suvs", 21000 },
+	{ 442, "suvs", 34000 },
+	{ 458, "suvs", 32000 },
 }
 
 car_data[10] = {
 	-- Railroad cars
-	{ 537, "train", 998300 },
-	{ 538, "train", 998400 },
-	{ 449, "train", 583300 },
+	{ 537, "train", 300000 },
+	{ 538, "train", 290000 },
+	{ 449, "train", 85000 },
 }
 
 -- Inventory details

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -52,6 +52,15 @@ function toggleEmergencyLights(plr)
 			lawTeams[getTeamName(getPlayerTeam(plr))] then
         		setVehicleOverrideLights(theVehicle, 2)
         		light1[theVehicle] = setTimer(setLight, 100, 1, theVehicle)
+
+			-- Imrprove vehicle performance during car chase
+	                if getVehicleType(theVehicle) == "Automobile" then
+	                        local result = getVehicleHandling(theVehicle)
+	                        setVehicleHandling(theVehicle, "engineAcceleration", tonumber(result["engineAcceleration"])*1.5, false)
+	                        setVehicleHandling(theVehicle, "engineInertia", tonumber(result["engineInertia"])/1.5, false)
+	                        setVehicleHandling(theVehicle, "brakeDeceleration", tonumber(result["brakeDeceleration"])*1.5, false)
+	                        setVehicleHandling(theVehicle, "brakeBias", tonumber(result["brakeBias"])*1.5, false)
+	                end
 		elseif lawTeams[getTeamName(getPlayerTeam(plr))] then
 			if isTimer(light1[theVehicle]) then
 				killTimer(light1[theVehicle])
@@ -65,6 +74,15 @@ function toggleEmergencyLights(plr)
 			setVehicleLightState(theVehicle, 1, 0)
 			setVehicleLightState(theVehicle, 2, 0)
 			setVehicleLightState(theVehicle, 3, 0)
+
+			-- Restore vehicle performance after car chase
+	                if getVehicleType(theVehicle) == "Automobile" then
+	                        local result = getVehicleHandling(theVehicle)
+	                        setVehicleHandling(theVehicle, "engineAcceleration", tonumber(result["engineAcceleration"])/1.5, false)
+	                        setVehicleHandling(theVehicle, "engineInertia", tonumber(result["engineInertia"])*1.5, false)
+	                        setVehicleHandling(theVehicle, "brakeDeceleration", tonumber(result["brakeDeceleration"])/1.5, false)
+	                        setVehicleHandling(theVehicle, "brakeBias", tonumber(result["brakeBias"])/1.5, false)
+	                end
 		end
     	end
 end
@@ -126,11 +144,14 @@ function syncTracker( cop )
 end
 addEventHandler("onPlayerLogin", root,
 function()
-    tracker_timers[source] = setTimer( syncTracker, 1000, 0, source )
+    tracker_timers[source] = setTimer(syncTracker, 1000, 0, source)
     -- Bind the key to emergency lights
     bindKey(source, "H", "down", "emlight")
     bindKey(source, "H", "up", "emlight")
 end)
 for k,v in pairs(getElementsByType("player")) do
-	tracker_timers[v] = setTimer( syncTracker, 1000, 0, v )
+	tracker_timers[v] = setTimer(syncTracker, 1000, 0, v)
+	-- Bind the key to emergency lights
+        bindKey(v, "H", "down", "emlight")
+        bindKey(v, "H", "up", "emlight")
 end

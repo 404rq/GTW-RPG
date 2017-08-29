@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Nametag system" description="Handle custom nametags" version="1" type="script" />
+    <info author="GTWGames" name="Nametag system" description="Handle custom nametags" version="69" type="script" />
     <script src="nametag_s.lua" type="server" />
     <script src="nametag_c.lua" type="client" />
 </meta>

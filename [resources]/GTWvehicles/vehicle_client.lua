@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -46,7 +46,7 @@ addEventHandler("onClientResourceStart", resourceRoot, client_load_markers)
 
 --[[ Initialize the spawner GUI ]]--
 gx,gy = guiGetScreenSize()
-window = guiCreateWindow(((gx-500)/2),((gy-400)/2),500,400,"Rental vehicles",false)
+window = exports.GTWgui:createWindow(((gx-500)/2),((gy-400)/2),500,400,"Rental vehicles",false)
 txt_search = guiCreateEdit(10, 32, 480, 30, "", false, window)
 guiEditSetCaretIndex(txt_search, 1)
 veh_grid = guiCreateGridList(10, 64, 480, 294, false, window)
@@ -275,7 +275,7 @@ function spawn_the_vehicle()
 		make_vehlist(true)
 	    if(window ~= nil) then
 	        guiSetVisible(window, true)
-	        showCursor(true)
+	        exports.GTWgui:showGUICursor(true)
 	        guiSetInputEnabled(true)
 	        guiSetText(txt_search, "")
 	        guiBringToFront(txt_search)
@@ -311,7 +311,7 @@ function marker_hit(hitElement)
 	        make_vehlist(false)
 	        if(window ~= nil) then
 	            guiSetVisible(window, true)
-	            showCursor(true)
+	            exports.GTWgui:showGUICursor(true)
 	            guiSetInputEnabled(true)
 	            guiSetText(txt_search, "")
 	            guiBringToFront(txt_search)
@@ -374,7 +374,7 @@ function marker_leave(leaveElement)
 end
 function close_the_window()
 	guiSetVisible(window, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 	guiSetInputEnabled(false)
 end
 addEvent("GTWvehicles.closeWindow", true)
@@ -387,7 +387,7 @@ end
 addEvent("GTWvehicles.onStreamOut", true)
 addEventHandler("GTWvehicles.onStreamOut", root, check_stream_out)
 
-addEventHandler("onClientElementStreamIn", getRootElement( ),
+--[[addEventHandler("onClientElementStreamIn", getRootElement( ),
     function ( )
         if getElementData(source, "GTWvehicles.isTrailerTowingVehile") then
                 local trailer = getElementData(source, "GTWvehicles.attachedTrailer")
@@ -420,4 +420,43 @@ addEventHandler( "onClientElementStreamOut", getRootElement( ),
                     end
             end
     end
-);
+);]]--
+
+setTimer(function() 
+	for k,v in pairs(getElementsByType("vehicle", root, true)) do
+		if getVehicleType(v) == "Trailer" and getElementData(v, "GTWvehicles.trailer.location") and 
+			getElementData(v, "GTWvehicles.towingVehicle") and getElementData(v, "GTWvehicles.towingVehicle") ~= 
+			getPedOccupiedVehicle(localPlayer) then
+			local data = fromJSON(getElementData(v, "GTWvehicles.trailer.location"))
+			--outputChatBox("Trailer "..k.." is streamed in at position: {"..math.floor(data[1])..", "..
+			--	math.floor(data[2])..", "..math.floor(data[3]).."} with rotation: {"..math.floor(data[4])..", "..
+			--	math.floor(data[5])..", "..math.floor(data[6]).."}")
+			
+			local tx,ty,tz = getElementPosition(v)
+			local trx,try,trz = getElementRotation(v)
+			--local sx,sy,sz = getElementVelocity(v)
+			--outputChatBox("Updated trailer position for player: "..getPlayerName(localPlayer)..", Diff: x: "..
+			--	math.floor(math.abs(tx-data[1])).." sx: ("..math.floor(sx).."), y: "..
+			--	math.floor(math.abs(ty-data[2])).." sy: ("..math.floor(sy).."), z: "..
+			--	math.floor(math.abs(tz-data[3])).." sz: ("..math.floor(sz)..
+			--	"), Diff rot: rx: "..math.floor(math.abs(trx-data[4]))..
+			--	", ry: "..math.floor(math.abs(try-data[5]))..", rz: "..math.floor(math.abs(trz-data[6])))
+			local t_tower = getElementData(v, "GTWvehicles.towingVehicle")
+			if t_tower and isElement(t_tower) then
+				setTimer(attachTrailerToVehicle, 100, 1, t_tower, v)
+			end
+			local t2_tower = getElementData(t_tower, "GTWvehicles.second_tower")
+			if t2_tower and isElement(t2_tower) then
+				setTimer(attachTrailerToVehicle, 100, 1, t2_tower, v)
+			end
+			
+			if math.abs(tx-data[1]) > 20 or math.abs(ty-data[2]) > 20 or math.abs(tz-data[3]) > 20 or (math.abs(trz-data[6]) > 30 and math.abs(trz-data[6]) < 150) then
+				--outputChatBox("Old pos: "..math.floor(tx)..", "..math.floor(ty)..", "..math.floor(tz))
+				setElementPosition(v, data[1],data[2],data[3])
+				setElementRotation(v, data[4],data[5],data[6])
+				--local tx,ty,tz = getElementPosition(v)
+				--outputChatBox("New pos: "..math.floor(tx)..", "..math.floor(ty)..", "..math.floor(tz))
+			end
+		end
+	end
+end, 500, 0)

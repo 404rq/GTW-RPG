@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -81,9 +81,9 @@ function delivery_point_hit(plr)
 	local actualspeed = (speedx^2 + speedy^2 + speedz^2)^(0.5)
 	local kmh = actualspeed * 180
 
-	-- Did this player drive faster than 30km/h? if so then we tell him he's
+	-- Did this player drive faster than 20km/h? if so then we tell him he's
 	-- an idiot who drove to fast.
-	if kmh > 40 then
+	if kmh > 20 then
 		exports.GTWtopbar:dm( "You are driving too fast!", 255, 0, 0 )
 		return
 	end
@@ -106,7 +106,7 @@ function delivery_point_hit(plr)
 	triggerServerEvent("GTWtrucker.payTrucker", resourceRoot, next_payment, load_time)
 
 	-- Alright, the driver has been paid, let's clean up some shit and give
-	-- him a new truck stop shall we?
+	-- him a new route shall we?
 	removeEventHandler("onClientMarkerHit", current_delivery_point, delivery_point_hit)
 	if isElement(current_delivery_point) then destroyElement(current_delivery_point) end
 	if isElement(current_blip) then destroyElement(current_blip) end
@@ -162,15 +162,16 @@ addEventHandler("onClientVehicleEnter", root, enter_the_truck)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_truck_route( )
 	-- Create the selection GUI
-	window = guiCreateWindow((sx-800)/2, (sy-600)/2, 800, 600, "Select truck route", false)
+	window = exports.GTWgui:createWindow((sx-800)/2, (sy-600)/2, 800, 600, "Select truck route", false)
 	local close_button = guiCreateButton(680, 560, 110, 36, "Close", false, window)
 	local routes_list = guiCreateGridList(10, 30, 780, 530, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.9 )
 	exports.GTWgui:setDefaultFont(close_button, 10)
 	exports.GTWgui:setDefaultFont(routes_list, 10)
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 
 	-- List all truck routes
+	table.sort(truck_routes)
 	for k,v in pairs(truck_routes) do
 		local tmp_row = guiGridListAddRow(routes_list)
 		guiGridListSetItemText(routes_list, tmp_row, tmp_col, k, false, false )
@@ -188,7 +189,7 @@ function select_truck_route( )
 		triggerServerEvent("GTWtrucker.selectRouteReceive", localPlayer, route)
 
 		-- Notice about how to change
-		outputChatBox("[Trucker]#BBBBBB Mission assigned, type /routes to change your mission", 255,200,0, true)
+		outputChatBox("[Trucker]#FFFFFF Mission assigned, type /routes to change your mission", 200,200,200, true)
 
 		-- Close the GUI
 		close_gui()
@@ -201,7 +202,7 @@ addEventHandler( "GTWtrucker.selectRoute", root, select_truck_route)
 function close_gui()
 	if isElement(window) then destroyElement(window) end
 	if isElement(routes_list) then destroyElement(routes_list) end
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ DX text to display the location of next DeliveryPoint ]]
@@ -214,7 +215,7 @@ function display_destination()
 	if getVehicleTowedByVehicle(getPedOccupiedVehicle(localPlayer)) and
 		getElementModel(getVehicleTowedByVehicle(
 		getPedOccupiedVehicle(localPlayer))) == 584 then
-		prefix = "liter"
+		prefix = "litre"
 	end
 	-- Check that the player is still a truck driver and nothing else
 	if not getPlayerTeam(localPlayer) or getPlayerTeam(localPlayer) ~= getTeamFromName("Civilians") then
@@ -236,9 +237,9 @@ function display_destination()
 
 	if not getElementData(localPlayer, "GTWtrucker.isLoading") then return end
 	local time_left = convert_number(math.round(getElementData(localPlayer, "GTWtrucker.loadTime") - getTickCount(), 2))
-	dxDrawText("Processing cargo ("..time_left..prefix.." remaining) please wait!",
+	dxDrawText("Processing cargo ("..time_left.." "..prefix.." remaining) please wait!",
 		(sx/2)-381,sy-53, 0,0, tocolor(0,0,0,255), 0.7, "bankgothic" )
-	dxDrawText("Processing cargo ("..time_left..prefix.." remaining) please wait!",
+	dxDrawText("Processing cargo ("..time_left.." "..prefix.." remaining) please wait!",
 		(sx/2)-380,sy-52, 0,0, tocolor(255,100,0,255), 0.7, "bankgothic" )
 
 	-- Check if finished

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -150,7 +150,7 @@ addEventHandler("onClientVehicleEnter", root, enter_the_train)
 --[[ Opens a GUI in where the driver can pick his route ]]--
 function select_train_route( )
 	-- Create the selection GUI
-	window = guiCreateWindow((sx-600)/2, (sy-350)/2, 600, 350, "Select train route", false)
+	window = exports.GTWgui:createWindow((sx-600)/2, (sy-350)/2, 600, 350, "Select train route", false)
 	local close_button = guiCreateButton(480, 310, 110, 36, "Close", false, window)
 	local routes_list = guiCreateGridList(10, 30, 580, 276, false, window)
 	local tmp_col = guiGridListAddColumn(routes_list, "Route name", 0.86 )
@@ -158,7 +158,7 @@ function select_train_route( )
 	exports.GTWgui:setDefaultFont(close_button, 10)
 	exports.GTWgui:setDefaultFont(routes_list, 10)
 	exports.GTWgui:setDefaultFont(info_label, 10)
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 
 	-- List all train routes
 	for k,v in pairs(train_routes) do
@@ -191,7 +191,7 @@ addEventHandler( "GTWtraindriver.selectRoute", root, select_train_route)
 function close_gui()
 	if isElement(window) then destroyElement(window) end
 	if isElement(routes_list) then destroyElement(routes_list) end
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ DX text to display the location of next trainstation ]]

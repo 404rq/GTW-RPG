@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -20,7 +20,7 @@ local sx,sy = guiGetScreenSize()
 --[[ Make GUI for context menu ]]--
 addEventHandler("onClientResourceStart", getResourceRootElement(getThisResource()),
 function()
-	window = guiCreateWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
+	window = exports.GTWgui:createWindow((sx-200)/2,(sy-300)/2, 200, 300, "Vehicle", false)
 	btn_repair = guiCreateButton(10, 30, 180, 40, "Repair", false, window)
 	btn_refuel = guiCreateButton(10, 70, 180, 40, "Refuel", false, window)
 	btn_close = guiCreateButton(10, 240, 180, 40, "Close", false, window)
@@ -48,8 +48,8 @@ end)
 function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
     if not clickedElement then return end
     local dist = getDistanceBetweenPoints3D(worldX, worldY, worldZ, getElementPosition(localPlayer)) or 0
-    if getElementType(clickedElement) == "vehicle" and not guiGetVisible(window) and (not getPedOccupiedVehicle(localPlayer) or
-        getPedOccupiedVehicle(localPlayer) ~= clickedElement) and
+    if getElementType(clickedElement) == "vehicle" and not guiGetVisible(window) and not getPedOccupiedVehicle(localPlayer) and
+        getPedOccupiedVehicle(localPlayer) ~= clickedElement and
         ((getPlayerTeam(localPlayer) == getTeamFromName("Civilians") and
         getElementData(localPlayer, "Occupation") == "Mechanic") or
 	getPlayerTeam(localPlayer) == getTeamFromName("Staff")) and
@@ -69,7 +69,7 @@ function openVehicleMenu(button, state, absoluteX, absoluteY, worldX, worldY, wo
         end
         element = clickedElement
 	if not isTimer(cooldown) then
-		showCursor(true)
+		exports.GTWgui:showGUICursor(true)
 		guiSetVisible(window, true)
 	end
     end
@@ -104,7 +104,7 @@ function repair_destroy()
 	end
 	cooldown = setTimer(function() end, 10000, 1)
 	guiSetVisible(window, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ Refule or display information? that's another question ]]--
@@ -142,12 +142,12 @@ function refuel_information()
 	end
 	cooldown = setTimer(function() end, 10000, 1)
 	guiSetVisible(window, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 
 --[[ Close the window, just close it ]]--
 function close_win()
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 	guiSetVisible(window, false)
 end
 
@@ -155,7 +155,7 @@ end
 function enter_veh()
 	if guiGetEnabled(btn_enter) and source == btn_enter then
 		guiSetVisible(window, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		if isElement(element) and getElementData(localPlayer, "staff") then
 			triggerServerEvent("GTWmechanic.staff.enter", root, element)
 		end
@@ -166,7 +166,7 @@ end
 function staff_repair()
 	if guiGetEnabled(btn_staff_repair) and source == btn_staff_repair then
 		guiSetVisible(window, false)
-		showCursor(false)
+		exports.GTWgui:showGUICursor(false)
 		if isElement(element) and getElementData(localPlayer, "staff") then
 			triggerServerEvent("GTWmechanic.staff.repair", root, element)
 		end

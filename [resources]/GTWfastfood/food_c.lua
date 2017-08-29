@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -16,7 +16,7 @@
 
 -- Define the menu GUI window
 local sx,sy = guiGetScreenSize()
-local win_menu = guiCreateWindow((sx-320)/2, (sy-297)/2, 320, 297, "Restaurant menu", false)
+local win_menu = exports.GTWgui:createWindow((sx-320)/2, (sy-297)/2, 320, 297, "Restaurant menu", false)
 guiSetVisible(win_menu, false)
 
 -- Define the menu buttons
@@ -59,7 +59,7 @@ end
 function open_menu(plr, r_type)
 	initialize_menu_choices(r_type)
 	guiSetVisible(win_menu, true)
-	showCursor(true)
+	exports.GTWgui:showGUICursor(true)
 end
 addEvent("GTWfastfood.gui.show",true)
 addEventHandler("GTWfastfood.gui.show", root, open_menu)
@@ -67,7 +67,7 @@ addEventHandler("GTWfastfood.gui.show", root, open_menu)
 --[[ Close the menu ]]--
 function close_menu()
 	guiSetVisible(win_menu, false)
-	showCursor(false)
+	exports.GTWgui:showGUICursor(false)
 end
 addEvent("GTWfastfood.gui.hide", true)
 addEventHandler("GTWfastfood.gui.hide", root, close_menu)
@@ -80,7 +80,7 @@ function menu_click()
 	-- Shall we close this menu?
    	if source == btn_close then
    		guiSetVisible(win_menu, false)
-   		showCursor(false)
+   		exports.GTWgui:showGUICursor(false)
 		return
 	end
 

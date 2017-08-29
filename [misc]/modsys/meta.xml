@@ -1,5 +1,5 @@
 <meta>
-    <info author="xXMADEXx" type="script" name="HTTP Mod Loader" version="40.1" />
+    <info author="xXMADEXx" type="script" name="HTTP Mod Loader" version="132.1" />
     <min_mta_version client="1.3.2" />
     <script src="server_code.lua" type="server" />
     <script src="client.lua" type="client" />

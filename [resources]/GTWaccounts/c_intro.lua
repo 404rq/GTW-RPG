@@ -25,21 +25,21 @@ settings.is_running = nil
 settings.intro = {
         -- LookAtX, LookAtY, LookAtZ, PosX, PosY, PosZ, Message
         [1]={ 1804.1455078125, -1932.4345703125, 13.386493682861, 1793.5693359375,
-                -1924.181640625, 17.390524864197, "This is a rental shop from where you can get a car" },
+                -1924.181640625, 17.390524864197, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_rental_shop"] },
         [2]={ 1940.4599609375, -1772.3994140625, 13.390598297119, 1970.6015625,
-                -1742.7529296875, 17.546875, "All vehicles need fuel, you can buy fuel at any gas station" },
+                -1742.7529296875, 17.546875, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_fuel"] },
         [3]={ 2245.490234375, -1663.033203125, 15.469003677368, 2263.44140625,
-                -1650.8525390625, 19.432439804077, "This is a skin shop, walk inside to buy a new skin" },
+                -1650.8525390625, 19.432439804077, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_skin_shop"] },
         [4]={ 2227.2275390625, -1721.541015625, 13.554790496826, 2223.6796875,
-                -1756.4375, 16.5625, "Visit the gym to improve your stamina or muscles" },
+                -1756.4375, 16.5625, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_gym"] },
         [5]={ 2396.2890625, -1911.6201171875, 16.460195541382, 2360.251953125,
-                -1880.6142578125, 22.553737640381, "You can regain your health by eating, literally anything" },
+                -1880.6142578125, 22.553737640381, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_health"] },
         [6]={ 2495.810546875, -1666.443359375, 13.34375, 2456.9892578125,
-                -1697.0546875, 22.953369140625, "Create/join a gang by pressing F6 to open your gang/goup/clan panel" },
+                -1697.0546875, 22.953369140625, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_gang"] },
         [7]={ 2495.810546875, -1666.443359375, 13.34375, 2456.9892578125,
-                -1697.0546875, 22.953369140625, "When you're in a gang you can capture turfs to gain money and respect" },
+                -1697.0546875, 22.953369140625, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_gang2"] },
         [8]={ 1808.2685546875, -1897.8447265625, 13.578125, 1797.71484375,
-                -1897.3994140625, 20.402294158936, "This is a work place, you can get a job here to make money" },
+                -1897.3994140625, 20.402294158936, lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_work"] },
 }
 settings.timer.limit = 360
 settings.timer.current = settings.timer.limit - 30
@@ -52,7 +52,7 @@ function reset_data()
         settings.timer.limit = 360
         settings.timer.current = settings.timer.limit - 30
         settings.frames.current = 0
-        settings.message = "Initializing..."
+        settings.message = lang_txt[getElementData(source, "GTWcore.language") or r_lang]["msg_initialize"]
 
         -- Kill event handler and reset view
         removeEventHandler("onClientRender", root, view_gtw_intro)

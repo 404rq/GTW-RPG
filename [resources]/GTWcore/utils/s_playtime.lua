@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -40,7 +40,7 @@ function update_display(plr, init_time)
 
         -- Update display time
         setElementData(plr, "Playtime", formatted_time)
-	
+
 	-- Define neew player
 	if tonumber(hours) or 0 < 12 then
 		setElementData(plr, "GTWcore.isNoob", true)
@@ -59,7 +59,7 @@ end
 --[[ Load the playtime on login (compatible with the old system) ]]--
 function load_playtime(_, acc)
         -- Look for any existing playtime in previous systems
-        local c_time = getAccountData(acc, "GTWdata.playtime") or 0
+        local c_time = get_account_data(acc, "GTWdata.playtime") or 0
         local l_time = getRealTime()
 
         -- Save the current timestamp as login time
@@ -92,7 +92,7 @@ function save_playtime( )
                 getElementData(source, "GTWdata.temp.playtime") or 0)
 
         -- Save playtime to database together with current
-        setAccountData(acc, "GTWdata.playtime", (getAccountData(acc,
+        set_account_data(acc, "GTWdata.playtime", (get_account_data(acc,
                 "GTWdata.playtime") or 0) + ((p_time*1000) or 0))
 
         -- Clean memory
@@ -107,7 +107,7 @@ function load_playtime_system()
                 if getElementData(v, "GTWdata.temp.playtime") and
                         acc and not isGuestAccount(acc) then
                         start_times[acc] = getElementData(v, "GTWdata.temp.playtime")
-                        local c_time = getAccountData(acc, "GTWdata.playtime") or 0
+                        local c_time = get_account_data(acc, "GTWdata.playtime") or 0
                         start_playtime_counter(v, c_time/1000)
                 end
         end

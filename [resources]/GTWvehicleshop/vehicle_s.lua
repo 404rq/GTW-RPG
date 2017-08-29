@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -50,8 +50,8 @@ function vehicleBuyRequest( model )
 			exports.GTWtopbar:dm( "You have bought a "..getVehicleNameFromModel( model ), client, 0, 255, 0 )
 
 			-- Save new vehicles to database
-			dbExec(veh_data, "INSERT INTO vehicles VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?)",
-				getAccountName(getPlayerAccount( client )), model, 0, 0, 100, 100, 3, toJSON({0,0,0, 0,0,0}),
+			dbExec(veh_data, "INSERT INTO vehicles VALUES (NULL,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+				getAccountName(getPlayerAccount( client )), model, 0, 0, 100, 100, 3, "GTW-RPG4", toJSON({0,0,0, 0,0,0}),
 				toJSON({200,200,200, 200,200,200, 0,0,0, 0,0,0}), toJSON({}), toJSON({}), toJSON({}))
 		elseif getPlayerMoney(client) < price then
 			exports.GTWtopbar:dm( "You can't afford this vehicle you little twat!", client, 255, 0, 0 )
@@ -67,7 +67,7 @@ addEventHandler( "GTWvehicleshop.onPlayerVehicleBuyRequest", root, vehicleBuyReq
 addEventHandler("onResourceStart", getResourceRootElement(),
 function()
 	dbExec(veh_data, "CREATE TABLE IF NOT EXISTS vehicles (ID INTEGER PRIMARY KEY, owner TEXT, model NUMERIC, "..
-		"locked NUMERIC, engine NUMERIC, health NUMERIC, fuel NUMERIC, paint NUMERIC, pos TEXT, color TEXT, upgrades TEXT, inventory TEXT, headlight TEXT)")
+		"locked NUMERIC, engine NUMERIC, health NUMERIC, fuel NUMERIC, paint NUMERIC, platetext TEXT, pos TEXT, color TEXT, upgrades TEXT, inventory TEXT, headlight TEXT)")
 end)
 
 --[[ Loads all vehicles for a specific player, requires that the player is logged in ]]--
@@ -76,7 +76,7 @@ function loadMyVehicles(query)
 	if result then
     	for _, row in ipairs( result ) do
             addVehicle(row["ID"], row["owner"], row["model"], row["locked"], row["engine"],
-            	row["health"], row["fuel"], row["paint"], row["pos"], row["color"],
+            	row["health"], row["fuel"], row["paint"], row["platetext"], row["pos"], row["color"],
             	row["upgrades"], row["inventory"], row["headlight"])
     	end
 	end
@@ -153,7 +153,7 @@ addEvent( "GTWvehicleshop.onListVehicles", true )
 addEventHandler( "GTWvehicleshop.onListVehicles", root, listMyVehicles )
 
 --[[ Create a vehicle based on data from the vehicle database ]]--
-function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, color, upgrades, inventory, hlight)
+function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, platetext, pos, color, upgrades, inventory, hlight)
 	if not getAccount( owner ) or not getAccountPlayer( getAccount( owner )) or getElementData(
 		getAccountPlayer( getAccount( owner )), "Jailed") == "Yes" then return end
 	if not vehicles[ID] then
@@ -166,6 +166,24 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 			isFirstSpawn = true
 		end
 		local veh = createVehicle( tonumber( model ), x,y,z )
+
+                -- Reduce vehicle top speed and acceleration
+                local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
+                local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+                if getVehicleType(veh) == "Automobile" or bicycle_list[vehID] then
+                        local result = getVehicleHandling(veh)
+                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/1.75, false)
+                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*1.6, false)
+                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/4, false)
+                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/2, false)
+                        setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*2, false)
+
+                        --Reduce max speed on bicycles and faggio
+                        if bicycle_list[vehID] then
+                                setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
+                        end
+                end
+
 		if supported_cars[getElementModel(veh)] then
 			local dist = supported_cars[getElementModel(veh)]
 			inventory_markers[veh] = createMarker(0, 0, -100, "cylinder", 3, 0, 0, 0, 0 )
@@ -215,13 +233,14 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, pos, co
 		setVehiclePaintjob( veh, tonumber( paint ))
 		setVehicleLocked( veh, locked )
 		setElementData( veh, "vehicleFuel", tonumber(fuel))
-		local health = tonumber(health*20)
-		if health < 300 then health = 300 end
+		health = tonumber(health*10)
+		if health < 100 then health = 100 end
 		setElementHealth( veh, health )
+                setVehiclePlateText( veh, platetext )
 		setElementData( veh, "owner", owner )
 		setElementData( veh, "isOwnedVehicle", tonumber(ID))
-		if getElementHealth( veh ) < 300 then
-			setElementHealth( veh, 300 )
+		if getElementHealth( veh ) < 100 then
+			setElementHealth( veh, 100 )
 		end
 		--outputChatBox(upgrades, getAccountPlayer( getAccount( owner )))
 		for k, i in pairs( fromJSON( upgrades )) do
@@ -239,11 +258,6 @@ function saveVehicleData( thePlayer, seat, jacked )
 		end
    		veh_save_timers[thePlayer] = setTimer(saveVehicle, 5000, 0, source )
    	end
-   	-- Show the price
-	--[[if is_demo_ex[source] then
-		outputChatBox( "Use /buyveh to purchase this "..getVehicleName(source).." for: $"..car_data[getElementModel(source)][2], thePlayer, 255, 200, 0)
-		exports.GTWtopbar:dm( "Use /buyveh to purchase this "..getVehicleName(source).." for: $"..car_data[getElementModel(source)][2], thePlayer, 255, 200, 0)
-	end]]--
 end
 addEventHandler( "onVehicleEnter", getRootElement(), saveVehicleData )
 function vehicleExit( thePlayer, seat, jacked )
@@ -269,7 +283,8 @@ function saveAndRemoveVehicle(veh, removeVeh)
 		local rx,ry,rz = getElementRotation( veh )
 		local fuel = getElementData( veh, "vehicleFuel" )
 		local paint = getVehiclePaintjob( veh )
-		local health = tostring(math.floor(tonumber(getElementHealth( veh ))/20))
+                local platetext = getVehiclePlateText( veh )
+		local health = tostring(math.floor(tonumber(getElementHealth( veh ))/10))
 		local locked = 0
 		if isVehicleLocked( veh ) then
 			locked = 1
@@ -281,8 +296,8 @@ function saveAndRemoveVehicle(veh, removeVeh)
 		local ID = getElementData( veh, "isOwnedVehicle" )
 		if ID then
 			-- Save to database
-			dbExec(veh_data, "UPDATE vehicles SET owner=?, locked=?, engine=?, health=?, fuel=?, paint=?, pos=?, color=?, upgrades=? WHERE ID=?",
-				vehicle_owners[veh], locked, engine, health, fuel, paint, toJSON({x,y,z, rx,ry,rz}),
+			dbExec(veh_data, "UPDATE vehicles SET owner=?, locked=?, engine=?, health=?, fuel=?, paint=?, platetext=?, pos=?, color=?, upgrades=? WHERE ID=?",
+				vehicle_owners[veh], locked, engine, health, fuel, paint, platetext, toJSON({x,y,z, rx,ry,rz}),
 				toJSON({ar,ag,ab, br,bg,bb, cr,cg,cb, dr,dg,db}), toJSON(getVehicleUpgrades( veh )), ID)
 
 			-- Clean up and free memory
@@ -439,7 +454,7 @@ function respawnVehicleToStart(veh_id)
                 -- Tolerate less than 30 seconds violent time or distance to cop larger than 180m
 		if ((tonumber(getElementData(client, "violent_seconds")) or 0) < 50 or
                         dist_to_cop > 180) and getElementData(client, "Jailed") ~= "Yes" then
-			local price = 500
+			local price = 100
 			if price and getPlayerMoney(client) > price then
 				takePlayerMoney( client, price )
 				-- Save to database

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -128,11 +128,11 @@ function pay_for_the_ride(driver, passenger, first)
 	if getVehicleOccupant(veh, 0) == driver and getElementData(driver, "Occupation") == "Tram Driver" then
 		-- First payment are more expensive
 		if first then
-			takePlayerMoney( passenger, 25 )
-			givePlayerMoney( driver, 25 )
+			takePlayerMoney(passenger, 10)
+			givePlayerMoney(driver, 10)
 		else
-			takePlayerMoney( passenger, 5 )
-			givePlayerMoney( driver, 5 )
+			takePlayerMoney(passenger, 5)
+			givePlayerMoney(driver, 5)
 		end
 	else
 		-- Throw the passenger out if he can't pay for the ride any more
@@ -164,8 +164,8 @@ function calculate_next_station(td_payment)
 
 	-- Increase stats by 1
 	local playeraccount = getPlayerAccount(client)
-	local tram_stations = (getAccountData(playeraccount, "GTWdata_stats_tram_stations") or 0) + 1
-	setAccountData(playeraccount, "GTWdata_stats_tram_stations", tram_stations)
+	local tram_stations = (exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.tram_stations") or 0) + 1
+	exports.GTWcore:set_account_data(playeraccount, "GTWdata.stats.tram_stations", tram_stations)
 
 	-- Pay the driver
 	givePlayerMoney(client, (fine + math.floor(tram_stations/4)) * (1 + math.floor(getElementData(client, "GTWvehicles.numberOfCars")/10 or 1)))

@@ -73,10 +73,10 @@ colorPicker = {
 		-- Create the color selection window
 		local screenW, screenH = guiGetScreenSize()
 		colorPicker.selectWindow = info.selectWindow
-		colorPicker.GUI.selectWindow = guiCreateWindow(screenW - info.selectWindow.width, (screenH - info.selectWindow.height) / 2,
+		colorPicker.GUI.selectWindow = exports.GTWgui:createWindow(screenW - info.selectWindow.width, (screenH - info.selectWindow.height) / 2,
 		                                        info.selectWindow.width, info.selectWindow.height, "Pick a color", false)
 		guiSetVisible(colorPicker.GUI.selectWindow, false)
-		guiWindowSetSizable(colorPicker.GUI.selectWindow, false)
+		exports.GTWgui:windowSetSizeable(colorPicker.GUI.selectWindow, false)
 
 		colorPicker.GUI.palette = guiCreateStaticImage(colorPicker.selectWindow.paletteX, colorPicker.selectWindow.paletteY,
 		                                        256, 256, "colorpicker/palette.png", false, colorPicker.GUI.selectWindow)

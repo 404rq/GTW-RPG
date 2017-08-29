@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -21,7 +21,7 @@ row,col = nil,nil
 
 --[[ Create vehicle management GUI ]]--
 x,y = guiGetScreenSize()
-window = guiCreateWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle manager", false)
+window = exports.GTWgui:createWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle manager", false)
 btn_show = guiCreateButton(10, 350, 90, 30, "Show", false, window)
 btn_hide = guiCreateButton(100, 350, 90, 30, "Hide", false, window)
 btn_lock = guiCreateButton(200, 350, 90, 30, "Lock", false, window)
@@ -51,7 +51,7 @@ exports.GTWgui:setDefaultFont(btn_sell, 10)
 exports.GTWgui:setDefaultFont(vehicle_list, 10)
 
 --[[ Create vehicle trunk GUI ]]--
-window_trunk = guiCreateWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle inventory", false)
+window_trunk = exports.GTWgui:createWindow((x-600)/2, (y-400)/2, 600, 400, "Vehicle inventory", false)
 btn_withdraw = guiCreateButton(275, 73, 50, 40, "<", false, window_trunk)
 btn_deposit = guiCreateButton(275, 115, 50, 40, ">", false, window_trunk)
 btn_withdraw_all = guiCreateButton(275, 163, 50, 40, "<<", false, window_trunk)
@@ -86,12 +86,12 @@ exports.GTWgui:setDefaultFont(btn_close, 10)
 function toggleGUI( source )
 	-- Show the vehicle GUI
 	if not guiGetVisible( window ) then
-		showCursor( true )
+		exports.GTWgui:showGUICursor( true )
 		guiSetVisible( window, true )
 		guiSetInputEnabled( true )
 		triggerServerEvent( "GTWvehicleshop.onListVehicles", localPlayer )
 	else
-		showCursor( false )
+		exports.GTWgui:showGUICursor( false )
 		guiSetVisible( window, false )
 		guiSetInputEnabled( false )
 	end
@@ -108,7 +108,7 @@ function toggleInventoryGUI( plr )
 			"GTWvehicleshop.the_near_player_trunk")
 		if getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk") and
 			browsing_player and browsing_player == localPlayer then
-			showCursor( true )
+			exports.GTWgui:showGUICursor( true )
 			guiSetVisible( window_trunk, true )
 			guiSetInputEnabled( true )
 			loadWeaponsToList()
@@ -117,7 +117,7 @@ function toggleInventoryGUI( plr )
 			exports.GTWtopbar:dm(getPlayerName(browsing_player).." is currently browsing this trunk, please wait!", 255, 0, 0)
 		end
 	else
-		showCursor( false )
+		exports.GTWgui:showGUICursor( false )
 		guiSetVisible( window_trunk, false )
 		guiSetInputEnabled( false )
 		if isElement(getElementData(localPlayer, "GTWvehicleshop.the_near_veh_trunk")) then

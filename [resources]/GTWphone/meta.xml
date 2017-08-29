@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,9 +15,9 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWphone" type="script" description="Adds a phone where the user can select radio stations, send SMS, or call services" version="0"></info>
+    <info author="GTWGames" name="GTWphone" type="script" description="Adds a phone where the user can select radio stations, send SMS, or call services" version="62"></info>
     <script src="phone_s.lua" type="server"></script>
     <script src="phone_c.lua" type="client" protected="true"></script>
-
+    
     <file src="lumia920.png" />
 </meta>

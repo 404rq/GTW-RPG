@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -49,7 +49,7 @@ radio = {
 	{ "http://www.hit104.com/listen.pls", "HIT104", 1 },
 	{ "http://31.14.40.241:6184/listen.pls", "FM104 Ireland", 1 },
 	{ "http://stream.europeanhitradio.com:8000/ehr64.m3u", "European Hit Radio", 1 },
-	
+
 	{ "", " Local radio", 0 },
 	{ "http://194.16.21.227/mix_gbg_se_mp3.m3u", "[Sweden] Mix megapol", 1 },
 	{ "http://194.16.21.227/nrj_se_mp3.m3u", "[Sweden] NRJ Sweden", 1 },
@@ -59,11 +59,11 @@ radio = {
 	{ "http://live-icy.gss.dr.dk:8000/A/A21L.mp3.m3u", "[Denmark] DR Mix", 1 },
 	{ "http://live-icy.gss.dr.dk:8000/A/A04L.mp3.m3u", "[Denmark] DR classical", 1 },
 	{ "http://live.motgift.nu:8000/stream", "[Sweden] Motgift Mix/Talk", 1 },
-	
+
 	{ "", " 181.fm stations", 0 },
 	{ "http://www.181.fm/winamp.pls?station=181-power&style=mp3&description=Power%20181%20(Top%2040)&file=181-power.pls", "Power 181", 1 },
 	{ "http://relay.181.fm:8068", "Old School Rap", 1 },
-	
+
 	{ "", " Rap and Hiphop", 0 },
 	{ "http://188.117.44.132:8000/stream.m3u", "[Finland] Basso radio", 1 },
 	{ "http://mp3-live.dasding.de/dasdingraka02_m.m3u", "[Germany] DasDing Sprechstunde", 1 },
@@ -71,7 +71,7 @@ radio = {
 	{ "http://91.121.223.159:8000/move.m3u", "Move FM", 1 },
 	{ "http://broadcast.infomaniak.ch/onlyrai-high.mp3.m3u", "Urban hit", 1 },
 	{ "http://lyd.nrk.no/nrk_radio_p3_national_rap_show_aac_h.m3u", "[Norway] Rap/Hiphop", 1 },
-	
+
 	{ "", " Rock", 0 },
 	{ "http://www.skyrock.fm/stream.php/yourplayer_64.pls", "Skyrock", 1 },
 	{ "http://stream-ice.mtgradio.com:8080/stat_bandit.m3u", "[Sweden] Bandit rock", 1 },
@@ -84,15 +84,15 @@ radio = {
 	{ "http://mp3channels.webradio.antenne.de/alternative", "[Germany] ROCK ANTENNE - Alternative", 1 },
 	{ "http://mp3channels.webradio.antenne.de/young-stars", "[Germany] ROCK ANTENNE - Young Stars", 1 },
 	{ "http://mp3channels.webradio.antenne.de/rockantennelocal01", "[Germany] ROCK ANTENNE - Erding Freising Ebersberg", 1 },
-	
+
 	{ "", " Jazz", 0 },
 	{ "http://lyd.nrk.no/nrk_radio_jazz_aac_h.m3u", "[Norway] NRK Jazz", 1 },
 	{ "http://sj128.hnux.com/listen.pls", "Smooth Jazz", 1 },
-	
+
 	{ "", " Techno", 0 },
 	{ "http://tunein.t4e.dj/hard/dsl/mp3", "Techno4ever Hard stream", 1 },
 	{ "http://tunein.t4e.dj/club/dsl/mp3", "Techno4ever Clup stream", 1 },
-	
+
 	{ "", " Mixed stations", 0 },
 	{ "http://www.radiogold.de/listen.pls", "Radio Gold (Germany)", 1 },
 	{ "http://217.151.151.91/live4.m3u", "Radio regenbogen (Germany)", 1 },
@@ -111,7 +111,7 @@ service = {
 
 -- Create window
 x,y = guiGetScreenSize()
---phoneGui = guiCreateWindow ( x - 244, y - 500, 244, 500, "", false )
+--phoneGui = exports.GTWgui:createWindow ( x - 244, y - 500, 244, 500, "", false )
 img = guiCreateStaticImage((x/2)-150, (y/2)-300, 300, 600, "lumia920.png", false, nil )
 
 -- Tab panel for apps
@@ -217,7 +217,7 @@ updateTimer = { }
 function togglePhone( source )
 	-- Show the phone
 	if not guiGetVisible( img ) then
-		showCursor ( true )
+		exports.GTWgui:showGUICursor ( true )
 		guiSetVisible( img, true )
 		triggerServerEvent ( "onPhoneOpen", localPlayer )
 
@@ -248,7 +248,7 @@ function togglePhone( source )
 			end
 		end, 5000, 0 )
 	else
-		showCursor ( false )
+		exports.GTWgui:showGUICursor ( false )
 		guiSetVisible( img, false )
 		triggerServerEvent( "onPhoneClose", localPlayer )
 		if isTimer( updateTimer[localPlayer] ) then
@@ -278,7 +278,7 @@ addEventHandler( "onClientGUIClick", btn_stop_radio, stopRadio )
 -- Close the gui
 function exitPhone( )
 	if source == btn_left then
-   		showCursor ( false )
+   		exports.GTWgui:showGUICursor ( false )
 		guiSetVisible( img, false )
 		triggerServerEvent( "onPhoneClose", localPlayer )
 		if isTimer( updateTimer[localPlayer] ) then
@@ -291,7 +291,7 @@ addEventHandler( "onClientGUIClick", btn_left, exitPhone )
 -- Home button
 function phoneBack( )
 	if source == btn_close then
-   		showCursor ( false )
+   		exports.GTWgui:showGUICursor ( false )
 		guiSetVisible( img, false )
 		triggerServerEvent( "onPhoneClose", localPlayer )
 		if isTimer( updateTimer[localPlayer] ) then

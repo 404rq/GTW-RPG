@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Sebbe (smart), Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -16,9 +16,9 @@
 
 --[[ Initialize group system GUI elements ]]--
 function makeGUI()
-	window = guiCreateWindow(0, 0, 770, 550, "Grand Theft Walrus - groups", false)
-	guiWindowSetSizable(window, false)
-	guiSetAlpha(window, 1.00)
+	sx,sy = guiGetScreenSize()
+	window = exports.GTWgui:createWindow((sx-770)/2, (sy-550)/2, 770, 550, "Grand Theft Walrus - groups", false)
+	exports.GTWgui:windowSetSizeable(window, false)
 	guiSetVisible(window, false)
 
 	mainPanel = guiCreateTabPanel(6, 23, 758, 520, false, window)
@@ -76,8 +76,8 @@ function makeGUI()
 	exports.GTWgui:setDefaultFont(viewWarnsButton, 10)
 	exports.GTWgui:setDefaultFont(viewMessageButton, 10)
 
-	messageWindow = guiCreateWindow(602, 341, 455, 350, "Group Message", false)
-	guiWindowSetSizable(messageWindow, false)
+	messageWindow = exports.GTWgui:createWindow(602, 341, 455, 350, "Group Message", false)
+	exports.GTWgui:windowSetSizeable(messageWindow, false)
 	guiSetAlpha(messageWindow, 1.00)
 
 	messageMemo = guiCreateMemo(9, 18, 436, 283, "", false, messageWindow)
@@ -85,8 +85,8 @@ function makeGUI()
 	messageSaveButton = guiCreateButton(10, 311, 108, 29, "Save", false, messageWindow)
 	guiSetVisible(messageWindow, false)
 
-	inviteWindow = guiCreateWindow(680, 277, 301, 414, "Invite Player", false)
-	guiWindowSetSizable(inviteWindow, false)
+	inviteWindow = exports.GTWgui:createWindow(680, 277, 301, 414, "Invite Player", false)
+	exports.GTWgui:windowSetSizeable(inviteWindow, false)
 	guiSetAlpha(inviteWindow, 1.00)
 	inviteSearchEdit = guiCreateEdit(9, 25, 282, 33, "", false, inviteWindow)
 	inviteList = guiCreateGridList(11, 62, 280, 302, false, inviteWindow)
@@ -96,8 +96,8 @@ function makeGUI()
 	guiSetVisible(inviteWindow, false)
 
 
-	listWindow = guiCreateWindow(680, 289, 297, 373, "Group List", false)
-	guiWindowSetSizable(listWindow, false)
+	listWindow = exports.GTWgui:createWindow(680, 289, 297, 373, "Group List", false)
+	exports.GTWgui:windowSetSizeable(listWindow, false)
 	guiSetAlpha(listWindow, 1.00)
 	listEdit = guiCreateEdit(9, 23, 278, 33, "", false, listWindow)
 	groupListGrid = guiCreateGridList(9, 61, 278, 271, false, listWindow)
@@ -107,8 +107,8 @@ function makeGUI()
 	closeGroupList = guiCreateButton(10, 335, 277, 28, "Close", false, listWindow)
 	guiSetVisible(listWindow, false)
 
-	warnWindow = guiCreateWindow(668, 296, 280, 167, "", false)
-	guiWindowSetSizable(warnWindow, false)
+	warnWindow = exports.GTWgui:createWindow(668, 296, 280, 167, "", false)
+	exports.GTWgui:windowSetSizeable(warnWindow, false)
 	guiSetAlpha(warnWindow, 1.00)
 
 	warningReasonEdit = guiCreateEdit(9, 26, 258, 38, "Reason", false, warnWindow)
@@ -117,8 +117,8 @@ function makeGUI()
 	warnButton = guiCreateButton(179, 132, 88, 25, "Warn", false, warnWindow)
 	guiSetVisible(warnWindow, false)
 
-	permWindow = guiCreateWindow(679, 289, 275, 446, "Rank Management", false)
-	guiWindowSetSizable(permWindow, false)
+	permWindow = exports.GTWgui:createWindow(679, 289, 275, 446, "Rank Management", false)
+	exports.GTWgui:windowSetSizeable(permWindow, false)
 	guiSetAlpha(permWindow, 1.00)
 
 	rankCombo = guiCreateComboBox(9, 23, 238, 150, "Select Rank", false, permWindow)
@@ -131,8 +131,8 @@ function makeGUI()
 	addRankButton = guiCreateButton(185, 362, 72, 23, "Add Rank", false, permWindow)
 	guiSetVisible(permWindow, false)
 
-	--[[GUIEditor.window[1] = guiCreateWindow(652, 300, 296, 301, "Set Rank", false)
-	guiWindowSetSizable(GUIEditor.window[1], false)
+	--[[GUIEditor.window[1] = exports.GTWgui:createWindow(652, 300, 296, 301, "Set Rank", false)
+	exports.GTWgui:windowSetSizeable(GUIEditor.window[1], false)
 	guiSetAlpha(GUIEditor.window[1], 1.00)
 	GUIEditor.combobox[1] = guiCreateComboBox(20, 94, 250, 161, "", false, GUIEditor.window[1])
 	GUIEditor.label[1] = guiCreateLabel(-17, 46, 290, 80, "Set the rank of account: .. to : ..", false, GUIEditor.combobox[1])
@@ -145,8 +145,8 @@ function makeGUI()
 	guiLabelSetHorizontalAlign(GUIEditor.label[2], "center", false)--]]
 
 
-	setRankWindow = guiCreateWindow(652, 300, 291, 265, "Set Rank", false)
-	guiWindowSetSizable(setRankWindow, false)
+	setRankWindow = exports.GTWgui:createWindow(652, 300, 291, 265, "Set Rank", false)
+	exports.GTWgui:windowSetSizeable(setRankWindow, false)
 	guiSetAlpha(setRankWindow, 1.00)
 	setRankCombo = guiCreateComboBox(20, 94, 250, 161, "Select Rank", false, setRankWindow)
 	setRankLabel1 = guiCreateLabel(-16, 46, 290, 80, "Set the rank of account: to : ", false, setRankCombo)

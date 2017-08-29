@@ -225,11 +225,12 @@ function clean_up_angry_bots(angry_bot, angry_blip)
 	if isElement(angry_bot) then destroyElement(angry_bot) end
 end
 function hijackVehicle(plr)
+	if getPedOccupiedVehicle(plr) then return end
 	local px,py,pz = getElementPosition(plr)
 	for k,v in pairs(getElementsByType("vehicle")) do
 		local b_driver = getVehicleOccupant(v) or v
 		local vx,vy,vz = getElementPosition(b_driver)
-		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 4 and 
+		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 5 and
 			isElement(v) and getElementType(v) == "vehicle" and
 			getVehicleOccupant(v) and getElementType(getVehicleOccupant(v)) == "ped" then
 			call(npc_hlc, "disableHLCForNPC", getVehicleOccupant(v))
@@ -239,7 +240,7 @@ function hijackVehicle(plr)
 			local angry_blip = createBlipAttachedTo(angry_bot, 0, 1, 200, 200, 200, 200, 0, 180 )
 			setTimer(clean_up_angry_bots, 300*1000, 1, angry_bot, angry_blip)
 			exports.GTWwanted:setWl(plr, 0.3, 10, "You committed the crime of grand theft auto")
-			destroyElement(getVehicleOccupant(v)) 
+			destroyElement(getVehicleOccupant(v))
 		end
 	end
 end
@@ -254,7 +255,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 		local dist = getDistanceBetweenPoints2D(px,py, x,y)
 
 		-- A player is closer to spawn than 50m, don't spawn
-		if dist < 50 then return end
+		if dist < 60 then return end
 	end
 
 	local square_tm_id = square_id[y] and square_id[y][x]
@@ -357,6 +358,23 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 			local zoff = z_offset[model]/math.cos(math.rad(rx))
 			local car = createVehicle(model,x,y,z+zoff,rx,0,rz)
 			setVehicleFuelTankExplodable(car, true)
+
+			-- Reduce vehicle top speed and acceleration
+			local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
+			local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+	                if getVehicleType(car) == "Automobile" or bicycle_list[vehID] then
+	                        local result = getVehicleHandling(car)
+	                        setVehicleHandling(car, "engineAcceleration", tonumber(result["engineAcceleration"])/2, false)
+	                        setVehicleHandling(car, "engineInertia", tonumber(result["engineInertia"])*2, false)
+	                        setVehicleHandling(car, "brakeDeceleration", tonumber(result["brakeDeceleration"])/2, false)
+	                        setVehicleHandling(car, "brakeBias", tonumber(result["brakeBias"])/2, false)
+
+				--Reduce max speed on bicycles and faggio
+				if bicycle_list[vehID] then
+					setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
+				end
+	                end
+
 			--setTimer(destroyAINPCVehicle, 120000, 1, car)
 			setElementData(car, "npc", true)
 			setElementDimension(car,dim)

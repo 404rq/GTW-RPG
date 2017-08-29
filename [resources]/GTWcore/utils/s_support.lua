@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		https://forum.404rq.com/bug-reports/
-	Suggestions:		https://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -134,7 +134,7 @@ setTimer(function()
 			local x,y,z = getElementPosition(v)
 			for l,m in pairs(m_location) do
 				if getDistanceBetweenPoints3D(m[2],m[3],m[4], x,y,z) < m[1] and getElementData(v, "GTWdata.isNew") then
-					s_cooldown[v] = setTimer(function() end, 20000,1)
+					s_cooldown[v] = setTimer(function() end, 120000,1)
 					playSoundFrontEnd(v, 11)
 					local m_first = "#00AA00(Tutorial)#CCCCCC "
 					for n=1, #messages[m[5]] do

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -147,7 +147,9 @@ function setWl(plr, level, violent_time, reason, add_to, reduce_health)
 
 	-- If the crime was in a vehicle collision, reduce health
 	if reduce_health and getPedOccupiedVehicle(plr) then
-                local loss = level/(getVehicleHandling(getPedOccupiedVehicle(plr)).mass * 0.00001)
+                local loss = level/(getVehicleHandling(getPedOccupiedVehicle(plr)).mass * 0.000001)
+		local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+		if source and isElement(source) and bike_list[getElementModel(source)] then loss = loss*20 end
 		local driver = getVehicleOccupant(getPedOccupiedVehicle(plr), 0)
 		for k,v in pairs(getVehicleOccupants(getPedOccupiedVehicle(plr))) do
 			local new_health = getElementHealth(v) - loss
@@ -184,8 +186,8 @@ function setWl(plr, level, violent_time, reason, add_to, reduce_health)
 
 	-- Wanted points for criminals
 	local pAcc = getPlayerAccount(plr)
-	local wp_stat = getAccountData( pAcc, "GTWdata_stats_wanted_points" ) or 0
-	setAccountData(pAcc, "GTWdata_stats_wanted_points", wp_stat+level)
+	local wp_stat = exports.GTWcore:get_account_data( pAcc, "GTWdata.stats.wanted_points" ) or 0
+	exports.GTWcore:set_account_data(pAcc, "GTWdata.stats.wanted_points", wp_stat+level)
 
 	-- Display the reason for the player
 	if reason and reason ~= "" then
@@ -228,6 +230,18 @@ end
 addEvent("GTWwanted.serverSetWl", true)
 addEventHandler("GTWwanted.serverSetWl", root, setServerWantedLevel)
 
+function client_kill_ped(ped, killer, body_part)
+	if not ped or not isElement(ped) or isPedDead(ped) or getPedOccupiedVehicle(ped) then return end
+	if not killer or not isElement(killer) or not getPedOccupiedVehicle(killer) or getPedOccupiedVehicleSeat(killer) > 0 then return end
+	local px,py,pz = getElementPosition(ped)
+	local kx,ky,kz = getElementPosition(killer)
+	if getDistanceBetweenPoints3D(px,py,pz, kx,ky,kz) > 10 then return end
+	killPed(ped, killer, 255, body_part, false)
+	setWl(killer, 0.4, 60, "You committed the crime of murder")
+end
+addEvent("GTWwanted.serverKillPed", true)
+addEventHandler("GTWwanted.serverKillPed", root, client_kill_ped)
+
 --[[ Get player wanted level ]]--
 function getWl(plr)
 	if not plr or not isElement(plr) or getElementType(plr) ~= "player" then return 0,0 end
@@ -264,6 +278,9 @@ addEventHandler("onPlayerDamage", root, crime_damage)
 --[[ Crime of killing other players ]]--
 function crime_death(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if not killer or not isElement(killer) or getElementType(killer) ~= "player" or killer == source then return end
+	local vx,vy,vz = getElementPosition(source)
+	local px,py,pz = getElementPosition(killer)
+	if getDistanceBetweenPoints3D(vz,vy,vz, px,py,pz) > 50 then return end
 	if getElementData(source, "GTWoutlaws.vBot") then return end
 	local wl,viol = getWl(source)
 	local is_jailed = exports.GTWjail:isJailed(source)
@@ -274,7 +291,7 @@ function crime_death(totalAmmo, killer, killerWeapon, bodypart, stealth)
 	if getElementType(source) == "ped" then
 		add_wl = 1.0   -- Reduced by 1.0 for bots
 	end
-	setWl(killer, round(add_wl, 2), 50)
+	setWl(killer, round(add_wl, 2), 50, "You comitted the crime of murder")
 end
 addEventHandler("onPedWasted", root, crime_death)
 addEventHandler("onPlayerWasted", root, crime_death)
@@ -314,7 +331,7 @@ function checkSpeeding( )
 	setWl(speeder, round(n_wl, 2), 0, "You committed the crime of speeding")
 
 	-- Pay the cop for the catch
-	local money = math.floor(kmh*1.3)
+	local money = math.floor(kmh*2)
 	exports.GTWtopbar:dm("You have catched: "..getPlayerName(speeder).." for speeding and earned: $"..tostring(money), client, 0, 255, 0 )
 	givePlayerMoney(client, money)
 end

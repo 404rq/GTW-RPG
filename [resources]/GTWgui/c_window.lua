@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -23,14 +23,14 @@ function createWindow(x, y, width, height, text, relative, source_resource)
 
 	-- Add resource to restart list
 	if source_resource then
-		triggerServerEvent("GTWgui.addToRefreshList", resourceRoot, source_resource)
+		triggerServerEvent("GTWgui.addToRefreshList", root, source_resource)
 	end
 
 	-- Add a close button TODO: repair this
 	--local close_button = guiCreateButton(width-30, 0, 30, 28, "X", false, window)
 	--addEventHandler("onClientGUIClick", close_button, function()
 	--	guiSetVisible(window, false)
-	--	showCursor(false, false)
+	--	exports.GTWgui:showGUICursor(false, false)
 	--end)
 
 	-- Apply the new font style of the GUI
@@ -44,12 +44,25 @@ function setDefaultFont(inputElement, size)
 	guiSetFont(inputElement, font)
 end
 
+--[[ Toggle window moveable functionality ]]--
+function windowSetMoveable(win, setting)
+	return false
+end
+
+--[[ Toggle sizeable functionality ]]--
+function windowSetSizeable(win, setting)
+	return false
+end
+
 --[[ Toggle the cursor (globally) ]]--
+function showGUICursor(show, toggle_controls)
+    	showCursor(show, toggle_controls)
+end
 function toggle_cursor()
-	if isCursorShowing(localPlayer) then
-    		showCursor(false, false)
-    	else
+	if not isCursorShowing() then
     		showCursor(true, true)
-    	end
+	else
+		showCursor(false, false)
+	end
 end
 bindKey("x", "down", toggle_cursor, "Toggle cursor")

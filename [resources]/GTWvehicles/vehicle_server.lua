@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -44,7 +44,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			if vehID then
 				if vehID == 592 or vehID == 577 or vehID == 553 then
 					local playeraccount = getPlayerAccount(client)
-					local pilot_progress = tonumber(getAccountData(playeraccount, "GTWdata_stats_pilot_progress")) or 0
+					local pilot_progress = tonumber(exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.pilot_progress")) or 0
 					if pilot_progress < 40 then
 						exports.GTWtopbar:dm("Your pilot license doesn't allow large aircraft yet! (Must be above 40)", client, 255, 0, 0)
 						return
@@ -58,7 +58,25 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 				setElementHealth(vehicles[client], (getElementHealth(vehicles[client])))
 			   	setVehicleHandling(vehicles[client], "headLight ", "big")
 			   	setVehicleHandling(vehicles[client], "tailLight", "big")
-				
+
+                                -- Reduce rental vehicle top speed
+                                local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
+                                local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+                                if getVehicleType(vehicles[client]) == "Automobile" or bike_list[vehID] then
+                                        local result = getVehicleHandling(vehicles[client])
+                                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/2, false)
+                                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*1.8, false)
+                                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/4, false)
+                                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/2, false)
+                                        setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*2, false)
+
+                                        --Reduce max speed on bicycles and faggio
+                                        if bicycle_list[vehID] then
+                                                setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
+                                        end
+        				currVehTopSpeed[vehicles[client]] = tonumber(result["maxVelocity"])
+        			end
+
 			   	-- Semi truck trailers
 			   	if vehID == 403 or vehID == 514 or vehID == 515 then
 					if extra ~= "" then
@@ -79,7 +97,9 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 						setElementSyncer(trailers[client][1], client)
 						setTimer(detachElements, 50, 1, trailers[client][1])
 						setTimer(attachTrailerToVehicle, 100, 1, vehicles[client], trailers[client][1])
-						
+						triggerClientEvent(root, "GTWvehicles.onStreamOut", root, vehicles[client])
+						triggerClientEvent(root, "GTWvehicles.onStreamOut", root, trailers[client][1])
+
 						-- Dual trailers if supported
 						if vehID == 591 then
 							local second_trailer = createVehicle(435, x, y, z, 0, 0, rot)
@@ -89,16 +109,39 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 							attachElements(second_tower, trailers[client][1], 0, 0, 0.5)
 							setElementCollisionsEnabled(second_tower, false)
 							setElementAlpha(second_tower, 0)
-							
+
 							attachElements(second_trailer, second_tower, 0, -10)
 							setElementSyncer(second_trailer, client)
 							setTimer(detachElements, 50, 1, second_trailer)
 							setTimer(attachTrailerToVehicle, 100, 1, second_tower, second_trailer)
-							
+							setTimer(attachTrailerToVehicle, 1000, 1, second_tower, second_trailer)
+
 							-- Save element pointers for deletion
 							setElementData(vehicles[client], "GTWvehicles.second_tower", second_tower)
 							setElementData(trailers[client][1], "GTWvehicles.second_trailer", second_trailer)
+							triggerClientEvent(root, "GTWvehicles.onStreamOut", root, second_trailer)
 						end
+
+						-- Trailer sync function
+						trailerSyncTimers[client] = setTimer(function(client)
+							-- Sync first truck trailer if there is any
+							if vehicles and vehicles[client] and isElement(vehicles[client]) and isElement(getElementData(vehicles[client], "GTWvehicles.attachedTrailer")) then
+								local tx,ty,tz = getElementPosition(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
+								local trx,try,trz = getElementRotation(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
+								setElementData(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"), "GTWvehicles.trailer.location",
+									toJSON({tx,ty,tz, trx,try,trz}))
+							else
+								killTimer(trailerSyncTimers[client])
+							end
+							-- Sync first truck trailer if there is any
+							if trailers and trailers[client] and trailers[client][1] and isElement(trailers[client][1]) and isElement(getElementData(trailers[client][1],
+								"GTWvehicles.second_trailer")) then
+								local tx,ty,tz = getElementPosition(getElementData(trailers[client][1], "GTWvehicles.second_trailer"))
+								local trx,try,trz = getElementRotation(getElementData(trailers[client][1], "GTWvehicles.second_trailer"))
+								setElementData(getElementData(trailers[client][1], "GTWvehicles.second_trailer"), "GTWvehicles.trailer.location",
+									toJSON({tx,ty,tz, trx,try,trz}))
+							end
+						end, 250, 0, client)
 					end
 			   	end
 
@@ -115,8 +158,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 			   		local carriage = nil
 					local carriage2 = vehicles[client]
 					local playeraccount = getPlayerAccount(client)
-					--[[local train_stops = tonumber(getAccountData(playeraccount, "GTWdata_stats_train_stops")) or 0
-					local tram_stops = tonumber(getAccountData(playeraccount, "GTWdata_stats_tram_stops")) or 0]]--
+					--[[local train_stops = tonumber(exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.train_stops")) or 0
+					local tram_stops = tonumber(exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.tram_stops")) or 0]]--
 					local numberOfCarriages = tonumber(extra) or 2
 					-- Extra freight engines
 					local engines = 1
@@ -151,7 +194,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					setElementData(client, "GTWvehicles.numberOfCars", numberOfCarriages)
 					setTimer(display_message, 350, 1, "Train set up: "..engines.." engines and: "..numberOfCarriages.." cars", client, 0, 255, 0)
 			   	end
-				setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
+				--setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
 				setElementData(vehicles[client], "owner", getAccountName(getPlayerAccount(client)))
 				setElementData(client, "currVeh", getElementModel(vehicles[client]))
 				warpPedIntoVehicle(client, vehicles[client])
@@ -228,7 +271,7 @@ function destroy_vehicle(plr, force_delete)
 			destroyElement(vehicles[plr])
 		end
    	 	triggerEvent("GTWvehicles.onDestroyVehilce", plr, plr)
-		
+
 		setElementData(plr, "currVeh", 0)
 		if isTimer(paymentsHolder[plr]) then
 			killTimer(paymentsHolder[plr])
@@ -267,6 +310,29 @@ function respawn_vehicle(veh)
 		respawnVehicle(veh)
 	end
 end
+
+--[[ Detach trailer from your trailer towing vehicle ]]--
+function disconnect_trailer(plr)
+	local tower = getPedOccupiedVehicle(plr)
+	if not tower or not isElement(tower) or getElementType(tower) ~=
+		"vehicle" then
+		exports.GTWtopbar:dm("You're not in a vehicle!", plr, 255, 0, 0)
+		return
+	end
+
+	-- Detach carriages
+        local sx,sy,sz = getElementVelocity(tower)
+        local actualspeed = (sx^2 + sy^2 + sz^2)^(0.5)
+        local kmh = actualspeed*180
+	if kmh < 5 then
+		if detachTrailerFromVehicle(tower) then
+			exports.GTWtopbar:dm("Trailer was detached successfully!", plr, 0,255,0)
+		end
+	else
+		exports.GTWtopbar:dm("You're moving too fast to detach your trailer", plr, 255, 0, 0)
+	end
+end
+addCommandHandler("detachtrailer", disconnect_trailer)
 
 -- Recursively destroys entire trains consisting of attached carriages or traielrs
 function destroyVehicleTrain(veh)

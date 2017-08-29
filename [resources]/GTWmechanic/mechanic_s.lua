@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -21,12 +21,12 @@ local default_money = 428  		-- Global definition based on what mechanics earn I
 function big_repair(veh)
 	fixVehicle(veh)
 	setElementHealth(veh, getElementHealth(veh))
-end			
-							
+end
+
 --[[ Pay for repair and refuel ]]--
 function pay_repair(mech, owner)
 	local pacc = getPlayerAccount(mech)
-	local repaired_cars = getAccountData(pacc, "GTWdata_stats_repaired_cars") or 0
+	local repaired_cars = exports.GTWcore:get_account_data(pacc, "GTWdata.stats.repaired_cars") or 0
 	if isElement(owner) then
 		takePlayerMoney(owner, default_money*3)
 	end
@@ -34,7 +34,7 @@ function pay_repair(mech, owner)
 end
 function pay_refuel(mech, owner)
 	local pacc = getPlayerAccount(mech)
-	local repaired_cars = getAccountData(pacc, "GTWdata_stats_repaired_cars") or 0
+	local repaired_cars = exports.GTWcore:get_account_data(pacc, "GTWdata.stats.repaired_cars") or 0
 	if owner and isElement(owner) then
 		takePlayerMoney(owner, default_money)
 	end
@@ -56,13 +56,13 @@ function repair_veh(veh, repairTime)
 	setElementFrozen(veh, true)
 	setElementFrozen(client, true)
 	setPedAnimation(client, "GRAFFITI", "spraycan_fire", -1, true, false)
-	showCursor(client, true)
+	exports.GTWgui:showGUICursor(client, true)
 	outPutTopbarMessage("Reparing vehicle...", client, 0, 255, 0)
 	if owner then outPutTopbarMessage("Your vehicle is repaired...", owner, 0, 255, 0) end
 
 	-- Reset after repair
 	setTimer(big_repair, math.floor(repairTime), 1, veh)
-	setTimer(showCursor, math.floor(repairTime), 1, client, false)
+	--setTimer(exports.GTWgui:showGUICursor, math.floor(repairTime), 1, client, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(repairTime), 1, client, false)
 	setTimer(outPutTopbarMessage, math.floor(repairTime), 1, "Vehicle was sucsessfully repaired!", client, 0, 255, 0)
@@ -73,8 +73,8 @@ function repair_veh(veh, repairTime)
 	-- Increase stats by 1 (if not your own car, solution to abuse 2014-11-13)
 	if owner == client then return end
 	local playeraccount = getPlayerAccount(client)
-	local repaired_cars = getAccountData(playeraccount, "GTWdata_stats_repaired_cars") or 0
-	setAccountData(playeraccount, "GTWdata_stats_repaired_cars", repaired_cars + 1)
+	local repaired_cars = exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.repaired_cars") or 0
+	exports.GTWcore:set_account_data(playeraccount, "GTWdata.stats.repaired_cars", repaired_cars + 1)
 end
 addEvent("GTWmechanic.repair", true)
 addEventHandler("GTWmechanic.repair", root, repair_veh)
@@ -94,12 +94,12 @@ function refuel_veh(veh, refuelTime)
 	setElementFrozen(veh, true)
 	setElementFrozen(client, true)
 	setPedAnimation(client, "GRAFFITI", "spraycan_fire", -1, true, false)
-	showCursor(client, true)
+	exports.GTWgui:showGUICursor(client, true)
 	outPutTopbarMessage("Refueling vehicle...", client, 0, 255, 0)
 	if owner then outPutTopbarMessage("Your vehicle is being refuled...", owner, 0, 255, 0) end
 
 	-- Reset after repair
-	setTimer(showCursor, math.floor(refuelTime), 1, client, false)
+	--setTimer(exports.GTWgui:showGUICursor, math.floor(refuelTime), 1, client, false)
 	setTimer(setElementFrozen, math.floor(refuelTime), 1, veh, false)
 	setTimer(setElementFrozen, math.floor(refuelTime), 1, client, false)
 	setTimer(outPutTopbarMessage, math.floor(refuelTime), 1, "Vehicle was sucsessfully refuled!", client, 0, 255, 0)

@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		El Med, Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -16,8 +16,8 @@
 local sx, sy = guiGetScreenSize()
 
 function makeLogGUI()
-	log = guiCreateWindow((sx / 2) - (694 / 2), (sy / 2) - (526 / 2), 694, 526, "Log", false)
-	guiWindowSetSizable(log , false)
+	log = exports.GTWgui:createWindow((sx / 2) - (694 / 2), (sy / 2) - (526 / 2), 694, 526, "Log", false)
+	exports.GTWgui:windowSetSizeable(log , false)
 	guiSetAlpha(log , 1.00)
 	guiSetVisible(log, false)
 
@@ -28,7 +28,7 @@ function makeLogGUI()
 	guiGridListSetSortingEnabled(logGrid, false)
 	logCloseButton = guiCreateButton(591, 483, 88, 33, "Close", false, log)
 
-	addEventHandler("onClientGUIClick", logCloseButton, function() guiSetVisible(log, false) showCursor(false) end, false)
+	addEventHandler("onClientGUIClick", logCloseButton, function() guiSetVisible(log, false) exports.GTWgui:showGUICursor(false) end, false)
 	addEventHandler("onClientGUIClick", searchEdit, function() if (guiGetText(source) == "Search..") then guiSetText(source, "") end end, false)
 	addEventHandler("onClientGUIChanged", searchEdit, searchLogs, false)
 end

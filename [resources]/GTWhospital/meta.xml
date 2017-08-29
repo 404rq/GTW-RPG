@@ -4,9 +4,9 @@
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
 
-	Source code:		https://github.com/GTWCode/GTW-RPG/
-	Bugtracker: 		http://forum.404rq.com/bug-reports/
-	Suggestions:		http://forum.404rq.com/mta-servers-development/
+	Source code:		https://github.com/404rq/GTW-RPG/
+	Bugtracker: 		https://discuss.404rq.com/t/issues
+	Suggestions:		https://discuss.404rq.com/t/development
 
 	Version:    		Open source
 	License:    		BSD 2-Clause
@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Hospital respawn" description="respawn at nearest hospital when you die" version="45" type="script" />
+    <info author="GTWGames" name="Hospital respawn" description="respawn at nearest hospital when you die" version="108" type="script" />
     <script src="hospital_s.lua" type="server" />
     <script src="hospital_c.lua" type="client" />
     <export function="spawn" type="server" />

@@ -1,5 +1,5 @@
 <meta>
-    <info author="To[X]ic" type="script" name="Scoreboard" description="DirectX scoreboard resource" addon="race" showInResourceBrowser="true" version="6" />
+    <info author="To[X]ic" type="script" name="Scoreboard" description="DirectX scoreboard resource" addon="race" showInResourceBrowser="true" version="72" />
     
     <file src="ITCKRIST.ttf" />
     <script src="dxscoreboard_exports.lua" type="server" />
@@ -73,4 +73,7 @@
         <setting name="*allowColorcodedNames" value="true" friendlyname="Allow colorcoded names" group="General" accept="false,true" desc="Should the player&apos;s color code be used as the display color in scoreboard?" />
         <setting name="*scrollStep" value="4" friendlyname="Number of lines to scroll" group="General" accept="1-10" desc="How many lines to scroll each time the mouse wheel is moved or the up/down buttons pressed" />
     </settings>
+    
+    <!-- Included resources: should be at the end of this file -->
+    <include resource="GTWcivilians" />
 </meta>

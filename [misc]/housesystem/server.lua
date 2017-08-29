@@ -533,7 +533,7 @@ end)
 -- TAKE PLAYER RENT --
 local function takePlayerRent()
 	for index, player in pairs(getElementsByType("player")) do
-		if(getPlayerRentedHouse(player) ~= false) then
+		if (getPlayerRentedHouse(player) ~= false) then
 			local id = getPlayerRentedHouse(player)
 			local owner = houseData[id]["OWNER"]
 			local rentable = tonumber(houseData[id]["RENTABLE"])
@@ -541,7 +541,7 @@ local function takePlayerRent()
 				local rentprice = tonumber(houseData[id]["RENTALPRICE"])
 				takePlayerMoney(player, rentprice) -- Takes the player money for the rent
 				exports.GTWtopbar:dm("You paid $"..rentprice.." rentalprice!", player, 255, 200, 0)
-				if ( getAccountPlayer( getAccount( owner ))) then
+				if owner and getAccount(owner) and getAccountPlayer(getAccount(owner)) then
 					givePlayerMoney( getAccountPlayer( getAccount( owner )), rentprice) -- Gives the owner the rentalprice
 					exports.GTWtopbar:dm("You got $"..rentprice.." from a tenand of your house!", getAccountPlayer( getAccount( owner )), 255, 200, 0)
 				end

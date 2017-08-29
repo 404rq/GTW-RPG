@@ -1,0 +1,218 @@
+<items>
+	<!-- broadway has 2 paintjobs -->
+   <item itemid="1000" name="Pro" price="400"/>
+   <item itemid="1001" name="Win" price="550"/>
+   <item itemid="1002" name="Drag" price="200"/>
+   <item itemid="1003" name="Alpha" price="250"/>
+   <item itemid="1004" name="Champ Scoop" price="100"/>
+   <item itemid="1005" name="Fury Scoop" price="150"/>
+   <item itemid="1006" name="Roof Scoop" price="80"/>
+   <item itemid="1007" name="R Sideskirt" price="500"/>
+
+   <item itemid="1008" name="5x Nitrous" price="500"/>
+   <item itemid="1009" name="2x Nitrous" price="200"/>
+   <item itemid="1010" name="10x Nitrous" price="1000"/>
+   <item itemid="1011" name="Race Scoop" price="220"/>
+   <item itemid="1012" name="Worx Scoop" price="250"/>
+   <item itemid="1013" name="Round Fog Lamp" price="100"/>
+   <item itemid="1014" name="Champ Spoiler" price="400"/>
+   <item itemid="1015" name="Race Spoiler" price="500"/>
+   <item itemid="1016" name="Worx Spoiler" price="200"/>
+
+   <item itemid="1017" name="L Sideskirt" price="500"/>
+   <item itemid="1018" name="Upsweptc Exhaust" price="350"/>
+   <item itemid="1019" name="Twin Cylinder Exhaust" price="300"/>
+   <item itemid="1020" name="Large Exhaust" price="250"/>
+   <item itemid="1021" name="Medium Exhaust" price="200"/>
+   <item itemid="1022" name="Small Exhaust" price="150"/>
+   <item itemid="1023" name="Fury Spoiler" price="350"/>
+   <item itemid="1024" name="Square Fog Lamp" price="50"/>
+   <item itemid="1025" name="Off Road" price="1000"/>
+
+   <item itemid="1026" name="R Alien Sideskirt" price="480"/>
+   <item itemid="1027" name="L Alien Sideskirt" price="480"/>
+   <item itemid="1028" name="Alien Exhaust" price="770"/>
+   <item itemid="1029" name="X-Flow Exhaust" price="680"/>
+   <item itemid="1030" name="L X-Flow Sideskirt" price="370"/>
+   <item itemid="1031" name="R X-Flow Sideskirt" price="370"/>
+   <item itemid="1032" name="Alien Roof Scoop" price="170"/>
+   <item itemid="1033" name="X-Flow Roof Scoop type 2" price="120"/>
+   <item itemid="1034" name="Alien Exhaust" price="790"/>
+
+   <item itemid="1035" name="X-Flow Exhaust" price="150"/>
+   <item itemid="1036" name="R Alien Sideskirt" price="500"/>
+   <item itemid="1037" name="X-Flow Exhaust" price="690"/>
+   <item itemid="1038" name="Alien Roof Scoop" price="190"/>
+   <item itemid="1039" name="L X-Flow Sideskirt" price="390"/>
+   <item itemid="1040" name="L Alien Sideskirt" price="500"/>
+   <item itemid="1041" name="R X-Flow Sideskirt" price="390"/>
+   <item itemid="1042" name="R Chrome Sideskirt" price="1000"/>
+   <item itemid="1043" name="Slamin Exhaust" price="500"/>
+
+   <item itemid="1044" name="Chrome Exhaust" price="500"/>
+   <item itemid="1045" name="X-Flow Exhaust" price="510"/>
+   <item itemid="1046" name="Alien Exhaust" price="710"/>
+   <item itemid="1047" name="R Alien Sideskirt" price="670"/>
+   <item itemid="1048" name="R X-Flow Sideskirt" price="530"/>
+   <item itemid="1049" name="Alien Spoiler" price="810"/>
+   <item itemid="1050" name="X-Flow Spoiler" price="620"/>
+   <item itemid="1051" name="L Alien Sideskirt" price="670"/>
+   <item itemid="1052" name="L X-Flow Sideskirt" price="530"/>
+
+   <item itemid="1053" name="X-Flow Roof Scoop" price="130"/>
+   <item itemid="1054" name="Alien Roof Scoop" price="210"/>
+   <item itemid="1055" name="Alien Roof Scoop" price="230"/>
+   <item itemid="1056" name="R Alien Sideskirt" price="520"/>
+   <item itemid="1057" name="R X-Flow Sideskirt" price="430"/>
+   <item itemid="1058" name="Alien Spoiler" price="620"/>
+   <item itemid="1059" name="X-Flow Exhaust" price="720"/>
+   <item itemid="1060" name="X-Flow Spoiler" price="530"/>
+   <item itemid="1061" name="X-Flow Roof Scoop" price="180"/>
+
+   <item itemid="1062" name="L Alien Sideskirt" price="520"/>
+   <item itemid="1063" name="L X-Flow Sideskirt" price="430"/>
+   <item itemid="1064" name="Alien Exhaust" price="830"/>
+   <item itemid="1065" name="Alien Exhaust" price="850"/>
+   <item itemid="1066" name="X-Flow Exhaust" price="750"/>
+   <item itemid="1067" name="Alien Roof Scoop" price="250"/>
+   <item itemid="1068" name="X-Flow Roof Scoop" price="200"/>
+   <item itemid="1069" name="R Alien Sideskirt" price="550"/>
+   <item itemid="1070" name="R X-Flow Sideskirt" price="450"/>
+
+   <item itemid="1071" name="L Alien Sideskirt" price="550"/>
+   <item itemid="1072" name="L X-Flow SIdeskirt" price="450"/>
+   <item itemid="1073" name="Shadow" price="1100"/>
+   <item itemid="1074" name="Mega" price="1030"/>
+   <item itemid="1075" name="Rimshine" price="980"/>
+   <item itemid="1076" name="Wires" price="1560"/>
+   <item itemid="1077" name="Classic" price="1620"/>
+   <item itemid="1078" name="Twist" price="1200"/>
+   <item itemid="1079" name="Cutter" price="1030"/>
+
+   <item itemid="1080" name="Switch" price="900"/>
+   <item itemid="1081" name="Grove" price="1230"/>
+   <item itemid="1082" name="Import" price="820"/>
+   <item itemid="1083" name="Dollar" price="1560"/>
+   <item itemid="1084" name="Trance" price="1350"/>
+   <item itemid="1085" name="Atomic" price="770"/>
+   <item itemid="1086" name="Stereo" price="100"/>
+   <item itemid="1087" name="Hydraulics" price="1500"/>
+   <item itemid="1088" name="Alien Roof Scoop" price="150"/>
+
+   <item itemid="1089" name="X-Flow Exhaust" price="650"/>
+   <item itemid="1090" name="R Alien Sideskirt" price="450"/>
+   <item itemid="1091" name="X-Flow Exhaust" price="100"/>
+   <item itemid="1092" name="Alien Exhaust" price="750"/>
+   <item itemid="1093" name="R X-Flow Sideskirt" price="350"/>
+   <item itemid="1094" name="L Alien Sideskirt" price="450"/>
+   <item itemid="1095" name="R X-Flow Sideskirt" price="350"/>
+   <item itemid="1096" name="Ahab" price="1000"/>
+   <item itemid="1097" name="Virtual" price="620"/>
+
+   <item itemid="1098" name="Access" price="1140"/>
+   <item itemid="1099" name="L Chrome Sideskirt" price="1000"/>
+   <item itemid="1100" name="Chrome Grill" price="940"/>
+   <item itemid="1101" name="L Chrome Flames" price="780"/>
+   <item itemid="1102" name="L Chrome Strip" price="830"/>
+   <item itemid="1103" name="Convertible Roof" price="3250"/>
+   <item itemid="1104" name="Chrome Exhaust" price="1610"/>
+   <item itemid="1105" name="Slamin Exhaust" price="1540"/>
+   <item itemid="1106" name="R Chrome Arches" price="780"/>
+
+   <item itemid="1107" name="L Chrome Strip" price="780"/>
+   <item itemid="1108" name="R Chrome Strip" price="780"/>
+   <item itemid="1109" name="Chrome R Bullbars" price="1610"/>
+   <item itemid="1110" name="Slamin R Bullbars" price="1540"/>
+   <item itemid="1111" name="Front Sign" price="100"/>
+   <item itemid="1112" name="Front Sign" price="100"/>
+   <item itemid="1113" name="Chrome Exhaust" price="1650"/>
+   <item itemid="1114" name="Slamin Exhaust" price="1590"/>
+   <item itemid="1115" name="Chrome Bullbars" price="2130"/>
+
+   <item itemid="1116" name="Slamin Bullbars" price="2050"/>
+   <item itemid="1117" name="Chrome F Bumper" price="2040"/>
+   <item itemid="1118" name="R Chrome Trim" price="720"/>
+   <item itemid="1119" name="R WHeelcovers" price="940"/>
+   <item itemid="1120" name="L Chrome Trim" price="940"/>
+   <item itemid="1121" name="L Wheelcovers" price="940"/>
+   <item itemid="1122" name="R Chrome Flames" price="780"/>
+   <item itemid="1123" name="Chrome Bars" price="860"/>
+   <item itemid="1124" name="L Chrome Arches" price="780"/>
+
+   <item itemid="1125" name="Chrome Lights" price="1120"/>
+   <item itemid="1126" name="Chrome Exhaust" price="3340"/>
+   <item itemid="1127" name="Slamin Exhaust" price="3250"/>
+   <item itemid="1128" name="Vinyl Hardtop" price="3340"/>
+   <item itemid="1129" name="Chrome Exhaust" price="1650"/>
+   <item itemid="1130" name="Hardtop" price="3380"/>
+   <item itemid="1131" name="Softtop" price="3290"/>
+   <item itemid="1132" name="Slamin Exhaust" price="1590"/>
+   <item itemid="1133" name="R Chrome Strip" price="830"/>
+
+   <item itemid="1134" name="R Chrome Strip" price="800"/>
+   <item itemid="1135" name="Slamin Exhaust" price="1500"/>
+   <item itemid="1136" name="Chrome Exhaust" price="1000"/>
+   <item itemid="1137" name="L Chrome Strip" price="800"/>
+   <item itemid="1138" name="Alien Spoiler" price="580"/>
+   <item itemid="1139" name="X-Flow Spoiler" price="470"/>
+   <item itemid="1140" name="X-Flow R Bumper" price="870"/>
+   <item itemid="1141" name="ALien R Bumper" price="980"/>
+   <item itemid="1142" name="Left Oval Vents" price="500"/>
+
+   <item itemid="1143" name="R Oval Vents" price="500"/>
+   <item itemid="1144" name="L Square Vents" price="500"/>
+   <item itemid="1145" name="R Square Vents" price="500"/>
+   <item itemid="1146" name="X-Flow Spoiler" price="490"/>
+   <item itemid="1147" name="Alien Spoiler" price="500"/>
+   <item itemid="1148" name="X-Flow R Bumper" price="500"/>
+   <item itemid="1149" name="EAlien R Bumper" price="1000"/>
+   <item itemid="1150" name="Alien R Bumper" price="1090"/>
+   <item itemid="1151" name="X-Flow R Bumper" price="840"/>
+
+   <item itemid="1152" name="X-Flow F Bumper" price="910"/>
+   <item itemid="1153" name="Alien F Bumper" price="1200"/>
+   <item itemid="1154" name="Alien R Bumper" price="1030"/>
+   <item itemid="1155" name="Alien F Bumper" price="1030"/>
+   <item itemid="1156" name="X-Flow R Bumper" price="920"/>
+   <item itemid="1157" name="X-Flow F Bumper" price="930"/>
+   <item itemid="1158" name="X-Flow Spoiler" price="550"/>
+   <item itemid="1159" name="Alien R Bumper" price="1050"/>
+   <item itemid="1160" name="Alien F Bumper" price="1050"/>
+
+   <item itemid="1161" name="X-Flow R Bumper" price="950"/>
+   <item itemid="1162" name="Alien Spoiler" price="650"/>
+   <item itemid="1163" name="X-Flow Spoiler" price="450"/>
+   <item itemid="1164" name="Alien Spoiler" price="550"/>
+   <item itemid="1165" name="X-Flow F Bumper" price="850"/>
+   <item itemid="1166" name="Alien F Bumper" price="950"/>
+   <item itemid="1167" name="X-Flow R Bumper" price="850"/>
+   <item itemid="1168" name="Alien R Bumper" price="950"/>
+   <item itemid="1169" name="Alien F Bumper" price="970"/>
+
+   <item itemid="1170" name="X-Flow F Bumper" price="880"/>
+   <item itemid="1171" name="Alien F Bumper" price="990"/>
+   <item itemid="1172" name="X-Flow F Bumper" price="900"/>
+   <item itemid="1173" name="X-Flow F Bumper" price="950"/>
+   <item itemid="1174" name="Chrome F Bumper" price="1000"/>
+   <item itemid="1175" name="Slamin R Bumper" price="900"/>
+   <item itemid="1176" name="Chrome F Bumper" price="1000"/>
+   <item itemid="1177" name="Slamin R Bumper" price="900"/>
+   <item itemid="1178" name="Slamin R Bumper" price="2050"/>
+
+   <item itemid="1179" name="Chrome F Bumper" price="2150"/>
+   <item itemid="1180" name="Chrome R Bumper" price="2130"/>
+   <item itemid="1181" name="Slamin F Bumper" price="2040"/>
+   <item itemid="1182" name="Chrome F Bumper" price="2150"/>
+   <item itemid="1183" name="Slamin R Bumper" price="2050"/>
+   <item itemid="1184" name="Chrome R Bumper" price="2150"/>
+   <item itemid="1185" name="Slamin F Bumper" price="2040"/>
+   <item itemid="1186" name="Slamin R Bumper" price="2095"/>
+   <item itemid="1187" name="Chrome R Bumper" price="2175"/>
+
+   <item itemid="1188" name="Slamin F Bumper" price="2080"/>
+   <item itemid="1189" name="Chrome F Bumper" price="2200"/>
+   <item itemid="1190" name="Slamin F Bumper" price="1200"/>
+   <item itemid="1191" name="Chrome F Bumper" price="1040"/>
+   <item itemid="1192" name="Chrome R Bumper" price="940"/>
+   <item itemid="1193" name="Slamin R Bumper" price="1100"/>
+</items>

@@ -16,7 +16,11 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="38" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
+    <info author="GTWGames" version="99" name="GTWaccounts" decription="Account system with GTW GUI" type="script" />
+    
+    <!-- Language support: must be located at the top -->
+    <script src="lang.lua" type="shared" />
+    
     <!-- Shaders -->
     <include resource="shader_detail" />
     <include resource="GTWgui" />
@@ -27,14 +31,14 @@
     <script src="c_gui.lua" type="client" />
     <script src="s_data.lua" type="server" />
     <script src="s_func.lua" type="server" />
-
+    
     <export function="getPlayerAccount" type="client" />
     <export function="isClientLoggedIn" type="client" />
     <export function="getPlayerId" type="client" />
     <export function="getPlayerId" type="server" />
-
+    
     <aclrequest>
-	 <right name="function.addAccount" access="true" />
-         <right name="function.callRemote" access="true" />
-     </aclrequest>
+        <right name="function.addAccount" access="true" />
+        <right name="function.callRemote" access="true" />
+    </aclrequest>
 </meta>
