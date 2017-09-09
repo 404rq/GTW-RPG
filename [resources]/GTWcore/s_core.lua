@@ -59,6 +59,7 @@ function load_settings()
         -- Connect to database
 	local conn_str = "dbname="..server_settings["MySQLdatabase"]..";host="..server_settings["MySQLhost"]
         core_db = dbConnect("mysql", conn_str, server_settings["MySQLuser"], server_settings["MySQLpass"], "autoreconnect=1")
+	dbExec(core_db, "CREATE TABLE IF NOT EXISTS account_data(account TEXT, data_key TEXT, data_value TEXT)")
 	outputServerLog("Connecting to DB: "..conn_str)
 end
 addEventHandler("onResourceStart", resourceRoot, load_settings)
