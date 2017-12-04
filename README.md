@@ -29,6 +29,6 @@ ETH: `0x1C343e689546A8c86088a927CeC532B50835E640`
 ## Useful links
 <table><tr><td>Our website</td><td>https://www.404rq.com</td><td></td></tr>
 <tr><td>Community</td><td>https://discuss.404rq.com</td><td>(use this for support)</td></tr>
-<tr><td>Screenshots</td><td>https://wuss.pw/am/F</td><td></td></tr>
+<tr><td>Screenshots</td><td>https://p.wuss.pw/am/F</td><td></td></tr>
 <tr><td>Hosting</td><td>https://www.99stack.com</td><td>(404rq reccomends 99Stack hosting)</td></tr>
 </table>
