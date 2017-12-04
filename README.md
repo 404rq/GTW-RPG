@@ -11,9 +11,9 @@ Check status and IP on our website: [www.404rq.com](https://www.404rq.com)
 ## Donate to the project
 Donations helps keep the development active, donations can be sent to our Crypto addresses:
 
-BTC: `1LegCyv77MCfvdSZuAnXRaH98PErL88ZUh`
-LTC: `LXGEphcPxYDUugRV9pA5QCMpbXNmQkmM7M`
-DASH `XijoqavdCHXc8eCiVoPDbofeuaUbskY1ag`
+BTC: `1LegCyv77MCfvdSZuAnXRaH98PErL88ZUh`<br>
+LTC: `LXGEphcPxYDUugRV9pA5QCMpbXNmQkmM7M`<br>
+DASH `XijoqavdCHXc8eCiVoPDbofeuaUbskY1ag`<br>
 ETH: `0x1C343e689546A8c86088a927CeC532B50835E640`
 
 ## Contributors
