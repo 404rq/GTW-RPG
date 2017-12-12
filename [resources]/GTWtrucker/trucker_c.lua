@@ -116,7 +116,7 @@ end
 function toggle_controls(state)
 	toggleControl("accelerate", state)
 	toggleControl("break_reverse", state)
-	setControlState("handbrake", not state)
+	setPedControlState("handbrake", not state)
 end
 
 --[[ Pause the route on vehicle exit ]]--
@@ -211,6 +211,7 @@ function display_destination()
 
 	-- Manage cargo prefix
 	if not getPedOccupiedVehicle(localPlayer) then return end
+	if not getElementData(localPlayer, "Occupation") or getElementData(localPlayer, "Occupation") ~= "Trucker" then return end
 	local prefix = "kg"
 	if getVehicleTowedByVehicle(getPedOccupiedVehicle(localPlayer)) and
 		getElementModel(getVehicleTowedByVehicle(

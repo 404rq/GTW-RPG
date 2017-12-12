@@ -130,8 +130,8 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 								local tx,ty,tz = getElementPosition(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
 								local trx,try,trz = getElementRotation(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
 								setElementData(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"), "GTWvehicles.trailer.location",
-								toJSON({tx,ty,tz, trx,try,trz}))
-							else
+									 toJSON({tx,ty,tz, trx,try,trz}))
+							elseif isTimer(trailerSyncTimers[client])
 								killTimer(trailerSyncTimers[client])
 							end
 							-- Sync first truck trailer if there is any
