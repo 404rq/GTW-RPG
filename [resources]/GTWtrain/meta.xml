@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWtrain" description="Add trains to the reailroads around SA, game mod for MTA SA" type="script" version="93"></info>
+    <info author="GTWGames" name="GTWtrain" description="Add trains to the reailroads around SA, game mod for MTA SA" type="script" version="98"></info>
     <script src="data.lua" type="shared"></script>
     <!--<script src="train-s.lua" type="server"></script>-->
     <script src="train_c.lua" type="client"></script>

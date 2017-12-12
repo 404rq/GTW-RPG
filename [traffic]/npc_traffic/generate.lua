@@ -205,7 +205,7 @@ function generateTraffic()
 end
 
 skins = {0,7,9,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,46,47,48,49,50,53,54,55,56,57,58,59,60,61,66,67,68,69,70,71,72,73,76,77,78,79,82,83,84,88,89,91,93,94,95,96,98,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,141,142,143,147,148,150,151,153,157,158,159,160,161,162,170,173,174,175,181,182,183,184,185,186,187,188,196,197,198,199,200,201,202,206,210,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,231,232,233,234,235,236,239,240,241,242,247,248,250,253,254,255,258,259,260,261,262,263}
-vehicles = {602,496,401,518,527,589,419,533,526,474,545,517,410,600,436,580,439,549,491,445,507,585,587,466,492,546,551,516,467,426,547,409,550,566,540,421,529,581,509,481,462,521,463,510,461,448,468,586,485,552,431,438,437,574,420,525,408,499,609,498,578,573,455,514,414,456,459,422,482,418,582,413,440,543,478,554,536,575,534,567,535,576,412,402,542,603,475,424,483,500,471,429,541,415,480,562,565,411,559,561,560,506,451,558,555,477,579,400,404,489,479,442,458}
+vehicles = {602,496,401,518,527,589,419,533,526,474,545,517,410,600,436,580,439,549,491,445,507,585,587,466,492,546,551,516,467,426,547,550,566,540,421,529,431,438,420,552,525,609,499,498,403,514,414,423,588,531,456,579,400,404,489,505,479,442,458,422,554,605,575,534,567,576,412,402,542,603,475,429,541,562,411,561,477}
 skincount,vehiclecount = #skins,#vehicles
 
 count_needed = 0
@@ -336,7 +336,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 
 		if create and trtype == "peds" then
 			local ped = createPed(model,x,y,z+1,rz)
-			local walking_styles = {54,55,56,54,55,56,54,55,56,54,55,56,54,55,56,54,55,56,54,55,56,118,119,121,123,124,125,127,129,130,135,138}
+			local walking_styles = {0,54,55,56,120}
 			setPedWalkingStyle(ped, walking_styles[math.random(#walking_styles)])
 			setElementDimension(ped,dim)
 			createBlipAttachedTo(ped, 0, 1, 200, 200, 200, 200, 0, 180 )
@@ -364,10 +364,11 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 			local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
 	                if getVehicleType(car) == "Automobile" or bicycle_list[vehID] then
 	                        local result = getVehicleHandling(car)
-	                        setVehicleHandling(car, "engineAcceleration", tonumber(result["engineAcceleration"])/2, false)
-	                        setVehicleHandling(car, "engineInertia", tonumber(result["engineInertia"])*2, false)
-	                        setVehicleHandling(car, "brakeDeceleration", tonumber(result["brakeDeceleration"])/2, false)
-	                        setVehicleHandling(car, "brakeBias", tonumber(result["brakeBias"])/2, false)
+							local realism_index = 1.6
+	                        setVehicleHandling(car, "engineAcceleration", tonumber(result["engineAcceleration"])/realism_index, false)
+	                        setVehicleHandling(car, "engineInertia", tonumber(result["engineInertia"])*realism_index, false)
+	                        setVehicleHandling(car, "brakeDeceleration", tonumber(result["brakeDeceleration"])/realism_index, false)
+	                        setVehicleHandling(car, "brakeBias", tonumber(result["brakeBias"])/realism_index, false)
 
 				--Reduce max speed on bicycles and faggio
 				if bicycle_list[vehID] then

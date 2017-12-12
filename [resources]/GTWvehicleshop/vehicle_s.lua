@@ -172,11 +172,12 @@ function addVehicle(ID, owner, model, lock, engine, health, fuel, paint, platete
                 local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
                 if getVehicleType(veh) == "Automobile" or bicycle_list[vehID] then
                         local result = getVehicleHandling(veh)
-                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/1.75, false)
-                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*1.6, false)
-                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/4, false)
-                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/2, false)
-                        setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*2, false)
+						local realism_index = 1.4
+                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/realism_index, false)
+                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*realism_index, false)
+                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/realism_index, false)
+                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/realism_index, false)
+                        setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*realism_index, false)
 
                         --Reduce max speed on bicycles and faggio
                         if bicycle_list[vehID] then

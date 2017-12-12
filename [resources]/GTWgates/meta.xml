@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Gate system" version="88" type="script" />
+    <info author="GTWGames" name="Gate system" version="92" type="script" />
     <script src="gates.lua" type="server" />
 </meta>

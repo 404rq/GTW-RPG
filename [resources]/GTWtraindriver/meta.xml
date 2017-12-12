@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="train driver job" description="traindriver job" version="110" type="script" />
+    <info author="GTWGames" name="train driver job" description="traindriver job" version="115" type="script" />
     <script src="data.lua" type="shared" />
     <script src="train_s.lua" type="server" />
     <script src="train_c.lua" type="client" />

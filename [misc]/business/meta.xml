@@ -1,5 +1,5 @@
 <meta>
-    <info author="JR10" name="Business System" version="193.2" type="script" />
+    <info author="JR10" name="Business System" version="198.2" type="script" />
     
     <script src="server/business_s.lua" type="server" />
     <script src="server/updatecheck.lua" type="server" />
