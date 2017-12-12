@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" version="88" name="GTWvehicleshop" description="Vehicle shops around the map for any type of vehicle" type="script" />
+    <info author="GTWGames" version="95" name="GTWvehicleshop" description="Vehicle shops around the map for any type of vehicle" type="script" />
     <script src="veh_data.lua" type="shared" />
     <script src="vehicle_s.lua" type="server" />
     <script src="vehicle_c.lua" type="client" />

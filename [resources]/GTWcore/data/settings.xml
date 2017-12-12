@@ -3,11 +3,11 @@
 	Project owner:		RageQuit community
 	Project name: 		GTW-RPG
 	Developers:   		Mr_Moose
-  
+
 	Source code:		https://github.com/404rq/GTW-RPG/
 	Bugtracker: 		https://discuss.404rq.com/t/issues
 	Suggestions:		https://discuss.404rq.com/t/suggestions
-  
+
 	Version:    		Open source
 	License:    		BSD 2-Clause
 	Status:     		Stable release
@@ -17,15 +17,15 @@
 <settings>
     <option name="gamemode">GTW-RPG v4.0-beta</option>
     <option name="map">GTWcore</option>
-    <option name="peak">1</option>
+    <option name="peak">3</option>
     <option name="version">4.0-beta</option>
-    <option name="revision">11463</option>
+    <option name="revision">12319</option>
     <option name="language">en_US</option>
     
     <!-- MySQL database credentials, (SQLite will be used if unset) -->
-    <option name="MySQLhost">127.0.0.1</option>
-    <option name="MySQLdatabase">gtw_v4</option>
-    <option name="MySQLuser">gtw_v4</option>
+    <option name="MySQLhost">10.8.82.137</option>
+    <option name="MySQLdatabase">gtp_v1</option>
+    <option name="MySQLuser">gtp_v1</option>
     <option name="MySQLpass">gaju5ssK3LRZ7wkA</option>
     <option name="MySQLport">3306</option>
     

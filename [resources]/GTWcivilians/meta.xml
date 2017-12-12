@@ -16,7 +16,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWcivilians" description="Management system for all types of works" version="133" type="script" />
+    <info author="GTWGames" name="GTWcivilians" description="Management system for all types of works" version="140" type="script" />
     <script src="misc/data.lua" type="shared" />
     <script src="civ_s.lua" type="server" />
     <script src="civ_c.lua" type="client" />

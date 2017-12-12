@@ -14,23 +14,37 @@
 ********************************************************************************
 ]]--
 
--- Set rain
-function set_rainy()
-	setWeather(8)
-end
-addCommandHandler("rainy", set_rainy)
-addCommandHandler("rain", set_rainy)
+local we = {
+	["LS"]={0,1,2,3,4},
+	["SF"]={5,6,7,8,9},
+	["LV"]={10,11,12},
+	["RC"]={13,14,15,16},
+	["BC"]={17,18,19},
+}
 
--- Set foggy
-function set_foggy()
-   	setWeather(9)
-end
-addCommandHandler("foggy", set_foggy)
-addCommandHandler("fog", set_foggy)
+local curr_weather,curr_region,region = 0,"LS","LS"
+function change_weather()
+	-- Check coordinates for each region
+	local x,y,z = getElementPosition(localPlayer)
+	if x < -1000 and y > -1500 and y < 1700 then region = "SF"
+	elseif x < -2200 and y >= 1700 then region = "SF"
+	elseif x > 900 and y > 600 then region = "LV"
+	elseif x > 200 and y < -800 then region = "LS"
+	elseif y < 0 then region = "RC"
+	elseif y >= 0 then region = "BC" end
 
--- Set sunny
-function set_sunny()
-	setWeather(0)
+	-- DEBUG output
+	--outputChatBox("Weather: "..curr_weather..", region: "..
+	--	curr_region..", current region: "..region)
+
+	-- Check if we're in the same region, then with 10% chance, change weather
+	if curr_region == region and math.random(1,2000) > 5 then return false end
+
+	-- Change the weather if we're in a new region
+	curr_weather = math.random(#we[region])
+	setWeather(we[region][curr_weather])
+
+	-- Update current region
+	curr_region = region
 end
-addCommandHandler("sunny", set_sunny)
-addCommandHandler("sun", set_sunny)
+setTimer(change_weather, 1000, 0)

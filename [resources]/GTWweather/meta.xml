@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWweather" description="Controls the weather in SA, game mod for MTA SA" type="script" version="64"></info>
+    <info author="GTWGames" name="GTWweather" description="Controls the weather in SA, game mod for MTA SA" type="script" version="89"></info>
     <script src="weather_s.lua" type="server"></script>
     <script src="weather_c.lua" type="client"></script>
 </meta>

@@ -15,6 +15,6 @@
 -->
 
 <meta>
-    <info type="map" name="GTWjail" author="GTWCode" version="79" description="Grand Theft Walrus Jail"></info>
+    <info type="map" name="GTWjail" author="GTWCode" version="83" description="Grand Theft Walrus Jail"></info>
     <script src="jail_map.lua" type="client"></script>
 </meta>

@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Safe areas" description="Manage safe areas around government buildings" type="script" version="101"></info>
+    <info author="GTWGames" name="Safe areas" description="Manage safe areas around government buildings" type="script" version="105"></info>
     <script src="safearea_s.lua" type="server"></script>
     <script src="safearea_c.lua" type="client"></script>
 </meta>

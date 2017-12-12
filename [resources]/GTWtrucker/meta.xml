@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Trucker job" version="152" type="script" />
+    <info author="GTWGames" name="Trucker job" version="158" type="script" />
     <script src="data.lua" type="shared" />
     <script src="trucker_s.lua" type="server" />
     <script src="trucker_c.lua" type="client" />

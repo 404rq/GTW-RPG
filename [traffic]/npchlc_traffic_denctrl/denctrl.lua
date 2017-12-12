@@ -17,14 +17,6 @@ function changeDensity(player,cmdname,trtype,density)
 end
 addCommandHandler("density",changeDensity)
 
-function setTDensity()
-	exports.npc_traffic:setTrafficDensity(0.02)
-	exports.npc_traffic:setTrafficDensity("peds", 0.06)
-	exports.npc_traffic:setTrafficDensity("boats", 0.04)
-	exports.npc_traffic:setTrafficDensity("planes", 0.04)
-end
-setTimer(setTDensity, 5000, 6)
-
 --[[ Keep density updated based on time per day ]]--
 function updateDensity()
 	local multiplier = 1
@@ -45,10 +37,10 @@ function updateDensity()
 	elseif h < 21 then multiplier = 2
 	elseif h < 22 then multiplier = 0.8
 	elseif h < 24 then multiplier = 0.4 end
-	
-	exports.npc_traffic:setTrafficDensity(0.01*multiplier)
-	exports.npc_traffic:setTrafficDensity("peds", 0.03*multiplier)
-	exports.npc_traffic:setTrafficDensity("boats", 0.02*multiplier)
-	exports.npc_traffic:setTrafficDensity("planes", 0.02*multiplier)
+
+	exports.npc_traffic:setTrafficDensity(0.002*multiplier)
+	exports.npc_traffic:setTrafficDensity("peds", 0.05*multiplier)
+	exports.npc_traffic:setTrafficDensity("boats", 0.01*multiplier)
+	exports.npc_traffic:setTrafficDensity("planes", 0.01*multiplier)
 end
-setTimer(updateDensity, 5000, 0)
+setTimer(updateDensity, 10000, 0)

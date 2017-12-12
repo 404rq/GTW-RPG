@@ -1,29 +1,29 @@
 --[[
 ********************************************************************************
-	Project owner:		RageQuit community
-	Project name: 		GTW-RPG
-	Developers:   		Mr_Moose
+Project owner:		RageQuit community
+Project name: 		GTW-RPG
+Developers:   		Mr_Moose
 
-	Source code:		https://github.com/404rq/GTW-RPG/
-	Bugtracker: 		https://discuss.404rq.com/t/issues
-	Suggestions:		https://discuss.404rq.com/t/development
+Source code:		https://github.com/404rq/GTW-RPG/
+Bugtracker: 		https://discuss.404rq.com/t/issues
+Suggestions:		https://discuss.404rq.com/t/development
 
-	Version:    		Open source
-	License:    		BSD 2-Clause
-	Status:     		Stable release
+Version:    		Open source
+License:    		BSD 2-Clause
+Status:     		Stable release
 ********************************************************************************
 ]]--
 
 --[[ Bind the L key to toggle vehicle lights ]]--
 function resource_load()
-    	local players = getElementsByType("player")
-    	for k,v in pairs(players) do
-        	bindKey(v, "l", "down", toggle_lights, "Lights on/off")
-    	end
+	local players = getElementsByType("player")
+	for k,v in pairs(players) do
+		bindKey(v, "l", "down", toggle_lights, "Lights on/off")
+	end
 end
 addEventHandler("onResourceStart", resourceRoot, resource_load)
 function apply_key_binds()
-    	bindKey(source, "l", "down", toggle_lights, "Lights on/off")
+	bindKey(source, "l", "down", toggle_lights, "Lights on/off")
 end
 addEventHandler("onPlayerJoin", root, apply_key_binds)
 
@@ -34,12 +34,12 @@ end
 
 --[[ Client want to spawn a vehicle ]]--
 function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
-    if isElement(client) and vehID and rot and price then
-    	local money = getPlayerMoney(client)
-	    if money >= price and getPlayerWantedLevel(client) == 0 and
-	    	getElementInterior(client) == 0 then
-	   	 	if isElement(vehicles[client]) then
-	   	 		destroy_vehicle(client, true)
+	if isElement(client) and vehID and rot and price then
+		local money = getPlayerMoney(client)
+		if money >= price and getPlayerWantedLevel(client) == 0 and
+		getElementInterior(client) == 0 then
+			if isElement(vehicles[client]) then
+				destroy_vehicle(client, true)
 			end
 			if vehID then
 				if vehID == 592 or vehID == 577 or vehID == 553 then
@@ -50,35 +50,36 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 						return
 					end
 				end
-		    	local x,y,z = getElementPosition(client)
-		    	if spawnx and spawny and spawnz then
-		    		x,y,z = spawnx,spawny,spawnz
-		    	end
-			   	vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot)
+				local x,y,z = getElementPosition(client)
+				if spawnx and spawny and spawnz then
+					x,y,z = spawnx,spawny,spawnz
+				end
+				vehicles[client] = createVehicle(vehID, x, y, z+1.5, 0, 0, rot)
 				setElementHealth(vehicles[client], (getElementHealth(vehicles[client])))
-			   	setVehicleHandling(vehicles[client], "headLight ", "big")
-			   	setVehicleHandling(vehicles[client], "tailLight", "big")
+				setVehicleHandling(vehicles[client], "headLight ", "big")
+				setVehicleHandling(vehicles[client], "tailLight", "big")
 
-                                -- Reduce rental vehicle top speed
-                                local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
-                                local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
-                                if getVehicleType(vehicles[client]) == "Automobile" or bike_list[vehID] then
-                                        local result = getVehicleHandling(vehicles[client])
-                                        setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/2, false)
-                                        setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*1.8, false)
-                                        setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/4, false)
-                                        setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/2, false)
-                                        setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*2, false)
+				-- Reduce rental vehicle top speed
+				local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
+				local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
+				if getVehicleType(vehicles[client]) == "Automobile" or bike_list[vehID] then
+					local result = getVehicleHandling(vehicles[client])
+					local realism_index = 1.6
+					setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/realism_index, false)
+					setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*realism_index, false)
+					setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/realism_index, false)
+					setVehicleHandling(vehicles[client], "brakeBias", tonumber(result["brakeBias"])/realism_index, false)
+					setVehicleHandling(vehicles[client], "percentSubmerged", tonumber(result["percentSubmerged"])*realism_index, false)
 
-                                        --Reduce max speed on bicycles and faggio
-                                        if bicycle_list[vehID] then
-                                                setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
-                                        end
-        				currVehTopSpeed[vehicles[client]] = tonumber(result["maxVelocity"])
-        			end
+					--Reduce max speed on bicycles and faggio
+					if bicycle_list[vehID] then
+						setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
+					end
+					currVehTopSpeed[vehicles[client]] = tonumber(result["maxVelocity"])
+				end
 
-			   	-- Semi truck trailers
-			   	if vehID == 403 or vehID == 514 or vehID == 515 then
+				-- Semi truck trailers
+				if vehID == 403 or vehID == 514 or vehID == 515 then
 					if extra ~= "" then
 						if extra == "Fuel" then vehID = 584 end
 						if extra == "Trailer 1" then vehID = 435 end
@@ -129,33 +130,33 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 								local tx,ty,tz = getElementPosition(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
 								local trx,try,trz = getElementRotation(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
 								setElementData(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"), "GTWvehicles.trailer.location",
-									toJSON({tx,ty,tz, trx,try,trz}))
+									 toJSON({tx,ty,tz, trx,try,trz}))
 							elseif isTimer(trailerSyncTimers[client])
 								killTimer(trailerSyncTimers[client])
 							end
 							-- Sync first truck trailer if there is any
 							if trailers and trailers[client] and trailers[client][1] and isElement(trailers[client][1]) and isElement(getElementData(trailers[client][1],
-								"GTWvehicles.second_trailer")) then
+							"GTWvehicles.second_trailer")) then
 								local tx,ty,tz = getElementPosition(getElementData(trailers[client][1], "GTWvehicles.second_trailer"))
 								local trx,try,trz = getElementRotation(getElementData(trailers[client][1], "GTWvehicles.second_trailer"))
 								setElementData(getElementData(trailers[client][1], "GTWvehicles.second_trailer"), "GTWvehicles.trailer.location",
-									toJSON({tx,ty,tz, trx,try,trz}))
+								toJSON({tx,ty,tz, trx,try,trz}))
 							end
 						end, 250, 0, client)
 					end
-			   	end
+				end
 
-			   	-- Train cars
-			   	if vehID == 537 or vehID == 538 or vehID == 449 then
+				-- Train cars
+				if vehID == 537 or vehID == 538 or vehID == 449 then
 					trailers[client] = { }
-			   		setTrainDirection(vehicles[client], true)
-			   		if vehID == 537 then
-			   			vehID = 569
-			   		end
-			   		if vehID == 538 then
-			   			vehID = 570
-			   		end
-			   		local carriage = nil
+					setTrainDirection(vehicles[client], true)
+					if vehID == 537 then
+						vehID = 569
+					end
+					if vehID == 538 then
+						vehID = 570
+					end
+					local carriage = nil
 					local carriage2 = vehicles[client]
 					local playeraccount = getPlayerAccount(client)
 					--[[local train_stops = tonumber(exports.GTWcore:get_account_data(playeraccount, "GTWdata.stats.train_stops")) or 0
@@ -185,7 +186,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 							attachElements(container, carriage, 0,0,0.8, 0,0,0)
 							setElementData(carriage, "GTWvehicles.container", container)
 						end
-                                        	triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
+						triggerClientEvent(root, "GTWvehicles.onStreamOut", root, carriage)
 						attachTrailerToVehicle(carriage2, carriage)
 						table.insert(trailers[client], carriage)
 						carriage2 = carriage
@@ -193,7 +194,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 					if numberOfCarriages < 1 then numberOfCarriages = 1 end
 					setElementData(client, "GTWvehicles.numberOfCars", numberOfCarriages)
 					setTimer(display_message, 350, 1, "Train set up: "..engines.." engines and: "..numberOfCarriages.." cars", client, 0, 255, 0)
-			   	end
+				end
 				--setElementData(vehicles[client], "vehicleFuel", math.random(90,100))
 				setElementData(vehicles[client], "owner", getAccountName(getPlayerAccount(client)))
 				setElementData(client, "currVeh", getElementModel(vehicles[client]))
@@ -208,7 +209,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 		elseif money < price then
 			exports.GTWtopbar:dm("You don't have enought money to use this vehicle!", client, 255, 0, 0)
 		end
-	    triggerClientEvent(client, "GTWvehicles.closeWindow", root)
+		triggerClientEvent(client, "GTWvehicles.closeWindow", root)
 	end
 end
 addEvent("GTWvehicles.spawnvehicle", true)
@@ -270,7 +271,7 @@ function destroy_vehicle(plr, force_delete)
 			end
 			destroyElement(vehicles[plr])
 		end
-   	 	triggerEvent("GTWvehicles.onDestroyVehilce", plr, plr)
+		triggerEvent("GTWvehicles.onDestroyVehilce", plr, plr)
 
 		setElementData(plr, "currVeh", 0)
 		if isTimer(paymentsHolder[plr]) then
@@ -315,15 +316,15 @@ end
 function disconnect_trailer(plr)
 	local tower = getPedOccupiedVehicle(plr)
 	if not tower or not isElement(tower) or getElementType(tower) ~=
-		"vehicle" then
+	"vehicle" then
 		exports.GTWtopbar:dm("You're not in a vehicle!", plr, 255, 0, 0)
 		return
 	end
 
 	-- Detach carriages
-        local sx,sy,sz = getElementVelocity(tower)
-        local actualspeed = (sx^2 + sy^2 + sz^2)^(0.5)
-        local kmh = actualspeed*180
+	local sx,sy,sz = getElementVelocity(tower)
+	local actualspeed = (sx^2 + sy^2 + sz^2)^(0.5)
+	local kmh = actualspeed*180
 	if kmh < 5 then
 		if detachTrailerFromVehicle(tower) then
 			exports.GTWtopbar:dm("Trailer was detached successfully!", plr, 0,255,0)
@@ -344,7 +345,7 @@ function destroyVehicleTrain(veh)
 	end
 end
 addEventHandler("onElementDestroy", getRootElement(), function()
-  	if getElementType(source) == "vehicle" then
-    	destroyVehicleTrain(source)
-  	end
+	if getElementType(source) == "vehicle" then
+		destroyVehicleTrain(source)
+	end
 end)

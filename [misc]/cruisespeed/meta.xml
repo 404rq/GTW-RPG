@@ -1,5 +1,5 @@
 <meta>
-    <info author="__Vector__" name="cruiseSpeed" description="cruise speed script" version="87" type="script" />
+    <info author="__Vector__" name="cruiseSpeed" description="cruise speed script" version="91" type="script" />
     <!-- script files -->
     <script src="client.lua" type="client" />
     <script src="server.lua" type="server" />
