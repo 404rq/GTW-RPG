@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWjail" version="184" type="script" />
+    <info author="GTWGames" name="GTWjail" version="185" type="script" />
     <script src="jail_s.lua" type="server" />
     
     <export function="Jail" type="server" />

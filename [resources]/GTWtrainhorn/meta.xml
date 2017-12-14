@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWtrainhorn" version="63" type="script" description="Adds various train horn sounds" />
+    <info author="GTWGames" name="GTWtrainhorn" version="67" type="script" description="Adds various train horn sounds" />
     <script src="horn_c.lua" type="client" />
     <script src="horn_s.lua" type="server" />
     

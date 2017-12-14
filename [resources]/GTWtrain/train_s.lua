@@ -598,7 +598,7 @@ function set_speed_policy(t_engine, state)
 		end
 	end
 
-	--triggerClientEvent(root, "GTWtrain.setControlState", root, engineer, state)
+	--triggerClientEvent(root, "GTWtrain.setPedControlState", root, engineer, state)
 end
 
 --[[ Round float numbers ]]--
@@ -613,7 +613,7 @@ end
 setTimer(function()
 	local plr = getRandomPlayer( )
 	create_train(plr)
-end, 5*1000, 0)
+end, 60*1000, 0)
 
 --[[ Debug for train speed ]]--
 addCommandHandler("tspeed", function(plr, cmd)

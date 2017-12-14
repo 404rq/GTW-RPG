@@ -36,7 +36,8 @@ end
 function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 	if isElement(client) and vehID and rot and price then
 		local money = getPlayerMoney(client)
-		if money >= price and getPlayerWantedLevel(client) == 0 and
+		local dist_to_cop = exports.GTWpolice:distanceToCop(client)
+		if money >= price and getPlayerWantedLevel(client) == 0 or dist_to_cop > 180 and
 		getElementInterior(client) == 0 then
 			if isElement(vehicles[client]) then
 				destroy_vehicle(client, true)
@@ -64,7 +65,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 				local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
 				if getVehicleType(vehicles[client]) == "Automobile" or bike_list[vehID] then
 					local result = getVehicleHandling(vehicles[client])
-					local realism_index = 1.6
+					local realism_index = 1.5
 					setVehicleHandling(vehicles[client], "engineAcceleration", tonumber(result["engineAcceleration"])/realism_index, false)
 					setVehicleHandling(vehicles[client], "engineInertia", tonumber(result["engineInertia"])*realism_index, false)
 					setVehicleHandling(vehicles[client], "brakeDeceleration", tonumber(result["brakeDeceleration"])/realism_index, false)
@@ -82,9 +83,9 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 				if vehID == 403 or vehID == 514 or vehID == 515 then
 					if extra ~= "" then
 						if extra == "Fuel" then vehID = 584 end
-						if extra == "Trailer 1" then vehID = 435 end
-						if extra == "Trailer 2" then vehID = 450 end
-						if extra == "Trailer 3" then vehID = 591 end
+						if extra == "Box container" then vehID = 435 end
+						if extra == "Open container" then vehID = 450 end
+						if extra == "Dual trailers" then vehID = 591 end
 						trailers[client] = { }
 						trailers[client][1] = createVehicle(vehID, x, y, z, 0, 0, rot)
 						setElementHealth(trailers[client][1], (getElementHealth(trailers[client][1])))
@@ -131,7 +132,7 @@ function spawn_vehicle(vehID, rot, price, extra, spawnx, spawny, spawnz)
 								local trx,try,trz = getElementRotation(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"))
 								setElementData(getElementData(vehicles[client], "GTWvehicles.attachedTrailer"), "GTWvehicles.trailer.location",
 								toJSON({tx,ty,tz, trx,try,trz}))
-							else
+							elseif isTimer(trailerSyncTimers[client]) then
 								killTimer(trailerSyncTimers[client])
 							end
 							-- Sync first truck trailer if there is any

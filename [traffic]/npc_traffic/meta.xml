@@ -1,5 +1,5 @@
 <meta>
-    <info author="CrystalMV" version="81.1" name="NPC traffic" description="Adds NPC traffic to the game" type="script" />
+    <info author="CrystalMV" version="101.1" name="NPC traffic" description="Adds NPC traffic to the game" type="script" />
     <include resource="npc_hlc" />
     <include resource="server_coldata" />
     
