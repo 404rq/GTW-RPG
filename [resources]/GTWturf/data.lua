@@ -15,8 +15,8 @@
 ]]--
 
 members_in_turf 		= {{ }}						-- Counts the amount of players in each group in each turf
-capturing 			= { }						-- Boolean to check whenever someone is trying to capture a specific turf
-cooldown 			= { }						-- Cooldown timer to prevent spam kills for stats farming
+capturing 				= { }						-- Boolean to check whenever someone is trying to capture a specific turf
+cooldown 				= { }						-- Cooldown timer to prevent spam kills for stats farming
 time_syncer 			= { }						-- Timers to update the client status text with information about how much time is left to capture a turf
 
 -- Database connection setup, MySQL or fallback SQLite
@@ -33,12 +33,12 @@ lowest_amount_to_display 	= 50						-- Specify the lowest amount of money which 
 team_criminals			= "Criminals"					-- Specify teams that are allowed to turf
 team_gangsters			= "Gangsters"					-- (See above)
 
-money_pickpocket_max		= 500						-- Specify how much (or less) money the gangmembers will pickpocket from their enemies during a kill inside a turf
-money_pickpocket_min		= 50						-- (See above)
-armor_max			= 35						-- The maximum amount of armor the killer will get after killing an enemy
-armor_min			= 25						-- The minimum amount of armor the killer will get after killing an enemy
+money_pickpocket_max	= 500						-- Specify how much (or less) money the gangmembers will pickpocket from their enemies during a kill inside a turf
+money_pickpocket_min	= 50						-- (See above)
+armor_max				= 35						-- The maximum amount of armor the killer will get after killing an enemy
+armor_min				= 25						-- The minimum amount of armor the killer will get after killing an enemy
 weapon_stats_max		= 15						-- The maximum amount of stats for the current weapon the killer will gain after killing an enemy
-weapon_stats_min		= 5						-- The minimum amount of stats for the current weapon the killer will gain after killing an enemy
+weapon_stats_min		= 5							-- The minimum amount of stats for the current weapon the killer will gain after killing an enemy
 
 time_reduce_factor		= 0.05						-- A value to be multiplied with sizex * sizey of a turf entered to decide how much time it takes to capture it
-turf_alpha			= 140						-- The global turf color alpha value
+turf_alpha				= 140						-- The global turf color alpha value

@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="Rental vehicles and features" type="script" version="365"></info>
+    <info author="GTWGames" name="Rental vehicles and features" type="script" version="371"></info>
     
     <!-- Data files -->
     <script src="data.lua" type="shared" protected="true"></script>

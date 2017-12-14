@@ -30,15 +30,15 @@ function change_weather()
 	elseif x < -2200 and y >= 1700 then region = "SF"
 	elseif x > 900 and y > 600 then region = "LV"
 	elseif x > 200 and y < -800 then region = "LS"
-	elseif y < 0 then region = "RC"
-	elseif y >= 0 then region = "BC" end
+	elseif y < 700 then region = "RC"
+	elseif y >= 700 then region = "BC" end
 
 	-- DEBUG output
 	--outputChatBox("Weather: "..curr_weather..", region: "..
 	--	curr_region..", current region: "..region)
 
 	-- Check if we're in the same region, then with 10% chance, change weather
-	if curr_region == region and math.random(1,2000) > 5 then return false end
+	if curr_region == region and math.random(1,200000) > 5 then return false end
 
 	-- Change the weather if we're in a new region
 	curr_weather = math.random(#we[region])

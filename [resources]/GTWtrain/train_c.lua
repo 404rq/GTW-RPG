@@ -40,8 +40,8 @@ function set_train_control_policy(engineer, state)
 		setPedControlState(engineer, "brake_reverse", true)
 	end
 end
-addEvent("GTWtrain.setControlState", true)
-addEventHandler("GTWtrain.setControlState", root, set_train_control_policy)
+addEvent("GTWtrain.setPedControlState", true)
+addEventHandler("GTWtrain.setPedControlState", root, set_train_control_policy)
 
 function set_train_track(cmd, new_track)
 	-- Verify MTA version

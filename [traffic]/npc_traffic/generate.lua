@@ -83,11 +83,11 @@ function removeEmptySquares()
 			for y,square_row in pairs(square_dim) do
 				for x,square in pairs(square_row) do
 					if
-						square.gen_mode == "despawn" and
-						square.count.peds == 0 and
-						square.count.cars == 0 and
-						square.count.boats == 0 and
-						square.count.planes == 0
+					square.gen_mode == "despawn" and
+					square.count.peds == 0 and
+					square.count.cars == 0 and
+					square.count.boats == 0 and
+					square.count.planes == 0
 					then
 						destroyPopulationSquare(x,y,dim)
 					end
@@ -205,7 +205,8 @@ function generateTraffic()
 end
 
 skins = {0,7,9,10,11,12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,43,44,46,47,48,49,50,53,54,55,56,57,58,59,60,61,66,67,68,69,70,71,72,73,76,77,78,79,82,83,84,88,89,91,93,94,95,96,98,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,141,142,143,147,148,150,151,153,157,158,159,160,161,162,170,173,174,175,181,182,183,184,185,186,187,188,196,197,198,199,200,201,202,206,210,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,231,232,233,234,235,236,239,240,241,242,247,248,250,253,254,255,258,259,260,261,262,263}
-vehicles = {602,496,401,518,527,589,419,533,526,474,545,517,410,600,436,580,439,549,491,445,507,585,587,466,492,546,551,516,467,426,547,550,566,540,421,529,431,438,420,552,525,609,499,498,403,514,414,423,588,531,456,579,400,404,489,505,479,442,458,422,554,605,575,534,567,576,412,402,542,603,475,429,541,562,411,561,477}
+vehicles =  {602,496,401,518,527,589,419,533,526,474,545,517,410,600,436,580,439,549,491,445,507,585,587,466,492,546,551,516,467,426,547,550,566,540,421,529,431,438,420,552,525,609,499,498,403,514,414,423,588,531,456,579,400,404,489,505,479,442,458,422,554,605,575,534,567,576,412,402,542,603,475,429,541,562,411,561,477}
+
 skincount,vehiclecount = #skins,#vehicles
 
 count_needed = 0
@@ -231,8 +232,8 @@ function hijackVehicle(plr)
 		local b_driver = getVehicleOccupant(v) or v
 		local vx,vy,vz = getElementPosition(b_driver)
 		if getDistanceBetweenPoints3D(px,py,pz, vx,vy,vz) < 5 and
-			isElement(v) and getElementType(v) == "vehicle" and
-			getVehicleOccupant(v) and getElementType(getVehicleOccupant(v)) == "ped" then
+		isElement(v) and getElementType(v) == "vehicle" and
+		getVehicleOccupant(v) and getElementType(getVehicleOccupant(v)) == "ped" then
 			call(npc_hlc, "disableHLCForNPC", getVehicleOccupant(v))
 			local px,py,pz = getElementPosition(plr)
 			local angry_bot = exports.slothbot:spawnBot(px,py,pz+2, 0, getElementModel(getVehicleOccupant(v)), 0,0, nil, 0, "chasing", plr)
@@ -248,6 +249,12 @@ for p_index,curr_player in pairs(getElementsByType("player")) do
 	bindKey(curr_player, "F", "down", hijackVehicle)
 end
 
+function safeAttachTrailerToVehicle(vehicle, trailer)
+	if not isElement(vehicle) then return end
+	if not isElement(trailer) then return end
+	attachTrailerToVehicle(vehicle, trailer)
+end
+
 function spawnTrafficInSquare(x,y,dim,trtype)
 	-- Do not spawn to close to any player
 	for k,v in pairs(getElementsByType("player")) do
@@ -255,7 +262,7 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 		local dist = getDistanceBetweenPoints2D(px,py, x,y)
 
 		-- A player is closer to spawn than 50m, don't spawn
-		if dist < 60 then return end
+		if dist < 80 then return end
 	end
 
 	local square_tm_id = square_id[y] and square_id[y][x]
@@ -362,19 +369,31 @@ function spawnTrafficInSquare(x,y,dim,trtype)
 			-- Reduce vehicle top speed and acceleration
 			local bicycle_list = {[509]=true,[481]=true,[510]=true,[462]=true}
 			local bike_list = {[581]=true,[509]=true,[481]=true,[462]=true,[521]=true,[463]=true,[510]=true,[522]=true,[461]=true,[448]=true,[468]=true,[586]=true}
-	                if getVehicleType(car) == "Automobile" or bicycle_list[vehID] then
-	                        local result = getVehicleHandling(car)
-							local realism_index = 1.6
-	                        setVehicleHandling(car, "engineAcceleration", tonumber(result["engineAcceleration"])/realism_index, false)
-	                        setVehicleHandling(car, "engineInertia", tonumber(result["engineInertia"])*realism_index, false)
-	                        setVehicleHandling(car, "brakeDeceleration", tonumber(result["brakeDeceleration"])/realism_index, false)
-	                        setVehicleHandling(car, "brakeBias", tonumber(result["brakeBias"])/realism_index, false)
+			if getVehicleType(car) == "Automobile" or bicycle_list[vehID] then
+				local result = getVehicleHandling(car)
+				local realism_index = 1.5
+				setVehicleHandling(car, "engineAcceleration", tonumber(result["engineAcceleration"])/realism_index, false)
+				setVehicleHandling(car, "engineInertia", tonumber(result["engineInertia"])*realism_index, false)
+				setVehicleHandling(car, "brakeDeceleration", tonumber(result["brakeDeceleration"])/realism_index, false)
+				setVehicleHandling(car, "brakeBias", tonumber(result["brakeBias"])/realism_index, false)
+
+				-- Attach trailer to trucks
+				if getElementModel(car) and (getElementModel(car) == 403 or getElementModel(car) == 514 or getElementModel(car) == 515) and math.random(1,10) > 5 then
+					local trailer = createVehicle(435, x,y,z+zoff,rx,0,rz)
+					if attachTrailerToVehicle(car, trailer) then
+						setElementData(car, "npc_trailer", trailer)
+						local timer = setTimer(safeAttachTrailerToVehicle, 3000, 0, car, trailer)
+						setElementData(car, "npc_trailer_timer", timer)
+					else
+						destroyElement(trailer)
+					end
+				end
 
 				--Reduce max speed on bicycles and faggio
 				if bicycle_list[vehID] then
 					setVehicleHandling(vehicles[client], "maxVelocity", 40, false)
 				end
-	                end
+			end
 
 			--setTimer(destroyAINPCVehicle, 120000, 1, car)
 			setElementData(car, "npc", true)
@@ -447,8 +466,8 @@ function removePedFromListOnDestroy()
 	if getAttachedElements(source) then
 		local attachedElements = getAttachedElements(source)
 		for k,v in ipairs(attachedElements) do
-      		if getElementType(v) == "blip" then
-      			destroyElement(v)
+			if getElementType(v) == "blip" then
+				destroyElement(v)
 			end
 		end
 	end
@@ -482,6 +501,8 @@ function despawnTrafficInSquare(x,y,dim,trtype)
 	if trtype == "peds" then
 		for element,exists in pairs(square.list[trtype]) do
 			destroyElement(element)
+			if isElement(element) and isElement(getElementData(element, "npc_trailer")) then destroyElement(getElementData(element, "npc_trailer")) end
+			if isElement(element) and isTimer(getElementData(element, "npc_trailer_timer")) then killTimer(getElementData(element, "npc_trailer_timer")) end
 		end
 	else
 		for element,exists in pairs(square.list[trtype]) do
@@ -492,6 +513,8 @@ function despawnTrafficInSquare(x,y,dim,trtype)
 			end
 			if destroy then
 				destroyElement(element)
+				if isElement(element) and isElement(getElementData(element, "npc_trailer")) then destroyElement(getElementData(element, "npc_trailer")) end
+				if isElement(element) and isTimer(getElementData(element, "npc_trailer_timer")) then killTimer(getElementData(element, "npc_trailer_timer")) end
 				for seat,ped in pairs(occupants) do
 					destroyElement(ped)
 				end

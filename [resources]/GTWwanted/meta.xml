@@ -15,7 +15,7 @@
 -->
 
 <meta>
-    <info author="GTWGames" name="GTWwanted" version="205" type="script" />
+    <info author="GTWGames" name="GTWwanted" version="206" type="script" />
     <script src="wanted_s.lua" type="server" />
     <script src="wanted_c.lua" type="client" />
     <script src="ped_money.lua" type="server" />

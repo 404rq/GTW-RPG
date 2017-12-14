@@ -47,8 +47,7 @@ function toggle_train_horn(theTrain)
 			theTrain2 = getVehicleTowedByVehicle( theTrain )
 		end
 
-		if theTrain and (getElementModel(theTrain) == 537 or getElementModel(theTrain) == 538 or
-			getElementModel(theTrain) == 449 or getVehicleOccupant(theTrain)) then
+		if theTrain and getVehicleOccupant(theTrain) then
 			x,y,z = getElementPosition(theTrain)
 			sound[k] = playSound3D(horn_signal, x, y, z, false )
 			setSoundVolume(sound[k], 0.5)

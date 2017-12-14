@@ -1,16 +1,16 @@
 --[[
 ********************************************************************************
-	Project owner:		RageQuit community
-	Project name: 		GTW-RPG
-	Developers:   		Mr_Moose
+Project owner:		RageQuit community
+Project name: 		GTW-RPG
+Developers:   		Mr_Moose
 
-	Source code:		https://github.com/404rq/GTW-RPG/
-	Bugtracker: 		https://discuss.404rq.com/t/issues
-	Suggestions:		https://discuss.404rq.com/t/development
+Source code:		https://github.com/404rq/GTW-RPG/
+Bugtracker: 		https://discuss.404rq.com/t/issues
+Suggestions:		https://discuss.404rq.com/t/development
 
-	Version:    		Open source
-	License:    		BSD 2-Clause
-	Status:     		Stable release
+Version:    		Open source
+License:    		BSD 2-Clause
+Status:     		Stable release
 ********************************************************************************
 ]]--
 
@@ -31,12 +31,12 @@ function turfPayout(query)
 	local result = dbPoll(query, 0)
 	local turfs_counter = { }
 	if result then
-    		for _, row in ipairs(result) do
-    			if not turfs_counter[row["owner"]] then
-    				turfs_counter[row["owner"]] = 0
-    			end
-            		turfs_counter[row["owner"]] = turfs_counter[row["owner"]] + ((row["sizeX"] * row["sizeY"])/200)
-    		end
+		for _, row in ipairs(result) do
+			if not turfs_counter[row["owner"]] then
+				turfs_counter[row["owner"]] = 0
+			end
+			turfs_counter[row["owner"]] = turfs_counter[row["owner"]] + ((row["sizeX"] * row["sizeY"])/500)
+		end
 	end
 	for w,player in pairs(getElementsByType("player")) do
 		if getElementData(player, "Group") and getElementData(player, "Group") ~= "None" then
@@ -46,7 +46,7 @@ function turfPayout(query)
 			-- Notice about turf money
 			if money > 0 then
 				givePlayerMoney(player,money)
-				exports.GTWtopbar:dm("You have received: "..tostring(math.floor(money)).."$ from your turfs!", player, 0, 255, 0)
+				exports.GTWtopbar:dm("You have received: $"..tostring(math.floor(money)).." from your turfs!", player, 0, 255, 0)
 			end
 		end
 	end
@@ -105,17 +105,17 @@ function countPlayersInTurf(turf)
 	for w,gangmember in ipairs(getElementsByType("player")) do
 		local px,py,pz = getElementPosition(gangmember)
 		if not getElementData(turf,"sizex") or not getElementData(turf,"sizey") or not
-			getElementData(turf,"posx") or not getElementData(turf,"posy") then return end
+		getElementData(turf,"posx") or not getElementData(turf,"posy") then return end
 		local posX = tonumber(getElementData(turf,"posx")) or 0
 		local posY = tonumber(getElementData(turf,"posy")) or 0
 		local sizeX = tonumber(getElementData(turf,"sizex")) or 0
 		local sizeY = tonumber(getElementData(turf,"sizey")) or 0
 		local lastEnemyGroupName = ""
 		if getElementData(gangmember,"Group") and getElementData(gangmember,"Group") == owner
-			and px > posX and px < (posX + sizeX) and py > posY and py < (posY + sizeY) then
+		and px > posX and px < (posX + sizeX) and py > posY and py < (posY + sizeY) then
 			ownC=ownC+1
 		elseif getElementData(gangmember,"Group") and px > posX and px < (posX + sizeX)
-			and py > posY and py < (posY + sizeY) then
+		and py > posY and py < (posY + sizeY) then
 			enemyC=enemyC+1
 			if lastEnemyGroupName ~= getElementData(gangmember,"Group") then
 				lastEnemyGroupName = getElementData(gangmember,"Group")
@@ -129,11 +129,11 @@ end
 -- Whenever a player enter a turf
 function onTurfEnter(hitElement)
 	if hitElement and isElement(hitElement) and getElementType(hitElement) == "player" and
-		getElementData(hitElement, "Group") and
-		getElementData(hitElement, "Group") ~= "None" and
-		(getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or
-		getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) and
-		not getElementData(hitElement,"isInTurf") then
+	getElementData(hitElement, "Group") and
+	getElementData(hitElement, "Group") ~= "None" and
+	(getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or
+	getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) and
+	not getElementData(hitElement,"isInTurf") then
 		local owner = getElementData(source, "owner")
 		local ownC,enemyC,enemyGC = countPlayersInTurf(source)
 		outputConsole("Own: "..tostring(ownC)..", Enemies: "..tostring(enemyC), hitElement)
@@ -143,8 +143,8 @@ function onTurfEnter(hitElement)
 		end
 		local area = getElementData(source, "area")
 		setElementData(hitElement, "area", source)
-    		if (getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) then
-    			setElementData(hitElement,"isInTurf",true)
+		if (getPlayerTeam(hitElement) == getTeamFromName(team_criminals) or getPlayerTeam(hitElement) == getTeamFromName(team_gangsters)) then
+			setElementData(hitElement,"isInTurf",true)
 			setElementData(hitElement, "GTWturf.posx", getElementData(source,"posx"))
 			setElementData(hitElement, "GTWturf.posy", getElementData(source,"posy"))
 			setElementData(hitElement, "GTWturf.theTurf", source)
@@ -163,14 +163,14 @@ function onTurfEnter(hitElement)
 				local px,py,pz = getElementPosition(hitElement)
 				local currturf = getZoneName(px,py,pz)
 				exports.GTWtopbar:dm("TURFS: This turf belongs to: "..owner.." hold it for "..
-					tostring(math.floor(time_to_capture)).." seconds to capture it", hitElement, 0, 255, 0)
+				tostring(math.floor(time_to_capture)).." seconds to capture it", hitElement, 0, 255, 0)
 				setElementData(hitElement, "captureTime", "Time before "..group..
-					" capture the turf: "..tostring(math.floor(time_to_capture)).." seconds")
+				" capture the turf: "..tostring(math.floor(time_to_capture)).." seconds")
 				setTimer(groupMessageFromGroup, 1000, 1, group.." is attacking your turf at: "..currturf..
-					" go there and defend your property!", owner, 255, 0, 0)
+				" go there and defend your property!", owner, 255, 0, 0)
 				-- Status group message
 				setTimer(groupMessage, 1000, 1, "TURFS: Your gang is attacking a turf at: "..currturf..", ("..
-					tostring(ownC+enemyGC).." members is involved)", hitElement, 255, 200, 0)
+				tostring(ownC+enemyGC).." members is involved)", hitElement, 255, 200, 0)
 				if not isTimer(capturing[source]) then
 					-- Start a timer that calls the capturing function
 					local player_turfer = hitElement
@@ -198,7 +198,7 @@ function onTurfEnter(hitElement)
 						setRadarAreaFlashing(area, false)
 						setElementData(theTurf, "currAttacker", nil)
 						dbExec(db, "UPDATE turfs SET owner=?, red=?, green=?, blue=? WHERE X=? AND Y=?", group, r, g, b,
-							tonumber(getElementData(colCuboid,"posx")), tonumber(getElementData(colCuboid,"posy")))
+						tonumber(getElementData(colCuboid,"posx")), tonumber(getElementData(colCuboid,"posy")))
 					end, time_to_capture*1000, 1)
 				end
 			end
@@ -220,11 +220,11 @@ function onTurfEnter(hitElement)
 					end
 				end, 1000,(time_to_capture))
 			end
-    		elseif getElementData(hitElement, "Group") == "None" and getPlayerTeam(hitElement) == getTeamFromName(team_criminals) and not getPedOccupiedVehicle(hitElement) then
+		elseif getElementData(hitElement, "Group") == "None" and getPlayerTeam(hitElement) == getTeamFromName(team_criminals) and not getPedOccupiedVehicle(hitElement) then
 			exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 		end
 	elseif not getElementData(hitElement, "Group") and getElementType(hitElement) == "player" and not getPedOccupiedVehicle(hitElement) and
-		getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
+	getPlayerTeam(hitElement) == getTeamFromName(team_criminals) then
 		exports.GTWtopbar:dm("Only gang members can capture turfs, (see F6)", hitElement, 255, 0, 0)
 	end
 end
@@ -243,8 +243,8 @@ end
 -- Same as above but takes a player element only as argument
 function resetTurfData(leaveElement)
 	if leaveElement and isElement(leaveElement) and getElementType(leaveElement) == "player" and getElementData(leaveElement, "Group") and
-		getElementData(leaveElement, "Group") ~= "None" and(getPlayerTeam(leaveElement) == getTeamFromName(team_criminals) or
-			getPlayerTeam(leaveElement) == getTeamFromName(team_gangsters)) then
+	getElementData(leaveElement, "Group") ~= "None" and(getPlayerTeam(leaveElement) == getTeamFromName(team_criminals) or
+	getPlayerTeam(leaveElement) == getTeamFromName(team_gangsters)) then
 		-- Count players in turf
 		local owner = getElementData(source, "owner")
 		local ownC,enemyC,enemyGC = countPlayersInTurf(source)
@@ -336,9 +336,9 @@ end
 function loadTurfs(query)
 	local result = dbPoll(query, 0)
 	if result then
-    		for _, row in ipairs(result) do
-            		addTurf(row["X"], row["Y"], row["Z"], row["sizeX"], row["sizeY"], row["red"], row["green"], row["blue"], row["owner"])
-    		end
+		for _, row in ipairs(result) do
+			addTurf(row["X"], row["Y"], row["Z"], row["sizeX"], row["sizeY"], row["red"], row["green"], row["blue"], row["owner"])
+		end
 	end
 end
 
@@ -346,9 +346,9 @@ end
 function player_Wasted(ammo, attacker, weapon, bodypart)
 	if isElement(source) and isElement(attacker) and getElementType(attacker) == "player" then
 		if(getPlayerTeam(source) == getTeamFromName(team_criminals) or getPlayerTeam(source) == getTeamFromName(team_gangsters)) and
-			(getPlayerTeam(attacker) == getTeamFromName(team_criminals) or getPlayerTeam(attacker) == getTeamFromName(team_gangsters)) and
-			getElementData(source, "Group") ~= getElementData(attacker, "Group") and
-			not isTimer(cooldown[attacker]) and getElementData(source,"isInTurf") then
+		(getPlayerTeam(attacker) == getTeamFromName(team_criminals) or getPlayerTeam(attacker) == getTeamFromName(team_gangsters)) and
+		getElementData(source, "Group") ~= getElementData(attacker, "Group") and
+		not isTimer(cooldown[attacker]) and getElementData(source,"isInTurf") then
 			local victim_money = getPlayerMoney(source)
 			if victim_money > money_pickpocket_max then
 				victim_money = money_pickpocket_max
@@ -394,7 +394,7 @@ function player_Wasted(ammo, attacker, weapon, bodypart)
 
 			-- Status
 			outputChatBox("#007700(GangInfo) #bbbbbbMoney: #eeeeee+"..tostring(money)..", #bbbbbbArmor:#eeeeee +"..
-				tostring(armor)..", #bbbbbbStats: #eeeeee+"..tostring(stats), attacker, 0, 255, 0, true)
+			tostring(armor)..", #bbbbbbStats: #eeeeee+"..tostring(stats), attacker, 0, 255, 0, true)
 			cooldown[attacker] = setTimer(function() end, 15000, 1)
 
 			setElementData(source, "isInTurf", false)
@@ -405,7 +405,7 @@ end
 addEventHandler("onPlayerWasted", root, player_Wasted)
 
 function increaseStats(totalAmmo, attacker, weapon, bodypart, stealth)
-    -- Weapon stats 2015-01-04 Stat's increase on any kill
+	-- Weapon stats 2015-01-04 Stat's increase on any kill
 	if not attacker or not weapon or not isElement(attacker) or getElementType(attacker) ~= "player" or attacker == source then return end
 	local stat_key = 69
 	if weapon == 23 then stat_key = 70 end
@@ -429,7 +429,7 @@ addEventHandler("onPlayerWasted", root, increaseStats)
 
 function killerMessage(weapon, attacker, stat_key)
 	exports.GTWtopbar:dm("STATS: Killer weapon: "..getWeaponNameFromID(weapon)..", Current value: "..
-		tostring(getPedStat(attacker, stat_key) or 0), attacker, 255, 100, 0)
+	tostring(getPedStat(attacker, stat_key) or 0), attacker, 255, 100, 0)
 end
 
 -- Claim a turf(Admin)
@@ -449,7 +449,7 @@ function claimTurf(player, cmd, sx, sy)
 		setElementData(getElementData(player, "GTWturf.theTurf"), "owner", group)
 		setElementData(getElementData(player, "GTWturf.area"), "owner", group)
 		dbExec(db, "UPDATE turfs SET owner=?, red=?, green=?, blue=? WHERE X=? AND Y=?", group, r, g, b,
-			tonumber(getElementData(player, "GTWturf.posx")), tonumber(getElementData(player, "GTWturf.posy")))
+		tonumber(getElementData(player, "GTWturf.posx")), tonumber(getElementData(player, "GTWturf.posy")))
 		exports.GTWtopbar:dm("TURFS: this area was claimed successfully", player, 0, 255, 0)
 	end
 end
@@ -500,15 +500,15 @@ end
 addCommandHandler("deleteturf", deleteturf)
 
 function math.round(number, decimals, method)
-    decimals = decimals or 0
-    local factor = 10 ^ decimals
-    if (method == "ceil" or method == "floor") then return math[method](number * factor) / factor
-    else return tonumber(("%."..decimals.."f"):format(number)) end
+	decimals = decimals or 0
+	local factor = 10 ^ decimals
+	if (method == "ceil" or method == "floor") then return math[method](number * factor) / factor
+	else return tonumber(("%."..decimals.."f"):format(number)) end
 end
 
 addCommandHandler("gtwinfo", function(plr, cmd)
 	outputChatBox("[GTW-RPG] "..getResourceName(
 	getThisResource())..", by: "..getResourceInfo(
-        getThisResource(), "author")..", v-"..getResourceInfo(
-        getThisResource(), "version")..", is represented", plr)
+	getThisResource(), "author")..", v-"..getResourceInfo(
+	getThisResource(), "version")..", is represented", plr)
 end)

@@ -61,17 +61,17 @@ veh_extra = {
 	["Freight"] = {1,2,3,4,5,6,7,8,9},
 	["Streak"] = {1,2,3,4,5,6,7,8},
 	["Tram"] = {1,2,3},
-	["Tanker"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Roadtrain"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Linerunner"] = {"", "Trailer 1", "Trailer 2", "Trailer 3"},
+	["Tanker"] = {"", "Fuel", "Box container", "Open container", "Dual trailers"},
+	["Roadtrain"] = {"", "Fuel", "Box container", "Open container", "Dual trailers"},
+	["Linerunner"] = {"", "Box container", "Open container", "Dual trailers"},
 }
 veh_extra_plr = {
 	["Freight"] = {1,2,3,4,5,6},
 	["Streak"] = {1,2,3,4,5},
 	["Tram"] = {1,2},
-	["Tanker"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Roadtrain"] = {"", "Fuel", "Trailer 1", "Trailer 2", "Trailer 3"},
-	["Linerunner"] = {"", "Trailer 1", "Trailer 2", "Trailer 3"},
+	["Tanker"] = {"", "Fuel", "Box container", "Open container", "Dual trailers"},
+	["Roadtrain"] = {"", "Fuel", "Box container", "Open container", "Dual trailers"},
+	["Linerunner"] = {"", "Box container", "Open container", "Dual trailers"},
 }
 -- *****************************************************************************
 
@@ -87,7 +87,7 @@ spawn_names = {
 	[1]={ "Caddy", "Faggio", "Moonbeam", "Oceanic", "Premier", "Remington", "Sanchez" },
 	[2]={ "Taxi", "Cabbie" },
 	[3]={ "Cement Truck", "DFT-30", "Flatbed", "Linerunner", "Packer", "Roadtrain", "Tanker" },
-	[4]={ "Police LS", "Police SF", "Police LV", "Police Ranger", "HPV1000" },
+	[4]={ "Police LS", "Police SF", "Police LV", "Police Ranger", "HPV1000", "Cheetah", "Sultan" },
 	[5]={ "Fire Truck" },
 	[6]={ "Barracks", "Enforcer", "Hydra", "Hunter", "HPV1000", "Patriot" },
 	[7]={ "Ambulance" },
@@ -113,7 +113,7 @@ spawn_prices = {
 	[1]={ 2, 1, 2, 3, 4, 5, 6 },
 	[2]={ 1, 1 },
 	[3]={ 2, 2, 2, 2, 3, 3, 3 },
-	[4]={ 0, 0, 0, 0, 0 },
+	[4]={ 0, 0, 0, 0, 0, 0, 0 },
 	[5]={ 0 },
 	[6]={ 0, 0, 0, 0, 0, 0 },
 	[7]={ 0 },
