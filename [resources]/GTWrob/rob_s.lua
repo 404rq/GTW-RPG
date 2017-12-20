@@ -171,7 +171,7 @@ end
 function robStatus( crim, target, money )
 	if isElement( crim ) then
 		if getElementData( crim, "rob" ) then
-			exports.GTWtopbar:dm( "Rob successfully, now escape before the cops arrive!", crim, 0, 255, 0 )
+			exports.GTWtopbar:dm( "Rob successful, now escape before the cops arrive!", crim, 0, 255, 0 )
 	    end
 	    if isElement( target ) and isElement( crim ) then
 			setPedAnimation( target, nil, nil )
