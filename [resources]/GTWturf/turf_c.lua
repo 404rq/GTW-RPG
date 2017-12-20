@@ -20,9 +20,18 @@ function show_time_left( )
 		local timeMsg = getElementData( localPlayer, "captureTime" )
 		local sx, sy = guiGetScreenSize( )
 		if timeMsg and timeMsg ~= "none" then
-			dxDrawText ( timeMsg, (sx/2)-250, sy-50, 0, 0,
-				tocolor( 200, 200, 200, 255 ), 0.8, "bankgothic" )
-		end
+			dxDrawText ( "Robbery in progress, time left: "..tostring(math.floor((endTime-currentTime)/1000)), ((sx/2)-200), sy-50, 0, 0,
+				tocolor( color, color, color, 255 ), 0.7, "bankgothic" )
+			if color == 255 then
+				direction = false
+			elseif color == 0 then
+				direction = true
+			end
+			if direction then
+				color = color + 1
+			else
+				color = color - 1
+			end
 	end
 end
 addEventHandler( "onClientRender", root, show_time_left )
