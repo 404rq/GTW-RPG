@@ -126,7 +126,7 @@ addEventHandler("onPlayerJoin", root, player_join_handler)
 local money_cooldown = { }
 function send_player_money(plr, cmd, receiver, amount)
 	local money = tonumber(amount) or 0
-        if isTimer(money_cooldown[plr]) then
+        if money_cooldown[plr] and getTickCount() - money_cooldown[plr] < 60000 then
                 exports.GTWtopbar:dm("Please allow up to 1 minute between each transfer", plr, 255, 0, 0)
                 return
         end
@@ -152,7 +152,7 @@ function send_player_money(plr, cmd, receiver, amount)
 	else
 		outputChatBox("Correct syntax: /give <player_nick> <amount>", plr, 180, 180, 180)
 	end
-        money_cooldown[plr] = setTimer(function() end, 60*1000, 1)
+        money_cooldown[plr] = getTickCount()
 end
 addCommandHandler("give", send_player_money)
 
