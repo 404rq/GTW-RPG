@@ -130,11 +130,10 @@ local s_cooldown = { }
 --[[ Display helpful messages to new players ]]--
 setTimer(function()
 	for k,v in pairs(getElementsByType("player")) do
-		if v and isElement(v) and getElementType(v) == "player" and not isTimer(s_cooldown[v]) then
+		if v and isElement(v) and getElementType(v) == "player" then
 			local x,y,z = getElementPosition(v)
 			for l,m in pairs(m_location) do
 				if getDistanceBetweenPoints3D(m[2],m[3],m[4], x,y,z) < m[1] and getElementData(v, "GTWdata.isNew") then
-					s_cooldown[v] = setTimer(function() end, 120000,1)
 					playSoundFrontEnd(v, 11)
 					local m_first = "#00AA00(Tutorial)#CCCCCC "
 					for n=1, #messages[m[5]] do
@@ -146,5 +145,5 @@ setTimer(function()
 			end
 		end
 	end
-end, 1000,0)
+end, 120000,0)
 --GTWcore.isNoob
